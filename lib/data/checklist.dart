@@ -1,4 +1,4 @@
-import 'package:ccr_checklist/data/section.dart';
+import 'package:ccr_checklist/data/checklist_section.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -12,7 +12,7 @@ class Checklist with _$Checklist {
     required String description,
     required String diverName,
     required DateTime date,
-    required List<Section> sections,
+    required List<ChecklistSection> sections,
   }) = _Checklist;
 
   Checklist._();

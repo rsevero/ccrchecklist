@@ -28,8 +28,9 @@ mixin _$Checklist {
   set diverName(String value) => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
   set date(DateTime value) => throw _privateConstructorUsedError;
-  List<Section> get sections => throw _privateConstructorUsedError;
-  set sections(List<Section> value) => throw _privateConstructorUsedError;
+  List<ChecklistSection> get sections => throw _privateConstructorUsedError;
+  set sections(List<ChecklistSection> value) =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -47,7 +48,7 @@ abstract class $ChecklistCopyWith<$Res> {
       String description,
       String diverName,
       DateTime date,
-      List<Section> sections});
+      List<ChecklistSection> sections});
 }
 
 /// @nodoc
@@ -89,7 +90,7 @@ class _$ChecklistCopyWithImpl<$Res, $Val extends Checklist>
       sections: null == sections
           ? _value.sections
           : sections // ignore: cast_nullable_to_non_nullable
-              as List<Section>,
+              as List<ChecklistSection>,
     ) as $Val);
   }
 }
@@ -107,7 +108,7 @@ abstract class _$$ChecklistImplCopyWith<$Res>
       String description,
       String diverName,
       DateTime date,
-      List<Section> sections});
+      List<ChecklistSection> sections});
 }
 
 /// @nodoc
@@ -147,7 +148,7 @@ class __$$ChecklistImplCopyWithImpl<$Res>
       sections: null == sections
           ? _value.sections
           : sections // ignore: cast_nullable_to_non_nullable
-              as List<Section>,
+              as List<ChecklistSection>,
     ));
   }
 }
@@ -175,7 +176,7 @@ class _$ChecklistImpl extends _Checklist with DiagnosticableTreeMixin {
   @override
   DateTime date;
   @override
-  List<Section> sections;
+  List<ChecklistSection> sections;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -214,7 +215,7 @@ abstract class _Checklist extends Checklist {
       required String description,
       required String diverName,
       required DateTime date,
-      required List<Section> sections}) = _$ChecklistImpl;
+      required List<ChecklistSection> sections}) = _$ChecklistImpl;
   _Checklist._() : super._();
 
   factory _Checklist.fromJson(Map<String, dynamic> json) =
@@ -233,8 +234,8 @@ abstract class _Checklist extends Checklist {
   DateTime get date;
   set date(DateTime value);
   @override
-  List<Section> get sections;
-  set sections(List<Section> value);
+  List<ChecklistSection> get sections;
+  set sections(List<ChecklistSection> value);
   @override
   @JsonKey(ignore: true)
   _$$ChecklistImplCopyWith<_$ChecklistImpl> get copyWith =>

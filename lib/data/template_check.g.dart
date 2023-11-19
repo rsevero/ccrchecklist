@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'check.dart';
+part of 'template_check.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -18,9 +18,9 @@ Map<String, dynamic> _$$RegularCheckImplToJson(_$RegularCheckImpl instance) =>
       'checked': instance.checked,
     };
 
-_$WithReferenceCheckImpl _$$WithReferenceCheckImplFromJson(
+_$TemplateWithReferenceCheckImpl _$$TemplateWithReferenceCheckImplFromJson(
         Map<String, dynamic> json) =>
-    _$WithReferenceCheckImpl(
+    _$TemplateWithReferenceCheckImpl(
       description: json['description'] as String,
       checked: json['checked'] as bool,
       referenceDescription: json['referenceDescription'] as String,
@@ -29,8 +29,8 @@ _$WithReferenceCheckImpl _$$WithReferenceCheckImplFromJson(
       reference3: (json['reference3'] as num).toDouble(),
     );
 
-Map<String, dynamic> _$$WithReferenceCheckImplToJson(
-        _$WithReferenceCheckImpl instance) =>
+Map<String, dynamic> _$$TemplateWithReferenceCheckImplToJson(
+        _$TemplateWithReferenceCheckImpl instance) =>
     <String, dynamic>{
       'description': instance.description,
       'checked': instance.checked,
@@ -40,32 +40,34 @@ Map<String, dynamic> _$$WithReferenceCheckImplToJson(
       'reference3': instance.reference3,
     };
 
-_$LinearityCheckStep1CheckImpl _$$LinearityCheckStep1CheckImplFromJson(
-        Map<String, dynamic> json) =>
-    _$LinearityCheckStep1CheckImpl(
-      reference1: (json['reference1'] as num).toDouble(),
-      reference2: (json['reference2'] as num).toDouble(),
-      reference3: (json['reference3'] as num).toDouble(),
-    );
+_$TemplateLinearityCheckStep1CheckImpl
+    _$$TemplateLinearityCheckStep1CheckImplFromJson(
+            Map<String, dynamic> json) =>
+        _$TemplateLinearityCheckStep1CheckImpl(
+          reference1: (json['reference1'] as num).toDouble(),
+          reference2: (json['reference2'] as num).toDouble(),
+          reference3: (json['reference3'] as num).toDouble(),
+        );
 
-Map<String, dynamic> _$$LinearityCheckStep1CheckImplToJson(
-        _$LinearityCheckStep1CheckImpl instance) =>
+Map<String, dynamic> _$$TemplateLinearityCheckStep1CheckImplToJson(
+        _$TemplateLinearityCheckStep1CheckImpl instance) =>
     <String, dynamic>{
       'reference1': instance.reference1,
       'reference2': instance.reference2,
       'reference3': instance.reference3,
     };
 
-_$LinearityCheckStep2CheckImpl _$$LinearityCheckStep2CheckImplFromJson(
-        Map<String, dynamic> json) =>
-    _$LinearityCheckStep2CheckImpl(
-      reference1: (json['reference1'] as num).toDouble(),
-      reference2: (json['reference2'] as num).toDouble(),
-      reference3: (json['reference3'] as num).toDouble(),
-    );
+_$TemplateLinearityCheckStep2CheckImpl
+    _$$TemplateLinearityCheckStep2CheckImplFromJson(
+            Map<String, dynamic> json) =>
+        _$TemplateLinearityCheckStep2CheckImpl(
+          reference1: (json['reference1'] as num).toDouble(),
+          reference2: (json['reference2'] as num).toDouble(),
+          reference3: (json['reference3'] as num).toDouble(),
+        );
 
-Map<String, dynamic> _$$LinearityCheckStep2CheckImplToJson(
-        _$LinearityCheckStep2CheckImpl instance) =>
+Map<String, dynamic> _$$TemplateLinearityCheckStep2CheckImplToJson(
+        _$TemplateLinearityCheckStep2CheckImpl instance) =>
     <String, dynamic>{
       'reference1': instance.reference1,
       'reference2': instance.reference2,

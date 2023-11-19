@@ -11,7 +11,7 @@ _$TemplateImpl _$$TemplateImplFromJson(Map<String, dynamic> json) =>
       title: json['title'] as String,
       description: json['description'] as String,
       sections: (json['sections'] as List<dynamic>)
-          .map((e) => Section.fromJson(e as Map<String, dynamic>))
+          .map((e) => TemplateSection.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

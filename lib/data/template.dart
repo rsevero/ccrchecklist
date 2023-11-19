@@ -1,4 +1,4 @@
-import 'package:ccr_checklist/data/section.dart';
+import 'package:ccr_checklist/data/template_section.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -10,7 +10,7 @@ class Template with _$Template {
   factory Template({
     required String title,
     required String description,
-    required List<Section> sections,
+    required List<TemplateSection> sections,
   }) = _Template;
 
   Template._();

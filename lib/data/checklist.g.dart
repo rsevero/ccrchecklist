@@ -13,7 +13,7 @@ _$ChecklistImpl _$$ChecklistImplFromJson(Map<String, dynamic> json) =>
       diverName: json['diverName'] as String,
       date: DateTime.parse(json['date'] as String),
       sections: (json['sections'] as List<dynamic>)
-          .map((e) => Section.fromJson(e as Map<String, dynamic>))
+          .map((e) => ChecklistSection.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

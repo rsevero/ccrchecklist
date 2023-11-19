@@ -24,8 +24,9 @@ mixin _$Template {
   set title(String value) => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   set description(String value) => throw _privateConstructorUsedError;
-  List<Section> get sections => throw _privateConstructorUsedError;
-  set sections(List<Section> value) => throw _privateConstructorUsedError;
+  List<TemplateSection> get sections => throw _privateConstructorUsedError;
+  set sections(List<TemplateSection> value) =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,7 +39,7 @@ abstract class $TemplateCopyWith<$Res> {
   factory $TemplateCopyWith(Template value, $Res Function(Template) then) =
       _$TemplateCopyWithImpl<$Res, Template>;
   @useResult
-  $Res call({String title, String description, List<Section> sections});
+  $Res call({String title, String description, List<TemplateSection> sections});
 }
 
 /// @nodoc
@@ -70,7 +71,7 @@ class _$TemplateCopyWithImpl<$Res, $Val extends Template>
       sections: null == sections
           ? _value.sections
           : sections // ignore: cast_nullable_to_non_nullable
-              as List<Section>,
+              as List<TemplateSection>,
     ) as $Val);
   }
 }
@@ -83,7 +84,7 @@ abstract class _$$TemplateImplCopyWith<$Res>
       __$$TemplateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String title, String description, List<Section> sections});
+  $Res call({String title, String description, List<TemplateSection> sections});
 }
 
 /// @nodoc
@@ -113,7 +114,7 @@ class __$$TemplateImplCopyWithImpl<$Res>
       sections: null == sections
           ? _value.sections
           : sections // ignore: cast_nullable_to_non_nullable
-              as List<Section>,
+              as List<TemplateSection>,
     ));
   }
 }
@@ -133,7 +134,7 @@ class _$TemplateImpl extends _Template with DiagnosticableTreeMixin {
   @override
   String description;
   @override
-  List<Section> sections;
+  List<TemplateSection> sections;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -168,7 +169,7 @@ abstract class _Template extends Template {
   factory _Template(
       {required String title,
       required String description,
-      required List<Section> sections}) = _$TemplateImpl;
+      required List<TemplateSection> sections}) = _$TemplateImpl;
   _Template._() : super._();
 
   factory _Template.fromJson(Map<String, dynamic> json) =
@@ -181,8 +182,8 @@ abstract class _Template extends Template {
   String get description;
   set description(String value);
   @override
-  List<Section> get sections;
-  set sections(List<Section> value);
+  List<TemplateSection> get sections;
+  set sections(List<TemplateSection> value);
   @override
   @JsonKey(ignore: true)
   _$$TemplateImplCopyWith<_$TemplateImpl> get copyWith =>
