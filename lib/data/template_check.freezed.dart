@@ -15,15 +15,13 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 TemplateRegularCheck _$TemplateRegularCheckFromJson(Map<String, dynamic> json) {
-  return _RegularCheck.fromJson(json);
+  return _TemplateRegularCheck.fromJson(json);
 }
 
 /// @nodoc
 mixin _$TemplateRegularCheck {
   String get description => throw _privateConstructorUsedError;
   set description(String value) => throw _privateConstructorUsedError;
-  bool get checked => throw _privateConstructorUsedError;
-  set checked(bool value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +35,7 @@ abstract class $TemplateRegularCheckCopyWith<$Res> {
           $Res Function(TemplateRegularCheck) then) =
       _$TemplateRegularCheckCopyWithImpl<$Res, TemplateRegularCheck>;
   @useResult
-  $Res call({String description, bool checked});
+  $Res call({String description});
 }
 
 /// @nodoc
@@ -55,75 +53,65 @@ class _$TemplateRegularCheckCopyWithImpl<$Res,
   @override
   $Res call({
     Object? description = null,
-    Object? checked = null,
   }) {
     return _then(_value.copyWith(
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      checked: null == checked
-          ? _value.checked
-          : checked // ignore: cast_nullable_to_non_nullable
-              as bool,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$RegularCheckImplCopyWith<$Res>
+abstract class _$$TemplateRegularCheckImplCopyWith<$Res>
     implements $TemplateRegularCheckCopyWith<$Res> {
-  factory _$$RegularCheckImplCopyWith(
-          _$RegularCheckImpl value, $Res Function(_$RegularCheckImpl) then) =
-      __$$RegularCheckImplCopyWithImpl<$Res>;
+  factory _$$TemplateRegularCheckImplCopyWith(_$TemplateRegularCheckImpl value,
+          $Res Function(_$TemplateRegularCheckImpl) then) =
+      __$$TemplateRegularCheckImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String description, bool checked});
+  $Res call({String description});
 }
 
 /// @nodoc
-class __$$RegularCheckImplCopyWithImpl<$Res>
-    extends _$TemplateRegularCheckCopyWithImpl<$Res, _$RegularCheckImpl>
-    implements _$$RegularCheckImplCopyWith<$Res> {
-  __$$RegularCheckImplCopyWithImpl(
-      _$RegularCheckImpl _value, $Res Function(_$RegularCheckImpl) _then)
+class __$$TemplateRegularCheckImplCopyWithImpl<$Res>
+    extends _$TemplateRegularCheckCopyWithImpl<$Res, _$TemplateRegularCheckImpl>
+    implements _$$TemplateRegularCheckImplCopyWith<$Res> {
+  __$$TemplateRegularCheckImplCopyWithImpl(_$TemplateRegularCheckImpl _value,
+      $Res Function(_$TemplateRegularCheckImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? description = null,
-    Object? checked = null,
   }) {
-    return _then(_$RegularCheckImpl(
+    return _then(_$TemplateRegularCheckImpl(
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      checked: null == checked
-          ? _value.checked
-          : checked // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$RegularCheckImpl with DiagnosticableTreeMixin implements _RegularCheck {
-  _$RegularCheckImpl({required this.description, required this.checked});
+class _$TemplateRegularCheckImpl
+    with DiagnosticableTreeMixin
+    implements _TemplateRegularCheck {
+  _$TemplateRegularCheckImpl({required this.description});
 
-  factory _$RegularCheckImpl.fromJson(Map<String, dynamic> json) =>
-      _$$RegularCheckImplFromJson(json);
+  factory _$TemplateRegularCheckImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TemplateRegularCheckImplFromJson(json);
 
   @override
   String description;
-  @override
-  bool checked;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TemplateRegularCheck(description: $description, checked: $checked)';
+    return 'TemplateRegularCheck(description: $description)';
   }
 
   @override
@@ -131,41 +119,39 @@ class _$RegularCheckImpl with DiagnosticableTreeMixin implements _RegularCheck {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'TemplateRegularCheck'))
-      ..add(DiagnosticsProperty('description', description))
-      ..add(DiagnosticsProperty('checked', checked));
+      ..add(DiagnosticsProperty('description', description));
   }
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$RegularCheckImplCopyWith<_$RegularCheckImpl> get copyWith =>
-      __$$RegularCheckImplCopyWithImpl<_$RegularCheckImpl>(this, _$identity);
+  _$$TemplateRegularCheckImplCopyWith<_$TemplateRegularCheckImpl>
+      get copyWith =>
+          __$$TemplateRegularCheckImplCopyWithImpl<_$TemplateRegularCheckImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$RegularCheckImplToJson(
+    return _$$TemplateRegularCheckImplToJson(
       this,
     );
   }
 }
 
-abstract class _RegularCheck implements TemplateRegularCheck {
-  factory _RegularCheck({required String description, required bool checked}) =
-      _$RegularCheckImpl;
+abstract class _TemplateRegularCheck implements TemplateRegularCheck {
+  factory _TemplateRegularCheck({required String description}) =
+      _$TemplateRegularCheckImpl;
 
-  factory _RegularCheck.fromJson(Map<String, dynamic> json) =
-      _$RegularCheckImpl.fromJson;
+  factory _TemplateRegularCheck.fromJson(Map<String, dynamic> json) =
+      _$TemplateRegularCheckImpl.fromJson;
 
   @override
   String get description;
   set description(String value);
   @override
-  bool get checked;
-  set checked(bool value);
-  @override
   @JsonKey(ignore: true)
-  _$$RegularCheckImplCopyWith<_$RegularCheckImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$TemplateRegularCheckImplCopyWith<_$TemplateRegularCheckImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 TemplateWithReferenceCheck _$TemplateWithReferenceCheckFromJson(
@@ -177,16 +163,8 @@ TemplateWithReferenceCheck _$TemplateWithReferenceCheckFromJson(
 mixin _$TemplateWithReferenceCheck {
   String get description => throw _privateConstructorUsedError;
   set description(String value) => throw _privateConstructorUsedError;
-  bool get checked => throw _privateConstructorUsedError;
-  set checked(bool value) => throw _privateConstructorUsedError;
   String get referenceDescription => throw _privateConstructorUsedError;
   set referenceDescription(String value) => throw _privateConstructorUsedError;
-  double get reference1 => throw _privateConstructorUsedError;
-  set reference1(double value) => throw _privateConstructorUsedError;
-  double get reference2 => throw _privateConstructorUsedError;
-  set reference2(double value) => throw _privateConstructorUsedError;
-  double get reference3 => throw _privateConstructorUsedError;
-  set reference3(double value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -201,13 +179,7 @@ abstract class $TemplateWithReferenceCheckCopyWith<$Res> {
       _$TemplateWithReferenceCheckCopyWithImpl<$Res,
           TemplateWithReferenceCheck>;
   @useResult
-  $Res call(
-      {String description,
-      bool checked,
-      String referenceDescription,
-      double reference1,
-      double reference2,
-      double reference3});
+  $Res call({String description, String referenceDescription});
 }
 
 /// @nodoc
@@ -225,37 +197,17 @@ class _$TemplateWithReferenceCheckCopyWithImpl<$Res,
   @override
   $Res call({
     Object? description = null,
-    Object? checked = null,
     Object? referenceDescription = null,
-    Object? reference1 = null,
-    Object? reference2 = null,
-    Object? reference3 = null,
   }) {
     return _then(_value.copyWith(
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      checked: null == checked
-          ? _value.checked
-          : checked // ignore: cast_nullable_to_non_nullable
-              as bool,
       referenceDescription: null == referenceDescription
           ? _value.referenceDescription
           : referenceDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      reference1: null == reference1
-          ? _value.reference1
-          : reference1 // ignore: cast_nullable_to_non_nullable
-              as double,
-      reference2: null == reference2
-          ? _value.reference2
-          : reference2 // ignore: cast_nullable_to_non_nullable
-              as double,
-      reference3: null == reference3
-          ? _value.reference3
-          : reference3 // ignore: cast_nullable_to_non_nullable
-              as double,
     ) as $Val);
   }
 }
@@ -269,13 +221,7 @@ abstract class _$$TemplateWithReferenceCheckImplCopyWith<$Res>
       __$$TemplateWithReferenceCheckImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String description,
-      bool checked,
-      String referenceDescription,
-      double reference1,
-      double reference2,
-      double reference3});
+  $Res call({String description, String referenceDescription});
 }
 
 /// @nodoc
@@ -292,37 +238,17 @@ class __$$TemplateWithReferenceCheckImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? description = null,
-    Object? checked = null,
     Object? referenceDescription = null,
-    Object? reference1 = null,
-    Object? reference2 = null,
-    Object? reference3 = null,
   }) {
     return _then(_$TemplateWithReferenceCheckImpl(
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      checked: null == checked
-          ? _value.checked
-          : checked // ignore: cast_nullable_to_non_nullable
-              as bool,
       referenceDescription: null == referenceDescription
           ? _value.referenceDescription
           : referenceDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      reference1: null == reference1
-          ? _value.reference1
-          : reference1 // ignore: cast_nullable_to_non_nullable
-              as double,
-      reference2: null == reference2
-          ? _value.reference2
-          : reference2 // ignore: cast_nullable_to_non_nullable
-              as double,
-      reference3: null == reference3
-          ? _value.reference3
-          : reference3 // ignore: cast_nullable_to_non_nullable
-              as double,
     ));
   }
 }
@@ -333,12 +259,7 @@ class _$TemplateWithReferenceCheckImpl
     with DiagnosticableTreeMixin
     implements _TemplateWithReferenceCheck {
   _$TemplateWithReferenceCheckImpl(
-      {required this.description,
-      required this.checked,
-      required this.referenceDescription,
-      required this.reference1,
-      required this.reference2,
-      required this.reference3});
+      {required this.description, required this.referenceDescription});
 
   factory _$TemplateWithReferenceCheckImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -347,19 +268,11 @@ class _$TemplateWithReferenceCheckImpl
   @override
   String description;
   @override
-  bool checked;
-  @override
   String referenceDescription;
-  @override
-  double reference1;
-  @override
-  double reference2;
-  @override
-  double reference3;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TemplateWithReferenceCheck(description: $description, checked: $checked, referenceDescription: $referenceDescription, reference1: $reference1, reference2: $reference2, reference3: $reference3)';
+    return 'TemplateWithReferenceCheck(description: $description, referenceDescription: $referenceDescription)';
   }
 
   @override
@@ -368,11 +281,7 @@ class _$TemplateWithReferenceCheckImpl
     properties
       ..add(DiagnosticsProperty('type', 'TemplateWithReferenceCheck'))
       ..add(DiagnosticsProperty('description', description))
-      ..add(DiagnosticsProperty('checked', checked))
-      ..add(DiagnosticsProperty('referenceDescription', referenceDescription))
-      ..add(DiagnosticsProperty('reference1', reference1))
-      ..add(DiagnosticsProperty('reference2', reference2))
-      ..add(DiagnosticsProperty('reference3', reference3));
+      ..add(DiagnosticsProperty('referenceDescription', referenceDescription));
   }
 
   @JsonKey(ignore: true)
@@ -394,11 +303,7 @@ abstract class _TemplateWithReferenceCheck
     implements TemplateWithReferenceCheck {
   factory _TemplateWithReferenceCheck(
       {required String description,
-      required bool checked,
-      required String referenceDescription,
-      required double reference1,
-      required double reference2,
-      required double reference3}) = _$TemplateWithReferenceCheckImpl;
+      required String referenceDescription}) = _$TemplateWithReferenceCheckImpl;
 
   factory _TemplateWithReferenceCheck.fromJson(Map<String, dynamic> json) =
       _$TemplateWithReferenceCheckImpl.fromJson;
@@ -407,20 +312,8 @@ abstract class _TemplateWithReferenceCheck
   String get description;
   set description(String value);
   @override
-  bool get checked;
-  set checked(bool value);
-  @override
   String get referenceDescription;
   set referenceDescription(String value);
-  @override
-  double get reference1;
-  set reference1(double value);
-  @override
-  double get reference2;
-  set reference2(double value);
-  @override
-  double get reference3;
-  set reference3(double value);
   @override
   @JsonKey(ignore: true)
   _$$TemplateWithReferenceCheckImplCopyWith<_$TemplateWithReferenceCheckImpl>
@@ -434,12 +327,8 @@ TemplateLinearityCheckStep1Check _$TemplateLinearityCheckStep1CheckFromJson(
 
 /// @nodoc
 mixin _$TemplateLinearityCheckStep1Check {
-  double get reference1 => throw _privateConstructorUsedError;
-  set reference1(double value) => throw _privateConstructorUsedError;
-  double get reference2 => throw _privateConstructorUsedError;
-  set reference2(double value) => throw _privateConstructorUsedError;
-  double get reference3 => throw _privateConstructorUsedError;
-  set reference3(double value) => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
+  set title(String value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -455,7 +344,7 @@ abstract class $TemplateLinearityCheckStep1CheckCopyWith<$Res> {
       _$TemplateLinearityCheckStep1CheckCopyWithImpl<$Res,
           TemplateLinearityCheckStep1Check>;
   @useResult
-  $Res call({double reference1, double reference2, double reference3});
+  $Res call({String title});
 }
 
 /// @nodoc
@@ -472,23 +361,13 @@ class _$TemplateLinearityCheckStep1CheckCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? reference1 = null,
-    Object? reference2 = null,
-    Object? reference3 = null,
+    Object? title = null,
   }) {
     return _then(_value.copyWith(
-      reference1: null == reference1
-          ? _value.reference1
-          : reference1 // ignore: cast_nullable_to_non_nullable
-              as double,
-      reference2: null == reference2
-          ? _value.reference2
-          : reference2 // ignore: cast_nullable_to_non_nullable
-              as double,
-      reference3: null == reference3
-          ? _value.reference3
-          : reference3 // ignore: cast_nullable_to_non_nullable
-              as double,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -502,7 +381,7 @@ abstract class _$$TemplateLinearityCheckStep1CheckImplCopyWith<$Res>
       __$$TemplateLinearityCheckStep1CheckImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({double reference1, double reference2, double reference3});
+  $Res call({String title});
 }
 
 /// @nodoc
@@ -518,23 +397,13 @@ class __$$TemplateLinearityCheckStep1CheckImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? reference1 = null,
-    Object? reference2 = null,
-    Object? reference3 = null,
+    Object? title = null,
   }) {
     return _then(_$TemplateLinearityCheckStep1CheckImpl(
-      reference1: null == reference1
-          ? _value.reference1
-          : reference1 // ignore: cast_nullable_to_non_nullable
-              as double,
-      reference2: null == reference2
-          ? _value.reference2
-          : reference2 // ignore: cast_nullable_to_non_nullable
-              as double,
-      reference3: null == reference3
-          ? _value.reference3
-          : reference3 // ignore: cast_nullable_to_non_nullable
-              as double,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -544,25 +413,18 @@ class __$$TemplateLinearityCheckStep1CheckImplCopyWithImpl<$Res>
 class _$TemplateLinearityCheckStep1CheckImpl
     with DiagnosticableTreeMixin
     implements _TemplateLinearityCheckStep1Check {
-  _$TemplateLinearityCheckStep1CheckImpl(
-      {required this.reference1,
-      required this.reference2,
-      required this.reference3});
+  _$TemplateLinearityCheckStep1CheckImpl({required this.title});
 
   factory _$TemplateLinearityCheckStep1CheckImpl.fromJson(
           Map<String, dynamic> json) =>
       _$$TemplateLinearityCheckStep1CheckImplFromJson(json);
 
   @override
-  double reference1;
-  @override
-  double reference2;
-  @override
-  double reference3;
+  String title;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TemplateLinearityCheckStep1Check(reference1: $reference1, reference2: $reference2, reference3: $reference3)';
+    return 'TemplateLinearityCheckStep1Check(title: $title)';
   }
 
   @override
@@ -570,9 +432,7 @@ class _$TemplateLinearityCheckStep1CheckImpl
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'TemplateLinearityCheckStep1Check'))
-      ..add(DiagnosticsProperty('reference1', reference1))
-      ..add(DiagnosticsProperty('reference2', reference2))
-      ..add(DiagnosticsProperty('reference3', reference3));
+      ..add(DiagnosticsProperty('title', title));
   }
 
   @JsonKey(ignore: true)
@@ -593,24 +453,16 @@ class _$TemplateLinearityCheckStep1CheckImpl
 
 abstract class _TemplateLinearityCheckStep1Check
     implements TemplateLinearityCheckStep1Check {
-  factory _TemplateLinearityCheckStep1Check(
-      {required double reference1,
-      required double reference2,
-      required double reference3}) = _$TemplateLinearityCheckStep1CheckImpl;
+  factory _TemplateLinearityCheckStep1Check({required String title}) =
+      _$TemplateLinearityCheckStep1CheckImpl;
 
   factory _TemplateLinearityCheckStep1Check.fromJson(
           Map<String, dynamic> json) =
       _$TemplateLinearityCheckStep1CheckImpl.fromJson;
 
   @override
-  double get reference1;
-  set reference1(double value);
-  @override
-  double get reference2;
-  set reference2(double value);
-  @override
-  double get reference3;
-  set reference3(double value);
+  String get title;
+  set title(String value);
   @override
   @JsonKey(ignore: true)
   _$$TemplateLinearityCheckStep1CheckImplCopyWith<
@@ -625,12 +477,8 @@ TemplateLinearityCheckStep2Check _$TemplateLinearityCheckStep2CheckFromJson(
 
 /// @nodoc
 mixin _$TemplateLinearityCheckStep2Check {
-  double get reference1 => throw _privateConstructorUsedError;
-  set reference1(double value) => throw _privateConstructorUsedError;
-  double get reference2 => throw _privateConstructorUsedError;
-  set reference2(double value) => throw _privateConstructorUsedError;
-  double get reference3 => throw _privateConstructorUsedError;
-  set reference3(double value) => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
+  set title(String value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -646,7 +494,7 @@ abstract class $TemplateLinearityCheckStep2CheckCopyWith<$Res> {
       _$TemplateLinearityCheckStep2CheckCopyWithImpl<$Res,
           TemplateLinearityCheckStep2Check>;
   @useResult
-  $Res call({double reference1, double reference2, double reference3});
+  $Res call({String title});
 }
 
 /// @nodoc
@@ -663,23 +511,13 @@ class _$TemplateLinearityCheckStep2CheckCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? reference1 = null,
-    Object? reference2 = null,
-    Object? reference3 = null,
+    Object? title = null,
   }) {
     return _then(_value.copyWith(
-      reference1: null == reference1
-          ? _value.reference1
-          : reference1 // ignore: cast_nullable_to_non_nullable
-              as double,
-      reference2: null == reference2
-          ? _value.reference2
-          : reference2 // ignore: cast_nullable_to_non_nullable
-              as double,
-      reference3: null == reference3
-          ? _value.reference3
-          : reference3 // ignore: cast_nullable_to_non_nullable
-              as double,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -693,7 +531,7 @@ abstract class _$$TemplateLinearityCheckStep2CheckImplCopyWith<$Res>
       __$$TemplateLinearityCheckStep2CheckImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({double reference1, double reference2, double reference3});
+  $Res call({String title});
 }
 
 /// @nodoc
@@ -709,23 +547,13 @@ class __$$TemplateLinearityCheckStep2CheckImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? reference1 = null,
-    Object? reference2 = null,
-    Object? reference3 = null,
+    Object? title = null,
   }) {
     return _then(_$TemplateLinearityCheckStep2CheckImpl(
-      reference1: null == reference1
-          ? _value.reference1
-          : reference1 // ignore: cast_nullable_to_non_nullable
-              as double,
-      reference2: null == reference2
-          ? _value.reference2
-          : reference2 // ignore: cast_nullable_to_non_nullable
-              as double,
-      reference3: null == reference3
-          ? _value.reference3
-          : reference3 // ignore: cast_nullable_to_non_nullable
-              as double,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -735,25 +563,18 @@ class __$$TemplateLinearityCheckStep2CheckImplCopyWithImpl<$Res>
 class _$TemplateLinearityCheckStep2CheckImpl
     with DiagnosticableTreeMixin
     implements _TemplateLinearityCheckStep2Check {
-  _$TemplateLinearityCheckStep2CheckImpl(
-      {required this.reference1,
-      required this.reference2,
-      required this.reference3});
+  _$TemplateLinearityCheckStep2CheckImpl({required this.title});
 
   factory _$TemplateLinearityCheckStep2CheckImpl.fromJson(
           Map<String, dynamic> json) =>
       _$$TemplateLinearityCheckStep2CheckImplFromJson(json);
 
   @override
-  double reference1;
-  @override
-  double reference2;
-  @override
-  double reference3;
+  String title;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TemplateLinearityCheckStep2Check(reference1: $reference1, reference2: $reference2, reference3: $reference3)';
+    return 'TemplateLinearityCheckStep2Check(title: $title)';
   }
 
   @override
@@ -761,9 +582,7 @@ class _$TemplateLinearityCheckStep2CheckImpl
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'TemplateLinearityCheckStep2Check'))
-      ..add(DiagnosticsProperty('reference1', reference1))
-      ..add(DiagnosticsProperty('reference2', reference2))
-      ..add(DiagnosticsProperty('reference3', reference3));
+      ..add(DiagnosticsProperty('title', title));
   }
 
   @JsonKey(ignore: true)
@@ -784,24 +603,16 @@ class _$TemplateLinearityCheckStep2CheckImpl
 
 abstract class _TemplateLinearityCheckStep2Check
     implements TemplateLinearityCheckStep2Check {
-  factory _TemplateLinearityCheckStep2Check(
-      {required double reference1,
-      required double reference2,
-      required double reference3}) = _$TemplateLinearityCheckStep2CheckImpl;
+  factory _TemplateLinearityCheckStep2Check({required String title}) =
+      _$TemplateLinearityCheckStep2CheckImpl;
 
   factory _TemplateLinearityCheckStep2Check.fromJson(
           Map<String, dynamic> json) =
       _$TemplateLinearityCheckStep2CheckImpl.fromJson;
 
   @override
-  double get reference1;
-  set reference1(double value);
-  @override
-  double get reference2;
-  set reference2(double value);
-  @override
-  double get reference3;
-  set reference3(double value);
+  String get title;
+  set title(String value);
   @override
   @JsonKey(ignore: true)
   _$$TemplateLinearityCheckStep2CheckImplCopyWith<

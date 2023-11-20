@@ -40,8 +40,8 @@ sealed class TemplateCheck {
 @unfreezed
 sealed class TemplateRegularCheck extends TemplateCheck
     with _$TemplateRegularCheck {
-  factory TemplateRegularCheck(
-      {required String description, required bool checked}) = _RegularCheck;
+  factory TemplateRegularCheck({required String description}) =
+      _TemplateRegularCheck;
 
   factory TemplateRegularCheck.fromJson(Map<String, dynamic> json) =>
       _$TemplateRegularCheckFromJson(json);
@@ -52,11 +52,7 @@ sealed class TemplateWithReferenceCheck extends TemplateCheck
     with _$TemplateWithReferenceCheck {
   factory TemplateWithReferenceCheck({
     required String description,
-    required bool checked,
     required String referenceDescription,
-    required double reference1,
-    required double reference2,
-    required double reference3,
   }) = _TemplateWithReferenceCheck;
 
   factory TemplateWithReferenceCheck.fromJson(Map<String, dynamic> json) =>
@@ -66,11 +62,8 @@ sealed class TemplateWithReferenceCheck extends TemplateCheck
 @unfreezed
 sealed class TemplateLinearityCheckStep1Check extends TemplateCheck
     with _$TemplateLinearityCheckStep1Check {
-  factory TemplateLinearityCheckStep1Check({
-    required double reference1,
-    required double reference2,
-    required double reference3,
-  }) = _TemplateLinearityCheckStep1Check;
+  factory TemplateLinearityCheckStep1Check({required String title}) =
+      _TemplateLinearityCheckStep1Check;
 
   factory TemplateLinearityCheckStep1Check.fromJson(
           Map<String, dynamic> json) =>
@@ -80,11 +73,8 @@ sealed class TemplateLinearityCheckStep1Check extends TemplateCheck
 @unfreezed
 sealed class TemplateLinearityCheckStep2Check extends TemplateCheck
     with _$TemplateLinearityCheckStep2Check {
-  factory TemplateLinearityCheckStep2Check({
-    required double reference1,
-    required double reference2,
-    required double reference3,
-  }) = _TemplateLinearityCheckStep2Check;
+  factory TemplateLinearityCheckStep2Check({required String title}) =
+      _TemplateLinearityCheckStep2Check;
 
   factory TemplateLinearityCheckStep2Check.fromJson(
           Map<String, dynamic> json) =>
