@@ -1,19 +1,75 @@
+import 'package:ccr_checklist/data/template.dart';
 import 'package:ccr_checklist/data/template_check.dart';
 import 'package:ccr_checklist/data/template_section.dart';
 import 'package:flutter/material.dart';
 
-class TemplateEditor extends StatelessWidget {
-  final List<TemplateSection> sections;
+class TemplateEditorPage extends StatefulWidget {
+  final Template template;
+  const TemplateEditorPage({super.key, required this.template});
 
-  const TemplateEditor(this.sections, {super.key});
+  @override
+  State<TemplateEditorPage> createState() => _TemplateEditorPageState();
+}
+
+class _TemplateEditorPageState extends State<TemplateEditorPage> {
+  Map<TemplateSection, List<TemplateCheck>> sectionChecks = {};
+
+  void _addNewSection() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) =>
+            TemplateSectionEditor(section: TemplateSection.empty()),
+      ),
+    );
+  }
+
+  void _editSection(TemplateSection section) {
+    // Navigate to the TemplateSectionEditor with the selected section
+    Navigator.of(context).push(
+      MaterialPageRoute(
+          builder: (context) => TemplateSectionEditor(section: section)),
+    );
+  }
+
+  void _editCheck(TemplateCheck check) {
+    // Navigate to the TemplateCheckEditor with the selected check
+    Navigator.of(context).push(
+      MaterialPageRoute(
+          builder: (context) => TemplateCheckEditor(check: check)),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: sections.length,
-      itemBuilder: (context, index) {
-        return TemplateSectionEditor(sections[index]);
-      },
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Template Editor'),
+        elevation: 4,
+      ),
+      body: ListView.builder(
+        itemCount: widget.template.sections.length,
+        itemBuilder: (context, index) {
+          final section = widget.template.sections[index];
+          return ListTile(
+            title: Text(section.title),
+            onTap: () => _editSection(section),
+            // Display checks in this section
+            subtitle: Column(
+              children: section.checks.map((check) {
+                return ListTile(
+                  title: Text(check.type),
+                  onTap: () => _editCheck(check),
+                );
+              }).toList(),
+            ),
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _addNewSection,
+        tooltip: 'Create New Section',
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }
@@ -21,7 +77,7 @@ class TemplateEditor extends StatelessWidget {
 class TemplateSectionEditor extends StatelessWidget {
   final TemplateSection section;
 
-  const TemplateSectionEditor(this.section, {super.key});
+  const TemplateSectionEditor({super.key, required this.section});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +89,7 @@ class TemplateSectionEditor extends StatelessWidget {
             itemCount: section.checks.length,
             itemBuilder: (context, index) {
               final check = section.checks[index];
-              return TemplateCheckEditor(check);
+              return TemplateCheckEditor(check: check);
             },
           ),
         ),
@@ -46,7 +102,7 @@ class TemplateSectionEditor extends StatelessWidget {
 class TemplateCheckEditor extends StatelessWidget {
   final TemplateCheck check;
 
-  const TemplateCheckEditor(this.check, {super.key});
+  const TemplateCheckEditor({super.key, required this.check});
 
   @override
   Widget build(BuildContext context) {

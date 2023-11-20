@@ -13,6 +13,12 @@ class Template with _$Template {
     required List<TemplateSection> sections,
   }) = _Template;
 
+  factory Template.empty() => Template(
+        title: '',
+        description: '',
+        sections: [],
+      );
+
   Template._();
 
   factory Template.fromJson(Map<String, dynamic> json) =>

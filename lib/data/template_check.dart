@@ -5,7 +5,9 @@ part 'template_check.freezed.dart';
 part 'template_check.g.dart';
 
 sealed class TemplateCheck {
-  TemplateCheck._();
+  final type = 'abstract check';
+
+  TemplateCheck();
   factory TemplateCheck.fromJson(Map<String, dynamic> json) {
     switch (json['type'] as String) {
       case 'regular':
@@ -38,18 +40,25 @@ sealed class TemplateCheck {
 }
 
 @unfreezed
-sealed class TemplateRegularCheck extends TemplateCheck
-    with _$TemplateRegularCheck {
+class TemplateRegularCheck extends TemplateCheck with _$TemplateRegularCheck {
+  TemplateRegularCheck._();
+
   factory TemplateRegularCheck({required String description}) =
       _TemplateRegularCheck;
 
   factory TemplateRegularCheck.fromJson(Map<String, dynamic> json) =>
       _$TemplateRegularCheckFromJson(json);
+
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  String get type => 'regular';
 }
 
 @unfreezed
-sealed class TemplateWithReferenceCheck extends TemplateCheck
+class TemplateWithReferenceCheck extends TemplateCheck
     with _$TemplateWithReferenceCheck {
+  TemplateWithReferenceCheck._();
+
   factory TemplateWithReferenceCheck({
     required String description,
     required String referenceDescription,
@@ -57,26 +66,42 @@ sealed class TemplateWithReferenceCheck extends TemplateCheck
 
   factory TemplateWithReferenceCheck.fromJson(Map<String, dynamic> json) =>
       _$TemplateWithReferenceCheckFromJson(json);
+
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  String get type => 'with reference';
 }
 
 @unfreezed
-sealed class TemplateLinearityCheckStep1Check extends TemplateCheck
+class TemplateLinearityCheckStep1Check extends TemplateCheck
     with _$TemplateLinearityCheckStep1Check {
+  TemplateLinearityCheckStep1Check._();
+
   factory TemplateLinearityCheckStep1Check({required String title}) =
       _TemplateLinearityCheckStep1Check;
 
   factory TemplateLinearityCheckStep1Check.fromJson(
           Map<String, dynamic> json) =>
       _$TemplateLinearityCheckStep1CheckFromJson(json);
+
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  String get type => 'linearity check initial step';
 }
 
 @unfreezed
-sealed class TemplateLinearityCheckStep2Check extends TemplateCheck
+class TemplateLinearityCheckStep2Check extends TemplateCheck
     with _$TemplateLinearityCheckStep2Check {
+  TemplateLinearityCheckStep2Check._();
+
   factory TemplateLinearityCheckStep2Check({required String title}) =
       _TemplateLinearityCheckStep2Check;
 
   factory TemplateLinearityCheckStep2Check.fromJson(
           Map<String, dynamic> json) =>
       _$TemplateLinearityCheckStep2CheckFromJson(json);
+
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  String get type => 'linearity check final step';
 }

@@ -98,10 +98,9 @@ class __$$TemplateRegularCheckImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$TemplateRegularCheckImpl
-    with DiagnosticableTreeMixin
-    implements _TemplateRegularCheck {
-  _$TemplateRegularCheckImpl({required this.description});
+class _$TemplateRegularCheckImpl extends _TemplateRegularCheck
+    with DiagnosticableTreeMixin {
+  _$TemplateRegularCheckImpl({required this.description}) : super._();
 
   factory _$TemplateRegularCheckImpl.fromJson(Map<String, dynamic> json) =>
       _$$TemplateRegularCheckImplFromJson(json);
@@ -138,9 +137,10 @@ class _$TemplateRegularCheckImpl
   }
 }
 
-abstract class _TemplateRegularCheck implements TemplateRegularCheck {
+abstract class _TemplateRegularCheck extends TemplateRegularCheck {
   factory _TemplateRegularCheck({required String description}) =
       _$TemplateRegularCheckImpl;
+  _TemplateRegularCheck._() : super._();
 
   factory _TemplateRegularCheck.fromJson(Map<String, dynamic> json) =
       _$TemplateRegularCheckImpl.fromJson;
@@ -255,11 +255,11 @@ class __$$TemplateWithReferenceCheckImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$TemplateWithReferenceCheckImpl
-    with DiagnosticableTreeMixin
-    implements _TemplateWithReferenceCheck {
+class _$TemplateWithReferenceCheckImpl extends _TemplateWithReferenceCheck
+    with DiagnosticableTreeMixin {
   _$TemplateWithReferenceCheckImpl(
-      {required this.description, required this.referenceDescription});
+      {required this.description, required this.referenceDescription})
+      : super._();
 
   factory _$TemplateWithReferenceCheckImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -299,11 +299,11 @@ class _$TemplateWithReferenceCheckImpl
   }
 }
 
-abstract class _TemplateWithReferenceCheck
-    implements TemplateWithReferenceCheck {
+abstract class _TemplateWithReferenceCheck extends TemplateWithReferenceCheck {
   factory _TemplateWithReferenceCheck(
       {required String description,
       required String referenceDescription}) = _$TemplateWithReferenceCheckImpl;
+  _TemplateWithReferenceCheck._() : super._();
 
   factory _TemplateWithReferenceCheck.fromJson(Map<String, dynamic> json) =
       _$TemplateWithReferenceCheckImpl.fromJson;
@@ -411,9 +411,8 @@ class __$$TemplateLinearityCheckStep1CheckImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$TemplateLinearityCheckStep1CheckImpl
-    with DiagnosticableTreeMixin
-    implements _TemplateLinearityCheckStep1Check {
-  _$TemplateLinearityCheckStep1CheckImpl({required this.title});
+    extends _TemplateLinearityCheckStep1Check with DiagnosticableTreeMixin {
+  _$TemplateLinearityCheckStep1CheckImpl({required this.title}) : super._();
 
   factory _$TemplateLinearityCheckStep1CheckImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -452,9 +451,10 @@ class _$TemplateLinearityCheckStep1CheckImpl
 }
 
 abstract class _TemplateLinearityCheckStep1Check
-    implements TemplateLinearityCheckStep1Check {
+    extends TemplateLinearityCheckStep1Check {
   factory _TemplateLinearityCheckStep1Check({required String title}) =
       _$TemplateLinearityCheckStep1CheckImpl;
+  _TemplateLinearityCheckStep1Check._() : super._();
 
   factory _TemplateLinearityCheckStep1Check.fromJson(
           Map<String, dynamic> json) =
@@ -561,9 +561,8 @@ class __$$TemplateLinearityCheckStep2CheckImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$TemplateLinearityCheckStep2CheckImpl
-    with DiagnosticableTreeMixin
-    implements _TemplateLinearityCheckStep2Check {
-  _$TemplateLinearityCheckStep2CheckImpl({required this.title});
+    extends _TemplateLinearityCheckStep2Check with DiagnosticableTreeMixin {
+  _$TemplateLinearityCheckStep2CheckImpl({required this.title}) : super._();
 
   factory _$TemplateLinearityCheckStep2CheckImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -602,9 +601,10 @@ class _$TemplateLinearityCheckStep2CheckImpl
 }
 
 abstract class _TemplateLinearityCheckStep2Check
-    implements TemplateLinearityCheckStep2Check {
+    extends TemplateLinearityCheckStep2Check {
   factory _TemplateLinearityCheckStep2Check({required String title}) =
       _$TemplateLinearityCheckStep2CheckImpl;
+  _TemplateLinearityCheckStep2Check._() : super._();
 
   factory _TemplateLinearityCheckStep2Check.fromJson(
           Map<String, dynamic> json) =

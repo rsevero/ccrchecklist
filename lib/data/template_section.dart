@@ -14,6 +14,8 @@ sealed class TemplateSection with _$TemplateSection {
 
   TemplateSection._();
 
+  factory TemplateSection.empty() => TemplateSection(title: '', checks: []);
+
   factory TemplateSection.fromJson(Map<String, dynamic> json) =>
       _$TemplateSectionFromJson(json);
 }
