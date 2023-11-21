@@ -1,26 +1,17 @@
+import 'package:ccr_checklist/data/template_section.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'template_check.freezed.dart';
 part 'template_check.g.dart';
 
-sealed class TemplateCheck {
-  final type = 'abstract check';
+class TemplateCheck {
+  final TemplateSection parent;
 
-  TemplateCheck();
+  TemplateCheck(this.parent);
+
   factory TemplateCheck.fromJson(Map<String, dynamic> json) {
-    switch (json['type'] as String) {
-      case 'regular':
-        return TemplateRegularCheck.fromJson(json);
-      case 'withReference':
-        return TemplateWithReferenceCheck.fromJson(json);
-      case 'linearityCheckStep1':
-        return TemplateLinearityCheckStep1Check.fromJson(json);
-      case 'linearityCheckStep2':
-        return TemplateLinearityCheckStep2Check.fromJson(json);
-      default:
-        throw UnsupportedError("Unknown check type ${json['type']}");
-    }
+    return TemplateCheck(json['parent']);
   }
 
   Map<String, dynamic> toJson() {
@@ -37,14 +28,18 @@ sealed class TemplateCheck {
         throw UnsupportedError("Unknown check type $runtimeType");
     }
   }
+
+  String get type => 'abstract check';
 }
 
 @unfreezed
-class TemplateRegularCheck extends TemplateCheck with _$TemplateRegularCheck {
+class TemplateRegularCheck with _$TemplateRegularCheck {
   TemplateRegularCheck._();
 
-  factory TemplateRegularCheck({required String description}) =
-      _TemplateRegularCheck;
+  @Implements<TemplateCheck>()
+  factory TemplateRegularCheck(
+      {required TemplateSection parent,
+      required String description}) = _TemplateRegularCheck;
 
   factory TemplateRegularCheck.fromJson(Map<String, dynamic> json) =>
       _$TemplateRegularCheckFromJson(json);
@@ -55,11 +50,12 @@ class TemplateRegularCheck extends TemplateCheck with _$TemplateRegularCheck {
 }
 
 @unfreezed
-class TemplateWithReferenceCheck extends TemplateCheck
-    with _$TemplateWithReferenceCheck {
+class TemplateWithReferenceCheck with _$TemplateWithReferenceCheck {
   TemplateWithReferenceCheck._();
 
+  @Implements<TemplateCheck>()
   factory TemplateWithReferenceCheck({
+    required TemplateSection parent,
     required String description,
     required String referenceDescription,
   }) = _TemplateWithReferenceCheck;
@@ -73,11 +69,11 @@ class TemplateWithReferenceCheck extends TemplateCheck
 }
 
 @unfreezed
-class TemplateLinearityCheckStep1Check extends TemplateCheck
-    with _$TemplateLinearityCheckStep1Check {
+class TemplateLinearityCheckStep1Check with _$TemplateLinearityCheckStep1Check {
   TemplateLinearityCheckStep1Check._();
 
-  factory TemplateLinearityCheckStep1Check({required String title}) =
+  @Implements<TemplateCheck>()
+  factory TemplateLinearityCheckStep1Check({required TemplateSection parent}) =
       _TemplateLinearityCheckStep1Check;
 
   factory TemplateLinearityCheckStep1Check.fromJson(
@@ -90,11 +86,11 @@ class TemplateLinearityCheckStep1Check extends TemplateCheck
 }
 
 @unfreezed
-class TemplateLinearityCheckStep2Check extends TemplateCheck
-    with _$TemplateLinearityCheckStep2Check {
+class TemplateLinearityCheckStep2Check with _$TemplateLinearityCheckStep2Check {
   TemplateLinearityCheckStep2Check._();
 
-  factory TemplateLinearityCheckStep2Check({required String title}) =
+  @Implements<TemplateCheck>()
+  factory TemplateLinearityCheckStep2Check({required TemplateSection parent}) =
       _TemplateLinearityCheckStep2Check;
 
   factory TemplateLinearityCheckStep2Check.fromJson(

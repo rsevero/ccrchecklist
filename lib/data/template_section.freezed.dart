@@ -24,6 +24,8 @@ mixin _$TemplateSection {
   set title(String value) => throw _privateConstructorUsedError;
   List<TemplateCheck> get checks => throw _privateConstructorUsedError;
   set checks(List<TemplateCheck> value) => throw _privateConstructorUsedError;
+  Template get parent => throw _privateConstructorUsedError;
+  set parent(Template value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +39,9 @@ abstract class $TemplateSectionCopyWith<$Res> {
           TemplateSection value, $Res Function(TemplateSection) then) =
       _$TemplateSectionCopyWithImpl<$Res, TemplateSection>;
   @useResult
-  $Res call({String title, List<TemplateCheck> checks});
+  $Res call({String title, List<TemplateCheck> checks, Template parent});
+
+  $TemplateCopyWith<$Res> get parent;
 }
 
 /// @nodoc
@@ -55,6 +59,7 @@ class _$TemplateSectionCopyWithImpl<$Res, $Val extends TemplateSection>
   $Res call({
     Object? title = null,
     Object? checks = null,
+    Object? parent = null,
   }) {
     return _then(_value.copyWith(
       title: null == title
@@ -65,7 +70,19 @@ class _$TemplateSectionCopyWithImpl<$Res, $Val extends TemplateSection>
           ? _value.checks
           : checks // ignore: cast_nullable_to_non_nullable
               as List<TemplateCheck>,
+      parent: null == parent
+          ? _value.parent
+          : parent // ignore: cast_nullable_to_non_nullable
+              as Template,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TemplateCopyWith<$Res> get parent {
+    return $TemplateCopyWith<$Res>(_value.parent, (value) {
+      return _then(_value.copyWith(parent: value) as $Val);
+    });
   }
 }
 
@@ -77,7 +94,10 @@ abstract class _$$TemplateSectionImplCopyWith<$Res>
       __$$TemplateSectionImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String title, List<TemplateCheck> checks});
+  $Res call({String title, List<TemplateCheck> checks, Template parent});
+
+  @override
+  $TemplateCopyWith<$Res> get parent;
 }
 
 /// @nodoc
@@ -93,6 +113,7 @@ class __$$TemplateSectionImplCopyWithImpl<$Res>
   $Res call({
     Object? title = null,
     Object? checks = null,
+    Object? parent = null,
   }) {
     return _then(_$TemplateSectionImpl(
       title: null == title
@@ -103,6 +124,10 @@ class __$$TemplateSectionImplCopyWithImpl<$Res>
           ? _value.checks
           : checks // ignore: cast_nullable_to_non_nullable
               as List<TemplateCheck>,
+      parent: null == parent
+          ? _value.parent
+          : parent // ignore: cast_nullable_to_non_nullable
+              as Template,
     ));
   }
 }
@@ -111,7 +136,8 @@ class __$$TemplateSectionImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$TemplateSectionImpl extends _TemplateSection
     with DiagnosticableTreeMixin {
-  _$TemplateSectionImpl({required this.title, required this.checks})
+  _$TemplateSectionImpl(
+      {required this.title, required this.checks, required this.parent})
       : super._();
 
   factory _$TemplateSectionImpl.fromJson(Map<String, dynamic> json) =>
@@ -121,10 +147,12 @@ class _$TemplateSectionImpl extends _TemplateSection
   String title;
   @override
   List<TemplateCheck> checks;
+  @override
+  Template parent;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TemplateSection(title: $title, checks: $checks)';
+    return 'TemplateSection(title: $title, checks: $checks, parent: $parent)';
   }
 
   @override
@@ -133,7 +161,8 @@ class _$TemplateSectionImpl extends _TemplateSection
     properties
       ..add(DiagnosticsProperty('type', 'TemplateSection'))
       ..add(DiagnosticsProperty('title', title))
-      ..add(DiagnosticsProperty('checks', checks));
+      ..add(DiagnosticsProperty('checks', checks))
+      ..add(DiagnosticsProperty('parent', parent));
   }
 
   @JsonKey(ignore: true)
@@ -154,7 +183,8 @@ class _$TemplateSectionImpl extends _TemplateSection
 abstract class _TemplateSection extends TemplateSection {
   factory _TemplateSection(
       {required String title,
-      required List<TemplateCheck> checks}) = _$TemplateSectionImpl;
+      required List<TemplateCheck> checks,
+      required Template parent}) = _$TemplateSectionImpl;
   _TemplateSection._() : super._();
 
   factory _TemplateSection.fromJson(Map<String, dynamic> json) =
@@ -166,6 +196,9 @@ abstract class _TemplateSection extends TemplateSection {
   @override
   List<TemplateCheck> get checks;
   set checks(List<TemplateCheck> value);
+  @override
+  Template get parent;
+  set parent(Template value);
   @override
   @JsonKey(ignore: true)
   _$$TemplateSectionImplCopyWith<_$TemplateSectionImpl> get copyWith =>

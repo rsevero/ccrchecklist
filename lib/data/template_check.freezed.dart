@@ -20,6 +20,8 @@ TemplateRegularCheck _$TemplateRegularCheckFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TemplateRegularCheck {
+  TemplateSection get parent => throw _privateConstructorUsedError;
+  set parent(TemplateSection value) => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   set description(String value) => throw _privateConstructorUsedError;
 
@@ -35,7 +37,9 @@ abstract class $TemplateRegularCheckCopyWith<$Res> {
           $Res Function(TemplateRegularCheck) then) =
       _$TemplateRegularCheckCopyWithImpl<$Res, TemplateRegularCheck>;
   @useResult
-  $Res call({String description});
+  $Res call({TemplateSection parent, String description});
+
+  $TemplateSectionCopyWith<$Res> get parent;
 }
 
 /// @nodoc
@@ -52,14 +56,27 @@ class _$TemplateRegularCheckCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? parent = null,
     Object? description = null,
   }) {
     return _then(_value.copyWith(
+      parent: null == parent
+          ? _value.parent
+          : parent // ignore: cast_nullable_to_non_nullable
+              as TemplateSection,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TemplateSectionCopyWith<$Res> get parent {
+    return $TemplateSectionCopyWith<$Res>(_value.parent, (value) {
+      return _then(_value.copyWith(parent: value) as $Val);
+    });
   }
 }
 
@@ -71,7 +88,10 @@ abstract class _$$TemplateRegularCheckImplCopyWith<$Res>
       __$$TemplateRegularCheckImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String description});
+  $Res call({TemplateSection parent, String description});
+
+  @override
+  $TemplateSectionCopyWith<$Res> get parent;
 }
 
 /// @nodoc
@@ -85,9 +105,14 @@ class __$$TemplateRegularCheckImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? parent = null,
     Object? description = null,
   }) {
     return _then(_$TemplateRegularCheckImpl(
+      parent: null == parent
+          ? _value.parent
+          : parent // ignore: cast_nullable_to_non_nullable
+              as TemplateSection,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -100,17 +125,20 @@ class __$$TemplateRegularCheckImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$TemplateRegularCheckImpl extends _TemplateRegularCheck
     with DiagnosticableTreeMixin {
-  _$TemplateRegularCheckImpl({required this.description}) : super._();
+  _$TemplateRegularCheckImpl({required this.parent, required this.description})
+      : super._();
 
   factory _$TemplateRegularCheckImpl.fromJson(Map<String, dynamic> json) =>
       _$$TemplateRegularCheckImplFromJson(json);
 
   @override
+  TemplateSection parent;
+  @override
   String description;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TemplateRegularCheck(description: $description)';
+    return 'TemplateRegularCheck(parent: $parent, description: $description)';
   }
 
   @override
@@ -118,6 +146,7 @@ class _$TemplateRegularCheckImpl extends _TemplateRegularCheck
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'TemplateRegularCheck'))
+      ..add(DiagnosticsProperty('parent', parent))
       ..add(DiagnosticsProperty('description', description));
   }
 
@@ -137,14 +166,19 @@ class _$TemplateRegularCheckImpl extends _TemplateRegularCheck
   }
 }
 
-abstract class _TemplateRegularCheck extends TemplateRegularCheck {
-  factory _TemplateRegularCheck({required String description}) =
-      _$TemplateRegularCheckImpl;
+abstract class _TemplateRegularCheck extends TemplateRegularCheck
+    implements TemplateCheck {
+  factory _TemplateRegularCheck(
+      {required TemplateSection parent,
+      required String description}) = _$TemplateRegularCheckImpl;
   _TemplateRegularCheck._() : super._();
 
   factory _TemplateRegularCheck.fromJson(Map<String, dynamic> json) =
       _$TemplateRegularCheckImpl.fromJson;
 
+  @override
+  TemplateSection get parent;
+  set parent(TemplateSection value);
   @override
   String get description;
   set description(String value);
@@ -161,6 +195,8 @@ TemplateWithReferenceCheck _$TemplateWithReferenceCheckFromJson(
 
 /// @nodoc
 mixin _$TemplateWithReferenceCheck {
+  TemplateSection get parent => throw _privateConstructorUsedError;
+  set parent(TemplateSection value) => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   set description(String value) => throw _privateConstructorUsedError;
   String get referenceDescription => throw _privateConstructorUsedError;
@@ -179,7 +215,12 @@ abstract class $TemplateWithReferenceCheckCopyWith<$Res> {
       _$TemplateWithReferenceCheckCopyWithImpl<$Res,
           TemplateWithReferenceCheck>;
   @useResult
-  $Res call({String description, String referenceDescription});
+  $Res call(
+      {TemplateSection parent,
+      String description,
+      String referenceDescription});
+
+  $TemplateSectionCopyWith<$Res> get parent;
 }
 
 /// @nodoc
@@ -196,10 +237,15 @@ class _$TemplateWithReferenceCheckCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? parent = null,
     Object? description = null,
     Object? referenceDescription = null,
   }) {
     return _then(_value.copyWith(
+      parent: null == parent
+          ? _value.parent
+          : parent // ignore: cast_nullable_to_non_nullable
+              as TemplateSection,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -209,6 +255,14 @@ class _$TemplateWithReferenceCheckCopyWithImpl<$Res,
           : referenceDescription // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TemplateSectionCopyWith<$Res> get parent {
+    return $TemplateSectionCopyWith<$Res>(_value.parent, (value) {
+      return _then(_value.copyWith(parent: value) as $Val);
+    });
   }
 }
 
@@ -221,7 +275,13 @@ abstract class _$$TemplateWithReferenceCheckImplCopyWith<$Res>
       __$$TemplateWithReferenceCheckImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String description, String referenceDescription});
+  $Res call(
+      {TemplateSection parent,
+      String description,
+      String referenceDescription});
+
+  @override
+  $TemplateSectionCopyWith<$Res> get parent;
 }
 
 /// @nodoc
@@ -237,10 +297,15 @@ class __$$TemplateWithReferenceCheckImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? parent = null,
     Object? description = null,
     Object? referenceDescription = null,
   }) {
     return _then(_$TemplateWithReferenceCheckImpl(
+      parent: null == parent
+          ? _value.parent
+          : parent // ignore: cast_nullable_to_non_nullable
+              as TemplateSection,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -258,7 +323,9 @@ class __$$TemplateWithReferenceCheckImplCopyWithImpl<$Res>
 class _$TemplateWithReferenceCheckImpl extends _TemplateWithReferenceCheck
     with DiagnosticableTreeMixin {
   _$TemplateWithReferenceCheckImpl(
-      {required this.description, required this.referenceDescription})
+      {required this.parent,
+      required this.description,
+      required this.referenceDescription})
       : super._();
 
   factory _$TemplateWithReferenceCheckImpl.fromJson(
@@ -266,13 +333,15 @@ class _$TemplateWithReferenceCheckImpl extends _TemplateWithReferenceCheck
       _$$TemplateWithReferenceCheckImplFromJson(json);
 
   @override
+  TemplateSection parent;
+  @override
   String description;
   @override
   String referenceDescription;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TemplateWithReferenceCheck(description: $description, referenceDescription: $referenceDescription)';
+    return 'TemplateWithReferenceCheck(parent: $parent, description: $description, referenceDescription: $referenceDescription)';
   }
 
   @override
@@ -280,6 +349,7 @@ class _$TemplateWithReferenceCheckImpl extends _TemplateWithReferenceCheck
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'TemplateWithReferenceCheck'))
+      ..add(DiagnosticsProperty('parent', parent))
       ..add(DiagnosticsProperty('description', description))
       ..add(DiagnosticsProperty('referenceDescription', referenceDescription));
   }
@@ -299,15 +369,20 @@ class _$TemplateWithReferenceCheckImpl extends _TemplateWithReferenceCheck
   }
 }
 
-abstract class _TemplateWithReferenceCheck extends TemplateWithReferenceCheck {
+abstract class _TemplateWithReferenceCheck extends TemplateWithReferenceCheck
+    implements TemplateCheck {
   factory _TemplateWithReferenceCheck(
-      {required String description,
+      {required TemplateSection parent,
+      required String description,
       required String referenceDescription}) = _$TemplateWithReferenceCheckImpl;
   _TemplateWithReferenceCheck._() : super._();
 
   factory _TemplateWithReferenceCheck.fromJson(Map<String, dynamic> json) =
       _$TemplateWithReferenceCheckImpl.fromJson;
 
+  @override
+  TemplateSection get parent;
+  set parent(TemplateSection value);
   @override
   String get description;
   set description(String value);
@@ -327,8 +402,8 @@ TemplateLinearityCheckStep1Check _$TemplateLinearityCheckStep1CheckFromJson(
 
 /// @nodoc
 mixin _$TemplateLinearityCheckStep1Check {
-  String get title => throw _privateConstructorUsedError;
-  set title(String value) => throw _privateConstructorUsedError;
+  TemplateSection get parent => throw _privateConstructorUsedError;
+  set parent(TemplateSection value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -344,7 +419,9 @@ abstract class $TemplateLinearityCheckStep1CheckCopyWith<$Res> {
       _$TemplateLinearityCheckStep1CheckCopyWithImpl<$Res,
           TemplateLinearityCheckStep1Check>;
   @useResult
-  $Res call({String title});
+  $Res call({TemplateSection parent});
+
+  $TemplateSectionCopyWith<$Res> get parent;
 }
 
 /// @nodoc
@@ -361,14 +438,22 @@ class _$TemplateLinearityCheckStep1CheckCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? title = null,
+    Object? parent = null,
   }) {
     return _then(_value.copyWith(
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
+      parent: null == parent
+          ? _value.parent
+          : parent // ignore: cast_nullable_to_non_nullable
+              as TemplateSection,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TemplateSectionCopyWith<$Res> get parent {
+    return $TemplateSectionCopyWith<$Res>(_value.parent, (value) {
+      return _then(_value.copyWith(parent: value) as $Val);
+    });
   }
 }
 
@@ -381,7 +466,10 @@ abstract class _$$TemplateLinearityCheckStep1CheckImplCopyWith<$Res>
       __$$TemplateLinearityCheckStep1CheckImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String title});
+  $Res call({TemplateSection parent});
+
+  @override
+  $TemplateSectionCopyWith<$Res> get parent;
 }
 
 /// @nodoc
@@ -397,13 +485,13 @@ class __$$TemplateLinearityCheckStep1CheckImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? title = null,
+    Object? parent = null,
   }) {
     return _then(_$TemplateLinearityCheckStep1CheckImpl(
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
+      parent: null == parent
+          ? _value.parent
+          : parent // ignore: cast_nullable_to_non_nullable
+              as TemplateSection,
     ));
   }
 }
@@ -412,18 +500,18 @@ class __$$TemplateLinearityCheckStep1CheckImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$TemplateLinearityCheckStep1CheckImpl
     extends _TemplateLinearityCheckStep1Check with DiagnosticableTreeMixin {
-  _$TemplateLinearityCheckStep1CheckImpl({required this.title}) : super._();
+  _$TemplateLinearityCheckStep1CheckImpl({required this.parent}) : super._();
 
   factory _$TemplateLinearityCheckStep1CheckImpl.fromJson(
           Map<String, dynamic> json) =>
       _$$TemplateLinearityCheckStep1CheckImplFromJson(json);
 
   @override
-  String title;
+  TemplateSection parent;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TemplateLinearityCheckStep1Check(title: $title)';
+    return 'TemplateLinearityCheckStep1Check(parent: $parent)';
   }
 
   @override
@@ -431,7 +519,7 @@ class _$TemplateLinearityCheckStep1CheckImpl
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'TemplateLinearityCheckStep1Check'))
-      ..add(DiagnosticsProperty('title', title));
+      ..add(DiagnosticsProperty('parent', parent));
   }
 
   @JsonKey(ignore: true)
@@ -451,8 +539,8 @@ class _$TemplateLinearityCheckStep1CheckImpl
 }
 
 abstract class _TemplateLinearityCheckStep1Check
-    extends TemplateLinearityCheckStep1Check {
-  factory _TemplateLinearityCheckStep1Check({required String title}) =
+    extends TemplateLinearityCheckStep1Check implements TemplateCheck {
+  factory _TemplateLinearityCheckStep1Check({required TemplateSection parent}) =
       _$TemplateLinearityCheckStep1CheckImpl;
   _TemplateLinearityCheckStep1Check._() : super._();
 
@@ -461,8 +549,8 @@ abstract class _TemplateLinearityCheckStep1Check
       _$TemplateLinearityCheckStep1CheckImpl.fromJson;
 
   @override
-  String get title;
-  set title(String value);
+  TemplateSection get parent;
+  set parent(TemplateSection value);
   @override
   @JsonKey(ignore: true)
   _$$TemplateLinearityCheckStep1CheckImplCopyWith<
@@ -477,8 +565,8 @@ TemplateLinearityCheckStep2Check _$TemplateLinearityCheckStep2CheckFromJson(
 
 /// @nodoc
 mixin _$TemplateLinearityCheckStep2Check {
-  String get title => throw _privateConstructorUsedError;
-  set title(String value) => throw _privateConstructorUsedError;
+  TemplateSection get parent => throw _privateConstructorUsedError;
+  set parent(TemplateSection value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -494,7 +582,9 @@ abstract class $TemplateLinearityCheckStep2CheckCopyWith<$Res> {
       _$TemplateLinearityCheckStep2CheckCopyWithImpl<$Res,
           TemplateLinearityCheckStep2Check>;
   @useResult
-  $Res call({String title});
+  $Res call({TemplateSection parent});
+
+  $TemplateSectionCopyWith<$Res> get parent;
 }
 
 /// @nodoc
@@ -511,14 +601,22 @@ class _$TemplateLinearityCheckStep2CheckCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? title = null,
+    Object? parent = null,
   }) {
     return _then(_value.copyWith(
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
+      parent: null == parent
+          ? _value.parent
+          : parent // ignore: cast_nullable_to_non_nullable
+              as TemplateSection,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TemplateSectionCopyWith<$Res> get parent {
+    return $TemplateSectionCopyWith<$Res>(_value.parent, (value) {
+      return _then(_value.copyWith(parent: value) as $Val);
+    });
   }
 }
 
@@ -531,7 +629,10 @@ abstract class _$$TemplateLinearityCheckStep2CheckImplCopyWith<$Res>
       __$$TemplateLinearityCheckStep2CheckImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String title});
+  $Res call({TemplateSection parent});
+
+  @override
+  $TemplateSectionCopyWith<$Res> get parent;
 }
 
 /// @nodoc
@@ -547,13 +648,13 @@ class __$$TemplateLinearityCheckStep2CheckImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? title = null,
+    Object? parent = null,
   }) {
     return _then(_$TemplateLinearityCheckStep2CheckImpl(
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
+      parent: null == parent
+          ? _value.parent
+          : parent // ignore: cast_nullable_to_non_nullable
+              as TemplateSection,
     ));
   }
 }
@@ -562,18 +663,18 @@ class __$$TemplateLinearityCheckStep2CheckImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$TemplateLinearityCheckStep2CheckImpl
     extends _TemplateLinearityCheckStep2Check with DiagnosticableTreeMixin {
-  _$TemplateLinearityCheckStep2CheckImpl({required this.title}) : super._();
+  _$TemplateLinearityCheckStep2CheckImpl({required this.parent}) : super._();
 
   factory _$TemplateLinearityCheckStep2CheckImpl.fromJson(
           Map<String, dynamic> json) =>
       _$$TemplateLinearityCheckStep2CheckImplFromJson(json);
 
   @override
-  String title;
+  TemplateSection parent;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TemplateLinearityCheckStep2Check(title: $title)';
+    return 'TemplateLinearityCheckStep2Check(parent: $parent)';
   }
 
   @override
@@ -581,7 +682,7 @@ class _$TemplateLinearityCheckStep2CheckImpl
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'TemplateLinearityCheckStep2Check'))
-      ..add(DiagnosticsProperty('title', title));
+      ..add(DiagnosticsProperty('parent', parent));
   }
 
   @JsonKey(ignore: true)
@@ -601,8 +702,8 @@ class _$TemplateLinearityCheckStep2CheckImpl
 }
 
 abstract class _TemplateLinearityCheckStep2Check
-    extends TemplateLinearityCheckStep2Check {
-  factory _TemplateLinearityCheckStep2Check({required String title}) =
+    extends TemplateLinearityCheckStep2Check implements TemplateCheck {
+  factory _TemplateLinearityCheckStep2Check({required TemplateSection parent}) =
       _$TemplateLinearityCheckStep2CheckImpl;
   _TemplateLinearityCheckStep2Check._() : super._();
 
@@ -611,8 +712,8 @@ abstract class _TemplateLinearityCheckStep2Check
       _$TemplateLinearityCheckStep2CheckImpl.fromJson;
 
   @override
-  String get title;
-  set title(String value);
+  TemplateSection get parent;
+  set parent(TemplateSection value);
   @override
   @JsonKey(ignore: true)
   _$$TemplateLinearityCheckStep2CheckImplCopyWith<

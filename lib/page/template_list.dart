@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ccr_checklist/data/template.dart';
-import 'package:ccr_checklist/pages/template_editor.dart';
+import 'package:ccr_checklist/page/template_editor.dart';
 
 class TemplateListPage extends StatefulWidget {
   final List<Template> templates = [];

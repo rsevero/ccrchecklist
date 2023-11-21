@@ -13,6 +13,7 @@ _$TemplateSectionImpl _$$TemplateSectionImplFromJson(
       checks: (json['checks'] as List<dynamic>)
           .map((e) => TemplateCheck.fromJson(e as Map<String, dynamic>))
           .toList(),
+      parent: Template.fromJson(json['parent'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$TemplateSectionImplToJson(
@@ -20,4 +21,5 @@ Map<String, dynamic> _$$TemplateSectionImplToJson(
     <String, dynamic>{
       'title': instance.title,
       'checks': instance.checks,
+      'parent': instance.parent,
     };

@@ -1,4 +1,4 @@
-import 'package:ccr_checklist/pages/template_list.dart';
+import 'package:ccr_checklist/page/template_list.dart';
 import 'package:flutter/material.dart';
 
 void main() {

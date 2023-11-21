@@ -1,11 +1,11 @@
 import 'package:ccr_checklist/data/template_section.dart';
+import 'package:ccr_checklist/store/template_editor.dart';
 import 'package:flutter/material.dart';
 
 class TemplateSectionEditorPage extends StatefulWidget {
-  final TemplateSection section;
+  final TemplateSection? section;
 
-  const TemplateSectionEditorPage({Key? key, required this.section})
-      : super(key: key);
+  const TemplateSectionEditorPage({Key? key, this.section}) : super(key: key);
 
   @override
   State<TemplateSectionEditorPage> createState() =>
@@ -14,11 +14,13 @@ class TemplateSectionEditorPage extends StatefulWidget {
 
 class _TemplateSectionEditorPageState extends State<TemplateSectionEditorPage> {
   late TextEditingController _titleController;
+  final TemplateEditorStore templateEditorStore = TemplateEditorStore();
 
   @override
   void initState() {
     super.initState();
-    _titleController = TextEditingController(text: widget.section.title);
+    _titleController = TextEditingController(
+        text: widget.section == null ? '' : widget.section!.title);
   }
 
   @override
@@ -28,8 +30,13 @@ class _TemplateSectionEditorPageState extends State<TemplateSectionEditorPage> {
   }
 
   void _saveSection() {
-    // Implement save logic
-    // Update the section with the new title
+    if (widget.section == null) {
+      templateEditorStore
+          .addNewSection(title: _titleController.text, checks: []);
+      // Add new section
+    } else {
+      // Update existing section
+    }
     Navigator.pop(context);
   }
 
