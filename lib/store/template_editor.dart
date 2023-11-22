@@ -8,7 +8,7 @@ part 'template_editor.g.dart';
 class TemplateEditorStore = TemplateEditorStoreBase with _$TemplateEditorStore;
 
 abstract class TemplateEditorStoreBase with Store {
-  @readonly.shallow
+  @readonly
   Template _template = Template.empty();
 
   @computed
