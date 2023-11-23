@@ -1,20 +1,13 @@
+import 'package:ccr_checklist/store/template_editor.dart';
 import 'package:flutter/material.dart';
 import 'package:ccr_checklist/data/template.dart';
 import 'package:ccr_checklist/page/template_editor.dart';
+import 'package:provider/provider.dart';
 
-class TemplateListPage extends StatefulWidget {
-  final List<Template> templates = [];
+class TemplateListPage extends StatelessWidget {
+  const TemplateListPage({super.key});
 
-  TemplateListPage({super.key});
-
-  @override
-  State<TemplateListPage> createState() => _TemplateListPageState();
-}
-
-class _TemplateListPageState extends State<TemplateListPage> {
-  _TemplateListPageState();
-
-  void _createNewTemplate() {
+  void _createNewTemplate(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
           builder: (context) => TemplateEditorPage(template: Template.empty())),
@@ -23,17 +16,18 @@ class _TemplateListPageState extends State<TemplateListPage> {
 
   @override
   Widget build(BuildContext context) {
+    final templateEditorStore = Provider.of<TemplateEditorStore>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('CCR Checklist Templates'),
         elevation: 4,
       ),
       body: ListView.builder(
-        itemCount: widget.templates.length,
+        itemCount: templateEditorStore.templates.length,
         itemBuilder: (context, index) {
           return ListTile(
-            title: Text(widget.templates[index].title),
-            subtitle: Text(widget.templates[index].description),
+            title: Text(templateEditorStore.templates[index].title),
+            subtitle: Text(templateEditorStore.templates[index].description),
             onTap: () {
               // Handle template selection, if necessary
             },
@@ -41,7 +35,7 @@ class _TemplateListPageState extends State<TemplateListPage> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _createNewTemplate,
+        onPressed: () => _createNewTemplate(context),
         tooltip: 'Create new template',
         child: const Icon(Icons.add),
       ),

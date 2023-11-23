@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class TemplateSectionEditorPage extends StatefulWidget {
   final TemplateSection? section;
 
-  const TemplateSectionEditorPage({Key? key, this.section}) : super(key: key);
+  const TemplateSectionEditorPage({super.key, this.section});
 
   @override
   State<TemplateSectionEditorPage> createState() =>
@@ -73,12 +73,12 @@ class _TemplateSectionEditorPageState extends State<TemplateSectionEditorPage> {
             ),
             ElevatedButton(
               onPressed: _cancelEditing,
-              style: ElevatedButton.styleFrom(primary: Colors.grey),
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.grey),
               child: const Text('Cancel'),
             ),
             ElevatedButton(
               onPressed: _deleteSection,
-              style: ElevatedButton.styleFrom(primary: Colors.red),
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
               child: const Text('Delete'),
             ),
           ],

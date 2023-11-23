@@ -42,6 +42,24 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
     });
   }
 
+  late final _$_templatesAtom =
+      Atom(name: 'TemplateEditorStoreBase._templates', context: context);
+
+  List<Template> get templates {
+    _$_templatesAtom.reportRead();
+    return super._templates;
+  }
+
+  @override
+  List<Template> get _templates => templates;
+
+  @override
+  set _templates(List<Template> value) {
+    _$_templatesAtom.reportWrite(value, super._templates, () {
+      super._templates = value;
+    });
+  }
+
   late final _$_selectedSectionAtom =
       Atom(name: 'TemplateEditorStoreBase._selectedSection', context: context);
 

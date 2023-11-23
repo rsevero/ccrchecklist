@@ -11,6 +11,9 @@ abstract class TemplateEditorStoreBase with Store {
   @readonly
   Template _template = Template.empty();
 
+  @readonly
+  List<Template> _templates = [];
+
   @computed
   List<TemplateSection> get sections => _template.sections;
 
@@ -23,11 +26,21 @@ abstract class TemplateEditorStoreBase with Store {
   @readonly
   TemplateCheck? _selectedCheck;
 
+  TemplateEditorStoreBase() {
+    _templates = [];
+
+    _template = _templates.isEmpty ? Template.empty() : _templates.first;
+  }
+
   @action
   void addNewSection(
       {required String title, required List<TemplateCheck> checks}) {
     _template.sections
         .add(TemplateSection(title: title, checks: checks, parent: _template));
+  }
+
+  void _addNewTemplate() {
+    _template = Template.empty();
   }
 
   @action
