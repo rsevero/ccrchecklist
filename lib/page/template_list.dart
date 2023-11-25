@@ -1,6 +1,5 @@
 import 'package:ccr_checklist/store/template_editor.dart';
 import 'package:flutter/material.dart';
-import 'package:ccr_checklist/data/template.dart';
 import 'package:ccr_checklist/page/template_editor.dart';
 import 'package:provider/provider.dart';
 
@@ -10,7 +9,8 @@ class TemplateListPage extends StatelessWidget {
   void _createNewTemplate(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-          builder: (context) => TemplateEditorPage(template: Template.empty())),
+        builder: (context) => const TemplateEditorPage(),
+      ),
     );
   }
 

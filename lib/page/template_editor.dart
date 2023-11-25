@@ -1,21 +1,14 @@
-import 'package:ccr_checklist/data/template.dart';
 import 'package:ccr_checklist/data/template_check.dart';
 import 'package:ccr_checklist/data/template_section.dart';
 import 'package:ccr_checklist/page/template_section_editor.dart';
+import 'package:ccr_checklist/store/template_editor.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class TemplateEditorPage extends StatefulWidget {
-  final Template template;
-  const TemplateEditorPage({super.key, required this.template});
+class TemplateEditorPage extends StatelessWidget {
+  const TemplateEditorPage({super.key});
 
-  @override
-  State<TemplateEditorPage> createState() => _TemplateEditorPageState();
-}
-
-class _TemplateEditorPageState extends State<TemplateEditorPage> {
-  Map<TemplateSection, List<TemplateCheck>> sectionChecks = {};
-
-  void _addNewSection() {
+  void _addNewSection(BuildContext context) {
     // final newSection = TemplateSection.empty();
     // widget.t
     Navigator.of(context).push(
@@ -25,7 +18,7 @@ class _TemplateEditorPageState extends State<TemplateEditorPage> {
     );
   }
 
-  void _editSection(TemplateSection section) {
+  void _editSection(BuildContext context, TemplateSection section) {
     // Navigate to the TemplateSectionEditor with the selected section
     Navigator.of(context).push(
       MaterialPageRoute(
@@ -33,7 +26,7 @@ class _TemplateEditorPageState extends State<TemplateEditorPage> {
     );
   }
 
-  void _editCheck(TemplateCheck check) {
+  void _editCheck(BuildContext context, TemplateCheck check) {
     // Navigate to the TemplateCheckEditor with the selected check
     // Navigator.of(context).push(
     //   MaterialPageRoute(
@@ -43,24 +36,25 @@ class _TemplateEditorPageState extends State<TemplateEditorPage> {
 
   @override
   Widget build(BuildContext context) {
+    final templateEditorStore = Provider.of<TemplateEditorStore>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Template Editor'),
         elevation: 4,
       ),
       body: ListView.builder(
-        itemCount: widget.template.sections.length,
+        itemCount: templateEditorStore.template.sections.length,
         itemBuilder: (context, index) {
-          final section = widget.template.sections[index];
+          final section = templateEditorStore.template.sections[index];
           return ListTile(
             title: Text(section.title),
-            onTap: () => _editSection(section),
+            onTap: () => _editSection(context, section),
             // Display checks in this section
             subtitle: Column(
               children: section.checks.map((check) {
                 return ListTile(
                   title: Text(check.type),
-                  onTap: () => _editCheck(check),
+                  onTap: () => _editCheck(context, check),
                 );
               }).toList(),
             ),
@@ -68,7 +62,7 @@ class _TemplateEditorPageState extends State<TemplateEditorPage> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _addNewSection,
+        onPressed: () => _addNewSection(context),
         tooltip: 'Create New Section',
         child: const Icon(Icons.add),
       ),
