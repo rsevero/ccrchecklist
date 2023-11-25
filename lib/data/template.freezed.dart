@@ -20,6 +20,8 @@ Template _$TemplateFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Template {
+  String get rebreatherModel => throw _privateConstructorUsedError;
+  set rebreatherModel(String value) => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   set title(String value) => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
@@ -39,7 +41,11 @@ abstract class $TemplateCopyWith<$Res> {
   factory $TemplateCopyWith(Template value, $Res Function(Template) then) =
       _$TemplateCopyWithImpl<$Res, Template>;
   @useResult
-  $Res call({String title, String description, List<TemplateSection> sections});
+  $Res call(
+      {String rebreatherModel,
+      String title,
+      String description,
+      List<TemplateSection> sections});
 }
 
 /// @nodoc
@@ -55,11 +61,16 @@ class _$TemplateCopyWithImpl<$Res, $Val extends Template>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? rebreatherModel = null,
     Object? title = null,
     Object? description = null,
     Object? sections = null,
   }) {
     return _then(_value.copyWith(
+      rebreatherModel: null == rebreatherModel
+          ? _value.rebreatherModel
+          : rebreatherModel // ignore: cast_nullable_to_non_nullable
+              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -84,7 +95,11 @@ abstract class _$$TemplateImplCopyWith<$Res>
       __$$TemplateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String title, String description, List<TemplateSection> sections});
+  $Res call(
+      {String rebreatherModel,
+      String title,
+      String description,
+      List<TemplateSection> sections});
 }
 
 /// @nodoc
@@ -98,11 +113,16 @@ class __$$TemplateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? rebreatherModel = null,
     Object? title = null,
     Object? description = null,
     Object? sections = null,
   }) {
     return _then(_$TemplateImpl(
+      rebreatherModel: null == rebreatherModel
+          ? _value.rebreatherModel
+          : rebreatherModel // ignore: cast_nullable_to_non_nullable
+              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -123,12 +143,17 @@ class __$$TemplateImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$TemplateImpl extends _Template with DiagnosticableTreeMixin {
   _$TemplateImpl(
-      {required this.title, required this.description, required this.sections})
+      {required this.rebreatherModel,
+      required this.title,
+      required this.description,
+      required this.sections})
       : super._();
 
   factory _$TemplateImpl.fromJson(Map<String, dynamic> json) =>
       _$$TemplateImplFromJson(json);
 
+  @override
+  String rebreatherModel;
   @override
   String title;
   @override
@@ -138,7 +163,7 @@ class _$TemplateImpl extends _Template with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Template(title: $title, description: $description, sections: $sections)';
+    return 'Template(rebreatherModel: $rebreatherModel, title: $title, description: $description, sections: $sections)';
   }
 
   @override
@@ -146,6 +171,7 @@ class _$TemplateImpl extends _Template with DiagnosticableTreeMixin {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'Template'))
+      ..add(DiagnosticsProperty('rebreatherModel', rebreatherModel))
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('description', description))
       ..add(DiagnosticsProperty('sections', sections));
@@ -167,7 +193,8 @@ class _$TemplateImpl extends _Template with DiagnosticableTreeMixin {
 
 abstract class _Template extends Template {
   factory _Template(
-      {required String title,
+      {required String rebreatherModel,
+      required String title,
       required String description,
       required List<TemplateSection> sections}) = _$TemplateImpl;
   _Template._() : super._();
@@ -175,6 +202,9 @@ abstract class _Template extends Template {
   factory _Template.fromJson(Map<String, dynamic> json) =
       _$TemplateImpl.fromJson;
 
+  @override
+  String get rebreatherModel;
+  set rebreatherModel(String value);
   @override
   String get title;
   set title(String value);

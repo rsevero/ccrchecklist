@@ -8,12 +8,14 @@ part 'template.g.dart';
 @unfreezed
 class Template with _$Template {
   factory Template({
+    required String rebreatherModel,
     required String title,
     required String description,
     required List<TemplateSection> sections,
   }) = _Template;
 
   factory Template.empty() => Template(
+        rebreatherModel: '',
         title: '',
         description: '',
         sections: [],

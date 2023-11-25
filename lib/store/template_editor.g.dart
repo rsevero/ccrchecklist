@@ -29,16 +29,16 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
 
   Template get template {
     _$_templateAtom.reportRead();
-    return super._template;
+    return super._currentTemplate;
   }
 
   @override
-  Template get _template => template;
+  Template get _currentTemplate => template;
 
   @override
-  set _template(Template value) {
-    _$_templateAtom.reportWrite(value, super._template, () {
-      super._template = value;
+  set _currentTemplate(Template value) {
+    _$_templateAtom.reportWrite(value, super._currentTemplate, () {
+      super._currentTemplate = value;
     });
   }
 
@@ -65,16 +65,16 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
 
   TemplateSection? get selectedSection {
     _$_selectedSectionAtom.reportRead();
-    return super._selectedSection;
+    return super._currentSection;
   }
 
   @override
-  TemplateSection? get _selectedSection => selectedSection;
+  TemplateSection? get _currentSection => selectedSection;
 
   @override
-  set _selectedSection(TemplateSection? value) {
-    _$_selectedSectionAtom.reportWrite(value, super._selectedSection, () {
-      super._selectedSection = value;
+  set _currentSection(TemplateSection? value) {
+    _$_selectedSectionAtom.reportWrite(value, super._currentSection, () {
+      super._currentSection = value;
     });
   }
 
@@ -83,16 +83,16 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
 
   TemplateCheck? get selectedCheck {
     _$_selectedCheckAtom.reportRead();
-    return super._selectedCheck;
+    return super._currentCheck;
   }
 
   @override
-  TemplateCheck? get _selectedCheck => selectedCheck;
+  TemplateCheck? get _currentCheck => selectedCheck;
 
   @override
-  set _selectedCheck(TemplateCheck? value) {
-    _$_selectedCheckAtom.reportWrite(value, super._selectedCheck, () {
-      super._selectedCheck = value;
+  set _currentCheck(TemplateCheck? value) {
+    _$_selectedCheckAtom.reportWrite(value, super._currentCheck, () {
+      super._currentCheck = value;
     });
   }
 
@@ -134,11 +134,11 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
   }
 
   @override
-  void editSection(TemplateSection section) {
+  void updateSectionTitle(int index, String title) {
     final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
-        name: 'TemplateEditorStoreBase.editSection');
+        name: 'TemplateEditorStoreBase.updateSectionTitle');
     try {
-      return super.editSection(section);
+      return super.updateSectionTitle(index, title);
     } finally {
       _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
     }

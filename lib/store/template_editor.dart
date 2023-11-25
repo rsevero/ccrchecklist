@@ -9,58 +9,67 @@ class TemplateEditorStore = TemplateEditorStoreBase with _$TemplateEditorStore;
 
 abstract class TemplateEditorStoreBase with Store {
   @readonly
-  Template _template = Template.empty();
+  Template _currentTemplate = Template.empty();
 
   @readonly
   List<Template> _templates = [];
 
   @computed
-  List<TemplateSection> get sections => _template.sections;
+  List<TemplateSection> get sections => _currentTemplate.sections;
 
   @readonly
-  TemplateSection? _selectedSection;
+  TemplateSection? _currentSection;
 
   @computed
-  List<TemplateCheck> get checks => _selectedSection?.checks ?? [];
+  List<TemplateCheck> get checks => _currentSection?.checks ?? [];
 
   @readonly
-  TemplateCheck? _selectedCheck;
+  TemplateCheck? _currentCheck;
 
   TemplateEditorStoreBase() {
     _templates = [];
 
-    _template = _templates.isEmpty ? Template.empty() : _templates.first;
+    _currentTemplate = _templates.isEmpty ? Template.empty() : _templates.first;
   }
 
   @action
   void addNewSection(
       {required String title, required List<TemplateCheck> checks}) {
-    _template.sections
-        .add(TemplateSection(title: title, checks: checks, parent: _template));
+    _currentSection =
+        TemplateSection(title: title, checks: checks, parent: _currentTemplate);
+    _currentTemplate.sections.add(_currentSection!);
   }
 
-  void _addNewTemplate() {
-    _template = Template.empty();
+  void addNewTemplate(
+      {required String title,
+      required String description,
+      required String rebreatherModel}) {
+    _currentTemplate = Template(
+        rebreatherModel: rebreatherModel,
+        title: title,
+        description: description,
+        sections: []);
+    _templates.add(_currentTemplate);
   }
 
   @action
   void deleteSection(TemplateSection section) {
-    _template.sections.remove(section);
+    _currentTemplate.sections.remove(section);
   }
 
   @action
   void setTemplate(Template template) {
-    _template = template;
+    _currentTemplate = template;
   }
 
   @action
-  void editSection(TemplateSection section) {
-    _selectedSection = section;
+  void updateSectionTitle(int index, String title) {
+    _currentTemplate.sections[index].title = title;
   }
 
   @action
   void editCheck(TemplateCheck check) {
-    _selectedCheck = check;
+    _currentCheck = check;
   }
 
   @action
@@ -69,7 +78,7 @@ abstract class TemplateEditorStoreBase with Store {
       return;
     }
 
-    _selectedCheck = check;
-    _selectedSection = section;
+    _currentCheck = check;
+    _currentSection = section;
   }
 }

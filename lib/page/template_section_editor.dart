@@ -1,89 +1,96 @@
 import 'package:ccr_checklist/data/template_section.dart';
 import 'package:ccr_checklist/store/template_editor.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
 
-class TemplateSectionEditorPage extends StatefulWidget {
-  final TemplateSection? section;
+class TemplateSectionEditorPage extends StatelessWidget {
+  const TemplateSectionEditorPage({super.key});
 
-  const TemplateSectionEditorPage({super.key, this.section});
+  void _addSection(BuildContext context, TemplateSection newSection) {
+    final templateEditorStore =
+        Provider.of<TemplateEditorStore>(context, listen: false);
+    // templateEditorStore
+    //     .addNewSection(title: _titleController.text, checks: []);
 
-  @override
-  State<TemplateSectionEditorPage> createState() =>
-      _TemplateSectionEditorPageState();
-}
-
-class _TemplateSectionEditorPageState extends State<TemplateSectionEditorPage> {
-  late TextEditingController _titleController;
-  final TemplateEditorStore templateEditorStore = TemplateEditorStore();
-
-  @override
-  void initState() {
-    super.initState();
-    _titleController = TextEditingController(
-        text: widget.section == null ? '' : widget.section!.title);
-  }
-
-  @override
-  void dispose() {
-    _titleController.dispose();
-    super.dispose();
-  }
-
-  void _saveSection() {
-    if (widget.section == null) {
-      templateEditorStore
-          .addNewSection(title: _titleController.text, checks: []);
-      // Add new section
-    } else {
-      // Update existing section
-    }
     Navigator.pop(context);
   }
 
-  void _cancelEditing() {
+  void _cancelEditing(BuildContext context) {
     // Just pop the page without saving
     Navigator.pop(context);
   }
 
-  void _deleteSection() {
+  void _deleteSection(BuildContext context) {
     // Implement delete logic
     Navigator.pop(context);
   }
 
   @override
   Widget build(BuildContext context) {
+    final templateEditorStore = Provider.of<TemplateEditorStore>(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit Section'),
+        title: const Text('Sections'),
+        elevation: 4,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            TextField(
-              controller: _titleController,
-              decoration: const InputDecoration(
-                labelText: 'Section Title',
+            Expanded(
+              child: Observer(
+                builder: (_) => ListView.builder(
+                  itemCount: templateEditorStore.sections.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text(templateEditorStore.sections[index].title),
+                      trailing: IconButton(
+                        icon: const Icon(Icons.edit),
+                        onPressed: () => _showEditDialog(
+                            context, templateEditorStore, index),
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
-            const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: _saveSection,
-              child: const Text('Save'),
-            ),
-            ElevatedButton(
-              onPressed: _cancelEditing,
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.grey),
-              child: const Text('Cancel'),
-            ),
-            ElevatedButton(
-              onPressed: _deleteSection,
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-              child: const Text('Delete'),
+              onPressed: () => templateEditorStore
+                  .addNewSection(title: 'New Section', checks: []),
+              child: const Text('Add Section'),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  void _showEditDialog(BuildContext context,
+      TemplateEditorStore templateEditorStore, int index) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        String newTitle = templateEditorStore.sections[index].title;
+        return AlertDialog(
+          title: const Text('Edit Section Title'),
+          content: TextField(
+            onChanged: (value) => newTitle = value,
+            controller: TextEditingController(
+                text: templateEditorStore.sections[index].title),
+          ),
+          actions: <Widget>[
+            ElevatedButton(
+              child: const Text('Save'),
+              onPressed: () {
+                templateEditorStore.updateSectionTitle(index, newTitle);
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

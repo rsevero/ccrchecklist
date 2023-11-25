@@ -8,6 +8,7 @@ part of 'template.dart';
 
 _$TemplateImpl _$$TemplateImplFromJson(Map<String, dynamic> json) =>
     _$TemplateImpl(
+      rebreatherModel: json['rebreatherModel'] as String,
       title: json['title'] as String,
       description: json['description'] as String,
       sections: (json['sections'] as List<dynamic>)
@@ -17,6 +18,7 @@ _$TemplateImpl _$$TemplateImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$TemplateImplToJson(_$TemplateImpl instance) =>
     <String, dynamic>{
+      'rebreatherModel': instance.rebreatherModel,
       'title': instance.title,
       'description': instance.description,
       'sections': instance.sections,
