@@ -16,13 +16,13 @@ class TemplateCheck {
 
   Map<String, dynamic> toJson() {
     switch (runtimeType) {
-      case TemplateRegularCheck:
+      case TemplateRegularCheck _:
         return (this as TemplateRegularCheck).toJson();
-      case TemplateWithReferenceCheck:
+      case TemplateWithReferenceCheck _:
         return (this as TemplateWithReferenceCheck).toJson();
-      case TemplateLinearityCheckStep1Check:
+      case TemplateLinearityCheckStep1Check _:
         return (this as TemplateLinearityCheckStep1Check).toJson();
-      case TemplateLinearityCheckStep2Check:
+      case TemplateLinearityCheckStep2Check _:
         return (this as TemplateLinearityCheckStep2Check).toJson();
       default:
         throw UnsupportedError("Unknown check type $runtimeType");
@@ -44,7 +44,6 @@ class TemplateRegularCheck with _$TemplateRegularCheck {
   factory TemplateRegularCheck.fromJson(Map<String, dynamic> json) =>
       _$TemplateRegularCheckFromJson(json);
 
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   String get type => 'regular';
 }
@@ -63,7 +62,6 @@ class TemplateWithReferenceCheck with _$TemplateWithReferenceCheck {
   factory TemplateWithReferenceCheck.fromJson(Map<String, dynamic> json) =>
       _$TemplateWithReferenceCheckFromJson(json);
 
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   String get type => 'with reference';
 }
@@ -80,7 +78,6 @@ class TemplateLinearityCheckStep1Check with _$TemplateLinearityCheckStep1Check {
           Map<String, dynamic> json) =>
       _$TemplateLinearityCheckStep1CheckFromJson(json);
 
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   String get type => 'linearity check initial step';
 }
@@ -97,7 +94,6 @@ class TemplateLinearityCheckStep2Check with _$TemplateLinearityCheckStep2Check {
           Map<String, dynamic> json) =>
       _$TemplateLinearityCheckStep2CheckFromJson(json);
 
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   String get type => 'linearity check final step';
 }

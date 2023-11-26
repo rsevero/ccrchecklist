@@ -23,13 +23,13 @@ sealed class ChecklistCheck {
 
   Map<String, dynamic> toJson() {
     switch (runtimeType) {
-      case ChecklistRegularCheck:
+      case ChecklistRegularCheck _:
         return (this as ChecklistRegularCheck).toJson();
-      case ChecklistWithReferenceCheck:
+      case ChecklistWithReferenceCheck _:
         return (this as ChecklistWithReferenceCheck).toJson();
-      case ChecklistLinearityCheckStep1Check:
+      case ChecklistLinearityCheckStep1Check _:
         return (this as ChecklistLinearityCheckStep1Check).toJson();
-      case ChecklistLinearityCheckStep2Check:
+      case ChecklistLinearityCheckStep2Check _:
         return (this as ChecklistLinearityCheckStep2Check).toJson();
       default:
         throw UnsupportedError("Unknown check type $runtimeType");

@@ -24,20 +24,20 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
               name: 'TemplateEditorStoreBase.checks'))
           .value;
 
-  late final _$_templateAtom =
-      Atom(name: 'TemplateEditorStoreBase._template', context: context);
+  late final _$_currentTemplateAtom =
+      Atom(name: 'TemplateEditorStoreBase._currentTemplate', context: context);
 
-  Template get template {
-    _$_templateAtom.reportRead();
+  Template get currentTemplate {
+    _$_currentTemplateAtom.reportRead();
     return super._currentTemplate;
   }
 
   @override
-  Template get _currentTemplate => template;
+  Template get _currentTemplate => currentTemplate;
 
   @override
   set _currentTemplate(Template value) {
-    _$_templateAtom.reportWrite(value, super._currentTemplate, () {
+    _$_currentTemplateAtom.reportWrite(value, super._currentTemplate, () {
       super._currentTemplate = value;
     });
   }
@@ -60,38 +60,38 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
     });
   }
 
-  late final _$_selectedSectionAtom =
-      Atom(name: 'TemplateEditorStoreBase._selectedSection', context: context);
+  late final _$_currentSectionAtom =
+      Atom(name: 'TemplateEditorStoreBase._currentSection', context: context);
 
-  TemplateSection? get selectedSection {
-    _$_selectedSectionAtom.reportRead();
+  TemplateSection? get currentSection {
+    _$_currentSectionAtom.reportRead();
     return super._currentSection;
   }
 
   @override
-  TemplateSection? get _currentSection => selectedSection;
+  TemplateSection? get _currentSection => currentSection;
 
   @override
   set _currentSection(TemplateSection? value) {
-    _$_selectedSectionAtom.reportWrite(value, super._currentSection, () {
+    _$_currentSectionAtom.reportWrite(value, super._currentSection, () {
       super._currentSection = value;
     });
   }
 
-  late final _$_selectedCheckAtom =
-      Atom(name: 'TemplateEditorStoreBase._selectedCheck', context: context);
+  late final _$_currentCheckAtom =
+      Atom(name: 'TemplateEditorStoreBase._currentCheck', context: context);
 
-  TemplateCheck? get selectedCheck {
-    _$_selectedCheckAtom.reportRead();
+  TemplateCheck? get currentCheck {
+    _$_currentCheckAtom.reportRead();
     return super._currentCheck;
   }
 
   @override
-  TemplateCheck? get _currentCheck => selectedCheck;
+  TemplateCheck? get _currentCheck => currentCheck;
 
   @override
   set _currentCheck(TemplateCheck? value) {
-    _$_selectedCheckAtom.reportWrite(value, super._currentCheck, () {
+    _$_currentCheckAtom.reportWrite(value, super._currentCheck, () {
       super._currentCheck = value;
     });
   }

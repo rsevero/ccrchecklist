@@ -1,6 +1,8 @@
-import 'package:ccr_checklist/data/template.dart';
+import 'dart:convert';
 import 'package:ccr_checklist/data/template_check.dart';
 import 'package:ccr_checklist/data/template_section.dart';
+import 'package:ccr_checklist/data/template.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:mobx/mobx.dart';
 
 part 'template_editor.g.dart';
@@ -27,9 +29,27 @@ abstract class TemplateEditorStoreBase with Store {
   TemplateCheck? _currentCheck;
 
   TemplateEditorStoreBase() {
-    _templates = [];
+    _getDefaultTemplates();
 
     _currentTemplate = _templates.isEmpty ? Template.empty() : _templates.first;
+  }
+
+  Future<void> _getDefaultTemplates() async {
+    // Load the manifest file
+    String manifestJson =
+        await rootBundle.loadString('assets/templates/manifest.json');
+    List<String> templateFileNames = ((json.decode(manifestJson)
+        as Map<String, dynamic>)['templates'] as List<String>);
+
+    // Load each template file listed in the manifest
+    for (String fileName in templateFileNames) {
+      final String jsonString =
+          await rootBundle.loadString('assets/templates/$fileName');
+      final Map<String, dynamic> jsonMap = json.decode(jsonString);
+      final newTemplate = Template.fromJson(jsonMap);
+
+      _templates.add(newTemplate);
+    }
   }
 
   @action
@@ -50,6 +70,31 @@ abstract class TemplateEditorStoreBase with Store {
         description: description,
         sections: []);
     _templates.add(_currentTemplate);
+    _templates.sort(_compareTemplates);
+  }
+
+  void editTemplateRebreatherModel(String rebreatherModel) {
+    _currentTemplate.rebreatherModel = rebreatherModel;
+    _templates.sort(_compareTemplates);
+  }
+
+  void editTemplateTitle(String title) {
+    _currentTemplate.title = title;
+    _templates.sort(_compareTemplates);
+  }
+
+  void editTemplateDescription(String description) {
+    _currentTemplate.description = description;
+  }
+
+  int _compareTemplates(Template a, Template b) {
+    final modelCompare = a.rebreatherModel.compareTo(b.rebreatherModel);
+
+    if (modelCompare != 0) {
+      return modelCompare;
+    } else {
+      return a.title.compareTo(b.title);
+    }
   }
 
   @action
