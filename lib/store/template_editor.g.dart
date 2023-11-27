@@ -9,20 +9,20 @@ part of 'template_editor.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
-  Computed<List<TemplateSection>>? _$sectionsComputed;
+  Computed<ObservableList<TemplateSection>>? _$sectionsComputed;
 
   @override
-  List<TemplateSection> get sections => (_$sectionsComputed ??=
-          Computed<List<TemplateSection>>(() => super.sections,
+  ObservableList<TemplateSection> get sections => (_$sectionsComputed ??=
+          Computed<ObservableList<TemplateSection>>(() => super.sections,
               name: 'TemplateEditorStoreBase.sections'))
       .value;
-  Computed<List<TemplateCheck>>? _$checksComputed;
+  Computed<ObservableList<TemplateCheck>>? _$checksComputed;
 
   @override
-  List<TemplateCheck> get checks =>
-      (_$checksComputed ??= Computed<List<TemplateCheck>>(() => super.checks,
+  ObservableList<TemplateCheck> get checks => (_$checksComputed ??=
+          Computed<ObservableList<TemplateCheck>>(() => super.checks,
               name: 'TemplateEditorStoreBase.checks'))
-          .value;
+      .value;
 
   late final _$_currentTemplateAtom =
       Atom(name: 'TemplateEditorStoreBase._currentTemplate', context: context);
@@ -45,16 +45,16 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
   late final _$_templatesAtom =
       Atom(name: 'TemplateEditorStoreBase._templates', context: context);
 
-  List<Template> get templates {
+  ObservableList<Template> get templates {
     _$_templatesAtom.reportRead();
     return super._templates;
   }
 
   @override
-  List<Template> get _templates => templates;
+  ObservableList<Template> get _templates => templates;
 
   @override
-  set _templates(List<Template> value) {
+  set _templates(ObservableList<Template> value) {
     _$_templatesAtom.reportWrite(value, super._templates, () {
       super._templates = value;
     });
@@ -96,6 +96,16 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
     });
   }
 
+  late final _$_getDefaultTemplatesAsyncAction = AsyncAction(
+      'TemplateEditorStoreBase._getDefaultTemplates',
+      context: context);
+
+  @override
+  Future<void> _getDefaultTemplates() {
+    return _$_getDefaultTemplatesAsyncAction
+        .run(() => super._getDefaultTemplates());
+  }
+
   late final _$TemplateEditorStoreBaseActionController =
       ActionController(name: 'TemplateEditorStoreBase', context: context);
 
@@ -106,6 +116,56 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
         name: 'TemplateEditorStoreBase.addNewSection');
     try {
       return super.addNewSection(title: title, checks: checks);
+    } finally {
+      _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void addNewTemplate(
+      {required String title,
+      required String description,
+      required String rebreatherModel}) {
+    final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
+        name: 'TemplateEditorStoreBase.addNewTemplate');
+    try {
+      return super.addNewTemplate(
+          title: title,
+          description: description,
+          rebreatherModel: rebreatherModel);
+    } finally {
+      _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void editTemplateRebreatherModel(String rebreatherModel) {
+    final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
+        name: 'TemplateEditorStoreBase.editTemplateRebreatherModel');
+    try {
+      return super.editTemplateRebreatherModel(rebreatherModel);
+    } finally {
+      _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void editTemplateTitle(String title) {
+    final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
+        name: 'TemplateEditorStoreBase.editTemplateTitle');
+    try {
+      return super.editTemplateTitle(title);
+    } finally {
+      _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void editTemplateDescription(String description) {
+    final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
+        name: 'TemplateEditorStoreBase.editTemplateDescription');
+    try {
+      return super.editTemplateDescription(description);
     } finally {
       _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
     }

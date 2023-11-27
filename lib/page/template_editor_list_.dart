@@ -1,6 +1,7 @@
 import 'package:ccr_checklist/store/template_editor.dart';
 import 'package:flutter/material.dart';
 import 'package:ccr_checklist/page/template_editor.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
 class TemplateEditorListPage extends StatelessWidget {
@@ -14,17 +15,19 @@ class TemplateEditorListPage extends StatelessWidget {
         title: const Text('CCR Checklist Templates'),
         elevation: 4,
       ),
-      body: ListView.builder(
-        itemCount: templateEditorStore.templates.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(templateEditorStore.templates[index].title),
-            subtitle: Text(templateEditorStore.templates[index].description),
-            onTap: () {
-              // Handle template selection, if necessary
-            },
-          );
-        },
+      body: Observer(
+        builder: (_) => ListView.builder(
+          itemCount: templateEditorStore.templates.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text(templateEditorStore.templates[index].title),
+              subtitle: Text(templateEditorStore.templates[index].description),
+              onTap: () {
+                // Handle template selection, if necessary
+              },
+            );
+          },
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _addNewTemplate(context),

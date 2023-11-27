@@ -1,7 +1,6 @@
-
 {
-    "files": [
-      "template1.json"
-    ]
-  }
+  "templates": [
+    "template1.json"
+  ]
+}
   

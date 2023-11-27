@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:ccr_checklist/constants.dart';
 import 'package:ccr_checklist/data/template_check.dart';
 import 'package:ccr_checklist/data/template_section.dart';
 import 'package:ccr_checklist/data/template.dart';
@@ -14,16 +15,18 @@ abstract class TemplateEditorStoreBase with Store {
   Template _currentTemplate = Template.empty();
 
   @readonly
-  List<Template> _templates = [];
+  var _templates = ObservableList<Template>();
 
   @computed
-  List<TemplateSection> get sections => _currentTemplate.sections;
+  ObservableList<TemplateSection> get sections =>
+      ObservableList<TemplateSection>.of(_currentTemplate.sections);
 
   @readonly
   TemplateSection? _currentSection;
 
   @computed
-  List<TemplateCheck> get checks => _currentSection?.checks ?? [];
+  ObservableList<TemplateCheck> get checks =>
+      ObservableList<TemplateCheck>.of(_currentSection?.checks ?? []);
 
   @readonly
   TemplateCheck? _currentCheck;
@@ -34,12 +37,13 @@ abstract class TemplateEditorStoreBase with Store {
     _currentTemplate = _templates.isEmpty ? Template.empty() : _templates.first;
   }
 
+  @action
   Future<void> _getDefaultTemplates() async {
-    // Load the manifest file
     String manifestJson =
-        await rootBundle.loadString('assets/templates/manifest.json');
+        await rootBundle.loadString(ccrDefaultTemplatesManifestPath);
     List<String> templateFileNames = ((json.decode(manifestJson)
-        as Map<String, dynamic>)['templates'] as List<String>);
+            as Map<String, dynamic>)['templates'] as List<dynamic>)
+        .cast<String>();
 
     // Load each template file listed in the manifest
     for (String fileName in templateFileNames) {
@@ -60,6 +64,7 @@ abstract class TemplateEditorStoreBase with Store {
     _currentTemplate.sections.add(_currentSection!);
   }
 
+  @action
   void addNewTemplate(
       {required String title,
       required String description,
@@ -73,16 +78,19 @@ abstract class TemplateEditorStoreBase with Store {
     _templates.sort(_compareTemplates);
   }
 
+  @action
   void editTemplateRebreatherModel(String rebreatherModel) {
     _currentTemplate.rebreatherModel = rebreatherModel;
     _templates.sort(_compareTemplates);
   }
 
+  @action
   void editTemplateTitle(String title) {
     _currentTemplate.title = title;
     _templates.sort(_compareTemplates);
   }
 
+  @action
   void editTemplateDescription(String description) {
     _currentTemplate.description = description;
   }
