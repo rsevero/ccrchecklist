@@ -11,6 +11,8 @@ class TemplateEditorListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final templateListStore = Provider.of<TemplateListStore>(context);
+    final templateEditorStore = Provider.of<TemplateEditorStore>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('CCR Checklist Templates'),
@@ -22,10 +24,17 @@ class TemplateEditorListPage extends StatelessWidget {
           itemBuilder: (context, index) {
             return Observer(
               builder: (_) => ListTile(
-                title: Text(templateListStore.templates[index].title),
+                title: Text(
+                    "${templateListStore.templates[index].rebreatherModel} - ${templateListStore.templates[index].title}"),
                 subtitle: Text(templateListStore.templates[index].description),
                 onTap: () {
-                  // Handle template selection, if necessary
+                  templateEditorStore
+                      .setCurrentTemplate(templateListStore.templates[index]);
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const TemplateEditorPage(),
+                    ),
+                  );
                 },
               ),
             );
@@ -41,9 +50,10 @@ class TemplateEditorListPage extends StatelessWidget {
   }
 
   void _addNewTemplate(BuildContext context) async {
+    final templateListStore =
+        Provider.of<TemplateListStore>(context, listen: false);
     final templateEditorStore =
         Provider.of<TemplateEditorStore>(context, listen: false);
-    final templateListStore = Provider.of<TemplateListStore>(context);
 
     final TextEditingController rebreatherModelController =
         TextEditingController();
@@ -56,22 +66,34 @@ class TemplateEditorListPage extends StatelessWidget {
             return AlertDialog(
               title: const Text('New Template'),
               content: SingleChildScrollView(
-                child: ListBody(
+                child: Column(
                   children: <Widget>[
                     TextField(
                       controller: rebreatherModelController,
                       decoration:
                           const InputDecoration(hintText: 'Rebreather model'),
                       autofocus: true,
+                      textInputAction: TextInputAction
+                          .next, // Move focus to next input on "Enter"
+                      onSubmitted: (_) => FocusScope.of(context)
+                          .requestFocus(FocusNode()), // Optional
                     ),
                     TextField(
                       controller: titleController,
                       decoration: const InputDecoration(hintText: 'Title'),
+                      textInputAction: TextInputAction
+                          .next, // Move focus to next input on "Enter"
+                      onSubmitted: (_) => FocusScope.of(context)
+                          .nextFocus(), // Move focus to next input
                     ),
                     TextField(
                       controller: descriptionController,
                       decoration:
                           const InputDecoration(hintText: 'Description'),
+                      textInputAction:
+                          TextInputAction.done, // Done action for last input
+                      onSubmitted: (_) => Navigator.of(context)
+                          .pop(true), // Activate "Create" method on "Enter"
                     ),
                   ],
                 ),
@@ -79,16 +101,13 @@ class TemplateEditorListPage extends StatelessWidget {
               actions: <Widget>[
                 TextButton(
                   child: const Text('Create'),
-                  onPressed: () {
-                    Navigator.of(context).pop(true); // Dismiss and return true
-                  },
+                  onPressed: () => Navigator.of(context)
+                      .pop(true), // Dismiss and return true
                 ),
                 TextButton(
                   child: const Text('Cancel'),
-                  onPressed: () {
-                    Navigator.of(context)
-                        .pop(false); // Dismiss and return false
-                  },
+                  onPressed: () => Navigator.of(context)
+                      .pop(false), // Dismiss and return false
                 ),
               ],
             );
@@ -97,10 +116,11 @@ class TemplateEditorListPage extends StatelessWidget {
         false; // Handle null (dialog dismissed)
 
     if (confirmed) {
-      templateListStore.addNewTemplate(
+      final newTemplate = templateListStore.addNewTemplate(
           rebreatherModel: rebreatherModelController.text,
           title: titleController.text,
           description: descriptionController.text);
+      templateEditorStore.setCurrentTemplate(newTemplate);
       if (!context.mounted) return;
       Navigator.of(context).push(
         MaterialPageRoute(
@@ -109,11 +129,11 @@ class TemplateEditorListPage extends StatelessWidget {
       );
     }
 
-    if (!context.mounted) return;
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const TemplateEditorPage(),
-      ),
-    );
+    // if (!context.mounted) return;
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(
+    //     builder: (context) => const TemplateEditorPage(),
+    //   ),
+    // );
   }
 }

@@ -47,7 +47,7 @@ mixin _$TemplateListStore on TemplateListStoreBase, Store {
       ActionController(name: 'TemplateListStoreBase', context: context);
 
   @override
-  void addNewTemplate(
+  Template addNewTemplate(
       {required String title,
       required String description,
       required String rebreatherModel}) {

@@ -43,7 +43,7 @@ abstract class TemplateListStoreBase with Store {
   }
 
   @action
-  void addNewTemplate(
+  Template addNewTemplate(
       {required String title,
       required String description,
       required String rebreatherModel}) {
@@ -52,8 +52,11 @@ abstract class TemplateListStoreBase with Store {
         title: title,
         description: description,
         sections: []);
+
     _templates.add(newTemplate);
     _templates.sort(_compareTemplates);
+
+    return newTemplate;
   }
 
   int _compareTemplates(Template a, Template b) {

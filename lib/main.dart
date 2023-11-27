@@ -15,12 +15,12 @@ class CCRChecklist extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        // Provider(
-        //   create: (context) => TemplateEditorStore(),
-        // ),
         Provider(
           create: (context) => TemplateListStore(),
           lazy: false,
+        ),
+        Provider(
+          create: (context) => TemplateEditorStore(),
         ),
       ],
       child: const CCRChecklistApp(),

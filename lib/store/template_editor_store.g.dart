@@ -16,6 +16,13 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
           Computed<ObservableList<TemplateSection>>(() => super.sections,
               name: 'TemplateEditorStoreBase.sections'))
       .value;
+  Computed<int>? _$sectionsCountComputed;
+
+  @override
+  int get sectionsCount =>
+      (_$sectionsCountComputed ??= Computed<int>(() => super.sectionsCount,
+              name: 'TemplateEditorStoreBase.sectionsCount'))
+          .value;
   Computed<ObservableList<TemplateCheck>>? _$checksComputed;
 
   @override
@@ -138,11 +145,11 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
   }
 
   @override
-  void setTemplate(Template template) {
+  void setCurrentTemplate(Template template) {
     final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
-        name: 'TemplateEditorStoreBase.setTemplate');
+        name: 'TemplateEditorStoreBase.setCurrentTemplate');
     try {
-      return super.setTemplate(template);
+      return super.setCurrentTemplate(template);
     } finally {
       _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -160,11 +167,22 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
   }
 
   @override
-  void editCheck(TemplateCheck check) {
+  void setCurrentCheck(TemplateCheck check) {
     final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
-        name: 'TemplateEditorStoreBase.editCheck');
+        name: 'TemplateEditorStoreBase.setCurrentCheck');
     try {
-      return super.editCheck(check);
+      return super.setCurrentCheck(check);
+    } finally {
+      _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setCurrentSection(TemplateSection section) {
+    final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
+        name: 'TemplateEditorStoreBase.setCurrentSection');
+    try {
+      return super.setCurrentSection(section);
     } finally {
       _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -185,6 +203,7 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
   String toString() {
     return '''
 sections: ${sections},
+sectionsCount: ${sectionsCount},
 checks: ${checks}
     ''';
   }

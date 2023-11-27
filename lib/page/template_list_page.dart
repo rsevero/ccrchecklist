@@ -28,7 +28,8 @@ class TemplateListPage extends StatelessWidget {
           itemBuilder: (context, index) {
             return Observer(
               builder: (_) => ListTile(
-                title: Text(templateListStore.templates[index].title),
+                title: Text(
+                    "${templateListStore.templates[index].rebreatherModel} - ${templateListStore.templates[index].title}"),
                 subtitle: Text(templateListStore.templates[index].description),
                 onTap: () {
                   // Handle template selection, if necessary

@@ -59,7 +59,7 @@ class TemplateEditorPage extends StatelessWidget {
           Expanded(
             child: Observer(
               builder: (_) => ListView.builder(
-                itemCount: templateEditorStore.sections.length,
+                itemCount: templateEditorStore.sectionsCount,
                 itemBuilder: (context, index) {
                   final section = templateEditorStore.sections[index];
                   return Observer(
@@ -158,6 +158,8 @@ class TemplateEditorPage extends StatelessWidget {
 
   void _addNewSection(BuildContext context) async {
     final TextEditingController titleController = TextEditingController();
+    final GlobalKey<FormState> _formKey =
+        GlobalKey<FormState>(); // Add a GlobalKey for the Form
 
     // Show a dialog to enter the section title
     bool confirmed = await showDialog(
@@ -165,10 +167,18 @@ class TemplateEditorPage extends StatelessWidget {
           builder: (BuildContext context) {
             return AlertDialog(
               title: const Text('New Section'),
-              content: TextField(
-                controller: titleController,
-                decoration: const InputDecoration(hintText: 'Enter title here'),
-                autofocus: true,
+              content: Form(
+                key: _formKey,
+                child: TextFormField(
+                  controller: titleController,
+                  decoration:
+                      const InputDecoration(hintText: 'Enter title here'),
+                  autofocus: true,
+                  onFieldSubmitted: (value) {
+                    Navigator.of(context)
+                        .pop(true); // Trigger when Enter is pressed
+                  },
+                ),
               ),
               actions: <Widget>[
                 TextButton(

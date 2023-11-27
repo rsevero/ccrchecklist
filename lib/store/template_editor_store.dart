@@ -15,6 +15,9 @@ abstract class TemplateEditorStoreBase with Store {
   ObservableList<TemplateSection> get sections =>
       ObservableList<TemplateSection>.of(_currentTemplate.sections);
 
+  @computed
+  int get sectionsCount => _currentTemplate.sections.length;
+
   @readonly
   TemplateSection? _currentSection;
 
@@ -54,7 +57,7 @@ abstract class TemplateEditorStoreBase with Store {
   }
 
   @action
-  void setTemplate(Template template) {
+  void setCurrentTemplate(Template template) {
     _currentTemplate = template;
   }
 
@@ -64,8 +67,13 @@ abstract class TemplateEditorStoreBase with Store {
   }
 
   @action
-  void editCheck(TemplateCheck check) {
+  void setCurrentCheck(TemplateCheck check) {
     _currentCheck = check;
+  }
+
+  @action
+  void setCurrentSection(TemplateSection section) {
+    _currentSection = section;
   }
 
   @action
