@@ -26,12 +26,15 @@ class TemplateListPage extends StatelessWidget {
         builder: (_) => ListView.builder(
           itemCount: templateEditorStore.templates.length,
           itemBuilder: (context, index) {
-            return ListTile(
-              title: Text(templateEditorStore.templates[index].title),
-              subtitle: Text(templateEditorStore.templates[index].description),
-              onTap: () {
-                // Handle template selection, if necessary
-              },
+            return Observer(
+              builder: (_) => ListTile(
+                title: Text(templateEditorStore.templates[index].title),
+                subtitle:
+                    Text(templateEditorStore.templates[index].description),
+                onTap: () {
+                  // Handle template selection, if necessary
+                },
+              ),
             );
           },
         ),

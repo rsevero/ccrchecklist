@@ -20,7 +20,7 @@ class TemplateEditorPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-            "Editing ${templateEditorStore.currentTemplate.rebreatherModel} - ${templateEditorStore.currentTemplate.title}"),
+            "${templateEditorStore.currentTemplate.rebreatherModel} - ${templateEditorStore.currentTemplate.title}"),
         elevation: 4,
         actions: [
           IconButton(
@@ -37,12 +37,10 @@ class TemplateEditorPage extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Observer(
               builder: (_) => Text(
-                templateEditorStore.currentTemplate
-                    .description, // Assuming this is where the description is stored.
+                templateEditorStore.currentTemplate.description,
                 style: const TextStyle(
-                  fontSize: 18.0, // Larger font size
-                  fontWeight: FontWeight.w700, // Make it bold
-                  color: Colors.blueGrey, // Optional: Change the color
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.w700,
                 ),
                 textAlign: TextAlign.left,
               ),
@@ -61,20 +59,23 @@ class TemplateEditorPage extends StatelessWidget {
           Expanded(
             child: Observer(
               builder: (_) => ListView.builder(
-                itemCount: templateEditorStore.currentTemplate.sections.length,
+                itemCount: templateEditorStore.sections.length,
                 itemBuilder: (context, index) {
-                  final section =
-                      templateEditorStore.currentTemplate.sections[index];
-                  return ListTile(
-                    title: Text(section.title),
-                    onTap: () => _editSection(context, section),
-                    subtitle: Column(
-                      children: section.checks.map((check) {
-                        return ListTile(
-                          title: Text(check.type),
-                          onTap: () => _editCheck(context, check),
-                        );
-                      }).toList(),
+                  final section = templateEditorStore.sections[index];
+                  return Observer(
+                    builder: (_) => ListTile(
+                      title: Text(section.title),
+                      onTap: () => _editSection(context, section),
+                      subtitle: Column(
+                        children: templateEditorStore.checks.map((check) {
+                          return Observer(
+                            builder: (_) => ListTile(
+                              title: Text(check.type),
+                              onTap: () => _editCheck(context, check),
+                            ),
+                          );
+                        }).toList(),
+                      ),
                     ),
                   );
                 },
@@ -199,7 +200,9 @@ class TemplateEditorPage extends StatelessWidget {
     }
   }
 
-  void _editSection(BuildContext context, TemplateSection section) {}
+  void _editSection(BuildContext context, TemplateSection section) {
+    // Navigation logic for editing sections
+  }
 
   void _editCheck(BuildContext context, TemplateCheck check) {
     // Navigation logic for editing checks
