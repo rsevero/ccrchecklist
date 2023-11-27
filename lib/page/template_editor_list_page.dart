@@ -1,6 +1,7 @@
-import 'package:ccr_checklist/store/template_editor.dart';
+import 'package:ccr_checklist/store/template_editor_store.dart';
+import 'package:ccr_checklist/store/template_list_store.dart';
 import 'package:flutter/material.dart';
-import 'package:ccr_checklist/page/template_editor.dart';
+import 'package:ccr_checklist/page/template_editor_page.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
@@ -9,7 +10,7 @@ class TemplateEditorListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final templateEditorStore = Provider.of<TemplateEditorStore>(context);
+    final templateListStore = Provider.of<TemplateListStore>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('CCR Checklist Templates'),
@@ -17,13 +18,12 @@ class TemplateEditorListPage extends StatelessWidget {
       ),
       body: Observer(
         builder: (_) => ListView.builder(
-          itemCount: templateEditorStore.templates.length,
+          itemCount: templateListStore.templates.length,
           itemBuilder: (context, index) {
             return Observer(
               builder: (_) => ListTile(
-                title: Text(templateEditorStore.templates[index].title),
-                subtitle:
-                    Text(templateEditorStore.templates[index].description),
+                title: Text(templateListStore.templates[index].title),
+                subtitle: Text(templateListStore.templates[index].description),
                 onTap: () {
                   // Handle template selection, if necessary
                 },
@@ -43,6 +43,7 @@ class TemplateEditorListPage extends StatelessWidget {
   void _addNewTemplate(BuildContext context) async {
     final templateEditorStore =
         Provider.of<TemplateEditorStore>(context, listen: false);
+    final templateListStore = Provider.of<TemplateListStore>(context);
 
     final TextEditingController rebreatherModelController =
         TextEditingController();
@@ -96,7 +97,7 @@ class TemplateEditorListPage extends StatelessWidget {
         false; // Handle null (dialog dismissed)
 
     if (confirmed) {
-      templateEditorStore.addNewTemplate(
+      templateListStore.addNewTemplate(
           rebreatherModel: rebreatherModelController.text,
           title: titleController.text,
           description: descriptionController.text);

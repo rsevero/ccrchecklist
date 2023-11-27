@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:ccr_checklist/data/template_check.dart';
 import 'package:ccr_checklist/data/template_section.dart';
 import 'package:ccr_checklist/data/template.dart';
-import 'package:ccr_checklist/store/template_editor.dart';
+import 'package:ccr_checklist/store/template_editor_store.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter/material.dart';

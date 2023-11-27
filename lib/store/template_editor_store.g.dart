@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'template_editor.dart';
+part of 'template_editor_store.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -42,24 +42,6 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
     });
   }
 
-  late final _$_templatesAtom =
-      Atom(name: 'TemplateEditorStoreBase._templates', context: context);
-
-  ObservableList<Template> get templates {
-    _$_templatesAtom.reportRead();
-    return super._templates;
-  }
-
-  @override
-  ObservableList<Template> get _templates => templates;
-
-  @override
-  set _templates(ObservableList<Template> value) {
-    _$_templatesAtom.reportWrite(value, super._templates, () {
-      super._templates = value;
-    });
-  }
-
   late final _$_currentSectionAtom =
       Atom(name: 'TemplateEditorStoreBase._currentSection', context: context);
 
@@ -96,16 +78,6 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
     });
   }
 
-  late final _$_getDefaultTemplatesAsyncAction = AsyncAction(
-      'TemplateEditorStoreBase._getDefaultTemplates',
-      context: context);
-
-  @override
-  Future<void> _getDefaultTemplates() {
-    return _$_getDefaultTemplatesAsyncAction
-        .run(() => super._getDefaultTemplates());
-  }
-
   late final _$TemplateEditorStoreBaseActionController =
       ActionController(name: 'TemplateEditorStoreBase', context: context);
 
@@ -116,23 +88,6 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
         name: 'TemplateEditorStoreBase.addNewSection');
     try {
       return super.addNewSection(title: title, checks: checks);
-    } finally {
-      _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void addNewTemplate(
-      {required String title,
-      required String description,
-      required String rebreatherModel}) {
-    final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
-        name: 'TemplateEditorStoreBase.addNewTemplate');
-    try {
-      return super.addNewTemplate(
-          title: title,
-          description: description,
-          rebreatherModel: rebreatherModel);
     } finally {
       _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
     }

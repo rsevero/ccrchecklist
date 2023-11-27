@@ -1,5 +1,6 @@
-import 'package:ccr_checklist/page/template_list.dart';
-import 'package:ccr_checklist/store/template_editor.dart';
+import 'package:ccr_checklist/page/template_list_page.dart';
+import 'package:ccr_checklist/store/template_editor_store.dart';
+import 'package:ccr_checklist/store/template_list_store.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,8 +15,12 @@ class CCRChecklist extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        // Provider(
+        //   create: (context) => TemplateEditorStore(),
+        // ),
         Provider(
-          create: (context) => TemplateEditorStore(),
+          create: (context) => TemplateListStore(),
+          lazy: false,
         ),
       ],
       child: const CCRChecklistApp(),
