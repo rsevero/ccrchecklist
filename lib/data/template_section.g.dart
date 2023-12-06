@@ -6,20 +6,16 @@ part of 'template_section.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$TemplateSectionImpl _$$TemplateSectionImplFromJson(
-        Map<String, dynamic> json) =>
-    _$TemplateSectionImpl(
+TemplateSection _$TemplateSectionFromJson(Map<String, dynamic> json) =>
+    TemplateSection(
       title: json['title'] as String,
       checks: (json['checks'] as List<dynamic>)
           .map((e) => TemplateCheck.fromJson(e as Map<String, dynamic>))
           .toList(),
-      parent: Template.fromJson(json['parent'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$TemplateSectionImplToJson(
-        _$TemplateSectionImpl instance) =>
+Map<String, dynamic> _$TemplateSectionToJson(TemplateSection instance) =>
     <String, dynamic>{
       'title': instance.title,
-      'checks': instance.checks,
-      'parent': instance.parent,
+      'checks': instance.checks.map((e) => e.toJson()).toList(),
     };

@@ -404,7 +404,7 @@ packages:
     source: hosted
     version: "2.4.0"
   morphy:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: morphy
       sha256: "0cb8f1f369b9757c1fcf15e9e4300ccff2c4fb33354ba382321c5a50ab4156cf"
@@ -412,7 +412,7 @@ packages:
     source: hosted
     version: "1.0.7"
   morphy_annotation:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: morphy_annotation
       sha256: "697906eecf746d6dab4bf0b148afd1cbf2cc39df56d7dd932d371e55fa591d48"

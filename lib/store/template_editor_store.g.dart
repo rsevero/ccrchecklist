@@ -9,13 +9,6 @@ part of 'template_editor_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
-  Computed<ObservableList<TemplateSection>>? _$sectionsComputed;
-
-  @override
-  ObservableList<TemplateSection> get sections => (_$sectionsComputed ??=
-          Computed<ObservableList<TemplateSection>>(() => super.sections,
-              name: 'TemplateEditorStoreBase.sections'))
-      .value;
   Computed<int>? _$sectionsCountComputed;
 
   @override
@@ -23,13 +16,6 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
       (_$sectionsCountComputed ??= Computed<int>(() => super.sectionsCount,
               name: 'TemplateEditorStoreBase.sectionsCount'))
           .value;
-  Computed<ObservableList<TemplateCheck>>? _$checksComputed;
-
-  @override
-  ObservableList<TemplateCheck> get checks => (_$checksComputed ??=
-          Computed<ObservableList<TemplateCheck>>(() => super.checks,
-              name: 'TemplateEditorStoreBase.checks'))
-      .value;
 
   late final _$_currentTemplateAtom =
       Atom(name: 'TemplateEditorStoreBase._currentTemplate', context: context);
@@ -49,21 +35,57 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
     });
   }
 
+  late final _$_sectionsAtom =
+      Atom(name: 'TemplateEditorStoreBase._sections', context: context);
+
+  ObservableList<TemplateSection> get sections {
+    _$_sectionsAtom.reportRead();
+    return super._sections;
+  }
+
+  @override
+  ObservableList<TemplateSection> get _sections => sections;
+
+  @override
+  set _sections(ObservableList<TemplateSection> value) {
+    _$_sectionsAtom.reportWrite(value, super._sections, () {
+      super._sections = value;
+    });
+  }
+
   late final _$_currentSectionAtom =
       Atom(name: 'TemplateEditorStoreBase._currentSection', context: context);
 
-  TemplateSection? get currentSection {
+  TemplateSection get currentSection {
     _$_currentSectionAtom.reportRead();
     return super._currentSection;
   }
 
   @override
-  TemplateSection? get _currentSection => currentSection;
+  TemplateSection get _currentSection => currentSection;
 
   @override
-  set _currentSection(TemplateSection? value) {
+  set _currentSection(TemplateSection value) {
     _$_currentSectionAtom.reportWrite(value, super._currentSection, () {
       super._currentSection = value;
+    });
+  }
+
+  late final _$_checksAtom =
+      Atom(name: 'TemplateEditorStoreBase._checks', context: context);
+
+  ObservableList<TemplateCheck> get checks {
+    _$_checksAtom.reportRead();
+    return super._checks;
+  }
+
+  @override
+  ObservableList<TemplateCheck> get _checks => checks;
+
+  @override
+  set _checks(ObservableList<TemplateCheck> value) {
+    _$_checksAtom.reportWrite(value, super._checks, () {
+      super._checks = value;
     });
   }
 
@@ -202,9 +224,7 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
   @override
   String toString() {
     return '''
-sections: ${sections},
-sectionsCount: ${sectionsCount},
-checks: ${checks}
+sectionsCount: ${sectionsCount}
     ''';
   }
 }

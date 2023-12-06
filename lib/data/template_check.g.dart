@@ -6,60 +6,66 @@ part of 'template_check.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$TemplateRegularCheckImpl _$$TemplateRegularCheckImplFromJson(
-        Map<String, dynamic> json) =>
-    _$TemplateRegularCheckImpl(
-      parent: TemplateSection.fromJson(json['parent'] as Map<String, dynamic>),
-      description: json['description'] as String,
+TemplateCheck _$TemplateCheckFromJson(Map<String, dynamic> json) =>
+    TemplateCheck(
+      type: json['type'] as String,
     );
 
-Map<String, dynamic> _$$TemplateRegularCheckImplToJson(
-        _$TemplateRegularCheckImpl instance) =>
+Map<String, dynamic> _$TemplateCheckToJson(TemplateCheck instance) =>
     <String, dynamic>{
-      'parent': instance.parent,
-      'description': instance.description,
+      'type': instance.type,
     };
 
-_$TemplateWithReferenceCheckImpl _$$TemplateWithReferenceCheckImplFromJson(
+TemplateRegularCheck _$TemplateRegularCheckFromJson(
         Map<String, dynamic> json) =>
-    _$TemplateWithReferenceCheckImpl(
-      parent: TemplateSection.fromJson(json['parent'] as Map<String, dynamic>),
+    TemplateRegularCheck(
+      description: json['description'] as String,
+      type: json['type'] as String,
+    );
+
+Map<String, dynamic> _$TemplateRegularCheckToJson(
+        TemplateRegularCheck instance) =>
+    <String, dynamic>{
+      'description': instance.description,
+      'type': instance.type,
+    };
+
+TemplateWithReferenceCheck _$TemplateWithReferenceCheckFromJson(
+        Map<String, dynamic> json) =>
+    TemplateWithReferenceCheck(
       description: json['description'] as String,
       referenceDescription: json['referenceDescription'] as String,
+      type: json['type'] as String,
     );
 
-Map<String, dynamic> _$$TemplateWithReferenceCheckImplToJson(
-        _$TemplateWithReferenceCheckImpl instance) =>
+Map<String, dynamic> _$TemplateWithReferenceCheckToJson(
+        TemplateWithReferenceCheck instance) =>
     <String, dynamic>{
-      'parent': instance.parent,
       'description': instance.description,
       'referenceDescription': instance.referenceDescription,
+      'type': instance.type,
     };
 
-_$TemplateLinearityCheckStep1CheckImpl
-    _$$TemplateLinearityCheckStep1CheckImplFromJson(
-            Map<String, dynamic> json) =>
-        _$TemplateLinearityCheckStep1CheckImpl(
-          parent:
-              TemplateSection.fromJson(json['parent'] as Map<String, dynamic>),
-        );
+TemplateLinearityCheckStep1Check _$TemplateLinearityCheckStep1CheckFromJson(
+        Map<String, dynamic> json) =>
+    TemplateLinearityCheckStep1Check(
+      type: json['type'] as String,
+    );
 
-Map<String, dynamic> _$$TemplateLinearityCheckStep1CheckImplToJson(
-        _$TemplateLinearityCheckStep1CheckImpl instance) =>
+Map<String, dynamic> _$TemplateLinearityCheckStep1CheckToJson(
+        TemplateLinearityCheckStep1Check instance) =>
     <String, dynamic>{
-      'parent': instance.parent,
+      'type': instance.type,
     };
 
-_$TemplateLinearityCheckStep2CheckImpl
-    _$$TemplateLinearityCheckStep2CheckImplFromJson(
-            Map<String, dynamic> json) =>
-        _$TemplateLinearityCheckStep2CheckImpl(
-          parent:
-              TemplateSection.fromJson(json['parent'] as Map<String, dynamic>),
-        );
+TemplateLinearityCheckStep2Check _$TemplateLinearityCheckStep2CheckFromJson(
+        Map<String, dynamic> json) =>
+    TemplateLinearityCheckStep2Check(
+      type: json['type'] as String,
+    );
 
-Map<String, dynamic> _$$TemplateLinearityCheckStep2CheckImplToJson(
-        _$TemplateLinearityCheckStep2CheckImpl instance) =>
+Map<String, dynamic> _$TemplateLinearityCheckStep2CheckToJson(
+        TemplateLinearityCheckStep2Check instance) =>
     <String, dynamic>{
-      'parent': instance.parent,
+      'type': instance.type,
     };

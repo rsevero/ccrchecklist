@@ -1,28 +1,20 @@
 import 'package:ccr_checklist/data/template_section.dart';
-import 'package:flutter/foundation.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:morphy_annotation/morphy_annotation.dart';
 
-part 'template.freezed.dart';
+part 'template.morphy.dart';
 part 'template.g.dart';
 
-@unfreezed
-class Template with _$Template {
-  factory Template({
-    required String rebreatherModel,
-    required String title,
-    required String description,
-    required List<TemplateSection> sections,
-  }) = _Template;
+@Morphy(generateJson: true)
+abstract class $Template {
+  String get rebreatherModel;
+  String get title;
+  String get description;
+  List<$TemplateSection> get sections;
 
-  factory Template.empty() => Template(
+  static Template empty() => Template(
         rebreatherModel: '',
         title: '',
         description: '',
         sections: [],
       );
-
-  Template._();
-
-  factory Template.fromJson(Map<String, dynamic> json) =>
-      _$TemplateFromJson(json);
 }

@@ -6,8 +6,7 @@ part of 'template.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$TemplateImpl _$$TemplateImplFromJson(Map<String, dynamic> json) =>
-    _$TemplateImpl(
+Template _$TemplateFromJson(Map<String, dynamic> json) => Template(
       rebreatherModel: json['rebreatherModel'] as String,
       title: json['title'] as String,
       description: json['description'] as String,
@@ -16,10 +15,9 @@ _$TemplateImpl _$$TemplateImplFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$$TemplateImplToJson(_$TemplateImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$TemplateToJson(Template instance) => <String, dynamic>{
       'rebreatherModel': instance.rebreatherModel,
       'title': instance.title,
       'description': instance.description,
-      'sections': instance.sections,
+      'sections': instance.sections.map((e) => e.toJson()).toList(),
     };
