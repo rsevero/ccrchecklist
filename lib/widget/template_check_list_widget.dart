@@ -1,5 +1,6 @@
 import 'package:ccr_checklist/data/template_check.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
+import 'package:ccr_checklist/widget/template_check_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -18,77 +19,10 @@ class TemplateCheckListWidget extends StatelessWidget {
     return ListView.builder(
       itemCount: checks.length,
       itemBuilder: (context, index) {
-        return Observer(
-          builder: (_) {
-            final check = checks[index];
-            return ListTile(
-              key: ValueKey(index),
-              title: Text(check.description),
-              trailing: PopupMenuButton<String>(
-                onSelected: (value) {
-                  switch (value) {
-                    case 'Edit':
-                      _editTemplateCheck(context, templateEditorStore, index);
-                      break;
-                    case 'Delete':
-                      templateEditorStore.deleteCheck(index);
-                      break;
-                  }
-                },
-                itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-                  const PopupMenuItem<String>(
-                    value: 'Edit',
-                    child: Text('Edit'),
-                  ),
-                  const PopupMenuItem<String>(
-                    value: 'Delete',
-                    child: Text('Delete'),
-                  ),
-                  // Add menu item for 'Drag' if needed
-                ],
-              ),
-            );
-          },
-        );
-      },
-    );
-  }
-
-  void _editTemplateCheck(BuildContext context,
-      TemplateEditorStore templateEditorStore, int index) {
-    final TextEditingController titleController = TextEditingController();
-    final check = templateEditorStore.checks[index];
-    titleController.text = check.description;
-
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Edit Section'),
-          content: TextFormField(
-            controller: titleController,
-            decoration: const InputDecoration(hintText: 'Enter section title'),
-            autofocus: true,
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Update'),
-              onPressed: () {
-                final String newTitle = titleController.text;
-                if (newTitle.isNotEmpty) {
-                  templateEditorStore.updateSectionTitle(index, newTitle);
-                  Navigator.of(context).pop();
-                }
-              },
-            ),
-            TextButton(
-              child: const Text('Cancel'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
+        return TemplateCheckWidget(
+            check: checks[index],
+            index: index,
+            templateEditorStore: templateEditorStore);
       },
     );
   }
