@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:ccr_checklist/data/template.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
+import 'package:ccr_checklist/theme/main_theme.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter/material.dart';
@@ -64,56 +65,68 @@ class TemplateEditorPage extends StatelessWidget {
                     key: ValueKey(index),
                     builder: (_) {
                       final section = templateEditorStore.sections[index];
+                      final isSelected =
+                          (index == templateEditorStore.selectedSectionIndex);
                       return SizedBox(
                         height: 60,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16.0),
-                                child: Text(section.title),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 32,
-                              child: PopupMenuButton<String>(
-                                onSelected: (value) {
-                                  switch (value) {
-                                    case 'Edit':
-                                      _editTemplateSection(
-                                          context, templateEditorStore, index);
-                                      break;
-                                    case 'Delete':
-                                      templateEditorStore
-                                          .deleteTemplateSection(index);
-                                      break;
-                                  }
-                                },
-                                itemBuilder: (BuildContext context) =>
-                                    <PopupMenuEntry<String>>[
-                                  const PopupMenuItem<String>(
-                                    value: 'Edit',
-                                    child: Text('Edit'),
+                        child: Container(
+                          color: isSelected
+                              ? mainColorScheme.primaryContainer
+                              : Colors.transparent,
+                          child: InkWell(
+                            onTap: () {
+                              templateEditorStore.onTapTemplateSection(index);
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16.0),
+                                    child: Text(section.title),
                                   ),
-                                  const PopupMenuItem<String>(
-                                    value: 'Delete',
-                                    child: Text('Delete'),
+                                ),
+                                SizedBox(
+                                  width: 32,
+                                  child: PopupMenuButton<String>(
+                                    onSelected: (value) {
+                                      switch (value) {
+                                        case 'Edit':
+                                          _editTemplateSection(context,
+                                              templateEditorStore, index);
+                                          break;
+                                        case 'Delete':
+                                          templateEditorStore
+                                              .deleteTemplateSection(index);
+                                          break;
+                                      }
+                                    },
+                                    itemBuilder: (BuildContext context) =>
+                                        <PopupMenuEntry<String>>[
+                                      const PopupMenuItem<String>(
+                                        value: 'Edit',
+                                        child: Text('Edit'),
+                                      ),
+                                      const PopupMenuItem<String>(
+                                        value: 'Delete',
+                                        child: Text('Delete'),
+                                      ),
+                                      // Add menu item for 'Drag' if needed
+                                    ],
                                   ),
-                                  // Add menu item for 'Drag' if needed
-                                ],
-                              ),
+                                ),
+                                ReorderableDragStartListener(
+                                  index: index,
+                                  child: const Padding(
+                                    padding: EdgeInsets.fromLTRB(0, 8, 8, 8),
+                                    child: Icon(
+                                        Icons.drag_handle), // Drag handle icon
+                                  ),
+                                ),
+                              ],
                             ),
-                            ReorderableDragStartListener(
-                              index: index,
-                              child: const Padding(
-                                padding: EdgeInsets.fromLTRB(0, 8, 8, 8),
-                                child:
-                                    Icon(Icons.drag_handle), // Drag handle icon
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
                       );
                     },

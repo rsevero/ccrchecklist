@@ -27,12 +27,20 @@ abstract class TemplateEditorStoreBase with Store {
   @readonly
   TemplateCheck? _currentCheck;
 
+  @readonly
+  int _selectedSectionIndex = 0;
+
   @action
   void addNewSection(
       {required String title, required List<TemplateCheck> checks}) {
     _currentSection = TemplateSection(title: title, checks: checks);
     _currentTemplate.sections.add(_currentSection);
     _sections.add(_currentSection);
+    _selectLastSection();
+  }
+
+  void _selectLastSection() {
+    _selectedSectionIndex = _sections.length - 1;
   }
 
   @action
@@ -113,5 +121,10 @@ abstract class TemplateEditorStoreBase with Store {
       _currentTemplate.sections.removeAt(index);
       _sections.removeAt(index);
     }
+  }
+
+  @action
+  void onTapTemplateSection(int index) {
+    _selectedSectionIndex = index;
   }
 }

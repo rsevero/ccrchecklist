@@ -1,6 +1,7 @@
 import 'package:ccr_checklist/page/template_list_page.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
 import 'package:ccr_checklist/store/template_list_store.dart';
+import 'package:ccr_checklist/theme/main_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -21,6 +22,7 @@ class CCRChecklist extends StatelessWidget {
         ),
         Provider(
           create: (context) => TemplateEditorStore(),
+          lazy: false,
         ),
       ],
       child: const CCRChecklistApp(),
@@ -35,10 +37,7 @@ class CCRChecklistApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'CCR Checklist',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.orange),
-        useMaterial3: true,
-      ),
+      theme: mainTheme,
       home: const TemplateListPage(),
     );
   }

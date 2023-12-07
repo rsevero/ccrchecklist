@@ -107,6 +107,25 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
     });
   }
 
+  late final _$_selectedSectionIndexAtom = Atom(
+      name: 'TemplateEditorStoreBase._selectedSectionIndex', context: context);
+
+  int get selectedSectionIndex {
+    _$_selectedSectionIndexAtom.reportRead();
+    return super._selectedSectionIndex;
+  }
+
+  @override
+  int get _selectedSectionIndex => selectedSectionIndex;
+
+  @override
+  set _selectedSectionIndex(int value) {
+    _$_selectedSectionIndexAtom.reportWrite(value, super._selectedSectionIndex,
+        () {
+      super._selectedSectionIndex = value;
+    });
+  }
+
   late final _$TemplateEditorStoreBaseActionController =
       ActionController(name: 'TemplateEditorStoreBase', context: context);
 
@@ -238,6 +257,17 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
         name: 'TemplateEditorStoreBase.deleteTemplateSection');
     try {
       return super.deleteTemplateSection(index);
+    } finally {
+      _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void onTapTemplateSection(int index) {
+    final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
+        name: 'TemplateEditorStoreBase.onTapTemplateSection');
+    try {
+      return super.onTapTemplateSection(index);
     } finally {
       _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
     }
