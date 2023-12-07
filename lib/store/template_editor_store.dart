@@ -15,9 +15,6 @@ abstract class TemplateEditorStoreBase with Store {
   @readonly
   ObservableList<TemplateSection> _sections = ObservableList<TemplateSection>();
 
-  @computed
-  int get sectionsCount => _sections.length;
-
   @readonly
   TemplateSection _selectedSection = $TemplateSection.empty();
 

@@ -1,6 +1,7 @@
 import 'package:ccr_checklist/data/template_section.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
 import 'package:ccr_checklist/theme/main_theme.dart';
+import 'package:ccr_checklist/widget/template_check_list_widget.dart';
 import 'package:flutter/material.dart';
 
 class TemplateSectionWidget extends StatelessWidget {
@@ -54,7 +55,8 @@ class TemplateSectionWidget extends StatelessWidget {
       onExpansionChanged: onExpansionChanged,
       initiallyExpanded: isExpanded,
       children: [
-        Text("Checks of section ${section.title}"),
+        TemplateCheckListWidget(
+            checks: section.checks, templateEditorStore: templateEditorStore),
       ],
     );
   }

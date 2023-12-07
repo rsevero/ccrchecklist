@@ -59,7 +59,7 @@ class TemplateEditorPage extends StatelessWidget {
             child: Observer(
               builder: (_) => ReorderableListView.builder(
                 shrinkWrap: true,
-                itemCount: templateEditorStore.sectionsCount,
+                itemCount: templateEditorStore.sections.length,
                 itemBuilder: (context, index) {
                   return Observer(
                     key: ValueKey(index),

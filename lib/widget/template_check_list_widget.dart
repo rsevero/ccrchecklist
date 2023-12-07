@@ -1,6 +1,7 @@
 import 'package:ccr_checklist/data/template_check.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 class TemplateCheckListWidget extends StatelessWidget {
   final List<TemplateCheck> checks;
@@ -17,32 +18,37 @@ class TemplateCheckListWidget extends StatelessWidget {
     return ListView.builder(
       itemCount: checks.length,
       itemBuilder: (context, index) {
-        final check = checks[index];
-        return ListTile(
-          title: Text(check.description),
-          trailing: PopupMenuButton<String>(
-            onSelected: (value) {
-              switch (value) {
-                case 'Edit':
-                  _editTemplateCheck(context, templateEditorStore, index);
-                  break;
-                case 'Delete':
-                  templateEditorStore.deleteCheck(index);
-                  break;
-              }
-            },
-            itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-              const PopupMenuItem<String>(
-                value: 'Edit',
-                child: Text('Edit'),
+        return Observer(
+          builder: (_) {
+            final check = checks[index];
+            return ListTile(
+              key: ValueKey(index),
+              title: Text(check.description),
+              trailing: PopupMenuButton<String>(
+                onSelected: (value) {
+                  switch (value) {
+                    case 'Edit':
+                      _editTemplateCheck(context, templateEditorStore, index);
+                      break;
+                    case 'Delete':
+                      templateEditorStore.deleteCheck(index);
+                      break;
+                  }
+                },
+                itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                  const PopupMenuItem<String>(
+                    value: 'Edit',
+                    child: Text('Edit'),
+                  ),
+                  const PopupMenuItem<String>(
+                    value: 'Delete',
+                    child: Text('Delete'),
+                  ),
+                  // Add menu item for 'Drag' if needed
+                ],
               ),
-              const PopupMenuItem<String>(
-                value: 'Delete',
-                child: Text('Delete'),
-              ),
-              // Add menu item for 'Drag' if needed
-            ],
-          ),
+            );
+          },
         );
       },
     );
