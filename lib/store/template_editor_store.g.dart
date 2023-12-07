@@ -178,17 +178,6 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
   }
 
   @override
-  void updateSectionTitle(int index, String title) {
-    final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
-        name: 'TemplateEditorStoreBase.updateSectionTitle');
-    try {
-      return super.updateSectionTitle(index, title);
-    } finally {
-      _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   void setCurrentCheck(TemplateCheck check) {
     final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
         name: 'TemplateEditorStoreBase.setCurrentCheck');
@@ -216,6 +205,39 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
         name: 'TemplateEditorStoreBase.moveCheckAnotherSection');
     try {
       return super.moveCheckAnotherSection(check, section);
+    } finally {
+      _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void moveTemplateSection(int oldIndex, int newIndex) {
+    final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
+        name: 'TemplateEditorStoreBase.moveTemplateSection');
+    try {
+      return super.moveTemplateSection(oldIndex, newIndex);
+    } finally {
+      _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void updateSectionTitle(int index, String newTitle) {
+    final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
+        name: 'TemplateEditorStoreBase.updateSectionTitle');
+    try {
+      return super.updateSectionTitle(index, newTitle);
+    } finally {
+      _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void deleteTemplateSection(int index) {
+    final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
+        name: 'TemplateEditorStoreBase.deleteTemplateSection');
+    try {
+      return super.deleteTemplateSection(index);
     } finally {
       _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
     }

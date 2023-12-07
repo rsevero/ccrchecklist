@@ -65,14 +65,6 @@ abstract class TemplateEditorStoreBase with Store {
   }
 
   @action
-  void updateSectionTitle(int index, String title) {
-    final updatedTemplateSection = _currentTemplate.sections[index]
-        .copyWith_TemplateSection(title: Opt(title));
-    _currentTemplate.sections[index] = updatedTemplateSection;
-    _sections[index] = updatedTemplateSection;
-  }
-
-  @action
   void setCurrentCheck(TemplateCheck check) {
     _currentCheck = check;
   }
@@ -90,5 +82,36 @@ abstract class TemplateEditorStoreBase with Store {
 
     _currentCheck = check;
     _currentSection = section;
+  }
+
+  @action
+  void moveTemplateSection(int oldIndex, int newIndex) {
+    if (oldIndex < newIndex) {
+      newIndex -= 1;
+    }
+
+    final section = _currentTemplate.sections.removeAt(oldIndex);
+    _currentTemplate.sections.insert(newIndex, section);
+
+    final observableSection = _sections.removeAt(oldIndex);
+    _sections.insert(newIndex, observableSection);
+  }
+
+  @action
+  void updateSectionTitle(int index, String newTitle) {
+    if (index >= 0 && index < _currentTemplate.sections.length) {
+      final updatedTemplateSection = _currentTemplate.sections[index]
+          .copyWith_TemplateSection(title: Opt(newTitle));
+      _currentTemplate.sections[index] = updatedTemplateSection;
+      _sections[index] = updatedTemplateSection;
+    }
+  }
+
+  @action
+  void deleteTemplateSection(int index) {
+    if (index >= 0 && index < _currentTemplate.sections.length) {
+      _currentTemplate.sections.removeAt(index);
+      _sections.removeAt(index);
+    }
   }
 }

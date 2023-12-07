@@ -1,7 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:ccr_checklist/data/template_check.dart';
-import 'package:ccr_checklist/data/template_section.dart';
 import 'package:ccr_checklist/data/template.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -58,27 +56,71 @@ class TemplateEditorPage extends StatelessWidget {
           ),
           Expanded(
             child: Observer(
-              builder: (_) => ListView.builder(
+              builder: (_) => ReorderableListView.builder(
+                shrinkWrap: true,
                 itemCount: templateEditorStore.sectionsCount,
                 itemBuilder: (context, index) {
-                  final section = templateEditorStore.sections[index];
                   return Observer(
-                    builder: (_) => ListTile(
-                      title: Text(section.title),
-                      onTap: () => _editSection(context, section),
-                      subtitle: Column(
-                        children: templateEditorStore.checks.map((check) {
-                          return Observer(
-                            builder: (_) => ListTile(
-                              title: Text(check.type),
-                              onTap: () => _editCheck(context, check),
+                    key: ValueKey(index),
+                    builder: (_) {
+                      final section = templateEditorStore.sections[index];
+                      return SizedBox(
+                        height: 60,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16.0),
+                                child: Text(section.title),
+                              ),
                             ),
-                          );
-                        }).toList(),
-                      ),
-                    ),
+                            SizedBox(
+                              width: 32,
+                              child: PopupMenuButton<String>(
+                                onSelected: (value) {
+                                  switch (value) {
+                                    case 'Edit':
+                                      _editTemplateSection(
+                                          context, templateEditorStore, index);
+                                      break;
+                                    case 'Delete':
+                                      templateEditorStore
+                                          .deleteTemplateSection(index);
+                                      break;
+                                  }
+                                },
+                                itemBuilder: (BuildContext context) =>
+                                    <PopupMenuEntry<String>>[
+                                  const PopupMenuItem<String>(
+                                    value: 'Edit',
+                                    child: Text('Edit'),
+                                  ),
+                                  const PopupMenuItem<String>(
+                                    value: 'Delete',
+                                    child: Text('Delete'),
+                                  ),
+                                  // Add menu item for 'Drag' if needed
+                                ],
+                              ),
+                            ),
+                            ReorderableDragStartListener(
+                              index: index,
+                              child: const Padding(
+                                padding: EdgeInsets.fromLTRB(0, 8, 8, 8),
+                                child:
+                                    Icon(Icons.drag_handle), // Drag handle icon
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                   );
                 },
+                onReorder: (oldIndex, newIndex) =>
+                    templateEditorStore.moveTemplateSection(oldIndex, newIndex),
               ),
             ),
           ),
@@ -89,20 +131,8 @@ class TemplateEditorPage extends StatelessWidget {
         tooltip: 'Add Options',
         children: [
           SpeedDialChild(
-            child: const Icon(Icons.add),
-            label: 'Add New Section',
-            onTap: () => _addNewSection(context),
-          ),
-          SpeedDialChild(
-            child: const Icon(Icons.check),
-            label: 'Add Regular Check',
-            onTap: () {
-              // Implement action
-            },
-          ),
-          SpeedDialChild(
-            child: const Icon(Icons.check_circle),
-            label: 'Add "With Reference" Check',
+            child: const Icon(Icons.linear_scale),
+            label: 'Add Linearity Step 2 Check',
             onTap: () {
               // Implement action
             },
@@ -115,11 +145,23 @@ class TemplateEditorPage extends StatelessWidget {
             },
           ),
           SpeedDialChild(
-            child: const Icon(Icons.linear_scale),
-            label: 'Add Linearity Step 2 Check',
+            child: const Icon(Icons.check_circle),
+            label: 'Add "With Reference" Check',
             onTap: () {
               // Implement action
             },
+          ),
+          SpeedDialChild(
+            child: const Icon(Icons.check),
+            label: 'Add Regular Check',
+            onTap: () {
+              // Implement action
+            },
+          ),
+          SpeedDialChild(
+            child: const Icon(Icons.add),
+            label: 'Add New Section',
+            onTap: () => _addNewSection(context),
           ),
         ],
       ),
@@ -158,7 +200,7 @@ class TemplateEditorPage extends StatelessWidget {
 
   void _addNewSection(BuildContext context) async {
     final TextEditingController titleController = TextEditingController();
-    final GlobalKey<FormState> _formKey =
+    final GlobalKey<FormState> formKey =
         GlobalKey<FormState>(); // Add a GlobalKey for the Form
 
     // Show a dialog to enter the section title
@@ -168,7 +210,7 @@ class TemplateEditorPage extends StatelessWidget {
             return AlertDialog(
               title: const Text('New Section'),
               content: Form(
-                key: _formKey,
+                key: formKey,
                 child: TextFormField(
                   controller: titleController,
                   decoration:
@@ -210,11 +252,42 @@ class TemplateEditorPage extends StatelessWidget {
     }
   }
 
-  void _editSection(BuildContext context, TemplateSection section) {
-    // Navigation logic for editing sections
-  }
+  void _editTemplateSection(BuildContext context,
+      TemplateEditorStore templateEditorStore, int index) {
+    final TextEditingController titleController = TextEditingController();
+    final section = templateEditorStore.sections[index];
+    titleController.text = section.title;
 
-  void _editCheck(BuildContext context, TemplateCheck check) {
-    // Navigation logic for editing checks
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Edit Section'),
+          content: TextFormField(
+            controller: titleController,
+            decoration: const InputDecoration(hintText: 'Enter section title'),
+            autofocus: true,
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Update'),
+              onPressed: () {
+                final String newTitle = titleController.text;
+                if (newTitle.isNotEmpty) {
+                  templateEditorStore.updateSectionTitle(index, newTitle);
+                  Navigator.of(context).pop();
+                }
+              },
+            ),
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
