@@ -9,6 +9,30 @@ part of 'template_editor_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
+  Computed<bool>? _$enableCheckCreationComputed;
+
+  @override
+  bool get enableCheckCreation => (_$enableCheckCreationComputed ??=
+          Computed<bool>(() => super.enableCheckCreation,
+              name: 'TemplateEditorStoreBase.enableCheckCreation'))
+      .value;
+  Computed<bool>? _$enableLinearityStep2CreationComputed;
+
+  @override
+  bool get enableLinearityStep2Creation =>
+      (_$enableLinearityStep2CreationComputed ??= Computed<bool>(
+              () => super.enableLinearityStep2Creation,
+              name: 'TemplateEditorStoreBase.enableLinearityStep2Creation'))
+          .value;
+  Computed<bool>? _$enableLinearityStep1CreationComputed;
+
+  @override
+  bool get enableLinearityStep1Creation =>
+      (_$enableLinearityStep1CreationComputed ??= Computed<bool>(
+              () => super.enableLinearityStep1Creation,
+              name: 'TemplateEditorStoreBase.enableLinearityStep1Creation'))
+          .value;
+
   late final _$_currentTemplateAtom =
       Atom(name: 'TemplateEditorStoreBase._currentTemplate', context: context);
 
@@ -157,6 +181,42 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
     });
   }
 
+  late final _$_hasLinearityStep1Atom = Atom(
+      name: 'TemplateEditorStoreBase._hasLinearityStep1', context: context);
+
+  bool get hasLinearityStep1 {
+    _$_hasLinearityStep1Atom.reportRead();
+    return super._hasLinearityStep1;
+  }
+
+  @override
+  bool get _hasLinearityStep1 => hasLinearityStep1;
+
+  @override
+  set _hasLinearityStep1(bool value) {
+    _$_hasLinearityStep1Atom.reportWrite(value, super._hasLinearityStep1, () {
+      super._hasLinearityStep1 = value;
+    });
+  }
+
+  late final _$_hasLinearityStep2Atom = Atom(
+      name: 'TemplateEditorStoreBase._hasLinearityStep2', context: context);
+
+  bool get hasLinearityStep2 {
+    _$_hasLinearityStep2Atom.reportRead();
+    return super._hasLinearityStep2;
+  }
+
+  @override
+  bool get _hasLinearityStep2 => hasLinearityStep2;
+
+  @override
+  set _hasLinearityStep2(bool value) {
+    _$_hasLinearityStep2Atom.reportWrite(value, super._hasLinearityStep2, () {
+      super._hasLinearityStep2 = value;
+    });
+  }
+
   late final _$TemplateEditorStoreBaseActionController =
       ActionController(name: 'TemplateEditorStoreBase', context: context);
 
@@ -296,7 +356,9 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
   @override
   String toString() {
     return '''
-
+enableCheckCreation: ${enableCheckCreation},
+enableLinearityStep2Creation: ${enableLinearityStep2Creation},
+enableLinearityStep1Creation: ${enableLinearityStep1Creation}
     ''';
   }
 }

@@ -82,44 +82,52 @@ class TemplateEditorPage extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: SpeedDial(
-        animatedIcon: AnimatedIcons.menu_close,
-        tooltip: 'Add Options',
-        children: [
-          SpeedDialChild(
-            child: const Icon(Icons.linear_scale),
-            label: 'Add Linearity Step 2 Check',
-            onTap: () {
-              // Implement action
-            },
-          ),
-          SpeedDialChild(
-            child: const Icon(Icons.linear_scale_rounded),
-            label: 'Add Linearity Step 1 Check',
-            onTap: () {
-              // Implement action
-            },
-          ),
-          SpeedDialChild(
-            child: const Icon(Icons.check_circle),
-            label: 'Add "With Reference" Check',
-            onTap: () {
-              // Implement action
-            },
-          ),
-          SpeedDialChild(
-            child: const Icon(Icons.check),
-            label: 'Add Regular Check',
-            onTap: () {
-              // Implement action
-            },
-          ),
-          SpeedDialChild(
-            child: const Icon(Icons.add),
-            label: 'Add New Section',
-            onTap: () => _addNewSection(context),
-          ),
-        ],
+      floatingActionButton: Observer(
+        builder: (_) {
+          return SpeedDial(
+            animatedIcon: AnimatedIcons.menu_close,
+            tooltip: 'Add Options',
+            children: [
+              SpeedDialChild(
+                child: const Icon(Icons.linear_scale),
+                label: 'Add Linearity Step 2 Check',
+                visible: templateEditorStore.enableLinearityStep2Creation,
+                onTap: () {
+                  // Implement action
+                },
+              ),
+              SpeedDialChild(
+                child: const Icon(Icons.linear_scale_rounded),
+                label: 'Add Linearity Step 1 Check',
+                visible: templateEditorStore.enableLinearityStep1Creation,
+                onTap: () {
+                  // Implement action
+                },
+              ),
+              SpeedDialChild(
+                child: const Icon(Icons.check_circle),
+                label: 'Add "With Reference" Check',
+                visible: templateEditorStore.enableCheckCreation,
+                onTap: () {
+                  // Implement action
+                },
+              ),
+              SpeedDialChild(
+                child: const Icon(Icons.check),
+                label: 'Add Regular Check',
+                visible: templateEditorStore.enableCheckCreation,
+                onTap: () {
+                  // Implement action
+                },
+              ),
+              SpeedDialChild(
+                child: const Icon(Icons.add),
+                label: 'Add New Section',
+                onTap: () => _addNewSection(context),
+              ),
+            ],
+          );
+        },
       ),
     );
   }

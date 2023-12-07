@@ -34,6 +34,23 @@ abstract class TemplateEditorStoreBase with Store {
   TemplateEditorSectionOrCheckSelected _sectionOrCheckSelected =
       TemplateEditorSectionOrCheckSelected.none;
 
+  @computed
+  bool get enableCheckCreation => _sections.isNotEmpty;
+
+  @computed
+  bool get enableLinearityStep2Creation =>
+      _sections.isNotEmpty && _hasLinearityStep1 && !_hasLinearityStep2;
+
+  @computed
+  bool get enableLinearityStep1Creation =>
+      _sections.isNotEmpty && !_hasLinearityStep1;
+
+  @readonly
+  bool _hasLinearityStep1 = false;
+
+  @readonly
+  bool _hasLinearityStep2 = false;
+
   @action
   void addNewSection(
       {required String title, required List<TemplateCheck> checks}) {
@@ -41,6 +58,14 @@ abstract class TemplateEditorStoreBase with Store {
     _currentTemplate.sections.add(_selectedSection);
     _sections.add(_selectedSection);
     _selectLastSection();
+    _updateHasLinearitySteps();
+  }
+
+  void _updateHasLinearitySteps() {
+    _hasLinearityStep1 = _checks.any(
+        (check) => (check.runtimeType == TemplateLinearityCheckStep1Check));
+    _hasLinearityStep2 = _checks.any(
+        (check) => (check.runtimeType == TemplateLinearityCheckStep2Check));
   }
 
   void _selectLastSection() {
@@ -52,6 +77,7 @@ abstract class TemplateEditorStoreBase with Store {
       _selectedSectionIndex = -1;
       _selectedSection = $TemplateSection.empty();
       _checks = ObservableList<TemplateCheck>();
+      _updateHasLinearitySteps();
       _setSelectedCheckByIndex(-1);
       return;
     }
@@ -64,6 +90,7 @@ abstract class TemplateEditorStoreBase with Store {
     _checks = ObservableList.of(_selectedSection.checks);
     _selectedSectionIndex = index;
     _sectionOrCheckSelected = TemplateEditorSectionOrCheckSelected.section;
+    _updateHasLinearitySteps();
   }
 
   void _setSelectedCheckByIndex(int index) {
@@ -114,6 +141,7 @@ abstract class TemplateEditorStoreBase with Store {
 
     _selectedCheck = check;
     _selectedSection = section;
+    _updateHasLinearitySteps();
   }
 
   @action
