@@ -9,11 +9,13 @@ part of 'template_check.dart';
 TemplateCheck _$TemplateCheckFromJson(Map<String, dynamic> json) =>
     TemplateCheck(
       type: json['type'] as String,
+      description: json['description'] as String,
     );
 
 Map<String, dynamic> _$TemplateCheckToJson(TemplateCheck instance) =>
     <String, dynamic>{
       'type': instance.type,
+      'description': instance.description,
     };
 
 TemplateRegularCheck _$TemplateRegularCheckFromJson(
@@ -50,22 +52,26 @@ TemplateLinearityCheckStep1Check _$TemplateLinearityCheckStep1CheckFromJson(
         Map<String, dynamic> json) =>
     TemplateLinearityCheckStep1Check(
       type: json['type'] as String,
+      description: json['description'] as String,
     );
 
 Map<String, dynamic> _$TemplateLinearityCheckStep1CheckToJson(
         TemplateLinearityCheckStep1Check instance) =>
     <String, dynamic>{
       'type': instance.type,
+      'description': instance.description,
     };
 
 TemplateLinearityCheckStep2Check _$TemplateLinearityCheckStep2CheckFromJson(
         Map<String, dynamic> json) =>
     TemplateLinearityCheckStep2Check(
       type: json['type'] as String,
+      description: json['description'] as String,
     );
 
 Map<String, dynamic> _$TemplateLinearityCheckStep2CheckToJson(
         TemplateLinearityCheckStep2Check instance) =>
     <String, dynamic>{
       'type': instance.type,
+      'description': instance.description,
     };

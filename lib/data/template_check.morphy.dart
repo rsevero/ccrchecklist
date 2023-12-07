@@ -14,30 +14,39 @@ part of 'template_check.dart';
 )
 class TemplateCheck extends $TemplateCheck {
   final String type;
+  final String description;
 
   ///
   TemplateCheck({
     required this.type,
+    required this.description,
   });
   TemplateCheck._({
     required this.type,
+    required this.description,
   });
-  String toString() => "(TemplateCheck-type:${type.toString()})";
-  int get hashCode => hashObjects([type.hashCode]);
+  String toString() =>
+      "(TemplateCheck-type:${type.toString()}|description:${description.toString()})";
+  int get hashCode => hashObjects([type.hashCode, description.hashCode]);
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is TemplateCheck &&
           runtimeType == other.runtimeType &&
-          type == other.type;
+          type == other.type &&
+          description == other.description;
   TemplateCheck copyWith_TemplateCheck({
     Opt<String>? type,
+    Opt<String>? description,
   }) {
     return TemplateCheck._(
       type: type == null ? this.type as String : type.value as String,
+      description: description == null
+          ? this.description as String
+          : description.value as String,
     );
   }
 
-//$TemplateCheck|[]|[type:String:null]
+//$TemplateCheck|[]|[type:String:null, description:String:null]
 //
   factory TemplateCheck.fromJson(Map<String, dynamic> json) {
     if (json['_className_'] == "TemplateCheck") {
@@ -71,7 +80,7 @@ class TemplateCheck extends $TemplateCheck {
 
 extension $TemplateCheck_changeTo_E on $TemplateCheck {}
 
-enum TemplateCheck$ { type }
+enum TemplateCheck$ { type, description }
 
 ///
 ///implements [$TemplateCheck]
@@ -110,11 +119,14 @@ class TemplateRegularCheck extends $TemplateRegularCheck
           description == other.description &&
           type == other.type;
   TemplateRegularCheck copyWith_TemplateCheck({
+    Opt<String>? description,
     Opt<String>? type,
   }) {
     return TemplateRegularCheck._(
+      description: description == null
+          ? this.description as String
+          : description.value as String,
       type: type == null ? this.type as String : type.value as String,
-      description: (this as TemplateRegularCheck).description,
     );
   }
 
@@ -130,7 +142,7 @@ class TemplateRegularCheck extends $TemplateRegularCheck
     );
   }
 
-//$TemplateCheck|[]|[type:String:$TemplateCheck]$TemplateRegularCheck|[]|[description:String:null, type:String:null]
+//$TemplateCheck|[]|[type:String:$TemplateCheck, description:String:$TemplateCheck]$TemplateRegularCheck|[]|[description:String:null, type:String:null]
 //
   factory TemplateRegularCheck.fromJson(Map<String, dynamic> json) {
     if (json['_className_'] == "TemplateRegularCheck") {
@@ -208,11 +220,14 @@ class TemplateWithReferenceCheck extends $TemplateWithReferenceCheck
           referenceDescription == other.referenceDescription &&
           type == other.type;
   TemplateWithReferenceCheck copyWith_TemplateCheck({
+    Opt<String>? description,
     Opt<String>? type,
   }) {
     return TemplateWithReferenceCheck._(
+      description: description == null
+          ? this.description as String
+          : description.value as String,
       type: type == null ? this.type as String : type.value as String,
-      description: (this as TemplateWithReferenceCheck).description,
       referenceDescription:
           (this as TemplateWithReferenceCheck).referenceDescription,
     );
@@ -234,7 +249,7 @@ class TemplateWithReferenceCheck extends $TemplateWithReferenceCheck
     );
   }
 
-//$TemplateCheck|[]|[type:String:$TemplateCheck]$TemplateWithReferenceCheck|[]|[description:String:null, referenceDescription:String:null, type:String:null]
+//$TemplateCheck|[]|[type:String:$TemplateCheck, description:String:$TemplateCheck]$TemplateWithReferenceCheck|[]|[description:String:null, referenceDescription:String:null, type:String:null]
 //
   factory TemplateWithReferenceCheck.fromJson(Map<String, dynamic> json) {
     if (json['_className_'] == "TemplateWithReferenceCheck") {
@@ -283,6 +298,7 @@ enum TemplateWithReferenceCheck$ { description, referenceDescription, type }
 class TemplateLinearityCheckStep1Check extends $TemplateLinearityCheckStep1Check
     implements TemplateCheck {
   final String type;
+  final String description;
 
   ///
   ///implements [$TemplateCheck]
@@ -291,35 +307,46 @@ class TemplateLinearityCheckStep1Check extends $TemplateLinearityCheckStep1Check
   ///
   TemplateLinearityCheckStep1Check({
     required this.type,
+    required this.description,
   });
   TemplateLinearityCheckStep1Check._({
     required this.type,
+    required this.description,
   });
   String toString() =>
-      "(TemplateLinearityCheckStep1Check-type:${type.toString()})";
-  int get hashCode => hashObjects([type.hashCode]);
+      "(TemplateLinearityCheckStep1Check-type:${type.toString()}|description:${description.toString()})";
+  int get hashCode => hashObjects([type.hashCode, description.hashCode]);
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is TemplateLinearityCheckStep1Check &&
           runtimeType == other.runtimeType &&
-          type == other.type;
+          type == other.type &&
+          description == other.description;
   TemplateLinearityCheckStep1Check copyWith_TemplateCheck({
     Opt<String>? type,
+    Opt<String>? description,
   }) {
     return TemplateLinearityCheckStep1Check._(
       type: type == null ? this.type as String : type.value as String,
+      description: description == null
+          ? this.description as String
+          : description.value as String,
     );
   }
 
   TemplateLinearityCheckStep1Check copyWith_TemplateLinearityCheckStep1Check({
     Opt<String>? type,
+    Opt<String>? description,
   }) {
     return TemplateLinearityCheckStep1Check._(
       type: type == null ? this.type as String : type.value as String,
+      description: description == null
+          ? this.description as String
+          : description.value as String,
     );
   }
 
-//$TemplateCheck|[]|[type:String:$TemplateCheck]$TemplateLinearityCheckStep1Check|[]|[type:String:null]
+//$TemplateCheck|[]|[type:String:$TemplateCheck, description:String:$TemplateCheck]$TemplateLinearityCheckStep1Check|[]|[type:String:null, description:String:null]
 //
   factory TemplateLinearityCheckStep1Check.fromJson(Map<String, dynamic> json) {
     if (json['_className_'] == "TemplateLinearityCheckStep1Check") {
@@ -354,7 +381,7 @@ class TemplateLinearityCheckStep1Check extends $TemplateLinearityCheckStep1Check
 extension $TemplateLinearityCheckStep1Check_changeTo_E
     on $TemplateLinearityCheckStep1Check {}
 
-enum TemplateLinearityCheckStep1Check$ { type }
+enum TemplateLinearityCheckStep1Check$ { type, description }
 
 ///
 ///implements [$TemplateCheck]
@@ -368,6 +395,7 @@ enum TemplateLinearityCheckStep1Check$ { type }
 class TemplateLinearityCheckStep2Check extends $TemplateLinearityCheckStep2Check
     implements TemplateCheck {
   final String type;
+  final String description;
 
   ///
   ///implements [$TemplateCheck]
@@ -376,35 +404,46 @@ class TemplateLinearityCheckStep2Check extends $TemplateLinearityCheckStep2Check
   ///
   TemplateLinearityCheckStep2Check({
     required this.type,
+    required this.description,
   });
   TemplateLinearityCheckStep2Check._({
     required this.type,
+    required this.description,
   });
   String toString() =>
-      "(TemplateLinearityCheckStep2Check-type:${type.toString()})";
-  int get hashCode => hashObjects([type.hashCode]);
+      "(TemplateLinearityCheckStep2Check-type:${type.toString()}|description:${description.toString()})";
+  int get hashCode => hashObjects([type.hashCode, description.hashCode]);
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is TemplateLinearityCheckStep2Check &&
           runtimeType == other.runtimeType &&
-          type == other.type;
+          type == other.type &&
+          description == other.description;
   TemplateLinearityCheckStep2Check copyWith_TemplateCheck({
     Opt<String>? type,
+    Opt<String>? description,
   }) {
     return TemplateLinearityCheckStep2Check._(
       type: type == null ? this.type as String : type.value as String,
+      description: description == null
+          ? this.description as String
+          : description.value as String,
     );
   }
 
   TemplateLinearityCheckStep2Check copyWith_TemplateLinearityCheckStep2Check({
     Opt<String>? type,
+    Opt<String>? description,
   }) {
     return TemplateLinearityCheckStep2Check._(
       type: type == null ? this.type as String : type.value as String,
+      description: description == null
+          ? this.description as String
+          : description.value as String,
     );
   }
 
-//$TemplateCheck|[]|[type:String:$TemplateCheck]$TemplateLinearityCheckStep2Check|[]|[type:String:null]
+//$TemplateCheck|[]|[type:String:$TemplateCheck, description:String:$TemplateCheck]$TemplateLinearityCheckStep2Check|[]|[type:String:null, description:String:null]
 //
   factory TemplateLinearityCheckStep2Check.fromJson(Map<String, dynamic> json) {
     if (json['_className_'] == "TemplateLinearityCheckStep2Check") {
@@ -439,4 +478,4 @@ class TemplateLinearityCheckStep2Check extends $TemplateLinearityCheckStep2Check
 extension $TemplateLinearityCheckStep2Check_changeTo_E
     on $TemplateLinearityCheckStep2Check {}
 
-enum TemplateLinearityCheckStep2Check$ { type }
+enum TemplateLinearityCheckStep2Check$ { type, description }

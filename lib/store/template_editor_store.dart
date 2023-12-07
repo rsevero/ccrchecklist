@@ -19,28 +19,70 @@ abstract class TemplateEditorStoreBase with Store {
   int get sectionsCount => _sections.length;
 
   @readonly
-  TemplateSection _currentSection = $TemplateSection.empty();
+  TemplateSection _selectedSection = $TemplateSection.empty();
 
   @readonly
   ObservableList<TemplateCheck> _checks = ObservableList<TemplateCheck>();
 
   @readonly
-  TemplateCheck? _currentCheck;
+  TemplateCheck? _selectedCheck;
 
   @readonly
-  int _selectedSectionIndex = 0;
+  int _selectedSectionIndex = -1;
+
+  @readonly
+  int _selectedCheckIndex = -1;
+
+  @readonly
+  TemplateEditorSectionOrCheckSelected _sectionOrCheckSelected =
+      TemplateEditorSectionOrCheckSelected.none;
 
   @action
   void addNewSection(
       {required String title, required List<TemplateCheck> checks}) {
-    _currentSection = TemplateSection(title: title, checks: checks);
-    _currentTemplate.sections.add(_currentSection);
-    _sections.add(_currentSection);
+    _selectedSection = TemplateSection(title: title, checks: checks);
+    _currentTemplate.sections.add(_selectedSection);
+    _sections.add(_selectedSection);
     _selectLastSection();
   }
 
   void _selectLastSection() {
-    _selectedSectionIndex = _sections.length - 1;
+    _setSelectedSectionByIndex(_sections.length - 1);
+  }
+
+  void _setSelectedSectionByIndex(int index) {
+    if (_sections.isEmpty || (index < 0)) {
+      _selectedSectionIndex = -1;
+      _selectedSection = $TemplateSection.empty();
+      _checks = ObservableList<TemplateCheck>();
+      _setSelectedCheckByIndex(-1);
+      return;
+    }
+
+    if (index > _sections.length - 1) {
+      index = _sections.length - 1;
+    }
+
+    _selectedSection = _sections[index];
+    _checks = ObservableList.of(_selectedSection.checks);
+    _selectedSectionIndex = index;
+    _sectionOrCheckSelected = TemplateEditorSectionOrCheckSelected.section;
+  }
+
+  void _setSelectedCheckByIndex(int index) {
+    if (_checks.isEmpty || (index < 0)) {
+      _selectedCheckIndex = -1;
+      _selectedCheck = null;
+      return;
+    }
+
+    if (index > _checks.length - 1) {
+      index = _checks.length - 1;
+    }
+
+    _selectedCheck = _checks[index];
+    _selectedCheckIndex = index;
+    _sectionOrCheckSelected = TemplateEditorSectionOrCheckSelected.check;
   }
 
   @action
@@ -61,25 +103,10 @@ abstract class TemplateEditorStoreBase with Store {
   }
 
   @action
-  void deleteSection(TemplateSection section) {
-    _currentTemplate.sections.remove(section);
-    _sections.remove(section);
-  }
-
-  @action
   void setCurrentTemplate(Template template) {
     _currentTemplate = template;
     _sections = ObservableList.of(template.sections);
-  }
-
-  @action
-  void setCurrentCheck(TemplateCheck check) {
-    _currentCheck = check;
-  }
-
-  @action
-  void setCurrentSection(TemplateSection section) {
-    _currentSection = section;
+    _sectionOrCheckSelected = TemplateEditorSectionOrCheckSelected.none;
   }
 
   @action
@@ -88,8 +115,8 @@ abstract class TemplateEditorStoreBase with Store {
       return;
     }
 
-    _currentCheck = check;
-    _currentSection = section;
+    _selectedCheck = check;
+    _selectedSection = section;
   }
 
   @action
@@ -116,15 +143,35 @@ abstract class TemplateEditorStoreBase with Store {
   }
 
   @action
-  void deleteTemplateSection(int index) {
+  void deleteSection(int index) {
     if (index >= 0 && index < _currentTemplate.sections.length) {
       _currentTemplate.sections.removeAt(index);
       _sections.removeAt(index);
+      _setSelectedSectionByIndex(index);
     }
   }
 
   @action
-  void onTapTemplateSection(int index) {
-    _selectedSectionIndex = index;
+  void deleteCheck(int index) {
+    if (index >= 0 && index < _selectedSection.checks.length) {
+      _selectedSection.checks.removeAt(index);
+      _checks.removeAt(index);
+    }
   }
+
+  @action
+  void onTapSection(int index) {
+    _setSelectedSectionByIndex(index);
+  }
+
+  @action
+  void onTapCheck(int index) {
+    _setSelectedCheckByIndex(index);
+  }
+}
+
+enum TemplateEditorSectionOrCheckSelected {
+  none,
+  section,
+  check,
 }
