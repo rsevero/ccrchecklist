@@ -105,24 +105,6 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
     });
   }
 
-  late final _$_selectedCheckAtom =
-      Atom(name: 'TemplateEditorStoreBase._selectedCheck', context: context);
-
-  TemplateCheck? get selectedCheck {
-    _$_selectedCheckAtom.reportRead();
-    return super._selectedCheck;
-  }
-
-  @override
-  TemplateCheck? get _selectedCheck => selectedCheck;
-
-  @override
-  set _selectedCheck(TemplateCheck? value) {
-    _$_selectedCheckAtom.reportWrite(value, super._selectedCheck, () {
-      super._selectedCheck = value;
-    });
-  }
-
   late final _$_selectedSectionIndexAtom = Atom(
       name: 'TemplateEditorStoreBase._selectedSectionIndex', context: context);
 
@@ -139,45 +121,6 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
     _$_selectedSectionIndexAtom.reportWrite(value, super._selectedSectionIndex,
         () {
       super._selectedSectionIndex = value;
-    });
-  }
-
-  late final _$_selectedCheckIndexAtom = Atom(
-      name: 'TemplateEditorStoreBase._selectedCheckIndex', context: context);
-
-  int get selectedCheckIndex {
-    _$_selectedCheckIndexAtom.reportRead();
-    return super._selectedCheckIndex;
-  }
-
-  @override
-  int get _selectedCheckIndex => selectedCheckIndex;
-
-  @override
-  set _selectedCheckIndex(int value) {
-    _$_selectedCheckIndexAtom.reportWrite(value, super._selectedCheckIndex, () {
-      super._selectedCheckIndex = value;
-    });
-  }
-
-  late final _$_sectionOrCheckSelectedAtom = Atom(
-      name: 'TemplateEditorStoreBase._sectionOrCheckSelected',
-      context: context);
-
-  TemplateEditorSectionOrCheckSelected get sectionOrCheckSelected {
-    _$_sectionOrCheckSelectedAtom.reportRead();
-    return super._sectionOrCheckSelected;
-  }
-
-  @override
-  TemplateEditorSectionOrCheckSelected get _sectionOrCheckSelected =>
-      sectionOrCheckSelected;
-
-  @override
-  set _sectionOrCheckSelected(TemplateEditorSectionOrCheckSelected value) {
-    _$_sectionOrCheckSelectedAtom
-        .reportWrite(value, super._sectionOrCheckSelected, () {
-      super._sectionOrCheckSelected = value;
     });
   }
 
@@ -221,12 +164,22 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
       ActionController(name: 'TemplateEditorStoreBase', context: context);
 
   @override
-  void addNewSection(
-      {required String title, required List<TemplateCheck> checks}) {
+  void addRegularCheck({required String description}) {
+    final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
+        name: 'TemplateEditorStoreBase.addRegularCheck');
+    try {
+      return super.addRegularCheck(description: description);
+    } finally {
+      _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void addNewSection({required String title}) {
     final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
         name: 'TemplateEditorStoreBase.addNewSection');
     try {
-      return super.addNewSection(title: title, checks: checks);
+      return super.addNewSection(title: title);
     } finally {
       _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -321,11 +274,11 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
   }
 
   @override
-  void deleteCheck(int index) {
+  void deleteCheck(TemplateCheck aCheck) {
     final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
         name: 'TemplateEditorStoreBase.deleteCheck');
     try {
-      return super.deleteCheck(index);
+      return super.deleteCheck(aCheck);
     } finally {
       _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -337,17 +290,6 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
         name: 'TemplateEditorStoreBase.onTapSection');
     try {
       return super.onTapSection(index);
-    } finally {
-      _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void onTapCheck(int index) {
-    final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
-        name: 'TemplateEditorStoreBase.onTapCheck');
-    try {
-      return super.onTapCheck(index);
     } finally {
       _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
     }

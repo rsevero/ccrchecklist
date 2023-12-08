@@ -6,72 +6,61 @@ part of 'template_check.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-TemplateCheck _$TemplateCheckFromJson(Map<String, dynamic> json) =>
-    TemplateCheck(
-      type: json['type'] as String,
+_$TemplateRegularCheckImpl _$$TemplateRegularCheckImplFromJson(
+        Map<String, dynamic> json) =>
+    _$TemplateRegularCheckImpl(
       description: json['description'] as String,
+      $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$TemplateCheckToJson(TemplateCheck instance) =>
+Map<String, dynamic> _$$TemplateRegularCheckImplToJson(
+        _$TemplateRegularCheckImpl instance) =>
     <String, dynamic>{
-      'type': instance.type,
       'description': instance.description,
+      'runtimeType': instance.$type,
     };
 
-TemplateRegularCheck _$TemplateRegularCheckFromJson(
+_$TemplateWithReferenceCheckImpl _$$TemplateWithReferenceCheckImplFromJson(
         Map<String, dynamic> json) =>
-    TemplateRegularCheck(
+    _$TemplateWithReferenceCheckImpl(
       description: json['description'] as String,
-      type: json['type'] as String,
+      referenceCount: json['referenceCount'] as int,
+      $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$TemplateRegularCheckToJson(
-        TemplateRegularCheck instance) =>
+Map<String, dynamic> _$$TemplateWithReferenceCheckImplToJson(
+        _$TemplateWithReferenceCheckImpl instance) =>
     <String, dynamic>{
       'description': instance.description,
-      'type': instance.type,
+      'referenceCount': instance.referenceCount,
+      'runtimeType': instance.$type,
     };
 
-TemplateWithReferenceCheck _$TemplateWithReferenceCheckFromJson(
+_$TemplateLinearityStep1CheckImpl _$$TemplateLinearityStep1CheckImplFromJson(
         Map<String, dynamic> json) =>
-    TemplateWithReferenceCheck(
-      description: json['description'] as String,
-      referenceDescription: json['referenceDescription'] as String,
-      type: json['type'] as String,
+    _$TemplateLinearityStep1CheckImpl(
+      referenceCount: json['referenceCount'] as int,
+      $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$TemplateWithReferenceCheckToJson(
-        TemplateWithReferenceCheck instance) =>
+Map<String, dynamic> _$$TemplateLinearityStep1CheckImplToJson(
+        _$TemplateLinearityStep1CheckImpl instance) =>
     <String, dynamic>{
-      'description': instance.description,
-      'referenceDescription': instance.referenceDescription,
-      'type': instance.type,
+      'referenceCount': instance.referenceCount,
+      'runtimeType': instance.$type,
     };
 
-TemplateLinearityCheckStep1Check _$TemplateLinearityCheckStep1CheckFromJson(
+_$TemplateLinearityStep2CheckImpl _$$TemplateLinearityStep2CheckImplFromJson(
         Map<String, dynamic> json) =>
-    TemplateLinearityCheckStep1Check(
-      type: json['type'] as String,
-      description: json['description'] as String,
+    _$TemplateLinearityStep2CheckImpl(
+      step1: TemplateLinearityStep1Check.fromJson(
+          json['step1'] as Map<String, dynamic>),
+      $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$TemplateLinearityCheckStep1CheckToJson(
-        TemplateLinearityCheckStep1Check instance) =>
+Map<String, dynamic> _$$TemplateLinearityStep2CheckImplToJson(
+        _$TemplateLinearityStep2CheckImpl instance) =>
     <String, dynamic>{
-      'type': instance.type,
-      'description': instance.description,
-    };
-
-TemplateLinearityCheckStep2Check _$TemplateLinearityCheckStep2CheckFromJson(
-        Map<String, dynamic> json) =>
-    TemplateLinearityCheckStep2Check(
-      type: json['type'] as String,
-      description: json['description'] as String,
-    );
-
-Map<String, dynamic> _$TemplateLinearityCheckStep2CheckToJson(
-        TemplateLinearityCheckStep2Check instance) =>
-    <String, dynamic>{
-      'type': instance.type,
-      'description': instance.description,
+      'step1': instance.step1,
+      'runtimeType': instance.$type,
     };

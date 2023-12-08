@@ -29,7 +29,7 @@ class TemplateCheckWidget extends StatelessWidget {
                   _editTemplateCheck(context, templateEditorStore, index);
                   break;
                 case 'Delete':
-                  templateEditorStore.deleteCheck(index);
+                  templateEditorStore.deleteCheck(check);
                   break;
               }
             },

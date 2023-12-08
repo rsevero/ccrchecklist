@@ -117,7 +117,7 @@ class TemplateEditorPage extends StatelessWidget {
                 label: 'Add Regular Check',
                 visible: templateEditorStore.enableCheckCreation,
                 onTap: () {
-                  // Implement action
+                  _onTapAddRegularCheck(context, templateEditorStore);
                 },
               ),
               SpeedDialChild(
@@ -211,8 +211,43 @@ class TemplateEditorPage extends StatelessWidget {
       if (!context.mounted) return;
       TemplateEditorStore templateEditorStore =
           Provider.of<TemplateEditorStore>(context, listen: false);
-      templateEditorStore
-          .addNewSection(title: titleController.text, checks: []);
+      templateEditorStore.addNewSection(title: titleController.text);
+    }
+  }
+
+  void _onTapAddRegularCheck(
+      BuildContext context, TemplateEditorStore templateEditorStore) async {
+    final TextEditingController descriptionController = TextEditingController();
+
+    bool confirmed = await showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Add Regular Check'),
+              content: TextFormField(
+                controller: descriptionController,
+                decoration:
+                    const InputDecoration(hintText: 'Enter check description'),
+                autofocus: true,
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('Update'),
+                  onPressed: () => Navigator.of(context).pop(true),
+                ),
+                TextButton(
+                  child: const Text('Cancel'),
+                  onPressed: () => Navigator.of(context).pop(false),
+                ),
+              ],
+            );
+          },
+        ) ??
+        false;
+
+    if (confirmed) {
+      templateEditorStore.addRegularCheck(
+          description: descriptionController.text);
     }
   }
 }

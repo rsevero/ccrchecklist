@@ -1,16 +1,22 @@
 import 'package:ccr_checklist/data/template_check.dart';
-import 'package:morphy_annotation/morphy_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'template_section.morphy.dart';
+part 'template_section.freezed.dart';
 part 'template_section.g.dart';
 
-@Morphy(generateJson: true)
-abstract class $TemplateSection {
-  String get title;
-  List<$TemplateCheck> get checks;
+@freezed
+class TemplateSection with _$TemplateSection {
+  const factory TemplateSection(
+      {required String title,
+      required List<TemplateCheck> checks}) = _TemplateSection;
 
-  static TemplateSection empty() => TemplateSection(
-        title: '',
-        checks: [],
-      );
+  factory TemplateSection.empty() {
+    return const TemplateSection(
+      title: '',
+      checks: [],
+    );
+  }
+
+  factory TemplateSection.fromJson(Map<String, Object?> json) =>
+      _$TemplateSectionFromJson(json);
 }
