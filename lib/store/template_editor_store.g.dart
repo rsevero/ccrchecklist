@@ -204,6 +204,17 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
       ActionController(name: 'TemplateEditorStoreBase', context: context);
 
   @override
+  void addWithReferenceCheck(dynamic description, dynamic referenceCount) {
+    final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
+        name: 'TemplateEditorStoreBase.addWithReferenceCheck');
+    try {
+      return super.addWithReferenceCheck(description, referenceCount);
+    } finally {
+      _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void addRegularCheck({required String description}) {
     final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
         name: 'TemplateEditorStoreBase.addRegularCheck');

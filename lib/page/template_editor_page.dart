@@ -106,7 +106,7 @@ class TemplateEditorPage extends StatelessWidget {
                 label: 'Add "With Reference" Check',
                 visible: templateEditorStore.enableCheckCreation,
                 onTap: () {
-                  // Implement action
+                  _onTapAddWithReferenceCheck(context, templateEditorStore);
                 },
               ),
               SpeedDialChild(
@@ -246,5 +246,71 @@ class TemplateEditorPage extends StatelessWidget {
       templateEditorStore.addRegularCheck(
           description: descriptionController.text);
     }
+  }
+
+  void _onTapAddWithReferenceCheck(
+      BuildContext context, TemplateEditorStore templateEditorStore) {
+    final TextEditingController descriptionController = TextEditingController();
+    int numberOfReferences = 1; // Default value
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Add Check with References'),
+          content: StatefulBuilder(
+            // Use StatefulBuilder to update the dialog's state
+            builder: (BuildContext context, StateSetter setState) {
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  TextFormField(
+                    controller: descriptionController,
+                    decoration: const InputDecoration(
+                        hintText: 'Enter check description'),
+                    autofocus: true,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8.0),
+                    child: Text(
+                        'Amount of references'), // Label for the radio buttons
+                  ),
+                  ...List.generate(
+                      5,
+                      (index) => RadioListTile<int>(
+                            title: Text('${index + 1}'),
+                            value: index + 1,
+                            groupValue: numberOfReferences,
+                            onChanged: (int? value) {
+                              if (value != null) {
+                                setState(() => numberOfReferences = value);
+                              }
+                            },
+                          )),
+                ],
+              );
+            },
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Create'),
+              onPressed: () {
+                // Validate inputs and create check
+                final description = descriptionController.text;
+                if (description.isNotEmpty) {
+                  templateEditorStore.addWithReferenceCheck(
+                      description, numberOfReferences);
+                  Navigator.of(context).pop();
+                }
+              },
+            ),
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

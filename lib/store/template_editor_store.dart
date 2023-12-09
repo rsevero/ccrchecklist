@@ -48,11 +48,18 @@ abstract class TemplateEditorStoreBase with Store {
   Map<int, ExpansionTileController> _sectionExpansionTileControllers = {};
 
   @action
+  void addWithReferenceCheck(description, referenceCount) {
+    final newWithReferenceCheck = TemplateWithReferenceCheck(
+        description: description, referenceCount: referenceCount);
+    _selectedSection.checks.add(newWithReferenceCheck);
+    _checks.add(newWithReferenceCheck);
+  }
+
+  @action
   void addRegularCheck({required String description}) {
     final newRegularCheck = TemplateRegularCheck(description: description);
     _selectedSection.checks.add(newRegularCheck);
     _checks.add(newRegularCheck);
-    _updateHasLinearitySteps();
   }
 
   @action
@@ -69,7 +76,6 @@ abstract class TemplateEditorStoreBase with Store {
     _sections.add(_selectedSection);
     _sectionsIsExpanded.add(true);
     _selectLastSection();
-    _updateHasLinearitySteps();
   }
 
   void _updateHasLinearitySteps() {
@@ -98,7 +104,6 @@ abstract class TemplateEditorStoreBase with Store {
       _selectedSectionIndex = -1;
       _selectedSection = TemplateSection.empty();
       _checks = ObservableList<TemplateCheck>();
-      _updateHasLinearitySteps();
       return;
     }
 
@@ -109,6 +114,7 @@ abstract class TemplateEditorStoreBase with Store {
     _selectedSection = _sections[index];
     _checks = ObservableList.of(_selectedSection.checks);
     _selectedSectionIndex = index;
+    _sectionsIsExpanded[index] = true;
   }
 
   @action
@@ -175,10 +181,11 @@ abstract class TemplateEditorStoreBase with Store {
         newSectionExpansionTileController!;
 
     // If someone can please explain to me why the following code does work I
-    // would be very grateful. AFAICT, the following code is doing exactly the
-    // opposite of what it should be doing as I want the controller in the NEW
-    // position to reproduce the isExpanded state of the OLD position as it's
-    // the same controller at the NEW position but it works as it is. I don't
+    // would be very grateful.
+    //
+    // AFAICT, the following code is doing exactly the opposite of what it
+    // should be doing as I want the controller in the NEW position to reproduce
+    // the isExpanded state of the OLD position but it works as it is. I don't
     // get it.
     if (oldSectionIsExpanded) {
       _sectionExpansionTileControllers[oldIndex]!.expand();

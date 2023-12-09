@@ -20,9 +20,15 @@ class TemplateCheckWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Observer(
       builder: (_) {
+        String title = check.description;
+        if (check is TemplateWithReferenceCheck) {
+          final reference =
+              (check as TemplateWithReferenceCheck).referenceCount;
+          title = '$title (Ref: $reference)';
+        }
         return ListTile(
           key: ValueKey(index),
-          title: Text(check.description),
+          title: Text(title),
           trailing: PopupMenuButton<String>(
             onSelected: (value) {
               switch (value) {
