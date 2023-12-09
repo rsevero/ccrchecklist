@@ -15,9 +15,7 @@ final mainDarkTheme = ThemeData(
 
 final speedDialButtonBackgroundColor = mainLightTheme.colorScheme.background;
 final speedDialButtonTextColor = mainLightTheme.colorScheme.onBackground;
-// final speedDialButtonDisabledBackgroundColor =
-//     mainLightTheme.colorScheme.outline;
-// final speedDialButtonDisabledTextColor =
-//     mainLightTheme.colorScheme.outlineVariant;
-final speedDialButtonDisabledBackgroundColor = Colors.grey[300];
-final speedDialButtonDisabledTextColor = Colors.grey[600];
+
+const speedDialButtonDisabledBackgroundColor =
+    Color.fromRGBO(224, 224, 224, 0.7);
+const speedDialButtonDisabledTextColor = Color.fromRGBO(117, 117, 117, 0.7);

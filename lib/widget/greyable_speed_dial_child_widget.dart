@@ -5,6 +5,7 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 class GreyableSpeedDialChild extends SpeedDialChild {
   final String text;
   final bool isEnabled;
+  final double disabledOpacity = 0.6;
 
   GreyableSpeedDialChild(
       {super.key,
@@ -14,28 +15,37 @@ class GreyableSpeedDialChild extends SpeedDialChild {
       super.onTap});
 
   @override
-  Widget get labelWidget => Container(
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
-        margin: const EdgeInsets.symmetric(horizontal: 10),
-        decoration: BoxDecoration(
-          color: isEnabled
-              ? speedDialButtonBackgroundColor
-              : speedDialButtonDisabledBackgroundColor,
-          borderRadius: BorderRadius.circular(6),
-          boxShadow: [
-            BoxShadow(
-              color: isEnabled ? Colors.black26 : Colors.transparent,
-              blurRadius: 2,
-              offset: const Offset(1, 1),
-            ),
-          ],
-        ),
-        child: Text(
-          text,
-          style: TextStyle(
+  Widget? get child => Opacity(
+        opacity: isEnabled ? 1.0 : disabledOpacity,
+        child: IgnorePointer(ignoring: !isEnabled, child: super.child),
+      );
+
+  @override
+  Widget get labelWidget => Opacity(
+        opacity: isEnabled ? 1.0 : disabledOpacity,
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
+          margin: const EdgeInsets.symmetric(horizontal: 10),
+          decoration: BoxDecoration(
             color: isEnabled
-                ? speedDialButtonTextColor
-                : speedDialButtonDisabledTextColor,
+                ? speedDialButtonBackgroundColor
+                : speedDialButtonDisabledBackgroundColor,
+            borderRadius: BorderRadius.circular(6),
+            boxShadow: [
+              BoxShadow(
+                color: isEnabled ? Colors.black26 : Colors.transparent,
+                blurRadius: 2,
+                offset: const Offset(1, 1),
+              ),
+            ],
+          ),
+          child: Text(
+            text,
+            style: TextStyle(
+              color: isEnabled
+                  ? speedDialButtonTextColor
+                  : speedDialButtonDisabledTextColor,
+            ),
           ),
         ),
       );
