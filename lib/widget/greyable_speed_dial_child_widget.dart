@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 class GreyableSpeedDialChild extends SpeedDialChild {
-  final Widget child;
   final String text;
   final bool isEnabled;
   final Function()? onTap;
@@ -12,7 +11,7 @@ class GreyableSpeedDialChild extends SpeedDialChild {
       {super.key,
       required this.text,
       required this.isEnabled,
-      required this.child,
+      super.child,
       required this.onTap});
 
   @override
@@ -52,41 +51,4 @@ class GreyableSpeedDialChild extends SpeedDialChild {
 
   @override
   double? get elevation => isEnabled ? null : 0;
-
-  // return SpeedDialChild(
-  //   child: child,
-  //   labelWidget: Container(
-  //     padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
-  //     margin: const EdgeInsets.symmetric(horizontal: 10),
-  //     decoration: BoxDecoration(
-  //       color: isEnabled
-  //           ? speedDialButtonBackgroundColor
-  //           : speedDialButtonDisabledBackgroundColor,
-  //       borderRadius: BorderRadius.circular(6),
-  //       boxShadow: [
-  //         BoxShadow(
-  //           color: isEnabled ? Colors.black26 : Colors.transparent,
-  //           blurRadius: 4,
-  //         ),
-  //       ],
-  //     ),
-  //     child: Text(
-  //       text,
-  //       style: TextStyle(
-  //         color: isEnabled
-  //             ? speedDialButtonTextColor
-  //             : speedDialButtonDisabledTextColor,
-  //       ),
-  //     ),
-  //   ),
-  //   backgroundColor: isEnabled
-  //       ? speedDialButtonBackgroundColor
-  //       : speedDialButtonDisabledBackgroundColor,
-  //   foregroundColor: isEnabled
-  //       ? speedDialButtonTextColor
-  //       : speedDialButtonDisabledTextColor,
-  //   onTap: isEnabled
-  //       ? () => _onTapAddRegularCheck(context, templateEditorStore)
-  //       : null,
-  // );
 }
