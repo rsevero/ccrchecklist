@@ -109,7 +109,6 @@ class TemplateSectionWidget extends StatelessWidget {
   }
 
   void onExpansionChangedSection(bool value) {
-    print("-> onExpansionChangedSection index $index: $value\n");
-    templateEditorStore.setSectionIsExpansion(index, value);
+    templateEditorStore.setSectionIsExpanded(index, value);
   }
 }

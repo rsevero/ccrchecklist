@@ -292,7 +292,8 @@ class TemplateEditorPage extends StatelessWidget {
             TextButton(
               child: const Text('Create'),
               onPressed: () {
-                templateEditorStore.addLinearityStep1Check(numberOfReferences);
+                templateEditorStore.addLinearityStep1Check(
+                    referenceCount: numberOfReferences);
                 Navigator.of(context).pop();
               },
             ),
@@ -358,7 +359,8 @@ class TemplateEditorPage extends StatelessWidget {
                 final description = descriptionController.text;
                 if (description.isNotEmpty) {
                   templateEditorStore.addWithReferenceCheck(
-                      description, numberOfReferences);
+                      description: description,
+                      referenceCount: numberOfReferences);
                   Navigator.of(context).pop();
                 }
               },

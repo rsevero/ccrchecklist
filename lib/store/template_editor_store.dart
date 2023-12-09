@@ -19,7 +19,8 @@ abstract class TemplateEditorStoreBase with Store {
   TemplateSection _selectedSection = TemplateSection.empty();
 
   @readonly
-  ObservableList<TemplateCheck> _checks = ObservableList<TemplateCheck>();
+  ObservableList<ObservableList<TemplateCheck>> _checks =
+      ObservableList<ObservableList<TemplateCheck>>();
 
   @readonly
   ObservableList<bool> _sectionsIsExpanded = ObservableList<bool>();
@@ -51,36 +52,37 @@ abstract class TemplateEditorStoreBase with Store {
   void addLinearityStep2Check() {
     final newLinearityStep2Check = TemplateLinearityStep2Check();
     _selectedSection.checks.add(newLinearityStep2Check);
-    _checks.add(newLinearityStep2Check);
+    _checks[_selectedSectionIndex].add(newLinearityStep2Check);
     _updateHasLinearitySteps();
   }
 
   @action
-  void addLinearityStep1Check(referenceCount) {
+  void addLinearityStep1Check({required int referenceCount}) {
     final newLinearityStep1Check =
         TemplateLinearityStep1Check(referenceCount: referenceCount);
     _selectedSection.checks.add(newLinearityStep1Check);
-    _checks.add(newLinearityStep1Check);
+    _checks[_selectedSectionIndex].add(newLinearityStep1Check);
     _updateHasLinearitySteps();
   }
 
   @action
-  void addWithReferenceCheck(description, referenceCount) {
+  void addWithReferenceCheck(
+      {required String description, required int referenceCount}) {
     final newWithReferenceCheck = TemplateWithReferenceCheck(
         description: description, referenceCount: referenceCount);
     _selectedSection.checks.add(newWithReferenceCheck);
-    _checks.add(newWithReferenceCheck);
+    _checks[_selectedSectionIndex].add(newWithReferenceCheck);
   }
 
   @action
   void addRegularCheck({required String description}) {
     final newRegularCheck = TemplateRegularCheck(description: description);
     _selectedSection.checks.add(newRegularCheck);
-    _checks.add(newRegularCheck);
+    _checks[_selectedSectionIndex].add(newRegularCheck);
   }
 
   @action
-  void setSectionIsExpansion(int index, bool value) {
+  void setSectionIsExpanded(int index, bool value) {
     if (index >= 0 && index < _sectionsIsExpanded.length) {
       _sectionsIsExpanded[index] = value;
     }
@@ -91,6 +93,7 @@ abstract class TemplateEditorStoreBase with Store {
     _selectedSection = TemplateSection(title: title, checks: []);
     _currentTemplate.sections.add(_selectedSection);
     _sections.add(_selectedSection);
+    _checks.add(ObservableList.of(_selectedSection.checks));
     _sectionsIsExpanded.add(true);
     _selectLastSection();
   }
@@ -98,8 +101,8 @@ abstract class TemplateEditorStoreBase with Store {
   void _updateHasLinearitySteps() {
     bool hasStep1 = false;
     bool hasStep2 = false;
-    for (final aSection in _currentTemplate.sections) {
-      for (final aCheck in aSection.checks) {
+    for (final checkList in _checks) {
+      for (final aCheck in checkList) {
         if (aCheck is TemplateLinearityStep1Check) {
           hasStep1 = true;
         } else if (aCheck is TemplateLinearityStep2Check) {
@@ -120,7 +123,6 @@ abstract class TemplateEditorStoreBase with Store {
     if (_sections.isEmpty || (index < 0)) {
       _selectedSectionIndex = -1;
       _selectedSection = TemplateSection.empty();
-      _checks = ObservableList<TemplateCheck>();
       return;
     }
 
@@ -129,7 +131,6 @@ abstract class TemplateEditorStoreBase with Store {
     }
 
     _selectedSection = _sections[index];
-    _checks = ObservableList.of(_selectedSection.checks);
     _selectedSectionIndex = index;
     _sectionsIsExpanded[index] = true;
   }
@@ -157,6 +158,9 @@ abstract class TemplateEditorStoreBase with Store {
     _sectionsIsExpanded = ObservableList.of(
         List.generate(template.sections.length, (_) => false));
     _sectionExpansionTileControllers.clear();
+    for (final section in _currentTemplate.sections) {
+      _checks.add(ObservableList.of(section.checks));
+    }
     _selectLastSection();
   }
 
@@ -246,12 +250,13 @@ abstract class TemplateEditorStoreBase with Store {
 
   @action
   void deleteCheck(TemplateCheck aCheck) {
-    for (final aSection in _currentTemplate.sections) {
+    for (var sectionIndex = 0;
+        sectionIndex < _currentTemplate.sections.length;
+        sectionIndex++) {
+      final aSection = _currentTemplate.sections[sectionIndex];
       if (aSection.checks.contains(aCheck)) {
         aSection.checks.remove(aCheck);
-        if (aSection == _selectedSection) {
-          _checks.remove(aCheck);
-        }
+        _checks[sectionIndex].remove(aCheck);
         _updateHasLinearitySteps();
         return;
       }

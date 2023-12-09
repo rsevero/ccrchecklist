@@ -39,6 +39,7 @@ class GreyableSpeedDialChild extends SpeedDialChild {
           ),
         ),
       );
+
   @override
   Color? get backgroundColor => isEnabled
       ? speedDialButtonBackgroundColor

@@ -67,7 +67,8 @@ class TemplateCheckWidget extends StatelessWidget {
   void _editTemplateCheck(BuildContext context,
       TemplateEditorStore templateEditorStore, int index) {
     final TextEditingController titleController = TextEditingController();
-    final check = templateEditorStore.checks[index];
+    final check = templateEditorStore
+        .checks[templateEditorStore.selectedSectionIndex][index];
     titleController.text = check.description;
 
     showDialog(

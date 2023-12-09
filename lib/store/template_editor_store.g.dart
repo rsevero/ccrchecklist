@@ -90,16 +90,16 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
   late final _$_checksAtom =
       Atom(name: 'TemplateEditorStoreBase._checks', context: context);
 
-  ObservableList<TemplateCheck> get checks {
+  ObservableList<ObservableList<TemplateCheck>> get checks {
     _$_checksAtom.reportRead();
     return super._checks;
   }
 
   @override
-  ObservableList<TemplateCheck> get _checks => checks;
+  ObservableList<ObservableList<TemplateCheck>> get _checks => checks;
 
   @override
-  set _checks(ObservableList<TemplateCheck> value) {
+  set _checks(ObservableList<ObservableList<TemplateCheck>> value) {
     _$_checksAtom.reportWrite(value, super._checks, () {
       super._checks = value;
     });
@@ -215,22 +215,24 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
   }
 
   @override
-  void addLinearityStep1Check(dynamic referenceCount) {
+  void addLinearityStep1Check({required int referenceCount}) {
     final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
         name: 'TemplateEditorStoreBase.addLinearityStep1Check');
     try {
-      return super.addLinearityStep1Check(referenceCount);
+      return super.addLinearityStep1Check(referenceCount: referenceCount);
     } finally {
       _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void addWithReferenceCheck(dynamic description, dynamic referenceCount) {
+  void addWithReferenceCheck(
+      {required String description, required int referenceCount}) {
     final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
         name: 'TemplateEditorStoreBase.addWithReferenceCheck');
     try {
-      return super.addWithReferenceCheck(description, referenceCount);
+      return super.addWithReferenceCheck(
+          description: description, referenceCount: referenceCount);
     } finally {
       _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -248,11 +250,11 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
   }
 
   @override
-  void setSectionIsExpansion(int index, bool value) {
+  void setSectionIsExpanded(int index, bool value) {
     final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
-        name: 'TemplateEditorStoreBase.setSectionIsExpansion');
+        name: 'TemplateEditorStoreBase.setSectionIsExpanded');
     try {
-      return super.setSectionIsExpansion(index, value);
+      return super.setSectionIsExpanded(index, value);
     } finally {
       _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
     }

@@ -17,7 +17,7 @@ class TemplateCheckListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Observer(
       builder: (_) {
-        final checks = templateEditorStore.sections[sectionIndex].checks;
+        final checks = templateEditorStore.checks[sectionIndex];
         return SingleChildScrollView(
           child: ListView.builder(
             shrinkWrap: true,
