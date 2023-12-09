@@ -148,7 +148,7 @@ class _$TemplateRegularCheckImpl extends TemplateRegularCheck
       _$$TemplateRegularCheckImplFromJson(json);
 
   @override
-  final String description;
+  String description;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
@@ -165,19 +165,6 @@ class _$TemplateRegularCheckImpl extends TemplateRegularCheck
       ..add(DiagnosticsProperty('type', 'TemplateCheck.regular'))
       ..add(DiagnosticsProperty('description', description));
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$TemplateRegularCheckImpl &&
-            (identical(other.description, description) ||
-                other.description == description));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, description);
 
   @JsonKey(ignore: true)
   @override
@@ -271,7 +258,7 @@ class _$TemplateRegularCheckImpl extends TemplateRegularCheck
 }
 
 abstract class TemplateRegularCheck extends TemplateCheck {
-  factory TemplateRegularCheck({required final String description}) =
+  factory TemplateRegularCheck({required String description}) =
       _$TemplateRegularCheckImpl;
   TemplateRegularCheck._() : super._();
 
@@ -279,6 +266,7 @@ abstract class TemplateRegularCheck extends TemplateCheck {
       _$TemplateRegularCheckImpl.fromJson;
 
   String get description;
+  set description(String value);
   @JsonKey(ignore: true)
   _$$TemplateRegularCheckImplCopyWith<_$TemplateRegularCheckImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -338,9 +326,9 @@ class _$TemplateWithReferenceCheckImpl extends TemplateWithReferenceCheck
       _$$TemplateWithReferenceCheckImplFromJson(json);
 
   @override
-  final String description;
+  String description;
   @override
-  final int referenceCount;
+  int referenceCount;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
@@ -358,21 +346,6 @@ class _$TemplateWithReferenceCheckImpl extends TemplateWithReferenceCheck
       ..add(DiagnosticsProperty('description', description))
       ..add(DiagnosticsProperty('referenceCount', referenceCount));
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$TemplateWithReferenceCheckImpl &&
-            (identical(other.description, description) ||
-                other.description == description) &&
-            (identical(other.referenceCount, referenceCount) ||
-                other.referenceCount == referenceCount));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, description, referenceCount);
 
   @JsonKey(ignore: true)
   @override
@@ -466,15 +439,17 @@ class _$TemplateWithReferenceCheckImpl extends TemplateWithReferenceCheck
 
 abstract class TemplateWithReferenceCheck extends TemplateCheck {
   factory TemplateWithReferenceCheck(
-      {required final String description,
-      required final int referenceCount}) = _$TemplateWithReferenceCheckImpl;
+      {required String description,
+      required int referenceCount}) = _$TemplateWithReferenceCheckImpl;
   TemplateWithReferenceCheck._() : super._();
 
   factory TemplateWithReferenceCheck.fromJson(Map<String, dynamic> json) =
       _$TemplateWithReferenceCheckImpl.fromJson;
 
   String get description;
+  set description(String value);
   int get referenceCount;
+  set referenceCount(int value);
   @JsonKey(ignore: true)
   _$$TemplateWithReferenceCheckImplCopyWith<_$TemplateWithReferenceCheckImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -527,7 +502,7 @@ class _$TemplateLinearityStep1CheckImpl extends TemplateLinearityStep1Check
       _$$TemplateLinearityStep1CheckImplFromJson(json);
 
   @override
-  final int referenceCount;
+  int referenceCount;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
@@ -544,19 +519,6 @@ class _$TemplateLinearityStep1CheckImpl extends TemplateLinearityStep1Check
       ..add(DiagnosticsProperty('type', 'TemplateCheck.linearityStep1'))
       ..add(DiagnosticsProperty('referenceCount', referenceCount));
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$TemplateLinearityStep1CheckImpl &&
-            (identical(other.referenceCount, referenceCount) ||
-                other.referenceCount == referenceCount));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, referenceCount);
 
   @JsonKey(ignore: true)
   @override
@@ -649,7 +611,7 @@ class _$TemplateLinearityStep1CheckImpl extends TemplateLinearityStep1Check
 }
 
 abstract class TemplateLinearityStep1Check extends TemplateCheck {
-  factory TemplateLinearityStep1Check({required final int referenceCount}) =
+  factory TemplateLinearityStep1Check({required int referenceCount}) =
       _$TemplateLinearityStep1CheckImpl;
   TemplateLinearityStep1Check._() : super._();
 
@@ -657,6 +619,7 @@ abstract class TemplateLinearityStep1Check extends TemplateCheck {
       _$TemplateLinearityStep1CheckImpl.fromJson;
 
   int get referenceCount;
+  set referenceCount(int value);
   @JsonKey(ignore: true)
   _$$TemplateLinearityStep1CheckImplCopyWith<_$TemplateLinearityStep1CheckImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -708,7 +671,7 @@ class _$TemplateLinearityStep2CheckImpl extends TemplateLinearityStep2Check
       _$$TemplateLinearityStep2CheckImplFromJson(json);
 
   @override
-  final TemplateLinearityStep1Check step1;
+  TemplateLinearityStep1Check step1;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
@@ -725,19 +688,6 @@ class _$TemplateLinearityStep2CheckImpl extends TemplateLinearityStep2Check
       ..add(DiagnosticsProperty('type', 'TemplateCheck.linearityStep2'))
       ..add(DiagnosticsProperty('step1', step1));
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$TemplateLinearityStep2CheckImpl &&
-            const DeepCollectionEquality().equals(other.step1, step1));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(step1));
 
   @JsonKey(ignore: true)
   @override
@@ -831,7 +781,7 @@ class _$TemplateLinearityStep2CheckImpl extends TemplateLinearityStep2Check
 
 abstract class TemplateLinearityStep2Check extends TemplateCheck {
   factory TemplateLinearityStep2Check(
-          {required final TemplateLinearityStep1Check step1}) =
+          {required TemplateLinearityStep1Check step1}) =
       _$TemplateLinearityStep2CheckImpl;
   TemplateLinearityStep2Check._() : super._();
 
@@ -839,6 +789,7 @@ abstract class TemplateLinearityStep2Check extends TemplateCheck {
       _$TemplateLinearityStep2CheckImpl.fromJson;
 
   TemplateLinearityStep1Check get step1;
+  set step1(TemplateLinearityStep1Check value);
   @JsonKey(ignore: true)
   _$$TemplateLinearityStep2CheckImplCopyWith<_$TemplateLinearityStep2CheckImpl>
       get copyWith => throw _privateConstructorUsedError;

@@ -1,1 +1,1 @@
-{"rebreatherModel":"Kiss Sidewinder","title":"Default","description":"Still testing","sections":[{"title":"Section 1","checks":[],"_className_":"TemplateSection"},{"title":"Section 2","checks":[],"_className_":"TemplateSection"},{"title":"Section 3","checks":[],"_className_":"TemplateSection"}],"_className_":"Template"}
+{"rebreatherModel":"Kiss Sidewinder","title":"Default","description":"Still testing","sections":[{"title":"Section 1","checks":[]},{"title":"Section 2","checks":[]},{"title":"Section 3","checks":[{"description":"Regular Check 1","runtimeType":"regular"}]}]}

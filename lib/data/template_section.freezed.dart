@@ -21,7 +21,9 @@ TemplateSection _$TemplateSectionFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$TemplateSection {
   String get title => throw _privateConstructorUsedError;
+  set title(String value) => throw _privateConstructorUsedError;
   List<TemplateCheck> get checks => throw _privateConstructorUsedError;
+  set checks(List<TemplateCheck> value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -98,7 +100,7 @@ class __$$TemplateSectionImplCopyWithImpl<$Res>
           : title // ignore: cast_nullable_to_non_nullable
               as String,
       checks: null == checks
-          ? _value._checks
+          ? _value.checks
           : checks // ignore: cast_nullable_to_non_nullable
               as List<TemplateCheck>,
     ));
@@ -108,41 +110,20 @@ class __$$TemplateSectionImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$TemplateSectionImpl implements _TemplateSection {
-  const _$TemplateSectionImpl(
-      {required this.title, required final List<TemplateCheck> checks})
-      : _checks = checks;
+  _$TemplateSectionImpl({required this.title, required this.checks});
 
   factory _$TemplateSectionImpl.fromJson(Map<String, dynamic> json) =>
       _$$TemplateSectionImplFromJson(json);
 
   @override
-  final String title;
-  final List<TemplateCheck> _checks;
+  String title;
   @override
-  List<TemplateCheck> get checks {
-    if (_checks is EqualUnmodifiableListView) return _checks;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_checks);
-  }
+  List<TemplateCheck> checks;
 
   @override
   String toString() {
     return 'TemplateSection(title: $title, checks: $checks)';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$TemplateSectionImpl &&
-            (identical(other.title, title) || other.title == title) &&
-            const DeepCollectionEquality().equals(other._checks, _checks));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, title, const DeepCollectionEquality().hash(_checks));
 
   @JsonKey(ignore: true)
   @override
@@ -160,17 +141,19 @@ class _$TemplateSectionImpl implements _TemplateSection {
 }
 
 abstract class _TemplateSection implements TemplateSection {
-  const factory _TemplateSection(
-      {required final String title,
-      required final List<TemplateCheck> checks}) = _$TemplateSectionImpl;
+  factory _TemplateSection(
+      {required String title,
+      required List<TemplateCheck> checks}) = _$TemplateSectionImpl;
 
   factory _TemplateSection.fromJson(Map<String, dynamic> json) =
       _$TemplateSectionImpl.fromJson;
 
   @override
   String get title;
+  set title(String value);
   @override
   List<TemplateCheck> get checks;
+  set checks(List<TemplateCheck> value);
   @override
   @JsonKey(ignore: true)
   _$$TemplateSectionImplCopyWith<_$TemplateSectionImpl> get copyWith =>

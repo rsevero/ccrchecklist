@@ -65,13 +65,10 @@ class TemplateEditorPage extends StatelessWidget {
                     key: ValueKey(index),
                     builder: (_) {
                       final section = templateEditorStore.sections[index];
-                      final isSelected =
-                          (index == templateEditorStore.selectedSectionIndex);
                       return TemplateSectionWidget(
                           section: section,
                           index: index,
-                          templateEditorStore: templateEditorStore,
-                          isSelected: isSelected);
+                          templateEditorStore: templateEditorStore);
                     },
                   );
                 },
@@ -123,7 +120,7 @@ class TemplateEditorPage extends StatelessWidget {
               SpeedDialChild(
                 child: const Icon(Icons.add),
                 label: 'Add New Section',
-                onTap: () => _addNewSection(context),
+                onTap: () => _onTapAddNewSection(context),
               ),
             ],
           );
@@ -162,7 +159,7 @@ class TemplateEditorPage extends StatelessWidget {
     }
   }
 
-  void _addNewSection(BuildContext context) async {
+  void _onTapAddNewSection(BuildContext context) async {
     final TextEditingController titleController = TextEditingController();
     final GlobalKey<FormState> formKey =
         GlobalKey<FormState>(); // Add a GlobalKey for the Form
@@ -211,7 +208,7 @@ class TemplateEditorPage extends StatelessWidget {
       if (!context.mounted) return;
       TemplateEditorStore templateEditorStore =
           Provider.of<TemplateEditorStore>(context, listen: false);
-      templateEditorStore.addNewSection(title: titleController.text);
+      templateEditorStore.addSection(title: titleController.text);
     }
   }
 
@@ -232,7 +229,7 @@ class TemplateEditorPage extends StatelessWidget {
               ),
               actions: <Widget>[
                 TextButton(
-                  child: const Text('Update'),
+                  child: const Text('Create'),
                   onPressed: () => Navigator.of(context).pop(true),
                 ),
                 TextButton(

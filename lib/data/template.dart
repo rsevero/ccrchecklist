@@ -4,16 +4,16 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'template.freezed.dart';
 part 'template.g.dart';
 
-@freezed
+@unfreezed
 class Template with _$Template {
-  const factory Template(
+  factory Template(
       {required String rebreatherModel,
       required String title,
       required String description,
       required List<TemplateSection> sections}) = _Template;
 
   factory Template.empty() {
-    return const Template(
+    return Template(
       rebreatherModel: '',
       title: '',
       description: '',

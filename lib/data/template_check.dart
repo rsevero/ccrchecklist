@@ -4,9 +4,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'template_check.freezed.dart';
 part 'template_check.g.dart';
 
-@freezed
+@unfreezed
 sealed class TemplateCheck with _$TemplateCheck {
-  const TemplateCheck._();
+  TemplateCheck._();
 
   factory TemplateCheck.regular({required String description}) =
       TemplateRegularCheck;

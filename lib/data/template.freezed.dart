@@ -21,9 +21,14 @@ Template _$TemplateFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Template {
   String get rebreatherModel => throw _privateConstructorUsedError;
+  set rebreatherModel(String value) => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
+  set title(String value) => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
+  set description(String value) => throw _privateConstructorUsedError;
   List<TemplateSection> get sections => throw _privateConstructorUsedError;
+  set sections(List<TemplateSection> value) =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -127,7 +132,7 @@ class __$$TemplateImplCopyWithImpl<$Res>
           : description // ignore: cast_nullable_to_non_nullable
               as String,
       sections: null == sections
-          ? _value._sections
+          ? _value.sections
           : sections // ignore: cast_nullable_to_non_nullable
               as List<TemplateSection>,
     ));
@@ -137,52 +142,28 @@ class __$$TemplateImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$TemplateImpl implements _Template {
-  const _$TemplateImpl(
+  _$TemplateImpl(
       {required this.rebreatherModel,
       required this.title,
       required this.description,
-      required final List<TemplateSection> sections})
-      : _sections = sections;
+      required this.sections});
 
   factory _$TemplateImpl.fromJson(Map<String, dynamic> json) =>
       _$$TemplateImplFromJson(json);
 
   @override
-  final String rebreatherModel;
+  String rebreatherModel;
   @override
-  final String title;
+  String title;
   @override
-  final String description;
-  final List<TemplateSection> _sections;
+  String description;
   @override
-  List<TemplateSection> get sections {
-    if (_sections is EqualUnmodifiableListView) return _sections;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_sections);
-  }
+  List<TemplateSection> sections;
 
   @override
   String toString() {
     return 'Template(rebreatherModel: $rebreatherModel, title: $title, description: $description, sections: $sections)';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$TemplateImpl &&
-            (identical(other.rebreatherModel, rebreatherModel) ||
-                other.rebreatherModel == rebreatherModel) &&
-            (identical(other.title, title) || other.title == title) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
-            const DeepCollectionEquality().equals(other._sections, _sections));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, rebreatherModel, title,
-      description, const DeepCollectionEquality().hash(_sections));
 
   @JsonKey(ignore: true)
   @override
@@ -199,23 +180,27 @@ class _$TemplateImpl implements _Template {
 }
 
 abstract class _Template implements Template {
-  const factory _Template(
-      {required final String rebreatherModel,
-      required final String title,
-      required final String description,
-      required final List<TemplateSection> sections}) = _$TemplateImpl;
+  factory _Template(
+      {required String rebreatherModel,
+      required String title,
+      required String description,
+      required List<TemplateSection> sections}) = _$TemplateImpl;
 
   factory _Template.fromJson(Map<String, dynamic> json) =
       _$TemplateImpl.fromJson;
 
   @override
   String get rebreatherModel;
+  set rebreatherModel(String value);
   @override
   String get title;
+  set title(String value);
   @override
   String get description;
+  set description(String value);
   @override
   List<TemplateSection> get sections;
+  set sections(List<TemplateSection> value);
   @override
   @JsonKey(ignore: true)
   _$$TemplateImplCopyWith<_$TemplateImpl> get copyWith =>

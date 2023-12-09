@@ -3,61 +3,72 @@ import 'package:ccr_checklist/store/template_editor_store.dart';
 import 'package:ccr_checklist/theme/main_theme.dart';
 import 'package:ccr_checklist/widget/template_check_list_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 class TemplateSectionWidget extends StatelessWidget {
   final TemplateSection section;
   final int index;
   final TemplateEditorStore templateEditorStore;
-  final bool isExpanded;
-  final bool isSelected;
-  final Function(bool)? onExpansionChanged;
 
   const TemplateSectionWidget({
     super.key,
     required this.section,
     required this.index,
     required this.templateEditorStore,
-    this.isExpanded = false,
-    this.isSelected = false,
-    this.onExpansionChanged,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ExpansionTile(
-      backgroundColor:
-          isSelected ? mainColorScheme.primaryContainer : Colors.transparent,
-      title: Text(section.title),
-      controlAffinity: ListTileControlAffinity.leading,
-      trailing: PopupMenuButton<String>(
-        onSelected: (value) {
-          switch (value) {
-            case 'Edit':
-              _editTemplateSection(context, templateEditorStore, index);
-              break;
-            case 'Delete':
-              templateEditorStore.deleteSection(index);
-              break;
-          }
-        },
-        itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-          const PopupMenuItem<String>(
-            value: 'Edit',
-            child: Text('Edit'),
+    return Observer(
+      builder: (_) {
+        final isSelected = (index == templateEditorStore.selectedSectionIndex);
+        // final expansionTileController = ExpansionTileController();
+        // templateEditorStore.setSectionExpansionTileController(
+        //     index, expansionTileController);
+        return Container(
+          color: isSelected
+              ? mainColorScheme.primaryContainer
+              : Colors.transparent,
+          child: ExpansionTile(
+            title: Text(section.title),
+            // controller: expansionTileController,
+            controlAffinity: ListTileControlAffinity.leading,
+            trailing: Builder(builder: (context) {
+              templateEditorStore.setSectionExpansionTileController(
+                  index, ExpansionTileController.of(context));
+              return PopupMenuButton<String>(
+                itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                  const PopupMenuItem<String>(
+                    value: 'Edit',
+                    child: Text('Edit'),
+                  ),
+                  const PopupMenuItem<String>(
+                    value: 'Delete',
+                    child: Text('Delete'),
+                  ),
+                ],
+                onSelected: (value) {
+                  switch (value) {
+                    case 'Edit':
+                      _editTemplateSection(context, templateEditorStore, index);
+                      break;
+                    case 'Delete':
+                      templateEditorStore.deleteSection(index);
+                      break;
+                  }
+                },
+              );
+            }),
+            onExpansionChanged: (value) => onExpansionChangedSection(value),
+            initiallyExpanded: templateEditorStore.sectionsIsExpanded[index],
+            children: [
+              TemplateCheckListWidget(
+                  checks: section.checks,
+                  templateEditorStore: templateEditorStore),
+            ],
           ),
-          const PopupMenuItem<String>(
-            value: 'Delete',
-            child: Text('Delete'),
-          ),
-          // Add menu item for 'Drag' if needed
-        ],
-      ),
-      onExpansionChanged: onExpansionChanged,
-      initiallyExpanded: isExpanded,
-      children: [
-        TemplateCheckListWidget(
-            checks: section.checks, templateEditorStore: templateEditorStore),
-      ],
+        );
+      },
     );
   }
 
@@ -99,60 +110,9 @@ class TemplateSectionWidget extends StatelessWidget {
       },
     );
   }
+
+  void onExpansionChangedSection(bool value) {
+    print("-> onExpansionChangedSection index $index: $value\n");
+    templateEditorStore.setSectionIsExpansion(index, value);
+  }
 }
-
-
-// InkWell(
-//                             onTap: () {
-//                               templateEditorStore.onTapTemplateSection(index);
-//                             },
-//                             child: Row(
-//                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                               children: [
-//                                 Expanded(
-//                                   child: Padding(
-//                                     padding: const EdgeInsets.symmetric(
-//                                         horizontal: 16.0),
-//                                     child: Text(section.title),
-//                                   ),
-//                                 ),
-//                                 SizedBox(
-//                                   width: 32,
-//                                   child: PopupMenuButton<String>(
-//                                     onSelected: (value) {
-//                                       switch (value) {
-//                                         case 'Edit':
-//                                           _editTemplateSection(context,
-//                                               templateEditorStore, index);
-//                                           break;
-//                                         case 'Delete':
-//                                           templateEditorStore
-//                                               .deleteTemplateSection(index);
-//                                           break;
-//                                       }
-//                                     },
-//                                     itemBuilder: (BuildContext context) =>
-//                                         <PopupMenuEntry<String>>[
-//                                       const PopupMenuItem<String>(
-//                                         value: 'Edit',
-//                                         child: Text('Edit'),
-//                                       ),
-//                                       const PopupMenuItem<String>(
-//                                         value: 'Delete',
-//                                         child: Text('Delete'),
-//                                       ),
-//                                       // Add menu item for 'Drag' if needed
-//                                     ],
-//                                   ),
-//                                 ),
-//                                 ReorderableDragStartListener(
-//                                   index: index,
-//                                   child: const Padding(
-//                                     padding: EdgeInsets.fromLTRB(0, 8, 8, 8),
-//                                     child: Icon(
-//                                         Icons.drag_handle), // Drag handle icon
-//                                   ),
-//                                 ),
-//                               ],
-//                             ),
-//                           ),

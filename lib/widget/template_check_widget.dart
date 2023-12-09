@@ -6,6 +6,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 class TemplateCheckWidget extends StatelessWidget {
   final TemplateCheck check;
   final int index;
+
   final TemplateEditorStore templateEditorStore;
 
   const TemplateCheckWidget({

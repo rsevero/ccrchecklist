@@ -16,14 +16,19 @@ class TemplateCheckListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: checks.length,
-      itemBuilder: (context, index) {
-        return TemplateCheckWidget(
-            check: checks[index],
-            index: index,
-            templateEditorStore: templateEditorStore);
-      },
+    return Observer(
+      builder: (_) => SingleChildScrollView(
+        child: ListView.builder(
+          shrinkWrap: true,
+          itemCount: checks.length,
+          itemBuilder: (context, index) {
+            return TemplateCheckWidget(
+                check: checks[index],
+                index: index,
+                templateEditorStore: templateEditorStore);
+          },
+        ),
+      ),
     );
   }
 }

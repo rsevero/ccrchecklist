@@ -105,6 +105,24 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
     });
   }
 
+  late final _$_sectionsIsExpandedAtom = Atom(
+      name: 'TemplateEditorStoreBase._sectionsIsExpanded', context: context);
+
+  ObservableList<bool> get sectionsIsExpanded {
+    _$_sectionsIsExpandedAtom.reportRead();
+    return super._sectionsIsExpanded;
+  }
+
+  @override
+  ObservableList<bool> get _sectionsIsExpanded => sectionsIsExpanded;
+
+  @override
+  set _sectionsIsExpanded(ObservableList<bool> value) {
+    _$_sectionsIsExpandedAtom.reportWrite(value, super._sectionsIsExpanded, () {
+      super._sectionsIsExpanded = value;
+    });
+  }
+
   late final _$_selectedSectionIndexAtom = Atom(
       name: 'TemplateEditorStoreBase._selectedSectionIndex', context: context);
 
@@ -160,6 +178,28 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
     });
   }
 
+  late final _$_sectionExpansionTileControllersAtom = Atom(
+      name: 'TemplateEditorStoreBase._sectionExpansionTileControllers',
+      context: context);
+
+  Map<int, ExpansionTileController> get sectionExpansionTileControllers {
+    _$_sectionExpansionTileControllersAtom.reportRead();
+    return super._sectionExpansionTileControllers;
+  }
+
+  @override
+  Map<int, ExpansionTileController> get _sectionExpansionTileControllers =>
+      sectionExpansionTileControllers;
+
+  @override
+  set _sectionExpansionTileControllers(
+      Map<int, ExpansionTileController> value) {
+    _$_sectionExpansionTileControllersAtom
+        .reportWrite(value, super._sectionExpansionTileControllers, () {
+      super._sectionExpansionTileControllers = value;
+    });
+  }
+
   late final _$TemplateEditorStoreBaseActionController =
       ActionController(name: 'TemplateEditorStoreBase', context: context);
 
@@ -175,11 +215,22 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
   }
 
   @override
-  void addNewSection({required String title}) {
+  void setSectionIsExpansion(int index, bool value) {
     final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
-        name: 'TemplateEditorStoreBase.addNewSection');
+        name: 'TemplateEditorStoreBase.setSectionIsExpansion');
     try {
-      return super.addNewSection(title: title);
+      return super.setSectionIsExpansion(index, value);
+    } finally {
+      _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void addSection({required String title}) {
+    final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
+        name: 'TemplateEditorStoreBase.addSection');
+    try {
+      return super.addSection(title: title);
     } finally {
       _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
     }

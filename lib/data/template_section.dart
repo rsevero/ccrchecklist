@@ -4,14 +4,14 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'template_section.freezed.dart';
 part 'template_section.g.dart';
 
-@freezed
+@unfreezed
 class TemplateSection with _$TemplateSection {
-  const factory TemplateSection(
+  factory TemplateSection(
       {required String title,
       required List<TemplateCheck> checks}) = _TemplateSection;
 
   factory TemplateSection.empty() {
-    return const TemplateSection(
+    return TemplateSection(
       title: '',
       checks: [],
     );
