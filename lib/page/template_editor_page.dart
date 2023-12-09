@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:ccr_checklist/data/template.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
+import 'package:ccr_checklist/theme/main_theme.dart';
+import 'package:ccr_checklist/widget/greyable_speed_dial_child_widget.dart';
 import 'package:ccr_checklist/widget/template_section_widget.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -85,41 +87,38 @@ class TemplateEditorPage extends StatelessWidget {
             animatedIcon: AnimatedIcons.menu_close,
             tooltip: 'Add Options',
             children: [
-              SpeedDialChild(
+              GreyableSpeedDialChild(
                 child: const Icon(Icons.linear_scale),
-                label: 'Add Linearity Step 2 Check',
-                visible: templateEditorStore.enableLinearityStep2Creation,
-                onTap: () {
-                  // Implement action
-                },
+                text: 'Add Linearity Step 2 Check',
+                isEnabled: templateEditorStore.enableLinearityStep2Creation,
+                onTap: () =>
+                    _onTapAddLinearityStep2Check(context, templateEditorStore),
               ),
-              SpeedDialChild(
+              GreyableSpeedDialChild(
                 child: const Icon(Icons.linear_scale_rounded),
-                label: 'Add Linearity Step 1 Check',
-                visible: templateEditorStore.enableLinearityStep1Creation,
-                onTap: () {
-                  // Implement action
-                },
+                text: 'Add Linearity Step 1 Check',
+                isEnabled: templateEditorStore.enableLinearityStep1Creation,
+                onTap: () =>
+                    _onTapAddLinearityStep1Check(context, templateEditorStore),
               ),
-              SpeedDialChild(
+              GreyableSpeedDialChild(
                 child: const Icon(Icons.check_circle),
-                label: 'Add "With Reference" Check',
-                visible: templateEditorStore.enableCheckCreation,
-                onTap: () {
-                  _onTapAddWithReferenceCheck(context, templateEditorStore);
-                },
+                text: 'Add "With Reference" Check',
+                isEnabled: templateEditorStore.enableCheckCreation,
+                onTap: () =>
+                    _onTapAddWithReferenceCheck(context, templateEditorStore),
               ),
-              SpeedDialChild(
+              GreyableSpeedDialChild(
                 child: const Icon(Icons.check),
-                label: 'Add Regular Check',
-                visible: templateEditorStore.enableCheckCreation,
-                onTap: () {
-                  _onTapAddRegularCheck(context, templateEditorStore);
-                },
+                text: 'Add Regular Check',
+                isEnabled: templateEditorStore.enableCheckCreation,
+                onTap: () =>
+                    _onTapAddRegularCheck(context, templateEditorStore),
               ),
-              SpeedDialChild(
+              GreyableSpeedDialChild(
                 child: const Icon(Icons.add),
-                label: 'Add New Section',
+                text: 'Add New Section',
+                isEnabled: true,
                 onTap: () => _onTapAddNewSection(context),
               ),
             ],
@@ -248,6 +247,66 @@ class TemplateEditorPage extends StatelessWidget {
     }
   }
 
+  void _onTapAddLinearityStep2Check(
+      BuildContext context, TemplateEditorStore templateEditorStore) {
+    templateEditorStore.addLinearityStep2Check();
+  }
+
+  void _onTapAddLinearityStep1Check(
+      BuildContext context, TemplateEditorStore templateEditorStore) {
+    int numberOfReferences = 1; // Default value
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Add step 1 of Linearity Check'),
+          content: StatefulBuilder(
+            // Use StatefulBuilder to update the dialog's state
+            builder: (BuildContext context, StateSetter setState) {
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8.0),
+                    child: Text(
+                        'Amount of references'), // Label for the radio buttons
+                  ),
+                  ...List.generate(
+                    5,
+                    (index) => RadioListTile<int>(
+                      title: Text('${index + 1}'),
+                      value: index + 1,
+                      groupValue: numberOfReferences,
+                      onChanged: (int? value) {
+                        if (value != null) {
+                          setState(() => numberOfReferences = value);
+                        }
+                      },
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Create'),
+              onPressed: () {
+                templateEditorStore.addLinearityStep1Check(numberOfReferences);
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   void _onTapAddWithReferenceCheck(
       BuildContext context, TemplateEditorStore templateEditorStore) {
     final TextEditingController descriptionController = TextEditingController();
@@ -276,17 +335,18 @@ class TemplateEditorPage extends StatelessWidget {
                         'Amount of references'), // Label for the radio buttons
                   ),
                   ...List.generate(
-                      5,
-                      (index) => RadioListTile<int>(
-                            title: Text('${index + 1}'),
-                            value: index + 1,
-                            groupValue: numberOfReferences,
-                            onChanged: (int? value) {
-                              if (value != null) {
-                                setState(() => numberOfReferences = value);
-                              }
-                            },
-                          )),
+                    5,
+                    (index) => RadioListTile<int>(
+                      title: Text('${index + 1}'),
+                      value: index + 1,
+                      groupValue: numberOfReferences,
+                      onChanged: (int? value) {
+                        if (value != null) {
+                          setState(() => numberOfReferences = value);
+                        }
+                      },
+                    ),
+                  ),
                 ],
               );
             },

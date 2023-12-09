@@ -15,9 +15,7 @@ sealed class TemplateCheck with _$TemplateCheck {
       required int referenceCount}) = TemplateWithReferenceCheck;
   factory TemplateCheck.linearityStep1({required int referenceCount}) =
       TemplateLinearityStep1Check;
-  factory TemplateCheck.linearityStep2(
-          {required TemplateLinearityStep1Check step1}) =
-      TemplateLinearityStep2Check;
+  factory TemplateCheck.linearityStep2() = TemplateLinearityStep2Check;
 
   String get description {
     if (this is TemplateRegularCheck) {

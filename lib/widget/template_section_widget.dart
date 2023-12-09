@@ -22,9 +22,6 @@ class TemplateSectionWidget extends StatelessWidget {
     return Observer(
       builder: (_) {
         final isSelected = (index == templateEditorStore.selectedSectionIndex);
-        // final expansionTileController = ExpansionTileController();
-        // templateEditorStore.setSectionExpansionTileController(
-        //     index, expansionTileController);
         return Container(
           color: isSelected
               ? mainColorScheme.primaryContainer
@@ -63,7 +60,7 @@ class TemplateSectionWidget extends StatelessWidget {
             initiallyExpanded: templateEditorStore.sectionsIsExpanded[index],
             children: [
               TemplateCheckListWidget(
-                  checks: section.checks,
+                  sectionIndex: index,
                   templateEditorStore: templateEditorStore),
             ],
           ),

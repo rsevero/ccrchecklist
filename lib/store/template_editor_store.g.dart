@@ -204,6 +204,28 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
       ActionController(name: 'TemplateEditorStoreBase', context: context);
 
   @override
+  void addLinearityStep2Check() {
+    final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
+        name: 'TemplateEditorStoreBase.addLinearityStep2Check');
+    try {
+      return super.addLinearityStep2Check();
+    } finally {
+      _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void addLinearityStep1Check(dynamic referenceCount) {
+    final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
+        name: 'TemplateEditorStoreBase.addLinearityStep1Check');
+    try {
+      return super.addLinearityStep1Check(referenceCount);
+    } finally {
+      _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void addWithReferenceCheck(dynamic description, dynamic referenceCount) {
     final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
         name: 'TemplateEditorStoreBase.addWithReferenceCheck');

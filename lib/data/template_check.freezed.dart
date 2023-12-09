@@ -39,7 +39,7 @@ mixin _$TemplateCheck {
     required TResult Function(String description, int referenceCount)
         withReference,
     required TResult Function(int referenceCount) linearityStep1,
-    required TResult Function(TemplateLinearityStep1Check step1) linearityStep2,
+    required TResult Function() linearityStep2,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -47,7 +47,7 @@ mixin _$TemplateCheck {
     TResult? Function(String description)? regular,
     TResult? Function(String description, int referenceCount)? withReference,
     TResult? Function(int referenceCount)? linearityStep1,
-    TResult? Function(TemplateLinearityStep1Check step1)? linearityStep2,
+    TResult? Function()? linearityStep2,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,7 +55,7 @@ mixin _$TemplateCheck {
     TResult Function(String description)? regular,
     TResult Function(String description, int referenceCount)? withReference,
     TResult Function(int referenceCount)? linearityStep1,
-    TResult Function(TemplateLinearityStep1Check step1)? linearityStep2,
+    TResult Function()? linearityStep2,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -181,7 +181,7 @@ class _$TemplateRegularCheckImpl extends TemplateRegularCheck
     required TResult Function(String description, int referenceCount)
         withReference,
     required TResult Function(int referenceCount) linearityStep1,
-    required TResult Function(TemplateLinearityStep1Check step1) linearityStep2,
+    required TResult Function() linearityStep2,
   }) {
     return regular(description);
   }
@@ -192,7 +192,7 @@ class _$TemplateRegularCheckImpl extends TemplateRegularCheck
     TResult? Function(String description)? regular,
     TResult? Function(String description, int referenceCount)? withReference,
     TResult? Function(int referenceCount)? linearityStep1,
-    TResult? Function(TemplateLinearityStep1Check step1)? linearityStep2,
+    TResult? Function()? linearityStep2,
   }) {
     return regular?.call(description);
   }
@@ -203,7 +203,7 @@ class _$TemplateRegularCheckImpl extends TemplateRegularCheck
     TResult Function(String description)? regular,
     TResult Function(String description, int referenceCount)? withReference,
     TResult Function(int referenceCount)? linearityStep1,
-    TResult Function(TemplateLinearityStep1Check step1)? linearityStep2,
+    TResult Function()? linearityStep2,
     required TResult orElse(),
   }) {
     if (regular != null) {
@@ -361,7 +361,7 @@ class _$TemplateWithReferenceCheckImpl extends TemplateWithReferenceCheck
     required TResult Function(String description, int referenceCount)
         withReference,
     required TResult Function(int referenceCount) linearityStep1,
-    required TResult Function(TemplateLinearityStep1Check step1) linearityStep2,
+    required TResult Function() linearityStep2,
   }) {
     return withReference(description, referenceCount);
   }
@@ -372,7 +372,7 @@ class _$TemplateWithReferenceCheckImpl extends TemplateWithReferenceCheck
     TResult? Function(String description)? regular,
     TResult? Function(String description, int referenceCount)? withReference,
     TResult? Function(int referenceCount)? linearityStep1,
-    TResult? Function(TemplateLinearityStep1Check step1)? linearityStep2,
+    TResult? Function()? linearityStep2,
   }) {
     return withReference?.call(description, referenceCount);
   }
@@ -383,7 +383,7 @@ class _$TemplateWithReferenceCheckImpl extends TemplateWithReferenceCheck
     TResult Function(String description)? regular,
     TResult Function(String description, int referenceCount)? withReference,
     TResult Function(int referenceCount)? linearityStep1,
-    TResult Function(TemplateLinearityStep1Check step1)? linearityStep2,
+    TResult Function()? linearityStep2,
     required TResult orElse(),
   }) {
     if (withReference != null) {
@@ -534,7 +534,7 @@ class _$TemplateLinearityStep1CheckImpl extends TemplateLinearityStep1Check
     required TResult Function(String description, int referenceCount)
         withReference,
     required TResult Function(int referenceCount) linearityStep1,
-    required TResult Function(TemplateLinearityStep1Check step1) linearityStep2,
+    required TResult Function() linearityStep2,
   }) {
     return linearityStep1(referenceCount);
   }
@@ -545,7 +545,7 @@ class _$TemplateLinearityStep1CheckImpl extends TemplateLinearityStep1Check
     TResult? Function(String description)? regular,
     TResult? Function(String description, int referenceCount)? withReference,
     TResult? Function(int referenceCount)? linearityStep1,
-    TResult? Function(TemplateLinearityStep1Check step1)? linearityStep2,
+    TResult? Function()? linearityStep2,
   }) {
     return linearityStep1?.call(referenceCount);
   }
@@ -556,7 +556,7 @@ class _$TemplateLinearityStep1CheckImpl extends TemplateLinearityStep1Check
     TResult Function(String description)? regular,
     TResult Function(String description, int referenceCount)? withReference,
     TResult Function(int referenceCount)? linearityStep1,
-    TResult Function(TemplateLinearityStep1Check step1)? linearityStep2,
+    TResult Function()? linearityStep2,
     required TResult orElse(),
   }) {
     if (linearityStep1 != null) {
@@ -631,8 +631,6 @@ abstract class _$$TemplateLinearityStep2CheckImplCopyWith<$Res> {
           _$TemplateLinearityStep2CheckImpl value,
           $Res Function(_$TemplateLinearityStep2CheckImpl) then) =
       __$$TemplateLinearityStep2CheckImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({TemplateLinearityStep1Check step1});
 }
 
 /// @nodoc
@@ -643,26 +641,13 @@ class __$$TemplateLinearityStep2CheckImplCopyWithImpl<$Res>
       _$TemplateLinearityStep2CheckImpl _value,
       $Res Function(_$TemplateLinearityStep2CheckImpl) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? step1 = freezed,
-  }) {
-    return _then(_$TemplateLinearityStep2CheckImpl(
-      step1: freezed == step1
-          ? _value.step1
-          : step1 // ignore: cast_nullable_to_non_nullable
-              as TemplateLinearityStep1Check,
-    ));
-  }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$TemplateLinearityStep2CheckImpl extends TemplateLinearityStep2Check
     with DiagnosticableTreeMixin {
-  _$TemplateLinearityStep2CheckImpl({required this.step1, final String? $type})
+  _$TemplateLinearityStep2CheckImpl({final String? $type})
       : $type = $type ?? 'linearityStep2',
         super._();
 
@@ -670,31 +655,19 @@ class _$TemplateLinearityStep2CheckImpl extends TemplateLinearityStep2Check
           Map<String, dynamic> json) =>
       _$$TemplateLinearityStep2CheckImplFromJson(json);
 
-  @override
-  TemplateLinearityStep1Check step1;
-
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TemplateCheck.linearityStep2(step1: $step1)';
+    return 'TemplateCheck.linearityStep2()';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'TemplateCheck.linearityStep2'))
-      ..add(DiagnosticsProperty('step1', step1));
+    properties.add(DiagnosticsProperty('type', 'TemplateCheck.linearityStep2'));
   }
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$TemplateLinearityStep2CheckImplCopyWith<_$TemplateLinearityStep2CheckImpl>
-      get copyWith => __$$TemplateLinearityStep2CheckImplCopyWithImpl<
-          _$TemplateLinearityStep2CheckImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -703,9 +676,9 @@ class _$TemplateLinearityStep2CheckImpl extends TemplateLinearityStep2Check
     required TResult Function(String description, int referenceCount)
         withReference,
     required TResult Function(int referenceCount) linearityStep1,
-    required TResult Function(TemplateLinearityStep1Check step1) linearityStep2,
+    required TResult Function() linearityStep2,
   }) {
-    return linearityStep2(step1);
+    return linearityStep2();
   }
 
   @override
@@ -714,9 +687,9 @@ class _$TemplateLinearityStep2CheckImpl extends TemplateLinearityStep2Check
     TResult? Function(String description)? regular,
     TResult? Function(String description, int referenceCount)? withReference,
     TResult? Function(int referenceCount)? linearityStep1,
-    TResult? Function(TemplateLinearityStep1Check step1)? linearityStep2,
+    TResult? Function()? linearityStep2,
   }) {
-    return linearityStep2?.call(step1);
+    return linearityStep2?.call();
   }
 
   @override
@@ -725,11 +698,11 @@ class _$TemplateLinearityStep2CheckImpl extends TemplateLinearityStep2Check
     TResult Function(String description)? regular,
     TResult Function(String description, int referenceCount)? withReference,
     TResult Function(int referenceCount)? linearityStep1,
-    TResult Function(TemplateLinearityStep1Check step1)? linearityStep2,
+    TResult Function()? linearityStep2,
     required TResult orElse(),
   }) {
     if (linearityStep2 != null) {
-      return linearityStep2(step1);
+      return linearityStep2();
     }
     return orElse();
   }
@@ -780,17 +753,9 @@ class _$TemplateLinearityStep2CheckImpl extends TemplateLinearityStep2Check
 }
 
 abstract class TemplateLinearityStep2Check extends TemplateCheck {
-  factory TemplateLinearityStep2Check(
-          {required TemplateLinearityStep1Check step1}) =
-      _$TemplateLinearityStep2CheckImpl;
+  factory TemplateLinearityStep2Check() = _$TemplateLinearityStep2CheckImpl;
   TemplateLinearityStep2Check._() : super._();
 
   factory TemplateLinearityStep2Check.fromJson(Map<String, dynamic> json) =
       _$TemplateLinearityStep2CheckImpl.fromJson;
-
-  TemplateLinearityStep1Check get step1;
-  set step1(TemplateLinearityStep1Check value);
-  @JsonKey(ignore: true)
-  _$$TemplateLinearityStep2CheckImplCopyWith<_$TemplateLinearityStep2CheckImpl>
-      get copyWith => throw _privateConstructorUsedError;
 }

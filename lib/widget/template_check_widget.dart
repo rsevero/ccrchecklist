@@ -21,10 +21,17 @@ class TemplateCheckWidget extends StatelessWidget {
     return Observer(
       builder: (_) {
         String title = check.description;
-        if (check is TemplateWithReferenceCheck) {
-          final reference =
-              (check as TemplateWithReferenceCheck).referenceCount;
-          title = '$title (Ref: $reference)';
+        if ((check is TemplateWithReferenceCheck) ||
+            (check is TemplateLinearityStep1Check)) {
+          int referenceCount;
+          if (check is TemplateWithReferenceCheck) {
+            referenceCount =
+                (check as TemplateWithReferenceCheck).referenceCount;
+          } else {
+            referenceCount =
+                (check as TemplateLinearityStep1Check).referenceCount;
+          }
+          title = '$title (Ref count: $referenceCount)';
         }
         return ListTile(
           key: ValueKey(index),

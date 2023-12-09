@@ -53,14 +53,11 @@ Map<String, dynamic> _$$TemplateLinearityStep1CheckImplToJson(
 _$TemplateLinearityStep2CheckImpl _$$TemplateLinearityStep2CheckImplFromJson(
         Map<String, dynamic> json) =>
     _$TemplateLinearityStep2CheckImpl(
-      step1: TemplateLinearityStep1Check.fromJson(
-          json['step1'] as Map<String, dynamic>),
       $type: json['runtimeType'] as String?,
     );
 
 Map<String, dynamic> _$$TemplateLinearityStep2CheckImplToJson(
         _$TemplateLinearityStep2CheckImpl instance) =>
     <String, dynamic>{
-      'step1': instance.step1,
       'runtimeType': instance.$type,
     };

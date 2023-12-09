@@ -48,6 +48,23 @@ abstract class TemplateEditorStoreBase with Store {
   Map<int, ExpansionTileController> _sectionExpansionTileControllers = {};
 
   @action
+  void addLinearityStep2Check() {
+    final newLinearityStep2Check = TemplateLinearityStep2Check();
+    _selectedSection.checks.add(newLinearityStep2Check);
+    _checks.add(newLinearityStep2Check);
+    _updateHasLinearitySteps();
+  }
+
+  @action
+  void addLinearityStep1Check(referenceCount) {
+    final newLinearityStep1Check =
+        TemplateLinearityStep1Check(referenceCount: referenceCount);
+    _selectedSection.checks.add(newLinearityStep1Check);
+    _checks.add(newLinearityStep1Check);
+    _updateHasLinearitySteps();
+  }
+
+  @action
   void addWithReferenceCheck(description, referenceCount) {
     final newWithReferenceCheck = TemplateWithReferenceCheck(
         description: description, referenceCount: referenceCount);
@@ -83,9 +100,9 @@ abstract class TemplateEditorStoreBase with Store {
     bool hasStep2 = false;
     for (final aSection in _currentTemplate.sections) {
       for (final aCheck in aSection.checks) {
-        if (aCheck.runtimeType == TemplateLinearityStep1Check) {
+        if (aCheck is TemplateLinearityStep1Check) {
           hasStep1 = true;
-        } else if (aCheck.runtimeType == TemplateLinearityStep2Check) {
+        } else if (aCheck is TemplateLinearityStep2Check) {
           hasStep2 = true;
         }
       }
@@ -256,7 +273,7 @@ abstract class TemplateEditorStoreBase with Store {
 //   // One item means it's a section, two items means it's a check.
 //   final draggingSection = (oldPosition.length == 1);
 
-//   if (draggingSection) {
+//   if (draggingSection) { 
 //     _moveSection(oldSectionIndex, newSectionIndex);
 //   } else {
 //     // Moving a check
