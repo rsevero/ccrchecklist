@@ -5,14 +5,13 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 class GreyableSpeedDialChild extends SpeedDialChild {
   final String text;
   final bool isEnabled;
-  final Function()? onTap;
 
   GreyableSpeedDialChild(
       {super.key,
       required this.text,
       required this.isEnabled,
       super.child,
-      required this.onTap});
+      super.onTap});
 
   @override
   Widget get labelWidget => Container(
