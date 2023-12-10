@@ -327,6 +327,32 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
   }
 
   @override
+  void updateWithReferenceCheck(
+      int sectionIndex, int index, String description, int referenceCount) {
+    final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
+        name: 'TemplateEditorStoreBase.updateWithReferenceCheck');
+    try {
+      return super.updateWithReferenceCheck(
+          sectionIndex, index, description, referenceCount);
+    } finally {
+      _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void updateLinearityStep1Check(
+      int sectionIndex, int index, int referenceCount) {
+    final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
+        name: 'TemplateEditorStoreBase.updateLinearityStep1Check');
+    try {
+      return super
+          .updateLinearityStep1Check(sectionIndex, index, referenceCount);
+    } finally {
+      _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void moveTemplateSection(int oldIndex, int newIndex) {
     final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
         name: 'TemplateEditorStoreBase.moveTemplateSection');

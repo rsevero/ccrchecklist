@@ -174,6 +174,25 @@ abstract class TemplateEditorStoreBase with Store {
   }
 
   @action
+  void updateWithReferenceCheck(
+      int sectionIndex, int index, String description, int referenceCount) {
+    final check = _currentTemplate.sections[sectionIndex].checks[index]
+        as TemplateWithReferenceCheck;
+
+    check.description = description;
+    check.referenceCount = referenceCount;
+  }
+
+  @action
+  void updateLinearityStep1Check(
+      int sectionIndex, int index, int referenceCount) {
+    final check = _currentTemplate.sections[sectionIndex].checks[index]
+        as TemplateLinearityStep1Check;
+
+    check.referenceCount = referenceCount;
+  }
+
+  @action
   void moveTemplateSection(int oldIndex, int newIndex) {
     if (oldIndex == newIndex) {
       return;
