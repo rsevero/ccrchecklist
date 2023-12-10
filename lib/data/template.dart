@@ -4,7 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'template.freezed.dart';
 part 'template.g.dart';
 
-@unfreezed
+@Freezed(makeCollectionsUnmodifiable: false)
 class Template with _$Template {
   factory Template(
       {required String rebreatherModel,

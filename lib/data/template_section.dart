@@ -4,7 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'template_section.freezed.dart';
 part 'template_section.g.dart';
 
-@unfreezed
+@Freezed(makeCollectionsUnmodifiable: false)
 class TemplateSection with _$TemplateSection {
   factory TemplateSection(
       {required String title,

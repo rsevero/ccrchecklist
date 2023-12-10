@@ -327,6 +327,17 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
   }
 
   @override
+  void updateRegularCheck(int sectionIndex, int index, String description) {
+    final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
+        name: 'TemplateEditorStoreBase.updateRegularCheck');
+    try {
+      return super.updateRegularCheck(sectionIndex, index, description);
+    } finally {
+      _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void updateWithReferenceCheck(
       int sectionIndex, int index, String description, int referenceCount) {
     final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
@@ -364,11 +375,11 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
   }
 
   @override
-  void updateSectionTitle(int index, String newTitle) {
+  void updateSectionTitle(int sectionIndex, String newTitle) {
     final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
         name: 'TemplateEditorStoreBase.updateSectionTitle');
     try {
-      return super.updateSectionTitle(index, newTitle);
+      return super.updateSectionTitle(sectionIndex, newTitle);
     } finally {
       _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -386,11 +397,11 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
   }
 
   @override
-  void deleteCheck(TemplateCheck aCheck) {
+  void deleteCheck(int sectionIndex, int index) {
     final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
         name: 'TemplateEditorStoreBase.deleteCheck');
     try {
-      return super.deleteCheck(aCheck);
+      return super.deleteCheck(sectionIndex, index);
     } finally {
       _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
     }

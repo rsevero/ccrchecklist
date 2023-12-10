@@ -4,7 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'template_check.freezed.dart';
 part 'template_check.g.dart';
 
-@unfreezed
+@Freezed(makeCollectionsUnmodifiable: false)
 sealed class TemplateCheck with _$TemplateCheck {
   TemplateCheck._();
 

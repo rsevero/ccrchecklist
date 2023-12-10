@@ -6,7 +6,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 class TemplateCheckWidget extends StatelessWidget {
   final int index;
   final int sectionIndex;
-
   final TemplateEditorStore templateEditorStore;
 
   const TemplateCheckWidget({
@@ -21,7 +20,7 @@ class TemplateCheckWidget extends StatelessWidget {
     return Observer(
       builder: (_) {
         final check = templateEditorStore.checks[sectionIndex][index];
-        String title = check.description;
+        String description = check.description;
         if ((check is TemplateWithReferenceCheck) ||
             (check is TemplateLinearityStep1Check)) {
           int referenceCount;
@@ -31,11 +30,11 @@ class TemplateCheckWidget extends StatelessWidget {
             referenceCount =
                 (check as TemplateLinearityStep1Check).referenceCount;
           }
-          title = '$title (Ref count: $referenceCount)';
+          description += ' (Ref count: $referenceCount)';
         }
         return ListTile(
           key: ValueKey("$sectionIndex-$index"),
-          title: Text(title),
+          title: Text(description),
           trailing: PopupMenuButton<String>(
             onSelected: (value) {
               switch (value) {
@@ -44,14 +43,15 @@ class TemplateCheckWidget extends StatelessWidget {
                       context, templateEditorStore, sectionIndex, index);
                   break;
                 case 'Delete':
-                  templateEditorStore.deleteCheck(check);
+                  templateEditorStore.deleteCheck(sectionIndex, index);
                   break;
               }
             },
             itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
               PopupMenuItem<String>(
                 value: 'Edit',
-                enabled: check is! TemplateLinearityStep2Check,
+                enabled: templateEditorStore.checks[sectionIndex][index]
+                    is! TemplateLinearityStep2Check,
                 child: const Text('Edit'),
               ),
               const PopupMenuItem<String>(
@@ -89,7 +89,8 @@ class TemplateCheckWidget extends StatelessWidget {
               onPressed: () {
                 final String newTitle = titleController.text;
                 if (newTitle.isNotEmpty) {
-                  templateEditorStore.updateSectionTitle(index, newTitle);
+                  templateEditorStore.updateRegularCheck(
+                      sectionIndex, index, newTitle);
                   Navigator.of(context).pop();
                 }
               },

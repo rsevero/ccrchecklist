@@ -21,14 +21,9 @@ Template _$TemplateFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Template {
   String get rebreatherModel => throw _privateConstructorUsedError;
-  set rebreatherModel(String value) => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
-  set title(String value) => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
-  set description(String value) => throw _privateConstructorUsedError;
   List<TemplateSection> get sections => throw _privateConstructorUsedError;
-  set sections(List<TemplateSection> value) =>
-      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -152,18 +147,36 @@ class _$TemplateImpl implements _Template {
       _$$TemplateImplFromJson(json);
 
   @override
-  String rebreatherModel;
+  final String rebreatherModel;
   @override
-  String title;
+  final String title;
   @override
-  String description;
+  final String description;
   @override
-  List<TemplateSection> sections;
+  final List<TemplateSection> sections;
 
   @override
   String toString() {
     return 'Template(rebreatherModel: $rebreatherModel, title: $title, description: $description, sections: $sections)';
   }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TemplateImpl &&
+            (identical(other.rebreatherModel, rebreatherModel) ||
+                other.rebreatherModel == rebreatherModel) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            const DeepCollectionEquality().equals(other.sections, sections));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, rebreatherModel, title,
+      description, const DeepCollectionEquality().hash(sections));
 
   @JsonKey(ignore: true)
   @override
@@ -181,26 +194,22 @@ class _$TemplateImpl implements _Template {
 
 abstract class _Template implements Template {
   factory _Template(
-      {required String rebreatherModel,
-      required String title,
-      required String description,
-      required List<TemplateSection> sections}) = _$TemplateImpl;
+      {required final String rebreatherModel,
+      required final String title,
+      required final String description,
+      required final List<TemplateSection> sections}) = _$TemplateImpl;
 
   factory _Template.fromJson(Map<String, dynamic> json) =
       _$TemplateImpl.fromJson;
 
   @override
   String get rebreatherModel;
-  set rebreatherModel(String value);
   @override
   String get title;
-  set title(String value);
   @override
   String get description;
-  set description(String value);
   @override
   List<TemplateSection> get sections;
-  set sections(List<TemplateSection> value);
   @override
   @JsonKey(ignore: true)
   _$$TemplateImplCopyWith<_$TemplateImpl> get copyWith =>

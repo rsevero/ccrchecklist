@@ -21,9 +21,7 @@ TemplateSection _$TemplateSectionFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$TemplateSection {
   String get title => throw _privateConstructorUsedError;
-  set title(String value) => throw _privateConstructorUsedError;
   List<TemplateCheck> get checks => throw _privateConstructorUsedError;
-  set checks(List<TemplateCheck> value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -116,14 +114,28 @@ class _$TemplateSectionImpl implements _TemplateSection {
       _$$TemplateSectionImplFromJson(json);
 
   @override
-  String title;
+  final String title;
   @override
-  List<TemplateCheck> checks;
+  final List<TemplateCheck> checks;
 
   @override
   String toString() {
     return 'TemplateSection(title: $title, checks: $checks)';
   }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TemplateSectionImpl &&
+            (identical(other.title, title) || other.title == title) &&
+            const DeepCollectionEquality().equals(other.checks, checks));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, title, const DeepCollectionEquality().hash(checks));
 
   @JsonKey(ignore: true)
   @override
@@ -142,18 +154,16 @@ class _$TemplateSectionImpl implements _TemplateSection {
 
 abstract class _TemplateSection implements TemplateSection {
   factory _TemplateSection(
-      {required String title,
-      required List<TemplateCheck> checks}) = _$TemplateSectionImpl;
+      {required final String title,
+      required final List<TemplateCheck> checks}) = _$TemplateSectionImpl;
 
   factory _TemplateSection.fromJson(Map<String, dynamic> json) =
       _$TemplateSectionImpl.fromJson;
 
   @override
   String get title;
-  set title(String value);
   @override
   List<TemplateCheck> get checks;
-  set checks(List<TemplateCheck> value);
   @override
   @JsonKey(ignore: true)
   _$$TemplateSectionImplCopyWith<_$TemplateSectionImpl> get copyWith =>

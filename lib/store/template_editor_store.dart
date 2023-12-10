@@ -174,22 +174,33 @@ abstract class TemplateEditorStoreBase with Store {
   }
 
   @action
+  void updateRegularCheck(int sectionIndex, int index, String description) {
+    final check = _checks[sectionIndex][index] as TemplateRegularCheck;
+    final newCheck = check.copyWith(description: description);
+
+    _currentTemplate.sections[sectionIndex].checks[index] = newCheck;
+    _checks[sectionIndex][index] = newCheck;
+  }
+
+  @action
   void updateWithReferenceCheck(
       int sectionIndex, int index, String description, int referenceCount) {
-    final check = _currentTemplate.sections[sectionIndex].checks[index]
-        as TemplateWithReferenceCheck;
+    final check = _checks[sectionIndex][index] as TemplateWithReferenceCheck;
+    final newCheck = check.copyWith(
+        description: description, referenceCount: referenceCount);
 
-    check.description = description;
-    check.referenceCount = referenceCount;
+    _currentTemplate.sections[sectionIndex].checks[index] = newCheck;
+    _checks[sectionIndex][index] = newCheck;
   }
 
   @action
   void updateLinearityStep1Check(
       int sectionIndex, int index, int referenceCount) {
-    final check = _currentTemplate.sections[sectionIndex].checks[index]
-        as TemplateLinearityStep1Check;
+    final check = _checks[sectionIndex][index] as TemplateLinearityStep1Check;
+    final newCheck = check.copyWith(referenceCount: referenceCount);
 
-    check.referenceCount = referenceCount;
+    _currentTemplate.sections[sectionIndex].checks[index] = newCheck;
+    _checks[sectionIndex][index] = newCheck;
   }
 
   @action
@@ -210,6 +221,9 @@ abstract class TemplateEditorStoreBase with Store {
     final newSectionIsExpanded = _sectionsIsExpanded[newIndex];
     final oldSectionIsExpanded = _sectionsIsExpanded.removeAt(oldIndex);
     _sectionsIsExpanded.insert(newIndex, oldSectionIsExpanded);
+
+    final observableChecks = _checks.removeAt(oldIndex);
+    _checks.insert(newIndex, observableChecks);
 
     final oldSectionExpansionTileController =
         _sectionExpansionTileControllers.remove(oldIndex);
@@ -247,12 +261,13 @@ abstract class TemplateEditorStoreBase with Store {
   }
 
   @action
-  void updateSectionTitle(int index, String newTitle) {
-    if (index >= 0 && index < _currentTemplate.sections.length) {
+  void updateSectionTitle(int sectionIndex, String newTitle) {
+    if (sectionIndex >= 0 && sectionIndex < _currentTemplate.sections.length) {
       final updatedTemplateSection =
-          _currentTemplate.sections[index].copyWith(title: newTitle);
-      _currentTemplate.sections[index] = updatedTemplateSection;
-      _sections[index] = updatedTemplateSection;
+          _currentTemplate.sections[sectionIndex].copyWith(title: newTitle);
+
+      _currentTemplate.sections[sectionIndex] = updatedTemplateSection;
+      _sections[sectionIndex] = updatedTemplateSection;
     }
   }
 
@@ -268,17 +283,14 @@ abstract class TemplateEditorStoreBase with Store {
   }
 
   @action
-  void deleteCheck(TemplateCheck aCheck) {
-    for (var sectionIndex = 0;
-        sectionIndex < _currentTemplate.sections.length;
-        sectionIndex++) {
-      final aSection = _currentTemplate.sections[sectionIndex];
-      if (aSection.checks.contains(aCheck)) {
-        aSection.checks.remove(aCheck);
-        _checks[sectionIndex].remove(aCheck);
-        _updateHasLinearitySteps();
-        return;
-      }
+  void deleteCheck(int sectionIndex, int index) {
+    if (((sectionIndex >= 0) &&
+            (sectionIndex < _currentTemplate.sections.length)) &&
+        ((index >= 0) &&
+            (index < _currentTemplate.sections[sectionIndex].checks.length))) {
+      _currentTemplate.sections[sectionIndex].checks.removeAt(index);
+      _checks[sectionIndex].removeAt(index);
+      _updateHasLinearitySteps();
     }
   }
 
