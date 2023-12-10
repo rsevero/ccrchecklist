@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:ccr_checklist/constants.dart';
+import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/data/template.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:mobx/mobx.dart';

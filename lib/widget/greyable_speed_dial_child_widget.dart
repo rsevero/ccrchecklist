@@ -5,7 +5,6 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 class GreyableSpeedDialChild extends SpeedDialChild {
   final String text;
   final bool isEnabled;
-  final double disabledOpacity = 0.6;
 
   GreyableSpeedDialChild(
       {super.key,

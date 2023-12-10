@@ -1,3 +1,4 @@
+import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/theme/orange_color_schemes.g.dart';
 import 'package:flutter/material.dart';
 
@@ -17,5 +18,6 @@ final speedDialButtonBackgroundColor = mainLightTheme.colorScheme.background;
 final speedDialButtonTextColor = mainLightTheme.colorScheme.onBackground;
 
 const speedDialButtonDisabledBackgroundColor =
-    Color.fromRGBO(224, 224, 224, 0.7);
-const speedDialButtonDisabledTextColor = Color.fromRGBO(117, 117, 117, 0.7);
+    Color.fromRGBO(224, 224, 224, ccrDisabledOpacity);
+const speedDialButtonDisabledTextColor =
+    Color.fromRGBO(117, 117, 117, ccrDisabledOpacity);
