@@ -84,7 +84,7 @@ class TemplateEditorPage extends StatelessWidget {
         builder: (_) {
           return SpeedDial(
             animatedIcon: AnimatedIcons.menu_close,
-            tooltip: 'Add Options',
+            tooltip: 'Options',
             children: [
               GreyableSpeedDialChild(
                 child: const Icon(Icons.linear_scale),
@@ -101,7 +101,7 @@ class TemplateEditorPage extends StatelessWidget {
                     _onTapAddLinearityStep1Check(context, templateEditorStore),
               ),
               GreyableSpeedDialChild(
-                child: const Icon(Icons.check_circle),
+                child: const Icon(Icons.check_circle_outlined),
                 text: 'Add "With Reference" Check',
                 isEnabled: templateEditorStore.enableCheckCreation,
                 onTap: () =>
@@ -118,7 +118,13 @@ class TemplateEditorPage extends StatelessWidget {
                 child: const Icon(Icons.add),
                 text: 'Add New Section',
                 isEnabled: true,
-                onTap: () => _onTapAddNewSection(context),
+                onTap: () => _onTapAddNewSection(context, templateEditorStore),
+              ),
+              GreyableSpeedDialChild(
+                child: const Icon(Icons.edit_attributes),
+                text: 'Edit Template',
+                isEnabled: true,
+                onTap: () => _onTapEditTemplate(context, templateEditorStore),
               ),
             ],
           );
@@ -157,7 +163,68 @@ class TemplateEditorPage extends StatelessWidget {
     }
   }
 
-  void _onTapAddNewSection(BuildContext context) async {
+  void _onTapEditTemplate(
+      BuildContext context, TemplateEditorStore templateEditorStore) {
+    final TextEditingController rebreatherModelController =
+        TextEditingController(
+            text: templateEditorStore.currentTemplate.rebreatherModel);
+    final TextEditingController titleController =
+        TextEditingController(text: templateEditorStore.currentTemplate.title);
+    final TextEditingController descriptionController = TextEditingController(
+        text: templateEditorStore.currentTemplate.description);
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Edit Template'),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                TextFormField(
+                  controller: rebreatherModelController,
+                  decoration:
+                      const InputDecoration(labelText: 'Rebreather Model'),
+                  autofocus: true,
+                ),
+                TextFormField(
+                  controller: titleController,
+                  decoration: const InputDecoration(labelText: 'Title'),
+                ),
+                TextFormField(
+                  controller: descriptionController,
+                  decoration: const InputDecoration(labelText: 'Description'),
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Update'),
+              onPressed: () {
+                templateEditorStore.updateTemplate(
+                  rebreatherModelController.text,
+                  titleController.text,
+                  descriptionController.text,
+                );
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _onTapAddNewSection(
+      BuildContext context, TemplateEditorStore templateEditorStore) async {
     final TextEditingController titleController = TextEditingController();
     final GlobalKey<FormState> formKey =
         GlobalKey<FormState>(); // Add a GlobalKey for the Form
@@ -203,9 +270,6 @@ class TemplateEditorPage extends StatelessWidget {
         false; // Handle null (dialog dismissed)
 
     if (confirmed) {
-      if (!context.mounted) return;
-      TemplateEditorStore templateEditorStore =
-          Provider.of<TemplateEditorStore>(context, listen: false);
       templateEditorStore.addSection(title: titleController.text);
     }
   }

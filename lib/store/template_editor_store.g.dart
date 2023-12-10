@@ -375,6 +375,18 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
   }
 
   @override
+  void updateTemplate(
+      String rebreatherModel, String title, String description) {
+    final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
+        name: 'TemplateEditorStoreBase.updateTemplate');
+    try {
+      return super.updateTemplate(rebreatherModel, title, description);
+    } finally {
+      _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void updateSectionTitle(int sectionIndex, String newTitle) {
     final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
         name: 'TemplateEditorStoreBase.updateSectionTitle');
@@ -402,17 +414,6 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
         name: 'TemplateEditorStoreBase.deleteCheck');
     try {
       return super.deleteCheck(sectionIndex, index);
-    } finally {
-      _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void onTapSection(int index) {
-    final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
-        name: 'TemplateEditorStoreBase.onTapSection');
-    try {
-      return super.onTapSection(index);
     } finally {
       _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
     }

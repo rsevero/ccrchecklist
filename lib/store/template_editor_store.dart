@@ -261,6 +261,17 @@ abstract class TemplateEditorStoreBase with Store {
   }
 
   @action
+  void updateTemplate(
+      String rebreatherModel, String title, String description) {
+    final newTemplate = _currentTemplate.copyWith(
+        description: description,
+        rebreatherModel: rebreatherModel,
+        title: title);
+
+    _currentTemplate = newTemplate;
+  }
+
+  @action
   void updateSectionTitle(int sectionIndex, String newTitle) {
     if (sectionIndex >= 0 && sectionIndex < _currentTemplate.sections.length) {
       final updatedTemplateSection =
@@ -292,11 +303,6 @@ abstract class TemplateEditorStoreBase with Store {
       _checks[sectionIndex].removeAt(index);
       _updateHasLinearitySteps();
     }
-  }
-
-  @action
-  void onTapSection(int index) {
-    _setSelectedSectionByIndex(index);
   }
 }
 
