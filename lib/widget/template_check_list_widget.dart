@@ -24,9 +24,7 @@ class TemplateCheckListWidget extends StatelessWidget {
             itemCount: checks.length,
             itemBuilder: (context, index) {
               return TemplateCheckWidget(
-                  check: checks[index],
-                  index: index,
-                  templateEditorStore: templateEditorStore);
+                  index: index, templateEditorStore: templateEditorStore);
             },
           ),
         );

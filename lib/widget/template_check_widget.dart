@@ -4,14 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 class TemplateCheckWidget extends StatelessWidget {
-  final TemplateCheck check;
   final int index;
 
   final TemplateEditorStore templateEditorStore;
 
   const TemplateCheckWidget({
     super.key,
-    required this.check,
     required this.index,
     required this.templateEditorStore,
   });
@@ -20,13 +18,14 @@ class TemplateCheckWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Observer(
       builder: (_) {
+        final check = templateEditorStore
+            .checks[templateEditorStore.selectedSectionIndex][index];
         String title = check.description;
         if ((check is TemplateWithReferenceCheck) ||
             (check is TemplateLinearityStep1Check)) {
           int referenceCount;
           if (check is TemplateWithReferenceCheck) {
-            referenceCount =
-                (check as TemplateWithReferenceCheck).referenceCount;
+            referenceCount = check.referenceCount;
           } else {
             referenceCount =
                 (check as TemplateLinearityStep1Check).referenceCount;
