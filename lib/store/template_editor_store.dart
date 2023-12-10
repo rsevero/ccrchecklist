@@ -1,7 +1,6 @@
 import 'package:ccr_checklist/data/template_check.dart';
 import 'package:ccr_checklist/data/template_section.dart';
 import 'package:ccr_checklist/data/template.dart';
-import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 
 part 'template_editor_store.g.dart';
@@ -23,9 +22,6 @@ abstract class TemplateEditorStoreBase with Store {
       ObservableList<ObservableList<TemplateCheck>>();
 
   @readonly
-  ObservableList<bool> _sectionsIsExpanded = ObservableList<bool>();
-
-  @readonly
   int _selectedSectionIndex = -1;
 
   @computed
@@ -44,9 +40,6 @@ abstract class TemplateEditorStoreBase with Store {
 
   @readonly
   bool _hasLinearityStep2 = false;
-
-  @readonly
-  Map<int, ExpansionTileController> _sectionExpansionTileControllers = {};
 
   @action
   void addLinearityStep2Check() {
@@ -82,19 +75,11 @@ abstract class TemplateEditorStoreBase with Store {
   }
 
   @action
-  void setSectionIsExpanded(int index, bool value) {
-    if (index >= 0 && index < _sectionsIsExpanded.length) {
-      _sectionsIsExpanded[index] = value;
-    }
-  }
-
-  @action
   void addSection({required String title}) {
     _selectedSection = TemplateSection(title: title, checks: []);
     _currentTemplate.sections.add(_selectedSection);
     _sections.add(_selectedSection);
     _checks.add(ObservableList.of(_selectedSection.checks));
-    _sectionsIsExpanded.add(true);
     _selectLastSection();
   }
 
@@ -119,20 +104,19 @@ abstract class TemplateEditorStoreBase with Store {
     _setSelectedSectionByIndex(_sections.length - 1);
   }
 
-  void _setSelectedSectionByIndex(int index) {
-    if (_sections.isEmpty || (index < 0)) {
+  void _setSelectedSectionByIndex(int sectionIndex) {
+    if (_sections.isEmpty || (sectionIndex < 0)) {
       _selectedSectionIndex = -1;
       _selectedSection = TemplateSection.empty();
       return;
     }
 
-    if (index >= _sections.length) {
-      index = _sections.length - 1;
+    if (sectionIndex >= _sections.length) {
+      sectionIndex = _sections.length - 1;
     }
 
-    _selectedSection = _sections[index];
-    _selectedSectionIndex = index;
-    _sectionsIsExpanded[index] = true;
+    _selectedSection = _sections[sectionIndex];
+    _selectedSectionIndex = sectionIndex;
   }
 
   @action
@@ -155,9 +139,6 @@ abstract class TemplateEditorStoreBase with Store {
   void setCurrentTemplate(Template template) {
     _currentTemplate = template;
     _sections = ObservableList.of(template.sections);
-    _sectionsIsExpanded = ObservableList.of(
-        List.generate(template.sections.length, (_) => false));
-    _sectionExpansionTileControllers.clear();
     for (final section in _currentTemplate.sections) {
       _checks.add(ObservableList.of(section.checks));
     }
@@ -165,99 +146,74 @@ abstract class TemplateEditorStoreBase with Store {
   }
 
   @action
-  void moveCheckAnotherSection(TemplateCheck check, TemplateSection section) {
-    if (section.checks.contains(check)) {
+  void moveCheckToAnotherSection(
+      int currentSectionIndex, int checkIndex, int newSectionIndex) {
+    if (currentSectionIndex == newSectionIndex) {
       return;
     }
 
-    _selectedSection = section;
+    final check = _checks[currentSectionIndex][checkIndex];
+    _checks[currentSectionIndex].removeAt(checkIndex);
+    _currentTemplate.sections[currentSectionIndex].checks.removeAt(checkIndex);
+
+    _checks[newSectionIndex].add(check);
+    _currentTemplate.sections[newSectionIndex].checks.add(check);
+
+    _setSelectedSectionByIndex(newSectionIndex);
   }
 
   @action
-  void updateRegularCheck(int sectionIndex, int index, String description) {
-    final check = _checks[sectionIndex][index] as TemplateRegularCheck;
+  void updateRegularCheck(
+      int sectionIndex, int checkIndex, String description) {
+    final check = _checks[sectionIndex][checkIndex] as TemplateRegularCheck;
     final newCheck = check.copyWith(description: description);
 
-    _currentTemplate.sections[sectionIndex].checks[index] = newCheck;
-    _checks[sectionIndex][index] = newCheck;
+    _currentTemplate.sections[sectionIndex].checks[checkIndex] = newCheck;
+    _checks[sectionIndex][checkIndex] = newCheck;
   }
 
   @action
-  void updateWithReferenceCheck(
-      int sectionIndex, int index, String description, int referenceCount) {
-    final check = _checks[sectionIndex][index] as TemplateWithReferenceCheck;
+  void updateWithReferenceCheck(int sectionIndex, int checkIndex,
+      String description, int referenceCount) {
+    final check =
+        _checks[sectionIndex][checkIndex] as TemplateWithReferenceCheck;
     final newCheck = check.copyWith(
         description: description, referenceCount: referenceCount);
 
-    _currentTemplate.sections[sectionIndex].checks[index] = newCheck;
-    _checks[sectionIndex][index] = newCheck;
+    _currentTemplate.sections[sectionIndex].checks[checkIndex] = newCheck;
+    _checks[sectionIndex][checkIndex] = newCheck;
   }
 
   @action
   void updateLinearityStep1Check(
-      int sectionIndex, int index, int referenceCount) {
-    final check = _checks[sectionIndex][index] as TemplateLinearityStep1Check;
+      int sectionIndex, int checkIndex, int referenceCount) {
+    final check =
+        _checks[sectionIndex][checkIndex] as TemplateLinearityStep1Check;
     final newCheck = check.copyWith(referenceCount: referenceCount);
 
-    _currentTemplate.sections[sectionIndex].checks[index] = newCheck;
-    _checks[sectionIndex][index] = newCheck;
+    _currentTemplate.sections[sectionIndex].checks[checkIndex] = newCheck;
+    _checks[sectionIndex][checkIndex] = newCheck;
   }
 
   @action
-  void moveTemplateSection(int oldIndex, int newIndex) {
-    if (oldIndex == newIndex) {
+  void moveSection(int oldSectionIndex, int newSectionIndex) {
+    if (oldSectionIndex == newSectionIndex) {
       return;
     }
-    if (oldIndex < newIndex) {
-      newIndex -= 1;
+    if (oldSectionIndex < newSectionIndex) {
+      newSectionIndex -= 1;
     }
 
-    final section = _currentTemplate.sections.removeAt(oldIndex);
-    _currentTemplate.sections.insert(newIndex, section);
+    final section = _currentTemplate.sections.removeAt(oldSectionIndex);
+    _currentTemplate.sections.insert(newSectionIndex, section);
 
-    final observableSection = _sections.removeAt(oldIndex);
-    _sections.insert(newIndex, observableSection);
+    final observableSection = _sections.removeAt(oldSectionIndex);
+    _sections.insert(newSectionIndex, observableSection);
 
-    final newSectionIsExpanded = _sectionsIsExpanded[newIndex];
-    final oldSectionIsExpanded = _sectionsIsExpanded.removeAt(oldIndex);
-    _sectionsIsExpanded.insert(newIndex, oldSectionIsExpanded);
+    final observableChecks = _checks.removeAt(oldSectionIndex);
+    _checks.insert(newSectionIndex, observableChecks);
 
-    final observableChecks = _checks.removeAt(oldIndex);
-    _checks.insert(newIndex, observableChecks);
-
-    final oldSectionExpansionTileController =
-        _sectionExpansionTileControllers.remove(oldIndex);
-    final newSectionExpansionTileController =
-        _sectionExpansionTileControllers.remove(newIndex);
-    _sectionExpansionTileControllers[newIndex] =
-        oldSectionExpansionTileController!;
-    _sectionExpansionTileControllers[oldIndex] =
-        newSectionExpansionTileController!;
-
-    // If someone can please explain to me why the following code does work I
-    // would be very grateful.
-    //
-    // AFAICT, the following code is doing exactly the opposite of what it
-    // should be doing as I want the controller in the NEW position to reproduce
-    // the isExpanded state of the OLD position but it works as it is. I don't
-    // get it.
-    if (oldSectionIsExpanded) {
-      _sectionExpansionTileControllers[oldIndex]!.expand();
-    } else {
-      _sectionExpansionTileControllers[oldIndex]!.collapse();
-    }
-    if (newSectionIsExpanded) {
-      _sectionExpansionTileControllers[newIndex]!.expand();
-    } else {
-      _sectionExpansionTileControllers[newIndex]!.collapse();
-    }
-
-    _setSelectedSectionByIndex(newIndex);
-  }
-
-  void setSectionExpansionTileController(
-      int index, ExpansionTileController expansionTileController) {
-    _sectionExpansionTileControllers[index] = expansionTileController;
+    _setSelectedSectionByIndex(newSectionIndex);
   }
 
   @action
@@ -287,7 +243,6 @@ abstract class TemplateEditorStoreBase with Store {
     if (index >= 0 && index < _currentTemplate.sections.length) {
       _currentTemplate.sections.removeAt(index);
       _sections.removeAt(index);
-      _sectionsIsExpanded.removeAt(index);
       _setSelectedSectionByIndex(index);
       _updateHasLinearitySteps();
     }
@@ -305,76 +260,3 @@ abstract class TemplateEditorStoreBase with Store {
     }
   }
 }
-
-// @action
-// void moveTemplateSection(String oldKey, String newKey) {
-//   final oldPosition = oldKey.split('|');
-//   final newPosition = newKey.split('|');
-//   final oldSectionIndex = int.parse(oldPosition[0]);
-//   final newSectionIndex = int.parse(newPosition[0]);
-//   // One item means it's a section, two items means it's a check.
-//   final draggingSection = (oldPosition.length == 1);
-
-//   if (draggingSection) { 
-//     _moveSection(oldSectionIndex, newSectionIndex);
-//   } else {
-//     // Moving a check
-//     final oldCheckIndex = int.parse(oldPosition[1]);
-//     // One item means it's a section, two items means it's a check.
-//     final targetIsSection = (newPosition.length == 1);
-//     if (targetIsSection) {
-//       if (oldSectionIndex == newSectionIndex) {
-//         return;
-//       } else {
-//         _moveCheckToEndOfAnotherSection(
-//             oldSectionIndex, oldCheckIndex, newSectionIndex);
-//       }
-//     } else {
-//       final newCheckIndex = int.parse(newPosition[1]);
-//       if (oldSectionIndex == newSectionIndex) {
-//         _moveCheckInSameSection(
-//             oldSectionIndex, oldCheckIndex, newCheckIndex);
-//       } else {
-//         _moveCheckToChoosenPositionInAnotherSection(
-//             oldSectionIndex, oldCheckIndex, newSectionIndex, newCheckIndex);
-//       }
-//     }
-//   }
-// }
-
-// void _moveCheckToChoosenPositionInAnotherSection(int oldSectionIndex,
-//     int oldCheckIndex, int newSectionIndex, int newCheckIndex) {
-//   final check = _currentTemplate.sections[oldSectionIndex].checks
-//       .removeAt(oldCheckIndex);
-//   _currentTemplate.sections[newSectionIndex].checks
-//       .insert(newCheckIndex, check);
-
-//   final observableCheck = _checks.removeAt(oldCheckIndex);
-//   _setSelectedSectionByIndex(newSectionIndex);
-//   _checks.insert(newCheckIndex, observableCheck);
-// }
-
-// void _moveCheckInSameSection(
-//     int sectionIndex, int oldCheckIndex, int newCheckIndex) {
-//   if (oldCheckIndex < newCheckIndex) {
-//     newCheckIndex -= 1;
-//   }
-
-//   final check =
-//       _currentTemplate.sections[sectionIndex].checks.removeAt(oldCheckIndex);
-//   _currentTemplate.sections[sectionIndex].checks.insert(newCheckIndex, check);
-
-//   final observableCheck = _checks.removeAt(oldCheckIndex);
-//   _checks.insert(newCheckIndex, observableCheck);
-// }
-
-// void _moveCheckToEndOfAnotherSection(
-//     int oldSectionIndex, int oldCheckIndex, int newSectionIndex) {
-//   final check = _currentTemplate.sections[oldSectionIndex].checks
-//       .removeAt(oldCheckIndex);
-//   _currentTemplate.sections[newSectionIndex].checks.add(check);
-
-//   final observableCheck = _checks.removeAt(oldCheckIndex);
-//   _setSelectedSectionByIndex(newSectionIndex);
-//   _checks.add(observableCheck);
-// }

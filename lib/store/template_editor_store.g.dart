@@ -105,24 +105,6 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
     });
   }
 
-  late final _$_sectionsIsExpandedAtom = Atom(
-      name: 'TemplateEditorStoreBase._sectionsIsExpanded', context: context);
-
-  ObservableList<bool> get sectionsIsExpanded {
-    _$_sectionsIsExpandedAtom.reportRead();
-    return super._sectionsIsExpanded;
-  }
-
-  @override
-  ObservableList<bool> get _sectionsIsExpanded => sectionsIsExpanded;
-
-  @override
-  set _sectionsIsExpanded(ObservableList<bool> value) {
-    _$_sectionsIsExpandedAtom.reportWrite(value, super._sectionsIsExpanded, () {
-      super._sectionsIsExpanded = value;
-    });
-  }
-
   late final _$_selectedSectionIndexAtom = Atom(
       name: 'TemplateEditorStoreBase._selectedSectionIndex', context: context);
 
@@ -178,28 +160,6 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
     });
   }
 
-  late final _$_sectionExpansionTileControllersAtom = Atom(
-      name: 'TemplateEditorStoreBase._sectionExpansionTileControllers',
-      context: context);
-
-  Map<int, ExpansionTileController> get sectionExpansionTileControllers {
-    _$_sectionExpansionTileControllersAtom.reportRead();
-    return super._sectionExpansionTileControllers;
-  }
-
-  @override
-  Map<int, ExpansionTileController> get _sectionExpansionTileControllers =>
-      sectionExpansionTileControllers;
-
-  @override
-  set _sectionExpansionTileControllers(
-      Map<int, ExpansionTileController> value) {
-    _$_sectionExpansionTileControllersAtom
-        .reportWrite(value, super._sectionExpansionTileControllers, () {
-      super._sectionExpansionTileControllers = value;
-    });
-  }
-
   late final _$TemplateEditorStoreBaseActionController =
       ActionController(name: 'TemplateEditorStoreBase', context: context);
 
@@ -244,17 +204,6 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
         name: 'TemplateEditorStoreBase.addRegularCheck');
     try {
       return super.addRegularCheck(description: description);
-    } finally {
-      _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setSectionIsExpanded(int index, bool value) {
-    final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
-        name: 'TemplateEditorStoreBase.setSectionIsExpanded');
-    try {
-      return super.setSectionIsExpanded(index, value);
     } finally {
       _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -316,35 +265,38 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
   }
 
   @override
-  void moveCheckAnotherSection(TemplateCheck check, TemplateSection section) {
+  void moveCheckToAnotherSection(
+      int currentSectionIndex, int checkIndex, int newSectionIndex) {
     final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
-        name: 'TemplateEditorStoreBase.moveCheckAnotherSection');
+        name: 'TemplateEditorStoreBase.moveCheckToAnotherSection');
     try {
-      return super.moveCheckAnotherSection(check, section);
+      return super.moveCheckToAnotherSection(
+          currentSectionIndex, checkIndex, newSectionIndex);
     } finally {
       _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void updateRegularCheck(int sectionIndex, int index, String description) {
+  void updateRegularCheck(
+      int sectionIndex, int checkIndex, String description) {
     final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
         name: 'TemplateEditorStoreBase.updateRegularCheck');
     try {
-      return super.updateRegularCheck(sectionIndex, index, description);
+      return super.updateRegularCheck(sectionIndex, checkIndex, description);
     } finally {
       _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void updateWithReferenceCheck(
-      int sectionIndex, int index, String description, int referenceCount) {
+  void updateWithReferenceCheck(int sectionIndex, int checkIndex,
+      String description, int referenceCount) {
     final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
         name: 'TemplateEditorStoreBase.updateWithReferenceCheck');
     try {
       return super.updateWithReferenceCheck(
-          sectionIndex, index, description, referenceCount);
+          sectionIndex, checkIndex, description, referenceCount);
     } finally {
       _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -352,23 +304,23 @@ mixin _$TemplateEditorStore on TemplateEditorStoreBase, Store {
 
   @override
   void updateLinearityStep1Check(
-      int sectionIndex, int index, int referenceCount) {
+      int sectionIndex, int checkIndex, int referenceCount) {
     final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
         name: 'TemplateEditorStoreBase.updateLinearityStep1Check');
     try {
       return super
-          .updateLinearityStep1Check(sectionIndex, index, referenceCount);
+          .updateLinearityStep1Check(sectionIndex, checkIndex, referenceCount);
     } finally {
       _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void moveTemplateSection(int oldIndex, int newIndex) {
+  void moveSection(int oldSectionIndex, int newSectionIndex) {
     final _$actionInfo = _$TemplateEditorStoreBaseActionController.startAction(
-        name: 'TemplateEditorStoreBase.moveTemplateSection');
+        name: 'TemplateEditorStoreBase.moveSection');
     try {
-      return super.moveTemplateSection(oldIndex, newIndex);
+      return super.moveSection(oldSectionIndex, newSectionIndex);
     } finally {
       _$TemplateEditorStoreBaseActionController.endAction(_$actionInfo);
     }

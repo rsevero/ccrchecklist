@@ -74,7 +74,7 @@ class TemplateEditorPage extends StatelessWidget {
                   );
                 },
                 onReorder: (oldIndex, newIndex) =>
-                    templateEditorStore.moveTemplateSection(oldIndex, newIndex),
+                    templateEditorStore.moveSection(oldIndex, newIndex),
               ),
             ),
           ),

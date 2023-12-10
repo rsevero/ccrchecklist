@@ -22,17 +22,21 @@ class TemplateSectionWidget extends StatelessWidget {
     return Observer(
       builder: (_) {
         final isSelected = (index == templateEditorStore.selectedSectionIndex);
+        // final expansionTileController = ExpansionTileController();
+        // templateEditorStore.setSectionExpansionTileController(
+        //     index, expansionTileController);
         return Container(
           color: isSelected
               ? mainColorScheme.primaryContainer
               : Colors.transparent,
           child: ExpansionTile(
+            key: ObjectKey(section),
             title: Text(section.title),
             // controller: expansionTileController,
             controlAffinity: ListTileControlAffinity.leading,
             trailing: Builder(builder: (context) {
-              templateEditorStore.setSectionExpansionTileController(
-                  index, ExpansionTileController.of(context));
+              // templateEditorStore.setSectionExpansionTileController(
+              //     index, ExpansionTileController.of(context));
               return PopupMenuButton<String>(
                 itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
                   const PopupMenuItem<String>(
@@ -56,8 +60,7 @@ class TemplateSectionWidget extends StatelessWidget {
                 },
               );
             }),
-            onExpansionChanged: (value) => onExpansionChangedSection(value),
-            initiallyExpanded: templateEditorStore.sectionsIsExpanded[index],
+            initiallyExpanded: index == templateEditorStore.sections.length - 1,
             children: [
               TemplateCheckListWidget(
                   sectionIndex: index,
@@ -106,9 +109,5 @@ class TemplateSectionWidget extends StatelessWidget {
         );
       },
     );
-  }
-
-  void onExpansionChangedSection(bool value) {
-    templateEditorStore.setSectionIsExpanded(index, value);
   }
 }

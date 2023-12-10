@@ -39,7 +39,10 @@ class TemplateCheckWidget extends StatelessWidget {
             onSelected: (value) {
               switch (value) {
                 case 'Edit':
-                  _editTemplateCheck(
+                  _editCheck(context, templateEditorStore, sectionIndex, index);
+                  break;
+                case 'Move to new section':
+                  _moveCheckNewSection(
                       context, templateEditorStore, sectionIndex, index);
                   break;
                 case 'Delete':
@@ -53,6 +56,11 @@ class TemplateCheckWidget extends StatelessWidget {
                 enabled: templateEditorStore.checks[sectionIndex][index]
                     is! TemplateLinearityStep2Check,
                 child: const Text('Edit'),
+              ),
+              PopupMenuItem<String>(
+                value: 'Move to new section',
+                enabled: templateEditorStore.sections.length > 1,
+                child: const Text('Move to new section'),
               ),
               const PopupMenuItem<String>(
                 value: 'Delete',
@@ -245,8 +253,78 @@ class TemplateCheckWidget extends StatelessWidget {
     );
   }
 
-  void _editTemplateCheck(BuildContext context,
-      TemplateEditorStore templateEditorStore, int sectionIndex, int index) {
+  void _moveCheckNewSection(
+      BuildContext context,
+      TemplateEditorStore templateEditorStore,
+      int sectionIndex,
+      int checkIndex) {
+    int? selectedNewSectionIndex;
+
+    if (templateEditorStore.sections.length == 2) {
+      // If there are only 2 sections, the other section is the destination
+      selectedNewSectionIndex = (sectionIndex == 0) ? 1 : 0;
+      templateEditorStore.moveCheckToAnotherSection(
+          sectionIndex, checkIndex, selectedNewSectionIndex);
+      return;
+    }
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          // Using StatefulBuilder to manage local state
+          builder: (BuildContext context, StateSetter setState) {
+            return AlertDialog(
+              title: const Text('Move Check to New Section'),
+              content: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    for (int i = 0;
+                        i < templateEditorStore.sections.length;
+                        i++)
+                      if (i != sectionIndex) // Exclude the current section
+                        RadioListTile<int>(
+                          title: Text(templateEditorStore.sections[i].title),
+                          value: i,
+                          groupValue: selectedNewSectionIndex,
+                          onChanged: (int? value) {
+                            setState(() {
+                              // Update the local state
+                              selectedNewSectionIndex = value;
+                            });
+                          },
+                        ),
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('Update'),
+                  onPressed: () {
+                    if (selectedNewSectionIndex != null) {
+                      templateEditorStore.moveCheckToAnotherSection(
+                          sectionIndex, checkIndex, selectedNewSectionIndex!);
+                      Navigator.of(context).pop();
+                    }
+                  },
+                ),
+                TextButton(
+                  child: const Text('Cancel'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+
+  void _editCheck(BuildContext context, TemplateEditorStore templateEditorStore,
+      int sectionIndex, int index) {
     final check = templateEditorStore.checks[sectionIndex][index];
 
     if (check is TemplateRegularCheck) {
