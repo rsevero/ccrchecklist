@@ -19,5 +19,5 @@ Map<String, dynamic> _$$TemplateSectionImplToJson(
         _$TemplateSectionImpl instance) =>
     <String, dynamic>{
       'title': instance.title,
-      'checks': instance.checks,
+      'checks': instance.checks.map((e) => e.toJson()).toList(),
     };

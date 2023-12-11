@@ -135,7 +135,8 @@ class __$$TemplateImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$TemplateImpl implements _Template {
   _$TemplateImpl(
       {required this.rebreatherModel,

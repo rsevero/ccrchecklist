@@ -106,7 +106,8 @@ class __$$TemplateSectionImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$TemplateSectionImpl implements _TemplateSection {
   _$TemplateSectionImpl({required this.title, required this.checks});
 

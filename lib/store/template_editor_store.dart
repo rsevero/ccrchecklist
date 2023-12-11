@@ -3,12 +3,14 @@ import 'package:ccr_checklist/data/template_section.dart';
 import 'package:ccr_checklist/data/template.dart';
 import 'package:ccr_checklist/main.dart';
 import 'package:ccr_checklist/store/observablelist_json_converter.dart';
+import 'package:ccr_checklist/undo/undo_redo_storage.dart';
+import 'package:ccr_checklist/widget/undo_redo_buttons_widget.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:mobx/mobx.dart';
 
 part 'template_editor_store.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class TemplateEditorStore extends _TemplateSectionToJson
     with _$TemplateEditorStore {
   TemplateEditorStore();
@@ -68,13 +70,78 @@ abstract class _TemplateSectionToJson with Store {
   @JsonKey(includeFromJson: true, includeToJson: true)
   bool _hasLinearityStep2 = false;
 
-  _TemplateSectionToJson() {
-    _saveSnapshot();
+  @readonly
+  bool _canUndo = false;
+
+  @readonly
+  bool _canRedo = false;
+
+  @readonly
+  String _undoDescription = '';
+
+  @readonly
+  String _redoDescription = '';
+
+  @computed
+  UndoRedoController get undoRedoController => UndoRedoController(
+      undo: undo,
+      redo: redo,
+      status: UndoRedoStatus(
+          canUndo: _canUndo,
+          canRedo: _canRedo,
+          undoDescription: _undoDescription,
+          redoDescription: _redoDescription));
+
+  void _saveSnapshot(String operation) {
+    final snapshot = _$TemplateEditorStoreToJson(this as TemplateEditorStore);
+    final undoRedoStatus =
+        undoRedoStorage.addUndo(_undoRedoClass, operation, snapshot);
+
+    _canUndo = undoRedoStatus.canUndo;
+    _canRedo = undoRedoStatus.canRedo;
+    _undoDescription = undoRedoStatus.undoDescription;
+    _redoDescription = undoRedoStatus.redoDescription;
   }
 
-  void _saveSnapshot() {
-    final snapshot = _$TemplateEditorStoreToJson(this as TemplateEditorStore);
-    undoRedoStorage.addUndo(_undoRedoClass, snapshot);
+  @action
+  void undo() {
+    final undoRedoRequest = undoRedoStorage.getUndo(_undoRedoClass);
+    if (!undoRedoRequest.available) {
+      return;
+    }
+
+    _applySnapshot(undoRedoRequest.json!);
+    _updateUndoRedoStatus(undoRedoRequest.undoRedoStatus);
+  }
+
+  void _updateUndoRedoStatus(UndoRedoStatus undoRedoStatus) {
+    _canUndo = undoRedoStatus.canUndo;
+    _canRedo = undoRedoStatus.canRedo;
+    _undoDescription = undoRedoStatus.undoDescription;
+    _redoDescription = undoRedoStatus.redoDescription;
+  }
+
+  @action
+  void redo() {
+    final undoRedoRequest = undoRedoStorage.getRedo(_undoRedoClass);
+    if (!undoRedoRequest.available) {
+      return;
+    }
+
+    _applySnapshot(undoRedoRequest.json!);
+    _updateUndoRedoStatus(undoRedoRequest.undoRedoStatus);
+  }
+
+  void _applySnapshot(Map<String, dynamic> json) {
+    final templateEditorStore = TemplateEditorStore.fromJson(json);
+
+    _currentTemplate = templateEditorStore._currentTemplate;
+    _sections = templateEditorStore._sections;
+    _selectedSection = templateEditorStore._selectedSection;
+    _checks = templateEditorStore._checks;
+    _selectedSectionIndex = templateEditorStore._selectedSectionIndex;
+    _hasLinearityStep1 = templateEditorStore._hasLinearityStep1;
+    _hasLinearityStep2 = templateEditorStore._hasLinearityStep2;
   }
 
   @action
@@ -83,7 +150,7 @@ abstract class _TemplateSectionToJson with Store {
     _selectedSection.checks.add(newLinearityStep2Check);
     _checks[_selectedSectionIndex].add(newLinearityStep2Check);
     _updateHasLinearitySteps();
-    _saveSnapshot();
+    _saveSnapshot('Add linearity step 2');
   }
 
   @action
@@ -93,7 +160,7 @@ abstract class _TemplateSectionToJson with Store {
     _selectedSection.checks.add(newLinearityStep1Check);
     _checks[_selectedSectionIndex].add(newLinearityStep1Check);
     _updateHasLinearitySteps();
-    _saveSnapshot();
+    _saveSnapshot('Add linearity step 1');
   }
 
   @action
@@ -103,7 +170,7 @@ abstract class _TemplateSectionToJson with Store {
         description: description, referenceCount: referenceCount);
     _selectedSection.checks.add(newWithReferenceCheck);
     _checks[_selectedSectionIndex].add(newWithReferenceCheck);
-    _saveSnapshot();
+    _saveSnapshot('Add with reference check');
   }
 
   @action
@@ -111,7 +178,7 @@ abstract class _TemplateSectionToJson with Store {
     final newRegularCheck = TemplateRegularCheck(description: description);
     _selectedSection.checks.add(newRegularCheck);
     _checks[_selectedSectionIndex].add(newRegularCheck);
-    _saveSnapshot();
+    _saveSnapshot('Add regular check');
   }
 
   @action
@@ -121,7 +188,7 @@ abstract class _TemplateSectionToJson with Store {
     _sections.add(_selectedSection);
     _checks.add(ObservableList.of(_selectedSection.checks));
     _selectLastSection();
-    _saveSnapshot();
+    _saveSnapshot('Add section');
   }
 
   void _updateHasLinearitySteps() {
@@ -168,7 +235,9 @@ abstract class _TemplateSectionToJson with Store {
       _checks.add(ObservableList.of(section.checks));
     }
     _selectLastSection();
-    _saveSnapshot();
+
+    undoRedoStorage.clearUndoRedo(_undoRedoClass);
+    _saveSnapshot('Set current template');
   }
 
   @action
@@ -186,7 +255,7 @@ abstract class _TemplateSectionToJson with Store {
     _currentTemplate.sections[newSectionIndex].checks.add(check);
 
     _setSelectedSectionByIndex(newSectionIndex);
-    _saveSnapshot();
+    _saveSnapshot('Move check to another section');
   }
 
   @action
@@ -197,7 +266,7 @@ abstract class _TemplateSectionToJson with Store {
 
     _currentTemplate.sections[sectionIndex].checks[checkIndex] = newCheck;
     _checks[sectionIndex][checkIndex] = newCheck;
-    _saveSnapshot();
+    _saveSnapshot('Update regular check');
   }
 
   @action
@@ -210,7 +279,7 @@ abstract class _TemplateSectionToJson with Store {
 
     _currentTemplate.sections[sectionIndex].checks[checkIndex] = newCheck;
     _checks[sectionIndex][checkIndex] = newCheck;
-    _saveSnapshot();
+    _saveSnapshot('Update with reference check');
   }
 
   @action
@@ -222,7 +291,7 @@ abstract class _TemplateSectionToJson with Store {
 
     _currentTemplate.sections[sectionIndex].checks[checkIndex] = newCheck;
     _checks[sectionIndex][checkIndex] = newCheck;
-    _saveSnapshot();
+    _saveSnapshot('Update linearity step 1 check');
   }
 
   @action
@@ -244,7 +313,7 @@ abstract class _TemplateSectionToJson with Store {
     _checks.insert(newSectionIndex, observableChecks);
 
     _setSelectedSectionByIndex(newSectionIndex);
-    _saveSnapshot();
+    _saveSnapshot('Move section');
   }
 
   @action
@@ -256,7 +325,7 @@ abstract class _TemplateSectionToJson with Store {
         title: title);
 
     _currentTemplate = newTemplate;
-    _saveSnapshot();
+    _saveSnapshot('Update template');
   }
 
   @action
@@ -267,7 +336,7 @@ abstract class _TemplateSectionToJson with Store {
 
       _currentTemplate.sections[sectionIndex] = updatedTemplateSection;
       _sections[sectionIndex] = updatedTemplateSection;
-      _saveSnapshot();
+      _saveSnapshot('Update section title');
     }
   }
 
@@ -278,7 +347,7 @@ abstract class _TemplateSectionToJson with Store {
       _sections.removeAt(index);
       _setSelectedSectionByIndex(index);
       _updateHasLinearitySteps();
-      _saveSnapshot();
+      _saveSnapshot('Delete section');
     }
   }
 
@@ -291,7 +360,7 @@ abstract class _TemplateSectionToJson with Store {
       _currentTemplate.sections[sectionIndex].checks.removeAt(index);
       _checks[sectionIndex].removeAt(index);
       _updateHasLinearitySteps();
-      _saveSnapshot();
+      _saveSnapshot('Delete check');
     }
   }
 }

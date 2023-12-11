@@ -25,7 +25,6 @@ class CCRChecklist extends StatelessWidget {
         ),
         Provider(
           create: (context) => TemplateEditorStore(),
-          lazy: false,
         ),
       ],
       child: const CCRChecklistApp(),

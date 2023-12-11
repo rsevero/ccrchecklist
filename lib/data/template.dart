@@ -6,6 +6,7 @@ part 'template.g.dart';
 
 @Freezed(makeCollectionsUnmodifiable: false)
 class Template with _$Template {
+  @JsonSerializable(explicitToJson: true)
   factory Template(
       {required String rebreatherModel,
       required String title,

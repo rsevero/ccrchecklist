@@ -6,6 +6,7 @@ part 'template_section.g.dart';
 
 @Freezed(makeCollectionsUnmodifiable: false)
 class TemplateSection with _$TemplateSection {
+  @JsonSerializable(explicitToJson: true)
   factory TemplateSection(
       {required String title,
       required List<TemplateCheck> checks}) = _TemplateSection;

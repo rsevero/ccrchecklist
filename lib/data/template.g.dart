@@ -21,5 +21,5 @@ Map<String, dynamic> _$$TemplateImplToJson(_$TemplateImpl instance) =>
       'rebreatherModel': instance.rebreatherModel,
       'title': instance.title,
       'description': instance.description,
-      'sections': instance.sections,
+      'sections': instance.sections.map((e) => e.toJson()).toList(),
     };

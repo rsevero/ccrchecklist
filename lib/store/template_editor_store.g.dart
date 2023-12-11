@@ -24,10 +24,10 @@ TemplateEditorStore _$TemplateEditorStoreFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$TemplateEditorStoreToJson(
         TemplateEditorStore instance) =>
     <String, dynamic>{
-      '_currentTemplate': instance._currentTemplate,
+      '_currentTemplate': instance._currentTemplate.toJson(),
       '_sections': ObservableListJsonConverter.oblstOfTemplateSectionToJson(
           instance._sections),
-      '_selectedSection': instance._selectedSection,
+      '_selectedSection': instance._selectedSection.toJson(),
       '_checks': ObservableListJsonConverter.oblstOfObLstOfTemplateCheckToJson(
           instance._checks),
       '_selectedSectionIndex': instance._selectedSectionIndex,
@@ -65,6 +65,13 @@ mixin _$TemplateEditorStore on _TemplateSectionToJson, Store {
               () => super.enableLinearityStep1Creation,
               name: '_TemplateSectionToJson.enableLinearityStep1Creation'))
           .value;
+  Computed<UndoRedoController>? _$undoRedoControllerComputed;
+
+  @override
+  UndoRedoController get undoRedoController => (_$undoRedoControllerComputed ??=
+          Computed<UndoRedoController>(() => super.undoRedoController,
+              name: '_TemplateSectionToJson.undoRedoController'))
+      .value;
 
   late final _$_currentTemplateAtom =
       Atom(name: '_TemplateSectionToJson._currentTemplate', context: context);
@@ -193,8 +200,102 @@ mixin _$TemplateEditorStore on _TemplateSectionToJson, Store {
     });
   }
 
+  late final _$_canUndoAtom =
+      Atom(name: '_TemplateSectionToJson._canUndo', context: context);
+
+  bool get canUndo {
+    _$_canUndoAtom.reportRead();
+    return super._canUndo;
+  }
+
+  @override
+  bool get _canUndo => canUndo;
+
+  @override
+  set _canUndo(bool value) {
+    _$_canUndoAtom.reportWrite(value, super._canUndo, () {
+      super._canUndo = value;
+    });
+  }
+
+  late final _$_canRedoAtom =
+      Atom(name: '_TemplateSectionToJson._canRedo', context: context);
+
+  bool get canRedo {
+    _$_canRedoAtom.reportRead();
+    return super._canRedo;
+  }
+
+  @override
+  bool get _canRedo => canRedo;
+
+  @override
+  set _canRedo(bool value) {
+    _$_canRedoAtom.reportWrite(value, super._canRedo, () {
+      super._canRedo = value;
+    });
+  }
+
+  late final _$_undoDescriptionAtom =
+      Atom(name: '_TemplateSectionToJson._undoDescription', context: context);
+
+  String get undoDescription {
+    _$_undoDescriptionAtom.reportRead();
+    return super._undoDescription;
+  }
+
+  @override
+  String get _undoDescription => undoDescription;
+
+  @override
+  set _undoDescription(String value) {
+    _$_undoDescriptionAtom.reportWrite(value, super._undoDescription, () {
+      super._undoDescription = value;
+    });
+  }
+
+  late final _$_redoDescriptionAtom =
+      Atom(name: '_TemplateSectionToJson._redoDescription', context: context);
+
+  String get redoDescription {
+    _$_redoDescriptionAtom.reportRead();
+    return super._redoDescription;
+  }
+
+  @override
+  String get _redoDescription => redoDescription;
+
+  @override
+  set _redoDescription(String value) {
+    _$_redoDescriptionAtom.reportWrite(value, super._redoDescription, () {
+      super._redoDescription = value;
+    });
+  }
+
   late final _$_TemplateSectionToJsonActionController =
       ActionController(name: '_TemplateSectionToJson', context: context);
+
+  @override
+  void undo() {
+    final _$actionInfo = _$_TemplateSectionToJsonActionController.startAction(
+        name: '_TemplateSectionToJson.undo');
+    try {
+      return super.undo();
+    } finally {
+      _$_TemplateSectionToJsonActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void redo() {
+    final _$actionInfo = _$_TemplateSectionToJsonActionController.startAction(
+        name: '_TemplateSectionToJson.redo');
+    try {
+      return super.redo();
+    } finally {
+      _$_TemplateSectionToJsonActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void addLinearityStep2Check() {
@@ -376,7 +477,8 @@ mixin _$TemplateEditorStore on _TemplateSectionToJson, Store {
     return '''
 enableCheckCreation: ${enableCheckCreation},
 enableLinearityStep2Creation: ${enableLinearityStep2Creation},
-enableLinearityStep1Creation: ${enableLinearityStep1Creation}
+enableLinearityStep1Creation: ${enableLinearityStep1Creation},
+undoRedoController: ${undoRedoController}
     ''';
   }
 }

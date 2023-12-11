@@ -4,6 +4,7 @@ import 'package:ccr_checklist/data/template.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
 import 'package:ccr_checklist/widget/greyable_speed_dial_child_widget.dart';
 import 'package:ccr_checklist/widget/template_section_widget.dart';
+import 'package:ccr_checklist/widget/undo_redo_buttons_widget.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,18 @@ class TemplateEditorPage extends StatelessWidget {
             "${templateEditorStore.currentTemplate.rebreatherModel} - ${templateEditorStore.currentTemplate.title}"),
         elevation: 4,
         actions: [
+          Observer(
+            builder: (_) {
+              return UndoRedoButtonsWidget(
+                canRedo: templateEditorStore.canRedo,
+                canUndo: templateEditorStore.canUndo,
+                redo: templateEditorStore.redo,
+                undo: templateEditorStore.undo,
+                redoDescription: templateEditorStore.redoDescription,
+                undoDescription: templateEditorStore.undoDescription,
+              );
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.save),
             onPressed: () =>
