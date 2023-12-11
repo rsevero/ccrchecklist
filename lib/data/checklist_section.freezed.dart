@@ -98,7 +98,7 @@ class __$$ChecklistSectionImplCopyWithImpl<$Res>
           : title // ignore: cast_nullable_to_non_nullable
               as String,
       checks: null == checks
-          ? _value._checks
+          ? _value.checks
           : checks // ignore: cast_nullable_to_non_nullable
               as List<ChecklistCheck>,
     ));
@@ -106,39 +106,22 @@ class __$$ChecklistSectionImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$ChecklistSectionImpl extends _ChecklistSection
-    with DiagnosticableTreeMixin {
-  _$ChecklistSectionImpl(
-      {required this.title, required final List<ChecklistCheck> checks})
-      : _checks = checks,
-        super._();
+
+@JsonSerializable(explicitToJson: true)
+class _$ChecklistSectionImpl implements _ChecklistSection {
+  _$ChecklistSectionImpl({required this.title, required this.checks});
 
   factory _$ChecklistSectionImpl.fromJson(Map<String, dynamic> json) =>
       _$$ChecklistSectionImplFromJson(json);
 
   @override
   final String title;
-  final List<ChecklistCheck> _checks;
   @override
-  List<ChecklistCheck> get checks {
-    if (_checks is EqualUnmodifiableListView) return _checks;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_checks);
-  }
+  final List<ChecklistCheck> checks;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'ChecklistSection(title: $title, checks: $checks)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'ChecklistSection'))
-      ..add(DiagnosticsProperty('title', title))
-      ..add(DiagnosticsProperty('checks', checks));
   }
 
   @override
@@ -147,13 +130,13 @@ class _$ChecklistSectionImpl extends _ChecklistSection
         (other.runtimeType == runtimeType &&
             other is _$ChecklistSectionImpl &&
             (identical(other.title, title) || other.title == title) &&
-            const DeepCollectionEquality().equals(other._checks, _checks));
+            const DeepCollectionEquality().equals(other.checks, checks));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, title, const DeepCollectionEquality().hash(_checks));
+      runtimeType, title, const DeepCollectionEquality().hash(checks));
 
   @JsonKey(ignore: true)
   @override
@@ -170,11 +153,10 @@ class _$ChecklistSectionImpl extends _ChecklistSection
   }
 }
 
-abstract class _ChecklistSection extends ChecklistSection {
+abstract class _ChecklistSection implements ChecklistSection {
   factory _ChecklistSection(
       {required final String title,
       required final List<ChecklistCheck> checks}) = _$ChecklistSectionImpl;
-  _ChecklistSection._() : super._();
 
   factory _ChecklistSection.fromJson(Map<String, dynamic> json) =
       _$ChecklistSectionImpl.fromJson;

@@ -5,8 +5,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'checklist.freezed.dart';
 part 'checklist.g.dart';
 
-@unfreezed
+@Freezed(makeCollectionsUnmodifiable: false)
 class Checklist with _$Checklist {
+  @JsonSerializable(explicitToJson: true)
   factory Checklist({
     required String title,
     required String description,
@@ -14,8 +15,6 @@ class Checklist with _$Checklist {
     required DateTime date,
     required List<ChecklistSection> sections,
   }) = _Checklist;
-
-  Checklist._();
 
   factory Checklist.fromJson(Map<String, dynamic> json) =>
       _$ChecklistFromJson(json);

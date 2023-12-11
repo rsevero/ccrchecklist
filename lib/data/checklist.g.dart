@@ -23,5 +23,5 @@ Map<String, dynamic> _$$ChecklistImplToJson(_$ChecklistImpl instance) =>
       'description': instance.description,
       'diverName': instance.diverName,
       'date': instance.date.toIso8601String(),
-      'sections': instance.sections,
+      'sections': instance.sections.map((e) => e.toJson()).toList(),
     };

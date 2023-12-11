@@ -21,16 +21,10 @@ Checklist _$ChecklistFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Checklist {
   String get title => throw _privateConstructorUsedError;
-  set title(String value) => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
-  set description(String value) => throw _privateConstructorUsedError;
   String get diverName => throw _privateConstructorUsedError;
-  set diverName(String value) => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
-  set date(DateTime value) => throw _privateConstructorUsedError;
   List<ChecklistSection> get sections => throw _privateConstructorUsedError;
-  set sections(List<ChecklistSection> value) =>
-      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -154,29 +148,29 @@ class __$$ChecklistImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$ChecklistImpl extends _Checklist with DiagnosticableTreeMixin {
+
+@JsonSerializable(explicitToJson: true)
+class _$ChecklistImpl with DiagnosticableTreeMixin implements _Checklist {
   _$ChecklistImpl(
       {required this.title,
       required this.description,
       required this.diverName,
       required this.date,
-      required this.sections})
-      : super._();
+      required this.sections});
 
   factory _$ChecklistImpl.fromJson(Map<String, dynamic> json) =>
       _$$ChecklistImplFromJson(json);
 
   @override
-  String title;
+  final String title;
   @override
-  String description;
+  final String description;
   @override
-  String diverName;
+  final String diverName;
   @override
-  DateTime date;
+  final DateTime date;
   @override
-  List<ChecklistSection> sections;
+  final List<ChecklistSection> sections;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -195,6 +189,25 @@ class _$ChecklistImpl extends _Checklist with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('sections', sections));
   }
 
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ChecklistImpl &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.diverName, diverName) ||
+                other.diverName == diverName) &&
+            (identical(other.date, date) || other.date == date) &&
+            const DeepCollectionEquality().equals(other.sections, sections));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, title, description, diverName,
+      date, const DeepCollectionEquality().hash(sections));
+
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
@@ -209,33 +222,27 @@ class _$ChecklistImpl extends _Checklist with DiagnosticableTreeMixin {
   }
 }
 
-abstract class _Checklist extends Checklist {
+abstract class _Checklist implements Checklist {
   factory _Checklist(
-      {required String title,
-      required String description,
-      required String diverName,
-      required DateTime date,
-      required List<ChecklistSection> sections}) = _$ChecklistImpl;
-  _Checklist._() : super._();
+      {required final String title,
+      required final String description,
+      required final String diverName,
+      required final DateTime date,
+      required final List<ChecklistSection> sections}) = _$ChecklistImpl;
 
   factory _Checklist.fromJson(Map<String, dynamic> json) =
       _$ChecklistImpl.fromJson;
 
   @override
   String get title;
-  set title(String value);
   @override
   String get description;
-  set description(String value);
   @override
   String get diverName;
-  set diverName(String value);
   @override
   DateTime get date;
-  set date(DateTime value);
   @override
   List<ChecklistSection> get sections;
-  set sections(List<ChecklistSection> value);
   @override
   @JsonKey(ignore: true)
   _$$ChecklistImplCopyWith<_$ChecklistImpl> get copyWith =>

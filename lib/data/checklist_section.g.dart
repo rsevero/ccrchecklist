@@ -19,5 +19,5 @@ Map<String, dynamic> _$$ChecklistSectionImplToJson(
         _$ChecklistSectionImpl instance) =>
     <String, dynamic>{
       'title': instance.title,
-      'checks': instance.checks,
+      'checks': instance.checks.map((e) => e.toJson()).toList(),
     };
