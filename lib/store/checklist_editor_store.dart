@@ -1,4 +1,8 @@
+import 'package:ccr_checklist/data/checklist_check.dart';
 import 'package:ccr_checklist/data/checklist_section.dart';
+import 'package:ccr_checklist/data/template.dart';
+import 'package:ccr_checklist/data/template_check.dart';
+import 'package:ccr_checklist/misc/helper_functions.dart';
 import 'package:ccr_checklist/store/observablelist_json_converter.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:mobx/mobx.dart';
@@ -17,8 +21,6 @@ class ChecklistEditorStore extends _ChecklistEditorStoreBaseToJson
 }
 
 abstract class _ChecklistEditorStoreBaseToJson with Store {
-  final _undoRedoClass = 'ChecklistEditorStore';
-
   @readonly
   @JsonKey(includeFromJson: true, includeToJson: true)
   String _title = '';
@@ -56,39 +58,109 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
   @readonly
   String _redoDescription = '';
 
-  void _saveSnapshot(String operation) {
-    // final snapshot =
-    //     _$ChecklistEditorStoreFromJson(this as ChecklistEditorStore);
-    // final undoRedoStatus =
-    //     undoRedoStorage.addUndo(_undoRedoClass, operation, snapshot);
+  int _linearityCheckReferenceCount = 0;
+  bool _linearityStep1CheckPresent = false;
+  bool _linearityStep2CheckPresent = false;
 
-    // _canUndo = undoRedoStatus.canUndo;
-    // _canRedo = undoRedoStatus.canRedo;
-    // _undoDescription = undoRedoStatus.undoDescription;
-    // _redoDescription = undoRedoStatus.redoDescription;
+  @action
+  void initializeFromTemplate(Template template) {
+    _title = template.title;
+    _description = template.description;
+    _linearityStep1CheckPresent = false;
+    _linearityStep2CheckPresent = false;
+    for (final templateSection in template.sections) {
+      _sections.add(ChecklistSection(
+        title: templateSection.title,
+        checks: _getChecksFromTemplateChecks(templateSection.checks),
+      ));
+    }
+
+    _updateLinearityStep2CheckReferenceCount();
+  }
+
+  void _updateLinearityStep2CheckReferenceCount() {
+    if (!_linearityStep1CheckPresent || !_linearityStep2CheckPresent) {
+      return;
+    }
+
+    for (int sectionIndex = 0;
+        sectionIndex < _sections.length;
+        sectionIndex++) {
+      for (int checkIndex = 0;
+          checkIndex < _sections[sectionIndex].checks.length;
+          checkIndex++) {
+        final check = _sections[sectionIndex].checks[checkIndex];
+        if (check is ChecklistLinearityStep2Check) {
+          if (check.referenceCount != _linearityCheckReferenceCount) {
+            _sections[sectionIndex].checks[checkIndex] =
+                _sections[sectionIndex].checks[checkIndex].copyWith(
+                      referenceCount: _linearityCheckReferenceCount,
+                      references: createAndInitializeReferencesMap(
+                          _linearityCheckReferenceCount),
+                    );
+          }
+          return;
+        }
+      }
+    }
+  }
+
+  List<ChecklistCheck> _getChecksFromTemplateChecks(
+      List<TemplateCheck> templateChecks) {
+    List<ChecklistCheck> checks = [];
+
+    for (final templateCheck in templateChecks) {
+      ChecklistCheck checklistCheck;
+      if (templateCheck is TemplateRegularCheck) {
+        checklistCheck = ChecklistRegularCheck(
+          description: templateCheck.description,
+          lastChange: DateTime.now(),
+          isChecked: false,
+          referenceCount: templateCheck.referenceCount,
+          references:
+              createAndInitializeReferencesMap(templateCheck.referenceCount),
+          secondsTimer: templateCheck.secondsTimer,
+        );
+      } else if (templateCheck is TemplateLinearityStep1Check) {
+        _linearityStep1CheckPresent = true;
+        _linearityCheckReferenceCount = templateCheck.referenceCount;
+        checklistCheck = ChecklistLinearityStep1Check(
+          lastChange: DateTime.now(),
+          isChecked: false,
+          referenceCount: templateCheck.referenceCount,
+          references:
+              createAndInitializeReferencesMap(templateCheck.referenceCount),
+        );
+      } else {
+        _linearityStep2CheckPresent = true;
+        checklistCheck = ChecklistLinearityStep2Check(
+          lastChange: DateTime.now(),
+          isChecked: false,
+          referenceCount: 0,
+          references: createAndInitializeReferencesMap(0),
+        );
+      }
+      checks.add(checklistCheck);
+    }
+
+    return checks;
   }
 
   @action
   void setTitle(String value) {
     _title = value;
-    _saveSnapshot('Set title');
   }
 
   @action
   void setDescription(String value) {
     _description = value;
-    _saveSnapshot('Set description');
   }
 
   @action
   void setDiverName(String value) {
     _diverName = value;
-    _saveSnapshot('Set diver name');
   }
 
   @action
-  void setDate(DateTime value) {
-    _date = value;
-    _saveSnapshot('Set date');
-  }
+  void setDate(DateTime value) {}
 }

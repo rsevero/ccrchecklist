@@ -18,6 +18,6 @@ class TemplateSection with _$TemplateSection {
     );
   }
 
-  factory TemplateSection.fromJson(Map<String, Object?> json) =>
+  factory TemplateSection.fromJson(Map<String, dynamic> json) =>
       _$TemplateSectionFromJson(json);
 }

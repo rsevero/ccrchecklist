@@ -7,11 +7,12 @@ part 'template.g.dart';
 @Freezed(makeCollectionsUnmodifiable: false)
 class Template with _$Template {
   @JsonSerializable(explicitToJson: true)
-  factory Template(
-      {required String rebreatherModel,
-      required String title,
-      required String description,
-      required List<TemplateSection> sections}) = _Template;
+  factory Template({
+    required String rebreatherModel,
+    required String title,
+    required String description,
+    required List<TemplateSection> sections,
+  }) = _Template;
 
   factory Template.empty() {
     return Template(
@@ -22,6 +23,6 @@ class Template with _$Template {
     );
   }
 
-  factory Template.fromJson(Map<String, Object?> json) =>
+  factory Template.fromJson(Map<String, dynamic> json) =>
       _$TemplateFromJson(json);
 }

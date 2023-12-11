@@ -8,38 +8,33 @@ part 'checklist_check.g.dart';
 sealed class ChecklistCheck with _$ChecklistCheck {
   ChecklistCheck._();
 
-  factory ChecklistCheck.regular(
-      {required bool isChecked,
-      required DateTime lastChange,
-      required String description}) = ChecklistRegularCheck;
-  factory ChecklistCheck.withReference({
+  factory ChecklistCheck.regular({
     required bool isChecked,
     required DateTime lastChange,
     required String description,
+    required int secondsTimer,
     required int referenceCount,
     required Map<int, double> references,
-  }) = ChecklistWithReferenceCheck;
+  }) = ChecklistRegularCheck;
   factory ChecklistCheck.linearityStep1({
     required bool isChecked,
     required DateTime lastChange,
     required int referenceCount,
     required Map<int, double> references,
-  }) = ChecklistLinearityCheckStep1Check;
+  }) = ChecklistLinearityStep1Check;
   factory ChecklistCheck.linearityStep2({
     required bool isChecked,
     required DateTime lastChange,
     required int referenceCount,
     required Map<int, double> references,
-  }) = ChecklistLinearityCheckStep2Check;
+  }) = ChecklistLinearityStep2Check;
 
   String get description {
     if (this is ChecklistRegularCheck) {
       return (this as ChecklistRegularCheck).description;
-    } else if (this is ChecklistWithReferenceCheck) {
-      return (this as ChecklistWithReferenceCheck).description;
-    } else if (this is ChecklistLinearityCheckStep1Check) {
+    } else if (this is ChecklistLinearityStep1Check) {
       return 'Linearity Step 1';
-    } else if (this is ChecklistLinearityCheckStep2Check) {
+    } else if (this is ChecklistLinearityStep2Check) {
       return 'Linearity Step 2';
     } else {
       throw Exception('Unknown ChecklistCheck type');

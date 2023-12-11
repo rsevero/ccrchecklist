@@ -204,6 +204,18 @@ mixin _$ChecklistEditorStore on _ChecklistEditorStoreBaseToJson, Store {
           name: '_ChecklistEditorStoreBaseToJson', context: context);
 
   @override
+  void initializeFromTemplate(Template template) {
+    final _$actionInfo =
+        _$_ChecklistEditorStoreBaseToJsonActionController.startAction(
+            name: '_ChecklistEditorStoreBaseToJson.initializeFromTemplate');
+    try {
+      return super.initializeFromTemplate(template);
+    } finally {
+      _$_ChecklistEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void setTitle(String value) {
     final _$actionInfo = _$_ChecklistEditorStoreBaseToJsonActionController
         .startAction(name: '_ChecklistEditorStoreBaseToJson.setTitle');

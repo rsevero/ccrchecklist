@@ -34,3 +34,13 @@ String formatSecondsToMinutesSeconds(int totalSeconds) {
 
   return formattedTime;
 }
+
+Map<int, double> createAndInitializeReferencesMap(int numberOfEntries) {
+  Map<int, double> myMap = {};
+
+  for (int i = 1; i <= numberOfEntries; i++) {
+    myMap[i] = 0.0;
+  }
+
+  return myMap;
+}
