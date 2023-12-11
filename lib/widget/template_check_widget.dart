@@ -1,5 +1,4 @@
 import 'package:ccr_checklist/data/template_check.dart';
-import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/misc/helper_functions.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
 import 'package:flutter/material.dart';
