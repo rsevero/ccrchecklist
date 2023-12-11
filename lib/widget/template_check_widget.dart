@@ -1,4 +1,5 @@
 import 'package:ccr_checklist/data/template_check.dart';
+import 'package:ccr_checklist/misc/helper_functions.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -21,16 +22,14 @@ class TemplateCheckWidget extends StatelessWidget {
       builder: (_) {
         final check = templateEditorStore.checks[sectionIndex][index];
         String description = check.description;
-        if ((check is TemplateWithReferenceCheck) ||
-            (check is TemplateLinearityStep1Check)) {
-          int referenceCount;
-          if (check is TemplateWithReferenceCheck) {
-            referenceCount = check.referenceCount;
-          } else {
-            referenceCount =
-                (check as TemplateLinearityStep1Check).referenceCount;
-          }
-          description += ' (Ref count: $referenceCount)';
+        if (check is TemplateRegularCheck) {
+          final timer = check.secondsTimer == 0
+              ? 'no timer'
+              : "${formatSecondsToMinutesSeconds(check.secondsTimer)}s";
+          description +=
+              ' (Ref count: ${check.referenceCount} - Timer: $timer)';
+        } else if (check is TemplateLinearityStep1Check) {
+          description += ' (Ref count: ${check.referenceCount})';
         }
         return ListTile(
           key: ValueKey("$sectionIndex-$index"),
@@ -76,31 +75,84 @@ class TemplateCheckWidget extends StatelessWidget {
 
   void _editTemplateRegularCheck(BuildContext context,
       TemplateEditorStore templateEditorStore, int sectionIndex, int index) {
-    final TextEditingController titleController = TextEditingController();
+    final TextEditingController descriptionController = TextEditingController();
+    final TextEditingController timerController = TextEditingController();
     final check = (templateEditorStore.checks[sectionIndex][index]
         as TemplateRegularCheck);
-    titleController.text = check.description;
+    descriptionController.text = check.description;
+    int numberOfReferences = check.referenceCount;
+    Duration timerDuration = Duration(seconds: check.secondsTimer);
 
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Edit Section'),
-          content: TextFormField(
-            controller: titleController,
-            decoration: const InputDecoration(hintText: 'Enter section title'),
-            autofocus: true,
+          title: const Text('Edit Regular Check'),
+          content: StatefulBuilder(
+            builder: (BuildContext context, StateSetter setState) {
+              return SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    TextFormField(
+                      controller: descriptionController,
+                      decoration: const InputDecoration(
+                          hintText: 'Enter check description'),
+                      autofocus: true,
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text('Amount of references'),
+                    ),
+                    ...List.generate(
+                      6,
+                      (index) => RadioListTile<int>(
+                        title: Text('$index'),
+                        value: index,
+                        groupValue: numberOfReferences,
+                        onChanged: (int? value) {
+                          if (value != null) {
+                            setState(() => numberOfReferences = value);
+                          }
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: const Text('Set Timer Duration'),
+                      subtitle: Text(
+                          '${timerDuration.inMinutes} minute(s) and ${timerDuration.inSeconds % 60} second(s)'),
+                      onTap: () async {
+                        final TimeOfDay? pickedTime = await showTimePicker(
+                          context: context,
+                          initialTime: TimeOfDay(
+                              hour: timerDuration.inMinutes,
+                              minute: timerDuration.inSeconds % 60),
+                        );
+                        if (pickedTime != null &&
+                            pickedTime != TimeOfDay.now()) {
+                          setState(() {
+                            timerDuration = Duration(
+                                minutes: pickedTime.hour,
+                                seconds: pickedTime.minute);
+                          });
+                        }
+                      },
+                    ),
+                  ],
+                ),
+              );
+            },
           ),
           actions: <Widget>[
             TextButton(
               child: const Text('Update'),
               onPressed: () {
-                final String newTitle = titleController.text;
-                if (newTitle.isNotEmpty) {
-                  templateEditorStore.updateRegularCheck(
-                      sectionIndex, index, newTitle);
-                  Navigator.of(context).pop();
-                }
+                final String newDescription = descriptionController.text;
+                templateEditorStore.updateRegularCheck(sectionIndex, index,
+                    description: newDescription,
+                    referenceCount: numberOfReferences,
+                    timerDuration: timerDuration.inSeconds);
+                Navigator.of(context).pop();
               },
             ),
             TextButton(
@@ -110,80 +162,6 @@ class TemplateCheckWidget extends StatelessWidget {
               },
             ),
           ],
-        );
-      },
-    );
-  }
-
-  void _editTemplateWithReferenceCheck(BuildContext context,
-      TemplateEditorStore templateEditorStore, int sectionIndex, int index) {
-    final TextEditingController titleController = TextEditingController();
-    final check = (templateEditorStore.checks[sectionIndex][index]
-        as TemplateWithReferenceCheck);
-    titleController.text = check.description;
-    int referenceCount = check.referenceCount;
-
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return StatefulBuilder(
-          // Use StatefulBuilder to manage local state of radio buttons
-          builder: (BuildContext context, StateSetter setState) {
-            return AlertDialog(
-              title: const Text('Edit Section'),
-              content: SingleChildScrollView(
-                // For better layout management
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    TextFormField(
-                      controller: titleController,
-                      decoration: const InputDecoration(
-                          hintText: 'Enter section title'),
-                      autofocus: true,
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text(
-                          'Amount of references'), // Label for the radio buttons
-                    ),
-                    ...List.generate(
-                      5,
-                      (index) => RadioListTile<int>(
-                        title: Text('${index + 1}'),
-                        value: index + 1,
-                        groupValue: referenceCount,
-                        onChanged: (int? value) {
-                          if (value != null) {
-                            setState(() => (referenceCount = value));
-                          }
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              actions: <Widget>[
-                TextButton(
-                  child: const Text('Update'),
-                  onPressed: () {
-                    final String newTitle = titleController.text;
-                    if (newTitle.isNotEmpty) {
-                      templateEditorStore.updateWithReferenceCheck(
-                          sectionIndex, index, newTitle, referenceCount);
-                      Navigator.of(context).pop();
-                    }
-                  },
-                ),
-                TextButton(
-                  child: const Text('Cancel'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            );
-          },
         );
       },
     );
@@ -329,9 +307,6 @@ class TemplateCheckWidget extends StatelessWidget {
 
     if (check is TemplateRegularCheck) {
       _editTemplateRegularCheck(
-          context, templateEditorStore, sectionIndex, index);
-    } else if (check is TemplateWithReferenceCheck) {
-      _editTemplateWithReferenceCheck(
           context, templateEditorStore, sectionIndex, index);
     } else if (check is TemplateLinearityStep1Check) {
       _editTemplateLinearityStep1Check(

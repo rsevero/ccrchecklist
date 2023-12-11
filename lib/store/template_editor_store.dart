@@ -157,18 +157,14 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
   }
 
   @action
-  void addWithReferenceCheck(
-      {required String description, required int referenceCount}) {
-    final newWithReferenceCheck = TemplateWithReferenceCheck(
-        description: description, referenceCount: referenceCount);
-    _selectedSection.checks.add(newWithReferenceCheck);
-    _checks[_selectedSectionIndex].add(newWithReferenceCheck);
-    _saveSnapshot('Add with reference check');
-  }
-
-  @action
-  void addRegularCheck({required String description}) {
-    final newRegularCheck = TemplateRegularCheck(description: description);
+  void addRegularCheck(
+      {required String description,
+      required int secondsTimer,
+      required int referenceCount}) {
+    final newRegularCheck = TemplateRegularCheck(
+        description: description,
+        secondsTimer: secondsTimer,
+        referenceCount: referenceCount);
     _selectedSection.checks.add(newRegularCheck);
     _checks[_selectedSectionIndex].add(newRegularCheck);
     _saveSnapshot('Add regular check');
@@ -252,27 +248,18 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
   }
 
   @action
-  void updateRegularCheck(
-      int sectionIndex, int checkIndex, String description) {
+  void updateRegularCheck(int sectionIndex, int checkIndex,
+      {String? description, int? timerDuration, int? referenceCount}) {
     final check = _checks[sectionIndex][checkIndex] as TemplateRegularCheck;
-    final newCheck = check.copyWith(description: description);
+
+    final newCheck = check.copyWith(
+        description: description ?? check.description,
+        secondsTimer: timerDuration ?? check.secondsTimer,
+        referenceCount: referenceCount ?? check.referenceCount);
 
     _currentTemplate.sections[sectionIndex].checks[checkIndex] = newCheck;
     _checks[sectionIndex][checkIndex] = newCheck;
     _saveSnapshot('Update regular check');
-  }
-
-  @action
-  void updateWithReferenceCheck(int sectionIndex, int checkIndex,
-      String description, int referenceCount) {
-    final check =
-        _checks[sectionIndex][checkIndex] as TemplateWithReferenceCheck;
-    final newCheck = check.copyWith(
-        description: description, referenceCount: referenceCount);
-
-    _currentTemplate.sections[sectionIndex].checks[checkIndex] = newCheck;
-    _checks[sectionIndex][checkIndex] = newCheck;
-    _saveSnapshot('Update with reference check');
   }
 
   @action

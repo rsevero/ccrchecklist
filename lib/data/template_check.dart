@@ -8,11 +8,10 @@ part 'template_check.g.dart';
 sealed class TemplateCheck with _$TemplateCheck {
   TemplateCheck._();
 
-  factory TemplateCheck.regular({required String description}) =
-      TemplateRegularCheck;
-  factory TemplateCheck.withReference(
+  factory TemplateCheck.regular(
       {required String description,
-      required int referenceCount}) = TemplateWithReferenceCheck;
+      required int secondsTimer,
+      required int referenceCount}) = TemplateRegularCheck;
   factory TemplateCheck.linearityStep1({required int referenceCount}) =
       TemplateLinearityStep1Check;
   factory TemplateCheck.linearityStep2() = TemplateLinearityStep2Check;
@@ -20,8 +19,6 @@ sealed class TemplateCheck with _$TemplateCheck {
   String get description {
     if (this is TemplateRegularCheck) {
       return (this as TemplateRegularCheck).description;
-    } else if (this is TemplateWithReferenceCheck) {
-      return (this as TemplateWithReferenceCheck).description;
     } else if (this is TemplateLinearityStep1Check) {
       return 'Linearity Step 1';
     } else if (this is TemplateLinearityStep2Check) {

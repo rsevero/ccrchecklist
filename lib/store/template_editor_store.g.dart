@@ -327,25 +327,17 @@ mixin _$TemplateEditorStore on _TemplateEditorStoreBaseToJson, Store {
   }
 
   @override
-  void addWithReferenceCheck(
-      {required String description, required int referenceCount}) {
-    final _$actionInfo =
-        _$_TemplateEditorStoreBaseToJsonActionController.startAction(
-            name: '_TemplateEditorStoreBaseToJson.addWithReferenceCheck');
-    try {
-      return super.addWithReferenceCheck(
-          description: description, referenceCount: referenceCount);
-    } finally {
-      _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void addRegularCheck({required String description}) {
+  void addRegularCheck(
+      {required String description,
+      required int secondsTimer,
+      required int referenceCount}) {
     final _$actionInfo = _$_TemplateEditorStoreBaseToJsonActionController
         .startAction(name: '_TemplateEditorStoreBaseToJson.addRegularCheck');
     try {
-      return super.addRegularCheck(description: description);
+      return super.addRegularCheck(
+          description: description,
+          secondsTimer: secondsTimer,
+          referenceCount: referenceCount);
     } finally {
       _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
     }
@@ -388,26 +380,15 @@ mixin _$TemplateEditorStore on _TemplateEditorStoreBaseToJson, Store {
   }
 
   @override
-  void updateRegularCheck(
-      int sectionIndex, int checkIndex, String description) {
+  void updateRegularCheck(int sectionIndex, int checkIndex,
+      {String? description, int? timerDuration, int? referenceCount}) {
     final _$actionInfo = _$_TemplateEditorStoreBaseToJsonActionController
         .startAction(name: '_TemplateEditorStoreBaseToJson.updateRegularCheck');
     try {
-      return super.updateRegularCheck(sectionIndex, checkIndex, description);
-    } finally {
-      _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void updateWithReferenceCheck(int sectionIndex, int checkIndex,
-      String description, int referenceCount) {
-    final _$actionInfo =
-        _$_TemplateEditorStoreBaseToJsonActionController.startAction(
-            name: '_TemplateEditorStoreBaseToJson.updateWithReferenceCheck');
-    try {
-      return super.updateWithReferenceCheck(
-          sectionIndex, checkIndex, description, referenceCount);
+      return super.updateRegularCheck(sectionIndex, checkIndex,
+          description: description,
+          timerDuration: timerDuration,
+          referenceCount: referenceCount);
     } finally {
       _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
     }

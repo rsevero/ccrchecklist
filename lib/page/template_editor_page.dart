@@ -114,13 +114,6 @@ class TemplateEditorPage extends StatelessWidget {
                     _onTapAddLinearityStep1Check(context, templateEditorStore),
               ),
               GreyableSpeedDialChild(
-                child: const Icon(Icons.check_circle_outlined),
-                text: 'Add "With Reference" Check',
-                isEnabled: templateEditorStore.enableCheckCreation,
-                onTap: () =>
-                    _onTapAddWithReferenceCheck(context, templateEditorStore),
-              ),
-              GreyableSpeedDialChild(
                 child: const Icon(Icons.check),
                 text: 'Add Regular Check',
                 isEnabled: templateEditorStore.enableCheckCreation,
@@ -287,42 +280,6 @@ class TemplateEditorPage extends StatelessWidget {
     }
   }
 
-  void _onTapAddRegularCheck(
-      BuildContext context, TemplateEditorStore templateEditorStore) async {
-    final TextEditingController descriptionController = TextEditingController();
-
-    bool confirmed = await showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: const Text('Add Regular Check'),
-              content: TextFormField(
-                controller: descriptionController,
-                decoration:
-                    const InputDecoration(hintText: 'Enter check description'),
-                autofocus: true,
-              ),
-              actions: <Widget>[
-                TextButton(
-                  child: const Text('Create'),
-                  onPressed: () => Navigator.of(context).pop(true),
-                ),
-                TextButton(
-                  child: const Text('Cancel'),
-                  onPressed: () => Navigator.of(context).pop(false),
-                ),
-              ],
-            );
-          },
-        ) ??
-        false;
-
-    if (confirmed) {
-      templateEditorStore.addRegularCheck(
-          description: descriptionController.text);
-    }
-  }
-
   void _onTapAddLinearityStep2Check(
       BuildContext context, TemplateEditorStore templateEditorStore) {
     templateEditorStore.addLinearityStep2Check();
@@ -384,10 +341,11 @@ class TemplateEditorPage extends StatelessWidget {
     );
   }
 
-  void _onTapAddWithReferenceCheck(
+  void _onTapAddRegularCheck(
       BuildContext context, TemplateEditorStore templateEditorStore) {
     final TextEditingController descriptionController = TextEditingController();
-    int numberOfReferences = 1; // Default value
+    int numberOfReferences = 0;
+    Duration timerDuration = Duration.zero; // Default values
 
     showDialog(
       context: context,
@@ -412,10 +370,10 @@ class TemplateEditorPage extends StatelessWidget {
                         'Amount of references'), // Label for the radio buttons
                   ),
                   ...List.generate(
-                    5,
+                    6,
                     (index) => RadioListTile<int>(
-                      title: Text('${index + 1}'),
-                      value: index + 1,
+                      title: Text('$index'),
+                      value: index,
                       groupValue: numberOfReferences,
                       onChanged: (int? value) {
                         if (value != null) {
@@ -423,6 +381,28 @@ class TemplateEditorPage extends StatelessWidget {
                         }
                       },
                     ),
+                  ),
+                  ListTile(
+                    title: const Text('Set Timer Duration'),
+                    subtitle: Text(
+                        '${timerDuration.inMinutes} minute(s) and ${timerDuration.inSeconds % 60} second(s)'),
+                    onTap: () async {
+                      final TimeOfDay? pickedTime = await showTimePicker(
+                        context: context,
+                        initialTime: TimeOfDay(
+                            hour: timerDuration.inMinutes,
+                            minute: timerDuration.inSeconds % 60),
+                      );
+                      if (pickedTime != null) {
+                        setState(
+                          () {
+                            timerDuration = Duration(
+                                minutes: pickedTime.hour,
+                                seconds: pickedTime.minute);
+                          },
+                        );
+                      }
+                    },
                   ),
                 ],
               );
@@ -435,9 +415,10 @@ class TemplateEditorPage extends StatelessWidget {
                 // Validate inputs and create check
                 final description = descriptionController.text;
                 if (description.isNotEmpty) {
-                  templateEditorStore.addWithReferenceCheck(
+                  templateEditorStore.addRegularCheck(
                       description: description,
-                      referenceCount: numberOfReferences);
+                      referenceCount: numberOfReferences,
+                      secondsTimer: timerDuration.inSeconds);
                   Navigator.of(context).pop();
                 }
               },
