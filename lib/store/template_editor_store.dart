@@ -1,27 +1,52 @@
 import 'package:ccr_checklist/data/template_check.dart';
 import 'package:ccr_checklist/data/template_section.dart';
 import 'package:ccr_checklist/data/template.dart';
+import 'package:ccr_checklist/main.dart';
+import 'package:ccr_checklist/store/observablelist_json_converter.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:mobx/mobx.dart';
 
 part 'template_editor_store.g.dart';
 
-class TemplateEditorStore = TemplateEditorStoreBase with _$TemplateEditorStore;
+@JsonSerializable()
+class TemplateEditorStore extends _TemplateSectionToJson
+    with _$TemplateEditorStore {
+  TemplateEditorStore();
+  factory TemplateEditorStore.fromJson(Map<String, dynamic> json) =>
+      _$TemplateEditorStoreFromJson(json);
+  Map<String, dynamic> toJson() => _$TemplateEditorStoreToJson(this);
+}
 
-abstract class TemplateEditorStoreBase with Store {
+abstract class _TemplateSectionToJson with Store {
+  final _undoRedoClass = 'TemplateEditorStore';
+
   @readonly
+  @JsonKey(includeFromJson: true, includeToJson: true)
   Template _currentTemplate = Template.empty();
 
   @readonly
+  @JsonKey(
+      includeFromJson: true,
+      includeToJson: true,
+      fromJson: ObservableListJsonConverter.oblstOfTemplateSectionFromJson,
+      toJson: ObservableListJsonConverter.oblstOfTemplateSectionToJson)
   ObservableList<TemplateSection> _sections = ObservableList<TemplateSection>();
 
   @readonly
+  @JsonKey(includeFromJson: true, includeToJson: true)
   TemplateSection _selectedSection = TemplateSection.empty();
 
   @readonly
+  @JsonKey(
+      includeFromJson: true,
+      includeToJson: true,
+      fromJson: ObservableListJsonConverter.oblstOfObLstOfTemplateCheckFromJson,
+      toJson: ObservableListJsonConverter.oblstOfObLstOfTemplateCheckToJson)
   ObservableList<ObservableList<TemplateCheck>> _checks =
       ObservableList<ObservableList<TemplateCheck>>();
 
   @readonly
+  @JsonKey(includeFromJson: true, includeToJson: true)
   int _selectedSectionIndex = -1;
 
   @computed
@@ -36,10 +61,21 @@ abstract class TemplateEditorStoreBase with Store {
       _sections.isNotEmpty && !_hasLinearityStep1;
 
   @readonly
+  @JsonKey(includeFromJson: true, includeToJson: true)
   bool _hasLinearityStep1 = false;
 
   @readonly
+  @JsonKey(includeFromJson: true, includeToJson: true)
   bool _hasLinearityStep2 = false;
+
+  _TemplateSectionToJson() {
+    _saveSnapshot();
+  }
+
+  void _saveSnapshot() {
+    final snapshot = _$TemplateEditorStoreToJson(this as TemplateEditorStore);
+    undoRedoStorage.addUndo(_undoRedoClass, snapshot);
+  }
 
   @action
   void addLinearityStep2Check() {
@@ -47,6 +83,7 @@ abstract class TemplateEditorStoreBase with Store {
     _selectedSection.checks.add(newLinearityStep2Check);
     _checks[_selectedSectionIndex].add(newLinearityStep2Check);
     _updateHasLinearitySteps();
+    _saveSnapshot();
   }
 
   @action
@@ -56,6 +93,7 @@ abstract class TemplateEditorStoreBase with Store {
     _selectedSection.checks.add(newLinearityStep1Check);
     _checks[_selectedSectionIndex].add(newLinearityStep1Check);
     _updateHasLinearitySteps();
+    _saveSnapshot();
   }
 
   @action
@@ -65,6 +103,7 @@ abstract class TemplateEditorStoreBase with Store {
         description: description, referenceCount: referenceCount);
     _selectedSection.checks.add(newWithReferenceCheck);
     _checks[_selectedSectionIndex].add(newWithReferenceCheck);
+    _saveSnapshot();
   }
 
   @action
@@ -72,6 +111,7 @@ abstract class TemplateEditorStoreBase with Store {
     final newRegularCheck = TemplateRegularCheck(description: description);
     _selectedSection.checks.add(newRegularCheck);
     _checks[_selectedSectionIndex].add(newRegularCheck);
+    _saveSnapshot();
   }
 
   @action
@@ -81,6 +121,7 @@ abstract class TemplateEditorStoreBase with Store {
     _sections.add(_selectedSection);
     _checks.add(ObservableList.of(_selectedSection.checks));
     _selectLastSection();
+    _saveSnapshot();
   }
 
   void _updateHasLinearitySteps() {
@@ -120,22 +161,6 @@ abstract class TemplateEditorStoreBase with Store {
   }
 
   @action
-  void editTemplateRebreatherModel(String rebreatherModel) {
-    _currentTemplate =
-        _currentTemplate.copyWith(rebreatherModel: rebreatherModel);
-  }
-
-  @action
-  void editTemplateTitle(String title) {
-    _currentTemplate = _currentTemplate.copyWith(title: title);
-  }
-
-  @action
-  void editTemplateDescription(String description) {
-    _currentTemplate = _currentTemplate.copyWith(description: description);
-  }
-
-  @action
   void setCurrentTemplate(Template template) {
     _currentTemplate = template;
     _sections = ObservableList.of(template.sections);
@@ -143,6 +168,7 @@ abstract class TemplateEditorStoreBase with Store {
       _checks.add(ObservableList.of(section.checks));
     }
     _selectLastSection();
+    _saveSnapshot();
   }
 
   @action
@@ -160,6 +186,7 @@ abstract class TemplateEditorStoreBase with Store {
     _currentTemplate.sections[newSectionIndex].checks.add(check);
 
     _setSelectedSectionByIndex(newSectionIndex);
+    _saveSnapshot();
   }
 
   @action
@@ -170,6 +197,7 @@ abstract class TemplateEditorStoreBase with Store {
 
     _currentTemplate.sections[sectionIndex].checks[checkIndex] = newCheck;
     _checks[sectionIndex][checkIndex] = newCheck;
+    _saveSnapshot();
   }
 
   @action
@@ -182,6 +210,7 @@ abstract class TemplateEditorStoreBase with Store {
 
     _currentTemplate.sections[sectionIndex].checks[checkIndex] = newCheck;
     _checks[sectionIndex][checkIndex] = newCheck;
+    _saveSnapshot();
   }
 
   @action
@@ -193,6 +222,7 @@ abstract class TemplateEditorStoreBase with Store {
 
     _currentTemplate.sections[sectionIndex].checks[checkIndex] = newCheck;
     _checks[sectionIndex][checkIndex] = newCheck;
+    _saveSnapshot();
   }
 
   @action
@@ -214,6 +244,7 @@ abstract class TemplateEditorStoreBase with Store {
     _checks.insert(newSectionIndex, observableChecks);
 
     _setSelectedSectionByIndex(newSectionIndex);
+    _saveSnapshot();
   }
 
   @action
@@ -225,6 +256,7 @@ abstract class TemplateEditorStoreBase with Store {
         title: title);
 
     _currentTemplate = newTemplate;
+    _saveSnapshot();
   }
 
   @action
@@ -235,6 +267,7 @@ abstract class TemplateEditorStoreBase with Store {
 
       _currentTemplate.sections[sectionIndex] = updatedTemplateSection;
       _sections[sectionIndex] = updatedTemplateSection;
+      _saveSnapshot();
     }
   }
 
@@ -245,6 +278,7 @@ abstract class TemplateEditorStoreBase with Store {
       _sections.removeAt(index);
       _setSelectedSectionByIndex(index);
       _updateHasLinearitySteps();
+      _saveSnapshot();
     }
   }
 
@@ -257,6 +291,7 @@ abstract class TemplateEditorStoreBase with Store {
       _currentTemplate.sections[sectionIndex].checks.removeAt(index);
       _checks[sectionIndex].removeAt(index);
       _updateHasLinearitySteps();
+      _saveSnapshot();
     }
   }
 }
