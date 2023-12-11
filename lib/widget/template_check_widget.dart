@@ -1,4 +1,5 @@
 import 'package:ccr_checklist/data/template_check.dart';
+import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/misc/helper_functions.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
 import 'package:flutter/material.dart';
@@ -23,9 +24,7 @@ class TemplateCheckWidget extends StatelessWidget {
         final check = templateEditorStore.checks[sectionIndex][index];
         String description = check.description;
         if (check is TemplateRegularCheck) {
-          final timer = check.secondsTimer == 0
-              ? 'no timer'
-              : "${formatSecondsToMinutesSeconds(check.secondsTimer)}s";
+          final timer = formatSecondsToMinutesSecondsTimer(check.secondsTimer);
           description +=
               ' (Ref count: ${check.referenceCount} - Timer: $timer)';
         } else if (check is TemplateLinearityStep1Check) {
@@ -76,7 +75,6 @@ class TemplateCheckWidget extends StatelessWidget {
   void _editTemplateRegularCheck(BuildContext context,
       TemplateEditorStore templateEditorStore, int sectionIndex, int index) {
     final TextEditingController descriptionController = TextEditingController();
-    final TextEditingController timerController = TextEditingController();
     final check = (templateEditorStore.checks[sectionIndex][index]
         as TemplateRegularCheck);
     descriptionController.text = check.description;
@@ -119,8 +117,8 @@ class TemplateCheckWidget extends StatelessWidget {
                     ),
                     ListTile(
                       title: const Text('Set Timer Duration'),
-                      subtitle: Text(
-                          '${timerDuration.inMinutes} minute(s) and ${timerDuration.inSeconds % 60} second(s)'),
+                      subtitle: Text(formatSecondsToMinutesSecondsTimer(
+                          timerDuration.inSeconds)),
                       onTap: () async {
                         final TimeOfDay? pickedTime = await showTimePicker(
                           context: context,

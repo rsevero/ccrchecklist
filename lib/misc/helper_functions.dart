@@ -1,6 +1,28 @@
+import 'package:ccr_checklist/misc/constants.dart';
+
+String formatSecondsToMinutesSecondsTimer(int totalSeconds) {
+  if (totalSeconds < 0) {
+    return "Invalid Input"; // Handle negative input
+  }
+
+  if (totalSeconds == 0) {
+    return ccrNoTimer; // Handle 0 input
+  }
+
+  // Formatting the output, e.g., "2:30"
+  final String formattedTime =
+      "${formatSecondsToMinutesSeconds(totalSeconds)}s";
+
+  return formattedTime;
+}
+
 String formatSecondsToMinutesSeconds(int totalSeconds) {
   if (totalSeconds < 0) {
     return "Invalid Input"; // Handle negative input
+  }
+
+  if (totalSeconds == 0) {
+    return ccrNoTimer; // Handle 0 input
   }
 
   int minutes = totalSeconds ~/ 60; // Integer division to get minutes
