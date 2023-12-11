@@ -10,20 +10,24 @@ sealed class ChecklistCheck with _$ChecklistCheck {
 
   factory ChecklistCheck.regular(
       {required bool isChecked,
+      required DateTime lastChange,
       required String description}) = ChecklistRegularCheck;
   factory ChecklistCheck.withReference({
     required bool isChecked,
+    required DateTime lastChange,
     required String description,
     required int referenceCount,
     required Map<int, double> references,
   }) = ChecklistWithReferenceCheck;
   factory ChecklistCheck.linearityStep1({
     required bool isChecked,
+    required DateTime lastChange,
     required int referenceCount,
     required Map<int, double> references,
   }) = ChecklistLinearityCheckStep1Check;
   factory ChecklistCheck.linearityStep2({
     required bool isChecked,
+    required DateTime lastChange,
     required int referenceCount,
     required Map<int, double> references,
   }) = ChecklistLinearityCheckStep2Check;

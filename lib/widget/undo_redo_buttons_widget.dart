@@ -38,20 +38,3 @@ class UndoRedoButtonsWidget extends StatelessWidget {
     );
   }
 }
-
-class UndoRedoController {
-  final UndoRedoStatus status;
-  final Function() undo;
-  final Function() redo;
-
-  const UndoRedoController({
-    required this.undo,
-    required this.redo,
-    required this.status,
-  });
-
-  bool get canUndo => status.canUndo;
-  bool get canRedo => status.canRedo;
-  String get undoDescription => status.undoDescription;
-  String get redoDescription => status.redoDescription;
-}

@@ -10,12 +10,13 @@ TemplateEditorStore _$TemplateEditorStoreFromJson(Map<String, dynamic> json) =>
     TemplateEditorStore()
       .._currentTemplate =
           Template.fromJson(json['_currentTemplate'] as Map<String, dynamic>)
-      .._sections = ObservableListJsonConverter.oblstOfTemplateSectionFromJson(
-          json['_sections'] as List<TemplateSection>)
+      .._sections =
+          ObservableListJsonConverter.obsvbLstOfTemplateSectionFromJson(
+              json['_sections'] as List<TemplateSection>)
       .._selectedSection = TemplateSection.fromJson(
           json['_selectedSection'] as Map<String, dynamic>)
       .._checks =
-          ObservableListJsonConverter.oblstOfObLstOfTemplateCheckFromJson(
+          ObservableListJsonConverter.obsvbLstOfObsvbLstOfTemplateCheckFromJson(
               json['_checks'] as List<List<TemplateCheck>>)
       .._selectedSectionIndex = json['_selectedSectionIndex'] as int
       .._hasLinearityStep1 = json['_hasLinearityStep1'] as bool
@@ -25,11 +26,12 @@ Map<String, dynamic> _$TemplateEditorStoreToJson(
         TemplateEditorStore instance) =>
     <String, dynamic>{
       '_currentTemplate': instance._currentTemplate.toJson(),
-      '_sections': ObservableListJsonConverter.oblstOfTemplateSectionToJson(
+      '_sections': ObservableListJsonConverter.obsvbLstOfTemplateSectionToJson(
           instance._sections),
       '_selectedSection': instance._selectedSection.toJson(),
-      '_checks': ObservableListJsonConverter.oblstOfObLstOfTemplateCheckToJson(
-          instance._checks),
+      '_checks':
+          ObservableListJsonConverter.obsvbLstOfObsvbLstOfTemplateCheckToJson(
+              instance._checks),
       '_selectedSectionIndex': instance._selectedSectionIndex,
       '_hasLinearityStep1': instance._hasLinearityStep1,
       '_hasLinearityStep2': instance._hasLinearityStep2,
@@ -41,13 +43,13 @@ Map<String, dynamic> _$TemplateEditorStoreToJson(
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$TemplateEditorStore on _TemplateSectionToJson, Store {
+mixin _$TemplateEditorStore on _TemplateEditorStoreBaseToJson, Store {
   Computed<bool>? _$enableCheckCreationComputed;
 
   @override
   bool get enableCheckCreation => (_$enableCheckCreationComputed ??=
           Computed<bool>(() => super.enableCheckCreation,
-              name: '_TemplateSectionToJson.enableCheckCreation'))
+              name: '_TemplateEditorStoreBaseToJson.enableCheckCreation'))
       .value;
   Computed<bool>? _$enableLinearityStep2CreationComputed;
 
@@ -55,7 +57,8 @@ mixin _$TemplateEditorStore on _TemplateSectionToJson, Store {
   bool get enableLinearityStep2Creation =>
       (_$enableLinearityStep2CreationComputed ??= Computed<bool>(
               () => super.enableLinearityStep2Creation,
-              name: '_TemplateSectionToJson.enableLinearityStep2Creation'))
+              name:
+                  '_TemplateEditorStoreBaseToJson.enableLinearityStep2Creation'))
           .value;
   Computed<bool>? _$enableLinearityStep1CreationComputed;
 
@@ -63,18 +66,13 @@ mixin _$TemplateEditorStore on _TemplateSectionToJson, Store {
   bool get enableLinearityStep1Creation =>
       (_$enableLinearityStep1CreationComputed ??= Computed<bool>(
               () => super.enableLinearityStep1Creation,
-              name: '_TemplateSectionToJson.enableLinearityStep1Creation'))
+              name:
+                  '_TemplateEditorStoreBaseToJson.enableLinearityStep1Creation'))
           .value;
-  Computed<UndoRedoController>? _$undoRedoControllerComputed;
 
-  @override
-  UndoRedoController get undoRedoController => (_$undoRedoControllerComputed ??=
-          Computed<UndoRedoController>(() => super.undoRedoController,
-              name: '_TemplateSectionToJson.undoRedoController'))
-      .value;
-
-  late final _$_currentTemplateAtom =
-      Atom(name: '_TemplateSectionToJson._currentTemplate', context: context);
+  late final _$_currentTemplateAtom = Atom(
+      name: '_TemplateEditorStoreBaseToJson._currentTemplate',
+      context: context);
 
   Template get currentTemplate {
     _$_currentTemplateAtom.reportRead();
@@ -92,7 +90,7 @@ mixin _$TemplateEditorStore on _TemplateSectionToJson, Store {
   }
 
   late final _$_sectionsAtom =
-      Atom(name: '_TemplateSectionToJson._sections', context: context);
+      Atom(name: '_TemplateEditorStoreBaseToJson._sections', context: context);
 
   ObservableList<TemplateSection> get sections {
     _$_sectionsAtom.reportRead();
@@ -109,8 +107,9 @@ mixin _$TemplateEditorStore on _TemplateSectionToJson, Store {
     });
   }
 
-  late final _$_selectedSectionAtom =
-      Atom(name: '_TemplateSectionToJson._selectedSection', context: context);
+  late final _$_selectedSectionAtom = Atom(
+      name: '_TemplateEditorStoreBaseToJson._selectedSection',
+      context: context);
 
   TemplateSection get selectedSection {
     _$_selectedSectionAtom.reportRead();
@@ -128,7 +127,7 @@ mixin _$TemplateEditorStore on _TemplateSectionToJson, Store {
   }
 
   late final _$_checksAtom =
-      Atom(name: '_TemplateSectionToJson._checks', context: context);
+      Atom(name: '_TemplateEditorStoreBaseToJson._checks', context: context);
 
   ObservableList<ObservableList<TemplateCheck>> get checks {
     _$_checksAtom.reportRead();
@@ -146,7 +145,8 @@ mixin _$TemplateEditorStore on _TemplateSectionToJson, Store {
   }
 
   late final _$_selectedSectionIndexAtom = Atom(
-      name: '_TemplateSectionToJson._selectedSectionIndex', context: context);
+      name: '_TemplateEditorStoreBaseToJson._selectedSectionIndex',
+      context: context);
 
   int get selectedSectionIndex {
     _$_selectedSectionIndexAtom.reportRead();
@@ -164,8 +164,9 @@ mixin _$TemplateEditorStore on _TemplateSectionToJson, Store {
     });
   }
 
-  late final _$_hasLinearityStep1Atom =
-      Atom(name: '_TemplateSectionToJson._hasLinearityStep1', context: context);
+  late final _$_hasLinearityStep1Atom = Atom(
+      name: '_TemplateEditorStoreBaseToJson._hasLinearityStep1',
+      context: context);
 
   bool get hasLinearityStep1 {
     _$_hasLinearityStep1Atom.reportRead();
@@ -182,8 +183,9 @@ mixin _$TemplateEditorStore on _TemplateSectionToJson, Store {
     });
   }
 
-  late final _$_hasLinearityStep2Atom =
-      Atom(name: '_TemplateSectionToJson._hasLinearityStep2', context: context);
+  late final _$_hasLinearityStep2Atom = Atom(
+      name: '_TemplateEditorStoreBaseToJson._hasLinearityStep2',
+      context: context);
 
   bool get hasLinearityStep2 {
     _$_hasLinearityStep2Atom.reportRead();
@@ -201,7 +203,7 @@ mixin _$TemplateEditorStore on _TemplateSectionToJson, Store {
   }
 
   late final _$_canUndoAtom =
-      Atom(name: '_TemplateSectionToJson._canUndo', context: context);
+      Atom(name: '_TemplateEditorStoreBaseToJson._canUndo', context: context);
 
   bool get canUndo {
     _$_canUndoAtom.reportRead();
@@ -219,7 +221,7 @@ mixin _$TemplateEditorStore on _TemplateSectionToJson, Store {
   }
 
   late final _$_canRedoAtom =
-      Atom(name: '_TemplateSectionToJson._canRedo', context: context);
+      Atom(name: '_TemplateEditorStoreBaseToJson._canRedo', context: context);
 
   bool get canRedo {
     _$_canRedoAtom.reportRead();
@@ -236,8 +238,9 @@ mixin _$TemplateEditorStore on _TemplateSectionToJson, Store {
     });
   }
 
-  late final _$_undoDescriptionAtom =
-      Atom(name: '_TemplateSectionToJson._undoDescription', context: context);
+  late final _$_undoDescriptionAtom = Atom(
+      name: '_TemplateEditorStoreBaseToJson._undoDescription',
+      context: context);
 
   String get undoDescription {
     _$_undoDescriptionAtom.reportRead();
@@ -254,8 +257,9 @@ mixin _$TemplateEditorStore on _TemplateSectionToJson, Store {
     });
   }
 
-  late final _$_redoDescriptionAtom =
-      Atom(name: '_TemplateSectionToJson._redoDescription', context: context);
+  late final _$_redoDescriptionAtom = Atom(
+      name: '_TemplateEditorStoreBaseToJson._redoDescription',
+      context: context);
 
   String get redoDescription {
     _$_redoDescriptionAtom.reportRead();
@@ -272,203 +276,210 @@ mixin _$TemplateEditorStore on _TemplateSectionToJson, Store {
     });
   }
 
-  late final _$_TemplateSectionToJsonActionController =
-      ActionController(name: '_TemplateSectionToJson', context: context);
+  late final _$_TemplateEditorStoreBaseToJsonActionController =
+      ActionController(
+          name: '_TemplateEditorStoreBaseToJson', context: context);
 
   @override
   void undo() {
-    final _$actionInfo = _$_TemplateSectionToJsonActionController.startAction(
-        name: '_TemplateSectionToJson.undo');
+    final _$actionInfo = _$_TemplateEditorStoreBaseToJsonActionController
+        .startAction(name: '_TemplateEditorStoreBaseToJson.undo');
     try {
       return super.undo();
     } finally {
-      _$_TemplateSectionToJsonActionController.endAction(_$actionInfo);
+      _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void redo() {
-    final _$actionInfo = _$_TemplateSectionToJsonActionController.startAction(
-        name: '_TemplateSectionToJson.redo');
+    final _$actionInfo = _$_TemplateEditorStoreBaseToJsonActionController
+        .startAction(name: '_TemplateEditorStoreBaseToJson.redo');
     try {
       return super.redo();
     } finally {
-      _$_TemplateSectionToJsonActionController.endAction(_$actionInfo);
+      _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void addLinearityStep2Check() {
-    final _$actionInfo = _$_TemplateSectionToJsonActionController.startAction(
-        name: '_TemplateSectionToJson.addLinearityStep2Check');
+    final _$actionInfo =
+        _$_TemplateEditorStoreBaseToJsonActionController.startAction(
+            name: '_TemplateEditorStoreBaseToJson.addLinearityStep2Check');
     try {
       return super.addLinearityStep2Check();
     } finally {
-      _$_TemplateSectionToJsonActionController.endAction(_$actionInfo);
+      _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void addLinearityStep1Check({required int referenceCount}) {
-    final _$actionInfo = _$_TemplateSectionToJsonActionController.startAction(
-        name: '_TemplateSectionToJson.addLinearityStep1Check');
+    final _$actionInfo =
+        _$_TemplateEditorStoreBaseToJsonActionController.startAction(
+            name: '_TemplateEditorStoreBaseToJson.addLinearityStep1Check');
     try {
       return super.addLinearityStep1Check(referenceCount: referenceCount);
     } finally {
-      _$_TemplateSectionToJsonActionController.endAction(_$actionInfo);
+      _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void addWithReferenceCheck(
       {required String description, required int referenceCount}) {
-    final _$actionInfo = _$_TemplateSectionToJsonActionController.startAction(
-        name: '_TemplateSectionToJson.addWithReferenceCheck');
+    final _$actionInfo =
+        _$_TemplateEditorStoreBaseToJsonActionController.startAction(
+            name: '_TemplateEditorStoreBaseToJson.addWithReferenceCheck');
     try {
       return super.addWithReferenceCheck(
           description: description, referenceCount: referenceCount);
     } finally {
-      _$_TemplateSectionToJsonActionController.endAction(_$actionInfo);
+      _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void addRegularCheck({required String description}) {
-    final _$actionInfo = _$_TemplateSectionToJsonActionController.startAction(
-        name: '_TemplateSectionToJson.addRegularCheck');
+    final _$actionInfo = _$_TemplateEditorStoreBaseToJsonActionController
+        .startAction(name: '_TemplateEditorStoreBaseToJson.addRegularCheck');
     try {
       return super.addRegularCheck(description: description);
     } finally {
-      _$_TemplateSectionToJsonActionController.endAction(_$actionInfo);
+      _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void addSection({required String title}) {
-    final _$actionInfo = _$_TemplateSectionToJsonActionController.startAction(
-        name: '_TemplateSectionToJson.addSection');
+    final _$actionInfo = _$_TemplateEditorStoreBaseToJsonActionController
+        .startAction(name: '_TemplateEditorStoreBaseToJson.addSection');
     try {
       return super.addSection(title: title);
     } finally {
-      _$_TemplateSectionToJsonActionController.endAction(_$actionInfo);
+      _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setCurrentTemplate(Template template) {
-    final _$actionInfo = _$_TemplateSectionToJsonActionController.startAction(
-        name: '_TemplateSectionToJson.setCurrentTemplate');
+    final _$actionInfo = _$_TemplateEditorStoreBaseToJsonActionController
+        .startAction(name: '_TemplateEditorStoreBaseToJson.setCurrentTemplate');
     try {
       return super.setCurrentTemplate(template);
     } finally {
-      _$_TemplateSectionToJsonActionController.endAction(_$actionInfo);
+      _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void moveCheckToAnotherSection(
       int currentSectionIndex, int checkIndex, int newSectionIndex) {
-    final _$actionInfo = _$_TemplateSectionToJsonActionController.startAction(
-        name: '_TemplateSectionToJson.moveCheckToAnotherSection');
+    final _$actionInfo =
+        _$_TemplateEditorStoreBaseToJsonActionController.startAction(
+            name: '_TemplateEditorStoreBaseToJson.moveCheckToAnotherSection');
     try {
       return super.moveCheckToAnotherSection(
           currentSectionIndex, checkIndex, newSectionIndex);
     } finally {
-      _$_TemplateSectionToJsonActionController.endAction(_$actionInfo);
+      _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void updateRegularCheck(
       int sectionIndex, int checkIndex, String description) {
-    final _$actionInfo = _$_TemplateSectionToJsonActionController.startAction(
-        name: '_TemplateSectionToJson.updateRegularCheck');
+    final _$actionInfo = _$_TemplateEditorStoreBaseToJsonActionController
+        .startAction(name: '_TemplateEditorStoreBaseToJson.updateRegularCheck');
     try {
       return super.updateRegularCheck(sectionIndex, checkIndex, description);
     } finally {
-      _$_TemplateSectionToJsonActionController.endAction(_$actionInfo);
+      _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void updateWithReferenceCheck(int sectionIndex, int checkIndex,
       String description, int referenceCount) {
-    final _$actionInfo = _$_TemplateSectionToJsonActionController.startAction(
-        name: '_TemplateSectionToJson.updateWithReferenceCheck');
+    final _$actionInfo =
+        _$_TemplateEditorStoreBaseToJsonActionController.startAction(
+            name: '_TemplateEditorStoreBaseToJson.updateWithReferenceCheck');
     try {
       return super.updateWithReferenceCheck(
           sectionIndex, checkIndex, description, referenceCount);
     } finally {
-      _$_TemplateSectionToJsonActionController.endAction(_$actionInfo);
+      _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void updateLinearityStep1Check(
       int sectionIndex, int checkIndex, int referenceCount) {
-    final _$actionInfo = _$_TemplateSectionToJsonActionController.startAction(
-        name: '_TemplateSectionToJson.updateLinearityStep1Check');
+    final _$actionInfo =
+        _$_TemplateEditorStoreBaseToJsonActionController.startAction(
+            name: '_TemplateEditorStoreBaseToJson.updateLinearityStep1Check');
     try {
       return super
           .updateLinearityStep1Check(sectionIndex, checkIndex, referenceCount);
     } finally {
-      _$_TemplateSectionToJsonActionController.endAction(_$actionInfo);
+      _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void moveSection(int oldSectionIndex, int newSectionIndex) {
-    final _$actionInfo = _$_TemplateSectionToJsonActionController.startAction(
-        name: '_TemplateSectionToJson.moveSection');
+    final _$actionInfo = _$_TemplateEditorStoreBaseToJsonActionController
+        .startAction(name: '_TemplateEditorStoreBaseToJson.moveSection');
     try {
       return super.moveSection(oldSectionIndex, newSectionIndex);
     } finally {
-      _$_TemplateSectionToJsonActionController.endAction(_$actionInfo);
+      _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void updateTemplate(
       String rebreatherModel, String title, String description) {
-    final _$actionInfo = _$_TemplateSectionToJsonActionController.startAction(
-        name: '_TemplateSectionToJson.updateTemplate');
+    final _$actionInfo = _$_TemplateEditorStoreBaseToJsonActionController
+        .startAction(name: '_TemplateEditorStoreBaseToJson.updateTemplate');
     try {
       return super.updateTemplate(rebreatherModel, title, description);
     } finally {
-      _$_TemplateSectionToJsonActionController.endAction(_$actionInfo);
+      _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void updateSectionTitle(int sectionIndex, String newTitle) {
-    final _$actionInfo = _$_TemplateSectionToJsonActionController.startAction(
-        name: '_TemplateSectionToJson.updateSectionTitle');
+    final _$actionInfo = _$_TemplateEditorStoreBaseToJsonActionController
+        .startAction(name: '_TemplateEditorStoreBaseToJson.updateSectionTitle');
     try {
       return super.updateSectionTitle(sectionIndex, newTitle);
     } finally {
-      _$_TemplateSectionToJsonActionController.endAction(_$actionInfo);
+      _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void deleteSection(int index) {
-    final _$actionInfo = _$_TemplateSectionToJsonActionController.startAction(
-        name: '_TemplateSectionToJson.deleteSection');
+    final _$actionInfo = _$_TemplateEditorStoreBaseToJsonActionController
+        .startAction(name: '_TemplateEditorStoreBaseToJson.deleteSection');
     try {
       return super.deleteSection(index);
     } finally {
-      _$_TemplateSectionToJsonActionController.endAction(_$actionInfo);
+      _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void deleteCheck(int sectionIndex, int index) {
-    final _$actionInfo = _$_TemplateSectionToJsonActionController.startAction(
-        name: '_TemplateSectionToJson.deleteCheck');
+    final _$actionInfo = _$_TemplateEditorStoreBaseToJsonActionController
+        .startAction(name: '_TemplateEditorStoreBaseToJson.deleteCheck');
     try {
       return super.deleteCheck(sectionIndex, index);
     } finally {
-      _$_TemplateSectionToJsonActionController.endAction(_$actionInfo);
+      _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
     }
   }
 
@@ -477,8 +488,7 @@ mixin _$TemplateEditorStore on _TemplateSectionToJson, Store {
     return '''
 enableCheckCreation: ${enableCheckCreation},
 enableLinearityStep2Creation: ${enableLinearityStep2Creation},
-enableLinearityStep1Creation: ${enableLinearityStep1Creation},
-undoRedoController: ${undoRedoController}
+enableLinearityStep1Creation: ${enableLinearityStep1Creation}
     ''';
   }
 }

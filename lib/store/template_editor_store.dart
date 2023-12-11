@@ -4,22 +4,23 @@ import 'package:ccr_checklist/data/template.dart';
 import 'package:ccr_checklist/main.dart';
 import 'package:ccr_checklist/store/observablelist_json_converter.dart';
 import 'package:ccr_checklist/undo/undo_redo_storage.dart';
-import 'package:ccr_checklist/widget/undo_redo_buttons_widget.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:mobx/mobx.dart';
 
 part 'template_editor_store.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class TemplateEditorStore extends _TemplateSectionToJson
+class TemplateEditorStore extends _TemplateEditorStoreBaseToJson
     with _$TemplateEditorStore {
   TemplateEditorStore();
+
   factory TemplateEditorStore.fromJson(Map<String, dynamic> json) =>
       _$TemplateEditorStoreFromJson(json);
+
   Map<String, dynamic> toJson() => _$TemplateEditorStoreToJson(this);
 }
 
-abstract class _TemplateSectionToJson with Store {
+abstract class _TemplateEditorStoreBaseToJson with Store {
   final _undoRedoClass = 'TemplateEditorStore';
 
   @readonly
@@ -30,8 +31,8 @@ abstract class _TemplateSectionToJson with Store {
   @JsonKey(
       includeFromJson: true,
       includeToJson: true,
-      fromJson: ObservableListJsonConverter.oblstOfTemplateSectionFromJson,
-      toJson: ObservableListJsonConverter.oblstOfTemplateSectionToJson)
+      fromJson: ObservableListJsonConverter.obsvbLstOfTemplateSectionFromJson,
+      toJson: ObservableListJsonConverter.obsvbLstOfTemplateSectionToJson)
   ObservableList<TemplateSection> _sections = ObservableList<TemplateSection>();
 
   @readonly
@@ -42,8 +43,10 @@ abstract class _TemplateSectionToJson with Store {
   @JsonKey(
       includeFromJson: true,
       includeToJson: true,
-      fromJson: ObservableListJsonConverter.oblstOfObLstOfTemplateCheckFromJson,
-      toJson: ObservableListJsonConverter.oblstOfObLstOfTemplateCheckToJson)
+      fromJson:
+          ObservableListJsonConverter.obsvbLstOfObsvbLstOfTemplateCheckFromJson,
+      toJson:
+          ObservableListJsonConverter.obsvbLstOfObsvbLstOfTemplateCheckToJson)
   ObservableList<ObservableList<TemplateCheck>> _checks =
       ObservableList<ObservableList<TemplateCheck>>();
 
@@ -81,16 +84,6 @@ abstract class _TemplateSectionToJson with Store {
 
   @readonly
   String _redoDescription = '';
-
-  @computed
-  UndoRedoController get undoRedoController => UndoRedoController(
-      undo: undo,
-      redo: redo,
-      status: UndoRedoStatus(
-          canUndo: _canUndo,
-          canRedo: _canRedo,
-          undoDescription: _undoDescription,
-          redoDescription: _redoDescription));
 
   void _saveSnapshot(String operation) {
     final snapshot = _$TemplateEditorStoreToJson(this as TemplateEditorStore);

@@ -32,7 +32,7 @@ class TemplateListPage extends StatelessWidget {
                     "${templateListStore.templates[index].rebreatherModel} - ${templateListStore.templates[index].title}"),
                 subtitle: Text(templateListStore.templates[index].description),
                 onTap: () {
-                  // Handle template selection, if necessary
+                  _onTapTemplate(context, templateListStore, index);
                 },
               ),
             );
@@ -49,5 +49,16 @@ class TemplateListPage extends StatelessWidget {
         builder: (context) => const TemplateEditorListPage(),
       ),
     );
+  }
+
+  void _onTapTemplate(
+      BuildContext context, TemplateListStore templateListStore, int index) {
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(
+    //     builder: (context) => TemplateEditorListPage(
+    //       template: templateListStore.templates[index],
+    //     ),
+    //   ),
+    // );
   }
 }
