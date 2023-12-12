@@ -23,6 +23,14 @@ class ChecklistEditorStore extends _ChecklistEditorStoreBaseToJson
 abstract class _ChecklistEditorStoreBaseToJson with Store {
   @readonly
   @JsonKey(includeFromJson: true, includeToJson: true)
+  String _rebreatherManufacturer = '';
+
+  @readonly
+  @JsonKey(includeFromJson: true, includeToJson: true)
+  String _rebreatherModel = '';
+
+  @readonly
+  @JsonKey(includeFromJson: true, includeToJson: true)
   String _title = '';
 
   @readonly
@@ -88,8 +96,11 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
 
   @action
   void loadFromTemplate(Template template) {
+    _rebreatherManufacturer = template.rebreatherManufacturer;
+    _rebreatherModel = template.rebreatherModel;
     _title = template.title;
     _description = template.description;
+    _date = DateTime.now();
     _linearityStep1CheckPresent = false;
     _linearityStep2CheckPresent = false;
     for (final templateSection in template.sections) {

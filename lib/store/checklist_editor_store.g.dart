@@ -9,6 +9,8 @@ part of 'checklist_editor_store.dart';
 ChecklistEditorStore _$ChecklistEditorStoreFromJson(
         Map<String, dynamic> json) =>
     ChecklistEditorStore()
+      .._rebreatherManufacturer = json['_rebreatherManufacturer'] as String
+      .._rebreatherModel = json['_rebreatherModel'] as String
       .._title = json['_title'] as String
       .._description = json['_description'] as String
       .._diverName = json['_diverName'] as String
@@ -23,6 +25,8 @@ ChecklistEditorStore _$ChecklistEditorStoreFromJson(
 Map<String, dynamic> _$ChecklistEditorStoreToJson(
         ChecklistEditorStore instance) =>
     <String, dynamic>{
+      '_rebreatherManufacturer': instance._rebreatherManufacturer,
+      '_rebreatherModel': instance._rebreatherModel,
       '_title': instance._title,
       '_description': instance._description,
       '_diverName': instance._diverName,
@@ -41,6 +45,45 @@ Map<String, dynamic> _$ChecklistEditorStoreToJson(
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$ChecklistEditorStore on _ChecklistEditorStoreBaseToJson, Store {
+  late final _$_rebreatherManufacturerAtom = Atom(
+      name: '_ChecklistEditorStoreBaseToJson._rebreatherManufacturer',
+      context: context);
+
+  String get rebreatherManufacturer {
+    _$_rebreatherManufacturerAtom.reportRead();
+    return super._rebreatherManufacturer;
+  }
+
+  @override
+  String get _rebreatherManufacturer => rebreatherManufacturer;
+
+  @override
+  set _rebreatherManufacturer(String value) {
+    _$_rebreatherManufacturerAtom
+        .reportWrite(value, super._rebreatherManufacturer, () {
+      super._rebreatherManufacturer = value;
+    });
+  }
+
+  late final _$_rebreatherModelAtom = Atom(
+      name: '_ChecklistEditorStoreBaseToJson._rebreatherModel',
+      context: context);
+
+  String get rebreatherModel {
+    _$_rebreatherModelAtom.reportRead();
+    return super._rebreatherModel;
+  }
+
+  @override
+  String get _rebreatherModel => rebreatherModel;
+
+  @override
+  set _rebreatherModel(String value) {
+    _$_rebreatherModelAtom.reportWrite(value, super._rebreatherModel, () {
+      super._rebreatherModel = value;
+    });
+  }
+
   late final _$_titleAtom =
       Atom(name: '_ChecklistEditorStoreBaseToJson._title', context: context);
 

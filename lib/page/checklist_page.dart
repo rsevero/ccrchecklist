@@ -1,6 +1,7 @@
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter/material.dart';
+import 'package:ccr_checklist/widget/checklist_appbar.dart';
+import 'package:ccr_checklist/widget/checklist_body.dart';
+import 'package:flutter/material.dart'; // For date formatting
 import 'package:provider/provider.dart';
 
 class ChecklistPage extends StatelessWidget {
@@ -11,29 +12,14 @@ class ChecklistPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final checklistEditorStore = Provider.of<ChecklistEditorStore>(context);
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text(checklistEditorStore.sections[sectionIndex].title),
-      ),
-      body: Observer(
-        builder: (_) => ListView.builder(
-          itemCount: checklistEditorStore.checks[sectionIndex].length,
-          itemBuilder: (context, index) {
-            var check = checklistEditorStore.checks[sectionIndex][index];
-            return CheckboxListTile(
-              title: Text(check.description),
-              value: check.isChecked,
-              controlAffinity: ListTileControlAffinity.leading,
-              onChanged: (bool? value) {
-                if (value != null) {
-                  checklistEditorStore.setCheckIsChecked(
-                      sectionIndex, index, value);
-                }
-              },
-            );
-          },
-        ),
-      ),
+      appBar: CheckListAppBar(
+          title: checklistEditorStore.title,
+          description: checklistEditorStore.description,
+          rebreatherManufacturer: checklistEditorStore.rebreatherManufacturer,
+          rebreatherModel: checklistEditorStore.rebreatherModel),
+      body: ChecklistBody(sectionIndex: sectionIndex),
     );
   }
 }
