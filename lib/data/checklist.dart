@@ -9,6 +9,8 @@ part 'checklist.g.dart';
 class Checklist with _$Checklist {
   @JsonSerializable(explicitToJson: true)
   factory Checklist({
+    required String rebreatherManufacturer,
+    required String rebreatherModel,
     required String title,
     required String description,
     required String diverName,

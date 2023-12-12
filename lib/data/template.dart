@@ -8,6 +8,7 @@ part 'template.g.dart';
 class Template with _$Template {
   @JsonSerializable(explicitToJson: true)
   factory Template({
+    required String rebreatherManufacturer,
     required String rebreatherModel,
     required String title,
     required String description,
@@ -16,6 +17,7 @@ class Template with _$Template {
 
   factory Template.empty() {
     return Template(
+      rebreatherManufacturer: '',
       rebreatherModel: '',
       title: '',
       description: '',

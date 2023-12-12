@@ -2,6 +2,7 @@ import 'package:ccr_checklist/page/checklist_page.dart';
 import 'package:ccr_checklist/page/template_editor_list_page.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:ccr_checklist/store/template_list_store.dart';
+import 'package:ccr_checklist/widget/template_list_tile_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
@@ -28,15 +29,16 @@ class TemplateListPage extends StatelessWidget {
         builder: (_) => ListView.builder(
           itemCount: templateListStore.templates.length,
           itemBuilder: (context, index) {
-            return Observer(
-              builder: (_) => ListTile(
-                title: Text(
-                    "${templateListStore.templates[index].rebreatherModel} - ${templateListStore.templates[index].title}"),
-                subtitle: Text(templateListStore.templates[index].description),
-                onTap: () {
-                  _onTapTemplate(context, templateListStore, index);
-                },
-              ),
+            return TemplateListTileWidget(
+              rebreatherManufacturer:
+                  templateListStore.templates[index].rebreatherManufacturer,
+              rebreatherModel:
+                  templateListStore.templates[index].rebreatherModel,
+              title: templateListStore.templates[index].title,
+              description: templateListStore.templates[index].description,
+              onTap: () {
+                _onTapTemplate(context, index);
+              },
             );
           },
         ),
@@ -53,8 +55,9 @@ class TemplateListPage extends StatelessWidget {
     );
   }
 
-  void _onTapTemplate(
-      BuildContext context, TemplateListStore templateListStore, int index) {
+  void _onTapTemplate(BuildContext context, int index) {
+    final templateListStore =
+        Provider.of<TemplateListStore>(context, listen: false);
     final checklistEditorStore =
         Provider.of<ChecklistEditorStore>(context, listen: false);
     checklistEditorStore.loadFromTemplate(templateListStore.templates[index]);

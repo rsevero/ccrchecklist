@@ -1,5 +1,6 @@
 import 'package:ccr_checklist/store/template_editor_store.dart';
 import 'package:ccr_checklist/store/template_list_store.dart';
+import 'package:ccr_checklist/widget/template_list_tile_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:ccr_checklist/page/template_editor_page.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -11,7 +12,6 @@ class TemplateEditorListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final templateListStore = Provider.of<TemplateListStore>(context);
-    final templateEditorStore = Provider.of<TemplateEditorStore>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -22,21 +22,16 @@ class TemplateEditorListPage extends StatelessWidget {
         builder: (_) => ListView.builder(
           itemCount: templateListStore.templates.length,
           itemBuilder: (context, index) {
-            return Observer(
-              builder: (_) => ListTile(
-                title: Text(
-                    "${templateListStore.templates[index].rebreatherModel} - ${templateListStore.templates[index].title}"),
-                subtitle: Text(templateListStore.templates[index].description),
-                onTap: () {
-                  templateEditorStore
-                      .setCurrentTemplate(templateListStore.templates[index]);
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const TemplateEditorPage(),
-                    ),
-                  );
-                },
-              ),
+            return TemplateListTileWidget(
+              rebreatherManufacturer:
+                  templateListStore.templates[index].rebreatherManufacturer,
+              rebreatherModel:
+                  templateListStore.templates[index].rebreatherModel,
+              title: templateListStore.templates[index].title,
+              description: templateListStore.templates[index].description,
+              onTap: () {
+                _onTapTemplate(context, index);
+              },
             );
           },
         ),
@@ -49,15 +44,31 @@ class TemplateEditorListPage extends StatelessWidget {
     );
   }
 
+  void _onTapTemplate(BuildContext context, int index) {
+    final templateListStore =
+        Provider.of<TemplateListStore>(context, listen: false);
+    final templateEditorStore =
+        Provider.of<TemplateEditorStore>(context, listen: false);
+
+    templateEditorStore.setCurrentTemplate(templateListStore.templates[index]);
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const TemplateEditorPage(),
+      ),
+    );
+  }
+
   void _addNewTemplate(BuildContext context) async {
     final templateListStore =
         Provider.of<TemplateListStore>(context, listen: false);
     final templateEditorStore =
         Provider.of<TemplateEditorStore>(context, listen: false);
 
+    final TextEditingController titleController = TextEditingController();
+    final TextEditingController rebreatherManufacturerController =
+        TextEditingController();
     final TextEditingController rebreatherModelController =
         TextEditingController();
-    final TextEditingController titleController = TextEditingController();
     final TextEditingController descriptionController = TextEditingController();
 
     bool confirmed = await showDialog(
@@ -68,6 +79,16 @@ class TemplateEditorListPage extends StatelessWidget {
               content: SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
+                    TextField(
+                      controller: rebreatherManufacturerController,
+                      decoration: const InputDecoration(
+                          hintText: 'Rebreather manufacturer'),
+                      autofocus: true,
+                      textInputAction: TextInputAction
+                          .next, // Move focus to next input on "Enter"
+                      onSubmitted: (_) => FocusScope.of(context)
+                          .requestFocus(FocusNode()), // Optional
+                    ),
                     TextField(
                       controller: rebreatherModelController,
                       decoration:
@@ -117,6 +138,7 @@ class TemplateEditorListPage extends StatelessWidget {
 
     if (confirmed) {
       final newTemplate = templateListStore.addNewTemplate(
+          rebreatherManufacturer: rebreatherManufacturerController.text,
           rebreatherModel: rebreatherModelController.text,
           title: titleController.text,
           description: descriptionController.text);
@@ -128,12 +150,5 @@ class TemplateEditorListPage extends StatelessWidget {
         ),
       );
     }
-
-    // if (!context.mounted) return;
-    // Navigator.of(context).push(
-    //   MaterialPageRoute(
-    //     builder: (context) => const TemplateEditorPage(),
-    //   ),
-    // );
   }
 }

@@ -8,6 +8,7 @@ part of 'template.dart';
 
 _$TemplateImpl _$$TemplateImplFromJson(Map<String, dynamic> json) =>
     _$TemplateImpl(
+      rebreatherManufacturer: json['rebreatherManufacturer'] as String,
       rebreatherModel: json['rebreatherModel'] as String,
       title: json['title'] as String,
       description: json['description'] as String,
@@ -18,6 +19,7 @@ _$TemplateImpl _$$TemplateImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$TemplateImplToJson(_$TemplateImpl instance) =>
     <String, dynamic>{
+      'rebreatherManufacturer': instance.rebreatherManufacturer,
       'rebreatherModel': instance.rebreatherModel,
       'title': instance.title,
       'description': instance.description,

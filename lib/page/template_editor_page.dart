@@ -22,7 +22,7 @@ class TemplateEditorPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-            "${templateEditorStore.currentTemplate.rebreatherModel} - ${templateEditorStore.currentTemplate.title}"),
+            "${templateEditorStore.currentTemplate.rebreatherManufacturer} - ${templateEditorStore.currentTemplate.rebreatherModel}"),
         elevation: 4,
         actions: [
           Observer(
@@ -50,14 +50,33 @@ class TemplateEditorPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Observer(
-              builder: (_) => Text(
-                templateEditorStore.currentTemplate.description,
-                style: const TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.w700,
-                ),
-                textAlign: TextAlign.left,
-              ),
+              builder: (_) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: Text(
+                        templateEditorStore.currentTemplate.title,
+                        style: const TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.w700,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                    Center(
+                      child: Text(
+                        templateEditorStore.currentTemplate.description,
+                        style: const TextStyle(
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.w700,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                  ],
+                );
+              },
             ),
           ),
           const Padding(

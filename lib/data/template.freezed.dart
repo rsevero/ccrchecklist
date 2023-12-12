@@ -20,6 +20,7 @@ Template _$TemplateFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Template {
+  String get rebreatherManufacturer => throw _privateConstructorUsedError;
   String get rebreatherModel => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
@@ -37,7 +38,8 @@ abstract class $TemplateCopyWith<$Res> {
       _$TemplateCopyWithImpl<$Res, Template>;
   @useResult
   $Res call(
-      {String rebreatherModel,
+      {String rebreatherManufacturer,
+      String rebreatherModel,
       String title,
       String description,
       List<TemplateSection> sections});
@@ -56,12 +58,17 @@ class _$TemplateCopyWithImpl<$Res, $Val extends Template>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? rebreatherManufacturer = null,
     Object? rebreatherModel = null,
     Object? title = null,
     Object? description = null,
     Object? sections = null,
   }) {
     return _then(_value.copyWith(
+      rebreatherManufacturer: null == rebreatherManufacturer
+          ? _value.rebreatherManufacturer
+          : rebreatherManufacturer // ignore: cast_nullable_to_non_nullable
+              as String,
       rebreatherModel: null == rebreatherModel
           ? _value.rebreatherModel
           : rebreatherModel // ignore: cast_nullable_to_non_nullable
@@ -91,7 +98,8 @@ abstract class _$$TemplateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String rebreatherModel,
+      {String rebreatherManufacturer,
+      String rebreatherModel,
       String title,
       String description,
       List<TemplateSection> sections});
@@ -108,12 +116,17 @@ class __$$TemplateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? rebreatherManufacturer = null,
     Object? rebreatherModel = null,
     Object? title = null,
     Object? description = null,
     Object? sections = null,
   }) {
     return _then(_$TemplateImpl(
+      rebreatherManufacturer: null == rebreatherManufacturer
+          ? _value.rebreatherManufacturer
+          : rebreatherManufacturer // ignore: cast_nullable_to_non_nullable
+              as String,
       rebreatherModel: null == rebreatherModel
           ? _value.rebreatherModel
           : rebreatherModel // ignore: cast_nullable_to_non_nullable
@@ -139,7 +152,8 @@ class __$$TemplateImplCopyWithImpl<$Res>
 @JsonSerializable(explicitToJson: true)
 class _$TemplateImpl implements _Template {
   _$TemplateImpl(
-      {required this.rebreatherModel,
+      {required this.rebreatherManufacturer,
+      required this.rebreatherModel,
       required this.title,
       required this.description,
       required this.sections});
@@ -147,6 +161,8 @@ class _$TemplateImpl implements _Template {
   factory _$TemplateImpl.fromJson(Map<String, dynamic> json) =>
       _$$TemplateImplFromJson(json);
 
+  @override
+  final String rebreatherManufacturer;
   @override
   final String rebreatherModel;
   @override
@@ -158,7 +174,7 @@ class _$TemplateImpl implements _Template {
 
   @override
   String toString() {
-    return 'Template(rebreatherModel: $rebreatherModel, title: $title, description: $description, sections: $sections)';
+    return 'Template(rebreatherManufacturer: $rebreatherManufacturer, rebreatherModel: $rebreatherModel, title: $title, description: $description, sections: $sections)';
   }
 
   @override
@@ -166,6 +182,8 @@ class _$TemplateImpl implements _Template {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TemplateImpl &&
+            (identical(other.rebreatherManufacturer, rebreatherManufacturer) ||
+                other.rebreatherManufacturer == rebreatherManufacturer) &&
             (identical(other.rebreatherModel, rebreatherModel) ||
                 other.rebreatherModel == rebreatherModel) &&
             (identical(other.title, title) || other.title == title) &&
@@ -176,8 +194,13 @@ class _$TemplateImpl implements _Template {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, rebreatherModel, title,
-      description, const DeepCollectionEquality().hash(sections));
+  int get hashCode => Object.hash(
+      runtimeType,
+      rebreatherManufacturer,
+      rebreatherModel,
+      title,
+      description,
+      const DeepCollectionEquality().hash(sections));
 
   @JsonKey(ignore: true)
   @override
@@ -195,7 +218,8 @@ class _$TemplateImpl implements _Template {
 
 abstract class _Template implements Template {
   factory _Template(
-      {required final String rebreatherModel,
+      {required final String rebreatherManufacturer,
+      required final String rebreatherModel,
       required final String title,
       required final String description,
       required final List<TemplateSection> sections}) = _$TemplateImpl;
@@ -203,6 +227,8 @@ abstract class _Template implements Template {
   factory _Template.fromJson(Map<String, dynamic> json) =
       _$TemplateImpl.fromJson;
 
+  @override
+  String get rebreatherManufacturer;
   @override
   String get rebreatherModel;
   @override

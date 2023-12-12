@@ -8,6 +8,8 @@ part of 'checklist.dart';
 
 _$ChecklistImpl _$$ChecklistImplFromJson(Map<String, dynamic> json) =>
     _$ChecklistImpl(
+      rebreatherManufacturer: json['rebreatherManufacturer'] as String,
+      rebreatherModel: json['rebreatherModel'] as String,
       title: json['title'] as String,
       description: json['description'] as String,
       diverName: json['diverName'] as String,
@@ -19,6 +21,8 @@ _$ChecklistImpl _$$ChecklistImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$ChecklistImplToJson(_$ChecklistImpl instance) =>
     <String, dynamic>{
+      'rebreatherManufacturer': instance.rebreatherManufacturer,
+      'rebreatherModel': instance.rebreatherModel,
       'title': instance.title,
       'description': instance.description,
       'diverName': instance.diverName,

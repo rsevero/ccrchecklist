@@ -49,15 +49,17 @@ mixin _$TemplateListStore on TemplateListStoreBase, Store {
   @override
   Template addNewTemplate(
       {required String title,
-      required String description,
-      required String rebreatherModel}) {
+      required String rebreatherManufacturer,
+      required String rebreatherModel,
+      required String description}) {
     final _$actionInfo = _$TemplateListStoreBaseActionController.startAction(
         name: 'TemplateListStoreBase.addNewTemplate');
     try {
       return super.addNewTemplate(
           title: title,
-          description: description,
-          rebreatherModel: rebreatherModel);
+          rebreatherManufacturer: rebreatherManufacturer,
+          rebreatherModel: rebreatherModel,
+          description: description);
     } finally {
       _$TemplateListStoreBaseActionController.endAction(_$actionInfo);
     }

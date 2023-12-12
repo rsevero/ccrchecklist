@@ -20,6 +20,8 @@ Checklist _$ChecklistFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Checklist {
+  String get rebreatherManufacturer => throw _privateConstructorUsedError;
+  String get rebreatherModel => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   String get diverName => throw _privateConstructorUsedError;
@@ -38,7 +40,9 @@ abstract class $ChecklistCopyWith<$Res> {
       _$ChecklistCopyWithImpl<$Res, Checklist>;
   @useResult
   $Res call(
-      {String title,
+      {String rebreatherManufacturer,
+      String rebreatherModel,
+      String title,
       String description,
       String diverName,
       DateTime date,
@@ -58,6 +62,8 @@ class _$ChecklistCopyWithImpl<$Res, $Val extends Checklist>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? rebreatherManufacturer = null,
+    Object? rebreatherModel = null,
     Object? title = null,
     Object? description = null,
     Object? diverName = null,
@@ -65,6 +71,14 @@ class _$ChecklistCopyWithImpl<$Res, $Val extends Checklist>
     Object? sections = null,
   }) {
     return _then(_value.copyWith(
+      rebreatherManufacturer: null == rebreatherManufacturer
+          ? _value.rebreatherManufacturer
+          : rebreatherManufacturer // ignore: cast_nullable_to_non_nullable
+              as String,
+      rebreatherModel: null == rebreatherModel
+          ? _value.rebreatherModel
+          : rebreatherModel // ignore: cast_nullable_to_non_nullable
+              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -98,7 +112,9 @@ abstract class _$$ChecklistImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String title,
+      {String rebreatherManufacturer,
+      String rebreatherModel,
+      String title,
       String description,
       String diverName,
       DateTime date,
@@ -116,6 +132,8 @@ class __$$ChecklistImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? rebreatherManufacturer = null,
+    Object? rebreatherModel = null,
     Object? title = null,
     Object? description = null,
     Object? diverName = null,
@@ -123,6 +141,14 @@ class __$$ChecklistImplCopyWithImpl<$Res>
     Object? sections = null,
   }) {
     return _then(_$ChecklistImpl(
+      rebreatherManufacturer: null == rebreatherManufacturer
+          ? _value.rebreatherManufacturer
+          : rebreatherManufacturer // ignore: cast_nullable_to_non_nullable
+              as String,
+      rebreatherModel: null == rebreatherModel
+          ? _value.rebreatherModel
+          : rebreatherModel // ignore: cast_nullable_to_non_nullable
+              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -152,7 +178,9 @@ class __$$ChecklistImplCopyWithImpl<$Res>
 @JsonSerializable(explicitToJson: true)
 class _$ChecklistImpl with DiagnosticableTreeMixin implements _Checklist {
   _$ChecklistImpl(
-      {required this.title,
+      {required this.rebreatherManufacturer,
+      required this.rebreatherModel,
+      required this.title,
       required this.description,
       required this.diverName,
       required this.date,
@@ -161,6 +189,10 @@ class _$ChecklistImpl with DiagnosticableTreeMixin implements _Checklist {
   factory _$ChecklistImpl.fromJson(Map<String, dynamic> json) =>
       _$$ChecklistImplFromJson(json);
 
+  @override
+  final String rebreatherManufacturer;
+  @override
+  final String rebreatherModel;
   @override
   final String title;
   @override
@@ -174,7 +206,7 @@ class _$ChecklistImpl with DiagnosticableTreeMixin implements _Checklist {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Checklist(title: $title, description: $description, diverName: $diverName, date: $date, sections: $sections)';
+    return 'Checklist(rebreatherManufacturer: $rebreatherManufacturer, rebreatherModel: $rebreatherModel, title: $title, description: $description, diverName: $diverName, date: $date, sections: $sections)';
   }
 
   @override
@@ -182,6 +214,9 @@ class _$ChecklistImpl with DiagnosticableTreeMixin implements _Checklist {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'Checklist'))
+      ..add(
+          DiagnosticsProperty('rebreatherManufacturer', rebreatherManufacturer))
+      ..add(DiagnosticsProperty('rebreatherModel', rebreatherModel))
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('description', description))
       ..add(DiagnosticsProperty('diverName', diverName))
@@ -194,6 +229,10 @@ class _$ChecklistImpl with DiagnosticableTreeMixin implements _Checklist {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ChecklistImpl &&
+            (identical(other.rebreatherManufacturer, rebreatherManufacturer) ||
+                other.rebreatherManufacturer == rebreatherManufacturer) &&
+            (identical(other.rebreatherModel, rebreatherModel) ||
+                other.rebreatherModel == rebreatherModel) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
                 other.description == description) &&
@@ -205,8 +244,15 @@ class _$ChecklistImpl with DiagnosticableTreeMixin implements _Checklist {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, title, description, diverName,
-      date, const DeepCollectionEquality().hash(sections));
+  int get hashCode => Object.hash(
+      runtimeType,
+      rebreatherManufacturer,
+      rebreatherModel,
+      title,
+      description,
+      diverName,
+      date,
+      const DeepCollectionEquality().hash(sections));
 
   @JsonKey(ignore: true)
   @override
@@ -224,7 +270,9 @@ class _$ChecklistImpl with DiagnosticableTreeMixin implements _Checklist {
 
 abstract class _Checklist implements Checklist {
   factory _Checklist(
-      {required final String title,
+      {required final String rebreatherManufacturer,
+      required final String rebreatherModel,
+      required final String title,
       required final String description,
       required final String diverName,
       required final DateTime date,
@@ -233,6 +281,10 @@ abstract class _Checklist implements Checklist {
   factory _Checklist.fromJson(Map<String, dynamic> json) =
       _$ChecklistImpl.fromJson;
 
+  @override
+  String get rebreatherManufacturer;
+  @override
+  String get rebreatherModel;
   @override
   String get title;
   @override

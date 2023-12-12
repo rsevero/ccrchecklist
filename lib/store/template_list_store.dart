@@ -43,11 +43,14 @@ abstract class TemplateListStoreBase with Store {
   }
 
   @action
-  Template addNewTemplate(
-      {required String title,
-      required String description,
-      required String rebreatherModel}) {
+  Template addNewTemplate({
+    required String title,
+    required String rebreatherManufacturer,
+    required String rebreatherModel,
+    required String description,
+  }) {
     final newTemplate = Template(
+        rebreatherManufacturer: rebreatherManufacturer,
         rebreatherModel: rebreatherModel,
         title: title,
         description: description,
