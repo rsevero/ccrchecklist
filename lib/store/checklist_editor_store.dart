@@ -47,6 +47,17 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
       ObservableList<ChecklistSection>();
 
   @readonly
+  @JsonKey(
+      includeFromJson: true,
+      includeToJson: true,
+      fromJson: ObservableListJsonConverter
+          .obsvbLstOfObsvbLstOfChecklistCheckFromJson,
+      toJson:
+          ObservableListJsonConverter.obsvbLstOfObsvbLstOfChecklistCheckToJson)
+  ObservableList<ObservableList<ChecklistCheck>> _checks =
+      ObservableList<ObservableList<ChecklistCheck>>();
+
+  @readonly
   bool _canUndo = false;
 
   @readonly
@@ -63,16 +74,31 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
   bool _linearityStep2CheckPresent = false;
 
   @action
-  void initializeFromTemplate(Template template) {
+  void setCheckIsChecked(int sectionIndex, int checkIndex, bool value) {
+    if (_checks[sectionIndex][checkIndex].isChecked == value) {
+      return;
+    }
+
+    _checks[sectionIndex][checkIndex] =
+        _checks[sectionIndex][checkIndex].copyWith(
+      isChecked: value,
+      lastChange: DateTime.now(),
+    );
+  }
+
+  @action
+  void loadFromTemplate(Template template) {
     _title = template.title;
     _description = template.description;
     _linearityStep1CheckPresent = false;
     _linearityStep2CheckPresent = false;
     for (final templateSection in template.sections) {
+      final checks = _getChecksFromTemplateChecks(templateSection.checks);
       _sections.add(ChecklistSection(
         title: templateSection.title,
-        checks: _getChecksFromTemplateChecks(templateSection.checks),
+        checks: checks,
       ));
+      _checks.add(ObservableList<ChecklistCheck>.of(checks));
     }
 
     _updateLinearityStep2CheckReferenceCount();
@@ -98,6 +124,12 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
                       references: createAndInitializeReferencesMap(
                           _linearityCheckReferenceCount),
                     );
+            _checks[sectionIndex][checkIndex] =
+                _checks[sectionIndex][checkIndex].copyWith(
+              referenceCount: _linearityCheckReferenceCount,
+              references: createAndInitializeReferencesMap(
+                  _linearityCheckReferenceCount),
+            );
           }
           return;
         }

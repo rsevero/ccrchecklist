@@ -1,4 +1,6 @@
+import 'package:ccr_checklist/page/checklist_page.dart';
 import 'package:ccr_checklist/page/template_editor_list_page.dart';
+import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:ccr_checklist/store/template_list_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -53,12 +55,16 @@ class TemplateListPage extends StatelessWidget {
 
   void _onTapTemplate(
       BuildContext context, TemplateListStore templateListStore, int index) {
-    // Navigator.of(context).push(
-    //   MaterialPageRoute(
-    //     builder: (context) => TemplateEditorListPage(
-    //       template: templateListStore.templates[index],
-    //     ),
-    //   ),
-    // );
+    final checklistEditorStore =
+        Provider.of<ChecklistEditorStore>(context, listen: false);
+    checklistEditorStore.loadFromTemplate(templateListStore.templates[index]);
+
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const ChecklistPage(
+          sectionIndex: 0,
+        ),
+      ),
+    );
   }
 }

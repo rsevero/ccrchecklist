@@ -15,7 +15,10 @@ ChecklistEditorStore _$ChecklistEditorStoreFromJson(
       .._date = DateTime.parse(json['_date'] as String)
       .._sections =
           ObservableListJsonConverter.obsvbLstOfChecklistSectionFromJson(
-              json['_sections'] as List<ChecklistSection>);
+              json['_sections'] as List<ChecklistSection>)
+      .._checks = ObservableListJsonConverter
+          .obsvbLstOfObsvbLstOfChecklistCheckFromJson(
+              json['_checks'] as List<List<ChecklistCheck>>);
 
 Map<String, dynamic> _$ChecklistEditorStoreToJson(
         ChecklistEditorStore instance) =>
@@ -26,6 +29,9 @@ Map<String, dynamic> _$ChecklistEditorStoreToJson(
       '_date': instance._date.toIso8601String(),
       '_sections': ObservableListJsonConverter.obsvbLstOfChecklistSectionToJson(
           instance._sections),
+      '_checks':
+          ObservableListJsonConverter.obsvbLstOfObsvbLstOfChecklistCheckToJson(
+              instance._checks),
     };
 
 // **************************************************************************
@@ -125,6 +131,24 @@ mixin _$ChecklistEditorStore on _ChecklistEditorStoreBaseToJson, Store {
     });
   }
 
+  late final _$_checksAtom =
+      Atom(name: '_ChecklistEditorStoreBaseToJson._checks', context: context);
+
+  ObservableList<ObservableList<ChecklistCheck>> get checks {
+    _$_checksAtom.reportRead();
+    return super._checks;
+  }
+
+  @override
+  ObservableList<ObservableList<ChecklistCheck>> get _checks => checks;
+
+  @override
+  set _checks(ObservableList<ObservableList<ChecklistCheck>> value) {
+    _$_checksAtom.reportWrite(value, super._checks, () {
+      super._checks = value;
+    });
+  }
+
   late final _$_canUndoAtom =
       Atom(name: '_ChecklistEditorStoreBaseToJson._canUndo', context: context);
 
@@ -204,12 +228,22 @@ mixin _$ChecklistEditorStore on _ChecklistEditorStoreBaseToJson, Store {
           name: '_ChecklistEditorStoreBaseToJson', context: context);
 
   @override
-  void initializeFromTemplate(Template template) {
-    final _$actionInfo =
-        _$_ChecklistEditorStoreBaseToJsonActionController.startAction(
-            name: '_ChecklistEditorStoreBaseToJson.initializeFromTemplate');
+  void setCheckIsChecked(int sectionIndex, int checkIndex, bool value) {
+    final _$actionInfo = _$_ChecklistEditorStoreBaseToJsonActionController
+        .startAction(name: '_ChecklistEditorStoreBaseToJson.setCheckIsChecked');
     try {
-      return super.initializeFromTemplate(template);
+      return super.setCheckIsChecked(sectionIndex, checkIndex, value);
+    } finally {
+      _$_ChecklistEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void loadFromTemplate(Template template) {
+    final _$actionInfo = _$_ChecklistEditorStoreBaseToJsonActionController
+        .startAction(name: '_ChecklistEditorStoreBaseToJson.loadFromTemplate');
+    try {
+      return super.loadFromTemplate(template);
     } finally {
       _$_ChecklistEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
     }

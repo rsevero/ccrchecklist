@@ -1,3 +1,4 @@
+import 'package:ccr_checklist/data/checklist_check.dart';
 import 'package:ccr_checklist/data/checklist_section.dart';
 import 'package:ccr_checklist/data/template_check.dart';
 import 'package:ccr_checklist/data/template_section.dart';
@@ -43,5 +44,24 @@ class ObservableListJsonConverter {
   static List<ChecklistSection> obsvbLstOfChecklistSectionToJson(
       ObservableList<ChecklistSection> object) {
     return object.toList();
+  }
+
+  static ObservableList<ObservableList<ChecklistCheck>>
+      obsvbLstOfObsvbLstOfChecklistCheckFromJson(
+          List<List<ChecklistCheck>> json) {
+    final oblst = ObservableList<ObservableList<ChecklistCheck>>();
+    for (final lst in json) {
+      oblst.add(ObservableList<ChecklistCheck>.of(lst));
+    }
+    return oblst;
+  }
+
+  static List<List<ChecklistCheck>> obsvbLstOfObsvbLstOfChecklistCheckToJson(
+      ObservableList<ObservableList<ChecklistCheck>> object) {
+    final List<List<ChecklistCheck>> lst = [];
+    for (final oblst in object) {
+      lst.add(oblst.toList());
+    }
+    return lst;
   }
 }
