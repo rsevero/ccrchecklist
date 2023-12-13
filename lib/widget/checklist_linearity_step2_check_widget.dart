@@ -78,12 +78,11 @@ class _ChecklistLinearityStep2CheckWidgetState
           }
         },
       ),
-      title: Row(
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Expanded(
-            child: Text(
-                'Linearity check - step 2: enter the mV (milivolts) readings in the "actual" column with pure oxygen.'),
-          ),
+          const Text(
+              'Linearity check - step 2: enter the mV (milivolts) readings in the "actual" column with pure oxygen.'),
           Observer(
             builder: (_) => SingleChildScrollView(
               scrollDirection: Axis.horizontal,
