@@ -1,4 +1,6 @@
+import 'package:ccr_checklist/data/checklist_check.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
+import 'package:ccr_checklist/widget/checklist_regular_check_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
@@ -14,22 +16,37 @@ class CheckListCheckList extends StatelessWidget {
 
     return Expanded(
       child: Observer(
-        builder: (_) => ListView.builder(
+        builder: (_) => ListView.separated(
           itemCount: checklistEditorStore.checks[sectionIndex].length,
           itemBuilder: (context, index) {
             var check = checklistEditorStore.checks[sectionIndex][index];
-            return CheckboxListTile(
-              title: Text(check.description),
-              value: check.isChecked,
-              controlAffinity: ListTileControlAffinity.leading,
-              onChanged: (bool? value) {
-                if (value != null) {
-                  checklistEditorStore.setCheckIsChecked(
-                      sectionIndex, index, value);
-                }
-              },
-            );
+            if (check is ChecklistRegularCheck) {
+              return ChecklistRegularCheckWidget(
+                  context: context,
+                  sectionIndex: sectionIndex,
+                  checkIndex: index);
+            } else if (check is ChecklistLinearityStep1Check) {
+              // return ChecklistLinearityStep1CheckWidget(context,
+              //     sectionIndex: sectionIndex, index: index);
+            } else if (check is ChecklistLinearityStep2Check) {
+              // return ChecklistLinearityStep2CheckWidget(context,
+              //     sectionIndex: sectionIndex, index: index);
+            } else {
+              throw Exception('Unknown check type');
+            }
+            // return CheckboxListTile(
+            //   title: Text(check.description),
+            //   value: check.isChecked,
+            //   controlAffinity: ListTileControlAffinity.leading,
+            //   onChanged: (bool? value) {
+            //     if (value != null) {
+            //       checklistEditorStore.setCheckIsChecked(
+            //           sectionIndex, index, value);
+            //     }
+            //   },
+            // );
           },
+          separatorBuilder: (context, index) => const Divider(),
         ),
       ),
     );
