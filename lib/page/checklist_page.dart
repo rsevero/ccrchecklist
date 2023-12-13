@@ -12,6 +12,7 @@ class ChecklistPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final checklistEditorStore = Provider.of<ChecklistEditorStore>(context);
+    final totalSections = checklistEditorStore.sections.length;
 
     return Scaffold(
       appBar: CheckListAppBar(
@@ -20,6 +21,47 @@ class ChecklistPage extends StatelessWidget {
           rebreatherManufacturer: checklistEditorStore.rebreatherManufacturer,
           rebreatherModel: checklistEditorStore.rebreatherModel),
       body: ChecklistBody(sectionIndex: sectionIndex),
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            IconButton(
+              icon: const Icon(Icons.navigate_before),
+              onPressed: sectionIndex > 0
+                  ? () => _onTapPreviousSection(context)
+                  : null,
+            ),
+            IconButton(
+              icon: const Icon(Icons.navigate_next),
+              onPressed: sectionIndex < totalSections - 1
+                  ? () => _onTapNextSection(context)
+                  : null,
+            ),
+          ],
+        ),
+      ),
     );
+  }
+
+  void _onTapPreviousSection(BuildContext context) {
+    navigateToSection(context, sectionIndex - 1);
+  }
+
+  void _onTapNextSection(BuildContext context) {
+    navigateToSection(context, sectionIndex + 1);
+  }
+
+  void navigateToSection(BuildContext context, int newSectionIndex) {
+    final checklistEditorStore =
+        Provider.of<ChecklistEditorStore>(context, listen: false);
+    final totalSections = checklistEditorStore.sections.length;
+
+    if ((newSectionIndex >= 0) && (newSectionIndex < totalSections)) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => ChecklistPage(sectionIndex: newSectionIndex),
+        ),
+      );
+    }
   }
 }
