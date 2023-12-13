@@ -1,5 +1,6 @@
 import 'package:ccr_checklist/data/checklist_check.dart';
 import 'package:ccr_checklist/misc/constants.dart';
+import 'package:ccr_checklist/misc/flutter_extension_methods.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:ccr_checklist/widget/linearity_worksheet_text.dart';
 import 'package:flutter/material.dart';
@@ -89,10 +90,11 @@ class _ChecklistLinearityStep2CheckWidgetState
               child: Container(
                 color: Theme.of(context).colorScheme.tertiary,
                 child: DataTable(
+                  columnSpacing: 12,
                   columns: const [
                     DataColumn(label: LinearityWorksheetText('mV')),
-                    DataColumn(label: LinearityWorksheetText('/ 0.21')),
-                    DataColumn(label: LinearityWorksheetText('x 1.6')),
+                    DataColumn(label: LinearityWorksheetText('/0.21')),
+                    DataColumn(label: LinearityWorksheetText('x1.6')),
                     DataColumn(label: LinearityWorksheetText('actual')),
                     DataColumn(label: LinearityWorksheetText('%')),
                   ],
@@ -135,18 +137,24 @@ class _ChecklistLinearityStep2CheckWidgetState
                           ),
                         ),
                         DataCell(
-                          Observer(
-                            builder: (_) => TextField(
-                              controller: _controllers[index],
-                              style: TextStyle(
-                                  color:
-                                      Theme.of(context).colorScheme.onTertiary),
-                              onChanged: (value) =>
-                                  checklistEditorStore.updateLinearityActual(
-                                      index, double.tryParse(value) ?? 0),
-                              keyboardType:
-                                  const TextInputType.numberWithOptions(
-                                      decimal: true),
+                          Container(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .secondaryContainer,
+                            child: Observer(
+                              builder: (_) => TextField(
+                                controller: _controllers[index],
+                                style: TextStyle(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSecondaryContainer),
+                                onChanged: (value) =>
+                                    checklistEditorStore.updateLinearityActual(
+                                        index, double.tryParse(value) ?? 0),
+                                keyboardType:
+                                    const TextInputType.numberWithOptions(
+                                        decimal: true),
+                              ),
                             ),
                           ),
                         ),

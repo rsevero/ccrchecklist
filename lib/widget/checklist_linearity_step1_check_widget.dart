@@ -89,28 +89,35 @@ class _ChecklistLinearityStep1CheckWidgetState
               child: Container(
                 color: Theme.of(context).colorScheme.tertiary,
                 child: DataTable(
+                  columnSpacing: 12,
                   columns: const [
                     DataColumn(label: LinearityWorksheetText('mV')),
-                    DataColumn(label: LinearityWorksheetText('/ 0.21')),
-                    DataColumn(label: LinearityWorksheetText('x 1.6')),
+                    DataColumn(label: LinearityWorksheetText('/0.21')),
+                    DataColumn(label: LinearityWorksheetText('x1.6')),
                   ],
                   rows: List<DataRow>.generate(
                     checklistEditorStore.linearityCheckReferenceCount,
                     (index) => DataRow(
                       cells: [
                         DataCell(
-                          Observer(
-                            builder: (_) => TextField(
-                              controller: _controllers[index],
-                              style: TextStyle(
-                                  color:
-                                      Theme.of(context).colorScheme.onTertiary),
-                              onChanged: (value) =>
-                                  checklistEditorStore.updateLinearityMV(
-                                      index, double.tryParse(value) ?? 0),
-                              keyboardType:
-                                  const TextInputType.numberWithOptions(
-                                      decimal: true),
+                          Container(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .secondaryContainer,
+                            child: Observer(
+                              builder: (_) => TextField(
+                                controller: _controllers[index],
+                                style: TextStyle(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSecondaryContainer),
+                                onChanged: (value) =>
+                                    checklistEditorStore.updateLinearityMV(
+                                        index, double.tryParse(value) ?? 0),
+                                keyboardType:
+                                    const TextInputType.numberWithOptions(
+                                        decimal: true),
+                              ),
                             ),
                           ),
                         ),
