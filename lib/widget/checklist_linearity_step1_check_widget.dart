@@ -78,12 +78,11 @@ class _ChecklistLinearityStep1CheckWidgetState
           }
         },
       ),
-      title: Row(
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Expanded(
-            child: Text(
-                'Linearity check - step 1: enter the mV (milivolts) readings with pure air.'),
-          ),
+          const Text(
+              'Linearity check - step 1: enter the mV (milivolts) readings with pure air.'),
           Observer(
             builder: (_) => SingleChildScrollView(
               scrollDirection: Axis.horizontal,
