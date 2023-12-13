@@ -49,10 +49,10 @@ class LinearityRow {
     }
 
     _actual = value;
-    if ((_multiplied == null) || (almostEqualI(_multiplied!, 0, 1))) {
+    if ((_divided == null) || (almostEqualI(_divided!, 0, 1))) {
       _percentage = null;
     } else {
-      _percentage = _actual! / _multiplied! * 100;
+      _percentage = _actual! / _divided! * 100;
     }
   }
 

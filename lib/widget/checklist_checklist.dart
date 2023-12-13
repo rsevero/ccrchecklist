@@ -1,6 +1,7 @@
 import 'package:ccr_checklist/data/checklist_check.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:ccr_checklist/widget/checklist_linearity_step1_check_widget.dart';
+import 'package:ccr_checklist/widget/checklist_linearity_step2_check_widget.dart';
 import 'package:ccr_checklist/widget/checklist_regular_check_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -28,23 +29,11 @@ class CheckListCheckList extends StatelessWidget {
               return ChecklistLinearityStep1CheckWidget(
                   sectionIndex: sectionIndex, checkIndex: index);
             } else if (check is ChecklistLinearityStep2Check) {
-              // return ChecklistLinearityStep2CheckWidget(context,
-              //     sectionIndex: sectionIndex, index: index);
-              return const Text('Linearity Step 2');
+              return ChecklistLinearityStep2CheckWidget(
+                  sectionIndex: sectionIndex, checkIndex: index);
             } else {
               throw Exception('Unknown check type');
             }
-            // return CheckboxListTile(
-            //   title: Text(check.description),
-            //   value: check.isChecked,
-            //   controlAffinity: ListTileControlAffinity.leading,
-            //   onChanged: (bool? value) {
-            //     if (value != null) {
-            //       checklistEditorStore.setCheckIsChecked(
-            //           sectionIndex, index, value);
-            //     }
-            //   },
-            // );
           },
           separatorBuilder: (context, index) => const Divider(),
         ),

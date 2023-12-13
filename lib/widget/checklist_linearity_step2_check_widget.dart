@@ -5,28 +5,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
-class ChecklistLinearityStep1CheckWidget extends StatefulWidget {
+class ChecklistLinearityStep2CheckWidget extends StatefulWidget {
   final int sectionIndex;
   final int checkIndex;
 
-  const ChecklistLinearityStep1CheckWidget({
+  const ChecklistLinearityStep2CheckWidget({
     super.key,
     required this.sectionIndex,
     required this.checkIndex,
   });
 
   @override
-  State<ChecklistLinearityStep1CheckWidget> createState() =>
-      _ChecklistLinearityStep1CheckWidgetState();
+  State<ChecklistLinearityStep2CheckWidget> createState() =>
+      _ChecklistLinearityStep2CheckWidgetState();
 }
 
-class _ChecklistLinearityStep1CheckWidgetState
-    extends State<ChecklistLinearityStep1CheckWidget> {
+class _ChecklistLinearityStep2CheckWidgetState
+    extends State<ChecklistLinearityStep2CheckWidget> {
   @override
   Widget build(BuildContext context) {
     final checklistEditorStore = Provider.of<ChecklistEditorStore>(context);
     final check = checklistEditorStore.checks[widget.sectionIndex]
-        [widget.checkIndex] as ChecklistLinearityStep1Check;
+        [widget.checkIndex] as ChecklistLinearityStep2Check;
 
     return ListTile(
       leading: Checkbox(
@@ -42,7 +42,7 @@ class _ChecklistLinearityStep1CheckWidgetState
         children: [
           const Expanded(
             child: Text(
-                'Linearity check - step 1: enter the mV (milivolts) readings with pure air.'),
+                'Linearity check - step 2: enter the mV (milivolts) readings in the "actual" column with pure oxygen.'),
           ),
           Observer(
             builder: (_) => SingleChildScrollView(
@@ -54,6 +54,8 @@ class _ChecklistLinearityStep1CheckWidgetState
                     DataColumn(label: LinearityWorksheetText('mV')),
                     DataColumn(label: LinearityWorksheetText('/ 0.21')),
                     DataColumn(label: LinearityWorksheetText('x 1.6')),
+                    DataColumn(label: LinearityWorksheetText('actual')),
+                    DataColumn(label: LinearityWorksheetText('%')),
                   ],
                   rows: List<DataRow>.generate(
                     checklistEditorStore.linearityCheckReferenceCount,
@@ -61,17 +63,14 @@ class _ChecklistLinearityStep1CheckWidgetState
                       cells: [
                         DataCell(
                           Observer(
-                            builder: (_) => TextField(
-                              style: TextStyle(
-                                  color:
-                                      Theme.of(context).colorScheme.onTertiary),
-                              onChanged: (value) =>
-                                  checklistEditorStore.updateLinearityMV(
-                                      index, double.tryParse(value) ?? 0),
-                              keyboardType:
-                                  const TextInputType.numberWithOptions(
-                                      decimal: true),
-                            ),
+                            builder: (_) => LinearityWorksheetText(
+                                checklistEditorStore
+                                            .linearityWorksheet[index].mv ==
+                                        null
+                                    ? ''
+                                    : checklistEditorStore
+                                        .linearityWorksheet[index].mv!
+                                        .toStringAsFixed(1)),
                           ),
                         ),
                         DataCell(Observer(
@@ -93,6 +92,33 @@ class _ChecklistLinearityStep1CheckWidgetState
                                     ? ''
                                     : checklistEditorStore
                                         .linearityWorksheet[index].multiplied!
+                                        .toStringAsFixed(1)),
+                          ),
+                        ),
+                        DataCell(
+                          Observer(
+                            builder: (_) => TextField(
+                              style: TextStyle(
+                                  color:
+                                      Theme.of(context).colorScheme.onTertiary),
+                              onChanged: (value) =>
+                                  checklistEditorStore.updateLinearityActual(
+                                      index, double.tryParse(value) ?? 0),
+                              keyboardType:
+                                  const TextInputType.numberWithOptions(
+                                      decimal: true),
+                            ),
+                          ),
+                        ),
+                        DataCell(
+                          Observer(
+                            builder: (_) => LinearityWorksheetText(
+                                checklistEditorStore.linearityWorksheet[index]
+                                            .percentage ==
+                                        null
+                                    ? ''
+                                    : checklistEditorStore
+                                        .linearityWorksheet[index].percentage!
                                         .toStringAsFixed(1)),
                           ),
                         ),
