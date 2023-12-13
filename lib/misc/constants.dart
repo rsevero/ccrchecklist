@@ -15,3 +15,6 @@ const ccrTimerBackgroundcolorNotRunning = Color(0xffe66101);
 const ccrTimerTextColorFinished = Color(0xffffffff);
 const ccrTimerTextColorRunning = Color(0xff666666);
 const ccrTimerTextColorNotRunning = Color(0xffffffff);
+
+const ccrLinearityWorksheetDivider = 0.21;
+const ccrLinearityWorksheetMultiplier = 1.6;

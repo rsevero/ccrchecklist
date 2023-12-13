@@ -1,5 +1,6 @@
 import 'package:ccr_checklist/data/checklist_check.dart';
 import 'package:ccr_checklist/data/checklist_section.dart';
+import 'package:ccr_checklist/data/linearity_row.dart';
 import 'package:ccr_checklist/data/template.dart';
 import 'package:ccr_checklist/data/template_check.dart';
 import 'package:ccr_checklist/misc/helper_functions.dart';
@@ -77,9 +78,12 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
   @readonly
   String _redoDescription = '';
 
+  @readonly
+  ObservableList<LinearityRow> _linearityWorksheet =
+      ObservableList<LinearityRow>();
+
+  @readonly
   int _linearityCheckReferenceCount = 0;
-  bool _linearityStep1CheckPresent = false;
-  bool _linearityStep2CheckPresent = false;
 
   @action
   void setCheckIsChecked(int sectionIndex, int checkIndex, bool value) {
@@ -95,64 +99,45 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
   }
 
   @action
+  void updateLinearityMV(int referenceIndex, double value) {
+    _linearityWorksheet[referenceIndex] =
+        _linearityWorksheet[referenceIndex].copyWith(mv: value);
+  }
+
+  @action
+  void updateLinearityActual(int referenceIndex, double value) {
+    _linearityWorksheet[referenceIndex] =
+        _linearityWorksheet[referenceIndex].copyWith(actual: value);
+  }
+
+  @action
   void loadFromTemplate(Template template) {
     _rebreatherManufacturer = template.rebreatherManufacturer;
     _rebreatherModel = template.rebreatherModel;
     _title = template.title;
     _description = template.description;
     _date = DateTime.now();
-    _linearityStep1CheckPresent = false;
-    _linearityStep2CheckPresent = false;
-    for (final templateSection in template.sections) {
-      final checks = _getChecksFromTemplateChecks(templateSection.checks);
+    for (int sectionIndex = 0;
+        sectionIndex < template.sections.length;
+        sectionIndex++) {
+      final templateSection = template.sections[sectionIndex];
+      final checks =
+          _getChecksFromTemplateChecks(templateSection.checks, sectionIndex);
       _sections.add(ChecklistSection(
         title: templateSection.title,
         checks: checks,
       ));
       _checks.add(ObservableList<ChecklistCheck>.of(checks));
     }
-
-    _updateLinearityStep2CheckReferenceCount();
-  }
-
-  void _updateLinearityStep2CheckReferenceCount() {
-    if (!_linearityStep1CheckPresent || !_linearityStep2CheckPresent) {
-      return;
-    }
-
-    for (int sectionIndex = 0;
-        sectionIndex < _sections.length;
-        sectionIndex++) {
-      for (int checkIndex = 0;
-          checkIndex < _sections[sectionIndex].checks.length;
-          checkIndex++) {
-        final check = _sections[sectionIndex].checks[checkIndex];
-        if (check is ChecklistLinearityStep2Check) {
-          if (check.referenceCount != _linearityCheckReferenceCount) {
-            _sections[sectionIndex].checks[checkIndex] =
-                _sections[sectionIndex].checks[checkIndex].copyWith(
-                      referenceCount: _linearityCheckReferenceCount,
-                      references: createAndInitializeReferencesMap(
-                          _linearityCheckReferenceCount),
-                    );
-            _checks[sectionIndex][checkIndex] =
-                _checks[sectionIndex][checkIndex].copyWith(
-              referenceCount: _linearityCheckReferenceCount,
-              references: createAndInitializeReferencesMap(
-                  _linearityCheckReferenceCount),
-            );
-          }
-          return;
-        }
-      }
-    }
   }
 
   List<ChecklistCheck> _getChecksFromTemplateChecks(
-      List<TemplateCheck> templateChecks) {
+      List<TemplateCheck> templateChecks, int sectionIndex) {
     List<ChecklistCheck> checks = [];
 
-    for (final templateCheck in templateChecks) {
+    for (int checkIndex = 0; checkIndex < templateChecks.length; checkIndex++) {
+      final templateCheck = templateChecks[checkIndex];
+
       ChecklistCheck checklistCheck;
       if (templateCheck is TemplateRegularCheck) {
         checklistCheck = ChecklistRegularCheck(
@@ -165,22 +150,24 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
           secondsTimer: templateCheck.secondsTimer,
         );
       } else if (templateCheck is TemplateLinearityStep1Check) {
-        _linearityStep1CheckPresent = true;
         _linearityCheckReferenceCount = templateCheck.referenceCount;
+        _linearityWorksheet.clear();
+        _linearityWorksheet.addAll(
+          List<LinearityRow>.generate(
+            templateCheck.referenceCount,
+            (index) => LinearityRow(),
+          ),
+        );
         checklistCheck = ChecklistLinearityStep1Check(
           lastChange: DateTime.now(),
           isChecked: false,
-          referenceCount: templateCheck.referenceCount,
-          references:
-              createAndInitializeReferencesMap(templateCheck.referenceCount),
+          referenceCount: _linearityCheckReferenceCount,
         );
       } else {
-        _linearityStep2CheckPresent = true;
         checklistCheck = ChecklistLinearityStep2Check(
           lastChange: DateTime.now(),
           isChecked: false,
           referenceCount: 0,
-          references: createAndInitializeReferencesMap(0),
         );
       }
       checks.add(checklistCheck);

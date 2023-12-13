@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   cupertino_icons: ^1.0.6
+  dart_numerics: ^0.0.6
   flutter:
     sdk: flutter
   flutter_mobx: ^2.2.0

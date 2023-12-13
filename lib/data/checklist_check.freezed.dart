@@ -34,7 +34,6 @@ mixin _$ChecklistCheck {
   bool get isChecked => throw _privateConstructorUsedError;
   DateTime get lastChange => throw _privateConstructorUsedError;
   int get referenceCount => throw _privateConstructorUsedError;
-  Map<int, double> get references => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
@@ -45,11 +44,11 @@ mixin _$ChecklistCheck {
             int referenceCount,
             Map<int, double> references)
         regular,
-    required TResult Function(bool isChecked, DateTime lastChange,
-            int referenceCount, Map<int, double> references)
+    required TResult Function(
+            bool isChecked, DateTime lastChange, int referenceCount)
         linearityStep1,
-    required TResult Function(bool isChecked, DateTime lastChange,
-            int referenceCount, Map<int, double> references)
+    required TResult Function(
+            bool isChecked, DateTime lastChange, int referenceCount)
         linearityStep2,
   }) =>
       throw _privateConstructorUsedError;
@@ -58,11 +57,9 @@ mixin _$ChecklistCheck {
     TResult? Function(bool isChecked, DateTime lastChange, String description,
             int secondsTimer, int referenceCount, Map<int, double> references)?
         regular,
-    TResult? Function(bool isChecked, DateTime lastChange, int referenceCount,
-            Map<int, double> references)?
+    TResult? Function(bool isChecked, DateTime lastChange, int referenceCount)?
         linearityStep1,
-    TResult? Function(bool isChecked, DateTime lastChange, int referenceCount,
-            Map<int, double> references)?
+    TResult? Function(bool isChecked, DateTime lastChange, int referenceCount)?
         linearityStep2,
   }) =>
       throw _privateConstructorUsedError;
@@ -71,11 +68,9 @@ mixin _$ChecklistCheck {
     TResult Function(bool isChecked, DateTime lastChange, String description,
             int secondsTimer, int referenceCount, Map<int, double> references)?
         regular,
-    TResult Function(bool isChecked, DateTime lastChange, int referenceCount,
-            Map<int, double> references)?
+    TResult Function(bool isChecked, DateTime lastChange, int referenceCount)?
         linearityStep1,
-    TResult Function(bool isChecked, DateTime lastChange, int referenceCount,
-            Map<int, double> references)?
+    TResult Function(bool isChecked, DateTime lastChange, int referenceCount)?
         linearityStep2,
     required TResult orElse(),
   }) =>
@@ -116,11 +111,7 @@ abstract class $ChecklistCheckCopyWith<$Res> {
           ChecklistCheck value, $Res Function(ChecklistCheck) then) =
       _$ChecklistCheckCopyWithImpl<$Res, ChecklistCheck>;
   @useResult
-  $Res call(
-      {bool isChecked,
-      DateTime lastChange,
-      int referenceCount,
-      Map<int, double> references});
+  $Res call({bool isChecked, DateTime lastChange, int referenceCount});
 }
 
 /// @nodoc
@@ -139,7 +130,6 @@ class _$ChecklistCheckCopyWithImpl<$Res, $Val extends ChecklistCheck>
     Object? isChecked = null,
     Object? lastChange = null,
     Object? referenceCount = null,
-    Object? references = null,
   }) {
     return _then(_value.copyWith(
       isChecked: null == isChecked
@@ -154,10 +144,6 @@ class _$ChecklistCheckCopyWithImpl<$Res, $Val extends ChecklistCheck>
           ? _value.referenceCount
           : referenceCount // ignore: cast_nullable_to_non_nullable
               as int,
-      references: null == references
-          ? _value.references
-          : references // ignore: cast_nullable_to_non_nullable
-              as Map<int, double>,
     ) as $Val);
   }
 }
@@ -327,11 +313,11 @@ class _$ChecklistRegularCheckImpl extends ChecklistRegularCheck
             int referenceCount,
             Map<int, double> references)
         regular,
-    required TResult Function(bool isChecked, DateTime lastChange,
-            int referenceCount, Map<int, double> references)
+    required TResult Function(
+            bool isChecked, DateTime lastChange, int referenceCount)
         linearityStep1,
-    required TResult Function(bool isChecked, DateTime lastChange,
-            int referenceCount, Map<int, double> references)
+    required TResult Function(
+            bool isChecked, DateTime lastChange, int referenceCount)
         linearityStep2,
   }) {
     return regular(isChecked, lastChange, description, secondsTimer,
@@ -344,11 +330,9 @@ class _$ChecklistRegularCheckImpl extends ChecklistRegularCheck
     TResult? Function(bool isChecked, DateTime lastChange, String description,
             int secondsTimer, int referenceCount, Map<int, double> references)?
         regular,
-    TResult? Function(bool isChecked, DateTime lastChange, int referenceCount,
-            Map<int, double> references)?
+    TResult? Function(bool isChecked, DateTime lastChange, int referenceCount)?
         linearityStep1,
-    TResult? Function(bool isChecked, DateTime lastChange, int referenceCount,
-            Map<int, double> references)?
+    TResult? Function(bool isChecked, DateTime lastChange, int referenceCount)?
         linearityStep2,
   }) {
     return regular?.call(isChecked, lastChange, description, secondsTimer,
@@ -361,11 +345,9 @@ class _$ChecklistRegularCheckImpl extends ChecklistRegularCheck
     TResult Function(bool isChecked, DateTime lastChange, String description,
             int secondsTimer, int referenceCount, Map<int, double> references)?
         regular,
-    TResult Function(bool isChecked, DateTime lastChange, int referenceCount,
-            Map<int, double> references)?
+    TResult Function(bool isChecked, DateTime lastChange, int referenceCount)?
         linearityStep1,
-    TResult Function(bool isChecked, DateTime lastChange, int referenceCount,
-            Map<int, double> references)?
+    TResult Function(bool isChecked, DateTime lastChange, int referenceCount)?
         linearityStep2,
     required TResult orElse(),
   }) {
@@ -442,7 +424,6 @@ abstract class ChecklistRegularCheck extends ChecklistCheck {
   int get secondsTimer;
   @override
   int get referenceCount;
-  @override
   Map<int, double> get references;
   @override
   @JsonKey(ignore: true)
@@ -459,11 +440,7 @@ abstract class _$$ChecklistLinearityStep1CheckImplCopyWith<$Res>
       __$$ChecklistLinearityStep1CheckImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {bool isChecked,
-      DateTime lastChange,
-      int referenceCount,
-      Map<int, double> references});
+  $Res call({bool isChecked, DateTime lastChange, int referenceCount});
 }
 
 /// @nodoc
@@ -482,7 +459,6 @@ class __$$ChecklistLinearityStep1CheckImplCopyWithImpl<$Res>
     Object? isChecked = null,
     Object? lastChange = null,
     Object? referenceCount = null,
-    Object? references = null,
   }) {
     return _then(_$ChecklistLinearityStep1CheckImpl(
       isChecked: null == isChecked
@@ -497,10 +473,6 @@ class __$$ChecklistLinearityStep1CheckImplCopyWithImpl<$Res>
           ? _value.referenceCount
           : referenceCount // ignore: cast_nullable_to_non_nullable
               as int,
-      references: null == references
-          ? _value.references
-          : references // ignore: cast_nullable_to_non_nullable
-              as Map<int, double>,
     ));
   }
 }
@@ -513,7 +485,6 @@ class _$ChecklistLinearityStep1CheckImpl extends ChecklistLinearityStep1Check
       {required this.isChecked,
       required this.lastChange,
       required this.referenceCount,
-      required this.references,
       final String? $type})
       : $type = $type ?? 'linearityStep1',
         super._();
@@ -528,15 +499,13 @@ class _$ChecklistLinearityStep1CheckImpl extends ChecklistLinearityStep1Check
   final DateTime lastChange;
   @override
   final int referenceCount;
-  @override
-  final Map<int, double> references;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ChecklistCheck.linearityStep1(isChecked: $isChecked, lastChange: $lastChange, referenceCount: $referenceCount, references: $references)';
+    return 'ChecklistCheck.linearityStep1(isChecked: $isChecked, lastChange: $lastChange, referenceCount: $referenceCount)';
   }
 
   @override
@@ -546,8 +515,7 @@ class _$ChecklistLinearityStep1CheckImpl extends ChecklistLinearityStep1Check
       ..add(DiagnosticsProperty('type', 'ChecklistCheck.linearityStep1'))
       ..add(DiagnosticsProperty('isChecked', isChecked))
       ..add(DiagnosticsProperty('lastChange', lastChange))
-      ..add(DiagnosticsProperty('referenceCount', referenceCount))
-      ..add(DiagnosticsProperty('references', references));
+      ..add(DiagnosticsProperty('referenceCount', referenceCount));
   }
 
   @override
@@ -560,15 +528,13 @@ class _$ChecklistLinearityStep1CheckImpl extends ChecklistLinearityStep1Check
             (identical(other.lastChange, lastChange) ||
                 other.lastChange == lastChange) &&
             (identical(other.referenceCount, referenceCount) ||
-                other.referenceCount == referenceCount) &&
-            const DeepCollectionEquality()
-                .equals(other.references, references));
+                other.referenceCount == referenceCount));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, isChecked, lastChange,
-      referenceCount, const DeepCollectionEquality().hash(references));
+  int get hashCode =>
+      Object.hash(runtimeType, isChecked, lastChange, referenceCount);
 
   @JsonKey(ignore: true)
   @override
@@ -589,14 +555,14 @@ class _$ChecklistLinearityStep1CheckImpl extends ChecklistLinearityStep1Check
             int referenceCount,
             Map<int, double> references)
         regular,
-    required TResult Function(bool isChecked, DateTime lastChange,
-            int referenceCount, Map<int, double> references)
+    required TResult Function(
+            bool isChecked, DateTime lastChange, int referenceCount)
         linearityStep1,
-    required TResult Function(bool isChecked, DateTime lastChange,
-            int referenceCount, Map<int, double> references)
+    required TResult Function(
+            bool isChecked, DateTime lastChange, int referenceCount)
         linearityStep2,
   }) {
-    return linearityStep1(isChecked, lastChange, referenceCount, references);
+    return linearityStep1(isChecked, lastChange, referenceCount);
   }
 
   @override
@@ -605,15 +571,12 @@ class _$ChecklistLinearityStep1CheckImpl extends ChecklistLinearityStep1Check
     TResult? Function(bool isChecked, DateTime lastChange, String description,
             int secondsTimer, int referenceCount, Map<int, double> references)?
         regular,
-    TResult? Function(bool isChecked, DateTime lastChange, int referenceCount,
-            Map<int, double> references)?
+    TResult? Function(bool isChecked, DateTime lastChange, int referenceCount)?
         linearityStep1,
-    TResult? Function(bool isChecked, DateTime lastChange, int referenceCount,
-            Map<int, double> references)?
+    TResult? Function(bool isChecked, DateTime lastChange, int referenceCount)?
         linearityStep2,
   }) {
-    return linearityStep1?.call(
-        isChecked, lastChange, referenceCount, references);
+    return linearityStep1?.call(isChecked, lastChange, referenceCount);
   }
 
   @override
@@ -622,16 +585,14 @@ class _$ChecklistLinearityStep1CheckImpl extends ChecklistLinearityStep1Check
     TResult Function(bool isChecked, DateTime lastChange, String description,
             int secondsTimer, int referenceCount, Map<int, double> references)?
         regular,
-    TResult Function(bool isChecked, DateTime lastChange, int referenceCount,
-            Map<int, double> references)?
+    TResult Function(bool isChecked, DateTime lastChange, int referenceCount)?
         linearityStep1,
-    TResult Function(bool isChecked, DateTime lastChange, int referenceCount,
-            Map<int, double> references)?
+    TResult Function(bool isChecked, DateTime lastChange, int referenceCount)?
         linearityStep2,
     required TResult orElse(),
   }) {
     if (linearityStep1 != null) {
-      return linearityStep1(isChecked, lastChange, referenceCount, references);
+      return linearityStep1(isChecked, lastChange, referenceCount);
     }
     return orElse();
   }
@@ -682,11 +643,9 @@ class _$ChecklistLinearityStep1CheckImpl extends ChecklistLinearityStep1Check
 
 abstract class ChecklistLinearityStep1Check extends ChecklistCheck {
   factory ChecklistLinearityStep1Check(
-          {required final bool isChecked,
-          required final DateTime lastChange,
-          required final int referenceCount,
-          required final Map<int, double> references}) =
-      _$ChecklistLinearityStep1CheckImpl;
+      {required final bool isChecked,
+      required final DateTime lastChange,
+      required final int referenceCount}) = _$ChecklistLinearityStep1CheckImpl;
   ChecklistLinearityStep1Check._() : super._();
 
   factory ChecklistLinearityStep1Check.fromJson(Map<String, dynamic> json) =
@@ -698,8 +657,6 @@ abstract class ChecklistLinearityStep1Check extends ChecklistCheck {
   DateTime get lastChange;
   @override
   int get referenceCount;
-  @override
-  Map<int, double> get references;
   @override
   @JsonKey(ignore: true)
   _$$ChecklistLinearityStep1CheckImplCopyWith<
@@ -716,11 +673,7 @@ abstract class _$$ChecklistLinearityStep2CheckImplCopyWith<$Res>
       __$$ChecklistLinearityStep2CheckImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {bool isChecked,
-      DateTime lastChange,
-      int referenceCount,
-      Map<int, double> references});
+  $Res call({bool isChecked, DateTime lastChange, int referenceCount});
 }
 
 /// @nodoc
@@ -739,7 +692,6 @@ class __$$ChecklistLinearityStep2CheckImplCopyWithImpl<$Res>
     Object? isChecked = null,
     Object? lastChange = null,
     Object? referenceCount = null,
-    Object? references = null,
   }) {
     return _then(_$ChecklistLinearityStep2CheckImpl(
       isChecked: null == isChecked
@@ -754,10 +706,6 @@ class __$$ChecklistLinearityStep2CheckImplCopyWithImpl<$Res>
           ? _value.referenceCount
           : referenceCount // ignore: cast_nullable_to_non_nullable
               as int,
-      references: null == references
-          ? _value.references
-          : references // ignore: cast_nullable_to_non_nullable
-              as Map<int, double>,
     ));
   }
 }
@@ -770,7 +718,6 @@ class _$ChecklistLinearityStep2CheckImpl extends ChecklistLinearityStep2Check
       {required this.isChecked,
       required this.lastChange,
       required this.referenceCount,
-      required this.references,
       final String? $type})
       : $type = $type ?? 'linearityStep2',
         super._();
@@ -785,15 +732,13 @@ class _$ChecklistLinearityStep2CheckImpl extends ChecklistLinearityStep2Check
   final DateTime lastChange;
   @override
   final int referenceCount;
-  @override
-  final Map<int, double> references;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ChecklistCheck.linearityStep2(isChecked: $isChecked, lastChange: $lastChange, referenceCount: $referenceCount, references: $references)';
+    return 'ChecklistCheck.linearityStep2(isChecked: $isChecked, lastChange: $lastChange, referenceCount: $referenceCount)';
   }
 
   @override
@@ -803,8 +748,7 @@ class _$ChecklistLinearityStep2CheckImpl extends ChecklistLinearityStep2Check
       ..add(DiagnosticsProperty('type', 'ChecklistCheck.linearityStep2'))
       ..add(DiagnosticsProperty('isChecked', isChecked))
       ..add(DiagnosticsProperty('lastChange', lastChange))
-      ..add(DiagnosticsProperty('referenceCount', referenceCount))
-      ..add(DiagnosticsProperty('references', references));
+      ..add(DiagnosticsProperty('referenceCount', referenceCount));
   }
 
   @override
@@ -817,15 +761,13 @@ class _$ChecklistLinearityStep2CheckImpl extends ChecklistLinearityStep2Check
             (identical(other.lastChange, lastChange) ||
                 other.lastChange == lastChange) &&
             (identical(other.referenceCount, referenceCount) ||
-                other.referenceCount == referenceCount) &&
-            const DeepCollectionEquality()
-                .equals(other.references, references));
+                other.referenceCount == referenceCount));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, isChecked, lastChange,
-      referenceCount, const DeepCollectionEquality().hash(references));
+  int get hashCode =>
+      Object.hash(runtimeType, isChecked, lastChange, referenceCount);
 
   @JsonKey(ignore: true)
   @override
@@ -846,14 +788,14 @@ class _$ChecklistLinearityStep2CheckImpl extends ChecklistLinearityStep2Check
             int referenceCount,
             Map<int, double> references)
         regular,
-    required TResult Function(bool isChecked, DateTime lastChange,
-            int referenceCount, Map<int, double> references)
+    required TResult Function(
+            bool isChecked, DateTime lastChange, int referenceCount)
         linearityStep1,
-    required TResult Function(bool isChecked, DateTime lastChange,
-            int referenceCount, Map<int, double> references)
+    required TResult Function(
+            bool isChecked, DateTime lastChange, int referenceCount)
         linearityStep2,
   }) {
-    return linearityStep2(isChecked, lastChange, referenceCount, references);
+    return linearityStep2(isChecked, lastChange, referenceCount);
   }
 
   @override
@@ -862,15 +804,12 @@ class _$ChecklistLinearityStep2CheckImpl extends ChecklistLinearityStep2Check
     TResult? Function(bool isChecked, DateTime lastChange, String description,
             int secondsTimer, int referenceCount, Map<int, double> references)?
         regular,
-    TResult? Function(bool isChecked, DateTime lastChange, int referenceCount,
-            Map<int, double> references)?
+    TResult? Function(bool isChecked, DateTime lastChange, int referenceCount)?
         linearityStep1,
-    TResult? Function(bool isChecked, DateTime lastChange, int referenceCount,
-            Map<int, double> references)?
+    TResult? Function(bool isChecked, DateTime lastChange, int referenceCount)?
         linearityStep2,
   }) {
-    return linearityStep2?.call(
-        isChecked, lastChange, referenceCount, references);
+    return linearityStep2?.call(isChecked, lastChange, referenceCount);
   }
 
   @override
@@ -879,16 +818,14 @@ class _$ChecklistLinearityStep2CheckImpl extends ChecklistLinearityStep2Check
     TResult Function(bool isChecked, DateTime lastChange, String description,
             int secondsTimer, int referenceCount, Map<int, double> references)?
         regular,
-    TResult Function(bool isChecked, DateTime lastChange, int referenceCount,
-            Map<int, double> references)?
+    TResult Function(bool isChecked, DateTime lastChange, int referenceCount)?
         linearityStep1,
-    TResult Function(bool isChecked, DateTime lastChange, int referenceCount,
-            Map<int, double> references)?
+    TResult Function(bool isChecked, DateTime lastChange, int referenceCount)?
         linearityStep2,
     required TResult orElse(),
   }) {
     if (linearityStep2 != null) {
-      return linearityStep2(isChecked, lastChange, referenceCount, references);
+      return linearityStep2(isChecked, lastChange, referenceCount);
     }
     return orElse();
   }
@@ -939,11 +876,9 @@ class _$ChecklistLinearityStep2CheckImpl extends ChecklistLinearityStep2Check
 
 abstract class ChecklistLinearityStep2Check extends ChecklistCheck {
   factory ChecklistLinearityStep2Check(
-          {required final bool isChecked,
-          required final DateTime lastChange,
-          required final int referenceCount,
-          required final Map<int, double> references}) =
-      _$ChecklistLinearityStep2CheckImpl;
+      {required final bool isChecked,
+      required final DateTime lastChange,
+      required final int referenceCount}) = _$ChecklistLinearityStep2CheckImpl;
   ChecklistLinearityStep2Check._() : super._();
 
   factory ChecklistLinearityStep2Check.fromJson(Map<String, dynamic> json) =
@@ -955,8 +890,6 @@ abstract class ChecklistLinearityStep2Check extends ChecklistCheck {
   DateTime get lastChange;
   @override
   int get referenceCount;
-  @override
-  Map<int, double> get references;
   @override
   @JsonKey(ignore: true)
   _$$ChecklistLinearityStep2CheckImplCopyWith<

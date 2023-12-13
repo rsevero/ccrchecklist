@@ -266,6 +266,45 @@ mixin _$ChecklistEditorStore on _ChecklistEditorStoreBaseToJson, Store {
     });
   }
 
+  late final _$_linearityWorksheetAtom = Atom(
+      name: '_ChecklistEditorStoreBaseToJson._linearityWorksheet',
+      context: context);
+
+  ObservableList<LinearityRow> get linearityWorksheet {
+    _$_linearityWorksheetAtom.reportRead();
+    return super._linearityWorksheet;
+  }
+
+  @override
+  ObservableList<LinearityRow> get _linearityWorksheet => linearityWorksheet;
+
+  @override
+  set _linearityWorksheet(ObservableList<LinearityRow> value) {
+    _$_linearityWorksheetAtom.reportWrite(value, super._linearityWorksheet, () {
+      super._linearityWorksheet = value;
+    });
+  }
+
+  late final _$_linearityCheckReferenceCountAtom = Atom(
+      name: '_ChecklistEditorStoreBaseToJson._linearityCheckReferenceCount',
+      context: context);
+
+  int get linearityCheckReferenceCount {
+    _$_linearityCheckReferenceCountAtom.reportRead();
+    return super._linearityCheckReferenceCount;
+  }
+
+  @override
+  int get _linearityCheckReferenceCount => linearityCheckReferenceCount;
+
+  @override
+  set _linearityCheckReferenceCount(int value) {
+    _$_linearityCheckReferenceCountAtom
+        .reportWrite(value, super._linearityCheckReferenceCount, () {
+      super._linearityCheckReferenceCount = value;
+    });
+  }
+
   late final _$_ChecklistEditorStoreBaseToJsonActionController =
       ActionController(
           name: '_ChecklistEditorStoreBaseToJson', context: context);
@@ -276,6 +315,29 @@ mixin _$ChecklistEditorStore on _ChecklistEditorStoreBaseToJson, Store {
         .startAction(name: '_ChecklistEditorStoreBaseToJson.setCheckIsChecked');
     try {
       return super.setCheckIsChecked(sectionIndex, checkIndex, value);
+    } finally {
+      _$_ChecklistEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void updateLinearityMV(int referenceIndex, double value) {
+    final _$actionInfo = _$_ChecklistEditorStoreBaseToJsonActionController
+        .startAction(name: '_ChecklistEditorStoreBaseToJson.updateLinearityMV');
+    try {
+      return super.updateLinearityMV(referenceIndex, value);
+    } finally {
+      _$_ChecklistEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void updateLinearityActual(int referenceIndex, double value) {
+    final _$actionInfo =
+        _$_ChecklistEditorStoreBaseToJsonActionController.startAction(
+            name: '_ChecklistEditorStoreBaseToJson.updateLinearityActual');
+    try {
+      return super.updateLinearityActual(referenceIndex, value);
     } finally {
       _$_ChecklistEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
     }

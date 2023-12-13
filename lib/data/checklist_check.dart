@@ -23,13 +23,11 @@ sealed class ChecklistCheck with _$ChecklistCheck {
     required bool isChecked,
     required DateTime lastChange,
     required int referenceCount,
-    required Map<int, double> references,
   }) = ChecklistLinearityStep1Check;
   factory ChecklistCheck.linearityStep2({
     required bool isChecked,
     required DateTime lastChange,
     required int referenceCount,
-    required Map<int, double> references,
   }) = ChecklistLinearityStep2Check;
 
   String get description {

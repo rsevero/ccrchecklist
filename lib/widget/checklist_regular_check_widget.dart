@@ -48,7 +48,9 @@ class _ChecklistRegularCheckWidgetState
 
   @override
   void dispose() {
-    _timer.cancel();
+    if (_timerAvailable) {
+      _timer.cancel();
+    }
     super.dispose();
   }
 

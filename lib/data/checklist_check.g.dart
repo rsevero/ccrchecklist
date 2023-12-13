@@ -39,9 +39,6 @@ _$ChecklistLinearityStep1CheckImpl _$$ChecklistLinearityStep1CheckImplFromJson(
       isChecked: json['isChecked'] as bool,
       lastChange: DateTime.parse(json['lastChange'] as String),
       referenceCount: json['referenceCount'] as int,
-      references: (json['references'] as Map<String, dynamic>).map(
-        (k, e) => MapEntry(int.parse(k), (e as num).toDouble()),
-      ),
       $type: json['runtimeType'] as String?,
     );
 
@@ -51,8 +48,6 @@ Map<String, dynamic> _$$ChecklistLinearityStep1CheckImplToJson(
       'isChecked': instance.isChecked,
       'lastChange': instance.lastChange.toIso8601String(),
       'referenceCount': instance.referenceCount,
-      'references':
-          instance.references.map((k, e) => MapEntry(k.toString(), e)),
       'runtimeType': instance.$type,
     };
 
@@ -62,9 +57,6 @@ _$ChecklistLinearityStep2CheckImpl _$$ChecklistLinearityStep2CheckImplFromJson(
       isChecked: json['isChecked'] as bool,
       lastChange: DateTime.parse(json['lastChange'] as String),
       referenceCount: json['referenceCount'] as int,
-      references: (json['references'] as Map<String, dynamic>).map(
-        (k, e) => MapEntry(int.parse(k), (e as num).toDouble()),
-      ),
       $type: json['runtimeType'] as String?,
     );
 
@@ -74,7 +66,5 @@ Map<String, dynamic> _$$ChecklistLinearityStep2CheckImplToJson(
       'isChecked': instance.isChecked,
       'lastChange': instance.lastChange.toIso8601String(),
       'referenceCount': instance.referenceCount,
-      'references':
-          instance.references.map((k, e) => MapEntry(k.toString(), e)),
       'runtimeType': instance.$type,
     };
