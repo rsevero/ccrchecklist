@@ -70,58 +70,74 @@ class _ChecklistRegularCheckWidgetState
           }
         },
       ),
-      title: Row(
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(child: Text(check.description)),
-          if (_timerAvailable)
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0),
-              child: GestureDetector(
-                onTap: _toggleTimer,
-                onLongPress: _changeTimerValue,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 8.0, vertical: 4.0),
-                  decoration: BoxDecoration(
-                    color: _getTimerBackgroundColor(),
-                    borderRadius:
-                        BorderRadius.circular(10.0), // Rounded corners
-                  ),
-                  child: Text(
-                    _formatTime(_remainingSeconds),
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: _getTimerTextColor(),
-                    ),
-                  ),
+          Text(check.description),
+          Row(
+            children: [
+              if (_timerAvailable) _buildTimer(),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Wrap(
+                  spacing: 8.0, // Horizontal space between reference fields
+                  children: _buildReferences(check),
                 ),
               ),
-            ),
-          ...List.generate(check.referenceCount, (index) {
-            return Padding(
-              padding: const EdgeInsets.only(left: 8.0),
-              child: SizedBox(
-                width: 60,
-                child: TextFormField(
-                  initialValue: check.references[index]?.toString() ?? '',
-                  decoration: InputDecoration(
-                    labelText: 'Ref ${index + 1}',
-                    border: const OutlineInputBorder(),
-                  ),
-                  keyboardType: TextInputType.number,
-                  onChanged: (value) {
-                    double? newValue = double.tryParse(value);
-                    if (newValue != null) {
-                      check.references[index] = newValue;
-                    }
-                  },
-                ),
-              ),
-            );
-          }),
+            ],
+          ),
         ],
       ),
     );
+  }
+
+  Widget _buildTimer() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 8.0),
+      child: GestureDetector(
+        onTap: _toggleTimer,
+        onLongPress: _changeTimerValue,
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+          decoration: BoxDecoration(
+            color: _getTimerBackgroundColor(),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          child: Text(
+            _formatTime(_remainingSeconds),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: _getTimerTextColor(),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  List<Widget> _buildReferences(ChecklistRegularCheck check) {
+    return List.generate(check.referenceCount, (index) {
+      return Padding(
+        padding: const EdgeInsets.only(top: 8.0),
+        child: SizedBox(
+          width: 60,
+          child: TextFormField(
+            initialValue: check.references[index]?.toString() ?? '',
+            decoration: InputDecoration(
+              labelText: 'Ref ${index + 1}',
+              border: const OutlineInputBorder(),
+            ),
+            keyboardType: TextInputType.number,
+            onChanged: (value) {
+              double? newValue = double.tryParse(value);
+              if (newValue != null) {
+                check.references[index] = newValue;
+              }
+            },
+          ),
+        ),
+      );
+    });
   }
 
   void _toggleTimer() {
