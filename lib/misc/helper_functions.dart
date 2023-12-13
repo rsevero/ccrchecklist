@@ -38,7 +38,7 @@ String formatSecondsToMinutesSeconds(int totalSeconds) {
 Map<int, double> createAndInitializeReferencesMap(int numberOfEntries) {
   Map<int, double> myMap = {};
 
-  for (int i = 1; i <= numberOfEntries; i++) {
+  for (int i = 0; i < numberOfEntries; i++) {
     myMap[i] = 0.0;
   }
 

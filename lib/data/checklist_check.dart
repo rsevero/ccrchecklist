@@ -6,6 +6,7 @@ part 'checklist_check.g.dart';
 
 @Freezed(makeCollectionsUnmodifiable: false)
 sealed class ChecklistCheck with _$ChecklistCheck {
+  @override
   final bool isChecked = false;
 
   ChecklistCheck._();

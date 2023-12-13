@@ -22,9 +22,7 @@ class CheckListCheckList extends StatelessWidget {
             var check = checklistEditorStore.checks[sectionIndex][index];
             if (check is ChecklistRegularCheck) {
               return ChecklistRegularCheckWidget(
-                  context: context,
-                  sectionIndex: sectionIndex,
-                  checkIndex: index);
+                  sectionIndex: sectionIndex, checkIndex: index);
             } else if (check is ChecklistLinearityStep1Check) {
               // return ChecklistLinearityStep1CheckWidget(context,
               //     sectionIndex: sectionIndex, index: index);
