@@ -1,4 +1,5 @@
 import 'package:ccr_checklist/data/checklist_check.dart';
+import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:ccr_checklist/widget/linearity_worksheet_text.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,45 @@ class ChecklistLinearityStep2CheckWidget extends StatefulWidget {
 
 class _ChecklistLinearityStep2CheckWidgetState
     extends State<ChecklistLinearityStep2CheckWidget> {
+  final List<TextEditingController> _controllers = [];
+  bool _isInit = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _controllers.addAll(List.generate(
+        ccrMaxReferences, (index) => TextEditingController(text: '')));
+  }
+
+  @override
+  void dispose() {
+    final controllersLenght = _controllers.length;
+    for (var i = 0; i < controllersLenght; i++) {
+      var controller = _controllers.removeLast();
+      controller.dispose();
+    }
+    super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    if (_isInit) {
+      _isInit = false;
+      final checklistEditorStore = Provider.of<ChecklistEditorStore>(context);
+      for (var index = 0;
+          index < checklistEditorStore.linearityCheckReferenceCount;
+          index++) {
+        if (checklistEditorStore.linearityWorksheet[index].actual == null) {
+          continue;
+        }
+        _controllers[index].text = checklistEditorStore
+            .linearityWorksheet[index].actual!
+            .toStringAsFixed(1);
+      }
+    }
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     final checklistEditorStore = Provider.of<ChecklistEditorStore>(context);
@@ -98,6 +138,7 @@ class _ChecklistLinearityStep2CheckWidgetState
                         DataCell(
                           Observer(
                             builder: (_) => TextField(
+                              controller: _controllers[index],
                               style: TextStyle(
                                   color:
                                       Theme.of(context).colorScheme.onTertiary),

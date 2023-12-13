@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:ccr_checklist/data/template.dart';
+import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/misc/helper_functions.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
 import 'package:ccr_checklist/widget/greyable_speed_dial_child_widget.dart';
@@ -326,7 +327,7 @@ class TemplateEditorPage extends StatelessWidget {
                         'Amount of references'), // Label for the radio buttons
                   ),
                   ...List.generate(
-                    5,
+                    ccrMaxReferences,
                     (index) => RadioListTile<int>(
                       title: Text('${index + 1}'),
                       value: index + 1,
@@ -390,7 +391,7 @@ class TemplateEditorPage extends StatelessWidget {
                         'Amount of references'), // Label for the radio buttons
                   ),
                   ...List.generate(
-                    6,
+                    ccrMaxReferences + 1,
                     (index) => RadioListTile<int>(
                       title: Text('$index'),
                       value: index,
