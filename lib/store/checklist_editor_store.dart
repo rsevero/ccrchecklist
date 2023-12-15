@@ -162,6 +162,10 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
   }
 
   void _isPreviousSectionsOk(int sectionIndex) {
+    if (sectionIndex >= _previousSectionsOk.length - 1) {
+      return;
+    }
+
     bool isOk = true;
     for (var index = 0; index <= sectionIndex; index++) {
       if (!_sectionsOk[index]) {

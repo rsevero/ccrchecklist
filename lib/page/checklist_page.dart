@@ -27,26 +27,53 @@ class ChecklistPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Observer(
-              builder: (_) => IconButton(
-                icon: const Icon(Icons.navigate_before),
-                color: checklistEditorStore.previousSectionsOk[sectionIndex]
-                    ? null
-                    : Colors.deepOrange,
-                onPressed: sectionIndex > 0
-                    ? () => _onTapPreviousSection(context)
-                    : null,
-              ),
+              builder: (_) {
+                final buttonEnabled = sectionIndex > 0;
+                return DecoratedBox(
+                  decoration: BoxDecoration(
+                      color: !buttonEnabled ||
+                              checklistEditorStore
+                                  .previousSectionsOk[sectionIndex]
+                          ? null
+                          : Theme.of(context).colorScheme.error),
+                  child: IconButton(
+                    icon: const Icon(Icons.navigate_before),
+                    color: !buttonEnabled ||
+                            checklistEditorStore
+                                .previousSectionsOk[sectionIndex]
+                        ? null
+                        : Theme.of(context).colorScheme.onError,
+                    onPressed: buttonEnabled
+                        ? () => _onTapPreviousSection(context)
+                        : null,
+                  ),
+                );
+              },
             ),
             Observer(
-              builder: (_) => IconButton(
-                icon: const Icon(Icons.navigate_next),
-                color: checklistEditorStore.sectionsOk[sectionIndex]
-                    ? Colors.green
-                    : Colors.deepOrange,
-                onPressed: sectionIndex < totalSections - 1
-                    ? () => _onTapNextSection(context)
-                    : null,
-              ),
+              builder: (_) {
+                final buttonEnabled = sectionIndex < totalSections - 1;
+                Color? buttonColor;
+                if (buttonEnabled) {
+                  buttonColor = checklistEditorStore.sectionsOk[sectionIndex]
+                      ? Colors.green
+                      : Theme.of(context).colorScheme.error;
+                }
+                return DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: buttonColor,
+                  ),
+                  child: IconButton(
+                    icon: const Icon(Icons.navigate_next),
+                    color: !buttonEnabled ||
+                            checklistEditorStore.sectionsOk[sectionIndex]
+                        ? null
+                        : Theme.of(context).colorScheme.onError,
+                    onPressed:
+                        buttonEnabled ? () => _onTapNextSection(context) : null,
+                  ),
+                );
+              },
             ),
           ],
         ),
