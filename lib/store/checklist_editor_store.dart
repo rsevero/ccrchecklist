@@ -103,6 +103,53 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
   int _linearityStep2SectionIndex = -1;
   int _linearityStep2CheckIndex = -1;
 
+  bool _nonOkChecksPerSectionUpdated = false;
+
+  int _nonOkSectionsCount = 0;
+
+  List<int> _nonOkChecksPerSection = [];
+
+  int get nonOkSectionsCount {
+    if (!_nonOkChecksPerSectionUpdated) {
+      _updateNonOkSections();
+    }
+
+    return _nonOkSectionsCount;
+  }
+
+  void _updateNonOkSections() {
+    var nonOkSections = 0;
+    _nonOkChecksPerSection.clear();
+
+    for (var index = 0; index < _checksOk.length; index++) {
+      int nonOkCount = 0;
+
+      for (var checkIndex = 0;
+          checkIndex < _checksOk[index].length;
+          checkIndex++) {
+        if (!_checksOk[index][checkIndex]) {
+          nonOkCount++;
+        }
+      }
+
+      _nonOkChecksPerSection.add(nonOkCount);
+      if (nonOkCount > 0) {
+        nonOkSections++;
+      }
+    }
+
+    _nonOkChecksPerSectionUpdated = true;
+    _nonOkSectionsCount = nonOkSections;
+  }
+
+  List<int> get nonOkChecksPerSection {
+    if (!_nonOkChecksPerSectionUpdated) {
+      _updateNonOkSections();
+    }
+
+    return _nonOkChecksPerSection;
+  }
+
   @action
   void setCheckIsChecked(int sectionIndex, int checkIndex, bool value) {
     _setCheckIsChecked(sectionIndex, checkIndex, value);
@@ -118,6 +165,9 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
       isChecked: value,
       lastChange: DateTime.now(),
     );
+
+    _nonOkChecksPerSectionUpdated = false;
+
     _updateOfStatus(sectionIndex, checkIndex);
   }
 

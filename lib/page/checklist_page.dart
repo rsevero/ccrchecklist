@@ -1,4 +1,5 @@
 import 'package:ccr_checklist/misc/constants.dart';
+import 'package:ccr_checklist/page/checklist_complete_page.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:ccr_checklist/widget/checklist_appbar.dart';
 import 'package:ccr_checklist/widget/checklist_body.dart';
@@ -53,7 +54,7 @@ class ChecklistPage extends StatelessWidget {
             ),
             Observer(
               builder: (_) {
-                final buttonEnabled = sectionIndex < totalSections - 1;
+                final buttonEnabled = sectionIndex < totalSections;
                 Color? buttonColor;
                 if (buttonEnabled) {
                   buttonColor = checklistEditorStore.sectionsOk[sectionIndex]
@@ -70,8 +71,9 @@ class ChecklistPage extends StatelessWidget {
                             checklistEditorStore.sectionsOk[sectionIndex]
                         ? null
                         : Theme.of(context).colorScheme.onError,
-                    onPressed:
-                        buttonEnabled ? () => _onTapNextSection(context) : null,
+                    onPressed: buttonEnabled
+                        ? () => _onTapNextSection(context, totalSections)
+                        : null,
                   ),
                 );
               },
@@ -86,8 +88,16 @@ class ChecklistPage extends StatelessWidget {
     navigateToSection(context, sectionIndex - 1);
   }
 
-  void _onTapNextSection(BuildContext context) {
-    navigateToSection(context, sectionIndex + 1);
+  void _onTapNextSection(BuildContext context, int totalSections) {
+    if (sectionIndex < (totalSections - 1)) {
+      navigateToSection(context, sectionIndex + 1);
+    } else {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => const ChecklistCompletePage(),
+        ),
+      );
+    }
   }
 
   void navigateToSection(BuildContext context, int newSectionIndex) {
