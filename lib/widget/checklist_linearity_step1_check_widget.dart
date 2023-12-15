@@ -83,68 +83,62 @@ class _ChecklistLinearityStep1CheckWidgetState
         children: [
           const Text(
               'Linearity check - step 1: enter the mV (milivolts) readings with pure air.'),
-          Observer(
-            builder: (_) => SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Container(
-                color: Theme.of(context).colorScheme.tertiary,
-                child: DataTable(
-                  columnSpacing: 12,
-                  columns: const [
-                    DataColumn(label: LinearityWorksheetText('mV')),
-                    DataColumn(label: LinearityWorksheetText('/0.21')),
-                    DataColumn(label: LinearityWorksheetText('x1.6')),
-                  ],
-                  rows: List<DataRow>.generate(
-                    checklistEditorStore.linearityCheckReferenceCount,
-                    (index) => DataRow(
-                      cells: [
-                        DataCell(
-                          Container(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .secondaryContainer,
-                            child: Observer(
-                              builder: (_) => TextField(
-                                controller: _controllers[index],
-                                style: TextStyle(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSecondaryContainer),
-                                onChanged: (value) =>
-                                    checklistEditorStore.updateLinearityMV(
-                                        index, double.tryParse(value) ?? 0),
-                                keyboardType:
-                                    const TextInputType.numberWithOptions(
-                                        decimal: true),
-                              ),
-                            ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Container(
+              color: Theme.of(context).colorScheme.tertiary,
+              child: DataTable(
+                columnSpacing: 12,
+                columns: const [
+                  DataColumn(label: LinearityWorksheetText('mV')),
+                  DataColumn(label: LinearityWorksheetText('/0.21')),
+                  DataColumn(label: LinearityWorksheetText('x1.6')),
+                ],
+                rows: List<DataRow>.generate(
+                  checklistEditorStore.linearityCheckReferenceCount,
+                  (index) => DataRow(
+                    cells: [
+                      DataCell(
+                        Container(
+                          color:
+                              Theme.of(context).colorScheme.secondaryContainer,
+                          child: TextField(
+                            controller: _controllers[index],
+                            style: TextStyle(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onSecondaryContainer),
+                            onChanged: (value) =>
+                                checklistEditorStore.updateLinearityMV(
+                                    index, double.tryParse(value) ?? 0),
+                            keyboardType: const TextInputType.numberWithOptions(
+                                decimal: true),
                           ),
                         ),
-                        DataCell(Observer(
+                      ),
+                      DataCell(Observer(
+                        builder: (_) => LinearityWorksheetText(
+                            checklistEditorStore
+                                        .linearityWorksheet[index].divided ==
+                                    null
+                                ? ''
+                                : checklistEditorStore
+                                    .linearityWorksheet[index].divided!
+                                    .toStringAsFixed(1)),
+                      )),
+                      DataCell(
+                        Observer(
                           builder: (_) => LinearityWorksheetText(
-                              checklistEditorStore
-                                          .linearityWorksheet[index].divided ==
+                              checklistEditorStore.linearityWorksheet[index]
+                                          .multiplied ==
                                       null
                                   ? ''
                                   : checklistEditorStore
-                                      .linearityWorksheet[index].divided!
+                                      .linearityWorksheet[index].multiplied!
                                       .toStringAsFixed(1)),
-                        )),
-                        DataCell(
-                          Observer(
-                            builder: (_) => LinearityWorksheetText(
-                                checklistEditorStore.linearityWorksheet[index]
-                                            .multiplied ==
-                                        null
-                                    ? ''
-                                    : checklistEditorStore
-                                        .linearityWorksheet[index].multiplied!
-                                        .toStringAsFixed(1)),
-                          ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),

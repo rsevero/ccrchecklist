@@ -2,6 +2,7 @@ import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:ccr_checklist/widget/checklist_appbar.dart';
 import 'package:ccr_checklist/widget/checklist_body.dart';
 import 'package:flutter/material.dart'; // For date formatting
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
 class ChecklistPage extends StatelessWidget {
@@ -25,17 +26,27 @@ class ChecklistPage extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            IconButton(
-              icon: const Icon(Icons.navigate_before),
-              onPressed: sectionIndex > 0
-                  ? () => _onTapPreviousSection(context)
-                  : null,
+            Observer(
+              builder: (_) => IconButton(
+                icon: const Icon(Icons.navigate_before),
+                color: checklistEditorStore.previousSectionsOk[sectionIndex]
+                    ? null
+                    : Colors.deepOrange,
+                onPressed: sectionIndex > 0
+                    ? () => _onTapPreviousSection(context)
+                    : null,
+              ),
             ),
-            IconButton(
-              icon: const Icon(Icons.navigate_next),
-              onPressed: sectionIndex < totalSections - 1
-                  ? () => _onTapNextSection(context)
-                  : null,
+            Observer(
+              builder: (_) => IconButton(
+                icon: const Icon(Icons.navigate_next),
+                color: checklistEditorStore.sectionsOk[sectionIndex]
+                    ? Colors.green
+                    : Colors.deepOrange,
+                onPressed: sectionIndex < totalSections - 1
+                    ? () => _onTapNextSection(context)
+                    : null,
+              ),
             ),
           ],
         ),

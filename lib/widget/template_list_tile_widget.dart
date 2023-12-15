@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 
 class TemplateListTileWidget extends StatelessWidget {
   final String rebreatherManufacturer;
@@ -19,12 +18,10 @@ class TemplateListTileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Observer(
-      builder: (_) => ListTile(
-        title: Text("$rebreatherManufacturer - $rebreatherModel"),
-        subtitle: Text("$title - $description"),
-        onTap: onTap,
-      ),
+    return ListTile(
+      title: Text("$rebreatherManufacturer - $rebreatherModel"),
+      subtitle: Text("$title - $description"),
+      onTap: onTap,
     );
   }
 }

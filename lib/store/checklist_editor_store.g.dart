@@ -305,6 +305,81 @@ mixin _$ChecklistEditorStore on _ChecklistEditorStoreBaseToJson, Store {
     });
   }
 
+  late final _$_checksOkAtom =
+      Atom(name: '_ChecklistEditorStoreBaseToJson._checksOk', context: context);
+
+  ObservableList<ObservableList<bool>> get checksOk {
+    _$_checksOkAtom.reportRead();
+    return super._checksOk;
+  }
+
+  @override
+  ObservableList<ObservableList<bool>> get _checksOk => checksOk;
+
+  @override
+  set _checksOk(ObservableList<ObservableList<bool>> value) {
+    _$_checksOkAtom.reportWrite(value, super._checksOk, () {
+      super._checksOk = value;
+    });
+  }
+
+  late final _$_sectionsOkAtom = Atom(
+      name: '_ChecklistEditorStoreBaseToJson._sectionsOk', context: context);
+
+  ObservableList<bool> get sectionsOk {
+    _$_sectionsOkAtom.reportRead();
+    return super._sectionsOk;
+  }
+
+  @override
+  ObservableList<bool> get _sectionsOk => sectionsOk;
+
+  @override
+  set _sectionsOk(ObservableList<bool> value) {
+    _$_sectionsOkAtom.reportWrite(value, super._sectionsOk, () {
+      super._sectionsOk = value;
+    });
+  }
+
+  late final _$_previousSectionsOkAtom = Atom(
+      name: '_ChecklistEditorStoreBaseToJson._previousSectionsOk',
+      context: context);
+
+  ObservableList<bool> get previousSectionsOk {
+    _$_previousSectionsOkAtom.reportRead();
+    return super._previousSectionsOk;
+  }
+
+  @override
+  ObservableList<bool> get _previousSectionsOk => previousSectionsOk;
+
+  @override
+  set _previousSectionsOk(ObservableList<bool> value) {
+    _$_previousSectionsOkAtom.reportWrite(value, super._previousSectionsOk, () {
+      super._previousSectionsOk = value;
+    });
+  }
+
+  late final _$_higherSectionEditedAtom = Atom(
+      name: '_ChecklistEditorStoreBaseToJson._higherSectionEdited',
+      context: context);
+
+  int get higherSectionEdited {
+    _$_higherSectionEditedAtom.reportRead();
+    return super._higherSectionEdited;
+  }
+
+  @override
+  int get _higherSectionEdited => higherSectionEdited;
+
+  @override
+  set _higherSectionEdited(int value) {
+    _$_higherSectionEditedAtom.reportWrite(value, super._higherSectionEdited,
+        () {
+      super._higherSectionEdited = value;
+    });
+  }
+
   late final _$_ChecklistEditorStoreBaseToJsonActionController =
       ActionController(
           name: '_ChecklistEditorStoreBaseToJson', context: context);

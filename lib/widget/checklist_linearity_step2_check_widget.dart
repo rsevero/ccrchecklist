@@ -83,94 +83,88 @@ class _ChecklistLinearityStep2CheckWidgetState
         children: [
           const Text(
               'Linearity check - step 2: enter the mV (milivolts) readings in the "actual" column with pure oxygen.'),
-          Observer(
-            builder: (_) => SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Container(
-                color: Theme.of(context).colorScheme.tertiary,
-                child: DataTable(
-                  columnSpacing: 12,
-                  columns: const [
-                    DataColumn(label: LinearityWorksheetText('mV')),
-                    DataColumn(label: LinearityWorksheetText('/0.21')),
-                    DataColumn(label: LinearityWorksheetText('x1.6')),
-                    DataColumn(label: LinearityWorksheetText('actual')),
-                    DataColumn(label: LinearityWorksheetText('%')),
-                  ],
-                  rows: List<DataRow>.generate(
-                    checklistEditorStore.linearityCheckReferenceCount,
-                    (index) => DataRow(
-                      cells: [
-                        DataCell(
-                          Observer(
-                            builder: (_) => LinearityWorksheetText(
-                                checklistEditorStore
-                                            .linearityWorksheet[index].mv ==
-                                        null
-                                    ? ''
-                                    : checklistEditorStore
-                                        .linearityWorksheet[index].mv!
-                                        .toStringAsFixed(1)),
-                          ),
-                        ),
-                        DataCell(Observer(
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Container(
+              color: Theme.of(context).colorScheme.tertiary,
+              child: DataTable(
+                columnSpacing: 12,
+                columns: const [
+                  DataColumn(label: LinearityWorksheetText('mV')),
+                  DataColumn(label: LinearityWorksheetText('/0.21')),
+                  DataColumn(label: LinearityWorksheetText('x1.6')),
+                  DataColumn(label: LinearityWorksheetText('actual')),
+                  DataColumn(label: LinearityWorksheetText('%')),
+                ],
+                rows: List<DataRow>.generate(
+                  checklistEditorStore.linearityCheckReferenceCount,
+                  (index) => DataRow(
+                    cells: [
+                      DataCell(
+                        Observer(
                           builder: (_) => LinearityWorksheetText(
                               checklistEditorStore
-                                          .linearityWorksheet[index].divided ==
+                                          .linearityWorksheet[index].mv ==
                                       null
                                   ? ''
                                   : checklistEditorStore
-                                      .linearityWorksheet[index].divided!
+                                      .linearityWorksheet[index].mv!
                                       .toStringAsFixed(1)),
-                        )),
-                        DataCell(
-                          Observer(
-                            builder: (_) => LinearityWorksheetText(
-                                checklistEditorStore.linearityWorksheet[index]
-                                            .multiplied ==
-                                        null
-                                    ? ''
-                                    : checklistEditorStore
-                                        .linearityWorksheet[index].multiplied!
-                                        .toStringAsFixed(1)),
+                        ),
+                      ),
+                      DataCell(Observer(
+                        builder: (_) => LinearityWorksheetText(
+                            checklistEditorStore
+                                        .linearityWorksheet[index].divided ==
+                                    null
+                                ? ''
+                                : checklistEditorStore
+                                    .linearityWorksheet[index].divided!
+                                    .toStringAsFixed(1)),
+                      )),
+                      DataCell(
+                        Observer(
+                          builder: (_) => LinearityWorksheetText(
+                              checklistEditorStore.linearityWorksheet[index]
+                                          .multiplied ==
+                                      null
+                                  ? ''
+                                  : checklistEditorStore
+                                      .linearityWorksheet[index].multiplied!
+                                      .toStringAsFixed(1)),
+                        ),
+                      ),
+                      DataCell(
+                        Container(
+                          color:
+                              Theme.of(context).colorScheme.secondaryContainer,
+                          child: TextField(
+                            controller: _controllers[index],
+                            style: TextStyle(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onSecondaryContainer),
+                            onChanged: (value) =>
+                                checklistEditorStore.updateLinearityActual(
+                                    index, double.tryParse(value) ?? 0),
+                            keyboardType: const TextInputType.numberWithOptions(
+                                decimal: true),
                           ),
                         ),
-                        DataCell(
-                          Container(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .secondaryContainer,
-                            child: Observer(
-                              builder: (_) => TextField(
-                                controller: _controllers[index],
-                                style: TextStyle(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSecondaryContainer),
-                                onChanged: (value) =>
-                                    checklistEditorStore.updateLinearityActual(
-                                        index, double.tryParse(value) ?? 0),
-                                keyboardType:
-                                    const TextInputType.numberWithOptions(
-                                        decimal: true),
-                              ),
-                            ),
-                          ),
+                      ),
+                      DataCell(
+                        Observer(
+                          builder: (_) => LinearityWorksheetText(
+                              checklistEditorStore.linearityWorksheet[index]
+                                          .percentage ==
+                                      null
+                                  ? ''
+                                  : checklistEditorStore
+                                      .linearityWorksheet[index].percentage!
+                                      .toStringAsFixed(1)),
                         ),
-                        DataCell(
-                          Observer(
-                            builder: (_) => LinearityWorksheetText(
-                                checklistEditorStore.linearityWorksheet[index]
-                                            .percentage ==
-                                        null
-                                    ? ''
-                                    : checklistEditorStore
-                                        .linearityWorksheet[index].percentage!
-                                        .toStringAsFixed(1)),
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
