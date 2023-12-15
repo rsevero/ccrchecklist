@@ -20,3 +20,5 @@ const ccrLinearityWorksheetDivider = 0.21;
 const ccrLinearityWorksheetMultiplier = 1.6;
 
 const ccrMaxReferences = 5;
+
+final ccrSectionOkColor = Colors.green;

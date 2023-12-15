@@ -1,3 +1,4 @@
+import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:ccr_checklist/widget/checklist_appbar.dart';
 import 'package:ccr_checklist/widget/checklist_body.dart';
@@ -56,7 +57,7 @@ class ChecklistPage extends StatelessWidget {
                 Color? buttonColor;
                 if (buttonEnabled) {
                   buttonColor = checklistEditorStore.sectionsOk[sectionIndex]
-                      ? Colors.green
+                      ? ccrSectionOkColor
                       : Theme.of(context).colorScheme.error;
                 }
                 return DecoratedBox(

@@ -1,6 +1,8 @@
+import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:ccr_checklist/widget/checklist_checklist.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -28,13 +30,17 @@ class ChecklistBody extends StatelessWidget {
             style: Theme.of(context).textTheme.titleSmall,
           ),
         ),
-        Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(16.0),
-          color: Theme.of(context).colorScheme.surfaceVariant,
-          child: Text(
-            section.title,
-            style: Theme.of(context).textTheme.titleLarge,
+        Observer(
+          builder: (_) => Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(16.0),
+            color: checklistEditorStore.sectionsOk[sectionIndex]
+                ? ccrSectionOkColor
+                : Theme.of(context).colorScheme.error,
+            child: Text(
+              section.title,
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
           ),
         ),
         CheckListCheckList(sectionIndex: sectionIndex),
