@@ -105,6 +105,10 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
 
   @action
   void setCheckIsChecked(int sectionIndex, int checkIndex, bool value) {
+    _setCheckIsChecked(sectionIndex, checkIndex, value);
+  }
+
+  void _setCheckIsChecked(int sectionIndex, int checkIndex, bool value) {
     if (_checks[sectionIndex][checkIndex].isChecked == value) {
       return;
     }
@@ -126,27 +130,7 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
   void _isCheckOk(int sectionIndex, int checkIndex) {
     final check = _checks[sectionIndex][checkIndex];
 
-    if (check is ChecklistRegularCheck) {
-      _checksOk[sectionIndex][checkIndex] = check.isChecked;
-    } else if (check is ChecklistLinearityStep1Check) {
-      bool isFilled = true;
-      for (var index = 0; index < _linearityCheckReferenceCount; index++) {
-        if (_linearityWorksheet[index].mv == null) {
-          isFilled = false;
-          break;
-        }
-      }
-      _checksOk[sectionIndex][checkIndex] = check.isChecked && isFilled;
-    } else if (check is ChecklistLinearityStep2Check) {
-      bool isFilled = true;
-      for (var index = 0; index < _linearityCheckReferenceCount; index++) {
-        if (_linearityWorksheet[index].actual == null) {
-          isFilled = false;
-          break;
-        }
-      }
-      _checksOk[sectionIndex][checkIndex] = check.isChecked && isFilled;
-    }
+    _checksOk[sectionIndex][checkIndex] = check.isChecked;
   }
 
   void _isSectionOk(int sectionIndex) {
@@ -181,14 +165,34 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
   void updateLinearityMV(int referenceIndex, double value) {
     _linearityWorksheet[referenceIndex] =
         _linearityWorksheet[referenceIndex].copyWith(mv: value);
-    _updateOfStatus(_linearityStep1SectionIndex, _linearityStep1CheckIndex);
+
+    bool isOk = true;
+    for (var index = 0; index < _linearityCheckReferenceCount; index++) {
+      if (_linearityWorksheet[index].mv == null) {
+        isOk = false;
+        break;
+      }
+    }
+
+    _setCheckIsChecked(
+        _linearityStep1SectionIndex, _linearityStep1CheckIndex, isOk);
   }
 
   @action
   void updateLinearityActual(int referenceIndex, double value) {
     _linearityWorksheet[referenceIndex] =
         _linearityWorksheet[referenceIndex].copyWith(actual: value);
-    _updateOfStatus(_linearityStep2SectionIndex, _linearityStep2CheckIndex);
+
+    bool isOk = true;
+    for (var index = 0; index < _linearityCheckReferenceCount; index++) {
+      if (_linearityWorksheet[index].actual == null) {
+        isOk = false;
+        break;
+      }
+    }
+
+    _setCheckIsChecked(
+        _linearityStep2SectionIndex, _linearityStep2CheckIndex, isOk);
   }
 
   @action

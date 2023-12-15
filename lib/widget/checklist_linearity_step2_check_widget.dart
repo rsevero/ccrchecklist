@@ -1,4 +1,3 @@
-import 'package:ccr_checklist/data/checklist_check.dart';
 import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:ccr_checklist/widget/linearity_worksheet_text.dart';
@@ -65,19 +64,8 @@ class _ChecklistLinearityStep2CheckWidgetState
   @override
   Widget build(BuildContext context) {
     final checklistEditorStore = Provider.of<ChecklistEditorStore>(context);
-    final check = checklistEditorStore.checks[widget.sectionIndex]
-        [widget.checkIndex] as ChecklistLinearityStep2Check;
 
     return ListTile(
-      leading: Checkbox(
-        value: check.isChecked,
-        onChanged: (bool? value) {
-          if (value != null) {
-            checklistEditorStore.setCheckIsChecked(
-                widget.sectionIndex, widget.checkIndex, value);
-          }
-        },
-      ),
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
