@@ -15,7 +15,7 @@ class TemplateListPage extends StatelessWidget {
     final templateListStore = Provider.of<TemplateListStore>(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('CCR Checklist Templates'),
+        title: const Text('CCR Checklist'),
         elevation: 4,
         actions: <Widget>[
           IconButton(

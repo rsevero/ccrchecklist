@@ -1,12 +1,17 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:ccr_checklist/data/checklist_check.dart';
 import 'package:ccr_checklist/data/checklist_section.dart';
 import 'package:ccr_checklist/data/linearity_row.dart';
 import 'package:ccr_checklist/data/template.dart';
 import 'package:ccr_checklist/data/template_check.dart';
+import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/misc/helper_functions.dart';
 import 'package:ccr_checklist/store/observablelist_json_converter.dart';
+import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:mobx/mobx.dart';
+import 'package:path_provider/path_provider.dart';
 
 part 'checklist_editor_store.g.dart';
 
@@ -107,7 +112,7 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
 
   int _nonOkSectionsCount = 0;
 
-  List<int> _nonOkChecksPerSection = [];
+  final List<int> _nonOkChecksPerSection = [];
 
   int get nonOkSectionsCount {
     if (!_nonOkChecksPerSectionUpdated) {
@@ -148,6 +153,20 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
     }
 
     return _nonOkChecksPerSection;
+  }
+
+  Future<String> createShareableFile() async {
+    final directory = await getApplicationDocumentsDirectory();
+    String formattedDateTime =
+        DateFormat('yyyyMMdd_HHmmss').format(DateTime.now());
+    final file =
+        File('${directory.path}/$formattedDateTime.$ccrChecklistExtension');
+    final jsonContent =
+        jsonEncode(_$ChecklistEditorStoreToJson(this as ChecklistEditorStore));
+
+    await file.writeAsString(jsonContent);
+
+    return file.path;
   }
 
   @action

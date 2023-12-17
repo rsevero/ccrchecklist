@@ -65,3 +65,16 @@ flutter {
 }
 
 dependencies {}
+
+// Trying to solve the "Execution failed for task ':app:checkDebugDuplicateClasses'."
+// error.
+// Solution from https://github.com/flutter/flutter/issues/119247#issuecomment-1405825291
+configurations.all {
+    resolutionStrategy {
+        eachDependency {
+            if ((requested.group == "org.jetbrains.kotlin") && (requested.name.startsWith("kotlin-stdlib"))) {
+                useVersion("1.8.0")
+            }
+        }
+    }
+}

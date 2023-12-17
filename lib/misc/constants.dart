@@ -21,4 +21,7 @@ const ccrLinearityWorksheetMultiplier = 1.6;
 
 const ccrMaxReferences = 5;
 
-final ccrSectionOkColor = Colors.green;
+const ccrSectionOkColor = Colors.green;
+
+const ccrChecklistExtension = 'ccr_cheklist';
+const ccrtemplateExtension = 'ccr_template';

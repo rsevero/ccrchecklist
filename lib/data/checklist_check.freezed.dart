@@ -266,7 +266,7 @@ class _$ChecklistRegularCheckImpl extends ChecklistRegularCheck
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ChecklistRegularCheckImpl &&
@@ -519,7 +519,7 @@ class _$ChecklistLinearityStep1CheckImpl extends ChecklistLinearityStep1Check
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ChecklistLinearityStep1CheckImpl &&
@@ -752,7 +752,7 @@ class _$ChecklistLinearityStep2CheckImpl extends ChecklistLinearityStep2Check
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ChecklistLinearityStep2CheckImpl &&

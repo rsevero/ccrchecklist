@@ -178,7 +178,7 @@ class _$TemplateImpl implements _Template {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TemplateImpl &&

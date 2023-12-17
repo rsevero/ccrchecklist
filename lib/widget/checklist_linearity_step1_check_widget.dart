@@ -76,7 +76,7 @@ class _ChecklistLinearityStep1CheckWidgetState
             child: Container(
               color: Theme.of(context).colorScheme.tertiary,
               child: DataTable(
-                columnSpacing: 12,
+                columnSpacing: 16,
                 columns: const [
                   DataColumn(label: LinearityWorksheetText('mV')),
                   DataColumn(label: LinearityWorksheetText('/0.21')),

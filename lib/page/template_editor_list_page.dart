@@ -15,7 +15,7 @@ class TemplateEditorListPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('CCR Checklist Templates'),
+        title: const Text('Checklist Templates'),
         elevation: 4,
       ),
       body: Observer(

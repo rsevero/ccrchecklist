@@ -182,7 +182,7 @@ class _$TemplateRegularCheckImpl extends TemplateRegularCheck
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TemplateRegularCheckImpl &&
@@ -371,7 +371,7 @@ class _$TemplateLinearityStep1CheckImpl extends TemplateLinearityStep1Check
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TemplateLinearityStep1CheckImpl &&
@@ -529,7 +529,7 @@ class _$TemplateLinearityStep2CheckImpl extends TemplateLinearityStep2Check
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TemplateLinearityStep2CheckImpl);

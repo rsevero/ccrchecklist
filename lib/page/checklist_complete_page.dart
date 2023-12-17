@@ -2,6 +2,7 @@ import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:ccr_checklist/widget/non_ok_sections_report.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 class ChecklistCompletePage extends StatelessWidget {
   const ChecklistCompletePage({super.key});
@@ -23,6 +24,12 @@ class ChecklistCompletePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Checklist Report'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.share),
+            onPressed: () => onPressedShare(context),
+          ),
+        ],
       ),
       body: Column(
         children: [
@@ -33,5 +40,13 @@ class ChecklistCompletePage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<void> onPressedShare(BuildContext context) async {
+    final checklistEditorStore =
+        Provider.of<ChecklistEditorStore>(context, listen: false);
+    final file = await checklistEditorStore.createShareableFile();
+
+    Share.shareXFiles([XFile(file)], text: 'Check out this file!');
   }
 }
