@@ -164,8 +164,8 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
 
   Future<String> createShareableFile() async {
     final directory = await getApplicationDocumentsDirectory();
-    String formattedDateTime =
-        DateFormat('yyyy-MM-dd_HH:mms:s').format(DateTime.now());
+    final formattedDateTime =
+        DateFormat('yyyy-MM-dd_HH:mm:ss').format(DateTime.now());
     final file = File(
         '${directory.path}/ccr_checklist_$formattedDateTime.$ccrChecklistExtension');
     final jsonContent = createChecklistFile();

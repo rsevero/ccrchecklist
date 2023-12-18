@@ -108,7 +108,7 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
 
   Future<String> createShareableFile() async {
     final directory = await getApplicationDocumentsDirectory();
-    String formattedDateTime =
+    final formattedDateTime =
         DateFormat('yyyy-MM-dd_HH:mm:ss').format(DateTime.now());
     final file = File(
         '${directory.path}/ccr_template_$formattedDateTime.$ccrTemplateExtension');
