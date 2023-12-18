@@ -1,9 +1,8 @@
 import 'package:ccr_checklist/store/template_editor_store.dart';
 import 'package:ccr_checklist/store/template_list_store.dart';
-import 'package:ccr_checklist/widget/template_list_tile_widget.dart';
+import 'package:ccr_checklist/widget/template_list.dart';
 import 'package:flutter/material.dart';
 import 'package:ccr_checklist/page/template_editor_page.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
 class TemplateEditorListPage extends StatelessWidget {
@@ -11,31 +10,14 @@ class TemplateEditorListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final templateListStore = Provider.of<TemplateListStore>(context);
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Checklist Templates'),
         elevation: 4,
       ),
-      body: Observer(
-        builder: (_) => ListView.builder(
-          itemCount: templateListStore.defaultTemplates.length,
-          itemBuilder: (context, index) {
-            return TemplateListTileWidget(
-              rebreatherManufacturer: templateListStore
-                  .defaultTemplates[index].rebreatherManufacturer,
-              rebreatherModel:
-                  templateListStore.defaultTemplates[index].rebreatherModel,
-              title: templateListStore.defaultTemplates[index].title,
-              description:
-                  templateListStore.defaultTemplates[index].description,
-              onTap: () {
-                _onTapTemplate(context, index);
-              },
-            );
-          },
-        ),
+      body: TemplateList(
+        onTapTemplate: _onTapTemplateFile,
+        onTapTemplateFile: _onTapTemplateFile,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _addNewTemplate(context),
@@ -45,7 +27,7 @@ class TemplateEditorListPage extends StatelessWidget {
     );
   }
 
-  Future<void> _onTapTemplate(BuildContext context, int index) async {
+  Future<void> _onTapTemplateFile(BuildContext context, int index) async {
     final templateListStore =
         Provider.of<TemplateListStore>(context, listen: false);
     final templateEditorStore =

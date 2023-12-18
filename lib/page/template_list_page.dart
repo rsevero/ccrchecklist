@@ -2,9 +2,8 @@ import 'package:ccr_checklist/page/checklist_page.dart';
 import 'package:ccr_checklist/page/template_editor_list_page.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:ccr_checklist/store/template_list_store.dart';
-import 'package:ccr_checklist/widget/template_list_tile_widget.dart';
+import 'package:ccr_checklist/widget/template_list.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
 class TemplateListPage extends StatelessWidget {
@@ -12,7 +11,6 @@ class TemplateListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final templateListStore = Provider.of<TemplateListStore>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('CCR Checklist'),
@@ -25,26 +23,9 @@ class TemplateListPage extends StatelessWidget {
           ),
         ],
       ),
-      body: Observer(
-        builder: (_) => ListView.builder(
-          itemCount: templateListStore.defaultTemplates.length,
-          itemBuilder: (context, index) {
-            return TemplateListTileWidget(
-              rebreatherManufacturer: templateListStore
-                  .defaultTemplates[index].rebreatherManufacturer,
-              rebreatherModel:
-                  templateListStore.defaultTemplates[index].rebreatherModel,
-              title: templateListStore.defaultTemplates[index].title,
-              description:
-                  templateListStore.defaultTemplates[index].description,
-              onTap: () {
-                _onTapTemplate(context, index);
-              },
-            );
-          },
-        ),
-        warnWhenNoObservables: true,
-      ),
+      body: TemplateList(
+          onTapTemplate: _onTapTemplateFile,
+          onTapTemplateFile: _onTapTemplateFile),
     );
   }
 
@@ -56,7 +37,7 @@ class TemplateListPage extends StatelessWidget {
     );
   }
 
-  void _onTapTemplate(BuildContext context, int index) async {
+  void _onTapTemplateFile(BuildContext context, int index) async {
     final templateListStore =
         Provider.of<TemplateListStore>(context, listen: false);
     final checklistEditorStore =
