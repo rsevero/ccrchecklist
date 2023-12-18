@@ -1,11 +1,16 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:ccr_checklist/data/template_check.dart';
 import 'package:ccr_checklist/data/template_section.dart';
 import 'package:ccr_checklist/data/template.dart';
 import 'package:ccr_checklist/main.dart';
+import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/store/observablelist_json_converter.dart';
 import 'package:ccr_checklist/undo/undo_redo_storage.dart';
+import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:mobx/mobx.dart';
+import 'package:path_provider/path_provider.dart';
 
 part 'template_editor_store.g.dart';
 
@@ -94,6 +99,24 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
     _canRedo = undoRedoStatus.canRedo;
     _undoDescription = undoRedoStatus.undoDescription;
     _redoDescription = undoRedoStatus.redoDescription;
+  }
+
+  String createTemplateFile(Template template) {
+    String jsonTemplate = jsonEncode(template.toJson());
+    return jsonTemplate;
+  }
+
+  Future<String> createShareableFile() async {
+    final directory = await getApplicationDocumentsDirectory();
+    String formattedDateTime =
+        DateFormat('yyyyMMdd_HHmmss').format(DateTime.now());
+    final file =
+        File('${directory.path}/$formattedDateTime.$ccrChecklistExtension');
+    final jsonContent = createTemplateFile(_currentTemplate);
+
+    await file.writeAsString(jsonContent);
+
+    return file.path;
   }
 
   @action

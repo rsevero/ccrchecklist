@@ -155,14 +155,20 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
     return _nonOkChecksPerSection;
   }
 
+  String createChecklistFile() {
+    final jsonContent =
+        jsonEncode(_$ChecklistEditorStoreToJson(this as ChecklistEditorStore));
+
+    return jsonContent;
+  }
+
   Future<String> createShareableFile() async {
     final directory = await getApplicationDocumentsDirectory();
     String formattedDateTime =
         DateFormat('yyyyMMdd_HHmmss').format(DateTime.now());
     final file =
         File('${directory.path}/$formattedDateTime.$ccrChecklistExtension');
-    final jsonContent =
-        jsonEncode(_$ChecklistEditorStoreToJson(this as ChecklistEditorStore));
+    final jsonContent = createChecklistFile();
 
     await file.writeAsString(jsonContent);
 

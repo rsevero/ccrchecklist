@@ -23,5 +23,5 @@ const ccrMaxReferences = 5;
 
 const ccrSectionOkColor = Colors.green;
 
-const ccrChecklistExtension = 'ccr_cheklist';
-const ccrtemplateExtension = 'ccr_template';
+const ccrChecklistExtension = 'ccrc';
+const ccrTemplateExtension = 'ccrt';

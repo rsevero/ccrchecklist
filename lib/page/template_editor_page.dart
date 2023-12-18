@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:ccr_checklist/data/template.dart';
 import 'package:ccr_checklist/misc/constants.dart';
@@ -9,9 +8,11 @@ import 'package:ccr_checklist/widget/template_section_widget.dart';
 import 'package:ccr_checklist/widget/undo_redo_buttons_widget.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 class TemplateEditorPage extends StatelessWidget {
   const TemplateEditorPage({super.key});
@@ -38,6 +39,12 @@ class TemplateEditorPage extends StatelessWidget {
               );
             },
           ),
+          if (defaultTargetPlatform != TargetPlatform.linux) ...[
+            IconButton(
+              icon: const Icon(Icons.share),
+              onPressed: () => onPressedShare(context),
+            )
+          ],
           IconButton(
             icon: const Icon(Icons.save),
             onPressed: () =>
@@ -160,15 +167,25 @@ class TemplateEditorPage extends StatelessWidget {
     );
   }
 
+  Future<void> onPressedShare(BuildContext context) async {
+    final templateEditorStore =
+        Provider.of<TemplateEditorStore>(context, listen: false);
+    final file = await templateEditorStore.createShareableFile();
+
+    Share.shareXFiles([XFile(file)], text: 'Check out this template!');
+  }
+
   Future<void> _saveTemplate(BuildContext context, Template template) async {
+    final TemplateEditorStore templateEditorStore =
+        Provider.of<TemplateEditorStore>(context, listen: false);
     final directory = await getApplicationDocumentsDirectory();
-    String fileName = "${template.rebreatherModel}_${template.title}.json";
+    String fileName =
+        "${template.rebreatherManufacturer}_${template.rebreatherModel}_${template.title}.$ccrTemplateExtension";
     String filePath = '${directory.path}/$fileName';
     File file = File(filePath);
 
     try {
-      String jsonTemplate = jsonEncode(template
-          .toJson()); // Assuming your Template class has a toJson method
+      String jsonTemplate = templateEditorStore.createTemplateFile(template);
       await file.writeAsString(jsonTemplate);
 
       if (!context.mounted) return;
