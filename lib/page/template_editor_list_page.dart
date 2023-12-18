@@ -16,13 +16,30 @@ class TemplateEditorListPage extends StatelessWidget {
         elevation: 4,
       ),
       body: TemplateList(
-        onTapTemplate: _onTapTemplateFile,
+        onTapTemplate: _onTapTemplate,
         onTapTemplateFile: _onTapTemplateFile,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _addNewTemplate(context),
         tooltip: 'Create New Template',
         child: const Icon(Icons.add),
+      ),
+    );
+  }
+
+  Future<void> _onTapTemplate(BuildContext context, int index) async {
+    final templateListStore =
+        Provider.of<TemplateListStore>(context, listen: false);
+    final templateEditorStore =
+        Provider.of<TemplateEditorStore>(context, listen: false);
+
+    templateEditorStore
+        .setCurrentTemplate(templateListStore.unsavedTemplates[index]);
+
+    if (!context.mounted) return;
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const TemplateEditorPage(),
       ),
     );
   }

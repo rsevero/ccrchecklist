@@ -19,8 +19,7 @@ class TemplateListTileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text("$rebreatherManufacturer - $rebreatherModel"),
-      subtitle: Text("$title - $description"),
+      title: Text("$title - $description"),
       onTap: onTap,
     );
   }

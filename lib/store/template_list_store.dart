@@ -13,10 +13,11 @@ class TemplateListStore = TemplateListStoreBase with _$TemplateListStore;
 
 abstract class TemplateListStoreBase with Store {
   @readonly
-  var _defaultTemplates = ObservableList<TemplateFile>();
+  ObservableList<TemplateFile> _defaultTemplates =
+      ObservableList<TemplateFile>();
 
   @readonly
-  var _unsavedTemplates = ObservableList<Template>();
+  ObservableList<Template> _unsavedTemplates = ObservableList<Template>();
 
   TemplateListStoreBase() {
     _getDefaultTemplates();
