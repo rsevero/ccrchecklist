@@ -27,15 +27,16 @@ class TemplateListPage extends StatelessWidget {
       ),
       body: Observer(
         builder: (_) => ListView.builder(
-          itemCount: templateListStore.templates.length,
+          itemCount: templateListStore.defaultTemplates.length,
           itemBuilder: (context, index) {
             return TemplateListTileWidget(
-              rebreatherManufacturer:
-                  templateListStore.templates[index].rebreatherManufacturer,
+              rebreatherManufacturer: templateListStore
+                  .defaultTemplates[index].rebreatherManufacturer,
               rebreatherModel:
-                  templateListStore.templates[index].rebreatherModel,
-              title: templateListStore.templates[index].title,
-              description: templateListStore.templates[index].description,
+                  templateListStore.defaultTemplates[index].rebreatherModel,
+              title: templateListStore.defaultTemplates[index].title,
+              description:
+                  templateListStore.defaultTemplates[index].description,
               onTap: () {
                 _onTapTemplate(context, index);
               },
@@ -55,13 +56,17 @@ class TemplateListPage extends StatelessWidget {
     );
   }
 
-  void _onTapTemplate(BuildContext context, int index) {
+  void _onTapTemplate(BuildContext context, int index) async {
     final templateListStore =
         Provider.of<TemplateListStore>(context, listen: false);
     final checklistEditorStore =
         Provider.of<ChecklistEditorStore>(context, listen: false);
-    checklistEditorStore.loadFromTemplate(templateListStore.templates[index]);
+    final template = await templateListStore
+        .getTemplate(templateListStore.defaultTemplates[index]);
 
+    checklistEditorStore.loadFromTemplate(template);
+
+    if (!context.mounted) return;
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const ChecklistPage(

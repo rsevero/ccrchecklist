@@ -1,6 +1,9 @@
 import 'dart:convert';
+import 'dart:io';
+import 'package:ccr_checklist/data/template_file.dart';
 import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/data/template.dart';
+import 'package:ccr_checklist/misc/helper_functions.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:mobx/mobx.dart';
 
@@ -9,21 +12,37 @@ part 'template_list_store.g.dart';
 class TemplateListStore = TemplateListStoreBase with _$TemplateListStore;
 
 abstract class TemplateListStoreBase with Store {
-  @observable
-  var _templates = ObservableList<Template>();
+  @readonly
+  var _defaultTemplates = ObservableList<TemplateFile>();
 
-  @computed
-  ObservableList<Template> get templates {
-    _templates.sort(_compareTemplates);
-    return _templates;
-  }
+  @readonly
+  var _unsavedTemplates = ObservableList<Template>();
 
   TemplateListStoreBase() {
     _getDefaultTemplates();
   }
 
+  Future<Template> getTemplate(TemplateFile templateFile) async {
+    if (templateFile.isAsset) {
+      final String jsonString = await rootBundle.loadString(templateFile.path);
+      final Map<String, dynamic> jsonMap = json.decode(jsonString);
+      return Template.fromJson(jsonMap);
+    } else {
+      final File templateFileHandle = File(templateFile.path);
+      final String jsonString = await templateFileHandle.readAsString();
+      final Map<String, dynamic> jsonMap = json.decode(jsonString);
+      return Template.fromJson(jsonMap);
+    }
+  }
+
   @action
   Future<void> _getDefaultTemplates() async {
+    await _getAssetTemplates();
+    await _getSavedTemplates();
+    _defaultTemplates.sort(_compareTemplateFile);
+  }
+
+  Future<void> _getAssetTemplates() async {
     String manifestJson =
         await rootBundle.loadString(ccrDefaultTemplatesManifestPath);
     List<String> templateFileNames = ((json.decode(manifestJson)
@@ -31,15 +50,55 @@ abstract class TemplateListStoreBase with Store {
         .cast<String>();
 
     // Load each template file listed in the manifest
-    for (String fileName in templateFileNames) {
-      final String jsonString =
-          await rootBundle.loadString('assets/templates/$fileName');
+    for (String filename in templateFileNames) {
+      final templatePath = 'assets/templates/$filename';
+      final String jsonString = await rootBundle.loadString(templatePath);
       final Map<String, dynamic> jsonMap = json.decode(jsonString);
       final newTemplate = Template.fromJson(jsonMap);
 
-      _templates.add(newTemplate);
+      final newTemplateFile = TemplateFile(
+        path: templatePath,
+        rebreatherManufacturer: newTemplate.rebreatherManufacturer,
+        rebreatherModel: newTemplate.rebreatherModel,
+        title: newTemplate.title,
+        description: newTemplate.description,
+        isAsset: true,
+      );
+
+      _defaultTemplates.add(newTemplateFile);
     }
-    _templates.sort(_compareTemplates);
+  }
+
+  Future<void> _getSavedTemplates() async {
+    final templateDirectory = await getTemplatesDirectory();
+
+    // Check if the template directory exists
+    if (!templateDirectory.existsSync()) {
+      return;
+    }
+
+    // List all files in the template directory
+    List<FileSystemEntity> fileList = templateDirectory.listSync();
+    _defaultTemplates.clear();
+
+    for (FileSystemEntity fileEntity in fileList) {
+      if (fileEntity is File && fileEntity.path.endsWith('.ccrt')) {
+        final String jsonString = await fileEntity.readAsString();
+        final Map<String, dynamic> jsonMap = json.decode(jsonString);
+        final newTemplate = Template.fromJson(jsonMap);
+
+        final newTemplateFile = TemplateFile(
+          path: fileEntity.path,
+          rebreatherManufacturer: newTemplate.rebreatherManufacturer,
+          rebreatherModel: newTemplate.rebreatherModel,
+          title: newTemplate.title,
+          description: newTemplate.description,
+          isAsset: false,
+        );
+
+        _defaultTemplates.add(newTemplateFile);
+      }
+    }
   }
 
   @action
@@ -56,19 +115,54 @@ abstract class TemplateListStoreBase with Store {
         description: description,
         sections: []);
 
-    _templates.add(newTemplate);
-    _templates.sort(_compareTemplates);
+    _unsavedTemplates.add(newTemplate);
+    _unsavedTemplates.sort(_compareTemplate);
 
     return newTemplate;
   }
 
-  int _compareTemplates(Template a, Template b) {
-    final modelCompare = a.rebreatherModel.compareTo(b.rebreatherModel);
+  int _compareTemplate(Template a, Template b) {
+    final manufacturerCompare =
+        a.rebreatherManufacturer.compareTo(b.rebreatherManufacturer);
+    if (manufacturerCompare != 0) {
+      return manufacturerCompare;
+    }
 
+    final modelCompare = a.rebreatherModel.compareTo(b.rebreatherModel);
     if (modelCompare != 0) {
       return modelCompare;
-    } else {
-      return a.title.compareTo(b.title);
     }
+
+    final titleCompare = a.title.compareTo(b.title);
+    if (titleCompare != 0) {
+      return titleCompare;
+    }
+
+    return a.description.compareTo(b.description);
+  }
+
+  int _compareTemplateFile(TemplateFile a, TemplateFile b) {
+    final manufacturerCompare =
+        a.rebreatherManufacturer.compareTo(b.rebreatherManufacturer);
+    if (manufacturerCompare != 0) {
+      return manufacturerCompare;
+    }
+
+    final modelCompare = a.rebreatherModel.compareTo(b.rebreatherModel);
+    if (modelCompare != 0) {
+      return modelCompare;
+    }
+
+    final titleCompare = a.title.compareTo(b.title);
+    if (titleCompare != 0) {
+      return titleCompare;
+    }
+
+    final descriptionCompare = a.description.compareTo(b.description);
+    if (descriptionCompare != 0) {
+      return descriptionCompare;
+    }
+
+    return a.path.compareTo(b.path);
   }
 }

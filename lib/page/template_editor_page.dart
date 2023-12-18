@@ -11,7 +11,6 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:slugify/slugify.dart';
@@ -182,12 +181,12 @@ class TemplateEditorPage extends StatelessWidget {
         Provider.of<TemplateEditorStore>(context, listen: false);
     final formattedDateTime =
         DateFormat('yyyy-MM-dd_HH:mm:ss').format(DateTime.now());
-    final directory = await getApplicationDocumentsDirectory();
+    final directory = await getTemplatesDirectory();
     String filename =
         "${template.rebreatherManufacturer}_${template.rebreatherModel}_${template.title}_$formattedDateTime.$ccrTemplateExtension";
     filename = slugify(filename);
     final filePath = '${directory.path}/$filename';
-    File file = File(filePath);
+    File file = await File(filePath).create(recursive: true);
 
     try {
       String jsonTemplate = templateEditorStore.createTemplateFile(template);

@@ -11,7 +11,6 @@ import 'package:ccr_checklist/store/observablelist_json_converter.dart';
 import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:mobx/mobx.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:slugify/slugify.dart';
 
 part 'checklist_editor_store.g.dart';
@@ -164,12 +163,14 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
   }
 
   Future<String> createShareableFile() async {
-    final directory = await getApplicationDocumentsDirectory();
+    Directory directory = await getSharedDirectory();
     final formattedDateTime =
         DateFormat('yyyy-MM-dd_HH:mm:ss').format(DateTime.now());
     String filename = 'ccr_checklist_$formattedDateTime.$ccrChecklistExtension';
     filename = slugify(filename);
-    final file = File('${directory.path}/$filename');
+    final file =
+        await File('${directory.path}/$filename').create(recursive: true);
+
     final jsonContent = createChecklistFile();
 
     await file.writeAsString(jsonContent);

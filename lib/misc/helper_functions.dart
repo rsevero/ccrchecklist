@@ -1,4 +1,6 @@
+import 'dart:io';
 import 'package:ccr_checklist/misc/constants.dart';
+import 'package:path_provider/path_provider.dart';
 
 String formatSecondsToMinutesSecondsTimer(int totalSeconds) {
   if (totalSeconds < 0) {
@@ -43,4 +45,18 @@ Map<int, double> createAndInitializeReferencesMap(int numberOfEntries) {
   }
 
   return myMap;
+}
+
+Future<Directory> getTemplatesDirectory() async {
+  final directory = await getApplicationDocumentsDirectory();
+  final templateDirectory = Directory('${directory.path}/templates');
+
+  return templateDirectory;
+}
+
+Future<Directory> getSharedDirectory() async {
+  final directory = await getApplicationDocumentsDirectory();
+  final templateDirectory = Directory('${directory.path}/share');
+
+  return templateDirectory;
 }

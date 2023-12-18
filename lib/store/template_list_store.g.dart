@@ -9,27 +9,39 @@ part of 'template_list_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$TemplateListStore on TemplateListStoreBase, Store {
-  Computed<ObservableList<Template>>? _$templatesComputed;
+  late final _$_defaultTemplatesAtom =
+      Atom(name: 'TemplateListStoreBase._defaultTemplates', context: context);
 
-  @override
-  ObservableList<Template> get templates => (_$templatesComputed ??=
-          Computed<ObservableList<Template>>(() => super.templates,
-              name: 'TemplateListStoreBase.templates'))
-      .value;
-
-  late final _$_templatesAtom =
-      Atom(name: 'TemplateListStoreBase._templates', context: context);
-
-  @override
-  ObservableList<Template> get _templates {
-    _$_templatesAtom.reportRead();
-    return super._templates;
+  ObservableList<TemplateFile> get defaultTemplates {
+    _$_defaultTemplatesAtom.reportRead();
+    return super._defaultTemplates;
   }
 
   @override
-  set _templates(ObservableList<Template> value) {
-    _$_templatesAtom.reportWrite(value, super._templates, () {
-      super._templates = value;
+  ObservableList<TemplateFile> get _defaultTemplates => defaultTemplates;
+
+  @override
+  set _defaultTemplates(ObservableList<TemplateFile> value) {
+    _$_defaultTemplatesAtom.reportWrite(value, super._defaultTemplates, () {
+      super._defaultTemplates = value;
+    });
+  }
+
+  late final _$_unsavedTemplatesAtom =
+      Atom(name: 'TemplateListStoreBase._unsavedTemplates', context: context);
+
+  ObservableList<Template> get unsavedTemplates {
+    _$_unsavedTemplatesAtom.reportRead();
+    return super._unsavedTemplates;
+  }
+
+  @override
+  ObservableList<Template> get _unsavedTemplates => unsavedTemplates;
+
+  @override
+  set _unsavedTemplates(ObservableList<Template> value) {
+    _$_unsavedTemplatesAtom.reportWrite(value, super._unsavedTemplates, () {
+      super._unsavedTemplates = value;
     });
   }
 
@@ -68,7 +80,7 @@ mixin _$TemplateListStore on TemplateListStoreBase, Store {
   @override
   String toString() {
     return '''
-templates: ${templates}
+
     ''';
   }
 }
