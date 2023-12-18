@@ -14,6 +14,7 @@ import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:slugify/slugify.dart';
 
 class TemplateEditorPage extends StatelessWidget {
   const TemplateEditorPage({super.key});
@@ -182,9 +183,10 @@ class TemplateEditorPage extends StatelessWidget {
     final formattedDateTime =
         DateFormat('yyyy-MM-dd_HH:mm:ss').format(DateTime.now());
     final directory = await getApplicationDocumentsDirectory();
-    String fileName =
+    String filename =
         "${template.rebreatherManufacturer}_${template.rebreatherModel}_${template.title}_$formattedDateTime.$ccrTemplateExtension";
-    String filePath = '${directory.path}/$fileName';
+    filename = slugify(filename);
+    final filePath = '${directory.path}/$filename';
     File file = File(filePath);
 
     try {
@@ -194,7 +196,7 @@ class TemplateEditorPage extends StatelessWidget {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Template "$fileName" saved successfully!'),
+          content: Text('Template "$filename" saved successfully!'),
           backgroundColor: Colors.green,
         ),
       );

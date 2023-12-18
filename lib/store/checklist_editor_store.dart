@@ -12,6 +12,7 @@ import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:mobx/mobx.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:slugify/slugify.dart';
 
 part 'checklist_editor_store.g.dart';
 
@@ -166,8 +167,9 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
     final directory = await getApplicationDocumentsDirectory();
     final formattedDateTime =
         DateFormat('yyyy-MM-dd_HH:mm:ss').format(DateTime.now());
-    final file = File(
-        '${directory.path}/ccr_checklist_$formattedDateTime.$ccrChecklistExtension');
+    String filename = 'ccr_checklist_$formattedDateTime.$ccrChecklistExtension';
+    filename = slugify(filename);
+    final file = File('${directory.path}/$filename');
     final jsonContent = createChecklistFile();
 
     await file.writeAsString(jsonContent);
