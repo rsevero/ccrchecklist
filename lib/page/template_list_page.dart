@@ -24,6 +24,7 @@ class TemplateListPage extends StatelessWidget {
         ],
       ),
       body: TemplateList(
+        isEditor: false,
         onTapTemplateFile: _onTapTemplateFile,
       ),
     );

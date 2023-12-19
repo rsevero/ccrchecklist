@@ -43,6 +43,19 @@ abstract class TemplateListStoreBase with Store {
     _isInitialized = true;
   }
 
+  @action
+  Future<void> removeTemplate(int index) async {
+    final templateFile = _defaultTemplates[index];
+    if (templateFile.isAsset) {
+      throw Exception('Cannot remove asset template');
+    }
+
+    final templateFileHandle = File(templateFile.path);
+    await templateFileHandle.delete();
+
+    _defaultTemplates.removeAt(index);
+  }
+
   Future<void> _getAssetTemplates() async {
     String manifestJson =
         await rootBundle.loadString(ccrDefaultTemplatesManifestPath);

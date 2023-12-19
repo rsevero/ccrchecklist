@@ -6,7 +6,10 @@ class TemplateListTileWidget extends StatelessWidget {
   final String title;
   final String description;
   final bool isAsset;
-  final Function()? onTap;
+  final bool isEditor;
+  final int templateIndex;
+  final Function() onTap;
+  final Function(BuildContext, int)? onRemove;
 
   const TemplateListTileWidget({
     super.key,
@@ -15,7 +18,10 @@ class TemplateListTileWidget extends StatelessWidget {
     required this.title,
     required this.description,
     required this.isAsset,
+    required this.isEditor,
+    required this.templateIndex,
     required this.onTap,
+    this.onRemove,
   });
 
   @override
@@ -23,6 +29,15 @@ class TemplateListTileWidget extends StatelessWidget {
     return ListTile(
       title: Text("$title - $description"),
       onTap: onTap,
+      trailing: !isEditor || isAsset
+          ? null
+          : IconButton(
+              icon: const Icon(Icons.delete),
+              onPressed: onRemove == null
+                  ? null
+                  : () => onRemove!(context, templateIndex),
+              tooltip: 'Remove',
+            ),
     );
   }
 }

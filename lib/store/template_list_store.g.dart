@@ -53,6 +53,14 @@ mixin _$TemplateListStore on TemplateListStoreBase, Store {
     return _$initializeAsyncAsyncAction.run(() => super.initializeAsync());
   }
 
+  late final _$removeTemplateAsyncAction =
+      AsyncAction('TemplateListStoreBase.removeTemplate', context: context);
+
+  @override
+  Future<void> removeTemplate(int index) {
+    return _$removeTemplateAsyncAction.run(() => super.removeTemplate(index));
+  }
+
   late final _$TemplateListStoreBaseActionController =
       ActionController(name: 'TemplateListStoreBase', context: context);
 

@@ -18,7 +18,9 @@ class TemplateEditorListPage extends StatelessWidget {
         elevation: 4,
       ),
       body: TemplateList(
+        isEditor: true,
         onTapTemplateFile: _onTapTemplateFile,
+        onRemoveTemplateFile: _onRemoveTemplateFile,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _addNewTemplate(context),
@@ -26,6 +28,41 @@ class TemplateEditorListPage extends StatelessWidget {
         child: const Icon(Icons.add),
       ),
     );
+  }
+
+  Future<void> _onRemoveTemplateFile(BuildContext context, int index) async {
+    final templateListStore =
+        Provider.of<TemplateListStore>(context, listen: false);
+
+    // Show confirmation dialog
+    final bool confirm = await showDialog<bool>(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Confirm Removal'),
+              content:
+                  const Text('Are you sure you want to remove this template?'),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('Remove'),
+                  onPressed: () => Navigator.of(context)
+                      .pop(true), // Dismiss dialog and return true
+                ),
+                TextButton(
+                  child: const Text('Cancel'),
+                  onPressed: () => Navigator.of(context)
+                      .pop(false), // Dismiss dialog and return false
+                ),
+              ],
+            );
+          },
+        ) ??
+        false; // If dialog is dismissed without any action, consider as false (do not remove)
+
+    // If confirmation received, remove the template
+    if (confirm) {
+      await templateListStore.removeTemplate(index);
+    }
   }
 
   Future<void> _onTapTemplateFile(BuildContext context, int index) async {

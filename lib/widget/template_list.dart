@@ -7,10 +7,14 @@ import 'package:provider/provider.dart';
 
 class TemplateList extends StatelessWidget {
   final Function(BuildContext, int) onTapTemplateFile;
+  final Function(BuildContext, int)? onRemoveTemplateFile;
+  final bool isEditor;
 
   const TemplateList({
     super.key,
     required this.onTapTemplateFile,
+    required this.isEditor,
+    this.onRemoveTemplateFile,
   });
 
   @override
@@ -40,8 +44,10 @@ class TemplateList extends StatelessWidget {
     String currentManufacturer = '';
     String currentModel = '';
 
-    for (var i = 0; i < defaultTemplates.length; i++) {
-      final template = defaultTemplates[i];
+    for (var templateIndex = 0;
+        templateIndex < defaultTemplates.length;
+        templateIndex++) {
+      final template = defaultTemplates[templateIndex];
       if (template.rebreatherManufacturer != currentManufacturer) {
         if (currentManufacturer != '') {
           models.add(
@@ -80,9 +86,12 @@ class TemplateList extends StatelessWidget {
           title: template.title,
           description: template.description,
           isAsset: template.isAsset,
+          isEditor: isEditor,
+          templateIndex: templateIndex,
           onTap: () {
-            onTapTemplateFile(context, i);
+            onTapTemplateFile(context, templateIndex);
           },
+          onRemove: onRemoveTemplateFile,
         ),
       );
     }
