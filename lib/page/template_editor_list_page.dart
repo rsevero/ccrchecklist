@@ -191,11 +191,29 @@ class TemplateEditorListPage extends StatelessWidget {
   Future<bool> _saveNewTemplate(
       BuildContext context, Template template, String filename) async {
     if (!context.mounted) return false;
-    return await ccrSaveTemplate(
+    final result = await ccrSaveTemplate(
       context: context,
       fileName: filename,
       onChooseAnother: ccrSaveAsTemplate,
       template: template,
     );
+
+    if (result) {
+      if (!context.mounted) return false;
+      final templateListStore =
+          Provider.of<TemplateListStore>(context, listen: false);
+      final templateEditorStore =
+          Provider.of<TemplateEditorStore>(context, listen: false);
+      final currentTemplate = templateEditorStore.currentTemplate;
+      templateListStore.addNewTemplate(
+        path: currentTemplate.filename,
+        title: currentTemplate.title,
+        rebreatherManufacturer: currentTemplate.rebreatherManufacturer,
+        rebreatherModel: currentTemplate.rebreatherModel,
+        description: currentTemplate.description,
+      );
+    }
+
+    return result;
   }
 }
