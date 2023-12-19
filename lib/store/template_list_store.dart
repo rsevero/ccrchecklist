@@ -16,9 +16,8 @@ abstract class TemplateListStoreBase with Store {
   ObservableList<TemplateFile> _defaultTemplates =
       ObservableList<TemplateFile>();
 
-  TemplateListStoreBase() {
-    _getDefaultTemplates();
-  }
+  @readonly
+  bool _isInitialized = false;
 
   Future<Template> getTemplate(TemplateFile templateFile) async {
     if (templateFile.isAsset) {
@@ -34,10 +33,14 @@ abstract class TemplateListStoreBase with Store {
   }
 
   @action
-  Future<void> _getDefaultTemplates() async {
+  Future<void> initializeAsync() async {
+    if (_isInitialized) {
+      return;
+    }
     await _getAssetTemplates();
     await _getSavedTemplates();
     _defaultTemplates.sort(_compareTemplateFile);
+    _isInitialized = true;
   }
 
   Future<void> _getAssetTemplates() async {

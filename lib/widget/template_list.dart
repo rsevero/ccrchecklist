@@ -19,12 +19,13 @@ class TemplateList extends StatelessWidget {
 
     return Observer(
       builder: (_) {
-        final defaultTemplates = templateListStore.defaultTemplates.toList();
+        if (!templateListStore.isInitialized) {
+          return const Center(child: CircularProgressIndicator());
+        }
 
+        final defaultTemplates = templateListStore.defaultTemplates.toList();
         return ListView(
-          children: [
-            ..._buildDefaultTile(context, defaultTemplates),
-          ],
+          children: _buildDefaultTile(context, defaultTemplates),
         );
       },
     );
@@ -50,11 +51,9 @@ class TemplateList extends StatelessWidget {
             ),
           );
           manufacturers.add(
-            Observer(
-              builder: (_) => ExpansionTile(
-                title: Text(currentManufacturer),
-                children: models,
-              ),
+            ExpansionTile(
+              title: Text(currentManufacturer),
+              children: models,
             ),
           );
         }

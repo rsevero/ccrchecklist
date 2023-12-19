@@ -27,14 +27,30 @@ mixin _$TemplateListStore on TemplateListStoreBase, Store {
     });
   }
 
-  late final _$_getDefaultTemplatesAsyncAction = AsyncAction(
-      'TemplateListStoreBase._getDefaultTemplates',
-      context: context);
+  late final _$_isInitializedAtom =
+      Atom(name: 'TemplateListStoreBase._isInitialized', context: context);
+
+  bool get isInitialized {
+    _$_isInitializedAtom.reportRead();
+    return super._isInitialized;
+  }
 
   @override
-  Future<void> _getDefaultTemplates() {
-    return _$_getDefaultTemplatesAsyncAction
-        .run(() => super._getDefaultTemplates());
+  bool get _isInitialized => isInitialized;
+
+  @override
+  set _isInitialized(bool value) {
+    _$_isInitializedAtom.reportWrite(value, super._isInitialized, () {
+      super._isInitialized = value;
+    });
+  }
+
+  late final _$initializeAsyncAsyncAction =
+      AsyncAction('TemplateListStoreBase.initializeAsync', context: context);
+
+  @override
+  Future<void> initializeAsync() {
+    return _$initializeAsyncAsyncAction.run(() => super.initializeAsync());
   }
 
   late final _$TemplateListStoreBaseActionController =
