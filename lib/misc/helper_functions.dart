@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:ccr_checklist/data/template.dart';
 import 'package:ccr_checklist/misc/constants.dart';
@@ -120,7 +121,7 @@ Future<bool> ccrSaveFile(
     BuildContext context, Template template, File file) async {
   try {
     template = template.copyWith(filename: file.path);
-    String jsonTemplate = template.toJson().toString();
+    String jsonTemplate = jsonEncode(template.toJson());
     await file.writeAsString(jsonTemplate);
 
     if (!context.mounted) return false;

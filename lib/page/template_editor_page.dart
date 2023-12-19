@@ -41,7 +41,7 @@ class TemplateEditorPage extends StatelessWidget {
           if (defaultTargetPlatform != TargetPlatform.linux) ...[
             IconButton(
               icon: const Icon(Icons.share),
-              onPressed: () => onPressedShare(context),
+              onPressed: () => _onPressedShare(context),
             )
           ],
           Observer(
@@ -176,7 +176,7 @@ class TemplateEditorPage extends StatelessWidget {
     );
   }
 
-  Future<void> onPressedShare(BuildContext context) async {
+  Future<void> _onPressedShare(BuildContext context) async {
     final templateEditorStore =
         Provider.of<TemplateEditorStore>(context, listen: false);
     final file = await templateEditorStore.createShareableFile();
