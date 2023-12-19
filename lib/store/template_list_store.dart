@@ -113,7 +113,7 @@ abstract class TemplateListStoreBase with Store {
   }
 
   @action
-  TemplateFile addNewTemplate({
+  int addNewTemplate({
     required String path,
     required String title,
     required String rebreatherManufacturer,
@@ -132,7 +132,30 @@ abstract class TemplateListStoreBase with Store {
     _defaultTemplates.add(newTemplate);
     _defaultTemplates.sort(_compareTemplateFile);
 
-    return newTemplate;
+    final templateIndex = _defaultTemplates.indexOf(newTemplate);
+
+    return templateIndex;
+  }
+
+  @action
+  void updateTemplate({
+    required int templateIndex,
+    required String rebreatherManufacturer,
+    required String rebreatherModel,
+    required String title,
+    required String description,
+  }) {
+    if (templateIndex < 0 || templateIndex >= _defaultTemplates.length) {
+      throw Exception('Invalid template index');
+    }
+
+    _defaultTemplates[templateIndex] =
+        _defaultTemplates[templateIndex].copyWith(
+      rebreatherManufacturer: rebreatherManufacturer,
+      rebreatherModel: rebreatherModel,
+      title: title,
+      description: description,
+    );
   }
 
   int _compareTemplateFile(TemplateFile a, TemplateFile b) {

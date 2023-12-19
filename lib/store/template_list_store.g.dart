@@ -65,7 +65,7 @@ mixin _$TemplateListStore on TemplateListStoreBase, Store {
       ActionController(name: 'TemplateListStoreBase', context: context);
 
   @override
-  TemplateFile addNewTemplate(
+  int addNewTemplate(
       {required String path,
       required String title,
       required String rebreatherManufacturer,
@@ -79,6 +79,27 @@ mixin _$TemplateListStore on TemplateListStoreBase, Store {
           title: title,
           rebreatherManufacturer: rebreatherManufacturer,
           rebreatherModel: rebreatherModel,
+          description: description);
+    } finally {
+      _$TemplateListStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void updateTemplate(
+      {required int templateIndex,
+      required String rebreatherManufacturer,
+      required String rebreatherModel,
+      required String title,
+      required String description}) {
+    final _$actionInfo = _$TemplateListStoreBaseActionController.startAction(
+        name: 'TemplateListStoreBase.updateTemplate');
+    try {
+      return super.updateTemplate(
+          templateIndex: templateIndex,
+          rebreatherManufacturer: rebreatherManufacturer,
+          rebreatherModel: rebreatherModel,
+          title: title,
           description: description);
     } finally {
       _$TemplateListStoreBaseActionController.endAction(_$actionInfo);

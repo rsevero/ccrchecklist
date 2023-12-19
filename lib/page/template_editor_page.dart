@@ -3,6 +3,7 @@ import 'package:ccr_checklist/data/template.dart';
 import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/misc/helper_functions.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
+import 'package:ccr_checklist/store/template_list_store.dart';
 import 'package:ccr_checklist/widget/greyable_speed_dial_child_widget.dart';
 import 'package:ccr_checklist/widget/template_section_widget.dart';
 import 'package:ccr_checklist/widget/undo_redo_buttons_widget.dart';
@@ -22,8 +23,10 @@ class TemplateEditorPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-            "${templateEditorStore.currentTemplate.rebreatherManufacturer} - ${templateEditorStore.currentTemplate.rebreatherModel}"),
+        title: Observer(
+          builder: (_) => Text(
+              "${templateEditorStore.currentTemplate.rebreatherManufacturer} - ${templateEditorStore.currentTemplate.rebreatherModel}"),
+        ),
         elevation: 4,
         actions: [
           Observer(
@@ -186,36 +189,18 @@ class TemplateEditorPage extends StatelessWidget {
 
   Future<void> _onPressedSaveTemplate(
       BuildContext context, Template template) async {
-    final TemplateEditorStore templateEditorStore =
-        Provider.of<TemplateEditorStore>(context, listen: false);
-    File file = await File(template.path).create(recursive: true);
-
-    try {
-      String jsonTemplate = templateEditorStore.createTemplateFile(template);
-      await file.writeAsString(jsonTemplate);
-
-      if (!context.mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Template "${template.path}" saved successfully!'),
-          backgroundColor: Colors.green,
-        ),
-      );
-    } catch (e) {
-      // Handle exceptions, e.g., show an error message
-      if (!context.mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Failed to save template: $e'),
-          backgroundColor: Colors.red,
-        ),
-      );
-    }
+    final file = await File(template.path).create(recursive: true);
+    if (!context.mounted) return;
+    await ccrSaveTemplate(
+      context: context,
+      template: template,
+      filePath: file.path,
+    );
   }
 
   Future<void> _onPressedSaveAsTemplate(
       BuildContext context, Template template) async {
-    await ccrSaveAsTemplate(context, template);
+    await ccrSaveAsTemplate(context: context, template: template);
   }
 
   void _onTapEditTemplate(
@@ -265,15 +250,13 @@ class TemplateEditorPage extends StatelessWidget {
           actions: <Widget>[
             TextButton(
               child: const Text('Update'),
-              onPressed: () {
-                templateEditorStore.updateTemplate(
-                  rebreatherManufacturer: rebreatherManufacturerController.text,
-                  rebreatherModel: rebreatherModelController.text,
-                  title: titleController.text,
-                  description: descriptionController.text,
-                );
-                Navigator.of(context).pop();
-              },
+              onPressed: () => _onPressedUpdateTemplate(
+                context: context,
+                rebreatherManufacturer: rebreatherManufacturerController.text,
+                rebreatherModel: rebreatherModelController.text,
+                title: titleController.text,
+                description: descriptionController.text,
+              ),
             ),
             TextButton(
               child: const Text('Cancel'),
@@ -285,6 +268,35 @@ class TemplateEditorPage extends StatelessWidget {
         );
       },
     );
+  }
+
+  void _onPressedUpdateTemplate({
+    required BuildContext context,
+    required String rebreatherManufacturer,
+    required String rebreatherModel,
+    required String title,
+    required String description,
+  }) {
+    final templateEditorStore =
+        Provider.of<TemplateEditorStore>(context, listen: false);
+    templateEditorStore.updateTemplate(
+      rebreatherManufacturer: rebreatherManufacturer,
+      rebreatherModel: rebreatherModel,
+      title: title,
+      description: description,
+    );
+
+    final TemplateListStore templateListStore =
+        Provider.of<TemplateListStore>(context, listen: false);
+    templateListStore.updateTemplate(
+      templateIndex: templateEditorStore.currentTemplateIndex,
+      rebreatherManufacturer: rebreatherManufacturer,
+      rebreatherModel: rebreatherModel,
+      title: title,
+      description: description,
+    );
+
+    Navigator.of(context).pop();
   }
 
   void _onTapAddNewSection(

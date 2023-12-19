@@ -33,6 +33,10 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
   Template _currentTemplate = Template.empty();
 
   @readonly
+  @JsonKey(includeFromJson: true, includeToJson: true)
+  int _currentTemplateIndex = -1;
+
+  @readonly
   @JsonKey(
       includeFromJson: true,
       includeToJson: true,
@@ -240,7 +244,10 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
   }
 
   @action
-  void setCurrentTemplate(Template template) {
+  void setCurrentTemplate(Template template, [int? templateIndex]) {
+    if (templateIndex != null) {
+      _currentTemplateIndex = templateIndex;
+    }
     _currentTemplate = template;
     _sections = ObservableList.of(template.sections);
     for (final section in _currentTemplate.sections) {
@@ -250,6 +257,11 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
 
     undoRedoStorage.clearUndoRedo(_undoRedoClass);
     _saveSnapshot('Set current template');
+  }
+
+  @action
+  void setCurrentTemplateIndex(int templateIndex) {
+    _currentTemplateIndex = templateIndex;
   }
 
   @action

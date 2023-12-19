@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:ccr_checklist/data/template.dart';
+import 'package:ccr_checklist/misc/ccr_file_for_save_template.dart';
 import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
+import 'package:ccr_checklist/store/template_list_store.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
@@ -74,86 +76,13 @@ Future<Directory> ccrGetSharedDirectory() async {
   return sharedDirectory;
 }
 
-Future<bool> ccrSaveTemplate(
-    {required BuildContext context,
-    required Template template,
-    required String? fileName,
-    required Function(BuildContext, Template) onChooseAnother}) async {
-  // If fileName is null, user cancelled the dialog
-  if (fileName == null || fileName.isEmpty) return false;
-
-  final directory = await ccrGetTemplatesDirectory();
-
-  // Remove default extension if present
-  if (fileName.endsWith('.$ccrTemplateExtension')) {
-    fileName = fileName.substring(
-        0, fileName.length - (ccrTemplateExtension.length + 1));
-  }
-
-  final filePath = '${directory.path}/$fileName.$ccrTemplateExtension';
-
-  File file = File(filePath);
-  if (await file.exists()) {
-    if (!context.mounted) return false;
-    final action = await ccrShowFileExistsDialog(context, fileName);
-    switch (action) {
-      case CCRFileExistsAction.replace:
-        if (!context.mounted) return false;
-        await ccrSaveFile(context, template, file);
-        break;
-      case CCRFileExistsAction.chooseAnother:
-        if (!context.mounted) return false;
-        onChooseAnother(context, template);
-        break;
-      case CCRFileExistsAction.cancel:
-      default:
-        return false;
-    }
-  } else {
-    if (!context.mounted) return false;
-    await ccrSaveFile(context, template, file);
-  }
-
-  return true;
-}
-
-Future<bool> ccrSaveFile(
-    BuildContext context, Template template, File file) async {
-  try {
-    template = template.copyWith(path: file.path);
-    String jsonTemplate = jsonEncode(template.toJson());
-    await file.writeAsString(jsonTemplate);
-
-    if (!context.mounted) return false;
-    final templateEditorStore =
-        Provider.of<TemplateEditorStore>(context, listen: false);
-    templateEditorStore.setCurrentTemplate(template);
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Template "${file.path}" saved successfully!'),
-        backgroundColor: Colors.green,
-      ),
-    );
-    return true;
-  } catch (e) {
-    if (!context.mounted) return false;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Failed to save template: $e'),
-        backgroundColor: Colors.red,
-      ),
-    );
-    return false;
-  }
-}
-
 Future<CCRFileExistsAction?> ccrShowFileExistsDialog(
-    BuildContext context, String fileName) async {
+    BuildContext context, String filepath) async {
   return await showDialog<CCRFileExistsAction>(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('File "$fileName" already exists'),
+        title: Text('File "$filepath" already exists'),
         content: const Text(
             'Do you want to replace it, choose another name, or cancel?'),
         actions: <Widget>[
@@ -205,15 +134,152 @@ Future<String?> ccrPromptFileName(BuildContext context) async {
   );
 }
 
-Future<bool> ccrSaveAsTemplate(BuildContext context, Template template) async {
-  // Prompt user for file name
-  final String? fileName = await ccrPromptFileName(context);
+Future<bool> ccrSaveTemplateFile(
+    BuildContext context, Template template, File file) async {
+  try {
+    template = template.copyWith(path: file.path);
+    String jsonTemplate = jsonEncode(template.toJson());
+    await file.writeAsString(jsonTemplate);
+
+    if (!context.mounted) return false;
+    final templateEditorStore =
+        Provider.of<TemplateEditorStore>(context, listen: false);
+    templateEditorStore.setCurrentTemplate(template);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Template "${file.path}" saved successfully!'),
+        backgroundColor: Colors.green,
+      ),
+    );
+    return true;
+  } catch (e) {
+    if (!context.mounted) return false;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Failed to save template: $e'),
+        backgroundColor: Colors.red,
+      ),
+    );
+    return false;
+  }
+}
+
+Future<CCRFileForSaveTemplate> ccrFileFromFilename(String? fileName) async {
+  if (fileName == null || fileName.isEmpty) {
+    return CCRFileForSaveTemplate(File(''), '');
+  }
+
+  // Remove default extension if present
+  if (fileName.endsWith('.$ccrTemplateExtension')) {
+    fileName = fileName.substring(
+        0, fileName.length - (ccrTemplateExtension.length + 1));
+  }
+
+  final directory = await ccrGetTemplatesDirectory();
+  final filePath = '${directory.path}/$fileName.$ccrTemplateExtension';
+
+  File file = File(filePath);
+
+  CCRFileForSaveTemplate result = CCRFileForSaveTemplate(file, fileName);
+
+  return result;
+}
+
+Future<CCRFileForSaveTemplate> ccrGetFileForSaveAsTemplate(
+    BuildContext context, String? fileName) async {
+  if ((fileName == null) || fileName.isEmpty) {
+    fileName = await ccrPromptFileName(context);
+  }
+
+  return await ccrFileFromFilename(fileName);
+}
+
+Future<bool> ccrSaveAsTemplate({
+  required BuildContext context,
+  required Template template,
+  String fileName = '',
+}) async {
+  var result = await ccrGetFileForSaveAsTemplate(context, fileName);
+  if (result.file.path == '') {
+    return false;
+  }
+
+  fileExistsLoop:
+  while (await result.file.exists()) {
+    if (!context.mounted) return false;
+    final action = await ccrShowFileExistsDialog(context, result.filename);
+    switch (action) {
+      case CCRFileExistsAction.replace:
+        break fileExistsLoop;
+      case CCRFileExistsAction.chooseAnother:
+        if (!context.mounted) return false;
+        result = await ccrGetFileForSaveAsTemplate(context, '');
+        if (result.file.path == '') {
+          return false;
+        }
+        break;
+      case CCRFileExistsAction.cancel:
+      default:
+        return false;
+    }
+  }
 
   if (!context.mounted) return false;
-  return await ccrSaveTemplate(
-    context: context,
-    fileName: fileName,
-    onChooseAnother: ccrSaveAsTemplate,
-    template: template,
+  await ccrSaveTemplateFile(context, template, result.file);
+
+  if (!context.mounted) return false;
+  final templateListStore =
+      Provider.of<TemplateListStore>(context, listen: false);
+  final templateEditorStore =
+      Provider.of<TemplateEditorStore>(context, listen: false);
+  final currentTemplate = templateEditorStore.currentTemplate;
+
+  final templateIndex = templateListStore.addNewTemplate(
+    path: currentTemplate.path,
+    title: currentTemplate.title,
+    rebreatherManufacturer: currentTemplate.rebreatherManufacturer,
+    rebreatherModel: currentTemplate.rebreatherModel,
+    description: currentTemplate.description,
   );
+  templateEditorStore.setCurrentTemplateIndex(templateIndex);
+
+  return true;
+}
+
+Future<bool> ccrSaveTemplate({
+  required BuildContext context,
+  required Template template,
+  required String? filePath,
+}) async {
+  if (filePath == null || filePath.isEmpty) {
+    return false;
+  }
+
+  // Remove default extension if present
+  if (filePath.endsWith('.$ccrTemplateExtension')) {
+    filePath = filePath.substring(
+        0, filePath.length - (ccrTemplateExtension.length + 1));
+  }
+  filePath = '$filePath.$ccrTemplateExtension';
+
+  File file = File(filePath);
+
+  if (!context.mounted) return false;
+  await ccrSaveTemplateFile(context, template, file);
+
+  if (!context.mounted) return false;
+  final templateListStore =
+      Provider.of<TemplateListStore>(context, listen: false);
+  final templateEditorStore =
+      Provider.of<TemplateEditorStore>(context, listen: false);
+  final currentTemplate = templateEditorStore.currentTemplate;
+  templateListStore.updateTemplate(
+      templateIndex: templateEditorStore.currentTemplateIndex,
+      rebreatherManufacturer: currentTemplate.rebreatherManufacturer,
+      rebreatherModel: currentTemplate.rebreatherModel,
+      title: currentTemplate.title,
+      description: currentTemplate.description);
+
+  return true;
 }

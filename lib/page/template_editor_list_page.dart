@@ -73,7 +73,7 @@ class TemplateEditorListPage extends StatelessWidget {
     final template = await templateListStore
         .getTemplate(templateListStore.defaultTemplates[index]);
 
-    templateEditorStore.setCurrentTemplate(template);
+    templateEditorStore.setCurrentTemplate(template, index);
 
     if (!context.mounted) return;
     Navigator.of(context).push(
@@ -189,12 +189,11 @@ class TemplateEditorListPage extends StatelessWidget {
   }
 
   Future<bool> _saveNewTemplate(
-      BuildContext context, Template template, String filename) async {
+      BuildContext context, Template template, String fileName) async {
     if (!context.mounted) return false;
-    final result = await ccrSaveTemplate(
+    final result = await ccrSaveAsTemplate(
       context: context,
-      fileName: filename,
-      onChooseAnother: ccrSaveAsTemplate,
+      fileName: fileName,
       template: template,
     );
 

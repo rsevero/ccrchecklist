@@ -4,6 +4,7 @@ import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vibration/vibration.dart';
 
 class ChecklistRegularCheckWidget extends StatefulWidget {
   final int sectionIndex;
@@ -176,13 +177,22 @@ class _ChecklistRegularCheckWidgetState
     if (_remainingSeconds > 0) {
       _timer = Timer.periodic(
         const Duration(seconds: 1),
-        (timer) {
+        (timer) async {
           if (_remainingSeconds > 0) {
             setState(() {
               _remainingSeconds--;
             });
           } else {
             _timer.cancel();
+
+            // Play sound alarm
+            // await audioPlayer
+            //     .play(AssetSource('assets/sounds/alarm-clock-short.mp3'));
+
+            // Vibrate the device
+            if (await Vibration.hasVibrator() ?? false) {
+              Vibration.vibrate();
+            }
           }
         },
       );

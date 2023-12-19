@@ -1,4 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Permission for Vibration -->
+    <uses-permission android:name="android.permission.VIBRATE"/>
     <application
         android:label="ccr_checklist"
         android:name="${applicationName}"
