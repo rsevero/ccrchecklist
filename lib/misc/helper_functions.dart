@@ -57,7 +57,7 @@ Future<Directory> ccrGetTemplatesDirectory() async {
       Directory('${directory.path}/$ccrDirectory/$ccrTemplatesDirectory');
 
   // Ensure the directory exists
-  await templateDirectory.create(recursive: true);
+  templateDirectory.createSync(recursive: true);
 
   return templateDirectory;
 }
@@ -68,7 +68,7 @@ Future<Directory> ccrGetSharedDirectory() async {
       Directory('${directory.path}/$ccrDirectory/$ccrShareDirectory');
 
   // Ensure the directory exists
-  await sharedDirectory.create(recursive: true);
+  sharedDirectory.createSync(recursive: true);
 
   return sharedDirectory;
 }

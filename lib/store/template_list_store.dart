@@ -70,31 +70,29 @@ abstract class TemplateListStoreBase with Store {
   Future<void> _getSavedTemplates() async {
     final templateDirectory = await ccrGetTemplatesDirectory();
 
-    // Check if the template directory exists
-    if (!templateDirectory.existsSync()) {
-      return;
-    }
-
     // List all files in the template directory
     List<FileSystemEntity> fileList = templateDirectory.listSync();
 
     for (FileSystemEntity fileEntity in fileList) {
-      if (fileEntity is File && fileEntity.path.endsWith('.ccrt')) {
-        final String jsonString = await fileEntity.readAsString();
-        final Map<String, dynamic> jsonMap = json.decode(jsonString);
-        final newTemplate = Template.fromJson(jsonMap);
-
-        final newTemplateFile = TemplateFile(
-          path: fileEntity.path,
-          rebreatherManufacturer: newTemplate.rebreatherManufacturer,
-          rebreatherModel: newTemplate.rebreatherModel,
-          title: newTemplate.title,
-          description: newTemplate.description,
-          isAsset: false,
-        );
-
-        _defaultTemplates.add(newTemplateFile);
+      if ((fileEntity is! File) ||
+          !fileEntity.path.endsWith('.$ccrTemplateExtension')) {
+        continue;
       }
+
+      final String jsonString = await fileEntity.readAsString();
+      final Map<String, dynamic> jsonMap = json.decode(jsonString);
+      final newTemplate = Template.fromJson(jsonMap);
+
+      final newTemplateFile = TemplateFile(
+        path: fileEntity.path,
+        rebreatherManufacturer: newTemplate.rebreatherManufacturer,
+        rebreatherModel: newTemplate.rebreatherModel,
+        title: newTemplate.title,
+        description: newTemplate.description,
+        isAsset: false,
+      );
+
+      _defaultTemplates.add(newTemplateFile);
     }
   }
 
