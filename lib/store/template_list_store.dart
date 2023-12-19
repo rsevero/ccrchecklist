@@ -16,9 +16,6 @@ abstract class TemplateListStoreBase with Store {
   ObservableList<TemplateFile> _defaultTemplates =
       ObservableList<TemplateFile>();
 
-  @readonly
-  ObservableList<Template> _unsavedTemplates = ObservableList<Template>();
-
   TemplateListStoreBase() {
     _getDefaultTemplates();
   }
@@ -52,7 +49,7 @@ abstract class TemplateListStoreBase with Store {
 
     // Load each template file listed in the manifest
     for (String filename in templateFileNames) {
-      final templatePath = 'assets/templates/$filename';
+      final templatePath = '$ccrDefaultTemplatesPath/$filename';
       final String jsonString = await rootBundle.loadString(templatePath);
       final Map<String, dynamic> jsonMap = json.decode(jsonString);
       final newTemplate = Template.fromJson(jsonMap);
@@ -71,7 +68,7 @@ abstract class TemplateListStoreBase with Store {
   }
 
   Future<void> _getSavedTemplates() async {
-    final templateDirectory = await getTemplatesDirectory();
+    final templateDirectory = await ccrGetTemplatesDirectory();
 
     // Check if the template directory exists
     if (!templateDirectory.existsSync()) {
@@ -80,7 +77,6 @@ abstract class TemplateListStoreBase with Store {
 
     // List all files in the template directory
     List<FileSystemEntity> fileList = templateDirectory.listSync();
-    _defaultTemplates.clear();
 
     for (FileSystemEntity fileEntity in fileList) {
       if (fileEntity is File && fileEntity.path.endsWith('.ccrt')) {
@@ -103,44 +99,26 @@ abstract class TemplateListStoreBase with Store {
   }
 
   @action
-  Template addNewTemplate({
+  TemplateFile addNewTemplate({
+    required String path,
     required String title,
     required String rebreatherManufacturer,
     required String rebreatherModel,
     required String description,
   }) {
-    final newTemplate = Template(
+    final newTemplate = TemplateFile(
       rebreatherManufacturer: rebreatherManufacturer,
       rebreatherModel: rebreatherModel,
       title: title,
       description: description,
-      sections: [],
+      path: path,
+      isAsset: false,
     );
 
-    _unsavedTemplates.add(newTemplate);
-    _unsavedTemplates.sort(_compareTemplate);
+    _defaultTemplates.add(newTemplate);
+    _defaultTemplates.sort(_compareTemplateFile);
 
     return newTemplate;
-  }
-
-  int _compareTemplate(Template a, Template b) {
-    final manufacturerCompare =
-        a.rebreatherManufacturer.compareTo(b.rebreatherManufacturer);
-    if (manufacturerCompare != 0) {
-      return manufacturerCompare;
-    }
-
-    final modelCompare = a.rebreatherModel.compareTo(b.rebreatherModel);
-    if (modelCompare != 0) {
-      return modelCompare;
-    }
-
-    final titleCompare = a.title.compareTo(b.title);
-    if (titleCompare != 0) {
-      return titleCompare;
-    }
-
-    return a.description.compareTo(b.description);
   }
 
   int _compareTemplateFile(TemplateFile a, TemplateFile b) {

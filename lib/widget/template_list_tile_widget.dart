@@ -5,6 +5,7 @@ class TemplateListTileWidget extends StatelessWidget {
   final String rebreatherModel;
   final String title;
   final String description;
+  final bool isAsset;
   final Function()? onTap;
 
   const TemplateListTileWidget({
@@ -13,6 +14,7 @@ class TemplateListTileWidget extends StatelessWidget {
     required this.rebreatherModel,
     required this.title,
     required this.description,
+    required this.isAsset,
     required this.onTap,
   });
 

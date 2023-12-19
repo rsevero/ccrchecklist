@@ -163,7 +163,7 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
   }
 
   Future<String> createShareableFile() async {
-    Directory directory = await getSharedDirectory();
+    Directory directory = await ccrGetSharedDirectory();
     final formattedDateTime =
         DateFormat('yyyy-MM-dd_HH:mm:ss').format(DateTime.now());
     String filename = 'ccr_checklist_$formattedDateTime.$ccrChecklistExtension';
@@ -316,7 +316,7 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
           isChecked: false,
           referenceCount: templateCheck.referenceCount,
           references:
-              createAndInitializeReferencesMap(templateCheck.referenceCount),
+              ccrCreateAndInitializeReferencesMap(templateCheck.referenceCount),
           secondsTimer: templateCheck.secondsTimer,
         );
       } else if (templateCheck is TemplateLinearityStep1Check) {

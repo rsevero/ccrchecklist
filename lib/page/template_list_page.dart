@@ -24,7 +24,6 @@ class TemplateListPage extends StatelessWidget {
         ],
       ),
       body: TemplateList(
-        onTapTemplate: _onTapTemplate,
         onTapTemplateFile: _onTapTemplateFile,
       ),
     );
@@ -34,25 +33,6 @@ class TemplateListPage extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const TemplateEditorListPage(),
-      ),
-    );
-  }
-
-  void _onTapTemplate(BuildContext context, int index) async {
-    final templateListStore =
-        Provider.of<TemplateListStore>(context, listen: false);
-    final checklistEditorStore =
-        Provider.of<ChecklistEditorStore>(context, listen: false);
-
-    checklistEditorStore
-        .loadFromTemplate(templateListStore.unsavedTemplates[index]);
-
-    if (!context.mounted) return;
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const ChecklistPage(
-          sectionIndex: 0,
-        ),
       ),
     );
   }

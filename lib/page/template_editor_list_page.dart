@@ -1,3 +1,5 @@
+import 'package:ccr_checklist/data/template.dart';
+import 'package:ccr_checklist/misc/helper_functions.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
 import 'package:ccr_checklist/store/template_list_store.dart';
 import 'package:ccr_checklist/widget/template_list.dart';
@@ -16,30 +18,12 @@ class TemplateEditorListPage extends StatelessWidget {
         elevation: 4,
       ),
       body: TemplateList(
-        onTapTemplate: _onTapTemplate,
         onTapTemplateFile: _onTapTemplateFile,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _addNewTemplate(context),
         tooltip: 'Create New Template',
         child: const Icon(Icons.add),
-      ),
-    );
-  }
-
-  Future<void> _onTapTemplate(BuildContext context, int index) async {
-    final templateListStore =
-        Provider.of<TemplateListStore>(context, listen: false);
-    final templateEditorStore =
-        Provider.of<TemplateEditorStore>(context, listen: false);
-
-    templateEditorStore
-        .setCurrentTemplate(templateListStore.unsavedTemplates[index]);
-
-    if (!context.mounted) return;
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const TemplateEditorPage(),
       ),
     );
   }
@@ -63,17 +47,13 @@ class TemplateEditorListPage extends StatelessWidget {
   }
 
   void _addNewTemplate(BuildContext context) async {
-    final templateListStore =
-        Provider.of<TemplateListStore>(context, listen: false);
-    final templateEditorStore =
-        Provider.of<TemplateEditorStore>(context, listen: false);
-
     final TextEditingController titleController = TextEditingController();
     final TextEditingController rebreatherManufacturerController =
         TextEditingController();
     final TextEditingController rebreatherModelController =
         TextEditingController();
     final TextEditingController descriptionController = TextEditingController();
+    final TextEditingController fileNameController = TextEditingController();
 
     bool confirmed = await showDialog(
           context: context,
@@ -84,10 +64,14 @@ class TemplateEditorListPage extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     TextField(
+                      controller: fileNameController,
+                      decoration: const InputDecoration(hintText: 'File name'),
+                      autofocus: true,
+                    ),
+                    TextField(
                       controller: rebreatherManufacturerController,
                       decoration: const InputDecoration(
                           hintText: 'Rebreather manufacturer'),
-                      autofocus: true,
                       textInputAction: TextInputAction
                           .next, // Move focus to next input on "Enter"
                       onSubmitted: (_) => FocusScope.of(context)
@@ -140,13 +124,24 @@ class TemplateEditorListPage extends StatelessWidget {
         ) ??
         false; // Handle null (dialog dismissed)
 
-    if (confirmed) {
-      final newTemplate = templateListStore.addNewTemplate(
-          rebreatherManufacturer: rebreatherManufacturerController.text,
-          rebreatherModel: rebreatherModelController.text,
-          title: titleController.text,
-          description: descriptionController.text);
-      templateEditorStore.setCurrentTemplate(newTemplate);
+    if (confirmed &&
+        fileNameController.text.isNotEmpty &&
+        rebreatherManufacturerController.text.isNotEmpty &&
+        rebreatherModelController.text.isNotEmpty &&
+        titleController.text.isNotEmpty) {
+      var newTemplate = Template(
+        rebreatherManufacturer: rebreatherManufacturerController.text,
+        rebreatherModel: rebreatherModelController.text,
+        title: titleController.text,
+        description: descriptionController.text,
+        sections: [],
+      );
+
+      if (!context.mounted) return;
+      final result =
+          await _saveNewTemplate(context, newTemplate, fileNameController.text);
+      if (!result) return;
+
       if (!context.mounted) return;
       Navigator.of(context).push(
         MaterialPageRoute(
@@ -154,5 +149,16 @@ class TemplateEditorListPage extends StatelessWidget {
         ),
       );
     }
+  }
+
+  Future<bool> _saveNewTemplate(
+      BuildContext context, Template template, String filename) async {
+    if (!context.mounted) return false;
+    return await ccrSaveTemplate(
+      context: context,
+      fileName: filename,
+      onChooseAnother: ccrSaveAsTemplate,
+      template: template,
+    );
   }
 }

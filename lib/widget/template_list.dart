@@ -1,4 +1,3 @@
-import 'package:ccr_checklist/data/template.dart';
 import 'package:ccr_checklist/data/template_file.dart';
 import 'package:ccr_checklist/store/template_list_store.dart';
 import 'package:ccr_checklist/widget/template_list_tile_widget.dart';
@@ -7,12 +6,10 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
 class TemplateList extends StatelessWidget {
-  final Function(BuildContext, int) onTapTemplate;
   final Function(BuildContext, int) onTapTemplateFile;
 
   const TemplateList({
     super.key,
-    required this.onTapTemplate,
     required this.onTapTemplateFile,
   });
 
@@ -22,39 +19,14 @@ class TemplateList extends StatelessWidget {
 
     return Observer(
       builder: (_) {
-        final unsavedTemplates = templateListStore.unsavedTemplates.toList();
         final defaultTemplates = templateListStore.defaultTemplates.toList();
 
         return ListView(
           children: [
-            if (templateListStore.unsavedTemplates.isNotEmpty)
-              _buildUnsavedTile(context, unsavedTemplates),
             ..._buildDefaultTile(context, defaultTemplates),
           ],
         );
       },
-    );
-  }
-
-  Widget _buildUnsavedTile(
-      BuildContext context, List<Template> unsavedTemplates) {
-    return ExpansionTile(
-      title: const Text('Unsaved Templates'),
-      children: unsavedTemplates.asMap().entries.map<Widget>(
-        (entry) {
-          final index = entry.key;
-          final template = entry.value;
-          return TemplateListTileWidget(
-            rebreatherManufacturer: template.rebreatherManufacturer,
-            rebreatherModel: template.rebreatherModel,
-            title: template.title,
-            description: template.description,
-            onTap: () {
-              onTapTemplateFile(context, index);
-            },
-          );
-        },
-      ).toList(),
     );
   }
 
@@ -108,6 +80,7 @@ class TemplateList extends StatelessWidget {
           rebreatherModel: template.rebreatherModel,
           title: template.title,
           description: template.description,
+          isAsset: template.isAsset,
           onTap: () {
             onTapTemplateFile(context, i);
           },

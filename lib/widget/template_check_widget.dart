@@ -23,7 +23,8 @@ class TemplateCheckWidget extends StatelessWidget {
         final check = templateEditorStore.checks[sectionIndex][index];
         String description = check.description;
         if (check is TemplateRegularCheck) {
-          final timer = formatSecondsToMinutesSecondsTimer(check.secondsTimer);
+          final timer =
+              ccrFormatSecondsToMinutesSecondsTimer(check.secondsTimer);
           description +=
               ' (Ref count: ${check.referenceCount} - Timer: $timer)';
         } else if (check is TemplateLinearityStep1Check) {
@@ -116,7 +117,7 @@ class TemplateCheckWidget extends StatelessWidget {
                     ),
                     ListTile(
                       title: const Text('Set Timer Duration'),
-                      subtitle: Text(formatSecondsToMinutesSecondsTimer(
+                      subtitle: Text(ccrFormatSecondsToMinutesSecondsTimer(
                           timerDuration.inSeconds)),
                       onTap: () async {
                         final TimeOfDay? pickedTime = await showTimePicker(

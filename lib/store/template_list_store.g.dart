@@ -27,24 +27,6 @@ mixin _$TemplateListStore on TemplateListStoreBase, Store {
     });
   }
 
-  late final _$_unsavedTemplatesAtom =
-      Atom(name: 'TemplateListStoreBase._unsavedTemplates', context: context);
-
-  ObservableList<Template> get unsavedTemplates {
-    _$_unsavedTemplatesAtom.reportRead();
-    return super._unsavedTemplates;
-  }
-
-  @override
-  ObservableList<Template> get _unsavedTemplates => unsavedTemplates;
-
-  @override
-  set _unsavedTemplates(ObservableList<Template> value) {
-    _$_unsavedTemplatesAtom.reportWrite(value, super._unsavedTemplates, () {
-      super._unsavedTemplates = value;
-    });
-  }
-
   late final _$_getDefaultTemplatesAsyncAction = AsyncAction(
       'TemplateListStoreBase._getDefaultTemplates',
       context: context);
@@ -59,8 +41,9 @@ mixin _$TemplateListStore on TemplateListStoreBase, Store {
       ActionController(name: 'TemplateListStoreBase', context: context);
 
   @override
-  Template addNewTemplate(
-      {required String title,
+  TemplateFile addNewTemplate(
+      {required String path,
+      required String title,
       required String rebreatherManufacturer,
       required String rebreatherModel,
       required String description}) {
@@ -68,6 +51,7 @@ mixin _$TemplateListStore on TemplateListStoreBase, Store {
         name: 'TemplateListStoreBase.addNewTemplate');
     try {
       return super.addNewTemplate(
+          path: path,
           title: title,
           rebreatherManufacturer: rebreatherManufacturer,
           rebreatherModel: rebreatherModel,

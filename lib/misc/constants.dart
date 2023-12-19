@@ -25,3 +25,9 @@ const ccrSectionOkColor = Colors.green;
 
 const ccrChecklistExtension = 'ccrc';
 const ccrTemplateExtension = 'ccrt';
+
+const ccrDirectory = 'ccr_checklist';
+const ccrTemplatesDirectory = 'templates';
+const ccrShareDirectory = 'share';
+
+enum CCRFileExistsAction { replace, chooseAnother, cancel }
