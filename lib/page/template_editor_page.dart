@@ -10,10 +10,11 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:slugify/slugify.dart';
+
+enum CCRFileExistsAction { replace, chooseAnother, cancel }
 
 class TemplateEditorPage extends StatelessWidget {
   const TemplateEditorPage({super.key});
@@ -46,11 +47,21 @@ class TemplateEditorPage extends StatelessWidget {
               onPressed: () => onPressedShare(context),
             )
           ],
+          Observer(
+            builder: (_) => IconButton(
+              icon: const Icon(Icons.save),
+              onPressed: (templateEditorStore.currentTemplate.filename.isEmpty)
+                  ? null
+                  : () => _onPressedSaveTemplate(
+                      context, templateEditorStore.currentTemplate),
+              tooltip: 'Save Template',
+            ),
+          ),
           IconButton(
-            icon: const Icon(Icons.save),
-            onPressed: () =>
-                _saveTemplate(context, templateEditorStore.currentTemplate),
-            tooltip: 'Save Template',
+            icon: const Icon(Icons.save_as),
+            onPressed: () => _onPressedSaveAsTemplate(
+                context, templateEditorStore.currentTemplate),
+            tooltip: 'Save As Template',
           ),
         ],
       ),
@@ -176,17 +187,11 @@ class TemplateEditorPage extends StatelessWidget {
     Share.shareXFiles([XFile(file)], text: 'Check out this template!');
   }
 
-  Future<void> _saveTemplate(BuildContext context, Template template) async {
+  Future<void> _onPressedSaveTemplate(
+      BuildContext context, Template template) async {
     final TemplateEditorStore templateEditorStore =
         Provider.of<TemplateEditorStore>(context, listen: false);
-    final formattedDateTime =
-        DateFormat('yyyy-MM-dd_HH:mm:ss').format(DateTime.now());
-    final directory = await getTemplatesDirectory();
-    String filename =
-        "${template.rebreatherManufacturer}_${template.rebreatherModel}_${template.title}_$formattedDateTime.$ccrTemplateExtension";
-    filename = slugify(filename);
-    final filePath = '${directory.path}/$filename';
-    File file = await File(filePath).create(recursive: true);
+    File file = await File(template.filename).create(recursive: true);
 
     try {
       String jsonTemplate = templateEditorStore.createTemplateFile(template);
@@ -195,7 +200,7 @@ class TemplateEditorPage extends StatelessWidget {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Template "$filename" saved successfully!'),
+          content: Text('Template "${template.filename}" saved successfully!'),
           backgroundColor: Colors.green,
         ),
       );
@@ -211,8 +216,138 @@ class TemplateEditorPage extends StatelessWidget {
     }
   }
 
+  Future<void> _onPressedSaveAsTemplate(
+      BuildContext context, Template template) async {
+    // Prompt user for file name
+    String? fileName = await _promptFileName(context);
+
+    // If fileName is null, user cancelled the dialog
+    if (fileName == null || fileName.isEmpty) return;
+
+    final directory = await getApplicationDocumentsDirectory();
+
+    // Remove default extension if present
+    if (fileName.endsWith('.$ccrTemplateExtension')) {
+      fileName = fileName.substring(
+          0, fileName.length - (ccrTemplateExtension.length + 1));
+    }
+
+    final filePath = '${directory.path}/$fileName.$ccrTemplateExtension';
+
+    File file = File(filePath);
+    if (await file.exists()) {
+      if (!context.mounted) return;
+      final action = await _showFileExistsDialog(context, fileName);
+      switch (action) {
+        case CCRFileExistsAction.replace:
+          if (!context.mounted) return;
+          await _saveFile(context, template, file);
+          break;
+        case CCRFileExistsAction.chooseAnother:
+          if (!context.mounted) return;
+          _onPressedSaveAsTemplate(context, template);
+          break;
+        case CCRFileExistsAction.cancel:
+        default:
+          return;
+      }
+    } else {
+      if (!context.mounted) return;
+      await _saveFile(context, template, file);
+    }
+  }
+
+  Future<void> _saveFile(
+      BuildContext context, Template template, File file) async {
+    try {
+      String jsonTemplate = template.toJson().toString();
+      await file.writeAsString(jsonTemplate);
+
+      if (!context.mounted) return;
+      final templateEditorStore =
+          Provider.of<TemplateEditorStore>(context, listen: false);
+      templateEditorStore.updateTemplate(filename: file.path);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Template "${file.path}" saved successfully!'),
+          backgroundColor: Colors.green,
+        ),
+      );
+    } catch (e) {
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Failed to save template: $e'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
+  Future<CCRFileExistsAction?> _showFileExistsDialog(
+      BuildContext context, String fileName) async {
+    return await showDialog<CCRFileExistsAction>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('File "$fileName" already exists'),
+          content: const Text(
+              'Do you want to replace it, choose another name, or cancel?'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Replace'),
+              onPressed: () =>
+                  Navigator.of(context).pop(CCRFileExistsAction.replace),
+            ),
+            TextButton(
+              child: const Text('Choose another'),
+              onPressed: () =>
+                  Navigator.of(context).pop(CCRFileExistsAction.chooseAnother),
+            ),
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () =>
+                  Navigator.of(context).pop(CCRFileExistsAction.cancel),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<String?> _promptFileName(BuildContext context) async {
+    return await showDialog<String>(
+      context: context,
+      builder: (BuildContext context) {
+        TextEditingController fileNameController = TextEditingController();
+        return AlertDialog(
+          title: const Text('Enter File Name'),
+          content: TextField(
+            controller: fileNameController,
+            decoration: const InputDecoration(hintText: 'File name'),
+            autofocus: true,
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Save'),
+              onPressed: () =>
+                  Navigator.of(context).pop(fileNameController.text),
+            ),
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   void _onTapEditTemplate(
       BuildContext context, TemplateEditorStore templateEditorStore) {
+    final TextEditingController rebreatherManufacturerController =
+        TextEditingController(
+            text: templateEditorStore.currentTemplate.rebreatherManufacturer);
     final TextEditingController rebreatherModelController =
         TextEditingController(
             text: templateEditorStore.currentTemplate.rebreatherModel);
@@ -231,10 +366,15 @@ class TemplateEditorPage extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 TextFormField(
+                  controller: rebreatherManufacturerController,
+                  decoration: const InputDecoration(
+                      labelText: 'Rebreather Manufacturer'),
+                  autofocus: true,
+                ),
+                TextFormField(
                   controller: rebreatherModelController,
                   decoration:
                       const InputDecoration(labelText: 'Rebreather Model'),
-                  autofocus: true,
                 ),
                 TextFormField(
                   controller: titleController,
@@ -252,9 +392,10 @@ class TemplateEditorPage extends StatelessWidget {
               child: const Text('Update'),
               onPressed: () {
                 templateEditorStore.updateTemplate(
-                  rebreatherModelController.text,
-                  titleController.text,
-                  descriptionController.text,
+                  rebreatherManufacturer: rebreatherManufacturerController.text,
+                  rebreatherModel: rebreatherModelController.text,
+                  title: titleController.text,
+                  description: descriptionController.text,
                 );
                 Navigator.of(context).pop();
               },

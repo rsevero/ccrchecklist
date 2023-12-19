@@ -320,12 +320,21 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
   }
 
   @action
-  void updateTemplate(
-      String rebreatherModel, String title, String description) {
+  void updateTemplate({
+    String? rebreatherManufacturer,
+    String? rebreatherModel,
+    String? title,
+    String? description,
+    String? filename,
+  }) {
     final newTemplate = _currentTemplate.copyWith(
-        description: description,
-        rebreatherModel: rebreatherModel,
-        title: title);
+      rebreatherManufacturer:
+          rebreatherManufacturer ?? _currentTemplate.rebreatherManufacturer,
+      description: description ?? _currentTemplate.description,
+      rebreatherModel: rebreatherModel ?? _currentTemplate.rebreatherModel,
+      title: title ?? _currentTemplate.title,
+      filename: filename ?? _currentTemplate.filename,
+    );
 
     _currentTemplate = newTemplate;
     _saveSnapshot('Update template');

@@ -110,11 +110,12 @@ abstract class TemplateListStoreBase with Store {
     required String description,
   }) {
     final newTemplate = Template(
-        rebreatherManufacturer: rebreatherManufacturer,
-        rebreatherModel: rebreatherModel,
-        title: title,
-        description: description,
-        sections: []);
+      rebreatherManufacturer: rebreatherManufacturer,
+      rebreatherModel: rebreatherModel,
+      title: title,
+      description: description,
+      sections: [],
+    );
 
     _unsavedTemplates.add(newTemplate);
     _unsavedTemplates.sort(_compareTemplate);

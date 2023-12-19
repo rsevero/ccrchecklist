@@ -421,11 +421,20 @@ mixin _$TemplateEditorStore on _TemplateEditorStoreBaseToJson, Store {
 
   @override
   void updateTemplate(
-      String rebreatherModel, String title, String description) {
+      {String? rebreatherManufacturer,
+      String? rebreatherModel,
+      String? title,
+      String? description,
+      String? filename}) {
     final _$actionInfo = _$_TemplateEditorStoreBaseToJsonActionController
         .startAction(name: '_TemplateEditorStoreBaseToJson.updateTemplate');
     try {
-      return super.updateTemplate(rebreatherModel, title, description);
+      return super.updateTemplate(
+          rebreatherManufacturer: rebreatherManufacturer,
+          rebreatherModel: rebreatherModel,
+          title: title,
+          description: description,
+          filename: filename);
     } finally {
       _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
     }
