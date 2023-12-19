@@ -120,7 +120,7 @@ Future<bool> ccrSaveTemplate(
 Future<bool> ccrSaveFile(
     BuildContext context, Template template, File file) async {
   try {
-    template = template.copyWith(filename: file.path);
+    template = template.copyWith(path: file.path);
     String jsonTemplate = jsonEncode(template.toJson());
     await file.writeAsString(jsonTemplate);
 

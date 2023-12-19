@@ -47,7 +47,7 @@ class TemplateEditorPage extends StatelessWidget {
           Observer(
             builder: (_) => IconButton(
               icon: const Icon(Icons.save),
-              onPressed: (templateEditorStore.currentTemplate.filename.isEmpty)
+              onPressed: (templateEditorStore.currentTemplate.path.isEmpty)
                   ? null
                   : () => _onPressedSaveTemplate(
                       context, templateEditorStore.currentTemplate),
@@ -188,7 +188,7 @@ class TemplateEditorPage extends StatelessWidget {
       BuildContext context, Template template) async {
     final TemplateEditorStore templateEditorStore =
         Provider.of<TemplateEditorStore>(context, listen: false);
-    File file = await File(template.filename).create(recursive: true);
+    File file = await File(template.path).create(recursive: true);
 
     try {
       String jsonTemplate = templateEditorStore.createTemplateFile(template);
@@ -197,7 +197,7 @@ class TemplateEditorPage extends StatelessWidget {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Template "${template.filename}" saved successfully!'),
+          content: Text('Template "${template.path}" saved successfully!'),
           backgroundColor: Colors.green,
         ),
       );

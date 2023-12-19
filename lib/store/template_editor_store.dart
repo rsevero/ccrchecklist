@@ -333,7 +333,7 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
       description: description ?? _currentTemplate.description,
       rebreatherModel: rebreatherModel ?? _currentTemplate.rebreatherModel,
       title: title ?? _currentTemplate.title,
-      filename: filename ?? _currentTemplate.filename,
+      path: filename ?? _currentTemplate.path,
     );
 
     _currentTemplate = newTemplate;

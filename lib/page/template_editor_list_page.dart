@@ -206,7 +206,7 @@ class TemplateEditorListPage extends StatelessWidget {
           Provider.of<TemplateEditorStore>(context, listen: false);
       final currentTemplate = templateEditorStore.currentTemplate;
       templateListStore.addNewTemplate(
-        path: currentTemplate.filename,
+        path: currentTemplate.path,
         title: currentTemplate.title,
         rebreatherManufacturer: currentTemplate.rebreatherManufacturer,
         rebreatherModel: currentTemplate.rebreatherModel,

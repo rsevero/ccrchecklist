@@ -13,7 +13,7 @@ class Template with _$Template {
     required String title,
     required String description,
     required List<TemplateSection> sections,
-    @Default('') String filename,
+    @Default('') String path,
   }) = _Template;
 
   factory Template.empty() {

@@ -25,7 +25,7 @@ mixin _$Template {
   String get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   List<TemplateSection> get sections => throw _privateConstructorUsedError;
-  String get filename => throw _privateConstructorUsedError;
+  String get path => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,7 +44,7 @@ abstract class $TemplateCopyWith<$Res> {
       String title,
       String description,
       List<TemplateSection> sections,
-      String filename});
+      String path});
 }
 
 /// @nodoc
@@ -65,7 +65,7 @@ class _$TemplateCopyWithImpl<$Res, $Val extends Template>
     Object? title = null,
     Object? description = null,
     Object? sections = null,
-    Object? filename = null,
+    Object? path = null,
   }) {
     return _then(_value.copyWith(
       rebreatherManufacturer: null == rebreatherManufacturer
@@ -88,9 +88,9 @@ class _$TemplateCopyWithImpl<$Res, $Val extends Template>
           ? _value.sections
           : sections // ignore: cast_nullable_to_non_nullable
               as List<TemplateSection>,
-      filename: null == filename
-          ? _value.filename
-          : filename // ignore: cast_nullable_to_non_nullable
+      path: null == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -110,7 +110,7 @@ abstract class _$$TemplateImplCopyWith<$Res>
       String title,
       String description,
       List<TemplateSection> sections,
-      String filename});
+      String path});
 }
 
 /// @nodoc
@@ -129,7 +129,7 @@ class __$$TemplateImplCopyWithImpl<$Res>
     Object? title = null,
     Object? description = null,
     Object? sections = null,
-    Object? filename = null,
+    Object? path = null,
   }) {
     return _then(_$TemplateImpl(
       rebreatherManufacturer: null == rebreatherManufacturer
@@ -152,9 +152,9 @@ class __$$TemplateImplCopyWithImpl<$Res>
           ? _value.sections
           : sections // ignore: cast_nullable_to_non_nullable
               as List<TemplateSection>,
-      filename: null == filename
-          ? _value.filename
-          : filename // ignore: cast_nullable_to_non_nullable
+      path: null == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -170,7 +170,7 @@ class _$TemplateImpl implements _Template {
       required this.title,
       required this.description,
       required this.sections,
-      this.filename = ''});
+      this.path = ''});
 
   factory _$TemplateImpl.fromJson(Map<String, dynamic> json) =>
       _$$TemplateImplFromJson(json);
@@ -187,11 +187,11 @@ class _$TemplateImpl implements _Template {
   final List<TemplateSection> sections;
   @override
   @JsonKey()
-  final String filename;
+  final String path;
 
   @override
   String toString() {
-    return 'Template(rebreatherManufacturer: $rebreatherManufacturer, rebreatherModel: $rebreatherModel, title: $title, description: $description, sections: $sections, filename: $filename)';
+    return 'Template(rebreatherManufacturer: $rebreatherManufacturer, rebreatherModel: $rebreatherModel, title: $title, description: $description, sections: $sections, path: $path)';
   }
 
   @override
@@ -207,8 +207,7 @@ class _$TemplateImpl implements _Template {
             (identical(other.description, description) ||
                 other.description == description) &&
             const DeepCollectionEquality().equals(other.sections, sections) &&
-            (identical(other.filename, filename) ||
-                other.filename == filename));
+            (identical(other.path, path) || other.path == path));
   }
 
   @JsonKey(ignore: true)
@@ -220,7 +219,7 @@ class _$TemplateImpl implements _Template {
       title,
       description,
       const DeepCollectionEquality().hash(sections),
-      filename);
+      path);
 
   @JsonKey(ignore: true)
   @override
@@ -243,7 +242,7 @@ abstract class _Template implements Template {
       required final String title,
       required final String description,
       required final List<TemplateSection> sections,
-      final String filename}) = _$TemplateImpl;
+      final String path}) = _$TemplateImpl;
 
   factory _Template.fromJson(Map<String, dynamic> json) =
       _$TemplateImpl.fromJson;
@@ -259,7 +258,7 @@ abstract class _Template implements Template {
   @override
   List<TemplateSection> get sections;
   @override
-  String get filename;
+  String get path;
   @override
   @JsonKey(ignore: true)
   _$$TemplateImplCopyWith<_$TemplateImpl> get copyWith =>
