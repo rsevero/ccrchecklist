@@ -11,6 +11,7 @@ TemplateEditorStore _$TemplateEditorStoreFromJson(Map<String, dynamic> json) =>
       .._currentTemplate =
           Template.fromJson(json['_currentTemplate'] as Map<String, dynamic>)
       .._currentTemplateIndex = json['_currentTemplateIndex'] as int
+      .._currentTemplateIsModified = json['_currentTemplateIsModified'] as bool
       .._sections =
           ObservableListJsonConverter.obsvbLstOfTemplateSectionFromJson(
               json['_sections'] as List<TemplateSection>)
@@ -28,6 +29,7 @@ Map<String, dynamic> _$TemplateEditorStoreToJson(
     <String, dynamic>{
       '_currentTemplate': instance._currentTemplate.toJson(),
       '_currentTemplateIndex': instance._currentTemplateIndex,
+      '_currentTemplateIsModified': instance._currentTemplateIsModified,
       '_sections': ObservableListJsonConverter.obsvbLstOfTemplateSectionToJson(
           instance._sections),
       '_selectedSection': instance._selectedSection.toJson(),

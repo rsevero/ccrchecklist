@@ -27,30 +27,30 @@ mixin _$TemplateListStore on TemplateListStoreBase, Store {
     });
   }
 
-  late final _$_isInitializedAtom =
-      Atom(name: 'TemplateListStoreBase._isInitialized', context: context);
+  late final _$_stateAtom =
+      Atom(name: 'TemplateListStoreBase._state', context: context);
 
-  bool get isInitialized {
-    _$_isInitializedAtom.reportRead();
-    return super._isInitialized;
+  TemplateListStoreState get state {
+    _$_stateAtom.reportRead();
+    return super._state;
   }
 
   @override
-  bool get _isInitialized => isInitialized;
+  TemplateListStoreState get _state => state;
 
   @override
-  set _isInitialized(bool value) {
-    _$_isInitializedAtom.reportWrite(value, super._isInitialized, () {
-      super._isInitialized = value;
+  set _state(TemplateListStoreState value) {
+    _$_stateAtom.reportWrite(value, super._state, () {
+      super._state = value;
     });
   }
 
-  late final _$initializeAsyncAsyncAction =
-      AsyncAction('TemplateListStoreBase.initializeAsync', context: context);
+  late final _$_actuallyUpdateAsyncAction =
+      AsyncAction('TemplateListStoreBase._actuallyUpdate', context: context);
 
   @override
-  Future<void> initializeAsync() {
-    return _$initializeAsyncAsyncAction.run(() => super.initializeAsync());
+  Future<void> _actuallyUpdate() {
+    return _$_actuallyUpdateAsyncAction.run(() => super._actuallyUpdate());
   }
 
   late final _$removeTemplateAsyncAction =
@@ -65,11 +65,11 @@ mixin _$TemplateListStore on TemplateListStoreBase, Store {
       ActionController(name: 'TemplateListStoreBase', context: context);
 
   @override
-  void markOutdated() {
+  void invalidate() {
     final _$actionInfo = _$TemplateListStoreBaseActionController.startAction(
-        name: 'TemplateListStoreBase.markOutdated');
+        name: 'TemplateListStoreBase.invalidate');
     try {
-      return super.markOutdated();
+      return super.invalidate();
     } finally {
       _$TemplateListStoreBaseActionController.endAction(_$actionInfo);
     }

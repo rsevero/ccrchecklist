@@ -40,6 +40,7 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
   int _currentTemplateIndex = -1;
 
   @readonly
+  @JsonKey(includeFromJson: true, includeToJson: true)
   bool _currentTemplateIsModified = false;
 
   @readonly
@@ -186,14 +187,14 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
     }
 
     _currentTemplate = template;
-    _currentTemplateIsModified = false;
-
+    undoRedoStorage.clearUndoRedo(_undoRedoClass);
     _saveSnapshot('Save template');
+    _currentTemplateIsModified = false;
 
     if (!context.mounted) return false;
     final templateListStore =
         Provider.of<TemplateListStore>(context, listen: false);
-    templateListStore.markOutdated();
+    templateListStore.invalidate();
 
     return true;
   }
@@ -314,6 +315,7 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
 
     undoRedoStorage.clearUndoRedo(_undoRedoClass);
     _saveSnapshot('Set current template');
+    _currentTemplateIsModified = false;
   }
 
   @action

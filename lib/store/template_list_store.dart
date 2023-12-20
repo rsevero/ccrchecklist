@@ -9,6 +9,12 @@ import 'package:mobx/mobx.dart';
 
 part 'template_list_store.g.dart';
 
+enum TemplateListStoreState {
+  outdated,
+  uptodate,
+  updating,
+}
+
 class TemplateListStore = TemplateListStoreBase with _$TemplateListStore;
 
 abstract class TemplateListStoreBase with Store {
@@ -17,7 +23,7 @@ abstract class TemplateListStoreBase with Store {
       ObservableList<TemplateFile>();
 
   @readonly
-  bool _isInitialized = false;
+  TemplateListStoreState _state = TemplateListStoreState.outdated;
 
   Future<Template> getTemplate(TemplateFile templateFile) async {
     if (templateFile.isAsset) {
@@ -32,20 +38,25 @@ abstract class TemplateListStoreBase with Store {
     }
   }
 
-  @action
-  Future<void> initializeAsync() async {
-    if (_isInitialized) {
+  void update() {
+    if (_state != TemplateListStoreState.outdated) {
       return;
     }
-    await _getAssetTemplates();
-    await _getSavedTemplates();
-    _defaultTemplates.sort(_compareTemplateFile);
-    _isInitialized = true;
+    _state = TemplateListStoreState.updating;
+    _actuallyUpdate();
   }
 
   @action
-  void markOutdated() {
-    _isInitialized = false;
+  Future<void> _actuallyUpdate() async {
+    await _getAssetTemplates();
+    await _getSavedTemplates();
+    _defaultTemplates.sort(_compareTemplateFile);
+    _state = TemplateListStoreState.uptodate;
+  }
+
+  @action
+  void invalidate() {
+    _state = TemplateListStoreState.outdated;
   }
 
   @action

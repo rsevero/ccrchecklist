@@ -20,10 +20,11 @@ class TemplateList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final templateListStore = Provider.of<TemplateListStore>(context);
+    templateListStore.update();
 
     return Observer(
       builder: (_) {
-        if (!templateListStore.isInitialized) {
+        if (templateListStore.state != TemplateListStoreState.uptodate) {
           return const Center(child: CircularProgressIndicator());
         }
 

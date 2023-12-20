@@ -21,11 +21,7 @@ class CCRChecklist extends StatelessWidget {
     return MultiProvider(
       providers: [
         Provider(
-          create: (_) {
-            final store = TemplateListStore();
-            store.initializeAsync();
-            return store;
-          },
+          create: (context) => TemplateListStore(),
         ),
         Provider(
           create: (context) => TemplateEditorStore(),
