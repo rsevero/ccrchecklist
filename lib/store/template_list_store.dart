@@ -44,6 +44,11 @@ abstract class TemplateListStoreBase with Store {
   }
 
   @action
+  void markOutdated() {
+    _isInitialized = false;
+  }
+
+  @action
   Future<void> removeTemplate(int index) async {
     final templateFile = _defaultTemplates[index];
     if (templateFile.isAsset) {

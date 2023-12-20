@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:ccr_checklist/data/template.dart';
 import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/misc/helper_functions.dart';
@@ -52,8 +51,7 @@ class TemplateEditorPage extends StatelessWidget {
               icon: const Icon(Icons.save),
               onPressed: (templateEditorStore.currentTemplate.path.isEmpty)
                   ? null
-                  : () => _onPressedSaveTemplate(
-                      context, templateEditorStore.currentTemplate),
+                  : () => _onPressedSaveTemplate(context),
               tooltip: 'Save Template',
             ),
           ),
@@ -187,20 +185,16 @@ class TemplateEditorPage extends StatelessWidget {
     Share.shareXFiles([XFile(file)], text: 'Check out this template!');
   }
 
-  Future<void> _onPressedSaveTemplate(
-      BuildContext context, Template template) async {
-    final file = await File(template.path).create(recursive: true);
-    if (!context.mounted) return;
-    await ccrSaveTemplate(
-      context: context,
-      template: template,
-      filePath: file.path,
-    );
+  Future<void> _onPressedSaveTemplate(BuildContext context) async {
+    final templateEditorStore =
+        Provider.of<TemplateEditorStore>(context, listen: false);
+    await templateEditorStore.saveTemplate(
+        context, templateEditorStore.currentTemplate);
   }
 
   Future<void> _onPressedSaveAsTemplate(
       BuildContext context, Template template) async {
-    await ccrSaveAsTemplate(context: context, template: template);
+    await ccrSaveAsTemplate(context, template);
   }
 
   void _onTapEditTemplate(

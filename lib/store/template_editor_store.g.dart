@@ -111,6 +111,26 @@ mixin _$TemplateEditorStore on _TemplateEditorStoreBaseToJson, Store {
     });
   }
 
+  late final _$_currentTemplateIsModifiedAtom = Atom(
+      name: '_TemplateEditorStoreBaseToJson._currentTemplateIsModified',
+      context: context);
+
+  bool get currentTemplateIsModified {
+    _$_currentTemplateIsModifiedAtom.reportRead();
+    return super._currentTemplateIsModified;
+  }
+
+  @override
+  bool get _currentTemplateIsModified => currentTemplateIsModified;
+
+  @override
+  set _currentTemplateIsModified(bool value) {
+    _$_currentTemplateIsModifiedAtom
+        .reportWrite(value, super._currentTemplateIsModified, () {
+      super._currentTemplateIsModified = value;
+    });
+  }
+
   late final _$_sectionsAtom =
       Atom(name: '_TemplateEditorStoreBaseToJson._sections', context: context);
 
@@ -296,6 +316,17 @@ mixin _$TemplateEditorStore on _TemplateEditorStoreBaseToJson, Store {
     _$_redoDescriptionAtom.reportWrite(value, super._redoDescription, () {
       super._redoDescription = value;
     });
+  }
+
+  late final _$saveTemplateAsyncAction = AsyncAction(
+      '_TemplateEditorStoreBaseToJson.saveTemplate',
+      context: context);
+
+  @override
+  Future<bool> saveTemplate(BuildContext context, Template template,
+      [String filePath = '']) {
+    return _$saveTemplateAsyncAction
+        .run(() => super.saveTemplate(context, template, filePath));
   }
 
   late final _$_TemplateEditorStoreBaseToJsonActionController =

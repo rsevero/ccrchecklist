@@ -65,6 +65,17 @@ mixin _$TemplateListStore on TemplateListStoreBase, Store {
       ActionController(name: 'TemplateListStoreBase', context: context);
 
   @override
+  void markOutdated() {
+    final _$actionInfo = _$TemplateListStoreBaseActionController.startAction(
+        name: 'TemplateListStoreBase.markOutdated');
+    try {
+      return super.markOutdated();
+    } finally {
+      _$TemplateListStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   int addNewTemplate(
       {required String path,
       required String title,

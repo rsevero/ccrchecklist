@@ -173,11 +173,8 @@ class TemplateEditorListPage extends StatelessWidget {
         description: descriptionController.text,
         sections: [],
       );
-
       if (!context.mounted) return;
-      final result =
-          await _saveNewTemplate(context, newTemplate, fileNameController.text);
-      if (!result) return;
+      await ccrSaveAsTemplate(context, newTemplate, fileNameController.text);
 
       if (!context.mounted) return;
       Navigator.of(context).push(
@@ -186,33 +183,5 @@ class TemplateEditorListPage extends StatelessWidget {
         ),
       );
     }
-  }
-
-  Future<bool> _saveNewTemplate(
-      BuildContext context, Template template, String fileName) async {
-    if (!context.mounted) return false;
-    final result = await ccrSaveAsTemplate(
-      context: context,
-      fileName: fileName,
-      template: template,
-    );
-
-    if (result) {
-      if (!context.mounted) return false;
-      final templateListStore =
-          Provider.of<TemplateListStore>(context, listen: false);
-      final templateEditorStore =
-          Provider.of<TemplateEditorStore>(context, listen: false);
-      final currentTemplate = templateEditorStore.currentTemplate;
-      templateListStore.addNewTemplate(
-        path: currentTemplate.path,
-        title: currentTemplate.title,
-        rebreatherManufacturer: currentTemplate.rebreatherManufacturer,
-        rebreatherModel: currentTemplate.rebreatherModel,
-        description: currentTemplate.description,
-      );
-    }
-
-    return result;
   }
 }

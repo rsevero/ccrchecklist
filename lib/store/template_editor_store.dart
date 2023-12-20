@@ -7,10 +7,13 @@ import 'package:ccr_checklist/main.dart';
 import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/misc/helper_functions.dart';
 import 'package:ccr_checklist/store/observablelist_json_converter.dart';
+import 'package:ccr_checklist/store/template_list_store.dart';
 import 'package:ccr_checklist/undo/undo_redo_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:mobx/mobx.dart';
+import 'package:provider/provider.dart';
 
 part 'template_editor_store.g.dart';
 
@@ -35,6 +38,9 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
   @readonly
   @JsonKey(includeFromJson: true, includeToJson: true)
   int _currentTemplateIndex = -1;
+
+  @readonly
+  bool _currentTemplateIsModified = false;
 
   @readonly
   @JsonKey(
@@ -103,6 +109,7 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
     _canRedo = undoRedoStatus.canRedo;
     _undoDescription = undoRedoStatus.undoDescription;
     _redoDescription = undoRedoStatus.redoDescription;
+    _currentTemplateIsModified = true;
   }
 
   String createTemplateFile(Template template) {
@@ -139,6 +146,56 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
     _canRedo = undoRedoStatus.canRedo;
     _undoDescription = undoRedoStatus.undoDescription;
     _redoDescription = undoRedoStatus.redoDescription;
+  }
+
+  @action
+  Future<bool> saveTemplate(BuildContext context, Template template,
+      [String filePath = '']) async {
+    filePath = filePath.trim();
+
+    if (filePath.isEmpty) {
+      filePath = template.path;
+      if (filePath.isEmpty) {
+        return false;
+      }
+    } else {
+      template = template.copyWith(path: filePath);
+    }
+
+    final jsonTemplate = createTemplateFile(template);
+
+    try {
+      final file = File(filePath);
+      file.writeAsString(jsonTemplate);
+      if (!context.mounted) return false;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Template "$filePath" saved successfully.'),
+          backgroundColor: Colors.green,
+        ),
+      );
+    } catch (e) {
+      if (!context.mounted) return false;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Failed to save template: $e'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return false;
+    }
+
+    _currentTemplate = template;
+    _currentTemplateIsModified = false;
+
+    _saveSnapshot('Save template');
+
+    if (!context.mounted) return false;
+    final templateListStore =
+        Provider.of<TemplateListStore>(context, listen: false);
+    templateListStore.markOutdated();
+
+    return true;
   }
 
   @action
