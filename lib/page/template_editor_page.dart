@@ -22,10 +22,13 @@ class TemplateEditorPage extends StatelessWidget {
 
     return PopScope(
       canPop: false,
-      onPopInvoked: (_) async {
+      onPopInvoked: (didPop) async {
         final backNavigationAllowed = await _onBackPress(context);
-        if (backNavigationAllowed) {
-          if (context.mounted) Navigator.of(context).pop();
+        if (backNavigationAllowed && !didPop) {
+          if (context.mounted) {
+            print('Popping');
+            Navigator.of(context).pop();
+          }
         }
       },
       child: Scaffold(

@@ -49,12 +49,14 @@ class TemplateListPage extends StatelessWidget {
     checklistEditorStore.loadFromTemplate(template);
 
     if (!context.mounted) return;
-    Navigator.of(context).push(
+    await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const ChecklistPage(
           sectionIndex: 0,
         ),
       ),
     );
+
+    templateListStore.update();
   }
 }

@@ -108,11 +108,9 @@ class TemplateList extends StatelessWidget {
 
     if (models.isNotEmpty) {
       manufacturers.add(
-        Observer(
-          builder: (_) => ExpansionTile(
-            title: Text(currentManufacturer),
-            children: models,
-          ),
+        ExpansionTile(
+          title: Text(currentManufacturer),
+          children: models,
         ),
       );
     }

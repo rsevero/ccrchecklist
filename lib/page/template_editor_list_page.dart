@@ -76,11 +76,13 @@ class TemplateEditorListPage extends StatelessWidget {
     templateEditorStore.setCurrentTemplate(template, index);
 
     if (!context.mounted) return;
-    Navigator.of(context).push(
+    await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const TemplateEditorPage(),
       ),
     );
+
+    templateListStore.update();
   }
 
   void _addNewTemplate(BuildContext context) async {
