@@ -22,9 +22,6 @@ class TemplateSectionWidget extends StatelessWidget {
     return Observer(
       builder: (_) {
         final isSelected = (index == templateEditorStore.selectedSectionIndex);
-        // final expansionTileController = ExpansionTileController();
-        // templateEditorStore.setSectionExpansionTileController(
-        //     index, expansionTileController);
         return Container(
           color: isSelected
               ? mainColorScheme.primaryContainer
@@ -32,11 +29,8 @@ class TemplateSectionWidget extends StatelessWidget {
           child: ExpansionTile(
             key: ObjectKey(section),
             title: Text(section.title),
-            // controller: expansionTileController,
             controlAffinity: ListTileControlAffinity.leading,
             trailing: Builder(builder: (context) {
-              // templateEditorStore.setSectionExpansionTileController(
-              //     index, ExpansionTileController.of(context));
               return PopupMenuButton<String>(
                 itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
                   const PopupMenuItem<String>(

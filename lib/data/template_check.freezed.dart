@@ -33,8 +33,8 @@ TemplateCheck _$TemplateCheckFromJson(Map<String, dynamic> json) {
 mixin _$TemplateCheck {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String description, int secondsTimer, int referenceCount)
+    required TResult Function(String description, int secondsTimer,
+            List<RegularCheckReference> references)
         regular,
     required TResult Function(int referenceCount) linearityStep1,
     required TResult Function() linearityStep2,
@@ -42,7 +42,8 @@ mixin _$TemplateCheck {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String description, int secondsTimer, int referenceCount)?
+    TResult? Function(String description, int secondsTimer,
+            List<RegularCheckReference> references)?
         regular,
     TResult? Function(int referenceCount)? linearityStep1,
     TResult? Function()? linearityStep2,
@@ -50,7 +51,8 @@ mixin _$TemplateCheck {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String description, int secondsTimer, int referenceCount)?
+    TResult Function(String description, int secondsTimer,
+            List<RegularCheckReference> references)?
         regular,
     TResult Function(int referenceCount)? linearityStep1,
     TResult Function()? linearityStep2,
@@ -106,7 +108,10 @@ abstract class _$$TemplateRegularCheckImplCopyWith<$Res> {
           $Res Function(_$TemplateRegularCheckImpl) then) =
       __$$TemplateRegularCheckImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String description, int secondsTimer, int referenceCount});
+  $Res call(
+      {String description,
+      int secondsTimer,
+      List<RegularCheckReference> references});
 }
 
 /// @nodoc
@@ -122,7 +127,7 @@ class __$$TemplateRegularCheckImplCopyWithImpl<$Res>
   $Res call({
     Object? description = null,
     Object? secondsTimer = null,
-    Object? referenceCount = null,
+    Object? references = null,
   }) {
     return _then(_$TemplateRegularCheckImpl(
       description: null == description
@@ -133,10 +138,10 @@ class __$$TemplateRegularCheckImplCopyWithImpl<$Res>
           ? _value.secondsTimer
           : secondsTimer // ignore: cast_nullable_to_non_nullable
               as int,
-      referenceCount: null == referenceCount
-          ? _value.referenceCount
-          : referenceCount // ignore: cast_nullable_to_non_nullable
-              as int,
+      references: null == references
+          ? _value.references
+          : references // ignore: cast_nullable_to_non_nullable
+              as List<RegularCheckReference>,
     ));
   }
 }
@@ -148,7 +153,7 @@ class _$TemplateRegularCheckImpl extends TemplateRegularCheck
   _$TemplateRegularCheckImpl(
       {required this.description,
       required this.secondsTimer,
-      required this.referenceCount,
+      required this.references,
       final String? $type})
       : $type = $type ?? 'regular',
         super._();
@@ -161,14 +166,14 @@ class _$TemplateRegularCheckImpl extends TemplateRegularCheck
   @override
   final int secondsTimer;
   @override
-  final int referenceCount;
+  final List<RegularCheckReference> references;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TemplateCheck.regular(description: $description, secondsTimer: $secondsTimer, referenceCount: $referenceCount)';
+    return 'TemplateCheck.regular(description: $description, secondsTimer: $secondsTimer, references: $references)';
   }
 
   @override
@@ -178,7 +183,7 @@ class _$TemplateRegularCheckImpl extends TemplateRegularCheck
       ..add(DiagnosticsProperty('type', 'TemplateCheck.regular'))
       ..add(DiagnosticsProperty('description', description))
       ..add(DiagnosticsProperty('secondsTimer', secondsTimer))
-      ..add(DiagnosticsProperty('referenceCount', referenceCount));
+      ..add(DiagnosticsProperty('references', references));
   }
 
   @override
@@ -190,14 +195,14 @@ class _$TemplateRegularCheckImpl extends TemplateRegularCheck
                 other.description == description) &&
             (identical(other.secondsTimer, secondsTimer) ||
                 other.secondsTimer == secondsTimer) &&
-            (identical(other.referenceCount, referenceCount) ||
-                other.referenceCount == referenceCount));
+            const DeepCollectionEquality()
+                .equals(other.references, references));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, description, secondsTimer, referenceCount);
+  int get hashCode => Object.hash(runtimeType, description, secondsTimer,
+      const DeepCollectionEquality().hash(references));
 
   @JsonKey(ignore: true)
   @override
@@ -210,37 +215,39 @@ class _$TemplateRegularCheckImpl extends TemplateRegularCheck
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String description, int secondsTimer, int referenceCount)
+    required TResult Function(String description, int secondsTimer,
+            List<RegularCheckReference> references)
         regular,
     required TResult Function(int referenceCount) linearityStep1,
     required TResult Function() linearityStep2,
   }) {
-    return regular(description, secondsTimer, referenceCount);
+    return regular(description, secondsTimer, references);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String description, int secondsTimer, int referenceCount)?
+    TResult? Function(String description, int secondsTimer,
+            List<RegularCheckReference> references)?
         regular,
     TResult? Function(int referenceCount)? linearityStep1,
     TResult? Function()? linearityStep2,
   }) {
-    return regular?.call(description, secondsTimer, referenceCount);
+    return regular?.call(description, secondsTimer, references);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String description, int secondsTimer, int referenceCount)?
+    TResult Function(String description, int secondsTimer,
+            List<RegularCheckReference> references)?
         regular,
     TResult Function(int referenceCount)? linearityStep1,
     TResult Function()? linearityStep2,
     required TResult orElse(),
   }) {
     if (regular != null) {
-      return regular(description, secondsTimer, referenceCount);
+      return regular(description, secondsTimer, references);
     }
     return orElse();
   }
@@ -289,9 +296,10 @@ class _$TemplateRegularCheckImpl extends TemplateRegularCheck
 
 abstract class TemplateRegularCheck extends TemplateCheck {
   factory TemplateRegularCheck(
-      {required final String description,
-      required final int secondsTimer,
-      required final int referenceCount}) = _$TemplateRegularCheckImpl;
+          {required final String description,
+          required final int secondsTimer,
+          required final List<RegularCheckReference> references}) =
+      _$TemplateRegularCheckImpl;
   TemplateRegularCheck._() : super._();
 
   factory TemplateRegularCheck.fromJson(Map<String, dynamic> json) =
@@ -299,7 +307,7 @@ abstract class TemplateRegularCheck extends TemplateCheck {
 
   String get description;
   int get secondsTimer;
-  int get referenceCount;
+  List<RegularCheckReference> get references;
   @JsonKey(ignore: true)
   _$$TemplateRegularCheckImplCopyWith<_$TemplateRegularCheckImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -393,8 +401,8 @@ class _$TemplateLinearityStep1CheckImpl extends TemplateLinearityStep1Check
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String description, int secondsTimer, int referenceCount)
+    required TResult Function(String description, int secondsTimer,
+            List<RegularCheckReference> references)
         regular,
     required TResult Function(int referenceCount) linearityStep1,
     required TResult Function() linearityStep2,
@@ -405,7 +413,8 @@ class _$TemplateLinearityStep1CheckImpl extends TemplateLinearityStep1Check
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String description, int secondsTimer, int referenceCount)?
+    TResult? Function(String description, int secondsTimer,
+            List<RegularCheckReference> references)?
         regular,
     TResult? Function(int referenceCount)? linearityStep1,
     TResult? Function()? linearityStep2,
@@ -416,7 +425,8 @@ class _$TemplateLinearityStep1CheckImpl extends TemplateLinearityStep1Check
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String description, int secondsTimer, int referenceCount)?
+    TResult Function(String description, int secondsTimer,
+            List<RegularCheckReference> references)?
         regular,
     TResult Function(int referenceCount)? linearityStep1,
     TResult Function()? linearityStep2,
@@ -542,8 +552,8 @@ class _$TemplateLinearityStep2CheckImpl extends TemplateLinearityStep2Check
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String description, int secondsTimer, int referenceCount)
+    required TResult Function(String description, int secondsTimer,
+            List<RegularCheckReference> references)
         regular,
     required TResult Function(int referenceCount) linearityStep1,
     required TResult Function() linearityStep2,
@@ -554,7 +564,8 @@ class _$TemplateLinearityStep2CheckImpl extends TemplateLinearityStep2Check
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String description, int secondsTimer, int referenceCount)?
+    TResult? Function(String description, int secondsTimer,
+            List<RegularCheckReference> references)?
         regular,
     TResult? Function(int referenceCount)? linearityStep1,
     TResult? Function()? linearityStep2,
@@ -565,7 +576,8 @@ class _$TemplateLinearityStep2CheckImpl extends TemplateLinearityStep2Check
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String description, int secondsTimer, int referenceCount)?
+    TResult Function(String description, int secondsTimer,
+            List<RegularCheckReference> references)?
         regular,
     TResult Function(int referenceCount)? linearityStep1,
     TResult Function()? linearityStep2,

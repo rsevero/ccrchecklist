@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:ccr_checklist/data/regular_check_reference.dart';
 import 'package:ccr_checklist/data/template_check.dart';
 import 'package:ccr_checklist/data/template_section.dart';
 import 'package:ccr_checklist/data/template.dart';
@@ -245,11 +246,11 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
   void addRegularCheck(
       {required String description,
       required int secondsTimer,
-      required int referenceCount}) {
+      required List<RegularCheckReference> references}) {
     final newRegularCheck = TemplateRegularCheck(
         description: description,
         secondsTimer: secondsTimer,
-        referenceCount: referenceCount);
+        references: references);
     _selectedSection.checks.add(newRegularCheck);
     _checks[_selectedSectionIndex].add(newRegularCheck);
     _saveSnapshot('Add regular check');
@@ -343,13 +344,15 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
 
   @action
   void updateRegularCheck(int sectionIndex, int checkIndex,
-      {String? description, int? timerDuration, int? referenceCount}) {
+      {String? description,
+      int? timerDuration,
+      List<RegularCheckReference>? references}) {
     final check = _checks[sectionIndex][checkIndex] as TemplateRegularCheck;
 
     final newCheck = check.copyWith(
         description: description ?? check.description,
         secondsTimer: timerDuration ?? check.secondsTimer,
-        referenceCount: referenceCount ?? check.referenceCount);
+        references: references ?? check.references);
 
     _currentTemplate.sections[sectionIndex].checks[checkIndex] = newCheck;
     _checks[sectionIndex][checkIndex] = newCheck;

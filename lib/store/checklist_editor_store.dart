@@ -314,9 +314,7 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
           description: templateCheck.description,
           lastChange: DateTime.now(),
           isChecked: false,
-          referenceCount: templateCheck.referenceCount,
-          references:
-              ccrCreateAndInitializeReferencesMap(templateCheck.referenceCount),
+          references: templateCheck.references,
           secondsTimer: templateCheck.secondsTimer,
         );
       } else if (templateCheck is TemplateLinearityStep1Check) {

@@ -48,6 +48,7 @@ abstract class TemplateListStoreBase with Store {
 
   @action
   Future<void> _actuallyUpdate() async {
+    _defaultTemplates.clear();
     await _getAssetTemplates();
     await _getSavedTemplates();
     _defaultTemplates.sort(_compareTemplateFile);

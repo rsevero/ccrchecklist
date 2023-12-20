@@ -117,13 +117,13 @@ class _ChecklistRegularCheckWidgetState
   }
 
   List<Widget> _buildReferences(ChecklistRegularCheck check) {
-    return List.generate(check.referenceCount, (index) {
+    return List.generate(check.references.length, (index) {
       return Padding(
         padding: const EdgeInsets.only(top: 8.0),
         child: SizedBox(
           width: 60,
           child: TextFormField(
-            initialValue: check.references[index]?.toString() ?? '',
+            initialValue: check.references[index].toString(),
             decoration: InputDecoration(
               labelText: 'Ref ${index + 1}',
               border: const OutlineInputBorder(),
@@ -132,7 +132,8 @@ class _ChecklistRegularCheckWidgetState
             onChanged: (value) {
               double? newValue = double.tryParse(value);
               if (newValue != null) {
-                check.references[index] = newValue;
+                check.references[index] =
+                    check.references[index].copyWith(value: newValue);
               }
             },
           ),

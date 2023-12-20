@@ -1,4 +1,6 @@
+import 'package:ccr_checklist/data/regular_check_reference.dart';
 import 'package:ccr_checklist/data/template_check.dart';
+import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/misc/helper_functions.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +28,7 @@ class TemplateCheckWidget extends StatelessWidget {
           final timer =
               ccrFormatSecondsToMinutesSecondsTimer(check.secondsTimer);
           description +=
-              ' (Ref count: ${check.referenceCount} - Timer: $timer)';
+              ' (Ref count: ${check.references.length} - Timer: $timer)';
         } else if (check is TemplateLinearityStep1Check) {
           description += ' (Ref count: ${check.referenceCount})';
         }
@@ -75,11 +77,27 @@ class TemplateCheckWidget extends StatelessWidget {
   void _editTemplateRegularCheck(BuildContext context,
       TemplateEditorStore templateEditorStore, int sectionIndex, int index) {
     final TextEditingController descriptionController = TextEditingController();
-    final check = (templateEditorStore.checks[sectionIndex][index]
-        as TemplateRegularCheck);
+    final TemplateRegularCheck check =
+        templateEditorStore.checks[sectionIndex][index] as TemplateRegularCheck;
     descriptionController.text = check.description;
-    int numberOfReferences = check.referenceCount;
+    int numberOfReferences = check.references.length;
     Duration timerDuration = Duration(seconds: check.secondsTimer);
+
+    // Initialize prefix and suffix controllers
+    List<TextEditingController> prefixControllers = [
+          TextEditingController(text: '')
+        ] +
+        List.generate(numberOfReferences,
+            (i) => TextEditingController(text: check.references[i].prefix)) +
+        List.generate(ccrMaxReferences - numberOfReferences,
+            (i) => TextEditingController(text: ''));
+    List<TextEditingController> suffixControllers = [
+          TextEditingController(text: '')
+        ] +
+        List.generate(numberOfReferences,
+            (i) => TextEditingController(text: check.references[i].suffix)) +
+        List.generate(ccrMaxReferences - numberOfReferences,
+            (i) => TextEditingController(text: ''));
 
     showDialog(
       context: context,
@@ -98,23 +116,6 @@ class TemplateCheckWidget extends StatelessWidget {
                           hintText: 'Enter check description'),
                       autofocus: true,
                     ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text('Amount of references'),
-                    ),
-                    ...List.generate(
-                      6,
-                      (index) => RadioListTile<int>(
-                        title: Text('$index'),
-                        value: index,
-                        groupValue: numberOfReferences,
-                        onChanged: (int? value) {
-                          if (value != null) {
-                            setState(() => numberOfReferences = value);
-                          }
-                        },
-                      ),
-                    ),
                     ListTile(
                       title: const Text('Set Timer Duration'),
                       subtitle: Text(ccrFormatSecondsToMinutesSecondsTimer(
@@ -126,8 +127,7 @@ class TemplateCheckWidget extends StatelessWidget {
                               hour: timerDuration.inMinutes,
                               minute: timerDuration.inSeconds % 60),
                         );
-                        if (pickedTime != null &&
-                            pickedTime != TimeOfDay.now()) {
+                        if (pickedTime != null) {
                           setState(() {
                             timerDuration = Duration(
                                 minutes: pickedTime.hour,
@@ -135,6 +135,59 @@ class TemplateCheckWidget extends StatelessWidget {
                           });
                         }
                       },
+                    ),
+                    if (numberOfReferences > 0)
+                      const Text(
+                          'References prefixes and suffixes are optional'),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text('Amount of references'),
+                    ),
+                    ...List.generate(
+                      ccrMaxReferences + 1,
+                      (index) => Row(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Visibility(
+                              visible: index > 0 && index <= numberOfReferences,
+                              maintainSize: true,
+                              maintainState: true,
+                              maintainAnimation: true,
+                              child: TextFormField(
+                                controller: prefixControllers[index],
+                                decoration:
+                                    InputDecoration(hintText: 'Prefix $index'),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: RadioListTile<int>(
+                              title: Text('$index'),
+                              value: index,
+                              groupValue: numberOfReferences,
+                              onChanged: (int? value) {
+                                setState(() => numberOfReferences = value ?? 0);
+                              },
+                            ),
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: Visibility(
+                              visible: index > 0 && index <= numberOfReferences,
+                              maintainSize: true,
+                              maintainState: true,
+                              maintainAnimation: true,
+                              child: TextFormField(
+                                controller: suffixControllers[index],
+                                decoration:
+                                    InputDecoration(hintText: 'Suffix $index'),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -145,25 +198,127 @@ class TemplateCheckWidget extends StatelessWidget {
             TextButton(
               child: const Text('Update'),
               onPressed: () {
-                final String newDescription = descriptionController.text;
+                final newDescription = descriptionController.text;
+                List<RegularCheckReference> newReferences = List.generate(
+                  numberOfReferences,
+                  (i) => RegularCheckReference(
+                    prefix: i < prefixControllers.length
+                        ? prefixControllers[i + 1].text
+                        : '',
+                    suffix: i < suffixControllers.length
+                        ? suffixControllers[i + 1].text
+                        : '',
+                  ),
+                );
                 templateEditorStore.updateRegularCheck(sectionIndex, index,
                     description: newDescription,
-                    referenceCount: numberOfReferences,
+                    references: newReferences,
                     timerDuration: timerDuration.inSeconds);
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
               child: const Text('Cancel'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
+              onPressed: () => Navigator.of(context).pop(),
             ),
           ],
         );
       },
     );
   }
+
+  // void _editTemplateRegularCheck(BuildContext context,
+  //     TemplateEditorStore templateEditorStore, int sectionIndex, int index) {
+  //   final TextEditingController descriptionController = TextEditingController();
+  //   final check = (templateEditorStore.checks[sectionIndex][index]
+  //       as TemplateRegularCheck);
+  //   descriptionController.text = check.description;
+  //   int numberOfReferences = check.references.length;
+  //   Duration timerDuration = Duration(seconds: check.secondsTimer);
+
+  //   showDialog(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return AlertDialog(
+  //         title: const Text('Edit Regular Check'),
+  //         content: StatefulBuilder(
+  //           builder: (BuildContext context, StateSetter setState) {
+  //             return SingleChildScrollView(
+  //               child: Column(
+  //                 mainAxisSize: MainAxisSize.min,
+  //                 children: <Widget>[
+  //                   TextFormField(
+  //                     controller: descriptionController,
+  //                     decoration: const InputDecoration(
+  //                         hintText: 'Enter check description'),
+  //                     autofocus: true,
+  //                   ),
+  //                   const Padding(
+  //                     padding: EdgeInsets.symmetric(vertical: 8.0),
+  //                     child: Text('Amount of references'),
+  //                   ),
+  //                   ...List.generate(
+  //                     6,
+  //                     (index) => RadioListTile<int>(
+  //                       title: Text('$index'),
+  //                       value: index,
+  //                       groupValue: numberOfReferences,
+  //                       onChanged: (int? value) {
+  //                         if (value != null) {
+  //                           setState(() => numberOfReferences = value);
+  //                         }
+  //                       },
+  //                     ),
+  //                   ),
+  //                   ListTile(
+  //                     title: const Text('Set Timer Duration'),
+  //                     subtitle: Text(ccrFormatSecondsToMinutesSecondsTimer(
+  //                         timerDuration.inSeconds)),
+  //                     onTap: () async {
+  //                       final TimeOfDay? pickedTime = await showTimePicker(
+  //                         context: context,
+  //                         initialTime: TimeOfDay(
+  //                             hour: timerDuration.inMinutes,
+  //                             minute: timerDuration.inSeconds % 60),
+  //                       );
+  //                       if (pickedTime != null &&
+  //                           pickedTime != TimeOfDay.now()) {
+  //                         setState(() {
+  //                           timerDuration = Duration(
+  //                               minutes: pickedTime.hour,
+  //                               seconds: pickedTime.minute);
+  //                         });
+  //                       }
+  //                     },
+  //                   ),
+  //                 ],
+  //               ),
+  //             );
+  //           },
+  //         ),
+  //         actions: <Widget>[
+  //           TextButton(
+  //             child: const Text('Update'),
+  //             onPressed: () {
+  //               final String newDescription = descriptionController.text;
+  //               templateEditorStore.updateRegularCheck(sectionIndex, index,
+  //                   description: newDescription,
+  //                   references: references,
+  //                   timerDuration: timerDuration.inSeconds);
+  //               Navigator.of(context).pop();
+  //             },
+  //           ),
+  //           TextButton(
+  //             child: const Text('Cancel'),
+  //             onPressed: () {
+  //               Navigator.of(context).pop();
+  //             },
+  //           ),
+  //         ],
+  //       );
+  //     },
+  //   );
+  // }
 
   void _editTemplateLinearityStep1Check(BuildContext context,
       TemplateEditorStore templateEditorStore, int sectionIndex, int index) {

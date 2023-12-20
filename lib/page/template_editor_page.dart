@@ -1,3 +1,4 @@
+import 'package:ccr_checklist/data/regular_check_reference.dart';
 import 'package:ccr_checklist/data/template.dart';
 import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/misc/helper_functions.dart';
@@ -439,88 +440,135 @@ class TemplateEditorPage extends StatelessWidget {
     final TextEditingController descriptionController = TextEditingController();
     int numberOfReferences = 0;
     Duration timerDuration = Duration.zero; // Default values
+    List<TextEditingController> prefixControllers =
+        List.generate(ccrMaxReferences + 1, (_) => TextEditingController());
+    List<TextEditingController> suffixControllers =
+        List.generate(ccrMaxReferences + 1, (_) => TextEditingController());
 
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Add Check with References'),
-          content: StatefulBuilder(
-            // Use StatefulBuilder to update the dialog's state
-            builder: (BuildContext context, StateSetter setState) {
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  TextFormField(
-                    controller: descriptionController,
-                    decoration: const InputDecoration(
-                        hintText: 'Enter check description'),
-                    autofocus: true,
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text(
-                        'Amount of references'), // Label for the radio buttons
-                  ),
-                  ...List.generate(
-                    ccrMaxReferences + 1,
-                    (index) => RadioListTile<int>(
-                      title: Text('$index'),
-                      value: index,
-                      groupValue: numberOfReferences,
-                      onChanged: (int? value) {
-                        if (value != null) {
-                          setState(() => numberOfReferences = value);
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+            return AlertDialog(
+              title: const Text('Add Check with References'),
+              content: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    TextFormField(
+                      controller: descriptionController,
+                      decoration: const InputDecoration(
+                          hintText: 'Enter check description'),
+                      autofocus: true,
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text('Amount of references'),
+                    ),
+                    ListTile(
+                      title: const Text('Set Timer Duration'),
+                      subtitle: Text(ccrFormatSecondsToMinutesSecondsTimer(
+                          timerDuration.inSeconds)),
+                      onTap: () async {
+                        final TimeOfDay? pickedTime = await showTimePicker(
+                          context: context,
+                          initialTime: TimeOfDay(
+                              hour: timerDuration.inMinutes,
+                              minute: timerDuration.inSeconds % 60),
+                        );
+                        if (pickedTime != null) {
+                          setState(
+                            () {
+                              timerDuration = Duration(
+                                  minutes: pickedTime.hour,
+                                  seconds: pickedTime.minute);
+                            },
+                          );
                         }
                       },
                     ),
-                  ),
-                  ListTile(
-                    title: const Text('Set Timer Duration'),
-                    subtitle: Text(ccrFormatSecondsToMinutesSecondsTimer(
-                        timerDuration.inSeconds)),
-                    onTap: () async {
-                      final TimeOfDay? pickedTime = await showTimePicker(
-                        context: context,
-                        initialTime: TimeOfDay(
-                            hour: timerDuration.inMinutes,
-                            minute: timerDuration.inSeconds % 60),
+                    if (numberOfReferences > 0)
+                      const Text(
+                          'References prefixes and suffixes are optional'),
+                    ...List.generate(
+                      ccrMaxReferences + 1,
+                      (index) => Row(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Visibility(
+                              visible: index > 0 && index <= numberOfReferences,
+                              maintainSize: true,
+                              maintainState: true,
+                              maintainAnimation: true,
+                              child: TextFormField(
+                                controller: prefixControllers[index],
+                                decoration:
+                                    InputDecoration(hintText: 'Prefix $index'),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: RadioListTile<int>(
+                              title: Text('$index'),
+                              value: index,
+                              groupValue: numberOfReferences,
+                              onChanged: (int? value) {
+                                setState(() => numberOfReferences = value ?? 0);
+                              },
+                            ),
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: Visibility(
+                              visible: index > 0 && index <= numberOfReferences,
+                              maintainSize: true,
+                              maintainState: true,
+                              maintainAnimation: true,
+                              child: TextFormField(
+                                controller: suffixControllers[index],
+                                decoration:
+                                    InputDecoration(hintText: 'Suffix $index'),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('Create'),
+                  onPressed: () {
+                    final description = descriptionController.text;
+                    if (description.isNotEmpty) {
+                      List<RegularCheckReference> references = List.generate(
+                        numberOfReferences,
+                        (i) => RegularCheckReference(
+                          prefix: prefixControllers[i + 1].text,
+                          suffix: suffixControllers[i + 1].text,
+                        ),
                       );
-                      if (pickedTime != null) {
-                        setState(
-                          () {
-                            timerDuration = Duration(
-                                minutes: pickedTime.hour,
-                                seconds: pickedTime.minute);
-                          },
-                        );
-                      }
-                    },
-                  ),
-                ],
-              );
-            },
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Create'),
-              onPressed: () {
-                // Validate inputs and create check
-                final description = descriptionController.text;
-                if (description.isNotEmpty) {
-                  templateEditorStore.addRegularCheck(
-                      description: description,
-                      referenceCount: numberOfReferences,
-                      secondsTimer: timerDuration.inSeconds);
-                  Navigator.of(context).pop();
-                }
-              },
-            ),
-            TextButton(
-              child: const Text('Cancel'),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-          ],
+                      templateEditorStore.addRegularCheck(
+                        description: description,
+                        references: references,
+                        secondsTimer: timerDuration.inSeconds,
+                      );
+                      Navigator.of(context).pop();
+                    }
+                  },
+                ),
+                TextButton(
+                  child: const Text('Cancel'),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+              ],
+            );
+          },
         );
       },
     );

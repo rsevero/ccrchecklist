@@ -13,10 +13,9 @@ _$ChecklistRegularCheckImpl _$$ChecklistRegularCheckImplFromJson(
       lastChange: DateTime.parse(json['lastChange'] as String),
       description: json['description'] as String,
       secondsTimer: json['secondsTimer'] as int,
-      referenceCount: json['referenceCount'] as int,
-      references: (json['references'] as Map<String, dynamic>).map(
-        (k, e) => MapEntry(int.parse(k), (e as num).toDouble()),
-      ),
+      references: (json['references'] as List<dynamic>)
+          .map((e) => RegularCheckReference.fromJson(e as Map<String, dynamic>))
+          .toList(),
       $type: json['runtimeType'] as String?,
     );
 
@@ -27,9 +26,7 @@ Map<String, dynamic> _$$ChecklistRegularCheckImplToJson(
       'lastChange': instance.lastChange.toIso8601String(),
       'description': instance.description,
       'secondsTimer': instance.secondsTimer,
-      'referenceCount': instance.referenceCount,
-      'references':
-          instance.references.map((k, e) => MapEntry(k.toString(), e)),
+      'references': instance.references,
       'runtimeType': instance.$type,
     };
 

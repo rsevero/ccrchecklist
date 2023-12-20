@@ -1,3 +1,4 @@
+import 'package:ccr_checklist/data/regular_check_reference.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -16,8 +17,7 @@ sealed class ChecklistCheck with _$ChecklistCheck {
     required DateTime lastChange,
     required String description,
     required int secondsTimer,
-    required int referenceCount,
-    required Map<int, double> references,
+    required List<RegularCheckReference> references,
   }) = ChecklistRegularCheck;
   factory ChecklistCheck.linearityStep1({
     required bool isChecked,
