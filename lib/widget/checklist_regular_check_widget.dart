@@ -75,17 +75,11 @@ class _ChecklistRegularCheckWidgetState
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(check.description),
-          Row(
-            children: [
-              if (_timerAvailable) _buildTimer(),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Wrap(
-                  spacing: 8.0, // Horizontal space between reference fields
-                  children: _buildReferences(check),
-                ),
-              ),
-            ],
+          if (_timerAvailable) _buildTimer(),
+          const SizedBox(width: 8),
+          Wrap(
+            spacing: 8.0, // Horizontal space between reference fields
+            children: _buildReferences(check),
           ),
         ],
       ),
@@ -117,29 +111,73 @@ class _ChecklistRegularCheckWidgetState
   }
 
   List<Widget> _buildReferences(ChecklistRegularCheck check) {
-    return List.generate(check.references.length, (index) {
-      return Padding(
-        padding: const EdgeInsets.only(top: 8.0),
-        child: SizedBox(
-          width: 60,
-          child: TextFormField(
-            initialValue: check.references[index].toString(),
-            decoration: InputDecoration(
-              labelText: 'Ref ${index + 1}',
-              border: const OutlineInputBorder(),
+    return [
+      Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Column for all prefixes
+          Column(
+            children: List.generate(
+              check.references.length,
+              (index) => SizedBox(
+                height: 68,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Text(check.references[index].prefix ?? ''),
+                ),
+              ),
             ),
-            keyboardType: TextInputType.number,
-            onChanged: (value) {
-              double? newValue = double.tryParse(value);
-              if (newValue != null) {
-                check.references[index] =
-                    check.references[index].copyWith(value: newValue);
-              }
-            },
           ),
-        ),
-      );
-    });
+          const SizedBox(width: 8),
+          // Column for all TextFormField
+          SizedBox(
+            width: 80,
+            child: Column(
+              children: List.generate(
+                check.references.length,
+                (index) => SizedBox(
+                  height: 68,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: TextFormField(
+                      initialValue: check.references[index].value == null
+                          ? ''
+                          : check.references[index].value.toString(),
+                      decoration: InputDecoration(
+                        labelText: 'Ref ${index + 1}',
+                        border: const OutlineInputBorder(),
+                      ),
+                      keyboardType: TextInputType.number,
+                      onChanged: (value) {
+                        double? newValue = double.tryParse(value);
+                        if (newValue != null) {
+                          check.references[index] =
+                              check.references[index].copyWith(value: newValue);
+                        }
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(width: 8),
+          // Column for all suffixes
+          Column(
+            children: List.generate(
+              check.references.length,
+              (index) => SizedBox(
+                height: 68,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Text(check.references[index].suffix ?? ''),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    ];
   }
 
   void _toggleTimer() {
