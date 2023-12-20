@@ -41,16 +41,6 @@ String ccrFormatSecondsToMinutesSeconds(int totalSeconds) {
   return formattedTime;
 }
 
-Map<int, double> ccrCreateAndInitializeReferencesMap(int numberOfEntries) {
-  Map<int, double> myMap = {};
-
-  for (int i = 0; i < numberOfEntries; i++) {
-    myMap[i] = 0.0;
-  }
-
-  return myMap;
-}
-
 Future<Directory> ccrGetSharedDirectory() async {
   final directory = await getApplicationDocumentsDirectory();
   final sharedDirectory =
@@ -180,6 +170,5 @@ Future<void> ccrSaveAsTemplate(BuildContext context, Template template,
   if (!context.mounted) return;
   final templateEditorStore =
       Provider.of<TemplateEditorStore>(context, listen: false);
-  templateEditorStore.saveTemplate(
-      context, templateEditorStore.currentTemplate, filePath);
+  templateEditorStore.saveTemplate(context, template, filePath);
 }
