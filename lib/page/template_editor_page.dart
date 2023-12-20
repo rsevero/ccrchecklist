@@ -198,7 +198,7 @@ class TemplateEditorPage extends StatelessWidget {
     return await showDialog<bool>(
           context: context,
           builder: (context) => AlertDialog(
-            title: const Text('Confirm abandoning modifications'),
+            title: const Text('Confirm losing modifications'),
             content: const Text(
                 'You have unsaved modifications to the template. Do you want to proceed without saving them?'),
             actions: <Widget>[
@@ -213,7 +213,7 @@ class TemplateEditorPage extends StatelessWidget {
             ],
           ),
         ) ??
-        false; // Returning false if dialog is dismissed
+        false;
   }
 
   Future<void> _onPressedShare(BuildContext context) async {
