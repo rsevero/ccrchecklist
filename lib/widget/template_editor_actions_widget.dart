@@ -24,33 +24,31 @@ class TemplateEditorActionsWidget extends StatelessWidget {
               child: const Icon(Icons.linear_scale),
               text: 'Add Linearity Step 2 Check',
               isEnabled: templateEditorStore.enableLinearityStep2Creation,
-              onTap: () =>
-                  _onTapAddLinearityStep2Check(context, templateEditorStore),
+              onTap: () => _onTapAddLinearityStep2Check(context),
             ),
             GreyableSpeedDialChild(
               child: const Icon(Icons.linear_scale_rounded),
               text: 'Add Linearity Step 1 Check',
               isEnabled: templateEditorStore.enableLinearityStep1Creation,
-              onTap: () =>
-                  _onTapAddLinearityStep1Check(context, templateEditorStore),
+              onTap: () => _onTapAddLinearityStep1Check(context),
             ),
             GreyableSpeedDialChild(
               child: const Icon(Icons.check),
               text: 'Add Regular Check',
               isEnabled: templateEditorStore.enableCheckCreation,
-              onTap: () => _onTapAddRegularCheck(context, templateEditorStore),
+              onTap: () => _onTapAddRegularCheck(context),
             ),
             GreyableSpeedDialChild(
               child: const Icon(Icons.add),
               text: 'Add New Section',
               isEnabled: true,
-              onTap: () => _onTapAddNewSection(context, templateEditorStore),
+              onTap: () => _onTapAddNewSection(context),
             ),
             GreyableSpeedDialChild(
               child: const Icon(Icons.edit_attributes),
               text: 'Edit Template',
               isEnabled: true,
-              onTap: () => _onTapEditTemplate(context, templateEditorStore),
+              onTap: () => _onTapEditTemplate(context),
             ),
           ],
         );
@@ -58,8 +56,8 @@ class TemplateEditorActionsWidget extends StatelessWidget {
     );
   }
 
-  void _onTapEditTemplate(
-      BuildContext context, TemplateEditorStore templateEditorStore) {
+  void _onTapEditTemplate(BuildContext context) {
+    final templateEditorStore = Provider.of<TemplateEditorStore>(context);
     final TextEditingController rebreatherManufacturerController =
         TextEditingController(
             text: templateEditorStore.currentTemplate.rebreatherManufacturer);
@@ -144,8 +142,8 @@ class TemplateEditorActionsWidget extends StatelessWidget {
     Navigator.of(context).pop();
   }
 
-  void _onTapAddNewSection(
-      BuildContext context, TemplateEditorStore templateEditorStore) async {
+  void _onTapAddNewSection(BuildContext context) async {
+    final templateEditorStore = Provider.of<TemplateEditorStore>(context);
     final TextEditingController titleController = TextEditingController();
     final GlobalKey<FormState> formKey =
         GlobalKey<FormState>(); // Add a GlobalKey for the Form
@@ -195,13 +193,13 @@ class TemplateEditorActionsWidget extends StatelessWidget {
     }
   }
 
-  void _onTapAddLinearityStep2Check(
-      BuildContext context, TemplateEditorStore templateEditorStore) {
+  void _onTapAddLinearityStep2Check(BuildContext context) {
+    final templateEditorStore = Provider.of<TemplateEditorStore>(context);
     templateEditorStore.addLinearityStep2Check();
   }
 
-  void _onTapAddLinearityStep1Check(
-      BuildContext context, TemplateEditorStore templateEditorStore) {
+  void _onTapAddLinearityStep1Check(BuildContext context) {
+    final templateEditorStore = Provider.of<TemplateEditorStore>(context);
     int numberOfReferences = 1; // Default value
 
     showDialog(
@@ -256,8 +254,8 @@ class TemplateEditorActionsWidget extends StatelessWidget {
     );
   }
 
-  void _onTapAddRegularCheck(
-      BuildContext context, TemplateEditorStore templateEditorStore) {
+  void _onTapAddRegularCheck(BuildContext context) {
+    final templateEditorStore = Provider.of<TemplateEditorStore>(context);
     final TextEditingController descriptionController = TextEditingController();
     int numberOfReferences = 0;
     Duration timerDuration = Duration.zero; // Default values
