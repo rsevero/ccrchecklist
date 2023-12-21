@@ -179,6 +179,10 @@ class TemplateEditorListPage extends StatelessWidget {
       await ccrSaveAsTemplate(context, newTemplate, fileNameController.text);
 
       if (!context.mounted) return;
+      final TemplateEditorStore templateEditorStore =
+          Provider.of<TemplateEditorStore>(context, listen: false);
+      templateEditorStore.setCurrentTemplate(newTemplate);
+
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => const TemplateEditorPage(),
