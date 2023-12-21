@@ -70,7 +70,7 @@ class _ChecklistLinearityStep1CheckWidgetState
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-              'Linearity check - step 1: enter the mV (milivolts) readings with pure air.'),
+              'Linearity check - step 1: turn on computer, note milivolts with pure air'),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Container(

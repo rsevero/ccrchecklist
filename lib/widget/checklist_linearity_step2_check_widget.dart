@@ -70,7 +70,7 @@ class _ChecklistLinearityStep2CheckWidgetState
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-              'Linearity check - step 2: enter the mV (milivolts) readings in the "actual" column with pure oxygen.'),
+              'Linearity check - step 2: open DSV, wait for stable readings, note mV (milivolts) readings in the "actual" column with pure oxygen'),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Container(
