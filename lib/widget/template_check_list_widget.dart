@@ -21,6 +21,7 @@ class TemplateCheckListWidget extends StatelessWidget {
         final checks = templateEditorStore.checks[sectionIndex];
         return SingleChildScrollView(
           child: ReorderableListView.builder(
+            buildDefaultDragHandles: false,
             shrinkWrap: true,
             itemCount: checks.length,
             itemBuilder: (context, index) {

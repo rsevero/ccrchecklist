@@ -339,6 +339,26 @@ mixin _$TemplateEditorStore on _TemplateEditorStoreBaseToJson, Store {
     });
   }
 
+  late final _$_isAnySectionExpandedAtom = Atom(
+      name: '_TemplateEditorStoreBaseToJson._isAnySectionExpanded',
+      context: context);
+
+  bool get isAnySectionExpanded {
+    _$_isAnySectionExpandedAtom.reportRead();
+    return super._isAnySectionExpanded;
+  }
+
+  @override
+  bool get _isAnySectionExpanded => isAnySectionExpanded;
+
+  @override
+  set _isAnySectionExpanded(bool value) {
+    _$_isAnySectionExpandedAtom.reportWrite(value, super._isAnySectionExpanded,
+        () {
+      super._isAnySectionExpanded = value;
+    });
+  }
+
   late final _$saveTemplateAsyncAction = AsyncAction(
       '_TemplateEditorStoreBaseToJson.saveTemplate',
       context: context);

@@ -33,41 +33,56 @@ class TemplateCheckWidget extends StatelessWidget {
         } else if (check is TemplateLinearityStep1Check) {
           description += ' (Ref count: ${check.referenceCount})';
         }
-        return ListTile(
-          title: Text(description),
-          trailing: PopupMenuButton<String>(
-            onSelected: (value) {
-              switch (value) {
-                case 'Edit':
-                  _editCheck(context, templateEditorStore, sectionIndex, index);
-                  break;
-                case 'Move to new section':
-                  _moveCheckNewSection(
-                      context, templateEditorStore, sectionIndex, index);
-                  break;
-                case 'Delete':
-                  templateEditorStore.deleteCheck(sectionIndex, index);
-                  break;
-              }
-            },
-            itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-              PopupMenuItem<String>(
-                value: 'Edit',
-                enabled: templateEditorStore.checks[sectionIndex][index]
-                    is! TemplateLinearityStep2Check,
-                child: const Text('Edit'),
+        return Row(
+          children: [
+            Expanded(
+              child: ListTile(
+                title: Text(description),
+                trailing: PopupMenuButton<String>(
+                  onSelected: (value) {
+                    switch (value) {
+                      case 'Edit':
+                        _editCheck(
+                            context, templateEditorStore, sectionIndex, index);
+                        break;
+                      case 'Move to new section':
+                        _moveCheckNewSection(
+                            context, templateEditorStore, sectionIndex, index);
+                        break;
+                      case 'Delete':
+                        templateEditorStore.deleteCheck(sectionIndex, index);
+                        break;
+                    }
+                  },
+                  itemBuilder: (BuildContext context) =>
+                      <PopupMenuEntry<String>>[
+                    PopupMenuItem<String>(
+                      value: 'Edit',
+                      enabled: templateEditorStore.checks[sectionIndex][index]
+                          is! TemplateLinearityStep2Check,
+                      child: const Text('Edit'),
+                    ),
+                    PopupMenuItem<String>(
+                      value: 'Move to new section',
+                      enabled: templateEditorStore.sections.length > 1,
+                      child: const Text('Move to new section'),
+                    ),
+                    const PopupMenuItem<String>(
+                      value: 'Delete',
+                      child: Text('Delete'),
+                    ),
+                  ],
+                ),
               ),
-              PopupMenuItem<String>(
-                value: 'Move to new section',
-                enabled: templateEditorStore.sections.length > 1,
-                child: const Text('Move to new section'),
+            ),
+            ReorderableDragStartListener(
+              index: index,
+              child: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Icon(Icons.drag_handle),
               ),
-              const PopupMenuItem<String>(
-                value: 'Delete',
-                child: Text('Delete'),
-              ),
-            ],
-          ),
+            )
+          ],
         );
       },
     );

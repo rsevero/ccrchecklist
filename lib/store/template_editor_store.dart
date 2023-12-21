@@ -105,15 +105,24 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
   @readonly
   ObservableMap<int, bool> _isSectionExpanded = ObservableMap<int, bool>();
 
+  @readonly
+  bool _isAnySectionExpanded = false;
+
   @action
   void setExpandedSection(int sectionIndex, bool expanded) {
     _isSectionExpanded[sectionIndex] = expanded;
+    _updateIsAnySectionExpanded();
+  }
+
+  void _updateIsAnySectionExpanded() {
+    _isAnySectionExpanded = _isSectionExpanded.values.any((element) => element);
   }
 
   @action
   void setExpandedSectionIfUnset(int sectionIndex, bool expanded) {
     if (!_isSectionExpanded.containsKey(sectionIndex)) {
       _isSectionExpanded[sectionIndex] = expanded;
+      _updateIsAnySectionExpanded();
     }
   }
 
