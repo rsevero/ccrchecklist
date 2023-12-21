@@ -14,6 +14,7 @@ class TemplateEditorActionsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final templateEditorStore = Provider.of<TemplateEditorStore>(context);
+
     return Observer(
       builder: (_) {
         return SpeedDial(
@@ -57,7 +58,8 @@ class TemplateEditorActionsWidget extends StatelessWidget {
   }
 
   void _onTapEditTemplate(BuildContext context) {
-    final templateEditorStore = Provider.of<TemplateEditorStore>(context);
+    final templateEditorStore =
+        Provider.of<TemplateEditorStore>(context, listen: false);
     final TextEditingController rebreatherManufacturerController =
         TextEditingController(
             text: templateEditorStore.currentTemplate.rebreatherManufacturer);
@@ -143,7 +145,8 @@ class TemplateEditorActionsWidget extends StatelessWidget {
   }
 
   void _onTapAddNewSection(BuildContext context) async {
-    final templateEditorStore = Provider.of<TemplateEditorStore>(context);
+    final templateEditorStore =
+        Provider.of<TemplateEditorStore>(context, listen: false);
     final TextEditingController titleController = TextEditingController();
     final GlobalKey<FormState> formKey =
         GlobalKey<FormState>(); // Add a GlobalKey for the Form
@@ -194,12 +197,14 @@ class TemplateEditorActionsWidget extends StatelessWidget {
   }
 
   void _onTapAddLinearityStep2Check(BuildContext context) {
-    final templateEditorStore = Provider.of<TemplateEditorStore>(context);
+    final templateEditorStore =
+        Provider.of<TemplateEditorStore>(context, listen: false);
     templateEditorStore.addLinearityStep2Check();
   }
 
   void _onTapAddLinearityStep1Check(BuildContext context) {
-    final templateEditorStore = Provider.of<TemplateEditorStore>(context);
+    final templateEditorStore =
+        Provider.of<TemplateEditorStore>(context, listen: false);
     int numberOfReferences = 1; // Default value
 
     showDialog(
@@ -255,7 +260,8 @@ class TemplateEditorActionsWidget extends StatelessWidget {
   }
 
   void _onTapAddRegularCheck(BuildContext context) {
-    final templateEditorStore = Provider.of<TemplateEditorStore>(context);
+    final templateEditorStore =
+        Provider.of<TemplateEditorStore>(context, listen: false);
     final TextEditingController descriptionController = TextEditingController();
     int numberOfReferences = 0;
     Duration timerDuration = Duration.zero; // Default values
