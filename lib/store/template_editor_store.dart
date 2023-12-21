@@ -102,6 +102,21 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
   @readonly
   String _redoDescription = '';
 
+  @readonly
+  ObservableMap<int, bool> _isSectionExpanded = ObservableMap<int, bool>();
+
+  @action
+  void setExpandedSection(int sectionIndex, bool expanded) {
+    _isSectionExpanded[sectionIndex] = expanded;
+  }
+
+  @action
+  void setExpandedSectionIfUnset(int sectionIndex, bool expanded) {
+    if (!_isSectionExpanded.containsKey(sectionIndex)) {
+      _isSectionExpanded[sectionIndex] = expanded;
+    }
+  }
+
   void _saveSnapshot(String operation) {
     final snapshot = _$TemplateEditorStoreToJson(this as TemplateEditorStore);
     final undoRedoStatus =
@@ -322,6 +337,22 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
   @action
   void setCurrentTemplateIndex(int templateIndex) {
     _currentTemplateIndex = templateIndex;
+  }
+
+  @action
+  void moveCheck(int sectionIndex, int oldIndex, int newIndex) {
+    if (oldIndex < newIndex) {
+      newIndex -= 1;
+    }
+
+    final check = _checks[sectionIndex].removeAt(oldIndex);
+    _checks[sectionIndex].insert(newIndex, check);
+
+    final templateSection = _currentTemplate.sections[sectionIndex];
+    final templateCheck = templateSection.checks.removeAt(oldIndex);
+    templateSection.checks.insert(newIndex, templateCheck);
+
+    _saveSnapshot('Move check');
   }
 
   @action

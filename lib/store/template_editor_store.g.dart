@@ -320,6 +320,25 @@ mixin _$TemplateEditorStore on _TemplateEditorStoreBaseToJson, Store {
     });
   }
 
+  late final _$_isSectionExpandedAtom = Atom(
+      name: '_TemplateEditorStoreBaseToJson._isSectionExpanded',
+      context: context);
+
+  ObservableMap<int, bool> get isSectionExpanded {
+    _$_isSectionExpandedAtom.reportRead();
+    return super._isSectionExpanded;
+  }
+
+  @override
+  ObservableMap<int, bool> get _isSectionExpanded => isSectionExpanded;
+
+  @override
+  set _isSectionExpanded(ObservableMap<int, bool> value) {
+    _$_isSectionExpandedAtom.reportWrite(value, super._isSectionExpanded, () {
+      super._isSectionExpanded = value;
+    });
+  }
+
   late final _$saveTemplateAsyncAction = AsyncAction(
       '_TemplateEditorStoreBaseToJson.saveTemplate',
       context: context);
@@ -334,6 +353,29 @@ mixin _$TemplateEditorStore on _TemplateEditorStoreBaseToJson, Store {
   late final _$_TemplateEditorStoreBaseToJsonActionController =
       ActionController(
           name: '_TemplateEditorStoreBaseToJson', context: context);
+
+  @override
+  void setExpandedSection(int sectionIndex, bool expanded) {
+    final _$actionInfo = _$_TemplateEditorStoreBaseToJsonActionController
+        .startAction(name: '_TemplateEditorStoreBaseToJson.setExpandedSection');
+    try {
+      return super.setExpandedSection(sectionIndex, expanded);
+    } finally {
+      _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setExpandedSectionIfUnset(int sectionIndex, bool expanded) {
+    final _$actionInfo =
+        _$_TemplateEditorStoreBaseToJsonActionController.startAction(
+            name: '_TemplateEditorStoreBaseToJson.setExpandedSectionIfUnset');
+    try {
+      return super.setExpandedSectionIfUnset(sectionIndex, expanded);
+    } finally {
+      _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void undo() {
@@ -427,6 +469,17 @@ mixin _$TemplateEditorStore on _TemplateEditorStoreBaseToJson, Store {
             name: '_TemplateEditorStoreBaseToJson.setCurrentTemplateIndex');
     try {
       return super.setCurrentTemplateIndex(templateIndex);
+    } finally {
+      _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void moveCheck(int sectionIndex, int oldIndex, int newIndex) {
+    final _$actionInfo = _$_TemplateEditorStoreBaseToJsonActionController
+        .startAction(name: '_TemplateEditorStoreBaseToJson.moveCheck');
+    try {
+      return super.moveCheck(sectionIndex, oldIndex, newIndex);
     } finally {
       _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
     }
