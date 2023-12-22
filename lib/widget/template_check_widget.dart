@@ -124,19 +124,23 @@ class TemplateCheckWidget extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    TextFormField(
-                      controller: descriptionController,
-                      decoration: const InputDecoration(
-                        hintText: 'Enter check description',
-                        border: OutlineInputBorder(),
+                    SizedBox(
+                      width: ccrDescriptionFieldWidth,
+                      child: TextFormField(
+                        controller: descriptionController,
+                        decoration: const InputDecoration(
+                          hintText: 'Enter check description',
+                          border: OutlineInputBorder(),
+                        ),
+                        maxLines: null, // Makes the input field expandable
+                        minLines:
+                            1, // Minimum lines the TextFormField will take
+                        keyboardType: TextInputType
+                            .multiline, // Keyboard type for multiline input
+                        textCapitalization: TextCapitalization
+                            .sentences, // Capitalize first letter of sentences
+                        autofocus: true,
                       ),
-                      maxLines: null, // Makes the input field expandable
-                      minLines: 1, // Minimum lines the TextFormField will take
-                      keyboardType: TextInputType
-                          .multiline, // Keyboard type for multiline input
-                      textCapitalization: TextCapitalization
-                          .sentences, // Capitalize first letter of sentences
-                      autofocus: true,
                     ),
                     ListTile(
                       title: const Text('Set Timer Duration'),

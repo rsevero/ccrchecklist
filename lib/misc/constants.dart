@@ -31,3 +31,5 @@ const ccrTemplatesDirectory = 'templates';
 const ccrShareDirectory = 'share';
 
 enum CCRFileExistsAction { replace, chooseAnother, cancel }
+
+const double ccrDescriptionFieldWidth = 300;
