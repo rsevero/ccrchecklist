@@ -1,5 +1,5 @@
 import 'package:ccr_checklist/store/template_editor_store.dart';
-import 'package:ccr_checklist/widget/template_editor_actions_widget.dart';
+import 'package:ccr_checklist/widget/template_editor_page_actions_widget.dart';
 import 'package:ccr_checklist/widget/template_editor_page_app_bar.dart';
 import 'package:ccr_checklist/widget/template_editor_page_body.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +25,7 @@ class TemplateEditorPage extends StatelessWidget {
       child: Scaffold(
         appBar: TemplateEditorPageAppBar(context, templateEditorStore),
         body: const TemplateEditorPageBody(),
-        floatingActionButton: const TemplateEditorActionsWidget(),
+        floatingActionButton: const TemplateEditorPageActionsWidget(),
       ),
     );
   }

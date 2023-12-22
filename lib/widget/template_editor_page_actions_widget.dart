@@ -8,8 +8,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:provider/provider.dart';
 
-class TemplateEditorActionsWidget extends StatelessWidget {
-  const TemplateEditorActionsWidget({super.key});
+class TemplateEditorPageActionsWidget extends StatelessWidget {
+  const TemplateEditorPageActionsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -284,7 +284,15 @@ class TemplateEditorActionsWidget extends StatelessWidget {
                     TextFormField(
                       controller: descriptionController,
                       decoration: const InputDecoration(
-                          hintText: 'Enter check description'),
+                        hintText: 'Enter check description',
+                        border: OutlineInputBorder(),
+                      ),
+                      maxLines: null, // Makes the input field expandable
+                      minLines: 1, // Minimum lines the TextFormField will take
+                      keyboardType: TextInputType
+                          .multiline, // Keyboard type for multiline input
+                      textCapitalization: TextCapitalization
+                          .sentences, // Capitalize first letter of sentences
                       autofocus: true,
                     ),
                     const Padding(
