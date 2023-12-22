@@ -126,20 +126,45 @@ class TemplateCheckWidget extends StatelessWidget {
                   children: <Widget>[
                     SizedBox(
                       width: ccrDescriptionFieldWidth,
-                      child: TextFormField(
-                        controller: descriptionController,
-                        decoration: const InputDecoration(
-                          hintText: 'Enter check description',
-                          border: OutlineInputBorder(),
-                        ),
-                        maxLines: null, // Makes the input field expandable
-                        minLines:
-                            1, // Minimum lines the TextFormField will take
-                        keyboardType: TextInputType
-                            .multiline, // Keyboard type for multiline input
-                        textCapitalization: TextCapitalization
-                            .sentences, // Capitalize first letter of sentences
-                        autofocus: true,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Row(
+                            children: [
+                              Text(
+                                'Description',
+                                style: TextStyle(
+                                  fontSize:
+                                      16, // Adjust the font size as needed
+                                ),
+                              ),
+                              Text(
+                                ' *', // Red asterisk with preceding space for separation
+                                style: TextStyle(
+                                  color: Colors.red,
+                                  fontSize:
+                                      16, // Adjust the font size to match the label
+                                ),
+                              ),
+                            ],
+                          ),
+                          TextFormField(
+                            controller: descriptionController,
+                            decoration: const InputDecoration(
+                              hintText: 'Enter check description',
+                              border: OutlineInputBorder(),
+                            ),
+                            maxLines: null, // Makes the input field expandable
+                            minLines:
+                                1, // Minimum lines the TextFormField will take
+                            keyboardType: TextInputType
+                                .multiline, // Keyboard type for multiline input
+                            textCapitalization: TextCapitalization
+                                .sentences, // Capitalize first letter of sentences
+                            autofocus: true,
+                          ),
+                          // ... other widgets ...
+                        ],
                       ),
                     ),
                     ListTile(
