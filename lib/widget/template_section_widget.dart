@@ -25,8 +25,7 @@ class TemplateSectionWidget extends StatelessWidget {
       builder: (_) {
         final isSelected =
             (sectionIndex == templateEditorStore.selectedSectionIndex);
-        final isExpanded =
-            (sectionIndex == templateEditorStore.sections.length - 1);
+        const isExpanded = false;
         templateEditorStore.setExpandedSectionIfUnset(sectionIndex, isExpanded);
 
         return Container(
