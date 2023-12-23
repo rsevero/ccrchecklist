@@ -332,6 +332,7 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
       _checks.add(ObservableList.of(section.checks));
     }
     _selectLastSection();
+    _updateHasLinearitySteps();
 
     undoRedoStorage.clearUndoRedo(_undoRedoClass);
     _saveSnapshot('Set current template');
