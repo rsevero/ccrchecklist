@@ -244,8 +244,9 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
   }
 
   @action
-  void addLinearityStep2Check() {
-    final newLinearityStep2Check = TemplateLinearityStep2Check();
+  void addLinearityStep2Check({required String description}) {
+    final newLinearityStep2Check =
+        TemplateLinearityStep2Check(description: description);
     _selectedSection.checks.add(newLinearityStep2Check);
     _checks[_selectedSectionIndex].add(newLinearityStep2Check);
     _updateHasLinearitySteps();
@@ -253,9 +254,10 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
   }
 
   @action
-  void addLinearityStep1Check({required int referenceCount}) {
-    final newLinearityStep1Check =
-        TemplateLinearityStep1Check(referenceCount: referenceCount);
+  void addLinearityStep1Check(
+      {required String description, required int referenceCount}) {
+    final newLinearityStep1Check = TemplateLinearityStep1Check(
+        referenceCount: referenceCount, description: description);
     _selectedSection.checks.add(newLinearityStep1Check);
     _checks[_selectedSectionIndex].add(newLinearityStep1Check);
     _updateHasLinearitySteps();
@@ -394,14 +396,34 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
 
   @action
   void updateLinearityStep1Check(
-      int sectionIndex, int checkIndex, int referenceCount) {
+    int sectionIndex,
+    int checkIndex, {
+    required int referenceCount,
+    required String description,
+  }) {
     final check =
         _checks[sectionIndex][checkIndex] as TemplateLinearityStep1Check;
-    final newCheck = check.copyWith(referenceCount: referenceCount);
+    final newCheck = check.copyWith(
+        referenceCount: referenceCount, description: description);
 
     _currentTemplate.sections[sectionIndex].checks[checkIndex] = newCheck;
     _checks[sectionIndex][checkIndex] = newCheck;
     _saveSnapshot('Update linearity step 1 check');
+  }
+
+  @action
+  void updateLinearityStep2Check(
+    int sectionIndex,
+    int checkIndex, {
+    required String description,
+  }) {
+    final check =
+        _checks[sectionIndex][checkIndex] as TemplateLinearityStep2Check;
+    final newCheck = check.copyWith(description: description);
+
+    _currentTemplate.sections[sectionIndex].checks[checkIndex] = newCheck;
+    _checks[sectionIndex][checkIndex] = newCheck;
+    _saveSnapshot('Update linearity step 2 check');
   }
 
   @action

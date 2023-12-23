@@ -31,13 +31,15 @@ TemplateCheck _$TemplateCheckFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TemplateCheck {
+  String get description => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String description, int secondsTimer,
             String observation, List<RegularCheckReference> references)
         regular,
-    required TResult Function(int referenceCount) linearityStep1,
-    required TResult Function() linearityStep2,
+    required TResult Function(String description, int referenceCount)
+        linearityStep1,
+    required TResult Function(String description) linearityStep2,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -45,8 +47,8 @@ mixin _$TemplateCheck {
     TResult? Function(String description, int secondsTimer, String observation,
             List<RegularCheckReference> references)?
         regular,
-    TResult? Function(int referenceCount)? linearityStep1,
-    TResult? Function()? linearityStep2,
+    TResult? Function(String description, int referenceCount)? linearityStep1,
+    TResult? Function(String description)? linearityStep2,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -54,8 +56,8 @@ mixin _$TemplateCheck {
     TResult Function(String description, int secondsTimer, String observation,
             List<RegularCheckReference> references)?
         regular,
-    TResult Function(int referenceCount)? linearityStep1,
-    TResult Function()? linearityStep2,
+    TResult Function(String description, int referenceCount)? linearityStep1,
+    TResult Function(String description)? linearityStep2,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -82,6 +84,9 @@ mixin _$TemplateCheck {
   }) =>
       throw _privateConstructorUsedError;
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $TemplateCheckCopyWith<TemplateCheck> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -89,6 +94,8 @@ abstract class $TemplateCheckCopyWith<$Res> {
   factory $TemplateCheckCopyWith(
           TemplateCheck value, $Res Function(TemplateCheck) then) =
       _$TemplateCheckCopyWithImpl<$Res, TemplateCheck>;
+  @useResult
+  $Res call({String description});
 }
 
 /// @nodoc
@@ -100,13 +107,28 @@ class _$TemplateCheckCopyWithImpl<$Res, $Val extends TemplateCheck>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? description = null,
+  }) {
+    return _then(_value.copyWith(
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$TemplateRegularCheckImplCopyWith<$Res> {
+abstract class _$$TemplateRegularCheckImplCopyWith<$Res>
+    implements $TemplateCheckCopyWith<$Res> {
   factory _$$TemplateRegularCheckImplCopyWith(_$TemplateRegularCheckImpl value,
           $Res Function(_$TemplateRegularCheckImpl) then) =
       __$$TemplateRegularCheckImplCopyWithImpl<$Res>;
+  @override
   @useResult
   $Res call(
       {String description,
@@ -230,8 +252,9 @@ class _$TemplateRegularCheckImpl extends TemplateRegularCheck
     required TResult Function(String description, int secondsTimer,
             String observation, List<RegularCheckReference> references)
         regular,
-    required TResult Function(int referenceCount) linearityStep1,
-    required TResult Function() linearityStep2,
+    required TResult Function(String description, int referenceCount)
+        linearityStep1,
+    required TResult Function(String description) linearityStep2,
   }) {
     return regular(description, secondsTimer, observation, references);
   }
@@ -242,8 +265,8 @@ class _$TemplateRegularCheckImpl extends TemplateRegularCheck
     TResult? Function(String description, int secondsTimer, String observation,
             List<RegularCheckReference> references)?
         regular,
-    TResult? Function(int referenceCount)? linearityStep1,
-    TResult? Function()? linearityStep2,
+    TResult? Function(String description, int referenceCount)? linearityStep1,
+    TResult? Function(String description)? linearityStep2,
   }) {
     return regular?.call(description, secondsTimer, observation, references);
   }
@@ -254,8 +277,8 @@ class _$TemplateRegularCheckImpl extends TemplateRegularCheck
     TResult Function(String description, int secondsTimer, String observation,
             List<RegularCheckReference> references)?
         regular,
-    TResult Function(int referenceCount)? linearityStep1,
-    TResult Function()? linearityStep2,
+    TResult Function(String description, int referenceCount)? linearityStep1,
+    TResult Function(String description)? linearityStep2,
     required TResult orElse(),
   }) {
     if (regular != null) {
@@ -318,23 +341,27 @@ abstract class TemplateRegularCheck extends TemplateCheck {
   factory TemplateRegularCheck.fromJson(Map<String, dynamic> json) =
       _$TemplateRegularCheckImpl.fromJson;
 
+  @override
   String get description;
   int get secondsTimer;
   String get observation;
   List<RegularCheckReference> get references;
+  @override
   @JsonKey(ignore: true)
   _$$TemplateRegularCheckImplCopyWith<_$TemplateRegularCheckImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$TemplateLinearityStep1CheckImplCopyWith<$Res> {
+abstract class _$$TemplateLinearityStep1CheckImplCopyWith<$Res>
+    implements $TemplateCheckCopyWith<$Res> {
   factory _$$TemplateLinearityStep1CheckImplCopyWith(
           _$TemplateLinearityStep1CheckImpl value,
           $Res Function(_$TemplateLinearityStep1CheckImpl) then) =
       __$$TemplateLinearityStep1CheckImplCopyWithImpl<$Res>;
+  @override
   @useResult
-  $Res call({int referenceCount});
+  $Res call({String description, int referenceCount});
 }
 
 /// @nodoc
@@ -349,9 +376,14 @@ class __$$TemplateLinearityStep1CheckImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? description = null,
     Object? referenceCount = null,
   }) {
     return _then(_$TemplateLinearityStep1CheckImpl(
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
       referenceCount: null == referenceCount
           ? _value.referenceCount
           : referenceCount // ignore: cast_nullable_to_non_nullable
@@ -365,7 +397,9 @@ class __$$TemplateLinearityStep1CheckImplCopyWithImpl<$Res>
 class _$TemplateLinearityStep1CheckImpl extends TemplateLinearityStep1Check
     with DiagnosticableTreeMixin {
   _$TemplateLinearityStep1CheckImpl(
-      {required this.referenceCount, final String? $type})
+      {required this.description,
+      required this.referenceCount,
+      final String? $type})
       : $type = $type ?? 'linearityStep1',
         super._();
 
@@ -374,6 +408,8 @@ class _$TemplateLinearityStep1CheckImpl extends TemplateLinearityStep1Check
       _$$TemplateLinearityStep1CheckImplFromJson(json);
 
   @override
+  final String description;
+  @override
   final int referenceCount;
 
   @JsonKey(name: 'runtimeType')
@@ -381,7 +417,7 @@ class _$TemplateLinearityStep1CheckImpl extends TemplateLinearityStep1Check
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TemplateCheck.linearityStep1(referenceCount: $referenceCount)';
+    return 'TemplateCheck.linearityStep1(description: $description, referenceCount: $referenceCount)';
   }
 
   @override
@@ -389,6 +425,7 @@ class _$TemplateLinearityStep1CheckImpl extends TemplateLinearityStep1Check
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'TemplateCheck.linearityStep1'))
+      ..add(DiagnosticsProperty('description', description))
       ..add(DiagnosticsProperty('referenceCount', referenceCount));
   }
 
@@ -397,13 +434,15 @@ class _$TemplateLinearityStep1CheckImpl extends TemplateLinearityStep1Check
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TemplateLinearityStep1CheckImpl &&
+            (identical(other.description, description) ||
+                other.description == description) &&
             (identical(other.referenceCount, referenceCount) ||
                 other.referenceCount == referenceCount));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, referenceCount);
+  int get hashCode => Object.hash(runtimeType, description, referenceCount);
 
   @JsonKey(ignore: true)
   @override
@@ -418,10 +457,11 @@ class _$TemplateLinearityStep1CheckImpl extends TemplateLinearityStep1Check
     required TResult Function(String description, int secondsTimer,
             String observation, List<RegularCheckReference> references)
         regular,
-    required TResult Function(int referenceCount) linearityStep1,
-    required TResult Function() linearityStep2,
+    required TResult Function(String description, int referenceCount)
+        linearityStep1,
+    required TResult Function(String description) linearityStep2,
   }) {
-    return linearityStep1(referenceCount);
+    return linearityStep1(description, referenceCount);
   }
 
   @override
@@ -430,10 +470,10 @@ class _$TemplateLinearityStep1CheckImpl extends TemplateLinearityStep1Check
     TResult? Function(String description, int secondsTimer, String observation,
             List<RegularCheckReference> references)?
         regular,
-    TResult? Function(int referenceCount)? linearityStep1,
-    TResult? Function()? linearityStep2,
+    TResult? Function(String description, int referenceCount)? linearityStep1,
+    TResult? Function(String description)? linearityStep2,
   }) {
-    return linearityStep1?.call(referenceCount);
+    return linearityStep1?.call(description, referenceCount);
   }
 
   @override
@@ -442,12 +482,12 @@ class _$TemplateLinearityStep1CheckImpl extends TemplateLinearityStep1Check
     TResult Function(String description, int secondsTimer, String observation,
             List<RegularCheckReference> references)?
         regular,
-    TResult Function(int referenceCount)? linearityStep1,
-    TResult Function()? linearityStep2,
+    TResult Function(String description, int referenceCount)? linearityStep1,
+    TResult Function(String description)? linearityStep2,
     required TResult orElse(),
   }) {
     if (linearityStep1 != null) {
-      return linearityStep1(referenceCount);
+      return linearityStep1(description, referenceCount);
     }
     return orElse();
   }
@@ -495,25 +535,33 @@ class _$TemplateLinearityStep1CheckImpl extends TemplateLinearityStep1Check
 }
 
 abstract class TemplateLinearityStep1Check extends TemplateCheck {
-  factory TemplateLinearityStep1Check({required final int referenceCount}) =
-      _$TemplateLinearityStep1CheckImpl;
+  factory TemplateLinearityStep1Check(
+      {required final String description,
+      required final int referenceCount}) = _$TemplateLinearityStep1CheckImpl;
   TemplateLinearityStep1Check._() : super._();
 
   factory TemplateLinearityStep1Check.fromJson(Map<String, dynamic> json) =
       _$TemplateLinearityStep1CheckImpl.fromJson;
 
+  @override
+  String get description;
   int get referenceCount;
+  @override
   @JsonKey(ignore: true)
   _$$TemplateLinearityStep1CheckImplCopyWith<_$TemplateLinearityStep1CheckImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$TemplateLinearityStep2CheckImplCopyWith<$Res> {
+abstract class _$$TemplateLinearityStep2CheckImplCopyWith<$Res>
+    implements $TemplateCheckCopyWith<$Res> {
   factory _$$TemplateLinearityStep2CheckImplCopyWith(
           _$TemplateLinearityStep2CheckImpl value,
           $Res Function(_$TemplateLinearityStep2CheckImpl) then) =
       __$$TemplateLinearityStep2CheckImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String description});
 }
 
 /// @nodoc
@@ -524,13 +572,27 @@ class __$$TemplateLinearityStep2CheckImplCopyWithImpl<$Res>
       _$TemplateLinearityStep2CheckImpl _value,
       $Res Function(_$TemplateLinearityStep2CheckImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? description = null,
+  }) {
+    return _then(_$TemplateLinearityStep2CheckImpl(
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$TemplateLinearityStep2CheckImpl extends TemplateLinearityStep2Check
     with DiagnosticableTreeMixin {
-  _$TemplateLinearityStep2CheckImpl({final String? $type})
+  _$TemplateLinearityStep2CheckImpl(
+      {required this.description, final String? $type})
       : $type = $type ?? 'linearityStep2',
         super._();
 
@@ -538,30 +600,44 @@ class _$TemplateLinearityStep2CheckImpl extends TemplateLinearityStep2Check
           Map<String, dynamic> json) =>
       _$$TemplateLinearityStep2CheckImplFromJson(json);
 
+  @override
+  final String description;
+
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TemplateCheck.linearityStep2()';
+    return 'TemplateCheck.linearityStep2(description: $description)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'TemplateCheck.linearityStep2'));
+    properties
+      ..add(DiagnosticsProperty('type', 'TemplateCheck.linearityStep2'))
+      ..add(DiagnosticsProperty('description', description));
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TemplateLinearityStep2CheckImpl);
+            other is _$TemplateLinearityStep2CheckImpl &&
+            (identical(other.description, description) ||
+                other.description == description));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, description);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TemplateLinearityStep2CheckImplCopyWith<_$TemplateLinearityStep2CheckImpl>
+      get copyWith => __$$TemplateLinearityStep2CheckImplCopyWithImpl<
+          _$TemplateLinearityStep2CheckImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -569,10 +645,11 @@ class _$TemplateLinearityStep2CheckImpl extends TemplateLinearityStep2Check
     required TResult Function(String description, int secondsTimer,
             String observation, List<RegularCheckReference> references)
         regular,
-    required TResult Function(int referenceCount) linearityStep1,
-    required TResult Function() linearityStep2,
+    required TResult Function(String description, int referenceCount)
+        linearityStep1,
+    required TResult Function(String description) linearityStep2,
   }) {
-    return linearityStep2();
+    return linearityStep2(description);
   }
 
   @override
@@ -581,10 +658,10 @@ class _$TemplateLinearityStep2CheckImpl extends TemplateLinearityStep2Check
     TResult? Function(String description, int secondsTimer, String observation,
             List<RegularCheckReference> references)?
         regular,
-    TResult? Function(int referenceCount)? linearityStep1,
-    TResult? Function()? linearityStep2,
+    TResult? Function(String description, int referenceCount)? linearityStep1,
+    TResult? Function(String description)? linearityStep2,
   }) {
-    return linearityStep2?.call();
+    return linearityStep2?.call(description);
   }
 
   @override
@@ -593,12 +670,12 @@ class _$TemplateLinearityStep2CheckImpl extends TemplateLinearityStep2Check
     TResult Function(String description, int secondsTimer, String observation,
             List<RegularCheckReference> references)?
         regular,
-    TResult Function(int referenceCount)? linearityStep1,
-    TResult Function()? linearityStep2,
+    TResult Function(String description, int referenceCount)? linearityStep1,
+    TResult Function(String description)? linearityStep2,
     required TResult orElse(),
   }) {
     if (linearityStep2 != null) {
-      return linearityStep2();
+      return linearityStep2(description);
     }
     return orElse();
   }
@@ -646,9 +723,17 @@ class _$TemplateLinearityStep2CheckImpl extends TemplateLinearityStep2Check
 }
 
 abstract class TemplateLinearityStep2Check extends TemplateCheck {
-  factory TemplateLinearityStep2Check() = _$TemplateLinearityStep2CheckImpl;
+  factory TemplateLinearityStep2Check({required final String description}) =
+      _$TemplateLinearityStep2CheckImpl;
   TemplateLinearityStep2Check._() : super._();
 
   factory TemplateLinearityStep2Check.fromJson(Map<String, dynamic> json) =
       _$TemplateLinearityStep2CheckImpl.fromJson;
+
+  @override
+  String get description;
+  @override
+  @JsonKey(ignore: true)
+  _$$TemplateLinearityStep2CheckImplCopyWith<_$TemplateLinearityStep2CheckImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

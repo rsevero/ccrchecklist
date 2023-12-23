@@ -21,27 +21,17 @@ sealed class ChecklistCheck with _$ChecklistCheck {
     required List<RegularCheckReference> references,
   }) = ChecklistRegularCheck;
   factory ChecklistCheck.linearityStep1({
+    required String description,
     required bool isChecked,
     required DateTime lastChange,
     required int referenceCount,
   }) = ChecklistLinearityStep1Check;
   factory ChecklistCheck.linearityStep2({
+    required String description,
     required bool isChecked,
     required DateTime lastChange,
     required int referenceCount,
   }) = ChecklistLinearityStep2Check;
-
-  String get description {
-    if (this is ChecklistRegularCheck) {
-      return (this as ChecklistRegularCheck).description;
-    } else if (this is ChecklistLinearityStep1Check) {
-      return 'Linearity Step 1';
-    } else if (this is ChecklistLinearityStep2Check) {
-      return 'Linearity Step 2';
-    } else {
-      throw Exception('Unknown ChecklistCheck type');
-    }
-  }
 
   factory ChecklistCheck.fromJson(Map<String, Object?> json) =>
       _$ChecklistCheckFromJson(json);

@@ -200,15 +200,11 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
     }
   }
 
-  void _onTapAddLinearityStep2Check(BuildContext context) {
-    final templateEditorStore =
-        Provider.of<TemplateEditorStore>(context, listen: false);
-    templateEditorStore.addLinearityStep2Check();
-  }
-
   void _onTapAddLinearityStep1Check(BuildContext context) {
     final templateEditorStore =
         Provider.of<TemplateEditorStore>(context, listen: false);
+    final TextEditingController descriptionController = TextEditingController();
+
     int numberOfReferences = 1; // Default value
 
     showDialog(
@@ -222,6 +218,47 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
+                  SizedBox(
+                    width: ccrDescriptionFieldWidth,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Row(
+                          children: [
+                            Text(
+                              'Description',
+                              style: TextStyle(
+                                fontSize: 16, // Adjust the font size as needed
+                              ),
+                            ),
+                            Text(
+                              ' *', // Red asterisk with preceding space for separation
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontSize:
+                                    16, // Adjust the font size to match the label
+                              ),
+                            ),
+                          ],
+                        ),
+                        TextFormField(
+                          controller: descriptionController,
+                          decoration: const InputDecoration(
+                            hintText: 'Enter check description',
+                            border: OutlineInputBorder(),
+                          ),
+                          maxLines: null, // Makes the input field expandable
+                          minLines:
+                              1, // Minimum lines the TextFormField will take
+                          keyboardType: TextInputType
+                              .multiline, // Keyboard type for multiline input
+                          textCapitalization: TextCapitalization
+                              .sentences, // Capitalize first letter of sentences
+                          autofocus: true,
+                        ),
+                      ],
+                    ),
+                  ),
                   const Padding(
                     padding: EdgeInsets.symmetric(vertical: 8.0),
                     child: Text(
@@ -248,9 +285,98 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
             TextButton(
               child: const Text('Create'),
               onPressed: () {
-                templateEditorStore.addLinearityStep1Check(
-                    referenceCount: numberOfReferences);
-                Navigator.of(context).pop();
+                final description = descriptionController.text;
+                if (description.isNotEmpty) {
+                  templateEditorStore.addLinearityStep1Check(
+                    description: description,
+                    referenceCount: numberOfReferences,
+                  );
+                  Navigator.of(context).pop();
+                }
+              },
+            ),
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _onTapAddLinearityStep2Check(BuildContext context) {
+    final templateEditorStore =
+        Provider.of<TemplateEditorStore>(context, listen: false);
+    final TextEditingController descriptionController = TextEditingController();
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Add step 2 of Linearity Check'),
+          content: StatefulBuilder(
+            // Use StatefulBuilder to update the dialog's state
+            builder: (BuildContext context, StateSetter setState) {
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  SizedBox(
+                    width: ccrDescriptionFieldWidth,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Row(
+                          children: [
+                            Text(
+                              'Description',
+                              style: TextStyle(
+                                fontSize: 16, // Adjust the font size as needed
+                              ),
+                            ),
+                            Text(
+                              ' *', // Red asterisk with preceding space for separation
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontSize:
+                                    16, // Adjust the font size to match the label
+                              ),
+                            ),
+                          ],
+                        ),
+                        TextFormField(
+                          controller: descriptionController,
+                          decoration: const InputDecoration(
+                            hintText: 'Enter check description',
+                            border: OutlineInputBorder(),
+                          ),
+                          maxLines: null, // Makes the input field expandable
+                          minLines:
+                              1, // Minimum lines the TextFormField will take
+                          keyboardType: TextInputType
+                              .multiline, // Keyboard type for multiline input
+                          textCapitalization: TextCapitalization
+                              .sentences, // Capitalize first letter of sentences
+                          autofocus: true,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Create'),
+              onPressed: () {
+                final description = descriptionController.text;
+                if (description.isNotEmpty) {
+                  templateEditorStore.addLinearityStep2Check(
+                    description: description,
+                  );
+                  Navigator.of(context).pop();
+                }
               },
             ),
             TextButton(
@@ -325,7 +451,6 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                                 .sentences, // Capitalize first letter of sentences
                             autofocus: true,
                           ),
-                          // ... other widgets ...
                         ],
                       ),
                     ),
@@ -360,7 +485,6 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                                 .sentences, // Capitalize first letter of sentences
                             autofocus: true,
                           ),
-                          // ... other widgets ...
                         ],
                       ),
                     ),

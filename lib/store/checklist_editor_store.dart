@@ -330,6 +330,7 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
           ),
         );
         checklistCheck = ChecklistLinearityStep1Check(
+          description: templateCheck.description,
           lastChange: DateTime.now(),
           isChecked: false,
           referenceCount: _linearityCheckReferenceCount,
@@ -338,6 +339,7 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
         _linearityStep2SectionIndex = sectionIndex;
         _linearityStep2CheckIndex = checkIndex;
         checklistCheck = ChecklistLinearityStep2Check(
+          description: templateCheck.description,
           lastChange: DateTime.now(),
           isChecked: false,
           referenceCount: 0,

@@ -1,3 +1,4 @@
+import 'package:ccr_checklist/data/checklist_check.dart';
 import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:ccr_checklist/widget/linearity_worksheet_text.dart';
@@ -64,13 +65,14 @@ class _ChecklistLinearityStep2CheckWidgetState
   @override
   Widget build(BuildContext context) {
     final checklistEditorStore = Provider.of<ChecklistEditorStore>(context);
+    final check = checklistEditorStore.checks[widget.sectionIndex]
+        [widget.checkIndex] as ChecklistLinearityStep2Check;
 
     return ListTile(
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-              'Linearity check - step 2: open DSV, wait for stable readings, note mV (milivolts) readings in the "actual" column with pure oxygen'),
+          Text(check.description),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Container(

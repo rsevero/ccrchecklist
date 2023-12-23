@@ -31,6 +31,7 @@ Map<String, dynamic> _$$TemplateRegularCheckImplToJson(
 _$TemplateLinearityStep1CheckImpl _$$TemplateLinearityStep1CheckImplFromJson(
         Map<String, dynamic> json) =>
     _$TemplateLinearityStep1CheckImpl(
+      description: json['description'] as String,
       referenceCount: json['referenceCount'] as int,
       $type: json['runtimeType'] as String?,
     );
@@ -38,6 +39,7 @@ _$TemplateLinearityStep1CheckImpl _$$TemplateLinearityStep1CheckImplFromJson(
 Map<String, dynamic> _$$TemplateLinearityStep1CheckImplToJson(
         _$TemplateLinearityStep1CheckImpl instance) =>
     <String, dynamic>{
+      'description': instance.description,
       'referenceCount': instance.referenceCount,
       'runtimeType': instance.$type,
     };
@@ -45,11 +47,13 @@ Map<String, dynamic> _$$TemplateLinearityStep1CheckImplToJson(
 _$TemplateLinearityStep2CheckImpl _$$TemplateLinearityStep2CheckImplFromJson(
         Map<String, dynamic> json) =>
     _$TemplateLinearityStep2CheckImpl(
+      description: json['description'] as String,
       $type: json['runtimeType'] as String?,
     );
 
 Map<String, dynamic> _$$TemplateLinearityStep2CheckImplToJson(
         _$TemplateLinearityStep2CheckImpl instance) =>
     <String, dynamic>{
+      'description': instance.description,
       'runtimeType': instance.$type,
     };

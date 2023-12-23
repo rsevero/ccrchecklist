@@ -1,3 +1,4 @@
+import 'package:ccr_checklist/data/checklist_check.dart';
 import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:ccr_checklist/widget/linearity_worksheet_text.dart';
@@ -64,13 +65,14 @@ class _ChecklistLinearityStep1CheckWidgetState
   @override
   Widget build(BuildContext context) {
     final checklistEditorStore = Provider.of<ChecklistEditorStore>(context);
+    final check = checklistEditorStore.checks[widget.sectionIndex]
+        [widget.checkIndex] as ChecklistLinearityStep1Check;
 
     return ListTile(
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-              'Linearity check - step 1: turn on computer, note milivolts with pure air'),
+          Text(check.description),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Container(

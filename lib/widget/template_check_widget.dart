@@ -36,7 +36,10 @@ class TemplateCheckWidget extends StatelessWidget {
             observation = "Obs.: $observation";
           }
         } else if (check is TemplateLinearityStep1Check) {
-          description += ' (Ref count: ${check.referenceCount})';
+          description +=
+              ' (Linearity step 1 - Ref count: ${check.referenceCount})';
+        } else if (check is TemplateLinearityStep2Check) {
+          description += ' (Linearity step 2)';
         }
         return Row(
           children: [
@@ -48,12 +51,10 @@ class TemplateCheckWidget extends StatelessWidget {
                   onSelected: (value) {
                     switch (value) {
                       case 'Edit':
-                        _editCheck(
-                            context, templateEditorStore, sectionIndex, index);
+                        _editCheck(context, sectionIndex, index);
                         break;
                       case 'Move to new section':
-                        _moveCheckNewSection(
-                            context, templateEditorStore, sectionIndex, index);
+                        _moveCheckNewSection(context, sectionIndex, index);
                         break;
                       case 'Delete':
                         templateEditorStore.deleteCheck(sectionIndex, index);
@@ -62,11 +63,9 @@ class TemplateCheckWidget extends StatelessWidget {
                   },
                   itemBuilder: (BuildContext context) =>
                       <PopupMenuEntry<String>>[
-                    PopupMenuItem<String>(
+                    const PopupMenuItem<String>(
                       value: 'Edit',
-                      enabled: templateEditorStore.checks[sectionIndex][index]
-                          is! TemplateLinearityStep2Check,
-                      child: const Text('Edit'),
+                      child: Text('Edit'),
                     ),
                     PopupMenuItem<String>(
                       value: 'Move to new section',
@@ -94,8 +93,10 @@ class TemplateCheckWidget extends StatelessWidget {
     );
   }
 
-  void _editTemplateRegularCheck(BuildContext context,
-      TemplateEditorStore templateEditorStore, int sectionIndex, int index) {
+  void _editTemplateRegularCheck(
+      BuildContext context, int sectionIndex, int index) {
+    final templateEditorStore =
+        Provider.of<TemplateEditorStore>(context, listen: false);
     final TextEditingController descriptionController = TextEditingController();
     final TextEditingController observationController = TextEditingController();
 
@@ -322,10 +323,14 @@ class TemplateCheckWidget extends StatelessWidget {
     );
   }
 
-  void _editTemplateLinearityStep1Check(BuildContext context,
-      TemplateEditorStore templateEditorStore, int sectionIndex, int index) {
-    final check = (templateEditorStore.checks[sectionIndex][index]
-        as TemplateLinearityStep1Check);
+  void _editTemplateLinearityStep1Check(
+      BuildContext context, int sectionIndex, int index) {
+    final templateEditorStore =
+        Provider.of<TemplateEditorStore>(context, listen: false);
+    final TextEditingController descriptionController = TextEditingController();
+    final TemplateLinearityStep1Check check = templateEditorStore
+        .checks[sectionIndex][index] as TemplateLinearityStep1Check;
+    descriptionController.text = check.description;
     int referenceCount = check.referenceCount;
 
     showDialog(
@@ -337,11 +342,52 @@ class TemplateCheckWidget extends StatelessWidget {
             return AlertDialog(
               title: const Text('Edit Section'),
               content: SingleChildScrollView(
-                // For better layout management
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     const Text('Linearity Step 1'),
+                    SizedBox(
+                      width: ccrDescriptionFieldWidth,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Row(
+                            children: [
+                              Text(
+                                'Description',
+                                style: TextStyle(
+                                  fontSize:
+                                      16, // Adjust the font size as needed
+                                ),
+                              ),
+                              Text(
+                                ' *', // Red asterisk with preceding space for separation
+                                style: TextStyle(
+                                  color: Colors.red,
+                                  fontSize:
+                                      16, // Adjust the font size to match the label
+                                ),
+                              ),
+                            ],
+                          ),
+                          TextFormField(
+                            controller: descriptionController,
+                            decoration: const InputDecoration(
+                              hintText: 'Enter check description',
+                              border: OutlineInputBorder(),
+                            ),
+                            maxLines: null, // Makes the input field expandable
+                            minLines:
+                                1, // Minimum lines the TextFormField will take
+                            keyboardType: TextInputType
+                                .multiline, // Keyboard type for multiline input
+                            textCapitalization: TextCapitalization
+                                .sentences, // Capitalize first letter of sentences
+                            autofocus: true,
+                          ),
+                        ],
+                      ),
+                    ),
                     const Padding(
                       padding: EdgeInsets.symmetric(vertical: 8.0),
                       child: Text(
@@ -367,8 +413,103 @@ class TemplateCheckWidget extends StatelessWidget {
                 TextButton(
                   child: const Text('Update'),
                   onPressed: () {
+                    final newDescription = descriptionController.text.trim();
                     templateEditorStore.updateLinearityStep1Check(
-                        sectionIndex, index, referenceCount);
+                        sectionIndex, index,
+                        referenceCount: referenceCount,
+                        description: newDescription);
+                    Navigator.of(context).pop();
+                  },
+                ),
+                TextButton(
+                  child: const Text('Cancel'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+
+  void _editTemplateLinearityStep2Check(
+      BuildContext context, int sectionIndex, int index) {
+    final templateEditorStore =
+        Provider.of<TemplateEditorStore>(context, listen: false);
+    final TextEditingController descriptionController = TextEditingController();
+    final TemplateLinearityStep2Check check = templateEditorStore
+        .checks[sectionIndex][index] as TemplateLinearityStep2Check;
+    descriptionController.text = check.description;
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          // Use StatefulBuilder to manage local state of radio buttons
+          builder: (BuildContext context, StateSetter setState) {
+            return AlertDialog(
+              title: const Text('Edit Section'),
+              content: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    const Text('Linearity Step 2'),
+                    SizedBox(
+                      width: ccrDescriptionFieldWidth,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Row(
+                            children: [
+                              Text(
+                                'Description',
+                                style: TextStyle(
+                                  fontSize:
+                                      16, // Adjust the font size as needed
+                                ),
+                              ),
+                              Text(
+                                ' *', // Red asterisk with preceding space for separation
+                                style: TextStyle(
+                                  color: Colors.red,
+                                  fontSize:
+                                      16, // Adjust the font size to match the label
+                                ),
+                              ),
+                            ],
+                          ),
+                          TextFormField(
+                            controller: descriptionController,
+                            decoration: const InputDecoration(
+                              hintText: 'Enter check description',
+                              border: OutlineInputBorder(),
+                            ),
+                            maxLines: null, // Makes the input field expandable
+                            minLines:
+                                1, // Minimum lines the TextFormField will take
+                            keyboardType: TextInputType
+                                .multiline, // Keyboard type for multiline input
+                            textCapitalization: TextCapitalization
+                                .sentences, // Capitalize first letter of sentences
+                            autofocus: true,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('Update'),
+                  onPressed: () {
+                    final newDescription = descriptionController.text.trim();
+                    templateEditorStore.updateLinearityStep2Check(
+                        sectionIndex, index,
+                        description: newDescription);
                     Navigator.of(context).pop();
                   },
                 ),
@@ -387,10 +528,9 @@ class TemplateCheckWidget extends StatelessWidget {
   }
 
   void _moveCheckNewSection(
-      BuildContext context,
-      TemplateEditorStore templateEditorStore,
-      int sectionIndex,
-      int checkIndex) {
+      BuildContext context, int sectionIndex, int checkIndex) {
+    final templateEditorStore =
+        Provider.of<TemplateEditorStore>(context, listen: false);
     int? selectedNewSectionIndex;
 
     if (templateEditorStore.sections.length == 2) {
@@ -456,18 +596,17 @@ class TemplateCheckWidget extends StatelessWidget {
     );
   }
 
-  void _editCheck(BuildContext context, TemplateEditorStore templateEditorStore,
-      int sectionIndex, int index) {
+  void _editCheck(BuildContext context, int sectionIndex, int index) {
+    final templateEditorStore =
+        Provider.of<TemplateEditorStore>(context, listen: false);
     final check = templateEditorStore.checks[sectionIndex][index];
 
     if (check is TemplateRegularCheck) {
-      _editTemplateRegularCheck(
-          context, templateEditorStore, sectionIndex, index);
+      _editTemplateRegularCheck(context, sectionIndex, index);
     } else if (check is TemplateLinearityStep1Check) {
-      _editTemplateLinearityStep1Check(
-          context, templateEditorStore, sectionIndex, index);
+      _editTemplateLinearityStep1Check(context, sectionIndex, index);
     } else if (check is TemplateLinearityStep2Check) {
-      return;
+      _editTemplateLinearityStep2Check(context, sectionIndex, index);
     } else {
       throw Exception('Unknown check type');
     }

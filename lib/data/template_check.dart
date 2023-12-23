@@ -16,10 +16,14 @@ sealed class TemplateCheck with _$TemplateCheck {
     required List<RegularCheckReference> references,
   }) = TemplateRegularCheck;
 
-  factory TemplateCheck.linearityStep1({required int referenceCount}) =
-      TemplateLinearityStep1Check;
+  factory TemplateCheck.linearityStep1({
+    required String description,
+    required int referenceCount,
+  }) = TemplateLinearityStep1Check;
 
-  factory TemplateCheck.linearityStep2() = TemplateLinearityStep2Check;
+  factory TemplateCheck.linearityStep2({
+    required String description,
+  }) = TemplateLinearityStep2Check;
 
   String get description {
     if (this is TemplateRegularCheck) {

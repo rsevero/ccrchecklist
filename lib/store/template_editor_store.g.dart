@@ -398,24 +398,26 @@ mixin _$TemplateEditorStore on _TemplateEditorStoreBaseToJson, Store {
   }
 
   @override
-  void addLinearityStep2Check() {
+  void addLinearityStep2Check({required String description}) {
     final _$actionInfo =
         _$_TemplateEditorStoreBaseToJsonActionController.startAction(
             name: '_TemplateEditorStoreBaseToJson.addLinearityStep2Check');
     try {
-      return super.addLinearityStep2Check();
+      return super.addLinearityStep2Check(description: description);
     } finally {
       _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void addLinearityStep1Check({required int referenceCount}) {
+  void addLinearityStep1Check(
+      {required String description, required int referenceCount}) {
     final _$actionInfo =
         _$_TemplateEditorStoreBaseToJsonActionController.startAction(
             name: '_TemplateEditorStoreBaseToJson.addLinearityStep1Check');
     try {
-      return super.addLinearityStep1Check(referenceCount: referenceCount);
+      return super.addLinearityStep1Check(
+          description: description, referenceCount: referenceCount);
     } finally {
       _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
     }
@@ -507,14 +509,28 @@ mixin _$TemplateEditorStore on _TemplateEditorStoreBaseToJson, Store {
   }
 
   @override
-  void updateLinearityStep1Check(
-      int sectionIndex, int checkIndex, int referenceCount) {
+  void updateLinearityStep1Check(int sectionIndex, int checkIndex,
+      {required int referenceCount, required String description}) {
     final _$actionInfo =
         _$_TemplateEditorStoreBaseToJsonActionController.startAction(
             name: '_TemplateEditorStoreBaseToJson.updateLinearityStep1Check');
     try {
-      return super
-          .updateLinearityStep1Check(sectionIndex, checkIndex, referenceCount);
+      return super.updateLinearityStep1Check(sectionIndex, checkIndex,
+          referenceCount: referenceCount, description: description);
+    } finally {
+      _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void updateLinearityStep2Check(int sectionIndex, int checkIndex,
+      {required String description}) {
+    final _$actionInfo =
+        _$_TemplateEditorStoreBaseToJsonActionController.startAction(
+            name: '_TemplateEditorStoreBaseToJson.updateLinearityStep2Check');
+    try {
+      return super.updateLinearityStep2Check(sectionIndex, checkIndex,
+          description: description);
     } finally {
       _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
     }
