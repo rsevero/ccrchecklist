@@ -10,7 +10,6 @@ TemplateEditorStore _$TemplateEditorStoreFromJson(Map<String, dynamic> json) =>
     TemplateEditorStore()
       .._currentTemplate =
           Template.fromJson(json['_currentTemplate'] as Map<String, dynamic>)
-      .._currentTemplateIndex = json['_currentTemplateIndex'] as int
       .._currentTemplateIsModified = json['_currentTemplateIsModified'] as bool
       .._sections =
           ObservableListJsonConverter.obsvbLstOfTemplateSectionFromJson(
@@ -28,7 +27,6 @@ Map<String, dynamic> _$TemplateEditorStoreToJson(
         TemplateEditorStore instance) =>
     <String, dynamic>{
       '_currentTemplate': instance._currentTemplate.toJson(),
-      '_currentTemplateIndex': instance._currentTemplateIndex,
       '_currentTemplateIsModified': instance._currentTemplateIsModified,
       '_sections': ObservableListJsonConverter.obsvbLstOfTemplateSectionToJson(
           instance._sections),
@@ -90,26 +88,6 @@ mixin _$TemplateEditorStore on _TemplateEditorStoreBaseToJson, Store {
   set _currentTemplate(Template value) {
     _$_currentTemplateAtom.reportWrite(value, super._currentTemplate, () {
       super._currentTemplate = value;
-    });
-  }
-
-  late final _$_currentTemplateIndexAtom = Atom(
-      name: '_TemplateEditorStoreBaseToJson._currentTemplateIndex',
-      context: context);
-
-  int get currentTemplateIndex {
-    _$_currentTemplateIndexAtom.reportRead();
-    return super._currentTemplateIndex;
-  }
-
-  @override
-  int get _currentTemplateIndex => currentTemplateIndex;
-
-  @override
-  set _currentTemplateIndex(int value) {
-    _$_currentTemplateIndexAtom.reportWrite(value, super._currentTemplateIndex,
-        () {
-      super._currentTemplateIndex = value;
     });
   }
 
@@ -474,23 +452,11 @@ mixin _$TemplateEditorStore on _TemplateEditorStoreBaseToJson, Store {
   }
 
   @override
-  void setCurrentTemplate(Template template, [int? templateIndex]) {
+  void setCurrentTemplate(Template template) {
     final _$actionInfo = _$_TemplateEditorStoreBaseToJsonActionController
         .startAction(name: '_TemplateEditorStoreBaseToJson.setCurrentTemplate');
     try {
-      return super.setCurrentTemplate(template, templateIndex);
-    } finally {
-      _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setCurrentTemplateIndex(int templateIndex) {
-    final _$actionInfo =
-        _$_TemplateEditorStoreBaseToJsonActionController.startAction(
-            name: '_TemplateEditorStoreBaseToJson.setCurrentTemplateIndex');
-    try {
-      return super.setCurrentTemplateIndex(templateIndex);
+      return super.setCurrentTemplate(template);
     } finally {
       _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
     }

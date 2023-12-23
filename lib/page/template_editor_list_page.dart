@@ -73,7 +73,7 @@ class TemplateEditorListPage extends StatelessWidget {
     final template = await templateListStore
         .getTemplate(templateListStore.defaultTemplates[index]);
 
-    templateEditorStore.setCurrentTemplate(template, index);
+    templateEditorStore.setCurrentTemplate(template);
 
     if (!context.mounted) return;
     await Navigator.of(context).push(
