@@ -13,10 +13,10 @@ sealed class ChecklistCheck with _$ChecklistCheck {
   ChecklistCheck._();
 
   factory ChecklistCheck.regular({
-    required bool isChecked,
-    required DateTime lastChange,
     required String description,
     required String observation,
+    required bool isChecked,
+    required DateTime lastChange,
     required int secondsTimer,
     required List<RegularCheckReference> references,
   }) = ChecklistRegularCheck;

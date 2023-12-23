@@ -9,10 +9,10 @@ part of 'checklist_check.dart';
 _$ChecklistRegularCheckImpl _$$ChecklistRegularCheckImplFromJson(
         Map<String, dynamic> json) =>
     _$ChecklistRegularCheckImpl(
-      isChecked: json['isChecked'] as bool,
-      lastChange: DateTime.parse(json['lastChange'] as String),
       description: json['description'] as String,
       observation: json['observation'] as String,
+      isChecked: json['isChecked'] as bool,
+      lastChange: DateTime.parse(json['lastChange'] as String),
       secondsTimer: json['secondsTimer'] as int,
       references: (json['references'] as List<dynamic>)
           .map((e) => RegularCheckReference.fromJson(e as Map<String, dynamic>))
@@ -23,10 +23,10 @@ _$ChecklistRegularCheckImpl _$$ChecklistRegularCheckImplFromJson(
 Map<String, dynamic> _$$ChecklistRegularCheckImplToJson(
         _$ChecklistRegularCheckImpl instance) =>
     <String, dynamic>{
-      'isChecked': instance.isChecked,
-      'lastChange': instance.lastChange.toIso8601String(),
       'description': instance.description,
       'observation': instance.observation,
+      'isChecked': instance.isChecked,
+      'lastChange': instance.lastChange.toIso8601String(),
       'secondsTimer': instance.secondsTimer,
       'references': instance.references,
       'runtimeType': instance.$type,

@@ -31,16 +31,16 @@ ChecklistCheck _$ChecklistCheckFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ChecklistCheck {
+  String get description => throw _privateConstructorUsedError;
   bool get isChecked => throw _privateConstructorUsedError;
   DateTime get lastChange => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            bool isChecked,
-            DateTime lastChange,
             String description,
             String observation,
+            bool isChecked,
+            DateTime lastChange,
             int secondsTimer,
             List<RegularCheckReference> references)
         regular,
@@ -55,10 +55,10 @@ mixin _$ChecklistCheck {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            bool isChecked,
-            DateTime lastChange,
             String description,
             String observation,
+            bool isChecked,
+            DateTime lastChange,
             int secondsTimer,
             List<RegularCheckReference> references)?
         regular,
@@ -73,10 +73,10 @@ mixin _$ChecklistCheck {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            bool isChecked,
-            DateTime lastChange,
             String description,
             String observation,
+            bool isChecked,
+            DateTime lastChange,
             int secondsTimer,
             List<RegularCheckReference> references)?
         regular,
@@ -125,7 +125,7 @@ abstract class $ChecklistCheckCopyWith<$Res> {
           ChecklistCheck value, $Res Function(ChecklistCheck) then) =
       _$ChecklistCheckCopyWithImpl<$Res, ChecklistCheck>;
   @useResult
-  $Res call({bool isChecked, DateTime lastChange, String description});
+  $Res call({String description, bool isChecked, DateTime lastChange});
 }
 
 /// @nodoc
@@ -141,11 +141,15 @@ class _$ChecklistCheckCopyWithImpl<$Res, $Val extends ChecklistCheck>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? description = null,
     Object? isChecked = null,
     Object? lastChange = null,
-    Object? description = null,
   }) {
     return _then(_value.copyWith(
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
       isChecked: null == isChecked
           ? _value.isChecked
           : isChecked // ignore: cast_nullable_to_non_nullable
@@ -154,10 +158,6 @@ class _$ChecklistCheckCopyWithImpl<$Res, $Val extends ChecklistCheck>
           ? _value.lastChange
           : lastChange // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
     ) as $Val);
   }
 }
@@ -172,10 +172,10 @@ abstract class _$$ChecklistRegularCheckImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool isChecked,
-      DateTime lastChange,
-      String description,
+      {String description,
       String observation,
+      bool isChecked,
+      DateTime lastChange,
       int secondsTimer,
       List<RegularCheckReference> references});
 }
@@ -191,22 +191,14 @@ class __$$ChecklistRegularCheckImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isChecked = null,
-    Object? lastChange = null,
     Object? description = null,
     Object? observation = null,
+    Object? isChecked = null,
+    Object? lastChange = null,
     Object? secondsTimer = null,
     Object? references = null,
   }) {
     return _then(_$ChecklistRegularCheckImpl(
-      isChecked: null == isChecked
-          ? _value.isChecked
-          : isChecked // ignore: cast_nullable_to_non_nullable
-              as bool,
-      lastChange: null == lastChange
-          ? _value.lastChange
-          : lastChange // ignore: cast_nullable_to_non_nullable
-              as DateTime,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -215,6 +207,14 @@ class __$$ChecklistRegularCheckImplCopyWithImpl<$Res>
           ? _value.observation
           : observation // ignore: cast_nullable_to_non_nullable
               as String,
+      isChecked: null == isChecked
+          ? _value.isChecked
+          : isChecked // ignore: cast_nullable_to_non_nullable
+              as bool,
+      lastChange: null == lastChange
+          ? _value.lastChange
+          : lastChange // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       secondsTimer: null == secondsTimer
           ? _value.secondsTimer
           : secondsTimer // ignore: cast_nullable_to_non_nullable
@@ -232,10 +232,10 @@ class __$$ChecklistRegularCheckImplCopyWithImpl<$Res>
 class _$ChecklistRegularCheckImpl extends ChecklistRegularCheck
     with DiagnosticableTreeMixin {
   _$ChecklistRegularCheckImpl(
-      {required this.isChecked,
-      required this.lastChange,
-      required this.description,
+      {required this.description,
       required this.observation,
+      required this.isChecked,
+      required this.lastChange,
       required this.secondsTimer,
       required this.references,
       final String? $type})
@@ -246,13 +246,13 @@ class _$ChecklistRegularCheckImpl extends ChecklistRegularCheck
       _$$ChecklistRegularCheckImplFromJson(json);
 
   @override
-  final bool isChecked;
-  @override
-  final DateTime lastChange;
-  @override
   final String description;
   @override
   final String observation;
+  @override
+  final bool isChecked;
+  @override
+  final DateTime lastChange;
   @override
   final int secondsTimer;
   @override
@@ -263,7 +263,7 @@ class _$ChecklistRegularCheckImpl extends ChecklistRegularCheck
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ChecklistCheck.regular(isChecked: $isChecked, lastChange: $lastChange, description: $description, observation: $observation, secondsTimer: $secondsTimer, references: $references)';
+    return 'ChecklistCheck.regular(description: $description, observation: $observation, isChecked: $isChecked, lastChange: $lastChange, secondsTimer: $secondsTimer, references: $references)';
   }
 
   @override
@@ -271,10 +271,10 @@ class _$ChecklistRegularCheckImpl extends ChecklistRegularCheck
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'ChecklistCheck.regular'))
-      ..add(DiagnosticsProperty('isChecked', isChecked))
-      ..add(DiagnosticsProperty('lastChange', lastChange))
       ..add(DiagnosticsProperty('description', description))
       ..add(DiagnosticsProperty('observation', observation))
+      ..add(DiagnosticsProperty('isChecked', isChecked))
+      ..add(DiagnosticsProperty('lastChange', lastChange))
       ..add(DiagnosticsProperty('secondsTimer', secondsTimer))
       ..add(DiagnosticsProperty('references', references));
   }
@@ -284,14 +284,14 @@ class _$ChecklistRegularCheckImpl extends ChecklistRegularCheck
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ChecklistRegularCheckImpl &&
-            (identical(other.isChecked, isChecked) ||
-                other.isChecked == isChecked) &&
-            (identical(other.lastChange, lastChange) ||
-                other.lastChange == lastChange) &&
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.observation, observation) ||
                 other.observation == observation) &&
+            (identical(other.isChecked, isChecked) ||
+                other.isChecked == isChecked) &&
+            (identical(other.lastChange, lastChange) ||
+                other.lastChange == lastChange) &&
             (identical(other.secondsTimer, secondsTimer) ||
                 other.secondsTimer == secondsTimer) &&
             const DeepCollectionEquality()
@@ -302,10 +302,10 @@ class _$ChecklistRegularCheckImpl extends ChecklistRegularCheck
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      isChecked,
-      lastChange,
       description,
       observation,
+      isChecked,
+      lastChange,
       secondsTimer,
       const DeepCollectionEquality().hash(references));
 
@@ -320,10 +320,10 @@ class _$ChecklistRegularCheckImpl extends ChecklistRegularCheck
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            bool isChecked,
-            DateTime lastChange,
             String description,
             String observation,
+            bool isChecked,
+            DateTime lastChange,
             int secondsTimer,
             List<RegularCheckReference> references)
         regular,
@@ -334,7 +334,7 @@ class _$ChecklistRegularCheckImpl extends ChecklistRegularCheck
             DateTime lastChange, int referenceCount)
         linearityStep2,
   }) {
-    return regular(isChecked, lastChange, description, observation,
+    return regular(description, observation, isChecked, lastChange,
         secondsTimer, references);
   }
 
@@ -342,10 +342,10 @@ class _$ChecklistRegularCheckImpl extends ChecklistRegularCheck
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            bool isChecked,
-            DateTime lastChange,
             String description,
             String observation,
+            bool isChecked,
+            DateTime lastChange,
             int secondsTimer,
             List<RegularCheckReference> references)?
         regular,
@@ -356,7 +356,7 @@ class _$ChecklistRegularCheckImpl extends ChecklistRegularCheck
             int referenceCount)?
         linearityStep2,
   }) {
-    return regular?.call(isChecked, lastChange, description, observation,
+    return regular?.call(description, observation, isChecked, lastChange,
         secondsTimer, references);
   }
 
@@ -364,10 +364,10 @@ class _$ChecklistRegularCheckImpl extends ChecklistRegularCheck
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            bool isChecked,
-            DateTime lastChange,
             String description,
             String observation,
+            bool isChecked,
+            DateTime lastChange,
             int secondsTimer,
             List<RegularCheckReference> references)?
         regular,
@@ -380,7 +380,7 @@ class _$ChecklistRegularCheckImpl extends ChecklistRegularCheck
     required TResult orElse(),
   }) {
     if (regular != null) {
-      return regular(isChecked, lastChange, description, observation,
+      return regular(description, observation, isChecked, lastChange,
           secondsTimer, references);
     }
     return orElse();
@@ -432,10 +432,10 @@ class _$ChecklistRegularCheckImpl extends ChecklistRegularCheck
 
 abstract class ChecklistRegularCheck extends ChecklistCheck {
   factory ChecklistRegularCheck(
-          {required final bool isChecked,
-          required final DateTime lastChange,
-          required final String description,
+          {required final String description,
           required final String observation,
+          required final bool isChecked,
+          required final DateTime lastChange,
           required final int secondsTimer,
           required final List<RegularCheckReference> references}) =
       _$ChecklistRegularCheckImpl;
@@ -445,12 +445,12 @@ abstract class ChecklistRegularCheck extends ChecklistCheck {
       _$ChecklistRegularCheckImpl.fromJson;
 
   @override
+  String get description;
+  String get observation;
+  @override
   bool get isChecked;
   @override
   DateTime get lastChange;
-  @override
-  String get description;
-  String get observation;
   int get secondsTimer;
   List<RegularCheckReference> get references;
   @override
@@ -591,10 +591,10 @@ class _$ChecklistLinearityStep1CheckImpl extends ChecklistLinearityStep1Check
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            bool isChecked,
-            DateTime lastChange,
             String description,
             String observation,
+            bool isChecked,
+            DateTime lastChange,
             int secondsTimer,
             List<RegularCheckReference> references)
         regular,
@@ -612,10 +612,10 @@ class _$ChecklistLinearityStep1CheckImpl extends ChecklistLinearityStep1Check
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            bool isChecked,
-            DateTime lastChange,
             String description,
             String observation,
+            bool isChecked,
+            DateTime lastChange,
             int secondsTimer,
             List<RegularCheckReference> references)?
         regular,
@@ -634,10 +634,10 @@ class _$ChecklistLinearityStep1CheckImpl extends ChecklistLinearityStep1Check
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            bool isChecked,
-            DateTime lastChange,
             String description,
             String observation,
+            bool isChecked,
+            DateTime lastChange,
             int secondsTimer,
             List<RegularCheckReference> references)?
         regular,
@@ -856,10 +856,10 @@ class _$ChecklistLinearityStep2CheckImpl extends ChecklistLinearityStep2Check
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            bool isChecked,
-            DateTime lastChange,
             String description,
             String observation,
+            bool isChecked,
+            DateTime lastChange,
             int secondsTimer,
             List<RegularCheckReference> references)
         regular,
@@ -877,10 +877,10 @@ class _$ChecklistLinearityStep2CheckImpl extends ChecklistLinearityStep2Check
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            bool isChecked,
-            DateTime lastChange,
             String description,
             String observation,
+            bool isChecked,
+            DateTime lastChange,
             int secondsTimer,
             List<RegularCheckReference> references)?
         regular,
@@ -899,10 +899,10 @@ class _$ChecklistLinearityStep2CheckImpl extends ChecklistLinearityStep2Check
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            bool isChecked,
-            DateTime lastChange,
             String description,
             String observation,
+            bool isChecked,
+            DateTime lastChange,
             int secondsTimer,
             List<RegularCheckReference> references)?
         regular,
