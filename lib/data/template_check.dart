@@ -25,18 +25,6 @@ sealed class TemplateCheck with _$TemplateCheck {
     required String description,
   }) = TemplateLinearityStep2Check;
 
-  String get description {
-    if (this is TemplateRegularCheck) {
-      return (this as TemplateRegularCheck).description;
-    } else if (this is TemplateLinearityStep1Check) {
-      return 'Linearity Step 1';
-    } else if (this is TemplateLinearityStep2Check) {
-      return 'Linearity Step 2';
-    } else {
-      throw Exception('Unknown TemplateCheck type');
-    }
-  }
-
   factory TemplateCheck.fromJson(Map<String, Object?> json) =>
       _$TemplateCheckFromJson(json);
 }
