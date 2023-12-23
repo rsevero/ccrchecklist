@@ -107,10 +107,11 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
               child: const Text('Update'),
               onPressed: () => _onPressedUpdateTemplate(
                 context: context,
-                rebreatherManufacturer: rebreatherManufacturerController.text,
-                rebreatherModel: rebreatherModelController.text,
-                title: titleController.text,
-                description: descriptionController.text,
+                rebreatherManufacturer:
+                    rebreatherManufacturerController.text.trim(),
+                rebreatherModel: rebreatherModelController.text.trim(),
+                title: titleController.text.trim(),
+                description: descriptionController.text.trim(),
               ),
             ),
             TextButton(
@@ -192,7 +193,10 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
         false; // Handle null (dialog dismissed)
 
     if (confirmed) {
-      templateEditorStore.addSection(title: titleController.text);
+      final title = titleController.text.trim();
+      if (title.isNotEmpty) {
+        templateEditorStore.addSection(title: title);
+      }
     }
   }
 

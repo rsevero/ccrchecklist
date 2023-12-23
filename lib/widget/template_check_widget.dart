@@ -291,8 +291,8 @@ class TemplateCheckWidget extends StatelessWidget {
             TextButton(
               child: const Text('Update'),
               onPressed: () {
-                final newDescription = descriptionController.text;
-                final newObservation = observationController.text;
+                final newDescription = descriptionController.text.trim();
+                final newObservation = observationController.text.trim();
                 List<RegularCheckReference> newReferences = List.generate(
                   numberOfReferences,
                   (i) => RegularCheckReference(

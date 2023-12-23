@@ -163,31 +163,39 @@ class TemplateEditorListPage extends StatelessWidget {
         ) ??
         false; // Handle null (dialog dismissed)
 
-    if (confirmed &&
-        fileNameController.text.isNotEmpty &&
-        rebreatherManufacturerController.text.isNotEmpty &&
-        rebreatherModelController.text.isNotEmpty &&
-        titleController.text.isNotEmpty) {
-      var newTemplate = Template(
-        rebreatherManufacturer: rebreatherManufacturerController.text,
-        rebreatherModel: rebreatherModelController.text,
-        title: titleController.text,
-        description: descriptionController.text,
-        sections: [],
-      );
-      if (!context.mounted) return;
-      await ccrSaveAsTemplate(context, newTemplate, fileNameController.text);
+    if (confirmed) {
+      final fileName = fileNameController.text.trim();
+      final rebreatherManufacturer =
+          rebreatherManufacturerController.text.trim();
+      final rebreatherModel = rebreatherModelController.text.trim();
+      final title = titleController.text.trim();
+      final description = descriptionController.text.trim();
+      if (fileName.isNotEmpty &&
+          rebreatherManufacturer.isNotEmpty &&
+          rebreatherModel.isNotEmpty &&
+          title.isNotEmpty) {
+        var newTemplate = Template(
+          rebreatherManufacturer: rebreatherManufacturer,
+          rebreatherModel: rebreatherModel,
+          title: title,
+          description: description,
+          sections: [],
+        );
+        if (!context.mounted) return;
+        await ccrSaveAsTemplate(
+            context, newTemplate, fileNameController.text.trim());
 
-      if (!context.mounted) return;
-      final TemplateEditorStore templateEditorStore =
-          Provider.of<TemplateEditorStore>(context, listen: false);
-      templateEditorStore.setCurrentTemplate(newTemplate);
+        if (!context.mounted) return;
+        final TemplateEditorStore templateEditorStore =
+            Provider.of<TemplateEditorStore>(context, listen: false);
+        templateEditorStore.setCurrentTemplate(newTemplate);
 
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => const TemplateEditorPage(),
-        ),
-      );
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => const TemplateEditorPage(),
+          ),
+        );
+      }
     }
   }
 }

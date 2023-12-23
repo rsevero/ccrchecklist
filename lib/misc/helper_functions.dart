@@ -98,7 +98,8 @@ Future<String?> ccrPromptFileName(BuildContext context) async {
         actions: <Widget>[
           TextButton(
             child: const Text('Save'),
-            onPressed: () => Navigator.of(context).pop(fileNameController.text),
+            onPressed: () =>
+                Navigator.of(context).pop(fileNameController.text.trim()),
           ),
           TextButton(
             child: const Text('Cancel'),

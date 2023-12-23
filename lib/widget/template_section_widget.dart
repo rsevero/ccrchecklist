@@ -117,9 +117,9 @@ class TemplateSectionWidget extends StatelessWidget {
             TextButton(
               child: const Text('Update'),
               onPressed: () {
-                final String newTitle = titleController.text;
-                if (newTitle.isNotEmpty) {
-                  templateEditorStore.updateSectionTitle(index, newTitle);
+                final String title = titleController.text.trim();
+                if (title.isNotEmpty) {
+                  templateEditorStore.updateSectionTitle(index, title);
                   Navigator.of(context).pop();
                 }
               },
