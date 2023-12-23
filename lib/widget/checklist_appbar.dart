@@ -1,3 +1,4 @@
+import 'package:ccr_checklist/misc/helper_functions.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -52,6 +53,7 @@ class CheckListAppBar extends StatelessWidget implements PreferredSizeWidget {
     final checklistEditorStore =
         Provider.of<ChecklistEditorStore>(context, listen: false);
     checklistEditorStore.resetChecklist();
+    navigateToSection(context, 0);
   }
 
   @override

@@ -72,23 +72,11 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
       ObservableList<ObservableList<ChecklistCheck>>();
 
   @readonly
-  bool _canUndo = false;
-
-  @readonly
-  bool _canRedo = false;
-
-  @readonly
-  String _undoDescription = '';
-
-  @readonly
-  String _redoDescription = '';
-
-  @readonly
   ObservableList<LinearityRow> _linearityWorksheet =
       ObservableList<LinearityRow>();
 
   @readonly
-  int _linearityCheckReferenceCount = 0;
+  int _linearityCheckReferenceCount = -1;
 
   @readonly
   ObservableList<ObservableList<bool>> _checksOk =
@@ -101,7 +89,7 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
   ObservableList<bool> _previousSectionsOk = ObservableList<bool>();
 
   @readonly
-  int _higherSectionEdited = 0;
+  int _higherSectionEdited = -1;
 
   @readonly
   bool _checklistChanged = false;
@@ -113,7 +101,7 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
 
   bool _nonOkChecksPerSectionUpdated = false;
 
-  int _nonOkSectionsCount = 0;
+  int _nonOkSectionsCount = -1;
 
   final List<int> _nonOkChecksPerSection = [];
 
@@ -286,12 +274,35 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
     _loadFromTemplate(template);
   }
 
+  void _resetStore() {
+    _sections.clear();
+    _checks.clear();
+    _checksOk.clear();
+    _sectionsOk.clear();
+    _previousSectionsOk.clear();
+    _linearityWorksheet.clear();
+    _linearityCheckReferenceCount = -1;
+    _linearityStep1SectionIndex = -1;
+    _linearityStep1CheckIndex = -1;
+    _linearityStep2SectionIndex = -1;
+    _linearityStep2CheckIndex = -1;
+    _nonOkChecksPerSectionUpdated = false;
+    _nonOkSectionsCount = -1;
+    _nonOkChecksPerSection.clear();
+    _higherSectionEdited = -1;
+    _checklistChanged = false;
+  }
+
   void _loadFromTemplate(Template template) {
+    _resetStore();
+
     _rebreatherManufacturer = template.rebreatherManufacturer;
     _rebreatherModel = template.rebreatherModel;
     _title = template.title;
     _description = template.description;
     _date = DateTime.now();
+    _diverName = '';
+
     for (int sectionIndex = 0;
         sectionIndex < template.sections.length;
         sectionIndex++) {

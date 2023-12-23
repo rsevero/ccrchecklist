@@ -1,4 +1,5 @@
 import 'package:ccr_checklist/misc/constants.dart';
+import 'package:ccr_checklist/misc/helper_functions.dart';
 import 'package:ccr_checklist/page/checklist_complete_page.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:ccr_checklist/widget/checklist_appbar.dart';
@@ -95,20 +96,6 @@ class ChecklistPage extends StatelessWidget {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => const ChecklistCompletePage(),
-        ),
-      );
-    }
-  }
-
-  void navigateToSection(BuildContext context, int newSectionIndex) {
-    final checklistEditorStore =
-        Provider.of<ChecklistEditorStore>(context, listen: false);
-    final totalSections = checklistEditorStore.sections.length;
-
-    if ((newSectionIndex >= 0) && (newSectionIndex < totalSections)) {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => ChecklistPage(sectionIndex: newSectionIndex),
         ),
       );
     }

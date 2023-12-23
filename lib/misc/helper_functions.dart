@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:ccr_checklist/data/template.dart';
 import 'package:ccr_checklist/misc/constants.dart';
+import 'package:ccr_checklist/page/checklist_page.dart';
+import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
@@ -172,4 +174,18 @@ Future<void> ccrSaveAsTemplate(BuildContext context, Template template,
   final templateEditorStore =
       Provider.of<TemplateEditorStore>(context, listen: false);
   templateEditorStore.saveTemplate(context, template, filePath);
+}
+
+void navigateToSection(BuildContext context, int newSectionIndex) {
+  final checklistEditorStore =
+      Provider.of<ChecklistEditorStore>(context, listen: false);
+  final totalSections = checklistEditorStore.sections.length;
+
+  if ((newSectionIndex >= 0) && (newSectionIndex < totalSections)) {
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => ChecklistPage(sectionIndex: newSectionIndex),
+      ),
+    );
+  }
 }
