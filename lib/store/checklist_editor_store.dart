@@ -103,6 +103,9 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
   @readonly
   int _higherSectionEdited = 0;
 
+  @readonly
+  bool _checklistChanged = false;
+
   int _linearityStep1SectionIndex = -1;
   int _linearityStep1CheckIndex = -1;
   int _linearityStep2SectionIndex = -1;
@@ -113,6 +116,8 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
   int _nonOkSectionsCount = 0;
 
   final List<int> _nonOkChecksPerSection = [];
+
+  Template _currentTemplate = Template.empty();
 
   int get nonOkSectionsCount {
     if (!_nonOkChecksPerSectionUpdated) {
@@ -195,11 +200,12 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
     );
 
     _nonOkChecksPerSectionUpdated = false;
+    _checklistChanged = true;
 
-    _updateOfStatus(sectionIndex, checkIndex);
+    _statusUpdate(sectionIndex, checkIndex);
   }
 
-  void _updateOfStatus(int sectionIndex, int checkIndex) {
+  void _statusUpdate(int sectionIndex, int checkIndex) {
     _isCheckOk(sectionIndex, checkIndex);
     _isSectionOk(sectionIndex);
     _isPreviousSectionsOk(sectionIndex);
@@ -254,6 +260,7 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
 
     _setCheckIsChecked(
         _linearityStep1SectionIndex, _linearityStep1CheckIndex, isOk);
+    _checklistChanged = true;
   }
 
   @action
@@ -271,10 +278,15 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
 
     _setCheckIsChecked(
         _linearityStep2SectionIndex, _linearityStep2CheckIndex, isOk);
+    _checklistChanged = true;
   }
 
   @action
   void loadFromTemplate(Template template) {
+    _loadFromTemplate(template);
+  }
+
+  void _loadFromTemplate(Template template) {
     _rebreatherManufacturer = template.rebreatherManufacturer;
     _rebreatherModel = template.rebreatherModel;
     _title = template.title;
@@ -299,6 +311,8 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
     _previousSectionsOk.addAll(
         List<bool>.generate(template.sections.length, (index) => false));
     _previousSectionsOk[0] = true;
+    _currentTemplate = template;
+    _checklistChanged = false;
   }
 
   List<ChecklistCheck> _getChecksFromTemplateChecks(
@@ -349,6 +363,11 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
     }
 
     return checks;
+  }
+
+  @action
+  void resetChecklist() {
+    _loadFromTemplate(_currentTemplate);
   }
 
   @action

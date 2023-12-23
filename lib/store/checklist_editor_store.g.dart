@@ -380,6 +380,25 @@ mixin _$ChecklistEditorStore on _ChecklistEditorStoreBaseToJson, Store {
     });
   }
 
+  late final _$_checklistChangedAtom = Atom(
+      name: '_ChecklistEditorStoreBaseToJson._checklistChanged',
+      context: context);
+
+  bool get checklistChanged {
+    _$_checklistChangedAtom.reportRead();
+    return super._checklistChanged;
+  }
+
+  @override
+  bool get _checklistChanged => checklistChanged;
+
+  @override
+  set _checklistChanged(bool value) {
+    _$_checklistChangedAtom.reportWrite(value, super._checklistChanged, () {
+      super._checklistChanged = value;
+    });
+  }
+
   late final _$_ChecklistEditorStoreBaseToJsonActionController =
       ActionController(
           name: '_ChecklistEditorStoreBaseToJson', context: context);
@@ -424,6 +443,17 @@ mixin _$ChecklistEditorStore on _ChecklistEditorStoreBaseToJson, Store {
         .startAction(name: '_ChecklistEditorStoreBaseToJson.loadFromTemplate');
     try {
       return super.loadFromTemplate(template);
+    } finally {
+      _$_ChecklistEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void resetChecklist() {
+    final _$actionInfo = _$_ChecklistEditorStoreBaseToJsonActionController
+        .startAction(name: '_ChecklistEditorStoreBaseToJson.resetChecklist');
+    try {
+      return super.resetChecklist();
     } finally {
       _$_ChecklistEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
     }
