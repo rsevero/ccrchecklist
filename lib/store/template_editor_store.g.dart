@@ -446,6 +446,7 @@ mixin _$TemplateEditorStore on _TemplateEditorStoreBaseToJson, Store {
   @override
   void addRegularCheck(
       {required String description,
+      required String observation,
       required int secondsTimer,
       required List<RegularCheckReference> references}) {
     final _$actionInfo = _$_TemplateEditorStoreBaseToJsonActionController
@@ -453,6 +454,7 @@ mixin _$TemplateEditorStore on _TemplateEditorStoreBaseToJson, Store {
     try {
       return super.addRegularCheck(
           description: description,
+          observation: observation,
           secondsTimer: secondsTimer,
           references: references);
     } finally {
@@ -522,6 +524,7 @@ mixin _$TemplateEditorStore on _TemplateEditorStoreBaseToJson, Store {
   @override
   void updateRegularCheck(int sectionIndex, int checkIndex,
       {String? description,
+      String? observation,
       int? timerDuration,
       List<RegularCheckReference>? references}) {
     final _$actionInfo = _$_TemplateEditorStoreBaseToJsonActionController
@@ -529,6 +532,7 @@ mixin _$TemplateEditorStore on _TemplateEditorStoreBaseToJson, Store {
     try {
       return super.updateRegularCheck(sectionIndex, checkIndex,
           description: description,
+          observation: observation,
           timerDuration: timerDuration,
           references: references);
     } finally {

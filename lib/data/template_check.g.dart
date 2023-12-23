@@ -11,6 +11,7 @@ _$TemplateRegularCheckImpl _$$TemplateRegularCheckImplFromJson(
     _$TemplateRegularCheckImpl(
       description: json['description'] as String,
       secondsTimer: json['secondsTimer'] as int,
+      observation: json['observation'] as String,
       references: (json['references'] as List<dynamic>)
           .map((e) => RegularCheckReference.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -22,6 +23,7 @@ Map<String, dynamic> _$$TemplateRegularCheckImplToJson(
     <String, dynamic>{
       'description': instance.description,
       'secondsTimer': instance.secondsTimer,
+      'observation': instance.observation,
       'references': instance.references,
       'runtimeType': instance.$type,
     };

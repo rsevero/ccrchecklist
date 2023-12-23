@@ -74,7 +74,38 @@ class _ChecklistRegularCheckWidgetState
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(check.description),
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 4.0, // Space between description and icon
+            children: [
+              Expanded(child: Text(check.description)),
+              if (check.observation.isNotEmpty)
+                IconButton(
+                  icon: const Icon(Icons.info_outline, color: Colors.blue),
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('Observation'),
+                          content: SingleChildScrollView(
+                            child: Text(check.observation),
+                          ),
+                          actions: <Widget>[
+                            TextButton(
+                              child: const Text('Close'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                ),
+            ],
+          ),
           if (_timerAvailable) _buildTimer(),
           const SizedBox(width: 8),
           Wrap(

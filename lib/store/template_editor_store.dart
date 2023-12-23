@@ -269,10 +269,12 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
   @action
   void addRegularCheck(
       {required String description,
+      required String observation,
       required int secondsTimer,
       required List<RegularCheckReference> references}) {
     final newRegularCheck = TemplateRegularCheck(
         description: description,
+        observation: observation,
         secondsTimer: secondsTimer,
         references: references);
     _selectedSection.checks.add(newRegularCheck);
@@ -385,12 +387,14 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
   @action
   void updateRegularCheck(int sectionIndex, int checkIndex,
       {String? description,
+      String? observation,
       int? timerDuration,
       List<RegularCheckReference>? references}) {
     final check = _checks[sectionIndex][checkIndex] as TemplateRegularCheck;
 
     final newCheck = check.copyWith(
         description: description ?? check.description,
+        observation: observation ?? check.observation,
         secondsTimer: timerDuration ?? check.secondsTimer,
         references: references ?? check.references);
 

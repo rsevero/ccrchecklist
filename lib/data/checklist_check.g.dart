@@ -12,6 +12,7 @@ _$ChecklistRegularCheckImpl _$$ChecklistRegularCheckImplFromJson(
       isChecked: json['isChecked'] as bool,
       lastChange: DateTime.parse(json['lastChange'] as String),
       description: json['description'] as String,
+      observation: json['observation'] as String,
       secondsTimer: json['secondsTimer'] as int,
       references: (json['references'] as List<dynamic>)
           .map((e) => RegularCheckReference.fromJson(e as Map<String, dynamic>))
@@ -25,6 +26,7 @@ Map<String, dynamic> _$$ChecklistRegularCheckImplToJson(
       'isChecked': instance.isChecked,
       'lastChange': instance.lastChange.toIso8601String(),
       'description': instance.description,
+      'observation': instance.observation,
       'secondsTimer': instance.secondsTimer,
       'references': instance.references,
       'runtimeType': instance.$type,

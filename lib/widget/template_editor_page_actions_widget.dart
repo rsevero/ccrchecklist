@@ -263,11 +263,12 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
     final templateEditorStore =
         Provider.of<TemplateEditorStore>(context, listen: false);
     final TextEditingController descriptionController = TextEditingController();
+    final TextEditingController observationController = TextEditingController();
     int numberOfReferences = 0;
     Duration timerDuration = Duration.zero; // Default values
-    List<TextEditingController> prefixControllers =
+    final List<TextEditingController> prefixControllers =
         List.generate(ccrMaxReferences + 1, (_) => TextEditingController());
-    List<TextEditingController> suffixControllers =
+    final List<TextEditingController> suffixControllers =
         List.generate(ccrMaxReferences + 1, (_) => TextEditingController());
 
     showDialog(
@@ -309,6 +310,41 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                             controller: descriptionController,
                             decoration: const InputDecoration(
                               hintText: 'Enter check description',
+                              border: OutlineInputBorder(),
+                            ),
+                            maxLines: null, // Makes the input field expandable
+                            minLines:
+                                1, // Minimum lines the TextFormField will take
+                            keyboardType: TextInputType
+                                .multiline, // Keyboard type for multiline input
+                            textCapitalization: TextCapitalization
+                                .sentences, // Capitalize first letter of sentences
+                            autofocus: true,
+                          ),
+                          // ... other widgets ...
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: ccrDescriptionFieldWidth,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Row(
+                            children: [
+                              Text(
+                                'Observation',
+                                style: TextStyle(
+                                  fontSize:
+                                      16, // Adjust the font size as needed
+                                ),
+                              ),
+                            ],
+                          ),
+                          TextFormField(
+                            controller: observationController,
+                            decoration: const InputDecoration(
+                              hintText: 'Enter check observation',
                               border: OutlineInputBorder(),
                             ),
                             maxLines: null, // Makes the input field expandable
@@ -407,6 +443,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                   child: const Text('Create'),
                   onPressed: () {
                     final description = descriptionController.text;
+                    final observation = observationController.text;
                     if (description.isNotEmpty) {
                       List<RegularCheckReference> references = List.generate(
                         numberOfReferences,
@@ -417,6 +454,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                       );
                       templateEditorStore.addRegularCheck(
                         description: description,
+                        observation: observation,
                         references: references,
                         secondsTimer: timerDuration.inSeconds,
                       );

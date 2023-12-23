@@ -16,6 +16,7 @@ sealed class ChecklistCheck with _$ChecklistCheck {
     required bool isChecked,
     required DateTime lastChange,
     required String description,
+    required String observation,
     required int secondsTimer,
     required List<RegularCheckReference> references,
   }) = ChecklistRegularCheck;

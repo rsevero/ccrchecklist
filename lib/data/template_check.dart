@@ -12,6 +12,7 @@ sealed class TemplateCheck with _$TemplateCheck {
   factory TemplateCheck.regular({
     required String description,
     required int secondsTimer,
+    required String observation,
     required List<RegularCheckReference> references,
   }) = TemplateRegularCheck;
 

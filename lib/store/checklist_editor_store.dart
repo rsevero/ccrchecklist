@@ -312,6 +312,7 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
       if (templateCheck is TemplateRegularCheck) {
         checklistCheck = ChecklistRegularCheck(
           description: templateCheck.description,
+          observation: templateCheck.observation,
           lastChange: DateTime.now(),
           isChecked: false,
           references: templateCheck.references,
@@ -364,5 +365,7 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
   }
 
   @action
-  void setDate(DateTime value) {}
+  void setDate(DateTime value) {
+    _date = value;
+  }
 }

@@ -25,11 +25,16 @@ class TemplateCheckWidget extends StatelessWidget {
       builder: (_) {
         final check = templateEditorStore.checks[sectionIndex][index];
         String description = check.description;
+        String observation = '';
         if (check is TemplateRegularCheck) {
           final timer =
               ccrFormatSecondsToMinutesSecondsTimer(check.secondsTimer);
           description +=
               ' (Ref count: ${check.references.length} - Timer: $timer)';
+          observation = check.observation.trim();
+          if (observation.isNotEmpty) {
+            observation = "Obs.: $observation";
+          }
         } else if (check is TemplateLinearityStep1Check) {
           description += ' (Ref count: ${check.referenceCount})';
         }
@@ -38,6 +43,7 @@ class TemplateCheckWidget extends StatelessWidget {
             Expanded(
               child: ListTile(
                 title: Text(description),
+                subtitle: (observation.isNotEmpty) ? Text(observation) : null,
                 trailing: PopupMenuButton<String>(
                   onSelected: (value) {
                     switch (value) {
@@ -91,9 +97,12 @@ class TemplateCheckWidget extends StatelessWidget {
   void _editTemplateRegularCheck(BuildContext context,
       TemplateEditorStore templateEditorStore, int sectionIndex, int index) {
     final TextEditingController descriptionController = TextEditingController();
+    final TextEditingController observationController = TextEditingController();
+
     final TemplateRegularCheck check =
         templateEditorStore.checks[sectionIndex][index] as TemplateRegularCheck;
     descriptionController.text = check.description;
+    observationController.text = check.observation;
     int numberOfReferences = check.references.length;
     Duration timerDuration = Duration(seconds: check.secondsTimer);
 
@@ -163,7 +172,40 @@ class TemplateCheckWidget extends StatelessWidget {
                                 .sentences, // Capitalize first letter of sentences
                             autofocus: true,
                           ),
-                          // ... other widgets ...
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: ccrDescriptionFieldWidth,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Row(
+                            children: [
+                              Text(
+                                'Observation',
+                                style: TextStyle(
+                                  fontSize:
+                                      16, // Adjust the font size as needed
+                                ),
+                              ),
+                            ],
+                          ),
+                          TextFormField(
+                            controller: observationController,
+                            decoration: const InputDecoration(
+                              hintText: 'Enter check observation',
+                              border: OutlineInputBorder(),
+                            ),
+                            maxLines: null, // Makes the input field expandable
+                            minLines:
+                                1, // Minimum lines the TextFormField will take
+                            keyboardType: TextInputType
+                                .multiline, // Keyboard type for multiline input
+                            textCapitalization: TextCapitalization
+                                .sentences, // Capitalize first letter of sentences
+                            autofocus: true,
+                          ),
                         ],
                       ),
                     ),
@@ -250,6 +292,7 @@ class TemplateCheckWidget extends StatelessWidget {
               child: const Text('Update'),
               onPressed: () {
                 final newDescription = descriptionController.text;
+                final newObservation = observationController.text;
                 List<RegularCheckReference> newReferences = List.generate(
                   numberOfReferences,
                   (i) => RegularCheckReference(
@@ -263,6 +306,7 @@ class TemplateCheckWidget extends StatelessWidget {
                 );
                 templateEditorStore.updateRegularCheck(sectionIndex, index,
                     description: newDescription,
+                    observation: newObservation,
                     references: newReferences,
                     timerDuration: timerDuration.inSeconds);
                 Navigator.of(context).pop();
