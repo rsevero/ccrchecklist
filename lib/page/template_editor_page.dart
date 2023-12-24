@@ -1,3 +1,4 @@
+import 'package:ccr_checklist/misc/helper_functions.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
 import 'package:ccr_checklist/widget/template_editor_page_actions_widget.dart';
 import 'package:ccr_checklist/widget/template_editor_page_app_bar.dart';
@@ -37,24 +38,10 @@ class TemplateEditorPage extends StatelessWidget {
       return true;
     }
 
-    return await showDialog<bool>(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: const Text('Confirm losing modifications'),
-            content: const Text(
-                'You have unsaved modifications to the template. Do you want to proceed without saving them?'),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(false),
-                child: const Text('No'),
-              ),
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(true),
-                child: const Text('Yes'),
-              ),
-            ],
-          ),
-        ) ??
-        false;
+    return await ccrConfirmActionDialog(
+      context,
+      'Confirm losing modifications',
+      'You have unsaved modifications to the template. Do you want to proceed without saving them?',
+    );
   }
 }
