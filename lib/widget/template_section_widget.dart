@@ -32,69 +32,78 @@ class TemplateSectionWidget extends StatelessWidget {
           color: isSelected
               ? mainColorScheme.primaryContainer
               : Colors.transparent,
-          child: ExpansionTile(
-            title: Text(section.title),
-            onExpansionChanged: (expanded) {
-              templateEditorStore.setExpandedSection(sectionIndex, expanded);
-            },
-            controlAffinity: ListTileControlAffinity.leading,
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                PopupMenuButton<String>(
-                  itemBuilder: (BuildContext context) =>
-                      <PopupMenuEntry<String>>[
-                    const PopupMenuItem<String>(
-                      value: 'Edit',
-                      child: Text('Edit'),
-                    ),
-                    const PopupMenuItem<String>(
-                      value: 'Delete',
-                      child: Text('Delete'),
-                    ),
-                  ],
-                  onSelected: (value) {
-                    switch (value) {
-                      case 'Edit':
-                        _editTemplateSection(
-                            context, templateEditorStore, sectionIndex);
-                        break;
-                      case 'Delete':
-                        templateEditorStore.deleteSection(sectionIndex);
-                        break;
-                    }
-                  },
-                ),
-                Observer(
-                  builder: (_) {
-                    return Visibility(
-                      visible: !((templateEditorStore.sections.length == 1) ||
-                          templateEditorStore.isAnySectionExpanded),
-                      maintainAnimation: true,
-                      maintainState: true,
-                      maintainSize: true,
-                      child: ReorderableDragStartListener(
-                        index: sectionIndex,
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16),
-                          child: Icon(Icons.drag_handle),
-                        ),
+          child: GestureDetector(
+            onTap: () => onTapSection(context, sectionIndex),
+            child: ExpansionTile(
+              title: Text(section.title),
+              onExpansionChanged: (expanded) {
+                templateEditorStore.setExpandedSection(sectionIndex, expanded);
+              },
+              controlAffinity: ListTileControlAffinity.leading,
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  PopupMenuButton<String>(
+                    itemBuilder: (BuildContext context) =>
+                        <PopupMenuEntry<String>>[
+                      const PopupMenuItem<String>(
+                        value: 'Edit',
+                        child: Text('Edit'),
                       ),
-                    );
-                  },
+                      const PopupMenuItem<String>(
+                        value: 'Delete',
+                        child: Text('Delete'),
+                      ),
+                    ],
+                    onSelected: (value) {
+                      switch (value) {
+                        case 'Edit':
+                          _editTemplateSection(
+                              context, templateEditorStore, sectionIndex);
+                          break;
+                        case 'Delete':
+                          templateEditorStore.deleteSection(sectionIndex);
+                          break;
+                      }
+                    },
+                  ),
+                  Observer(
+                    builder: (_) {
+                      return Visibility(
+                        visible: !((templateEditorStore.sections.length == 1) ||
+                            templateEditorStore.isAnySectionExpanded),
+                        maintainAnimation: true,
+                        maintainState: true,
+                        maintainSize: true,
+                        child: ReorderableDragStartListener(
+                          index: sectionIndex,
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 16),
+                            child: Icon(Icons.drag_handle),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+              initiallyExpanded: isExpanded,
+              children: [
+                TemplateCheckListWidget(
+                  sectionIndex: sectionIndex,
                 ),
               ],
             ),
-            initiallyExpanded: isExpanded,
-            children: [
-              TemplateCheckListWidget(
-                sectionIndex: sectionIndex,
-              ),
-            ],
           ),
         );
       },
     );
+  }
+
+  void onTapSection(context, sectionIndex) {
+    final templateEditorStore =
+        Provider.of<TemplateEditorStore>(context, listen: false);
+    templateEditorStore.setSelectedSectionByIndex(sectionIndex);
   }
 
   void _editTemplateSection(BuildContext context,

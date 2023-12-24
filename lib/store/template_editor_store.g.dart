@@ -591,6 +591,18 @@ mixin _$TemplateEditorStore on _TemplateEditorStoreBaseToJson, Store {
   }
 
   @override
+  dynamic setSelectedSectionByIndex(int sectionIndex) {
+    final _$actionInfo =
+        _$_TemplateEditorStoreBaseToJsonActionController.startAction(
+            name: '_TemplateEditorStoreBaseToJson.setSelectedSectionByIndex');
+    try {
+      return super.setSelectedSectionByIndex(sectionIndex);
+    } finally {
+      _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void deleteCheck(int sectionIndex, int index) {
     final _$actionInfo = _$_TemplateEditorStoreBaseToJsonActionController
         .startAction(name: '_TemplateEditorStoreBaseToJson.deleteCheck');

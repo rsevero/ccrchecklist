@@ -493,6 +493,11 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
   }
 
   @action
+  setSelectedSectionByIndex(int sectionIndex) {
+    _setSelectedSectionByIndex(sectionIndex);
+  }
+
+  @action
   void deleteCheck(int sectionIndex, int index) {
     if (((sectionIndex >= 0) &&
             (sectionIndex < _currentTemplate.sections.length)) &&
