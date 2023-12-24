@@ -82,8 +82,6 @@ class TemplateList extends StatelessWidget {
       }
       templates.add(
         TemplateListTileWidget(
-          rebreatherManufacturer: template.rebreatherManufacturer,
-          rebreatherModel: template.rebreatherModel,
           title: template.title,
           description: template.description,
           isAsset: template.isAsset,
