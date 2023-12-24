@@ -30,19 +30,21 @@ class ChecklistBody extends StatelessWidget {
             style: Theme.of(context).textTheme.titleSmall,
           ),
         ),
-        Observer(
-          builder: (_) => Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(16.0),
-            color: checklistEditorStore.sectionsOk[sectionIndex]
-                ? ccrSectionOkColor
-                : Theme.of(context).colorScheme.error,
-            child: Text(
-              section.title,
-              style: Theme.of(context).textTheme.titleLarge,
+        if (checklistEditorStore.sections.length > 1) ...[
+          Observer(
+            builder: (_) => Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(16.0),
+              color: checklistEditorStore.sectionsOk[sectionIndex]
+                  ? ccrSectionOkColor
+                  : Theme.of(context).colorScheme.error,
+              child: Text(
+                section.title,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
             ),
           ),
-        ),
+        ],
         CheckListCheckList(sectionIndex: sectionIndex),
       ],
     );
