@@ -27,7 +27,8 @@ class TemplateListTileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text("$title - $description"),
+      title: Text(title),
+      subtitle: Text(description),
       onTap: onTap,
       trailing: !isEditor || isAsset
           ? null
