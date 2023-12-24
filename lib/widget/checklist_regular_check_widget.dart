@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:ccr_checklist/data/checklist_check.dart';
 import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
+import 'package:ccr_checklist/widget/inline_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vibration/vibration.dart';
@@ -74,37 +75,26 @@ class _ChecklistRegularCheckWidgetState
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Wrap(
-            crossAxisAlignment: WrapCrossAlignment.center,
-            spacing: 4.0, // Space between description and icon
-            children: [
-              Expanded(child: Text(check.description)),
-              if (check.observation.isNotEmpty)
-                IconButton(
-                  icon: const Icon(Icons.info_outline, color: Colors.blue),
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: const Text('Observation'),
-                          content: SingleChildScrollView(
-                            child: Text(check.observation),
-                          ),
-                          actions: <Widget>[
-                            TextButton(
-                              child: const Text('Close'),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                          ],
-                        );
+          RichText(
+            text: TextSpan(
+              style: Theme.of(context).textTheme.bodyLarge,
+              children: [
+                TextSpan(text: check.description),
+                if (check.observation.isNotEmpty) ...[
+                  const TextSpan(text: ' '),
+                  WidgetSpan(
+                    alignment: PlaceholderAlignment.middle,
+                    child: InlineIcon(
+                      icon: Icons.info_outline,
+                      color: Colors.blue,
+                      onPressed: () {
+                        // Your existing showDialog code
                       },
-                    );
-                  },
-                ),
-            ],
+                    ),
+                  ),
+                ],
+              ],
+            ),
           ),
           if (_timerAvailable) _buildTimer(),
           const SizedBox(width: 8),
