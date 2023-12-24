@@ -18,70 +18,95 @@ class ChecklistPage extends StatelessWidget {
     final checklistEditorStore = Provider.of<ChecklistEditorStore>(context);
     final totalSections = checklistEditorStore.sections.length;
 
-    return Scaffold(
-      appBar: CheckListAppBar(
-          title: checklistEditorStore.title,
-          description: checklistEditorStore.description,
-          rebreatherManufacturer: checklistEditorStore.rebreatherManufacturer,
-          rebreatherModel: checklistEditorStore.rebreatherModel),
-      body: ChecklistBody(sectionIndex: sectionIndex),
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Observer(
-              builder: (_) {
-                final buttonEnabled = sectionIndex > 0;
-                return DecoratedBox(
-                  decoration: BoxDecoration(
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) async {
+        final backNavigationAllowed = await _onBackPress(context);
+        if (backNavigationAllowed && !didPop) {
+          if (context.mounted) {
+            Navigator.of(context).pop();
+          }
+        }
+      },
+      child: Scaffold(
+        appBar: CheckListAppBar(
+            title: checklistEditorStore.title,
+            description: checklistEditorStore.description,
+            rebreatherManufacturer: checklistEditorStore.rebreatherManufacturer,
+            rebreatherModel: checklistEditorStore.rebreatherModel),
+        body: ChecklistBody(sectionIndex: sectionIndex),
+        bottomNavigationBar: BottomAppBar(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Observer(
+                builder: (_) {
+                  final buttonEnabled = sectionIndex > 0;
+                  return DecoratedBox(
+                    decoration: BoxDecoration(
+                        color: !buttonEnabled ||
+                                checklistEditorStore
+                                    .previousSectionsOk[sectionIndex]
+                            ? null
+                            : Theme.of(context).colorScheme.error),
+                    child: IconButton(
+                      icon: const Icon(Icons.navigate_before),
                       color: !buttonEnabled ||
                               checklistEditorStore
                                   .previousSectionsOk[sectionIndex]
                           ? null
-                          : Theme.of(context).colorScheme.error),
-                  child: IconButton(
-                    icon: const Icon(Icons.navigate_before),
-                    color: !buttonEnabled ||
-                            checklistEditorStore
-                                .previousSectionsOk[sectionIndex]
-                        ? null
-                        : Theme.of(context).colorScheme.onError,
-                    onPressed: buttonEnabled
-                        ? () => _onTapPreviousSection(context)
-                        : null,
-                  ),
-                );
-              },
-            ),
-            Observer(
-              builder: (_) {
-                final buttonEnabled = sectionIndex < totalSections;
-                Color? buttonColor;
-                if (buttonEnabled) {
-                  buttonColor = checklistEditorStore.sectionsOk[sectionIndex]
-                      ? ccrSectionOkColor
-                      : Theme.of(context).colorScheme.error;
-                }
-                return DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: buttonColor,
-                  ),
-                  child: IconButton(
-                    icon: const Icon(Icons.navigate_next),
-                    color: !buttonEnabled ||
-                            checklistEditorStore.sectionsOk[sectionIndex]
-                        ? null
-                        : Theme.of(context).colorScheme.onError,
-                    onPressed: buttonEnabled
-                        ? () => _onTapNextSection(context, totalSections)
-                        : null,
-                  ),
-                );
-              },
-            ),
-          ],
+                          : Theme.of(context).colorScheme.onError,
+                      onPressed: buttonEnabled
+                          ? () => _onTapPreviousSection(context)
+                          : null,
+                    ),
+                  );
+                },
+              ),
+              Observer(
+                builder: (_) {
+                  final buttonEnabled = sectionIndex < totalSections;
+                  Color? buttonColor;
+                  if (buttonEnabled) {
+                    buttonColor = checklistEditorStore.sectionsOk[sectionIndex]
+                        ? ccrSectionOkColor
+                        : Theme.of(context).colorScheme.error;
+                  }
+                  return DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: buttonColor,
+                    ),
+                    child: IconButton(
+                      icon: const Icon(Icons.navigate_next),
+                      color: !buttonEnabled ||
+                              checklistEditorStore.sectionsOk[sectionIndex]
+                          ? null
+                          : Theme.of(context).colorScheme.onError,
+                      onPressed: buttonEnabled
+                          ? () => _onTapNextSection(context, totalSections)
+                          : null,
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+  Future<bool> _onBackPress(BuildContext context) async {
+    final checklistEditorStore =
+        Provider.of<ChecklistEditorStore>(context, listen: false);
+    if (!checklistEditorStore.checklistChanged) {
+      return true;
+    }
+
+    return await ccrConfirmActionDialog(
+      context,
+      'Confirm losing modifications',
+      'You have a partial checklist. Do you want to loose it?',
     );
   }
 
