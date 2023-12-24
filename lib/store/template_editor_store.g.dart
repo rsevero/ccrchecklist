@@ -11,6 +11,7 @@ TemplateEditorStore _$TemplateEditorStoreFromJson(Map<String, dynamic> json) =>
       .._currentTemplate =
           Template.fromJson(json['_currentTemplate'] as Map<String, dynamic>)
       .._currentTemplateIsModified = json['_currentTemplateIsModified'] as bool
+      .._isCurrentTemplateAsset = json['_isCurrentTemplateAsset'] as bool
       .._sections =
           ObservableListJsonConverter.obsvbLstOfTemplateSectionFromJson(
               json['_sections'] as List<TemplateSection>)
@@ -28,6 +29,7 @@ Map<String, dynamic> _$TemplateEditorStoreToJson(
     <String, dynamic>{
       '_currentTemplate': instance._currentTemplate.toJson(),
       '_currentTemplateIsModified': instance._currentTemplateIsModified,
+      '_isCurrentTemplateAsset': instance._isCurrentTemplateAsset,
       '_sections': ObservableListJsonConverter.obsvbLstOfTemplateSectionToJson(
           instance._sections),
       '_selectedSection': instance._selectedSection.toJson(),
@@ -108,6 +110,26 @@ mixin _$TemplateEditorStore on _TemplateEditorStoreBaseToJson, Store {
     _$_currentTemplateIsModifiedAtom
         .reportWrite(value, super._currentTemplateIsModified, () {
       super._currentTemplateIsModified = value;
+    });
+  }
+
+  late final _$_isCurrentTemplateAssetAtom = Atom(
+      name: '_TemplateEditorStoreBaseToJson._isCurrentTemplateAsset',
+      context: context);
+
+  bool get isCurrentTemplateAsset {
+    _$_isCurrentTemplateAssetAtom.reportRead();
+    return super._isCurrentTemplateAsset;
+  }
+
+  @override
+  bool get _isCurrentTemplateAsset => isCurrentTemplateAsset;
+
+  @override
+  set _isCurrentTemplateAsset(bool value) {
+    _$_isCurrentTemplateAssetAtom
+        .reportWrite(value, super._isCurrentTemplateAsset, () {
+      super._isCurrentTemplateAsset = value;
     });
   }
 
@@ -454,11 +476,11 @@ mixin _$TemplateEditorStore on _TemplateEditorStoreBaseToJson, Store {
   }
 
   @override
-  void setCurrentTemplate(Template template) {
+  void setCurrentTemplate(Template template, [bool isAsset = false]) {
     final _$actionInfo = _$_TemplateEditorStoreBaseToJsonActionController
         .startAction(name: '_TemplateEditorStoreBaseToJson.setCurrentTemplate');
     try {
-      return super.setCurrentTemplate(template);
+      return super.setCurrentTemplate(template, isAsset);
     } finally {
       _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
     }

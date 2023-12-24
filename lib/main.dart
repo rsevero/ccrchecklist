@@ -42,6 +42,7 @@ class CCRChecklistApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'CCR Checklist',
+      debugShowCheckedModeBanner: false,
       theme: mainLightTheme,
       darkTheme: mainDarkTheme,
       home: const TemplateListPage(),
