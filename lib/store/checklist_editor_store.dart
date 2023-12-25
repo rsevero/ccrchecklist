@@ -6,7 +6,7 @@ import 'package:ccr_checklist/data/linearity_row.dart';
 import 'package:ccr_checklist/data/template.dart';
 import 'package:ccr_checklist/data/template_check.dart';
 import 'package:ccr_checklist/misc/constants.dart';
-import 'package:ccr_checklist/misc/helper_functions.dart';
+import 'package:ccr_checklist/misc/get_directory_helper.dart';
 import 'package:ccr_checklist/store/observablelist_json_converter.dart';
 import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';

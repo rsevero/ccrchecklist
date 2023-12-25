@@ -1,7 +1,7 @@
 import 'package:ccr_checklist/data/regular_check_reference.dart';
 import 'package:ccr_checklist/data/template_check.dart';
 import 'package:ccr_checklist/misc/constants.dart';
-import 'package:ccr_checklist/misc/helper_functions.dart';
+import 'package:ccr_checklist/misc/datetime_formater_helper.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
