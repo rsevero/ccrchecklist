@@ -1,4 +1,4 @@
-import 'package:ccr_checklist/misc/helper_functions.dart';
+import 'package:ccr_checklist/misc/help_dialog_helper.dart';
 import 'package:ccr_checklist/page/checklist_page.dart';
 import 'package:ccr_checklist/page/template_editor_list_page.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';

@@ -1,4 +1,4 @@
-import 'package:ccr_checklist/misc/helper_functions.dart';
+import 'package:ccr_checklist/misc/help_dialog_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 
