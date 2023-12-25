@@ -32,6 +32,7 @@ dependencies:
   dart_numerics: ^0.0.6
   flutter:
     sdk: flutter
+  flutter_markdown: ^0.6.18+2
   flutter_mobx: ^2.2.0
   flutter_sharing_intent: ^1.1.0
   flutter_speed_dial: ^7.0.0
@@ -101,3 +102,9 @@ flutter:
     - assets/templates/manifest.json
     - assets/sounds/
     - assets/sounds/alarm-clock-short.mp3
+    - assets/help/
+    - assets/help/ChecklistCompletePage.md
+    - assets/help/ChecklistPage.md
+    - assets/help/TemplateEditorListPage.md
+    - assets/help/TemplateEditorPage.md
+    - assets/help/TemplateListPage.md

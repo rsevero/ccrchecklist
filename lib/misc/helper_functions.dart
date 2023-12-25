@@ -4,7 +4,9 @@ import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/page/checklist_page.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
+import 'package:ccr_checklist/widget/help_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -210,4 +212,28 @@ Future<bool> ccrConfirmActionDialog(
         ),
       ) ??
       false;
+}
+
+String ccrSeparateCamelCase(String text) {
+  RegExp exp = RegExp(r'(?<=[a-z])(?=[A-Z])');
+  return text.replaceAll(exp, ' ');
+}
+
+void ccrOpenHelpDialog(BuildContext context, String pageName) {
+  final helpTextFileName = 'assets/help/$pageName.md';
+  final helpTextFuture = ccrLoadHelpText(helpTextFileName);
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return HelpDialog(helpTextFuture: helpTextFuture, pageName: pageName);
+    },
+  );
+}
+
+Future<String> ccrLoadHelpText(String path) async {
+  try {
+    return await rootBundle.loadString(path);
+  } catch (e) {
+    return 'Error loading help text: $e';
+  }
 }
