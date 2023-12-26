@@ -28,6 +28,7 @@ class _ChecklistRegularCheckWidgetState
   late int _remainingSeconds;
   bool _timerAvailable = false;
   bool _isInit = true;
+  bool isHovering = false;
 
   @override
   void didChangeDependencies() {
@@ -84,12 +85,26 @@ class _ChecklistRegularCheckWidgetState
                   const TextSpan(text: ' '),
                   WidgetSpan(
                     alignment: PlaceholderAlignment.middle,
-                    child: InlineIcon(
-                      icon: Icons.info_outline,
-                      color: Colors.blue,
-                      onPressed: () {
-                        // Your existing showDialog code
-                      },
+                    child: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: InkWell(
+                        onTap: () => onPressedInfo(context, check),
+                        onHover: (hovering) {
+                          setState(() {
+                            isHovering = hovering;
+                          });
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color:
+                                isHovering ? Colors.grey : Colors.transparent,
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(Icons.info_outline,
+                              color: Colors.blue),
+                        ),
+                      ),
                     ),
                   ),
                 ],
@@ -104,6 +119,26 @@ class _ChecklistRegularCheckWidgetState
           ),
         ],
       ),
+    );
+  }
+
+  void onPressedInfo(BuildContext context, ChecklistRegularCheck check) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Info'),
+          content: Text(check.observation),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
     );
   }
 
