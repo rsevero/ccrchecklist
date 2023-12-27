@@ -43,7 +43,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
               child: const Icon(Icons.assignment_add),
               text: 'Add Page',
               isEnabled: true,
-              onTap: () => _onTapAddNewSection(context),
+              onTap: () => _onTapAddSection(context),
             ),
             GreyableSpeedDialChild(
               child: const Icon(Icons.edit_attributes),
@@ -145,7 +145,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
     Navigator.of(context).pop();
   }
 
-  void _onTapAddNewSection(BuildContext context) async {
+  void _onTapAddSection(BuildContext context) async {
     final templateEditorStore =
         Provider.of<TemplateEditorStore>(context, listen: false);
     final TextEditingController titleController = TextEditingController();
