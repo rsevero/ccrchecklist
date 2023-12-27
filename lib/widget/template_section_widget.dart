@@ -35,7 +35,14 @@ class TemplateSectionWidget extends StatelessWidget {
           child: GestureDetector(
             onTap: () => onTapSection(context, sectionIndex),
             child: ExpansionTile(
-              title: Text(section.title),
+              title: Text(
+                section.title,
+                style: TextStyle(
+                  color: isSelected
+                      ? mainColorScheme.onPrimaryContainer
+                      : mainColorScheme.onPrimary,
+                ),
+              ),
               onExpansionChanged: (expanded) {
                 templateEditorStore.setExpandedSection(sectionIndex, expanded);
               },
