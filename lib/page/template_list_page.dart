@@ -57,7 +57,13 @@ class TemplateListPage extends StatelessWidget {
     final template = await templateListStore
         .getTemplate(templateListStore.defaultTemplates[index]);
 
-    checklistEditorStore.loadFromTemplate(template);
+    if (!context.mounted) return;
+    final result =
+        await checklistEditorStore.loadFromTemplate(context, template);
+
+    if (!result) {
+      return;
+    }
 
     if (!context.mounted) return;
     await Navigator.of(context).push(

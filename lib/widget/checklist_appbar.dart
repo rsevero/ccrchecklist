@@ -57,7 +57,12 @@ class CheckListAppBar extends StatelessWidget implements PreferredSizeWidget {
         "Are you sure you want to reset the checklist and lose all changes?");
 
     if (confirm) {
-      checklistEditorStore.resetChecklist();
+      if (!context.mounted) return;
+      final result = await checklistEditorStore.resetChecklist(context);
+
+      if (!result) {
+        return;
+      }
       if (!context.mounted) return;
       navigateToSection(context, 0);
     }

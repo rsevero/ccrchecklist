@@ -9,6 +9,7 @@ import 'package:ccr_checklist/data/template_check.dart';
 import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/misc/get_directory_helper.dart';
 import 'package:ccr_checklist/store/observablelist_json_converter.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:mobx/mobx.dart';
@@ -309,8 +310,8 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
   }
 
   @action
-  void loadFromTemplate(Template template) {
-    _loadFromTemplate(template);
+  Future<bool> loadFromTemplate(BuildContext context, Template template) async {
+    return await _loadFromTemplate(context, template);
   }
 
   void _resetStore() {
@@ -333,7 +334,30 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
     _checklistChanged = false;
   }
 
-  void _loadFromTemplate(Template template) {
+  Future<void> _showNoPagesTemplateDialog(BuildContext context) async {
+    await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Empty Checklist'),
+        content: const Text('The selected checklist is empty.'),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('OK'),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        ],
+      ),
+    );
+    return;
+  }
+
+  Future<bool> _loadFromTemplate(
+      BuildContext context, Template template) async {
+    if (template.sections.isEmpty) {
+      await _showNoPagesTemplateDialog(context);
+      return false;
+    }
+
     _resetStore();
 
     _rebreatherManufacturer = template.rebreatherManufacturer;
@@ -366,6 +390,8 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
     _previousSectionsOk[0] = true;
     _currentTemplate = template;
     _checklistChanged = false;
+
+    return true;
   }
 
   @action
@@ -441,8 +467,8 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
   }
 
   @action
-  void resetChecklist() {
-    _loadFromTemplate(_currentTemplate);
+  Future<bool> resetChecklist(BuildContext context) async {
+    return await _loadFromTemplate(context, _currentTemplate);
   }
 
   @action

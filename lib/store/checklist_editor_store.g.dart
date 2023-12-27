@@ -344,6 +344,25 @@ mixin _$ChecklistEditorStore on _ChecklistEditorStoreBaseToJson, Store {
     });
   }
 
+  late final _$loadFromTemplateAsyncAction = AsyncAction(
+      '_ChecklistEditorStoreBaseToJson.loadFromTemplate',
+      context: context);
+
+  @override
+  Future<bool> loadFromTemplate(BuildContext context, Template template) {
+    return _$loadFromTemplateAsyncAction
+        .run(() => super.loadFromTemplate(context, template));
+  }
+
+  late final _$resetChecklistAsyncAction = AsyncAction(
+      '_ChecklistEditorStoreBaseToJson.resetChecklist',
+      context: context);
+
+  @override
+  Future<bool> resetChecklist(BuildContext context) {
+    return _$resetChecklistAsyncAction.run(() => super.resetChecklist(context));
+  }
+
   late final _$_ChecklistEditorStoreBaseToJsonActionController =
       ActionController(
           name: '_ChecklistEditorStoreBaseToJson', context: context);
@@ -383,17 +402,6 @@ mixin _$ChecklistEditorStore on _ChecklistEditorStoreBaseToJson, Store {
   }
 
   @override
-  void loadFromTemplate(Template template) {
-    final _$actionInfo = _$_ChecklistEditorStoreBaseToJsonActionController
-        .startAction(name: '_ChecklistEditorStoreBaseToJson.loadFromTemplate');
-    try {
-      return super.loadFromTemplate(template);
-    } finally {
-      _$_ChecklistEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   void setCheckReferenceValue(
       int sectionIndex, int checkIndex, int refIndex, double? newValue) {
     final _$actionInfo =
@@ -402,17 +410,6 @@ mixin _$ChecklistEditorStore on _ChecklistEditorStoreBaseToJson, Store {
     try {
       return super
           .setCheckReferenceValue(sectionIndex, checkIndex, refIndex, newValue);
-    } finally {
-      _$_ChecklistEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void resetChecklist() {
-    final _$actionInfo = _$_ChecklistEditorStoreBaseToJsonActionController
-        .startAction(name: '_ChecklistEditorStoreBaseToJson.resetChecklist');
-    try {
-      return super.resetChecklist();
     } finally {
       _$_ChecklistEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
     }
