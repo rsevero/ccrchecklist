@@ -9,7 +9,8 @@
 - [X] cogitar se altera a nomenclatura de seção para página
 
 ## Ao criar/editar template:
-- [ ] não adiciona regular check; em add step 1 linearity check abre a caixa (com faixa zebrada no meio), onde é possível descrever mas não clicar nos números; mesmo mantendo o 1 que ja está selecionado não adiciona esse tópico
+- [X] não adiciona regular check;
+- [ ] em add step 1 linearity check abre a caixa (com faixa zebrada no meio), onde é possível descrever mas não clicar nos números; mesmo mantendo o 1 que ja está selecionado não adiciona esse tópico
 - [ ] quando a seção está selecionada mudar a cor do texto pois está claro contra o fundo branco (ocorre tb com algumas páginas dentro do checklist de várias páginas)
 - [ ] não dá para editar checklist com uma página só
 - [ ] no checklist de varias páginas algumas das seções não abrem os tópicos

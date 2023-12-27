@@ -496,45 +496,38 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                           'References prefixes and suffixes are optional'),
                     ...List.generate(
                       ccrMaxReferences + 1,
-                      (index) => Row(
+                      (index) => Column(
                         children: [
-                          Expanded(
-                            flex: 2,
-                            child: Visibility(
-                              visible: index > 0 && index <= numberOfReferences,
-                              maintainSize: true,
-                              maintainState: true,
-                              maintainAnimation: true,
-                              child: TextFormField(
-                                controller: prefixControllers[index],
-                                decoration:
-                                    InputDecoration(hintText: 'Prefix $index'),
-                              ),
-                            ),
+                          RadioListTile<int>(
+                            title: Text('$index'),
+                            value: index,
+                            groupValue: numberOfReferences,
+                            onChanged: (int? value) {
+                              setState(() => numberOfReferences = value ?? 0);
+                            },
                           ),
-                          Expanded(
-                            flex: 1,
-                            child: RadioListTile<int>(
-                              title: Text('$index'),
-                              value: index,
-                              groupValue: numberOfReferences,
-                              onChanged: (int? value) {
-                                setState(() => numberOfReferences = value ?? 0);
-                              },
-                            ),
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child: Visibility(
-                              visible: index > 0 && index <= numberOfReferences,
-                              maintainSize: true,
-                              maintainState: true,
-                              maintainAnimation: true,
-                              child: TextFormField(
-                                controller: suffixControllers[index],
-                                decoration:
-                                    InputDecoration(hintText: 'Suffix $index'),
-                              ),
+                          Visibility(
+                            visible: index > 0 && index <= numberOfReferences,
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: TextFormField(
+                                    controller: prefixControllers[index],
+                                    decoration: InputDecoration(
+                                        hintText: 'Prefix $index'),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Expanded(
+                                  child: TextFormField(
+                                    controller: suffixControllers[index],
+                                    decoration: InputDecoration(
+                                        hintText: 'Suffix $index'),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
