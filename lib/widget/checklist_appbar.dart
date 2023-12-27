@@ -42,18 +42,25 @@ class CheckListAppBar extends StatelessWidget implements PreferredSizeWidget {
             tooltip: 'Reset Checklist',
             onPressed: checklistEditorStore.checklistChanged
                 ? () => onPressedResetChecklist(context)
-                : null, // Call the reset function on press
+                : null,
           ),
         ),
       ],
     );
   }
 
-  void onPressedResetChecklist(BuildContext context) {
+  void onPressedResetChecklist(BuildContext context) async {
     final checklistEditorStore =
         Provider.of<ChecklistEditorStore>(context, listen: false);
-    checklistEditorStore.resetChecklist();
-    navigateToSection(context, 0);
+
+    bool confirm = await ccrConfirmActionDialog(context, "Reset Checklist",
+        "Are you sure you want to reset the checklist and lose all changes?");
+
+    if (confirm) {
+      checklistEditorStore.resetChecklist();
+      if (!context.mounted) return;
+      navigateToSection(context, 0);
+    }
   }
 
   @override
