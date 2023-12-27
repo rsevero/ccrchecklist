@@ -216,13 +216,11 @@ class _ChecklistRegularCheckWidgetState
                         ],
                         onChanged: (value) {
                           double? newValue = double.tryParse(value);
-                          if (newValue != null) {
-                            checklistEditorStore.setCheckReferenceValue(
-                                widget.sectionIndex,
-                                widget.checkIndex,
-                                index,
-                                newValue);
-                          }
+                          checklistEditorStore.setCheckReferenceValue(
+                              widget.sectionIndex,
+                              widget.checkIndex,
+                              index,
+                              newValue);
                         },
                       ),
                     ),

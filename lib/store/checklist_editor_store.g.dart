@@ -249,6 +249,25 @@ mixin _$ChecklistEditorStore on _ChecklistEditorStoreBaseToJson, Store {
     });
   }
 
+  late final _$_emptyReferencesAtom = Atom(
+      name: '_ChecklistEditorStoreBaseToJson._emptyReferences',
+      context: context);
+
+  ObservableList<ObservableList<int>> get emptyReferences {
+    _$_emptyReferencesAtom.reportRead();
+    return super._emptyReferences;
+  }
+
+  @override
+  ObservableList<ObservableList<int>> get _emptyReferences => emptyReferences;
+
+  @override
+  set _emptyReferences(ObservableList<ObservableList<int>> value) {
+    _$_emptyReferencesAtom.reportWrite(value, super._emptyReferences, () {
+      super._emptyReferences = value;
+    });
+  }
+
   late final _$_sectionsOkAtom = Atom(
       name: '_ChecklistEditorStoreBaseToJson._sectionsOk', context: context);
 
@@ -376,7 +395,7 @@ mixin _$ChecklistEditorStore on _ChecklistEditorStoreBaseToJson, Store {
 
   @override
   void setCheckReferenceValue(
-      int sectionIndex, int checkIndex, int refIndex, dynamic newValue) {
+      int sectionIndex, int checkIndex, int refIndex, double? newValue) {
     final _$actionInfo =
         _$_ChecklistEditorStoreBaseToJsonActionController.startAction(
             name: '_ChecklistEditorStoreBaseToJson.setCheckReferenceValue');

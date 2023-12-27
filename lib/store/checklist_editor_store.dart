@@ -84,6 +84,10 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
       ObservableList<ObservableList<bool>>();
 
   @readonly
+  ObservableList<ObservableList<int>> _emptyReferences =
+      ObservableList<ObservableList<int>>();
+
+  @readonly
   ObservableList<bool> _sectionsOk = ObservableList<bool>();
 
   @readonly
@@ -126,7 +130,20 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
       for (var checkIndex = 0;
           checkIndex < _checksOk[index].length;
           checkIndex++) {
+        bool notOk = false;
         if (!_checksOk[index][checkIndex]) {
+          notOk = true;
+        }
+        if (!notOk) {
+          final check = _checks[index][checkIndex];
+          if (check is ChecklistRegularCheck) {
+            if (_emptyReferences[index][checkIndex] > 0) {
+              notOk = true;
+            }
+          }
+        }
+
+        if (notOk) {
           nonOkCount++;
         }
       }
@@ -196,8 +213,25 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
 
   void _statusUpdate(int sectionIndex, int checkIndex) {
     _isCheckOk(sectionIndex, checkIndex);
+    _updateEmptyRefs(sectionIndex, checkIndex);
     _isSectionOk(sectionIndex);
     _isPreviousSectionsOk(sectionIndex);
+  }
+
+  void _updateEmptyRefs(int sectionIndex, int checkIndex) {
+    int emptyRefs = 0;
+    final check = _checks[sectionIndex][checkIndex];
+    if (check is ChecklistRegularCheck) {
+      for (var index = 0; index < check.references.length; index++) {
+        if (check.references[index].value == null) {
+          emptyRefs++;
+        }
+      }
+    }
+    if (_emptyReferences[sectionIndex][checkIndex] != emptyRefs) {
+      _emptyReferences[sectionIndex][checkIndex] = emptyRefs;
+      _nonOkChecksPerSectionUpdated = false;
+    }
   }
 
   void _isCheckOk(int sectionIndex, int checkIndex) {
@@ -210,6 +244,10 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
     bool isOk = true;
     for (var index = 0; index < _checksOk[sectionIndex].length; index++) {
       if (!_checksOk[sectionIndex][index]) {
+        isOk = false;
+        break;
+      }
+      if (_emptyReferences[sectionIndex][index] != 0) {
         isOk = false;
         break;
       }
@@ -279,6 +317,7 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
     _sections.clear();
     _checks.clear();
     _checksOk.clear();
+    _emptyReferences.clear();
     _sectionsOk.clear();
     _previousSectionsOk.clear();
     _linearityWorksheet.clear();
@@ -317,6 +356,8 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
       _checks.add(ObservableList<ChecklistCheck>.of(checks));
       _checksOk.add(ObservableList<bool>.of(
           List<bool>.generate(checks.length, (index) => false)));
+      _emptyReferences.add(ObservableList<int>.of(
+          List<int>.generate(checks.length, (index) => 0)));
     }
     _sectionsOk.addAll(
         List<bool>.generate(template.sections.length, (index) => false));
@@ -329,7 +370,7 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
 
   @action
   void setCheckReferenceValue(
-      int sectionIndex, int checkIndex, int refIndex, newValue) {
+      int sectionIndex, int checkIndex, int refIndex, double? newValue) {
     final check = _checks[sectionIndex][checkIndex];
     if (check is! ChecklistRegularCheck) {
       return;
@@ -338,6 +379,7 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
     references[refIndex] = references[refIndex].copyWith(value: newValue);
     _checks[sectionIndex][checkIndex] = check.copyWith(references: references);
     _checklistChanged = true;
+    _statusUpdate(sectionIndex, checkIndex);
   }
 
   List<ChecklistCheck> _getChecksFromTemplateChecks(
