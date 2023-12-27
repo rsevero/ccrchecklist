@@ -202,7 +202,9 @@ class _ChecklistRegularCheckWidgetState
                       decoration: InputDecoration(
                         labelText: 'Ref ${index + 1}',
                         border: const OutlineInputBorder(),
+                        counterText: '',
                       ),
+                      maxLength: 5,
                       keyboardType: const TextInputType.numberWithOptions(
                           decimal: true, signed: true),
                       inputFormatters: [
