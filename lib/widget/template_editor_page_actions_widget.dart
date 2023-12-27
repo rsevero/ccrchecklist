@@ -211,64 +211,66 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
           title: const Text('Add step 1 of Linearity Check'),
           content: StatefulBuilder(
             builder: (BuildContext context, StateSetter setState) {
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  SizedBox(
-                    width: ccrDescriptionFieldWidth,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Row(
-                          children: [
-                            Text(
-                              'Description',
-                              style: TextStyle(
-                                fontSize: 16,
+              return SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    SizedBox(
+                      width: ccrDescriptionFieldWidth,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Row(
+                            children: [
+                              Text(
+                                'Description',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                ),
                               ),
-                            ),
-                            Text(
-                              ' *',
-                              style: TextStyle(
-                                color: Colors.red,
-                                fontSize: 16,
+                              Text(
+                                ' *',
+                                style: TextStyle(
+                                  color: Colors.red,
+                                  fontSize: 16,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        TextFormField(
-                          controller: descriptionController,
-                          decoration: const InputDecoration(
-                            hintText: 'Enter check description',
-                            border: OutlineInputBorder(),
+                            ],
                           ),
-                          maxLines: null,
-                          minLines: 1,
-                          keyboardType: TextInputType.multiline,
-                          textCapitalization: TextCapitalization.sentences,
-                          autofocus: true,
-                        ),
-                      ],
+                          TextFormField(
+                            controller: descriptionController,
+                            decoration: const InputDecoration(
+                              hintText: 'Enter check description',
+                              border: OutlineInputBorder(),
+                            ),
+                            maxLines: null,
+                            minLines: 1,
+                            keyboardType: TextInputType.multiline,
+                            textCapitalization: TextCapitalization.sentences,
+                            autofocus: true,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text('Amount of references'),
-                  ),
-                  ...List.generate(
-                    ccrMaxReferences,
-                    (index) => RadioListTile<int>(
-                      title: Text('${index + 1}'),
-                      value: index + 1,
-                      groupValue: numberOfReferences,
-                      onChanged: (int? value) {
-                        if (value != null) {
-                          setState(() => numberOfReferences = value);
-                        }
-                      },
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text('Amount of references'),
                     ),
-                  ),
-                ],
+                    ...List.generate(
+                      ccrMaxReferences,
+                      (index) => RadioListTile<int>(
+                        title: Text('${index + 1}'),
+                        value: index + 1,
+                        groupValue: numberOfReferences,
+                        onChanged: (int? value) {
+                          if (value != null) {
+                            setState(() => numberOfReferences = value);
+                          }
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               );
             },
           ),
