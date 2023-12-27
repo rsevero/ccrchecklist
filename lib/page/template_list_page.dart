@@ -37,11 +37,16 @@ class TemplateListPage extends StatelessWidget {
   }
 
   void _openTemplateEditor(BuildContext context) {
+    final templateListStore =
+        Provider.of<TemplateListStore>(context, listen: false);
+
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const TemplateEditorListPage(),
       ),
     );
+
+    templateListStore.update();
   }
 
   void _onTapTemplateFile(BuildContext context, int index) async {

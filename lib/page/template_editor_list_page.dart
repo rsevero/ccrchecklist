@@ -150,19 +150,17 @@ class TemplateEditorListPage extends StatelessWidget {
               actions: <Widget>[
                 TextButton(
                   child: const Text('Create'),
-                  onPressed: () => Navigator.of(context)
-                      .pop(true), // Dismiss and return true
+                  onPressed: () => Navigator.of(context).pop(true),
                 ),
                 TextButton(
                   child: const Text('Cancel'),
-                  onPressed: () => Navigator.of(context)
-                      .pop(false), // Dismiss and return false
+                  onPressed: () => Navigator.of(context).pop(false),
                 ),
               ],
             );
           },
         ) ??
-        false; // Handle null (dialog dismissed)
+        false;
 
     if (confirmed) {
       final fileName = fileNameController.text.trim();
@@ -187,11 +185,16 @@ class TemplateEditorListPage extends StatelessWidget {
             context, newTemplate, fileNameController.text.trim());
 
         if (!context.mounted) return;
+        final templateListStore =
+            Provider.of<TemplateListStore>(context, listen: false);
+
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => const TemplateEditorPage(),
           ),
         );
+
+        templateListStore.update();
       }
     }
   }
