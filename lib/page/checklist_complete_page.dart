@@ -17,9 +17,9 @@ class ChecklistCompletePage extends StatelessWidget {
     if (nonOkSectionCount == 0) {
       message = 'All sections completed!';
     } else if (nonOkSectionCount == 1) {
-      message = 'You have 1 section is not completed.';
+      message = 'You have 1 page not completed.';
     } else {
-      message = 'You have $nonOkSectionCount sections not completed.';
+      message = 'You have $nonOkSectionCount pages not completed.';
     }
 
     return Scaffold(

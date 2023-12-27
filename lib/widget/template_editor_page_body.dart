@@ -48,7 +48,7 @@ class TemplateEditorPageBody extends StatelessWidget {
         const Padding(
           padding: EdgeInsets.only(left: 16.0, bottom: 8.0),
           child: Text(
-            'Sections',
+            'Pages',
             style: TextStyle(
               fontSize: 20.0,
               fontWeight: FontWeight.bold,

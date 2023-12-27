@@ -40,8 +40,8 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
               onTap: () => _onTapAddRegularCheck(context),
             ),
             GreyableSpeedDialChild(
-              child: const Icon(Icons.add),
-              text: 'Add New Section',
+              child: const Icon(Icons.assignment_add),
+              text: 'Add Page',
               isEnabled: true,
               onTap: () => _onTapAddNewSection(context),
             ),
@@ -157,7 +157,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: const Text('New Section'),
+              title: const Text('New Page'),
               content: Form(
                 key: formKey,
                 child: TextFormField(
@@ -166,8 +166,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                       const InputDecoration(hintText: 'Enter title here'),
                   autofocus: true,
                   onFieldSubmitted: (value) {
-                    Navigator.of(context)
-                        .pop(true); // Trigger when Enter is pressed
+                    Navigator.of(context).pop(true);
                   },
                 ),
               ),
@@ -175,23 +174,21 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                 TextButton(
                   child: const Text('Create'),
                   onPressed: () {
-                    Navigator.of(context).pop(true); // Dismiss and return true
+                    Navigator.of(context).pop(true);
                   },
                 ),
                 TextButton(
                   child: const Text('Cancel'),
                   onPressed: () {
                     if (!context.mounted) return;
-                    Navigator.of(context)
-                        .pop(false); // Dismiss and return false
+                    Navigator.of(context).pop(false);
                   },
                 ),
               ],
             );
           },
         ) ??
-        false; // Handle null (dialog dismissed)
-
+        false;
     if (confirmed) {
       final title = titleController.text.trim();
       if (title.isNotEmpty) {
@@ -205,7 +202,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
         Provider.of<TemplateEditorStore>(context, listen: false);
     final TextEditingController descriptionController = TextEditingController();
 
-    int numberOfReferences = 1; // Default value
+    int numberOfReferences = 1;
 
     showDialog(
       context: context,
@@ -213,7 +210,6 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
         return AlertDialog(
           title: const Text('Add step 1 of Linearity Check'),
           content: StatefulBuilder(
-            // Use StatefulBuilder to update the dialog's state
             builder: (BuildContext context, StateSetter setState) {
               return Column(
                 mainAxisSize: MainAxisSize.min,
@@ -228,15 +224,14 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                             Text(
                               'Description',
                               style: TextStyle(
-                                fontSize: 16, // Adjust the font size as needed
+                                fontSize: 16,
                               ),
                             ),
                             Text(
-                              ' *', // Red asterisk with preceding space for separation
+                              ' *',
                               style: TextStyle(
                                 color: Colors.red,
-                                fontSize:
-                                    16, // Adjust the font size to match the label
+                                fontSize: 16,
                               ),
                             ),
                           ],
@@ -247,13 +242,10 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                             hintText: 'Enter check description',
                             border: OutlineInputBorder(),
                           ),
-                          maxLines: null, // Makes the input field expandable
-                          minLines:
-                              1, // Minimum lines the TextFormField will take
-                          keyboardType: TextInputType
-                              .multiline, // Keyboard type for multiline input
-                          textCapitalization: TextCapitalization
-                              .sentences, // Capitalize first letter of sentences
+                          maxLines: null,
+                          minLines: 1,
+                          keyboardType: TextInputType.multiline,
+                          textCapitalization: TextCapitalization.sentences,
                           autofocus: true,
                         ),
                       ],
@@ -261,8 +253,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                   ),
                   const Padding(
                     padding: EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text(
-                        'Amount of references'), // Label for the radio buttons
+                    child: Text('Amount of references'),
                   ),
                   ...List.generate(
                     ccrMaxReferences,
@@ -316,7 +307,6 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
         return AlertDialog(
           title: const Text('Add step 2 of Linearity Check'),
           content: StatefulBuilder(
-            // Use StatefulBuilder to update the dialog's state
             builder: (BuildContext context, StateSetter setState) {
               return Column(
                 mainAxisSize: MainAxisSize.min,
@@ -331,15 +321,14 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                             Text(
                               'Description',
                               style: TextStyle(
-                                fontSize: 16, // Adjust the font size as needed
+                                fontSize: 16,
                               ),
                             ),
                             Text(
-                              ' *', // Red asterisk with preceding space for separation
+                              ' *',
                               style: TextStyle(
                                 color: Colors.red,
-                                fontSize:
-                                    16, // Adjust the font size to match the label
+                                fontSize: 16,
                               ),
                             ),
                           ],
@@ -350,13 +339,10 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                             hintText: 'Enter check description',
                             border: OutlineInputBorder(),
                           ),
-                          maxLines: null, // Makes the input field expandable
-                          minLines:
-                              1, // Minimum lines the TextFormField will take
-                          keyboardType: TextInputType
-                              .multiline, // Keyboard type for multiline input
-                          textCapitalization: TextCapitalization
-                              .sentences, // Capitalize first letter of sentences
+                          maxLines: null,
+                          minLines: 1,
+                          keyboardType: TextInputType.multiline,
+                          textCapitalization: TextCapitalization.sentences,
                           autofocus: true,
                         ),
                       ],
@@ -395,7 +381,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
     final TextEditingController descriptionController = TextEditingController();
     final TextEditingController observationController = TextEditingController();
     int numberOfReferences = 0;
-    Duration timerDuration = Duration.zero; // Default values
+    Duration timerDuration = Duration.zero;
     final List<TextEditingController> prefixControllers =
         List.generate(ccrMaxReferences + 1, (_) => TextEditingController());
     final List<TextEditingController> suffixControllers =
@@ -422,16 +408,14 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                               Text(
                                 'Description',
                                 style: TextStyle(
-                                  fontSize:
-                                      16, // Adjust the font size as needed
+                                  fontSize: 16,
                                 ),
                               ),
                               Text(
-                                ' *', // Red asterisk with preceding space for separation
+                                ' *',
                                 style: TextStyle(
                                   color: Colors.red,
-                                  fontSize:
-                                      16, // Adjust the font size to match the label
+                                  fontSize: 16,
                                 ),
                               ),
                             ],
@@ -442,13 +426,10 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                               hintText: 'Enter check description',
                               border: OutlineInputBorder(),
                             ),
-                            maxLines: null, // Makes the input field expandable
-                            minLines:
-                                1, // Minimum lines the TextFormField will take
-                            keyboardType: TextInputType
-                                .multiline, // Keyboard type for multiline input
-                            textCapitalization: TextCapitalization
-                                .sentences, // Capitalize first letter of sentences
+                            maxLines: null,
+                            minLines: 1,
+                            keyboardType: TextInputType.multiline,
+                            textCapitalization: TextCapitalization.sentences,
                             autofocus: true,
                           ),
                         ],
@@ -464,8 +445,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                               Text(
                                 'Observation',
                                 style: TextStyle(
-                                  fontSize:
-                                      16, // Adjust the font size as needed
+                                  fontSize: 16,
                                 ),
                               ),
                             ],
@@ -476,13 +456,10 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                               hintText: 'Enter check observation',
                               border: OutlineInputBorder(),
                             ),
-                            maxLines: null, // Makes the input field expandable
-                            minLines:
-                                1, // Minimum lines the TextFormField will take
-                            keyboardType: TextInputType
-                                .multiline, // Keyboard type for multiline input
-                            textCapitalization: TextCapitalization
-                                .sentences, // Capitalize first letter of sentences
+                            maxLines: null,
+                            minLines: 1,
+                            keyboardType: TextInputType.multiline,
+                            textCapitalization: TextCapitalization.sentences,
                             autofocus: true,
                           ),
                         ],
