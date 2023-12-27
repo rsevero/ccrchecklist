@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:ccr_checklist/data/checklist_check.dart';
 import 'package:ccr_checklist/data/checklist_section.dart';
 import 'package:ccr_checklist/data/linearity_row.dart';
+import 'package:ccr_checklist/data/regular_check_reference.dart';
 import 'package:ccr_checklist/data/template.dart';
 import 'package:ccr_checklist/data/template_check.dart';
 import 'package:ccr_checklist/misc/constants.dart';
@@ -348,12 +349,20 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
 
       ChecklistCheck checklistCheck;
       if (templateCheck is TemplateRegularCheck) {
+        final checklistReferences = List<RegularCheckReference>.generate(
+          templateCheck.references.length,
+          (index) => RegularCheckReference(
+            prefix: templateCheck.references[index].prefix,
+            suffix: templateCheck.references[index].suffix,
+            value: null,
+          ),
+        );
         checklistCheck = ChecklistRegularCheck(
           description: templateCheck.description,
           observation: templateCheck.observation,
           lastChange: DateTime.now(),
           isChecked: false,
-          references: templateCheck.references,
+          references: checklistReferences,
           secondsTimer: templateCheck.secondsTimer,
         );
       } else if (templateCheck is TemplateLinearityStep1Check) {
