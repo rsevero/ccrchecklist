@@ -16,26 +16,29 @@ class NonOkSectionsReport extends StatelessWidget {
         .map((entry) => entry.key)
         .toList();
 
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: nonOkSections.length,
-      itemBuilder: (context, index) {
-        final sectionIndex = nonOkSections[index];
-        final sectionTitle = checklistEditorStore.sections[sectionIndex].title;
+    return Expanded(
+      child: ListView.builder(
+        shrinkWrap: true,
+        itemCount: nonOkSections.length,
+        itemBuilder: (context, index) {
+          final sectionIndex = nonOkSections[index];
+          final sectionTitle =
+              checklistEditorStore.sections[sectionIndex].title;
 
-        return ListTile(
-          leading: const Icon(Icons.error, color: Colors.red),
-          title: Text(sectionTitle),
-          subtitle: Text(
-              "Has ${checklistEditorStore.nonOkChecksPerSection[sectionIndex]} issues."),
-          trailing: ElevatedButton(
-            child: const Text('Fix'),
-            onPressed: () {
-              onPressedFix(context, sectionIndex);
-            },
-          ),
-        );
-      },
+          return ListTile(
+            leading: const Icon(Icons.error, color: Colors.red),
+            title: Text(sectionTitle),
+            subtitle: Text(
+                "Has ${checklistEditorStore.nonOkChecksPerSection[sectionIndex]} issues."),
+            trailing: ElevatedButton(
+              child: const Text('Fix'),
+              onPressed: () {
+                onPressedFix(context, sectionIndex);
+              },
+            ),
+          );
+        },
+      ),
     );
   }
 

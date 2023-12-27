@@ -4,7 +4,7 @@
 - [X] Reset: colocar caixa se quer mesmo zerar/perder os dados
 - [X] Reset não está apagando os campos de número, apenas a tabela
 - [X] no checklist report indicar que tem algumas caixas de números não preenchidas
-- [ ] no checklist report aparece faixa zebrada quando não cabe toda a lista na tela
+- [X] no checklist report aparece faixa zebrada quando não cabe toda a lista na tela
 - [ ] quando cria template e volta para a lista de templates fica rodando (se clicar no item editar - lápis - ele para de rodar e fica ok)
 - [ ] cogitar se altera a nomenclatura de seção para página
 
