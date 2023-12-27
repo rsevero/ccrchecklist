@@ -2,8 +2,8 @@ import 'dart:async';
 import 'package:ccr_checklist/data/checklist_check.dart';
 import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
-import 'package:ccr_checklist/widget/inline_icon.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:vibration/vibration.dart';
 
@@ -203,7 +203,11 @@ class _ChecklistRegularCheckWidgetState
                         labelText: 'Ref ${index + 1}',
                         border: const OutlineInputBorder(),
                       ),
-                      keyboardType: TextInputType.number,
+                      keyboardType: const TextInputType.numberWithOptions(
+                          decimal: true, signed: true),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(RegExp(r'[0-9.-]'))
+                      ],
                       onChanged: (value) {
                         double? newValue = double.tryParse(value);
                         if (newValue != null) {
