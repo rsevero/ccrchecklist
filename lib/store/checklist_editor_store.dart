@@ -326,6 +326,19 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
     _checklistChanged = false;
   }
 
+  @action
+  void setCheckReferenceValue(
+      int sectionIndex, int checkIndex, int refIndex, newValue) {
+    final check = _checks[sectionIndex][checkIndex];
+    if (check is! ChecklistRegularCheck) {
+      return;
+    }
+    final references = check.references;
+    references[refIndex] = references[refIndex].copyWith(value: newValue);
+    _checks[sectionIndex][checkIndex] = check.copyWith(references: references);
+    _checklistChanged = true;
+  }
+
   List<ChecklistCheck> _getChecksFromTemplateChecks(
       List<TemplateCheck> templateChecks, int sectionIndex) {
     List<ChecklistCheck> checks = [];

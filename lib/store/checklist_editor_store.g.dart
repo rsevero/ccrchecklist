@@ -375,6 +375,20 @@ mixin _$ChecklistEditorStore on _ChecklistEditorStoreBaseToJson, Store {
   }
 
   @override
+  void setCheckReferenceValue(
+      int sectionIndex, int checkIndex, int refIndex, dynamic newValue) {
+    final _$actionInfo =
+        _$_ChecklistEditorStoreBaseToJsonActionController.startAction(
+            name: '_ChecklistEditorStoreBaseToJson.setCheckReferenceValue');
+    try {
+      return super
+          .setCheckReferenceValue(sectionIndex, checkIndex, refIndex, newValue);
+    } finally {
+      _$_ChecklistEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void resetChecklist() {
     final _$actionInfo = _$_ChecklistEditorStoreBaseToJsonActionController
         .startAction(name: '_ChecklistEditorStoreBaseToJson.resetChecklist');

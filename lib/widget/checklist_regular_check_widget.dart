@@ -167,6 +167,8 @@ class _ChecklistRegularCheckWidgetState
   }
 
   List<Widget> _buildReferences(ChecklistRegularCheck check) {
+    final checklistEditorStore = Provider.of<ChecklistEditorStore>(context);
+
     return [
       Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -213,8 +215,11 @@ class _ChecklistRegularCheckWidgetState
                       onChanged: (value) {
                         double? newValue = double.tryParse(value);
                         if (newValue != null) {
-                          check.references[index] =
-                              check.references[index].copyWith(value: newValue);
+                          checklistEditorStore.setCheckReferenceValue(
+                              widget.sectionIndex,
+                              widget.checkIndex,
+                              index,
+                              newValue);
                         }
                       },
                     ),
