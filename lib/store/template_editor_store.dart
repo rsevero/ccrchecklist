@@ -211,7 +211,7 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
       return false;
     }
 
-    _currentTemplate = template;
+    setCurrentTemplate(template);
     undoRedoStorage.clearUndoRedo(_undoRedoClass);
     _saveSnapshot('Save template');
     _currentTemplateIsModified = false;
@@ -333,8 +333,13 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
 
   @action
   void setCurrentTemplate(Template template, [bool isAsset = false]) {
+    _setCurrentTemplate(template, isAsset);
+  }
+
+  void _setCurrentTemplate(Template template, [bool isAsset = false]) {
     _currentTemplate = template;
     _sections = ObservableList.of(template.sections);
+    _checks.clear();
     for (final section in _currentTemplate.sections) {
       _checks.add(ObservableList.of(section.checks));
     }
