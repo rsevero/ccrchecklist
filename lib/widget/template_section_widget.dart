@@ -40,7 +40,7 @@ class TemplateSectionWidget extends StatelessWidget {
                 style: TextStyle(
                   color: isSelected
                       ? mainColorScheme.onPrimaryContainer
-                      : mainColorScheme.onPrimary,
+                      : mainColorScheme.onSurface,
                 ),
               ),
               onExpansionChanged: (expanded) {
