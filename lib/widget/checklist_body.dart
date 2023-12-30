@@ -22,9 +22,7 @@ class ChecklistBody extends StatelessWidget {
         Container(
           width: double.infinity,
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-          color: Theme.of(context)
-              .colorScheme
-              .primaryContainer, // Highlight for the diver row
+          color: Theme.of(context).colorScheme.primaryContainer,
           child: Text(
             'Diver: ${checklistEditorStore.diverName} - Date: ${DateFormat('yyyy-MM-dd – kk:mm').format(checklistEditorStore.date)}',
             style: Theme.of(context).textTheme.titleSmall,
@@ -39,7 +37,7 @@ class ChecklistBody extends StatelessWidget {
                   ? ccrSectionOkColor
                   : Theme.of(context).colorScheme.error,
               child: Text(
-                section.title,
+                "${section.title} - ${sectionIndex + 1}/${checklistEditorStore.sections.length}",
                 style: Theme.of(context).textTheme.titleLarge,
               ),
             ),
