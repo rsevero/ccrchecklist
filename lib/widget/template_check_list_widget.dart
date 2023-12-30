@@ -19,23 +19,22 @@ class TemplateCheckListWidget extends StatelessWidget {
         final templateEditorStore = Provider.of<TemplateEditorStore>(context);
 
         final checks = templateEditorStore.checks[sectionIndex];
-        return SingleChildScrollView(
-          child: ReorderableListView.builder(
-            buildDefaultDragHandles: false,
-            shrinkWrap: true,
-            itemCount: checks.length,
-            itemBuilder: (context, index) {
-              return TemplateCheckWidget(
-                key: ValueKey(index),
-                sectionIndex: sectionIndex,
-                index: index,
-              );
-            },
-            onReorder: (int oldCheckIndex, int newCheckIndex) {
-              templateEditorStore.moveCheck(
-                  sectionIndex, oldCheckIndex, newCheckIndex);
-            },
-          ),
+        return ReorderableListView.builder(
+          buildDefaultDragHandles: false,
+          shrinkWrap: true,
+          physics: const ClampingScrollPhysics(),
+          itemCount: checks.length,
+          itemBuilder: (context, index) {
+            return TemplateCheckWidget(
+              key: ValueKey(index),
+              sectionIndex: sectionIndex,
+              index: index,
+            );
+          },
+          onReorder: (int oldCheckIndex, int newCheckIndex) {
+            templateEditorStore.moveCheck(
+                sectionIndex, oldCheckIndex, newCheckIndex);
+          },
         );
       },
     );
