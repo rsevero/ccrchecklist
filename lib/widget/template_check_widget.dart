@@ -3,6 +3,7 @@ import 'package:ccr_checklist/data/template_check.dart';
 import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/misc/datetime_formater_helper.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
+import 'package:ccr_checklist/theme/main_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
@@ -45,7 +46,12 @@ class TemplateCheckWidget extends StatelessWidget {
           children: [
             Expanded(
               child: ListTile(
-                title: Text(description),
+                title: Text(
+                  description,
+                  style: TextStyle(
+                    color: mainColorScheme.onPrimaryContainer,
+                  ),
+                ),
                 subtitle: (observation.isNotEmpty) ? Text(observation) : null,
                 trailing: PopupMenuButton<String>(
                   onSelected: (value) {
