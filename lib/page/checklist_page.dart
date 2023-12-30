@@ -21,11 +21,13 @@ class ChecklistPage extends StatelessWidget {
     return PopScope(
       canPop: false,
       onPopInvoked: (didPop) async {
-        final backNavigationAllowed = await _onBackPress(context);
-        if (backNavigationAllowed && !didPop) {
-          if (context.mounted) {
-            Navigator.of(context).pop();
-          }
+        if (didPop) {
+          return;
+        }
+        final NavigatorState navigator = Navigator.of(context);
+        final bool shouldPop = await _onBackPress(context);
+        if (shouldPop) {
+          navigator.pop();
         }
       },
       child: Scaffold(
