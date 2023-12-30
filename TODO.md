@@ -13,5 +13,5 @@
 - [X] em add step 1 linearity check abre a caixa (com faixa zebrada no meio), onde é possível descrever mas não clicar nos números; mesmo mantendo o 1 que ja está selecionado não adiciona esse tópico
 - [X] quando a seção está selecionada mudar a cor do texto pois está claro contra o fundo branco (ocorre tb com algumas páginas dentro do checklist de várias páginas)
 - [X] não dá para editar checklist com uma página só
-- [ ] no checklist de varias páginas algumas das seções não abrem os tópicos
+- [-] no checklist de varias páginas algumas das seções não abrem os tópicos - não consegui reproduzir
 - [X] quando há muitos tópicos fica impossível correr a tela
