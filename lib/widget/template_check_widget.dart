@@ -59,7 +59,7 @@ class TemplateCheckWidget extends StatelessWidget {
                       case 'Edit':
                         _editCheck(context, sectionIndex, index);
                         break;
-                      case 'Move to new section':
+                      case 'Move to new page':
                         _moveCheckNewSection(context, sectionIndex, index);
                         break;
                       case 'Delete':
@@ -74,9 +74,9 @@ class TemplateCheckWidget extends StatelessWidget {
                       child: Text('Edit'),
                     ),
                     PopupMenuItem<String>(
-                      value: 'Move to new section',
+                      value: 'Move to new page',
                       enabled: templateEditorStore.sections.length > 1,
-                      child: const Text('Move to new section'),
+                      child: const Text('Move to new page'),
                     ),
                     const PopupMenuItem<String>(
                       value: 'Delete',
@@ -343,15 +343,13 @@ class TemplateCheckWidget extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return StatefulBuilder(
-          // Use StatefulBuilder to manage local state of radio buttons
           builder: (BuildContext context, StateSetter setState) {
             return AlertDialog(
-              title: const Text('Edit Section'),
+              title: const Text('Edit Linearity Step 1 Check'),
               content: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    const Text('Linearity Step 1'),
                     SizedBox(
                       width: ccrDescriptionFieldWidth,
                       child: Column(
@@ -362,16 +360,14 @@ class TemplateCheckWidget extends StatelessWidget {
                               Text(
                                 'Description',
                                 style: TextStyle(
-                                  fontSize:
-                                      16, // Adjust the font size as needed
+                                  fontSize: 16,
                                 ),
                               ),
                               Text(
-                                ' *', // Red asterisk with preceding space for separation
+                                ' *',
                                 style: TextStyle(
                                   color: Colors.red,
-                                  fontSize:
-                                      16, // Adjust the font size to match the label
+                                  fontSize: 16,
                                 ),
                               ),
                             ],
@@ -396,8 +392,7 @@ class TemplateCheckWidget extends StatelessWidget {
                     ),
                     const Padding(
                       padding: EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text(
-                          'Amount of references'), // Label for the radio buttons
+                      child: Text('Amount of references'),
                     ),
                     ...List.generate(
                       5,
@@ -457,12 +452,11 @@ class TemplateCheckWidget extends StatelessWidget {
           // Use StatefulBuilder to manage local state of radio buttons
           builder: (BuildContext context, StateSetter setState) {
             return AlertDialog(
-              title: const Text('Edit Section'),
+              title: const Text('Edit Linearity Step 2 Check'),
               content: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    const Text('Linearity Step 2'),
                     SizedBox(
                       width: ccrDescriptionFieldWidth,
                       child: Column(
