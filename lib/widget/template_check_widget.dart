@@ -49,14 +49,14 @@ class TemplateCheckWidget extends StatelessWidget {
                 title: Text(
                   description,
                   style: TextStyle(
-                    color: mainColorScheme.onPrimaryContainer,
+                    color: mainColorScheme.onPrimary,
                   ),
                 ),
                 subtitle: (observation.isNotEmpty)
                     ? Text(
                         observation,
                         style: TextStyle(
-                          color: mainColorScheme.onPrimaryContainer,
+                          color: mainColorScheme.onPrimary,
                         ),
                       )
                     : null,
