@@ -192,7 +192,7 @@ class _ChecklistRegularCheckWidgetState
             const SizedBox(width: 8),
             // Column for all TextFormField
             SizedBox(
-              width: 80,
+              width: 110,
               child: Column(
                 children: List.generate(
                   check.references.length,
