@@ -149,10 +149,8 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
     final templateEditorStore =
         Provider.of<TemplateEditorStore>(context, listen: false);
     final TextEditingController titleController = TextEditingController();
-    final GlobalKey<FormState> formKey =
-        GlobalKey<FormState>(); // Add a GlobalKey for the Form
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-    // Show a dialog to enter the section title
     bool confirmed = await showDialog(
           context: context,
           builder: (BuildContext context) {
