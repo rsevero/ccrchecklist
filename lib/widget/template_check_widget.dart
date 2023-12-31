@@ -52,7 +52,14 @@ class TemplateCheckWidget extends StatelessWidget {
                     color: mainColorScheme.onPrimaryContainer,
                   ),
                 ),
-                subtitle: (observation.isNotEmpty) ? Text(observation) : null,
+                subtitle: (observation.isNotEmpty)
+                    ? Text(
+                        observation,
+                        style: TextStyle(
+                          color: mainColorScheme.onPrimaryContainer,
+                        ),
+                      )
+                    : null,
                 trailing: PopupMenuButton<String>(
                   onSelected: (value) {
                     switch (value) {
@@ -150,16 +157,14 @@ class TemplateCheckWidget extends StatelessWidget {
                               Text(
                                 'Description',
                                 style: TextStyle(
-                                  fontSize:
-                                      16, // Adjust the font size as needed
+                                  fontSize: 16,
                                 ),
                               ),
                               Text(
-                                ' *', // Red asterisk with preceding space for separation
+                                ' *',
                                 style: TextStyle(
                                   color: Colors.red,
-                                  fontSize:
-                                      16, // Adjust the font size to match the label
+                                  fontSize: 16,
                                 ),
                               ),
                             ],
@@ -192,8 +197,7 @@ class TemplateCheckWidget extends StatelessWidget {
                               Text(
                                 'Observation',
                                 style: TextStyle(
-                                  fontSize:
-                                      16, // Adjust the font size as needed
+                                  fontSize: 16,
                                 ),
                               ),
                             ],
