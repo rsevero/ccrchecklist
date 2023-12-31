@@ -123,10 +123,10 @@ class TemplateSectionWidget extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Edit Section'),
+          title: const Text('Edit Page'),
           content: TextFormField(
             controller: titleController,
-            decoration: const InputDecoration(hintText: 'Enter section title'),
+            decoration: const InputDecoration(hintText: 'Enter page title'),
             autofocus: true,
           ),
           actions: <Widget>[

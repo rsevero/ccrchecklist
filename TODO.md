@@ -3,4 +3,4 @@
 - [ ] ajustar os campos de número (números longos)
 - [ ] alterar cor de letra das observações na edição do “Cave Adventure”
 - [ ] ver sobreposição do número nas linhas prefixo e sufixo
-- [ ] na edição do “Cave Adventure” em Edit Section substituir Description por Title
+- [-] na edição do “Cave Adventure” em Edit Section substituir Description por Title
