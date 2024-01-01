@@ -3,6 +3,7 @@ import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:ccr_checklist/widget/linearity_worksheet_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
@@ -131,14 +132,25 @@ class _ChecklistLinearityStep2CheckWidgetState
                           child: TextField(
                             controller: _controllers[index],
                             style: TextStyle(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .onSecondaryContainer),
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSecondaryContainer,
+                            ),
+                            decoration: const InputDecoration(
+                              counterText: '',
+                            ),
                             onChanged: (value) =>
                                 checklistEditorStore.updateLinearityActual(
                                     index, double.tryParse(value) ?? 0),
+                            maxLength: 5,
                             keyboardType: const TextInputType.numberWithOptions(
-                                decimal: true),
+                              decimal: true,
+                              signed: false,
+                            ),
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                  RegExp(r'[0-9.-]'))
+                            ],
                           ),
                         ),
                       ),
