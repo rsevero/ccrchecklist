@@ -227,25 +227,28 @@ class TemplateCheckWidget extends StatelessWidget {
                         ],
                       ),
                     ),
-                    ListTile(
-                      title: const Text('Set Timer Duration'),
-                      subtitle: Text(ccrFormatSecondsToMinutesSecondsTimer(
-                          timerDuration.inSeconds)),
-                      onTap: () async {
-                        final TimeOfDay? pickedTime = await showTimePicker(
-                          context: context,
-                          initialTime: TimeOfDay(
-                              hour: timerDuration.inMinutes,
-                              minute: timerDuration.inSeconds % 60),
-                        );
-                        if (pickedTime != null) {
-                          setState(() {
-                            timerDuration = Duration(
-                                minutes: pickedTime.hour,
-                                seconds: pickedTime.minute);
-                          });
-                        }
-                      },
+                    SizedBox(
+                      width: ccrDescriptionFieldWidth,
+                      child: ListTile(
+                        title: const Text('Set Timer Duration'),
+                        subtitle: Text(ccrFormatSecondsToMinutesSecondsTimer(
+                            timerDuration.inSeconds)),
+                        onTap: () async {
+                          final TimeOfDay? pickedTime = await showTimePicker(
+                            context: context,
+                            initialTime: TimeOfDay(
+                                hour: timerDuration.inMinutes,
+                                minute: timerDuration.inSeconds % 60),
+                          );
+                          if (pickedTime != null) {
+                            setState(() {
+                              timerDuration = Duration(
+                                  minutes: pickedTime.hour,
+                                  seconds: pickedTime.minute);
+                            });
+                          }
+                        },
+                      ),
                     ),
                     if (numberOfReferences > 0)
                       const Text(
@@ -258,7 +261,7 @@ class TemplateCheckWidget extends StatelessWidget {
                       ccrMaxReferences + 1,
                       (index) => Row(
                         children: [
-                          Expanded(
+                          Flexible(
                             flex: 2,
                             child: Visibility(
                               visible: index > 0 && index <= numberOfReferences,
@@ -272,8 +275,8 @@ class TemplateCheckWidget extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Expanded(
-                            flex: 1,
+                          SizedBox(
+                            width: 90,
                             child: RadioListTile<int>(
                               title: Text('$index'),
                               value: index,
@@ -283,7 +286,7 @@ class TemplateCheckWidget extends StatelessWidget {
                               },
                             ),
                           ),
-                          Expanded(
+                          Flexible(
                             flex: 2,
                             child: Visibility(
                               visible: index > 0 && index <= numberOfReferences,
