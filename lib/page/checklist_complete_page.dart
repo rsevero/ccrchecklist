@@ -34,13 +34,16 @@ class ChecklistCompletePage extends StatelessWidget {
           ],
         ],
       ),
-      body: Column(
-        children: [
-          Text(message),
-          if (nonOkSectionCount > 0) ...[
-            const NonOkSectionsReport(),
-          ]
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Text(message),
+            if (nonOkSectionCount > 0) ...[
+              const NonOkSectionsReport(),
+            ]
+          ],
+        ),
       ),
     );
   }
