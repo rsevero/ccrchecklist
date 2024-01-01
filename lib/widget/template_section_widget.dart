@@ -1,6 +1,5 @@
 import 'package:ccr_checklist/data/template_section.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
-import 'package:ccr_checklist/theme/main_theme.dart';
 import 'package:ccr_checklist/widget/template_check_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -23,15 +22,15 @@ class TemplateSectionWidget extends StatelessWidget {
     return Observer(
       key: ValueKey(sectionIndex),
       builder: (_) {
+        ColorScheme colorScheme = Theme.of(context).colorScheme;
+
         final isSelected =
             (sectionIndex == templateEditorStore.selectedSectionIndex);
         const isExpanded = false;
         templateEditorStore.setExpandedSectionIfUnset(sectionIndex, isExpanded);
 
         return Container(
-          color: isSelected
-              ? mainColorScheme.primaryContainer
-              : Colors.transparent,
+          color: isSelected ? colorScheme.primaryContainer : Colors.transparent,
           child: GestureDetector(
             onTap: () => onTapSection(context, sectionIndex),
             child: ExpansionTile(
@@ -39,8 +38,8 @@ class TemplateSectionWidget extends StatelessWidget {
                 section.title,
                 style: TextStyle(
                   color: isSelected
-                      ? mainColorScheme.onPrimaryContainer
-                      : mainColorScheme.onPrimary,
+                      ? colorScheme.onPrimaryContainer
+                      : colorScheme.onSurface,
                 ),
               ),
               onExpansionChanged: (expanded) {

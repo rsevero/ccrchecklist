@@ -3,7 +3,6 @@ import 'package:ccr_checklist/data/template_check.dart';
 import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/misc/datetime_formater_helper.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
-import 'package:ccr_checklist/theme/main_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
@@ -24,6 +23,10 @@ class TemplateCheckWidget extends StatelessWidget {
 
     return Observer(
       builder: (_) {
+        ColorScheme colorScheme = Theme.of(context).colorScheme;
+
+        final isSelected =
+            (sectionIndex == templateEditorStore.selectedSectionIndex);
         final check = templateEditorStore.checks[sectionIndex][index];
         String description = check.description;
         String observation = '';
@@ -49,14 +52,18 @@ class TemplateCheckWidget extends StatelessWidget {
                 title: Text(
                   description,
                   style: TextStyle(
-                    color: mainColorScheme.onPrimary,
+                    color: isSelected
+                        ? colorScheme.onPrimaryContainer
+                        : colorScheme.onSurface,
                   ),
                 ),
                 subtitle: (observation.isNotEmpty)
                     ? Text(
                         observation,
                         style: TextStyle(
-                          color: mainColorScheme.onPrimary,
+                          color: isSelected
+                              ? colorScheme.onPrimaryContainer
+                              : colorScheme.onSurface,
                         ),
                       )
                     : null,
