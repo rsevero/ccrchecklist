@@ -1,6 +1,7 @@
-# Problemas identificados pela Renata Andrade em 2023-12-30
+# Problemas identificados pelo Joffer Fernandes em 2024-01-15
 
-- [X] ajustar os campos de número (números longos)
-- [X] alterar cor de letra das observações na edição do “Cave Adventure”
-- [X] ver sobreposição do número nas linhas prefixo e sufixo
-- [X] na edição do “Cave Adventure” em Edit Section substituir Description por Title
+- [ ] Campo para inserir nome do Diver:
+- [ ] Clicar em qualquer lugar do retângulo para habilitar/desabilitar etapa concluída.
+- [ ] Na descrição da etapa de milivoltagem, acrescentar espaço entre texto e bloco de notas.
+- [ ] Na anotação da milivoltagem, mudar cor do fundo ativo.
+- [ ] Clicar em qualquer lugar do retângulo da milivoltagem para habilitar o campo.
