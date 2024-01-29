@@ -25,6 +25,7 @@ class ChecklistLinearityStep1CheckWidget extends StatefulWidget {
 class _ChecklistLinearityStep1CheckWidgetState
     extends State<ChecklistLinearityStep1CheckWidget> {
   final List<TextEditingController> _controllers = [];
+  int _activeFieldIndex = -1;
   bool _isInit = true;
 
   @override
@@ -93,17 +94,28 @@ class _ChecklistLinearityStep1CheckWidgetState
                       DataCell(
                         Container(
                           height: 68,
-                          color:
-                              Theme.of(context).colorScheme.secondaryContainer,
+                          color: _activeFieldIndex == index
+                              ? Theme.of(context)
+                                  .colorScheme
+                                  .primary // Active field color
+                              : Theme.of(context)
+                                  .colorScheme
+                                  .secondaryContainer, // Normal field color
                           child: TextField(
                             controller: _controllers[index],
                             style: TextStyle(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onSecondaryContainer,
+                              color: _activeFieldIndex == index
+                                  ? Theme.of(context)
+                                      .colorScheme
+                                      .onPrimary // Active field color
+                                  : Theme.of(context)
+                                      .colorScheme
+                                      .onSecondaryContainer, // Normal field color
                             ),
                             decoration: const InputDecoration(
                               counterText: '',
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 18),
                             ),
                             onChanged: (value) =>
                                 checklistEditorStore.updateLinearityMV(
@@ -117,6 +129,12 @@ class _ChecklistLinearityStep1CheckWidgetState
                               FilteringTextInputFormatter.allow(
                                   RegExp(r'[0-9.-]'))
                             ],
+                            onTap: () {
+                              setState(() {
+                                _activeFieldIndex =
+                                    index; // Update the active field index
+                              });
+                            },
                           ),
                         ),
                       ),

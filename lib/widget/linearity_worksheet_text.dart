@@ -6,10 +6,17 @@ class LinearityWorksheetText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: TextStyle(
-        color: Theme.of(context).colorScheme.onTertiary,
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0), // Add padding around the text
+        child: Text(
+          text,
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.onTertiary,
+            fontSize: 16, // Increase text size (you can adjust this value)
+          ),
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }
