@@ -64,61 +64,70 @@ class _ChecklistRegularCheckWidgetState
     final check = checklistEditorStore.checks[widget.sectionIndex]
         [widget.checkIndex] as ChecklistRegularCheck;
 
-    return ListTile(
-      leading: Checkbox(
-        value: check.isChecked,
-        onChanged: (bool? value) {
-          if (value != null) {
-            checklistEditorStore.setCheckIsChecked(
-                widget.sectionIndex, widget.checkIndex, value);
-          }
-        },
-      ),
-      title: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          RichText(
-            text: TextSpan(
-              style: Theme.of(context).textTheme.bodyLarge,
-              children: [
-                TextSpan(text: check.description),
-                if (check.observation.isNotEmpty) ...[
-                  const TextSpan(text: ' '),
-                  WidgetSpan(
-                    alignment: PlaceholderAlignment.middle,
-                    child: MouseRegion(
-                      cursor: SystemMouseCursors.click,
-                      child: InkWell(
-                        onTap: () => onPressedInfo(context, check),
-                        onHover: (hovering) {
-                          setState(() {
-                            isHovering = hovering;
-                          });
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color:
-                                isHovering ? Colors.grey : Colors.transparent,
-                            shape: BoxShape.circle,
+    return InkWell(
+      onTap: () {
+        // Toggles the checkbox state
+        checklistEditorStore.setCheckIsChecked(
+            widget.sectionIndex, widget.checkIndex, !check.isChecked);
+      },
+      child: ListTile(
+        leading: Checkbox(
+          value: check.isChecked,
+          onChanged: (bool? value) {
+            // This is now redundant since the ListTile handles the toggle, but
+            // required for the Checkbox widget
+            if (value != null) {
+              checklistEditorStore.setCheckIsChecked(
+                  widget.sectionIndex, widget.checkIndex, value);
+            }
+          },
+        ),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            RichText(
+              text: TextSpan(
+                style: Theme.of(context).textTheme.bodyLarge,
+                children: [
+                  TextSpan(text: check.description),
+                  if (check.observation.isNotEmpty) ...[
+                    const TextSpan(text: ' '),
+                    WidgetSpan(
+                      alignment: PlaceholderAlignment.middle,
+                      child: MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        child: InkWell(
+                          onTap: () => onPressedInfo(context, check),
+                          onHover: (hovering) {
+                            setState(() {
+                              isHovering = hovering;
+                            });
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color:
+                                  isHovering ? Colors.grey : Colors.transparent,
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Icon(Icons.info_outline,
+                                color: Colors.blue),
                           ),
-                          child: const Icon(Icons.info_outline,
-                              color: Colors.blue),
                         ),
                       ),
                     ),
-                  ),
+                  ],
                 ],
-              ],
+              ),
             ),
-          ),
-          if (_timerAvailable) _buildTimer(),
-          const SizedBox(width: 8),
-          Wrap(
-            spacing: 8.0, // Horizontal space between reference fields
-            children: _buildReferences(check),
-          ),
-        ],
+            if (_timerAvailable) _buildTimer(),
+            const SizedBox(width: 8),
+            Wrap(
+              spacing: 8.0, // Horizontal space between reference fields
+              children: _buildReferences(check),
+            ),
+          ],
+        ),
       ),
     );
   }
