@@ -127,6 +127,10 @@ class _ChecklistLinearityStep1CheckWidgetState
                               FocusScope.of(context)
                                   .requestFocus(_focusNodes[index]);
                               setState(() => _activeFieldIndex = index);
+                              if (_focusNodes[index].hasFocus) {
+                                SystemChannels.textInput
+                                    .invokeMethod('TextInput.show');
+                              }
                             },
                           ),
                         ),
@@ -147,6 +151,10 @@ class _ChecklistLinearityStep1CheckWidgetState
                               FocusScope.of(context)
                                   .requestFocus(_focusNodes[index]);
                               setState(() => _activeFieldIndex = index);
+                              if (_focusNodes[index].hasFocus) {
+                                SystemChannels.textInput
+                                    .invokeMethod('TextInput.show');
+                              }
                             },
                           ),
                         ),

@@ -116,6 +116,10 @@ class _ChecklistLinearityStep2CheckWidgetState
                               FocusScope.of(context)
                                   .requestFocus(_focusNodes[index]);
                               setState(() => _activeFieldIndex = index);
+                              if (_focusNodes[index].hasFocus) {
+                                SystemChannels.textInput
+                                    .invokeMethod('TextInput.show');
+                              }
                             },
                           ),
                         ),
@@ -136,6 +140,10 @@ class _ChecklistLinearityStep2CheckWidgetState
                               FocusScope.of(context)
                                   .requestFocus(_focusNodes[index]);
                               setState(() => _activeFieldIndex = index);
+                              if (_focusNodes[index].hasFocus) {
+                                SystemChannels.textInput
+                                    .invokeMethod('TextInput.show');
+                              }
                             },
                           ),
                         ),
@@ -156,12 +164,25 @@ class _ChecklistLinearityStep2CheckWidgetState
                               FocusScope.of(context)
                                   .requestFocus(_focusNodes[index]);
                               setState(() => _activeFieldIndex = index);
+                              if (_focusNodes[index].hasFocus) {
+                                SystemChannels.textInput
+                                    .invokeMethod('TextInput.show');
+                              }
                             },
                           ),
                         ),
                       ),
                       DataCell(
-                        _buildEditableFieldCell(context, index),
+                        GestureDetector(
+                          onTap: () {
+                            FocusScope.of(context)
+                                .requestFocus(_focusNodes[index]);
+                            setState(() {
+                              _activeFieldIndex = index;
+                            });
+                          },
+                          child: _buildEditableFieldCell(context, index),
+                        ),
                       ),
                       DataCell(
                         Observer(
@@ -179,6 +200,10 @@ class _ChecklistLinearityStep2CheckWidgetState
                               FocusScope.of(context)
                                   .requestFocus(_focusNodes[index]);
                               setState(() => _activeFieldIndex = index);
+                              if (_focusNodes[index].hasFocus) {
+                                SystemChannels.textInput
+                                    .invokeMethod('TextInput.show');
+                              }
                             },
                           ),
                         ),
@@ -230,6 +255,7 @@ class _ChecklistLinearityStep2CheckWidgetState
             _activeFieldIndex = index; // Update the active field index
           });
         },
+        focusNode: _focusNodes[index],
       ),
     );
   }
