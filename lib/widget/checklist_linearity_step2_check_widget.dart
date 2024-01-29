@@ -74,6 +74,7 @@ class _ChecklistLinearityStep2CheckWidgetState
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(check.description),
+          const SizedBox(height: 8),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Container(
