@@ -1,5 +1,6 @@
 import 'package:ccr_checklist/data/checklist_check.dart';
 import 'package:ccr_checklist/misc/constants.dart';
+import 'package:ccr_checklist/misc/linearity_check_helper.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:ccr_checklist/widget/linearity_worksheet_text.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,7 @@ class ChecklistLinearityStep2CheckWidget extends StatefulWidget {
 class _ChecklistLinearityStep2CheckWidgetState
     extends State<ChecklistLinearityStep2CheckWidget> {
   final List<TextEditingController> _controllers = [];
+  final List<FocusNode> _focusNodes = [];
   int _activeFieldIndex = -1;
   bool _isInit = true;
 
@@ -33,15 +35,21 @@ class _ChecklistLinearityStep2CheckWidgetState
     super.initState();
     _controllers.addAll(List.generate(
         ccrMaxReferences, (index) => TextEditingController(text: '')));
+    _focusNodes.addAll(List.generate(ccrMaxReferences, (index) => FocusNode()));
   }
 
   @override
   void dispose() {
-    final controllersLenght = _controllers.length;
-    for (var i = 0; i < controllersLenght; i++) {
-      var controller = _controllers.removeLast();
+    // Dispose the TextEditingController instances
+    for (var controller in _controllers) {
       controller.dispose();
     }
+
+    // Dispose the FocusNode instances
+    for (var focusNode in _focusNodes) {
+      focusNode.dispose();
+    }
+
     super.dispose();
   }
 
@@ -95,94 +103,84 @@ class _ChecklistLinearityStep2CheckWidgetState
                     cells: [
                       DataCell(
                         Observer(
-                          builder: (_) => LinearityWorksheetText(
-                              checklistEditorStore
-                                          .linearityWorksheet[index].mv ==
-                                      null
-                                  ? ''
-                                  : checklistEditorStore
-                                      .linearityWorksheet[index].mv!
-                                      .toStringAsFixed(1)),
-                        ),
-                      ),
-                      DataCell(Observer(
-                        builder: (_) => LinearityWorksheetText(
-                            checklistEditorStore
-                                        .linearityWorksheet[index].divided ==
+                          builder: (_) => buildNonEditableLinearityCheckCell(
+                            context,
+                            index,
+                            checklistEditorStore.linearityWorksheet[index].mv ==
                                     null
                                 ? ''
                                 : checklistEditorStore
-                                    .linearityWorksheet[index].divided!
-                                    .toStringAsFixed(1)),
-                      )),
-                      DataCell(
-                        Observer(
-                          builder: (_) => LinearityWorksheetText(
-                              checklistEditorStore.linearityWorksheet[index]
-                                          .multiplied ==
-                                      null
-                                  ? ''
-                                  : checklistEditorStore
-                                      .linearityWorksheet[index].multiplied!
-                                      .toStringAsFixed(1)),
-                        ),
-                      ),
-                      DataCell(
-                        Container(
-                          color: _activeFieldIndex == index
-                              ? Theme.of(context)
-                                  .colorScheme
-                                  .primary // Active field color
-                              : Theme.of(context)
-                                  .colorScheme
-                                  .secondaryContainer, // Normal field color
-                          child: TextField(
-                            controller: _controllers[index],
-                            style: TextStyle(
-                              color: _activeFieldIndex == index
-                                  ? Theme.of(context)
-                                      .colorScheme
-                                      .onPrimary // Active field color
-                                  : Theme.of(context)
-                                      .colorScheme
-                                      .onSecondaryContainer, // Normal field color
-                            ),
-                            decoration: const InputDecoration(
-                              counterText: '',
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 18),
-                            ),
-                            onChanged: (value) =>
-                                checklistEditorStore.updateLinearityActual(
-                                    index, double.tryParse(value) ?? 0),
-                            maxLength: 5,
-                            keyboardType: const TextInputType.numberWithOptions(
-                              decimal: true,
-                              signed: false,
-                            ),
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                  RegExp(r'[0-9.-]'))
-                            ],
-                            onTap: () {
-                              setState(() {
-                                _activeFieldIndex =
-                                    index; // Update the active field index
-                              });
+                                    .linearityWorksheet[index].mv!
+                                    .toStringAsFixed(1),
+                            () {
+                              FocusScope.of(context)
+                                  .requestFocus(_focusNodes[index]);
+                              setState(() => _activeFieldIndex = index);
                             },
                           ),
                         ),
                       ),
                       DataCell(
                         Observer(
-                          builder: (_) => LinearityWorksheetText(
-                              checklistEditorStore.linearityWorksheet[index]
-                                          .percentage ==
-                                      null
-                                  ? ''
-                                  : checklistEditorStore
-                                      .linearityWorksheet[index].percentage!
-                                      .toStringAsFixed(1)),
+                          builder: (_) => buildNonEditableLinearityCheckCell(
+                            context,
+                            index,
+                            checklistEditorStore
+                                        .linearityWorksheet[index].divided ==
+                                    null
+                                ? ''
+                                : checklistEditorStore
+                                    .linearityWorksheet[index].divided!
+                                    .toStringAsFixed(1),
+                            () {
+                              FocusScope.of(context)
+                                  .requestFocus(_focusNodes[index]);
+                              setState(() => _activeFieldIndex = index);
+                            },
+                          ),
+                        ),
+                      ),
+                      DataCell(
+                        Observer(
+                          builder: (_) => buildNonEditableLinearityCheckCell(
+                            context,
+                            index,
+                            checklistEditorStore
+                                        .linearityWorksheet[index].multiplied ==
+                                    null
+                                ? ''
+                                : checklistEditorStore
+                                    .linearityWorksheet[index].multiplied!
+                                    .toStringAsFixed(1),
+                            () {
+                              FocusScope.of(context)
+                                  .requestFocus(_focusNodes[index]);
+                              setState(() => _activeFieldIndex = index);
+                            },
+                          ),
+                        ),
+                      ),
+                      DataCell(
+                        _buildEditableFieldCell(context, index),
+                      ),
+                      DataCell(
+                        Observer(
+                          builder: (_) => buildNonEditableLinearityCheckCell(
+                            context,
+                            index,
+                            checklistEditorStore
+                                        .linearityWorksheet[index].percentage ==
+                                    null
+                                ? ''
+                                : checklistEditorStore
+                                    .linearityWorksheet[index].percentage!
+                                    .toStringAsFixed(1),
+                            () {
+                              FocusScope.of(context)
+                                  .requestFocus(_focusNodes[index]);
+                              setState(() => _activeFieldIndex = index);
+                            },
+                          ),
                         ),
                       ),
                     ],
@@ -192,6 +190,46 @@ class _ChecklistLinearityStep2CheckWidgetState
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildEditableFieldCell(BuildContext context, int index) {
+    final checklistEditorStore = Provider.of<ChecklistEditorStore>(context);
+    return Container(
+      color: _activeFieldIndex == index
+          ? Theme.of(context).colorScheme.primary // Active field color
+          : Theme.of(context)
+              .colorScheme
+              .secondaryContainer, // Normal field color
+      child: TextField(
+        controller: _controllers[index],
+        style: TextStyle(
+          color: _activeFieldIndex == index
+              ? Theme.of(context).colorScheme.onPrimary // Active field color
+              : Theme.of(context)
+                  .colorScheme
+                  .onSecondaryContainer, // Normal field color
+        ),
+        decoration: const InputDecoration(
+          counterText: '',
+          contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 18),
+        ),
+        onChanged: (value) => checklistEditorStore.updateLinearityActual(
+            index, double.tryParse(value) ?? 0),
+        maxLength: 5,
+        keyboardType: const TextInputType.numberWithOptions(
+          decimal: true,
+          signed: false,
+        ),
+        inputFormatters: [
+          FilteringTextInputFormatter.allow(RegExp(r'[0-9.-]'))
+        ],
+        onTap: () {
+          setState(() {
+            _activeFieldIndex = index; // Update the active field index
+          });
+        },
       ),
     );
   }
