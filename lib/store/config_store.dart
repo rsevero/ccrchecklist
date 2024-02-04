@@ -26,6 +26,9 @@ abstract class _ConfigStoreBaseToJson with Store implements TomlEncodableValue {
   @readonly
   ConfigLoadStatusEnum _configLoadStatus = ConfigLoadStatusEnum.notLoaded;
 
+  @readonly
+  bool _isModified = false;
+
   _ConfigStoreBaseToJson() {
     loadConfig();
   }
@@ -59,11 +62,13 @@ abstract class _ConfigStoreBaseToJson with Store implements TomlEncodableValue {
 
   @action
   void setDiverName(String name) {
+    if (_configData.containsKey('DiverName') &&
+        _configData['DiverName'] == name) return;
     _configData['DiverName'] = name;
-    _saveConfig();
+    _isModified = true;
   }
 
-  void _saveConfig() async {
+  void saveConfig() async {
     var tomlString = TomlDocument.fromMap(_configData).toString();
 
     try {
@@ -71,6 +76,7 @@ abstract class _ConfigStoreBaseToJson with Store implements TomlEncodableValue {
       final file = File('${directory.path}/$ccrConfigFile');
 
       await file.writeAsString(tomlString);
+      _isModified = false;
       print("Config saved successfully.");
     } catch (e) {
       print("Failed to save config: $e");

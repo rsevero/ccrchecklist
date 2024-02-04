@@ -1,37 +1,36 @@
 import 'package:ccr_checklist/store/config_store.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
-class SettingsPage extends StatefulWidget {
-  const SettingsPage({super.key});
-
-  @override
-  State<SettingsPage> createState() => _SettingsPageState();
-}
-
-class _SettingsPageState extends State<SettingsPage> {
+class SettingsPage extends StatelessWidget {
   final TextEditingController _diverNameController = TextEditingController();
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final configStore = Provider.of<ConfigStore>(context);
-    _diverNameController.text = configStore.configData['DiverName'] ?? '';
-  }
-
-  @override
-  void dispose() {
-    _diverNameController.dispose();
-    super.dispose();
-  }
+  SettingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     final configStore = Provider.of<ConfigStore>(context);
 
+    // Initialize the text controller with the current diver name
+    _diverNameController.text = configStore.configData['DiverName'] ?? '';
+    _diverNameController.addListener(() {
+      configStore.setDiverName(_diverNameController.text);
+    });
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings'),
+        actions: <Widget>[
+          Observer(builder: (context) {
+            return IconButton(
+              icon: const Icon(Icons.save),
+              onPressed: configStore.isModified
+                  ? () => configStore.saveConfig()
+                  : null,
+            );
+          }),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -44,20 +43,8 @@ class _SettingsPageState extends State<SettingsPage> {
                 labelText: 'Diver Name',
                 border: OutlineInputBorder(),
               ),
-              onSubmitted: (newValue) {
-                configStore.setDiverName(newValue);
-              },
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                configStore.setDiverName(_diverNameController.text);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Settings saved')),
-                );
-              },
-              child: const Text('Save'),
-            ),
           ],
         ),
       ),

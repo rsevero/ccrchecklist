@@ -54,6 +54,24 @@ mixin _$ConfigStore on _ConfigStoreBaseToJson, Store {
     });
   }
 
+  late final _$_isModifiedAtom =
+      Atom(name: '_ConfigStoreBaseToJson._isModified', context: context);
+
+  bool get isModified {
+    _$_isModifiedAtom.reportRead();
+    return super._isModified;
+  }
+
+  @override
+  bool get _isModified => isModified;
+
+  @override
+  set _isModified(bool value) {
+    _$_isModifiedAtom.reportWrite(value, super._isModified, () {
+      super._isModified = value;
+    });
+  }
+
   late final _$loadConfigAsyncAction =
       AsyncAction('_ConfigStoreBaseToJson.loadConfig', context: context);
 

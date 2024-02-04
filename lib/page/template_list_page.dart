@@ -28,8 +28,8 @@ class TemplateListPage extends StatelessWidget {
               context: context,
               builder: (context) => MissingDiverNameDialog(
                 onDiverNameSubmitted: (name) {
-                  // Update the diver name in the config store
                   configStore.setDiverName(name);
+                  configStore.saveConfig();
                 },
               ),
             );
@@ -73,7 +73,7 @@ class TemplateListPage extends StatelessWidget {
 
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => const SettingsPage(),
+        builder: (context) => SettingsPage(),
       ),
     );
 
