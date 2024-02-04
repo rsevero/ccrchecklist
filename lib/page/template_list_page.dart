@@ -1,5 +1,6 @@
 import 'package:ccr_checklist/misc/help_dialog_helper.dart';
 import 'package:ccr_checklist/page/checklist_page.dart';
+import 'package:ccr_checklist/page/settings_page.dart';
 import 'package:ccr_checklist/page/template_editor_list_page.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:ccr_checklist/store/config_store.dart';
@@ -43,7 +44,12 @@ class TemplateListPage extends StatelessWidget {
               IconButton(
                 icon: const Icon(Icons.edit),
                 onPressed: () => _openTemplateEditor(context),
-                tooltip: 'Open Template Editor',
+                tooltip: 'Template Editor',
+              ),
+              IconButton(
+                icon: const Icon(Icons.settings_outlined),
+                onPressed: () => _openSettingsEditor(context),
+                tooltip: 'Settings',
               ),
               IconButton(
                 icon: const Icon(Icons.help_outline),
@@ -59,6 +65,19 @@ class TemplateListPage extends StatelessWidget {
         );
       },
     );
+  }
+
+  void _openSettingsEditor(BuildContext context) {
+    final templateListStore =
+        Provider.of<TemplateListStore>(context, listen: false);
+
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const SettingsPage(),
+      ),
+    );
+
+    templateListStore.update();
   }
 
   void _openTemplateEditor(BuildContext context) {
