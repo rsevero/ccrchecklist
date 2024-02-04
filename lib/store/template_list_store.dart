@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:ccr_checklist/data/template_file.dart';
 import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/data/template.dart';
-import 'package:ccr_checklist/misc/get_directory_helper.dart';
+import 'package:ccr_checklist/misc/ccr_directory_helper.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:mobx/mobx.dart';
 
@@ -75,14 +75,14 @@ abstract class TemplateListStoreBase with Store {
 
   Future<void> _getAssetTemplates() async {
     String manifestJson =
-        await rootBundle.loadString(ccrDefaultTemplatesManifestPath);
+        await rootBundle.loadString(ccrDefaultTemplatesManifestDirectory);
     List<String> templateFileNames = ((json.decode(manifestJson)
             as Map<String, dynamic>)['templates'] as List<dynamic>)
         .cast<String>();
 
     // Load each template file listed in the manifest
     for (String filename in templateFileNames) {
-      final templatePath = '$ccrDefaultTemplatesPath/$filename';
+      final templatePath = '$ccrDefaultTemplatesDirectory/$filename';
       final String jsonString = await rootBundle.loadString(templatePath);
       final Map<String, dynamic> jsonMap = json.decode(jsonString);
       final newTemplate = Template.fromJson(jsonMap);
@@ -101,7 +101,7 @@ abstract class TemplateListStoreBase with Store {
   }
 
   Future<void> _getSavedTemplates() async {
-    final templateDirectory = await ccrGetTemplatesDirectory();
+    final templateDirectory = await CCRDirectory.templates();
 
     // List all files in the template directory
     List<FileSystemEntity> fileList = templateDirectory.listSync();

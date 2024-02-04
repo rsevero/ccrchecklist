@@ -7,7 +7,7 @@ import 'package:ccr_checklist/data/regular_check_reference.dart';
 import 'package:ccr_checklist/data/template.dart';
 import 'package:ccr_checklist/data/template_check.dart';
 import 'package:ccr_checklist/misc/constants.dart';
-import 'package:ccr_checklist/misc/get_directory_helper.dart';
+import 'package:ccr_checklist/misc/ccr_directory_helper.dart';
 import 'package:ccr_checklist/store/observablelist_json_converter.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -175,7 +175,7 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
   }
 
   Future<String> createShareableFile() async {
-    Directory directory = await ccrGetSharedDirectory();
+    Directory directory = await CCRDirectory.shared();
     final formattedDateTime =
         DateFormat('yyyy-MM-dd_HH:mm:ss').format(DateTime.now());
     String filename = 'ccr_checklist_$formattedDateTime.$ccrChecklistExtension';

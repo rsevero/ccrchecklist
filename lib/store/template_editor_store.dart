@@ -6,7 +6,7 @@ import 'package:ccr_checklist/data/template_section.dart';
 import 'package:ccr_checklist/data/template.dart';
 import 'package:ccr_checklist/main.dart';
 import 'package:ccr_checklist/misc/constants.dart';
-import 'package:ccr_checklist/misc/get_directory_helper.dart';
+import 'package:ccr_checklist/misc/ccr_directory_helper.dart';
 import 'package:ccr_checklist/store/observablelist_json_converter.dart';
 import 'package:ccr_checklist/store/template_list_store.dart';
 import 'package:ccr_checklist/undo/undo_redo_storage.dart';
@@ -144,7 +144,7 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
   }
 
   Future<String> createShareableFile() async {
-    final directory = await ccrGetSharedDirectory();
+    final directory = await CCRDirectory.shared();
     final formattedDateTime =
         DateFormat('yyyy-MM-dd_HH:mm:ss').format(DateTime.now());
     final file = File(

@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:ccr_checklist/data/template.dart';
 import 'package:ccr_checklist/misc/constants.dart';
-import 'package:ccr_checklist/misc/get_directory_helper.dart';
+import 'package:ccr_checklist/misc/ccr_directory_helper.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -70,7 +70,7 @@ Future<String> ccrFilePathFromFileName(String fileName) async {
     fileName = fileName.substring(
         0, fileName.length - (ccrTemplateExtension.length + 1));
   }
-  final directory = await ccrGetTemplatesDirectory();
+  final directory = await CCRDirectory.templates();
   final filePath = '${directory.path}/$fileName.$ccrTemplateExtension';
 
   return filePath;

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
-const ccrDefaultTemplatesPath = 'assets/templates';
-const ccrDefaultTemplatesManifestPath =
-    '$ccrDefaultTemplatesPath/manifest.json';
+const ccrDefaultAssetsDirectory = 'assets';
+const ccrConfigFile = 'config.toml';
+const ccrDefaultTemplatesDirectory = '$ccrDefaultAssetsDirectory/templates';
+const ccrDefaultTemplatesManifestDirectory =
+    '$ccrDefaultTemplatesDirectory/manifest.json';
 
 const double ccrDisabledOpacity = 0.6;
 

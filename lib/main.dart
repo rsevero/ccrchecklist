@@ -1,5 +1,6 @@
 import 'package:ccr_checklist/page/template_list_page.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
+import 'package:ccr_checklist/store/config_store.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
 import 'package:ccr_checklist/store/template_list_store.dart';
 import 'package:ccr_checklist/theme/main_theme.dart';
@@ -28,6 +29,9 @@ class CCRChecklist extends StatelessWidget {
         ),
         Provider(
           create: (context) => ChecklistEditorStore(),
+        ),
+        Provider(
+          create: (context) => ConfigStore(),
         ),
       ],
       child: const CCRChecklistApp(),

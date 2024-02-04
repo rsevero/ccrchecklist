@@ -45,6 +45,7 @@ dependencies:
   provider: ^6.1.1
   share_plus: ^7.2.1
   slugify: ^2.0.0
+  toml: ^0.15.0
   vibration: ^1.8.4
 
 dev_dependencies:
