@@ -1,4 +1,6 @@
+import 'package:ccr_checklist/data/template.dart';
 import 'package:ccr_checklist/misc/help_dialog_helper.dart';
+import 'package:ccr_checklist/misc/template_load_helper.dart';
 import 'package:ccr_checklist/page/checklist_page.dart';
 import 'package:ccr_checklist/page/settings_page.dart';
 import 'package:ccr_checklist/page/template_editor_list_page.dart';
@@ -94,14 +96,12 @@ class TemplateListPage extends StatelessWidget {
   }
 
   void _onTapTemplateFile(BuildContext context, int index) async {
-    final templateListStore =
-        Provider.of<TemplateListStore>(context, listen: false);
-    final checklistEditorStore =
-        Provider.of<ChecklistEditorStore>(context, listen: false);
-    final template = await templateListStore
-        .getTemplate(templateListStore.defaultTemplates[index]);
+    final Template template =
+        await TemplateLoadHelper.loadTemplate(context, index);
 
     if (!context.mounted) return;
+    final checklistEditorStore =
+        Provider.of<ChecklistEditorStore>(context, listen: false);
     final result =
         await checklistEditorStore.loadFromTemplate(context, template);
 
@@ -110,6 +110,8 @@ class TemplateListPage extends StatelessWidget {
     }
 
     if (!context.mounted) return;
+    final templateListStore =
+        Provider.of<TemplateListStore>(context, listen: false);
     await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const ChecklistPage(

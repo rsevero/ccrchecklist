@@ -12,7 +12,7 @@ part of 'template.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Template _$TemplateFromJson(Map<String, dynamic> json) {
   return _Template.fromJson(json);
@@ -26,6 +26,7 @@ mixin _$Template {
   String get description => throw _privateConstructorUsedError;
   List<TemplateSection> get sections => throw _privateConstructorUsedError;
   String get path => throw _privateConstructorUsedError;
+  bool get isAsset => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,7 +45,8 @@ abstract class $TemplateCopyWith<$Res> {
       String title,
       String description,
       List<TemplateSection> sections,
-      String path});
+      String path,
+      bool isAsset});
 }
 
 /// @nodoc
@@ -66,6 +68,7 @@ class _$TemplateCopyWithImpl<$Res, $Val extends Template>
     Object? description = null,
     Object? sections = null,
     Object? path = null,
+    Object? isAsset = null,
   }) {
     return _then(_value.copyWith(
       rebreatherManufacturer: null == rebreatherManufacturer
@@ -92,6 +95,10 @@ class _$TemplateCopyWithImpl<$Res, $Val extends Template>
           ? _value.path
           : path // ignore: cast_nullable_to_non_nullable
               as String,
+      isAsset: null == isAsset
+          ? _value.isAsset
+          : isAsset // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -110,7 +117,8 @@ abstract class _$$TemplateImplCopyWith<$Res>
       String title,
       String description,
       List<TemplateSection> sections,
-      String path});
+      String path,
+      bool isAsset});
 }
 
 /// @nodoc
@@ -130,6 +138,7 @@ class __$$TemplateImplCopyWithImpl<$Res>
     Object? description = null,
     Object? sections = null,
     Object? path = null,
+    Object? isAsset = null,
   }) {
     return _then(_$TemplateImpl(
       rebreatherManufacturer: null == rebreatherManufacturer
@@ -156,6 +165,10 @@ class __$$TemplateImplCopyWithImpl<$Res>
           ? _value.path
           : path // ignore: cast_nullable_to_non_nullable
               as String,
+      isAsset: null == isAsset
+          ? _value.isAsset
+          : isAsset // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -170,7 +183,8 @@ class _$TemplateImpl implements _Template {
       required this.title,
       required this.description,
       required this.sections,
-      this.path = ''});
+      this.path = '',
+      this.isAsset = false});
 
   factory _$TemplateImpl.fromJson(Map<String, dynamic> json) =>
       _$$TemplateImplFromJson(json);
@@ -188,10 +202,13 @@ class _$TemplateImpl implements _Template {
   @override
   @JsonKey()
   final String path;
+  @override
+  @JsonKey()
+  final bool isAsset;
 
   @override
   String toString() {
-    return 'Template(rebreatherManufacturer: $rebreatherManufacturer, rebreatherModel: $rebreatherModel, title: $title, description: $description, sections: $sections, path: $path)';
+    return 'Template(rebreatherManufacturer: $rebreatherManufacturer, rebreatherModel: $rebreatherModel, title: $title, description: $description, sections: $sections, path: $path, isAsset: $isAsset)';
   }
 
   @override
@@ -207,7 +224,8 @@ class _$TemplateImpl implements _Template {
             (identical(other.description, description) ||
                 other.description == description) &&
             const DeepCollectionEquality().equals(other.sections, sections) &&
-            (identical(other.path, path) || other.path == path));
+            (identical(other.path, path) || other.path == path) &&
+            (identical(other.isAsset, isAsset) || other.isAsset == isAsset));
   }
 
   @JsonKey(ignore: true)
@@ -219,7 +237,8 @@ class _$TemplateImpl implements _Template {
       title,
       description,
       const DeepCollectionEquality().hash(sections),
-      path);
+      path,
+      isAsset);
 
   @JsonKey(ignore: true)
   @override
@@ -242,7 +261,8 @@ abstract class _Template implements Template {
       required final String title,
       required final String description,
       required final List<TemplateSection> sections,
-      final String path}) = _$TemplateImpl;
+      final String path,
+      final bool isAsset}) = _$TemplateImpl;
 
   factory _Template.fromJson(Map<String, dynamic> json) =
       _$TemplateImpl.fromJson;
@@ -259,6 +279,8 @@ abstract class _Template implements Template {
   List<TemplateSection> get sections;
   @override
   String get path;
+  @override
+  bool get isAsset;
   @override
   @JsonKey(ignore: true)
   _$$TemplateImplCopyWith<_$TemplateImpl> get copyWith =>

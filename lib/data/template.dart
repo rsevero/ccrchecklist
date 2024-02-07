@@ -14,6 +14,7 @@ class Template with _$Template {
     required String description,
     required List<TemplateSection> sections,
     @Default('') String path,
+    @Default(false) bool isAsset,
   }) = _Template;
 
   factory Template.empty() {

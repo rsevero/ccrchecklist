@@ -16,6 +16,7 @@ _$TemplateImpl _$$TemplateImplFromJson(Map<String, dynamic> json) =>
           .map((e) => TemplateSection.fromJson(e as Map<String, dynamic>))
           .toList(),
       path: json['path'] as String? ?? '',
+      isAsset: json['isAsset'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$TemplateImplToJson(_$TemplateImpl instance) =>
@@ -26,4 +27,5 @@ Map<String, dynamic> _$$TemplateImplToJson(_$TemplateImpl instance) =>
       'description': instance.description,
       'sections': instance.sections.map((e) => e.toJson()).toList(),
       'path': instance.path,
+      'isAsset': instance.isAsset,
     };

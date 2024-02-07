@@ -1,5 +1,6 @@
 import 'package:ccr_checklist/data/template.dart';
 import 'package:ccr_checklist/misc/save_template_helper.dart';
+import 'package:ccr_checklist/misc/template_load_helper.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
 import 'package:ccr_checklist/store/template_list_store.dart';
 import 'package:ccr_checklist/widget/template_list.dart';
@@ -66,17 +67,18 @@ class TemplateEditorListPage extends StatelessWidget {
   }
 
   Future<void> _onTapTemplateFile(BuildContext context, int index) async {
-    final templateListStore =
-        Provider.of<TemplateListStore>(context, listen: false);
-    final templateEditorStore =
-        Provider.of<TemplateEditorStore>(context, listen: false);
-    final template = await templateListStore
-        .getTemplate(templateListStore.defaultTemplates[index]);
-
-    templateEditorStore.setCurrentTemplate(
-        template, templateListStore.defaultTemplates[index].isAsset);
+    final Template template =
+        await TemplateLoadHelper.loadTemplate(context, index);
 
     if (!context.mounted) return;
+    final templateEditorStore =
+        Provider.of<TemplateEditorStore>(context, listen: false);
+
+    templateEditorStore.setCurrentTemplate(template);
+
+    if (!context.mounted) return;
+    final templateListStore =
+        Provider.of<TemplateListStore>(context, listen: false);
     await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const TemplateEditorPage(),

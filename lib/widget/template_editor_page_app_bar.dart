@@ -45,7 +45,7 @@ class TemplateEditorPageAppBar extends AppBar {
         Observer(
           builder: (_) => IconButton(
             icon: const Icon(Icons.save),
-            onPressed: (!templateEditorStore.isCurrentTemplateAsset &&
+            onPressed: (!templateEditorStore.currentTemplate.isAsset &&
                     templateEditorStore.currentTemplate.path.isNotEmpty &&
                     templateEditorStore.currentTemplateIsModified)
                 ? () => _onPressedSaveTemplate(context)

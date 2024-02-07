@@ -41,10 +41,6 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
   bool _currentTemplateIsModified = false;
 
   @readonly
-  @JsonKey(includeFromJson: true, includeToJson: true)
-  bool _isCurrentTemplateAsset = false;
-
-  @readonly
   @JsonKey(
       includeFromJson: true,
       includeToJson: true,
@@ -215,7 +211,6 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
     undoRedoStorage.clearUndoRedo(_undoRedoClass);
     _saveSnapshot('Save template');
     _currentTemplateIsModified = false;
-    _isCurrentTemplateAsset = false;
 
     if (!context.mounted) return false;
     final templateListStore =
@@ -332,11 +327,11 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
   }
 
   @action
-  void setCurrentTemplate(Template template, [bool isAsset = false]) {
-    _setCurrentTemplate(template, isAsset);
+  void setCurrentTemplate(Template template) {
+    _setCurrentTemplate(template);
   }
 
-  void _setCurrentTemplate(Template template, [bool isAsset = false]) {
+  void _setCurrentTemplate(Template template) {
     _currentTemplate = template;
     _sections = ObservableList.of(template.sections);
     _checks.clear();
@@ -349,7 +344,6 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
     undoRedoStorage.clearUndoRedo(_undoRedoClass);
     _saveSnapshot('Set current template');
     _currentTemplateIsModified = false;
-    _isCurrentTemplateAsset = isAsset;
   }
 
   @action

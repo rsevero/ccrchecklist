@@ -25,17 +25,17 @@ abstract class TemplateListStoreBase with Store {
   @readonly
   TemplateListStoreState _state = TemplateListStoreState.outdated;
 
-  Future<Template> getTemplate(TemplateFile templateFile) async {
-    if (templateFile.isAsset) {
-      final String jsonString = await rootBundle.loadString(templateFile.path);
-      final Map<String, dynamic> jsonMap = json.decode(jsonString);
-      return Template.fromJson(jsonMap);
+  Future<Template> getTemplate(String templatePath,
+      [bool isAsset = false]) async {
+    String jsonString;
+    if (isAsset) {
+      jsonString = await rootBundle.loadString(templatePath);
     } else {
-      final File templateFileHandle = File(templateFile.path);
-      final String jsonString = await templateFileHandle.readAsString();
-      final Map<String, dynamic> jsonMap = json.decode(jsonString);
-      return Template.fromJson(jsonMap);
+      final File templateFileHandle = File(templatePath);
+      jsonString = await templateFileHandle.readAsString();
     }
+    final Map<String, dynamic> jsonMap = json.decode(jsonString);
+    return Template.fromJson(jsonMap);
   }
 
   void update() {
