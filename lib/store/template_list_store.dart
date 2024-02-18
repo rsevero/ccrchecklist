@@ -68,7 +68,11 @@ abstract class TemplateListStoreBase with Store {
     }
 
     final templateFileHandle = File(templateFile.path);
-    await templateFileHandle.delete();
+
+    // Check if the file exists before attempting to delete
+    if (await templateFileHandle.exists()) {
+      await templateFileHandle.delete();
+    }
 
     _defaultTemplates.removeAt(index);
   }
