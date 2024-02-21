@@ -5,12 +5,14 @@ import 'package:ccr_checklist/store/template_editor_store.dart';
 import 'package:ccr_checklist/store/template_list_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 
-Widget createTemplateListPage() => MultiProvider(
+Widget createTemplateListPage({TemplateListStore? templateListStore}) =>
+    MultiProvider(
       providers: [
         Provider(
-          create: (context) => TemplateListStore(),
+          create: (context) => templateListStore ?? TemplateListStore(),
         ),
         Provider(
           create: (context) => TemplateEditorStore(),
@@ -25,31 +27,28 @@ Widget createTemplateListPage() => MultiProvider(
       child: const CCRChecklistApp(),
     );
 
+class MockTemplateListStore extends TemplateListStore with Store {
+  @override
+  TemplateListStoreState get state => TemplateListStoreState.uptodate;
+}
+
 void main() {
   group('Template List Page Widget Tests', () {
-    testWidgets('Test if template list shows up', (tester) async {
+    testWidgets('Test if initial circular progress indicator shows up',
+        (tester) async {
       await tester.pumpWidget(createTemplateListPage());
       expect(find.byType(CircularProgressIndicator), findsAny);
-      // expect(
-      //     find.byKey(const ValueKey('templateListListView')), findsOneWidget);
-
-      // expect(find.text(('CCR Checklist')), findsOneWidget)
-      // expect(
-      //     find.descendant(
-      //         of: find.byType(Observer), matching: find.byType(ListView)),
-      //     findsAny);
-      // expect(TestWidgetFinder(), findsAny);
     });
-    // testWidgets('Test if template list shows up', (tester) async {
-    //   await tester.pumpWidget(createTemplateListPage());
-    //   expect(find.text('Item 0'), findsOneWidget);
-    //   await tester.fling(
-    //     find.byType(ListView),
-    //     const Offset(0, -200),
-    //     3000,
-    //   );
-    //   await tester.pumpAndSettle();
-    //   expect(find.text('Item 0'), findsNothing);
-    // });
+    testWidgets('Test if template list shows up', (tester) async {
+      final mockTemplateListStore = MockTemplateListStore();
+
+      // Build the widget tree
+      await tester.pumpWidget(
+          createTemplateListPage(templateListStore: mockTemplateListStore));
+
+      // Wait for any animations or asynchronous tasks to complete
+      await tester.pump();
+      expect(find.byType(ListView), findsOneWidget);
+    });
   });
 }
