@@ -60,5 +60,17 @@ void main() {
       await tester.pump();
       expect(find.byType(ListView), findsOneWidget);
     });
+
+    testWidgets('Test if template editor list page does not have a edit icon',
+        (tester) async {
+      final mockTemplateListStore = MockTemplateListStore();
+
+      // Build the widget tree
+      await tester.pumpWidget(createTemplateEditorListPage(
+          templateListStore: mockTemplateListStore));
+
+      // Verify that there is a 'edit' icon
+      expect(find.byIcon(Icons.settings_outlined), findsNothing);
+    });
   });
 }
