@@ -34,13 +34,15 @@ class CCRChecklist extends StatelessWidget {
           create: (context) => ConfigStore(),
         ),
       ],
-      child: const CCRChecklistApp(),
+      child: const CCRChecklistApp(page: TemplateListPage()),
     );
   }
 }
 
 class CCRChecklistApp extends StatelessWidget {
-  const CCRChecklistApp({super.key});
+  final Widget page;
+
+  const CCRChecklistApp({super.key, required this.page});
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +51,7 @@ class CCRChecklistApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: mainLightTheme,
       darkTheme: mainDarkTheme,
-      home: const TemplateListPage(),
+      home: page,
     );
   }
 }
