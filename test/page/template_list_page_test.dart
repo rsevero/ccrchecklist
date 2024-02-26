@@ -51,5 +51,16 @@ void main() {
       await tester.pump();
       expect(find.byType(ListView), findsOneWidget);
     });
+
+    testWidgets('Test if template list page has edit icon', (tester) async {
+      final mockTemplateListStore = MockTemplateListStore();
+
+      // Build the widget tree
+      await tester.pumpWidget(
+          createTemplateListPage(templateListStore: mockTemplateListStore));
+
+      // Verify that there is a 'edit' icon
+      expect(find.byIcon(Icons.settings_outlined), findsWidgets);
+    });
   });
 }
