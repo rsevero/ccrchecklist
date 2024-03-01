@@ -11,7 +11,7 @@ class HelpDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final helpDialogTitle = '${ccrSeparateCamelCase(pageName)} Help';
+    final helpDialogTitle = ccrSeparateCamelCase(pageName);
 
     return AlertDialog(
       title: Text(helpDialogTitle),
