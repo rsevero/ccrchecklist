@@ -1,6 +1,6 @@
 import 'package:ccr_checklist/misc/help_dialog_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:markdown_widget/markdown_widget.dart';
 
 class HelpDialog extends StatelessWidget {
   final String pageName;
@@ -11,10 +11,10 @@ class HelpDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final helpDialogTitle = ccrSeparateCamelCase(pageName);
+    final helpDialogTitle = "# ${ccrSeparateCamelCase(pageName)}";
 
     return AlertDialog(
-      title: Text(helpDialogTitle),
+      title: MarkdownBlock(data: helpDialogTitle),
       content: FutureBuilder<String>(
         future: helpTextFuture,
         builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
@@ -26,8 +26,10 @@ class HelpDialog extends StatelessWidget {
             return SizedBox(
               height: MediaQuery.of(context).size.height * 0.5,
               width: MediaQuery.of(context).size.width * 0.8,
-              child: Markdown(
-                data: snapshot.data ?? 'No help available.',
+              child: SingleChildScrollView(
+                child: MarkdownBlock(
+                  data: snapshot.data ?? 'No help available.',
+                ),
               ),
             );
           }

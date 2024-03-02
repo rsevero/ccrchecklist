@@ -1,3 +1,4 @@
+import 'package:ccr_checklist/misc/help_dialog_helper.dart';
 import 'package:ccr_checklist/misc/helper_functions.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:flutter/material.dart';
@@ -44,6 +45,11 @@ class CheckListAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ? () => onPressedResetChecklist(context)
                 : null,
           ),
+        ),
+        IconButton(
+          icon: const Icon(Icons.help_outline),
+          onPressed: () => ccrOpenHelpDialog(context, 'ChecklistPage'),
+          tooltip: 'Help',
         ),
       ],
     );
