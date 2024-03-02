@@ -7,13 +7,13 @@ String ccrSeparateCamelCase(String text) {
   return text.replaceAll(exp, ' ');
 }
 
-void ccrOpenHelpDialog(BuildContext context, String pageName) {
+void ccrOpenHelpDialog(BuildContext context, String pageName) async {
   final helpTextFileName = 'assets/help/$pageName.md';
-  final helpTextFuture = ccrLoadHelpText(helpTextFileName);
+  final helpText = await ccrLoadHelpText(helpTextFileName);
   showDialog(
     context: context,
     builder: (BuildContext context) {
-      return HelpDialog(helpTextFuture: helpTextFuture, pageName: pageName);
+      return HelpDialog(helpText: helpText, pageName: pageName);
     },
   );
 }

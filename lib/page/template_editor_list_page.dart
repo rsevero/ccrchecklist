@@ -1,4 +1,5 @@
 import 'package:ccr_checklist/data/template.dart';
+import 'package:ccr_checklist/misc/help_dialog_helper.dart';
 import 'package:ccr_checklist/misc/save_template_helper.dart';
 import 'package:ccr_checklist/misc/template_load_helper.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
@@ -17,6 +18,14 @@ class TemplateEditorListPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Checklist Templates'),
         elevation: 4,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.help_outline),
+            onPressed: () =>
+                ccrOpenHelpDialog(context, 'TemplateEditorListPage'),
+            tooltip: 'Help',
+          ),
+        ],
       ),
       body: TemplateList(
         isEditor: true,
