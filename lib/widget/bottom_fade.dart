@@ -8,6 +8,8 @@ class BottomFade extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color fadeColor = Theme.of(context).colorScheme.onSecondaryContainer;
+
     return Stack(
       children: [
         child,
@@ -23,8 +25,8 @@ class BottomFade extends StatelessWidget {
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,
                   colors: [
-                    Colors.grey.withOpacity(0.8),
-                    Colors.grey.withOpacity(0)
+                    fadeColor.withOpacity(0.7),
+                    fadeColor.withOpacity(0)
                   ],
                 ),
               ),
