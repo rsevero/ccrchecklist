@@ -10,6 +10,8 @@ String ccrSeparateCamelCase(String text) {
 void ccrOpenHelpDialog(BuildContext context, String pageName) async {
   final helpTextFileName = 'assets/help/$pageName.md';
   final helpText = await ccrLoadHelpText(helpTextFileName);
+
+  if (!context.mounted) return;
   showDialog(
     context: context,
     builder: (BuildContext context) {
