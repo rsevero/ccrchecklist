@@ -1,3 +1,4 @@
+import 'package:ccr_checklist/misc/help_dialog_helper.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:ccr_checklist/widget/non_ok_sections_report.dart';
 import 'package:flutter/foundation.dart';
@@ -32,6 +33,12 @@ class ChecklistCompletePage extends StatelessWidget {
               onPressed: () => onPressedShare(context),
             )
           ],
+          IconButton(
+            icon: const Icon(Icons.help_outline),
+            onPressed: () =>
+                ccrOpenHelpDialog(context, 'ChecklistCompletePage'),
+            tooltip: 'Help',
+          ),
         ],
       ),
       body: Padding(
