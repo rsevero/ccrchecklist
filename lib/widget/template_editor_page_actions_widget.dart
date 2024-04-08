@@ -47,7 +47,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
             ),
             GreyableSpeedDialChild(
               child: const Icon(Icons.edit_attributes),
-              text: 'Edit Template',
+              text: 'Edit Info',
               isEnabled: true,
               onTap: () => _onTapEditTemplate(context),
             ),
@@ -75,7 +75,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Edit Template'),
+          title: const Text('Edit Info'),
           content: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
