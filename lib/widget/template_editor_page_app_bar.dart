@@ -1,4 +1,5 @@
 import 'package:ccr_checklist/data/template.dart';
+import 'package:ccr_checklist/misc/help_dialog_helper.dart';
 import 'package:ccr_checklist/misc/save_template_helper.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
 import 'package:ccr_checklist/widget/undo_redo_buttons_widget.dart';
@@ -58,6 +59,11 @@ class TemplateEditorPageAppBar extends AppBar {
           onPressed: () => _onPressedSaveAsTemplate(
               context, templateEditorStore.currentTemplate),
           tooltip: 'Save As Template',
+        ),
+        IconButton(
+          icon: const Icon(Icons.help_outline),
+          onPressed: () => ccrOpenHelpDialog(context, 'TemplateEditorPage'),
+          tooltip: 'Help',
         ),
       ];
 
