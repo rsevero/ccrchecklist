@@ -251,8 +251,16 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                       ),
                     ),
                     const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text('Amount of references'),
+                      padding: EdgeInsets.all(8.0),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'References',
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
                     ),
                     ...List.generate(
                       ccrMaxReferences,
