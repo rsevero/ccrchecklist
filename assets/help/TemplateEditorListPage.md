@@ -37,9 +37,20 @@ Here the user can edit the following info:
 * *Update*
 * *Cancel*
 
-###
+### Add Regular Check
+Allow the creation of a new regular check.
 
+Fields:
+* *Description*: mandatory main text describing the option.
+* *Observation*: optional extra info accesable through the blue question icon.
+* *Timer duration*: optional timer set in minutes and seconds. If left empty or at 0:00, no timer is presented to the user.
+* *References*: define how many "reference" fields will be presented.
 
+Each reference can have it's own optional preffix and suffix.
+
+#### Buttons
+* *Create*
+* *Cancel*
 
 
 ## Remove template

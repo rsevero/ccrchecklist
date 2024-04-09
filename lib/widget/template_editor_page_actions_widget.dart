@@ -465,31 +465,61 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                         ],
                       ),
                     ),
+                    SizedBox(
+                      width:
+                          ccrDescriptionFieldWidth, // Ensure this matches the width of your other fields
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Timer Duration',
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () async {
+                              final TimeOfDay? pickedTime =
+                                  await showTimePicker(
+                                context: context,
+                                initialTime: TimeOfDay(
+                                    hour: timerDuration.inMinutes,
+                                    minute: timerDuration.inSeconds % 60),
+                              );
+                              if (pickedTime != null) {
+                                setState(() {
+                                  timerDuration = Duration(
+                                      minutes: pickedTime.hour,
+                                      seconds: pickedTime.minute);
+                                });
+                              }
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 8.0),
+                              child: Text(
+                                ccrFormatSecondsToMinutesSecondsTimer(
+                                    timerDuration.inSeconds),
+                                style: const TextStyle(
+                                  color:
+                                      Colors.blue, // Styling similar to a link
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                     const Padding(
                       padding: EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text('Amount of references'),
-                    ),
-                    ListTile(
-                      title: const Text('Set Timer Duration'),
-                      subtitle: Text(ccrFormatSecondsToMinutesSecondsTimer(
-                          timerDuration.inSeconds)),
-                      onTap: () async {
-                        final TimeOfDay? pickedTime = await showTimePicker(
-                          context: context,
-                          initialTime: TimeOfDay(
-                              hour: timerDuration.inMinutes,
-                              minute: timerDuration.inSeconds % 60),
-                        );
-                        if (pickedTime != null) {
-                          setState(
-                            () {
-                              timerDuration = Duration(
-                                  minutes: pickedTime.hour,
-                                  seconds: pickedTime.minute);
-                            },
-                          );
-                        }
-                      },
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'References',
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
                     ),
                     if (numberOfReferences > 0)
                       const Text(
