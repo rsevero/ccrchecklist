@@ -26,7 +26,7 @@ class ChecklistBody extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
           color: Theme.of(context).colorScheme.primaryContainer,
           child: Text(
-            'Diver: ${configStore.diverName} - Date: ${DateFormat('yyyy-MM-dd – kk:mm').format(checklistEditorStore.date)}',
+            'Diver: ${configStore.diverName} — Date: ${DateFormat('yyyy-MM-dd – kk:mm').format(checklistEditorStore.date)}',
             style: Theme.of(context).textTheme.titleSmall,
           ),
         ),
