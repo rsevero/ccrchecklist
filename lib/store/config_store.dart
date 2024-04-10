@@ -68,6 +68,8 @@ abstract class _ConfigStoreBaseToJson with Store implements TomlEncodableValue {
     _isModified = true;
   }
 
+  String get diverName => _configData['DiverName'] ?? '';
+
   void saveConfig() async {
     var tomlString = TomlDocument.fromMap(_configData).toString();
 

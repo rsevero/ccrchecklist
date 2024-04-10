@@ -1,5 +1,6 @@
 import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
+import 'package:ccr_checklist/store/config_store.dart';
 import 'package:ccr_checklist/widget/checklist_checklist.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -14,6 +15,7 @@ class ChecklistBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final checklistEditorStore = Provider.of<ChecklistEditorStore>(context);
+    final ConfigStore configStore = Provider.of<ConfigStore>(context);
     final section = checklistEditorStore.sections[sectionIndex];
 
     return Column(
@@ -24,7 +26,7 @@ class ChecklistBody extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
           color: Theme.of(context).colorScheme.primaryContainer,
           child: Text(
-            'Diver: ${checklistEditorStore.diverName} - Date: ${DateFormat('yyyy-MM-dd – kk:mm').format(checklistEditorStore.date)}',
+            'Diver: ${configStore.diverName} - Date: ${DateFormat('yyyy-MM-dd – kk:mm').format(checklistEditorStore.date)}',
             style: Theme.of(context).textTheme.titleSmall,
           ),
         ),
