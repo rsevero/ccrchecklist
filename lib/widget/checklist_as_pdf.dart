@@ -74,17 +74,7 @@ class ChecklistAsPdf {
                   _buildChecklistRebreatherName(
                       "${_checklistEditorStore.rebreatherManufacturer} ${_checklistEditorStore.rebreatherModel}"),
                   pw.Divider(thickness: 0.1),
-                  pw.Row(
-                    crossAxisAlignment: pw.CrossAxisAlignment.start,
-                    children: [
-                      _text('Diver: '),
-                      _text(_configStore.diverName, italic: true),
-                      pw.Spacer(),
-                      _text('Date: '),
-                      _text(_formatDate(_checklistEditorStore.date),
-                          italic: true),
-                    ],
-                  ),
+                  _buildDiverDateRow(),
                   pw.Divider(thickness: 1),
                 ] +
                 _buildChecks(),
@@ -112,6 +102,19 @@ class ChecklistAsPdf {
       }
     }
     return rows;
+  }
+
+  pw.SpanningWidget _buildDiverDateRow() {
+    return pw.Row(
+      crossAxisAlignment: pw.CrossAxisAlignment.start,
+      children: [
+        _text('Diver: '),
+        _text(_configStore.diverName, italic: true),
+        pw.Spacer(),
+        _text('Date: '),
+        _text(_formatDate(_checklistEditorStore.date), italic: true),
+      ],
+    );
   }
 
   pw.SpanningWidget _regularChecklistItem(ChecklistRegularCheck check) {
