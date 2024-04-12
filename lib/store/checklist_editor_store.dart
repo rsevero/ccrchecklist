@@ -200,11 +200,18 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
       return;
     }
 
+    final now = DateTime.now();
     _checks[sectionIndex][checkIndex] =
         _checks[sectionIndex][checkIndex].copyWith(
       isChecked: value,
-      lastChange: DateTime.now(),
+      lastChange: now,
     );
+
+    _sections[sectionIndex].checks[checkIndex] =
+        _sections[sectionIndex].checks[checkIndex].copyWith(
+              isChecked: value,
+              lastChange: now,
+            );
 
     _nonOkChecksPerSectionUpdated = false;
     _checklistChanged = true;
@@ -404,6 +411,8 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
     final references = check.references;
     references[refIndex] = references[refIndex].copyWith(value: newValue);
     _checks[sectionIndex][checkIndex] = check.copyWith(references: references);
+    _sections[sectionIndex].checks[checkIndex] =
+        check.copyWith(references: references);
     _checklistChanged = true;
     _statusUpdate(sectionIndex, checkIndex);
   }
