@@ -1,5 +1,8 @@
 import 'package:ccr_checklist/misc/help_dialog_helper.dart';
+import 'package:ccr_checklist/page/pdf_preview_page.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
+import 'package:ccr_checklist/store/config_store.dart';
+import 'package:ccr_checklist/widget/checklist_as_pdf.dart';
 import 'package:ccr_checklist/widget/non_ok_sections_report.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -27,10 +30,16 @@ class ChecklistCompletePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Checklist Report'),
         actions: [
+          if (defaultTargetPlatform == TargetPlatform.linux) ...[
+            IconButton(
+              icon: const Icon(Icons.picture_as_pdf),
+              onPressed: () => _onPressedShare(context),
+            )
+          ],
           if (defaultTargetPlatform != TargetPlatform.linux) ...[
             IconButton(
               icon: const Icon(Icons.share),
-              onPressed: () => onPressedShare(context),
+              onPressed: () => _onPressedShare(context),
             )
           ],
           IconButton(
@@ -55,11 +64,19 @@ class ChecklistCompletePage extends StatelessWidget {
     );
   }
 
-  Future<void> onPressedShare(BuildContext context) async {
+  void _onPressedShare(BuildContext context) {
     final checklistEditorStore =
         Provider.of<ChecklistEditorStore>(context, listen: false);
-    final file = await checklistEditorStore.createShareableFile();
+    final configStore = Provider.of<ConfigStore>(context, listen: false);
 
-    Share.shareXFiles([XFile(file)], text: 'Check out my checklist!');
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PdfPreviewPage(
+          checklistEditorStore: checklistEditorStore,
+          configStore: configStore,
+        ),
+      ),
+    );
   }
 }
