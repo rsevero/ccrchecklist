@@ -1,8 +1,6 @@
 import 'package:ccr_checklist/data/checklist_check.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:ccr_checklist/store/config_store.dart';
-import 'package:ccr_checklist/widget/checklist_linearity_step1_check_widget.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
@@ -119,32 +117,34 @@ class ChecklistAsPdf {
   pw.SpanningWidget _regularChecklistItem(ChecklistRegularCheck check) {
     List<pw.SpanningWidget> rows = [];
 
-    rows.add(pw.Row(
-      crossAxisAlignment: pw.CrossAxisAlignment.start,
-      children: [
-        pw.Container(
-          width: 10,
-          height: 10,
-          margin: const pw.EdgeInsets.only(top: 2),
-          decoration: pw.BoxDecoration(
-            border: pw.Border.all(color: PdfColors.black),
-          ),
-          child: pw.Center(
-            child: pw.Text(
-              check.isChecked ? 'X' : ' ',
-              style: pw.TextStyle(
-                font: _regularFont,
-                fontSize: 8,
+    rows.add(
+      pw.Row(
+        crossAxisAlignment: pw.CrossAxisAlignment.start,
+        children: [
+          pw.Container(
+            width: 10,
+            height: 10,
+            margin: const pw.EdgeInsets.only(top: 2),
+            decoration: pw.BoxDecoration(
+              border: pw.Border.all(color: PdfColors.black),
+            ),
+            child: pw.Center(
+              child: pw.Text(
+                check.isChecked ? 'X' : ' ',
+                style: pw.TextStyle(
+                  font: _regularFont,
+                  fontSize: 8,
+                ),
               ),
             ),
           ),
-        ),
-        pw.SizedBox(width: 5),
-        pw.Expanded(
-          child: _text(check.description, fontSize: 12),
-        ),
-      ],
-    ));
+          pw.SizedBox(width: 5),
+          pw.Expanded(
+            child: _text(check.description, fontSize: 12),
+          ),
+        ],
+      ),
+    );
 
     if (check.observation.isNotEmpty) {
       rows.add(
@@ -161,7 +161,21 @@ class ChecklistAsPdf {
       );
     }
 
-    return pw.Column(children: rows);
+    return pw.Column(
+      children: [
+        pw.Container(
+          decoration: check.isChecked
+              ? null
+              : const pw.BoxDecoration(
+                  color: PdfColors.red300,
+                ),
+          padding:
+              const pw.EdgeInsets.only(left: 5, right: 5, top: 3, bottom: 2),
+          child: pw.Column(children: rows),
+        ),
+        pw.SizedBox(height: 3),
+      ],
+    );
   }
 
   pw.Text _text(String text,
