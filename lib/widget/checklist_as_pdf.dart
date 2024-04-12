@@ -64,22 +64,21 @@ class ChecklistAsPdf {
     _configStore = configStore;
 
     _pdf.addPage(
-      pw.Page(
+      pw.MultiPage(
         theme: _mainTheme,
+        pageFormat: PdfPageFormat.a4,
         build: (context) {
-          return pw.Column(
-            children: [
-                  _buildChecklistTitle(
-                      "${_checklistEditorStore.title} Checklist"),
-                  _buildChecklistDescription(_checklistEditorStore.description),
-                  _buildChecklistRebreatherName(
-                      "${_checklistEditorStore.rebreatherManufacturer} ${_checklistEditorStore.rebreatherModel}"),
-                  pw.Divider(thickness: 0.1),
-                  _buildDiverDateRow(),
-                  pw.Divider(thickness: 1),
-                ] +
-                _buildChecks(),
-          );
+          return [
+                _buildChecklistTitle(
+                    "${_checklistEditorStore.title} Checklist"),
+                _buildChecklistDescription(_checklistEditorStore.description),
+                _buildChecklistRebreatherName(
+                    "${_checklistEditorStore.rebreatherManufacturer} ${_checklistEditorStore.rebreatherModel}"),
+                pw.Divider(thickness: 0.1),
+                _buildDiverDateRow(),
+                pw.Divider(thickness: 1),
+              ] +
+              _buildChecks();
         },
       ),
     );
