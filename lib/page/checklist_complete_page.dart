@@ -2,12 +2,10 @@ import 'package:ccr_checklist/misc/help_dialog_helper.dart';
 import 'package:ccr_checklist/page/pdf_preview_page.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:ccr_checklist/store/config_store.dart';
-import 'package:ccr_checklist/widget/checklist_as_pdf.dart';
 import 'package:ccr_checklist/widget/non_ok_sections_report.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:share_plus/share_plus.dart';
 
 class ChecklistCompletePage extends StatelessWidget {
   const ChecklistCompletePage({super.key});
