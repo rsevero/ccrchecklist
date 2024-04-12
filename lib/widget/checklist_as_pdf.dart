@@ -1,4 +1,5 @@
 import 'package:ccr_checklist/data/checklist_check.dart';
+import 'package:ccr_checklist/data/checklist_section.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:ccr_checklist/store/config_store.dart';
 import 'package:flutter/services.dart';
@@ -89,6 +90,7 @@ class ChecklistAsPdf {
   List<pw.SpanningWidget> _buildChecks() {
     final List<pw.SpanningWidget> rows = [];
     for (final section in _checklistEditorStore.sections) {
+      rows.add(_buildSectionTitle(section));
       for (final check in section.checks) {
         switch (check) {
           case ChecklistRegularCheck():
@@ -100,8 +102,23 @@ class ChecklistAsPdf {
             break;
         }
       }
+      rows.add(pw.Divider(thickness: 0.4));
     }
     return rows;
+  }
+
+  pw.SpanningWidget _buildSectionTitle(ChecklistSection section) {
+    return pw.Container(
+      padding: const pw.EdgeInsets.symmetric(horizontal: 5),
+      child: pw.Row(
+        crossAxisAlignment: pw.CrossAxisAlignment.start,
+        children: [
+          pw.Expanded(
+            child: _text(section.title, fontSize: 14, bold: true),
+          ),
+        ],
+      ),
+    );
   }
 
   pw.SpanningWidget _buildDiverDateRow() {
