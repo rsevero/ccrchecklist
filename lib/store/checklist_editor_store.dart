@@ -54,6 +54,10 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
   DateTime _date = DateTime.now();
 
   @readonly
+  @JsonKey(includeFromJson: true, includeToJson: true)
+  DateTime _lastChange = DateTime.now();
+
+  @readonly
   @JsonKey(
       includeFromJson: true,
       includeToJson: true,
@@ -201,6 +205,7 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
     }
 
     final now = DateTime.now();
+
     _checks[sectionIndex][checkIndex] =
         _checks[sectionIndex][checkIndex].copyWith(
       isChecked: value,
@@ -213,6 +218,7 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
               lastChange: now,
             );
 
+    _lastChange = now;
     _nonOkChecksPerSectionUpdated = false;
     _checklistChanged = true;
 
@@ -405,15 +411,23 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
   void setCheckReferenceValue(
       int sectionIndex, int checkIndex, int refIndex, double? newValue) {
     final check = _checks[sectionIndex][checkIndex];
+
     if (check is! ChecklistRegularCheck) {
       return;
     }
+
     final references = check.references;
+    final now = DateTime.now();
+
     references[refIndex] = references[refIndex].copyWith(value: newValue);
-    _checks[sectionIndex][checkIndex] = check.copyWith(references: references);
+    _checks[sectionIndex][checkIndex] =
+        check.copyWith(references: references, lastChange: now);
     _sections[sectionIndex].checks[checkIndex] =
-        check.copyWith(references: references);
+        check.copyWith(references: references, lastChange: now);
+
     _checklistChanged = true;
+    _lastChange = now;
+
     _statusUpdate(sectionIndex, checkIndex);
   }
 

@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
+import 'package:printing/printing.dart';
 
 class ChecklistAsPdf {
   late pw.Document _pdf;
@@ -13,10 +14,9 @@ class ChecklistAsPdf {
   late pw.Font _boldFont;
   late pw.Font _italicFont;
   late pw.Font _boldItalicFont;
-  late pw.Font _lightFont;
-  late pw.Font _lightItalicFont;
   late pw.Font _thinFont;
   late pw.Font _thinItalicFont;
+  late pw.Font _textFont;
   late pw.ThemeData _mainTheme;
   bool _isInitialized = false;
   late ChecklistEditorStore _checklistEditorStore;
@@ -27,14 +27,10 @@ class ChecklistAsPdf {
   Future<void> _initializePdf() async {
     _pdf = pw.Document();
     if (!_isInitialized) {
-      _regularFont =
-          pw.Font.ttf(await rootBundle.load('assets/fonts/DMSans-Regular.ttf'));
-      _boldFont =
-          pw.Font.ttf(await rootBundle.load('assets/fonts/DMSans-Bold.ttf'));
-      _italicFont =
-          pw.Font.ttf(await rootBundle.load('assets/fonts/DMSans-Italic.ttf'));
-      _boldItalicFont = pw.Font.ttf(
-          await rootBundle.load('assets/fonts/DMSans-BoldItalic.ttf'));
+      _regularFont = await PdfGoogleFonts.notoSansRegular();
+      _boldFont = await PdfGoogleFonts.notoSansBold();
+      _italicFont = await PdfGoogleFonts.notoSansItalic();
+      _boldItalicFont = await PdfGoogleFonts.notoSansBoldItalic();
       _mainTheme = pw.ThemeData.withFont(
         base: _regularFont,
         bold: _boldFont,
@@ -42,14 +38,11 @@ class ChecklistAsPdf {
         boldItalic: _boldItalicFont,
       );
 
-      _lightFont =
-          pw.Font.ttf(await rootBundle.load('assets/fonts/DMSans-Light.ttf'));
-      _lightItalicFont = pw.Font.ttf(
-          await rootBundle.load('assets/fonts/DMSans-LightItalic.ttf'));
-      _thinFont =
-          pw.Font.ttf(await rootBundle.load('assets/fonts/DMSans-Thin.ttf'));
-      _thinItalicFont = pw.Font.ttf(
-          await rootBundle.load('assets/fonts/DMSans-ThinItalic.ttf'));
+      _thinFont = await PdfGoogleFonts.notoSansThin();
+      _thinItalicFont = await PdfGoogleFonts.notoSansThinItalic();
+
+      _textFont = await PdfGoogleFonts.notoSansRegular();
+
       _isInitialized = true;
     }
   }
@@ -121,14 +114,25 @@ class ChecklistAsPdf {
   }
 
   pw.SpanningWidget _buildDiverDateRow() {
-    return pw.Row(
-      crossAxisAlignment: pw.CrossAxisAlignment.start,
+    return pw.Column(
       children: [
-        _text('Diver: '),
-        _text(_configStore.diverName, italic: true),
-        pw.Spacer(),
-        _text('Date: '),
-        _text(_formatDate(_checklistEditorStore.date), italic: true),
+        pw.Row(
+          crossAxisAlignment: pw.CrossAxisAlignment.start,
+          children: [
+            _text('Diver: '),
+            _text(_configStore.diverName, italic: true),
+          ],
+        ),
+        pw.Row(
+          crossAxisAlignment: pw.CrossAxisAlignment.start,
+          children: [
+            _text('Start: '),
+            _text(_formatDate(_checklistEditorStore.date), italic: true),
+            pw.Spacer(),
+            _text('Last change: '),
+            _text(_formatDate(_checklistEditorStore.lastChange), italic: true),
+          ],
+        ),
       ],
     );
   }
@@ -142,7 +146,7 @@ class ChecklistAsPdf {
         children: [
           pw.Container(
             width: 10,
-            height: 10,
+            height: 11,
             margin: const pw.EdgeInsets.only(top: 2),
             decoration: pw.BoxDecoration(
               border: pw.Border.all(color: PdfColors.black),
@@ -151,7 +155,7 @@ class ChecklistAsPdf {
               child: pw.Text(
                 check.isChecked ? 'X' : ' ',
                 style: pw.TextStyle(
-                  font: _regularFont,
+                  font: _boldFont,
                   fontSize: 8,
                 ),
               ),
@@ -201,7 +205,7 @@ class ChecklistAsPdf {
       {double fontSize = 12, bool italic = false, bool bold = false}) {
     final pw.Font font = (italic && bold)
         ? _boldItalicFont
-        : (italic ? _italicFont : (bold ? _boldFont : _regularFont));
+        : (italic ? _italicFont : (bold ? _boldFont : _textFont));
 
     return pw.Text(
       text,

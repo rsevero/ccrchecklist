@@ -15,6 +15,7 @@ ChecklistEditorStore _$ChecklistEditorStoreFromJson(
       .._description = json['_description'] as String
       .._diverName = json['_diverName'] as String
       .._date = DateTime.parse(json['_date'] as String)
+      .._lastChange = DateTime.parse(json['_lastChange'] as String)
       .._sections =
           ObservableListJsonConverter.obsvbLstOfChecklistSectionFromJson(
               json['_sections'] as List<ChecklistSection>)
@@ -31,6 +32,7 @@ Map<String, dynamic> _$ChecklistEditorStoreToJson(
       '_description': instance._description,
       '_diverName': instance._diverName,
       '_date': instance._date.toIso8601String(),
+      '_lastChange': instance._lastChange.toIso8601String(),
       '_sections': ObservableListJsonConverter.obsvbLstOfChecklistSectionToJson(
           instance._sections),
       '_checks':
@@ -153,6 +155,24 @@ mixin _$ChecklistEditorStore on _ChecklistEditorStoreBaseToJson, Store {
   set _date(DateTime value) {
     _$_dateAtom.reportWrite(value, super._date, () {
       super._date = value;
+    });
+  }
+
+  late final _$_lastChangeAtom = Atom(
+      name: '_ChecklistEditorStoreBaseToJson._lastChange', context: context);
+
+  DateTime get lastChange {
+    _$_lastChangeAtom.reportRead();
+    return super._lastChange;
+  }
+
+  @override
+  DateTime get _lastChange => lastChange;
+
+  @override
+  set _lastChange(DateTime value) {
+    _$_lastChangeAtom.reportWrite(value, super._lastChange, () {
+      super._lastChange = value;
     });
   }
 

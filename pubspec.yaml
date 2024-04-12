@@ -36,6 +36,7 @@ dependencies:
   flutter_sharing_intent: ^1.1.0
   flutter_speed_dial: ^7.0.0
   freezed_annotation: ^2.4.1
+  google_fonts: ^6.2.1
   htmltopdfwidgets: ^1.0.3
   intl: ^0.19.0
   json_annotation: ^4.8.1
@@ -115,21 +116,3 @@ flutter:
     - assets/help/TemplateEditorListPage.md
     - assets/help/TemplateEditorPage.md
     - assets/help/TemplateListPage.md
-    - assets/fonts/DMSans-BlackItalic.ttf
-    - assets/fonts/DMSans-Black.ttf
-    - assets/fonts/DMSans-BoldItalic.ttf
-    - assets/fonts/DMSans-Bold.ttf
-    - assets/fonts/DMSans-ExtraBoldItalic.ttf
-    - assets/fonts/DMSans-ExtraBold.ttf
-    - assets/fonts/DMSans-ExtraLightItalic.ttf
-    - assets/fonts/DMSans-ExtraLight.ttf
-    - assets/fonts/DMSans-Italic.ttf
-    - assets/fonts/DMSans-LightItalic.ttf
-    - assets/fonts/DMSans-Light.ttf
-    - assets/fonts/DMSans-MediumItalic.ttf
-    - assets/fonts/DMSans-Medium.ttf
-    - assets/fonts/DMSans-Regular.ttf
-    - assets/fonts/DMSans-SemiBoldItalic.ttf
-    - assets/fonts/DMSans-SemiBold.ttf
-    - assets/fonts/DMSans-ThinItalic.ttf
-    - assets/fonts/DMSans-Thin.ttf
