@@ -69,9 +69,9 @@ class ChecklistAsPdf {
                 _buildChecklistDescription(_checklistEditorStore.description),
                 _buildChecklistRebreatherName(
                     "${_checklistEditorStore.rebreatherManufacturer} ${_checklistEditorStore.rebreatherModel}"),
-                pw.Divider(thickness: 0.1),
+                pw.SizedBox(height: 5),
                 _buildDiverDateRow(),
-                pw.Divider(thickness: 1),
+                pw.SizedBox(height: 5),
               ] +
               _buildChecks();
         },
@@ -116,31 +116,67 @@ class ChecklistAsPdf {
   }
 
   pw.SpanningWidget _buildDiverDateRow() {
-    return pw.Column(
-      children: [
-        pw.Row(
-          crossAxisAlignment: pw.CrossAxisAlignment.start,
-          children: [
-            _text('Diver: '),
-            _text(_configStore.diverName, italic: true),
-          ],
-        ),
-        pw.Row(
-          crossAxisAlignment: pw.CrossAxisAlignment.start,
-          children: [
-            _text('Start: '),
-            _text(_formatDate(_checklistEditorStore.date), italic: true),
-            pw.Spacer(),
-            _text('Last change: '),
-            _text(_formatDate(_checklistEditorStore.lastChange), italic: true),
-          ],
-        ),
-      ],
+    return pw.Container(
+      decoration: const pw.BoxDecoration(
+        color: PdfColors.grey800,
+        borderRadius: pw.BorderRadius.all(pw.Radius.circular(5)),
+      ),
+      padding: const pw.EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      child: pw.Column(
+        children: [
+          pw.Row(
+            crossAxisAlignment: pw.CrossAxisAlignment.start,
+            children: [
+              _text('Diver: ', color: PdfColors.white),
+              _text(_configStore.diverName,
+                  italic: true, color: PdfColors.white),
+            ],
+          ),
+          pw.Row(
+            crossAxisAlignment: pw.CrossAxisAlignment.start,
+            children: [
+              _text('Start: ', color: PdfColors.white),
+              _text(_formatDate(_checklistEditorStore.date),
+                  italic: true, color: PdfColors.white),
+              pw.Spacer(),
+              _text('Last change: ', color: PdfColors.white),
+              _text(_formatDate(_checklistEditorStore.lastChange),
+                  italic: true, color: PdfColors.white),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  pw.Text _text(String text,
+      {double fontSize = 12,
+      bool italic = false,
+      bool bold = false,
+      PdfColor color = PdfColors.black}) {
+    final pw.Font font = (italic && bold)
+        ? _boldItalicFont
+        : (italic ? _italicFont : (bold ? _boldFont : _regularFont));
+
+    return pw.Text(
+      text,
+      style: pw.TextStyle(
+        font: font,
+        fontSize: fontSize,
+        color: color, // Use the color parameter
+      ),
     );
   }
 
   pw.SpanningWidget _regularChecklistItem(ChecklistRegularCheck check) {
     List<pw.SpanningWidget> rows = [];
+    bool isOk = check.isChecked;
+
+    if (isOk && check.references.isNotEmpty) {
+      for (final reference in check.references) {
+        isOk = isOk && ((reference.value == null) || (reference.value!.isNaN));
+      }
+    }
 
     rows.add(
       pw.Row(
@@ -152,6 +188,7 @@ class ChecklistAsPdf {
             margin: const pw.EdgeInsets.only(top: 1),
             decoration: pw.BoxDecoration(
               border: pw.Border.all(color: PdfColors.black),
+              borderRadius: const pw.BorderRadius.all(pw.Radius.circular(2)),
             ),
             child: pw.Center(
               child: pw.Text(
@@ -234,38 +271,18 @@ class ChecklistAsPdf {
     return pw.Column(
       children: [
         pw.Container(
-          decoration: check.isChecked
+          decoration: isOk
               ? null
               : const pw.BoxDecoration(
                   color: PdfColors.red300,
+                  borderRadius: pw.BorderRadius.all(pw.Radius.circular(5)),
                 ),
           padding:
-              const pw.EdgeInsets.only(left: 5, right: 5, top: 3, bottom: 2),
+              const pw.EdgeInsets.only(left: 6, right: 5, top: 5, bottom: 5),
           child: pw.Column(children: rows),
         ),
         pw.SizedBox(height: 3),
       ],
-    );
-  }
-
-  pw.Text _text(
-    String text, {
-    double fontSize = 12,
-    bool italic = false,
-    bool bold = false,
-    pw.TextAlign textAlign = pw.TextAlign.left,
-  }) {
-    final pw.Font font = (italic && bold)
-        ? _boldItalicFont
-        : (italic ? _italicFont : (bold ? _boldFont : _textFont));
-
-    return pw.Text(
-      text,
-      textAlign: textAlign,
-      style: pw.TextStyle(
-        font: font,
-        fontSize: fontSize,
-      ),
     );
   }
 
