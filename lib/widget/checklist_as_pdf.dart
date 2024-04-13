@@ -85,6 +85,7 @@ class ChecklistAsPdf {
     final List<pw.SpanningWidget> rows = [];
     for (final section in _checklistEditorStore.sections) {
       rows.add(_buildSectionTitle(section));
+      rows.add(pw.SizedBox(height: 5));
       for (final check in section.checks) {
         switch (check) {
           case ChecklistRegularCheck():
@@ -174,7 +175,7 @@ class ChecklistAsPdf {
 
     if (isOk && check.references.isNotEmpty) {
       for (final reference in check.references) {
-        isOk = isOk && ((reference.value == null) || (reference.value!.isNaN));
+        isOk = isOk && ((reference.value != null) && (!reference.value!.isNaN));
       }
     }
 
