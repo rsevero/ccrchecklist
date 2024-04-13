@@ -17,6 +17,7 @@ class ChecklistAsPdf {
   late pw.Font _thinFont;
   late pw.Font _thinItalicFont;
   late pw.Font _textFont;
+  late pw.Font _checkFont;
   late pw.ThemeData _mainTheme;
   bool _isInitialized = false;
   late ChecklistEditorStore _checklistEditorStore;
@@ -42,6 +43,7 @@ class ChecklistAsPdf {
       _thinItalicFont = await PdfGoogleFonts.notoSansThinItalic();
 
       _textFont = await PdfGoogleFonts.notoSansRegular();
+      _checkFont = await PdfGoogleFonts.notoSansSymbols2Regular();
 
       _isInitialized = true;
     }
@@ -146,16 +148,16 @@ class ChecklistAsPdf {
         children: [
           pw.Container(
             width: 10,
-            height: 11,
-            margin: const pw.EdgeInsets.only(top: 2),
+            height: 12,
+            margin: const pw.EdgeInsets.only(top: 1),
             decoration: pw.BoxDecoration(
               border: pw.Border.all(color: PdfColors.black),
             ),
             child: pw.Center(
               child: pw.Text(
-                check.isChecked ? 'X' : ' ',
+                check.isChecked ? '✔' : '',
                 style: pw.TextStyle(
-                  font: _boldFont,
+                  font: _checkFont,
                   fontSize: 8,
                 ),
               ),
