@@ -171,6 +171,51 @@ class ChecklistAsPdf {
       ),
     );
 
+    if (check.references.isNotEmpty) {
+      final List<pw.SpanningWidget> prefixes = [];
+      final List<pw.SpanningWidget> values = [];
+      final List<pw.SpanningWidget> suffixes = [];
+
+      for (final reference in check.references) {
+        final String prefix =
+            ((reference.prefix != null) && (reference.prefix!.isNotEmpty))
+                ? reference.prefix.toString()
+                : '';
+        prefixes.add(_text(prefix, fontSize: 10, italic: true));
+
+        final String value =
+            ((reference.value == null) || (reference.value!.isNaN))
+                ? '—'
+                : reference.value.toString();
+        values.add(_text(value, fontSize: 10, bold: true));
+
+        final String suffix =
+            ((reference.suffix != null) && (reference.suffix!.isNotEmpty))
+                ? reference.suffix.toString()
+                : '';
+        suffixes.add(_text(suffix, fontSize: 10, italic: true));
+      }
+
+      rows.add(
+        pw.Row(
+          children: [
+            pw.SizedBox(width: 15),
+            pw.Column(
+              children: prefixes,
+              crossAxisAlignment: pw.CrossAxisAlignment.start,
+            ),
+            pw.SizedBox(width: 5),
+            pw.Column(children: values),
+            pw.SizedBox(width: 5),
+            pw.Column(
+              children: suffixes,
+              crossAxisAlignment: pw.CrossAxisAlignment.start,
+            ),
+          ],
+        ),
+      );
+    }
+
     if (check.observation.isNotEmpty) {
       rows.add(
         pw.Row(
@@ -203,14 +248,20 @@ class ChecklistAsPdf {
     );
   }
 
-  pw.Text _text(String text,
-      {double fontSize = 12, bool italic = false, bool bold = false}) {
+  pw.Text _text(
+    String text, {
+    double fontSize = 12,
+    bool italic = false,
+    bool bold = false,
+    pw.TextAlign textAlign = pw.TextAlign.left,
+  }) {
     final pw.Font font = (italic && bold)
         ? _boldItalicFont
         : (italic ? _italicFont : (bold ? _boldFont : _textFont));
 
     return pw.Text(
       text,
+      textAlign: textAlign,
       style: pw.TextStyle(
         font: font,
         fontSize: fontSize,
