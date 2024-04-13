@@ -92,8 +92,10 @@ class ChecklistAsPdf {
             rows.add(_regularChecklistItem(check));
             break;
           case ChecklistLinearityStep1Check():
+            rows.add(_linearityStep1ChecklistItem(check));
             break;
           case ChecklistLinearityStep2Check():
+            // rows.add(_linearityStep2ChecklistItem(check));
             break;
         }
       }
@@ -169,15 +171,96 @@ class ChecklistAsPdf {
     );
   }
 
+  pw.SpanningWidget _linearityStep1ChecklistItem(
+      ChecklistLinearityStep1Check check) {
+    List<pw.SpanningWidget> rows = [];
+    bool isOk = true;
+
+    rows.add(
+      pw.Row(
+        crossAxisAlignment: pw.CrossAxisAlignment.start,
+        children: [
+          pw.SizedBox(width: 15),
+          pw.Expanded(
+            child: _text(check.description, fontSize: 12),
+          ),
+        ],
+      ),
+    );
+
+    final List<pw.SpanningWidget> mvs = [_text('mV', fontSize: 10, bold: true)];
+    final List<pw.SpanningWidget> oxygens1_0 = [
+      _text('/0.21', fontSize: 10, italic: true)
+    ];
+    final List<pw.SpanningWidget> oxygens1_6 = [
+      _text('x1.6', fontSize: 10, italic: true)
+    ];
+
+    for (final line in _checklistEditorStore.linearityWorksheet) {
+      final String mv =
+          ((line.mv == null) || (line.mv!.isNaN)) ? '—' : line.mv.toString();
+      mvs.add(_text(mv, fontSize: 10, bold: true));
+
+      final String oxygen1_0 =
+          ((line.percentage == null) || (line.percentage!.isNaN))
+              ? '—'
+              : line.percentage.toString();
+      oxygens1_0.add(_text(oxygen1_0, fontSize: 10, italic: true));
+
+      final String oxygen1_6 =
+          ((line.multiplied == null) || (line.multiplied!.isNaN))
+              ? '—'
+              : line.multiplied.toString();
+      oxygens1_6.add(_text(oxygen1_6, fontSize: 10, italic: true));
+
+      isOk = isOk && ((line.mv != null) && (!line.mv!.isNaN));
+    }
+
+    rows.add(
+      pw.Row(
+        children: [
+          pw.SizedBox(width: 15),
+          pw.Container(
+            decoration: const pw.BoxDecoration(
+              color: PdfColors.grey300,
+              borderRadius: pw.BorderRadius.all(pw.Radius.circular(5)),
+            ),
+            padding: const pw.EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+            child: pw.Row(
+              children: [
+                pw.Column(children: mvs),
+                pw.SizedBox(width: 5),
+                pw.Column(children: oxygens1_0),
+                pw.SizedBox(width: 5),
+                pw.Column(children: oxygens1_6),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+
+    return pw.Column(
+      children: [
+        pw.Container(
+          decoration: isOk
+              ? null
+              : const pw.BoxDecoration(
+                  color: PdfColors.red300,
+                  borderRadius: pw.BorderRadius.all(pw.Radius.circular(5)),
+                ),
+          padding:
+              const pw.EdgeInsets.only(left: 6, right: 5, top: 5, bottom: 5),
+          child: pw.Column(children: rows),
+        ),
+        pw.SizedBox(height: 3),
+      ],
+    );
+  }
+
   pw.SpanningWidget _regularChecklistItem(ChecklistRegularCheck check) {
     List<pw.SpanningWidget> rows = [];
     bool isOk = check.isChecked;
-
-    if (isOk && check.references.isNotEmpty) {
-      for (final reference in check.references) {
-        isOk = isOk && ((reference.value != null) && (!reference.value!.isNaN));
-      }
-    }
 
     rows.add(
       pw.Row(
@@ -232,6 +315,8 @@ class ChecklistAsPdf {
                 ? reference.suffix.toString()
                 : '';
         suffixes.add(_text(suffix, fontSize: 10, italic: true));
+
+        isOk = isOk && ((reference.value != null) && (!reference.value!.isNaN));
       }
 
       rows.add(
