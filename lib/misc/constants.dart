@@ -37,3 +37,5 @@ enum CCRFileExistsAction { replace, chooseAnother, cancel }
 const double ccrDescriptionFieldWidth = 300;
 
 const double ccrReferenceRadioButtonWidth = 40;
+
+const double ccrMinimumLinearity = 90;

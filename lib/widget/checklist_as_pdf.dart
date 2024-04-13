@@ -1,5 +1,6 @@
 import 'package:ccr_checklist/data/checklist_check.dart';
 import 'package:ccr_checklist/data/checklist_section.dart';
+import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:ccr_checklist/store/config_store.dart';
 import 'package:flutter/services.dart';
@@ -95,7 +96,7 @@ class ChecklistAsPdf {
             rows.add(_linearityStep1ChecklistItem(check));
             break;
           case ChecklistLinearityStep2Check():
-            // rows.add(_linearityStep2ChecklistItem(check));
+            rows.add(_linearityStep2ChecklistItem(check));
             break;
         }
       }
@@ -197,20 +198,20 @@ class ChecklistAsPdf {
     ];
 
     for (final line in _checklistEditorStore.linearityWorksheet) {
-      final String mv =
-          ((line.mv == null) || (line.mv!.isNaN)) ? '—' : line.mv.toString();
+      final String mv = ((line.mv == null) || (line.mv!.isNaN))
+          ? '—'
+          : line.mv!.toStringAsFixed(1);
       mvs.add(_text(mv, fontSize: 10, bold: true));
 
-      final String oxygen1_0 =
-          ((line.percentage == null) || (line.percentage!.isNaN))
-              ? '—'
-              : line.percentage.toString();
+      final String oxygen1_0 = ((line.divided == null) || (line.divided!.isNaN))
+          ? '—'
+          : line.divided!.toStringAsFixed(1);
       oxygens1_0.add(_text(oxygen1_0, fontSize: 10, italic: true));
 
       final String oxygen1_6 =
           ((line.multiplied == null) || (line.multiplied!.isNaN))
               ? '—'
-              : line.multiplied.toString();
+              : line.multiplied!.toStringAsFixed(1);
       oxygens1_6.add(_text(oxygen1_6, fontSize: 10, italic: true));
 
       isOk = isOk && ((line.mv != null) && (!line.mv!.isNaN));
@@ -225,6 +226,7 @@ class ChecklistAsPdf {
               color: PdfColors.grey300,
               borderRadius: pw.BorderRadius.all(pw.Radius.circular(5)),
             ),
+            margin: const pw.EdgeInsets.only(bottom: 3, top: 4),
             padding: const pw.EdgeInsets.symmetric(horizontal: 8, vertical: 5),
             child: pw.Row(
               children: [
@@ -247,6 +249,118 @@ class ChecklistAsPdf {
               ? null
               : const pw.BoxDecoration(
                   color: PdfColors.red300,
+                  borderRadius: pw.BorderRadius.all(pw.Radius.circular(5)),
+                ),
+          padding:
+              const pw.EdgeInsets.only(left: 6, right: 5, top: 5, bottom: 5),
+          child: pw.Column(children: rows),
+        ),
+        pw.SizedBox(height: 3),
+      ],
+    );
+  }
+
+  pw.SpanningWidget _linearityStep2ChecklistItem(
+      ChecklistLinearityStep2Check check) {
+    List<pw.SpanningWidget> rows = [];
+    bool isOk = true;
+
+    rows.add(
+      pw.Row(
+        crossAxisAlignment: pw.CrossAxisAlignment.start,
+        children: [
+          pw.SizedBox(width: 15),
+          pw.Expanded(
+            child: _text(check.description, fontSize: 12),
+          ),
+        ],
+      ),
+    );
+
+    final List<pw.SpanningWidget> mvs = [_text('mV', fontSize: 10, bold: true)];
+    final List<pw.SpanningWidget> oxygens1_0 = [
+      _text('/0.21', fontSize: 10, italic: true)
+    ];
+    final List<pw.SpanningWidget> oxygens1_6 = [
+      _text('x1.6', fontSize: 10, italic: true)
+    ];
+    final List<pw.SpanningWidget> actuals = [
+      _text('actual', fontSize: 10, bold: true)
+    ];
+    final List<pw.SpanningWidget> percentages = [
+      _text('%', fontSize: 10, italic: true)
+    ];
+
+    for (final line in _checklistEditorStore.linearityWorksheet) {
+      final String mv = ((line.mv == null) || (line.mv!.isNaN))
+          ? '—'
+          : line.mv!.toStringAsFixed(1);
+      mvs.add(_text(mv, fontSize: 10, bold: true));
+
+      final String oxygen1_0 = ((line.divided == null) || (line.divided!.isNaN))
+          ? '—'
+          : line.divided!.toStringAsFixed(1);
+      oxygens1_0.add(_text(oxygen1_0, fontSize: 10, italic: true));
+
+      final String oxygen1_6 =
+          ((line.multiplied == null) || (line.multiplied!.isNaN))
+              ? '—'
+              : line.multiplied!.toStringAsFixed(1);
+      oxygens1_6.add(_text(oxygen1_6, fontSize: 10, italic: true));
+
+      final String actual = ((line.actual == null) || (line.actual!.isNaN))
+          ? '—'
+          : line.actual!.toStringAsFixed(1);
+      actuals.add(_text(actual, fontSize: 10, bold: true));
+
+      final String percentage =
+          ((line.percentage == null) || (line.percentage!.isNaN))
+              ? '—'
+              : line.percentage!.toStringAsFixed(1);
+      percentages.add(_text(percentage, fontSize: 10, italic: true));
+
+      isOk = isOk &&
+          ((line.percentage != null) &&
+              (!line.percentage!.isNaN) &&
+              (line.percentage! >= ccrMinimumLinearity));
+    }
+
+    rows.add(
+      pw.Row(
+        children: [
+          pw.SizedBox(width: 15),
+          pw.Container(
+            decoration: const pw.BoxDecoration(
+              color: PdfColors.grey300,
+              borderRadius: pw.BorderRadius.all(pw.Radius.circular(5)),
+            ),
+            margin: const pw.EdgeInsets.only(bottom: 3, top: 4),
+            padding: const pw.EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+            child: pw.Row(
+              children: [
+                pw.Column(children: mvs),
+                pw.SizedBox(width: 5),
+                pw.Column(children: oxygens1_0),
+                pw.SizedBox(width: 5),
+                pw.Column(children: oxygens1_6),
+                pw.SizedBox(width: 5),
+                pw.Column(children: actuals),
+                pw.SizedBox(width: 5),
+                pw.Column(children: percentages),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+
+    return pw.Column(
+      children: [
+        pw.Container(
+          decoration: isOk
+              ? null
+              : const pw.BoxDecoration(
+                  color: PdfColors.orange300,
                   borderRadius: pw.BorderRadius.all(pw.Radius.circular(5)),
                 ),
           padding:
