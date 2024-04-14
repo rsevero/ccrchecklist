@@ -10,30 +10,31 @@ class NonOkSectionsReport extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final checklistEditorStore = Provider.of<ChecklistEditorStore>(context);
-    final nonOkSections =
-        ChecklistCompleteHelper.nonOkSectionIndexes(checklistEditorStore);
 
     return Expanded(
       child: ListView.builder(
         shrinkWrap: true,
-        itemCount: nonOkSections.length,
+        itemCount: checklistEditorStore.sections.length,
         itemBuilder: (context, index) {
-          final int sectionIndex = nonOkSections[index];
-          final String sectionTitle = ChecklistCompleteHelper.sectionTitle(
-              checklistEditorStore, sectionIndex);
+          final String sectionTitle =
+              ChecklistCompleteHelper.sectionTitle(checklistEditorStore, index);
           final String sectionMessage = ChecklistCompleteHelper.sectionMessage(
-              checklistEditorStore, sectionIndex);
+              checklistEditorStore, index);
 
           return ListTile(
-            leading: const Icon(Icons.error, color: Colors.red),
+            leading: checklistEditorStore.sectionsOk[index]
+                ? const Icon(Icons.check, color: Colors.green)
+                : const Icon(Icons.error, color: Colors.red),
             title: Text(sectionTitle),
             subtitle: Text(sectionMessage),
-            trailing: ElevatedButton(
-              child: const Text('Fix'),
-              onPressed: () {
-                onPressedFix(context, sectionIndex);
-              },
-            ),
+            trailing: checklistEditorStore.sectionsOk[index]
+                ? null
+                : ElevatedButton(
+                    child: const Text('Fix'),
+                    onPressed: () {
+                      onPressedFix(context, index);
+                    },
+                  ),
           );
         },
       ),
