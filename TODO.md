@@ -8,5 +8,4 @@
 - [ ] Internacionalizar app
 - [ ] Opção de som ao terminar temporizador
 - [ ] Criar "Sobre": https://pub.dev/packages/about
-- [ ] Incluir licenças das fontes usadas:
-    - DM Sans: https://openfontlicense.org/open-font-license-official-text/
+- [ ] Incluir licenças das fontes usadas

@@ -1,3 +1,4 @@
+import 'package:ccr_checklist/misc/checklist_complete_helper.dart';
 import 'package:ccr_checklist/misc/help_dialog_helper.dart';
 import 'package:ccr_checklist/page/pdf_preview_page.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
@@ -14,15 +15,7 @@ class ChecklistCompletePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final checklistEditorStore = Provider.of<ChecklistEditorStore>(context);
     final nonOkSectionCount = checklistEditorStore.nonOkSectionsCount;
-    var message = '';
-
-    if (nonOkSectionCount == 0) {
-      message = 'All sections completed!';
-    } else if (nonOkSectionCount == 1) {
-      message = 'You have 1 page not completed.';
-    } else {
-      message = 'You have $nonOkSectionCount pages not completed.';
-    }
+    final message = ChecklistCompleteHelper.mainReport(checklistEditorStore);
 
     return Scaffold(
       appBar: AppBar(
