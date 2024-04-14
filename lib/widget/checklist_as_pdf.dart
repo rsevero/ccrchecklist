@@ -15,9 +15,7 @@ class ChecklistAsPdf {
   late pw.Font _boldFont;
   late pw.Font _italicFont;
   late pw.Font _boldItalicFont;
-  late pw.Font _thinFont;
   late pw.Font _thinItalicFont;
-  late pw.Font _textFont;
   late pw.Font _checkFont;
   late pw.ThemeData _mainTheme;
   bool _isInitialized = false;
@@ -40,10 +38,8 @@ class ChecklistAsPdf {
         boldItalic: _boldItalicFont,
       );
 
-      _thinFont = await PdfGoogleFonts.notoSansThin();
       _thinItalicFont = await PdfGoogleFonts.notoSansThinItalic();
 
-      _textFont = await PdfGoogleFonts.notoSansRegular();
       _checkFont = await PdfGoogleFonts.notoSansSymbols2Regular();
 
       _isInitialized = true;
