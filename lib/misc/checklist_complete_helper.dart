@@ -8,9 +8,9 @@ class ChecklistCompleteHelper {
     if (nonOkSectionCount == 0) {
       message = 'All sections completed!';
     } else if (nonOkSectionCount == 1) {
-      message = 'You have 1 non-complete page.';
+      message = 'You have 1 incomplete page.';
     } else {
-      message = 'You have $nonOkSectionCount non-complete pages.';
+      message = 'You have $nonOkSectionCount incomplete pages.';
     }
 
     return message;
@@ -38,7 +38,7 @@ class ChecklistCompleteHelper {
   static String sectionMessage(
       ChecklistEditorStore checklistEditorStore, int sectionIndex) {
     final String message = checklistEditorStore.sectionsOk[sectionIndex]
-        ? "Is complete."
+        ? "Complete."
         : "Has ${checklistEditorStore.nonOkChecksPerSection[sectionIndex]} issues.";
 
     return message;
