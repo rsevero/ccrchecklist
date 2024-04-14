@@ -44,8 +44,17 @@ class ChecklistCompletePage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(message),
+            Row(
+              children: [
+                const SizedBox(width: 20),
+                Text(
+                  message,
+                  textScaler: const TextScaler.linear(1.3),
+                ),
+              ],
+            ),
             if (nonOkSectionCount > 0) ...[
               const NonOkSectionsReport(),
             ]
