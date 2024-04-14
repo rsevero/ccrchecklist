@@ -20,14 +20,15 @@ class NonOkSectionsReport extends StatelessWidget {
               ChecklistCompleteHelper.sectionTitle(checklistEditorStore, index);
           final String sectionMessage = ChecklistCompleteHelper.sectionMessage(
               checklistEditorStore, index);
+          final bool sectionOk = checklistEditorStore.sectionsOk[index];
 
           return ListTile(
-            leading: checklistEditorStore.sectionsOk[index]
+            leading: sectionOk
                 ? const Icon(Icons.check, color: Colors.green)
                 : const Icon(Icons.error, color: Colors.red),
             title: Text(sectionTitle),
             subtitle: Text(sectionMessage),
-            trailing: checklistEditorStore.sectionsOk[index]
+            trailing: sectionOk
                 ? null
                 : ElevatedButton(
                     child: const Text('Fix'),
