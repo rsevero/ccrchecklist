@@ -24,14 +24,14 @@ class ChecklistCompletePage extends StatelessWidget {
           if (defaultTargetPlatform == TargetPlatform.linux) ...[
             IconButton(
               icon: const Icon(Icons.picture_as_pdf),
-              onPressed: () => _onPressedShare(context),
-            )
+              onPressed: () => _onPressedShow(context),
+            ),
           ],
-          if (defaultTargetPlatform != TargetPlatform.linux) ...[
+          if (defaultTargetPlatform == TargetPlatform.android) ...[
             IconButton(
               icon: const Icon(Icons.share),
               onPressed: () => _onPressedShare(context),
-            )
+            ),
           ],
           IconButton(
             icon: const Icon(Icons.help_outline),
@@ -65,6 +65,22 @@ class ChecklistCompletePage extends StatelessWidget {
   }
 
   void _onPressedShare(BuildContext context) {
+    final checklistEditorStore =
+        Provider.of<ChecklistEditorStore>(context, listen: false);
+    final configStore = Provider.of<ConfigStore>(context, listen: false);
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PdfPreviewPage(
+          checklistEditorStore: checklistEditorStore,
+          configStore: configStore,
+        ),
+      ),
+    );
+  }
+
+  void _onPressedShow(BuildContext context) {
     final checklistEditorStore =
         Provider.of<ChecklistEditorStore>(context, listen: false);
     final configStore = Provider.of<ConfigStore>(context, listen: false);
