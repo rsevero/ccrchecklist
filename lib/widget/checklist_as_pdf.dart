@@ -212,12 +212,18 @@ class ChecklistAsPdf {
             crossAxisAlignment: pw.CrossAxisAlignment.start,
             children: [
               _text('Start: ', color: PdfColors.white),
-              _text(_formatDate(_checklistEditorStore.date),
-                  italic: true, color: PdfColors.white),
+              _text(
+                  ChecklistCompleteHelper.formatDate(
+                      _checklistEditorStore.date),
+                  italic: true,
+                  color: PdfColors.white),
               pw.Spacer(),
               _text('Last change: ', color: PdfColors.white),
-              _text(_formatDate(_checklistEditorStore.lastChange),
-                  italic: true, color: PdfColors.white),
+              _text(
+                  ChecklistCompleteHelper.formatDate(
+                      _checklistEditorStore.lastChange),
+                  italic: true,
+                  color: PdfColors.white),
             ],
           ),
         ],
@@ -620,10 +626,5 @@ class ChecklistAsPdf {
         ),
       ],
     );
-  }
-
-  String _formatDate(DateTime dateTime) {
-    DateFormat formatter = DateFormat('yyyy.MM.dd - HH:mm');
-    return formatter.format(dateTime);
   }
 }

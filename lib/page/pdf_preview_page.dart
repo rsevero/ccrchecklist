@@ -1,9 +1,12 @@
+import 'package:ccr_checklist/misc/checklist_complete_helper.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:ccr_checklist/store/config_store.dart';
 import 'package:ccr_checklist/widget/checklist_as_pdf.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
+import 'package:slugify/slugify.dart';
 
 class PdfPreviewPage extends StatelessWidget {
   final ChecklistEditorStore checklistEditorStore;
@@ -54,6 +57,16 @@ class PdfPreviewPage extends StatelessWidget {
         ],
       ),
       body: PdfPreview(
+        initialPageFormat: PdfPageFormat.a4,
+        canDebug: false,
+        canChangePageFormat: true,
+        canChangeOrientation: false,
+        pageFormats: const {
+          'A4': PdfPageFormat.a4,
+          'Letter': PdfPageFormat.letter,
+          'Legal': PdfPageFormat.legal,
+        },
+        pdfFileName: _pdfFilename(),
         build: (context) async {
           final pdfBytes = await _generatePdf();
           if (pdfBytes != null) {
@@ -64,5 +77,22 @@ class PdfPreviewPage extends StatelessWidget {
         },
       ),
     );
+  }
+
+  String _pdfFilename() {
+    final buffer = StringBuffer();
+
+    buffer.write(slugify(configStore.configData['DiverName'],
+        delimiter: '_', lowercase: false));
+    buffer.write('-');
+    buffer.write(ChecklistCompleteHelper.formatDate(checklistEditorStore.date));
+    buffer.write('-');
+    buffer.write(
+        slugify(checklistEditorStore.title, delimiter: '_', lowercase: false));
+    buffer.write('_Checklist.pdf');
+
+    final String filename = buffer.toString();
+
+    return filename;
   }
 }

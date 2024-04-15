@@ -56,7 +56,7 @@ abstract class _ConfigStoreBaseToJson with Store implements TomlEncodableValue {
       _configLoadStatus = ConfigLoadStatusEnum.loaded;
     } catch (e) {
       _configLoadStatus = ConfigLoadStatusEnum.error;
-      print("Failed to read TOML file: $e");
+      // print("Failed to read TOML file: $e");
     }
   }
 
@@ -68,6 +68,7 @@ abstract class _ConfigStoreBaseToJson with Store implements TomlEncodableValue {
     _isModified = true;
   }
 
+  @computed
   String get diverName => _configData['DiverName'] ?? '';
 
   void saveConfig() async {
@@ -79,9 +80,9 @@ abstract class _ConfigStoreBaseToJson with Store implements TomlEncodableValue {
 
       await file.writeAsString(tomlString);
       _isModified = false;
-      print("Config saved successfully.");
+      // print("Config saved successfully.");
     } catch (e) {
-      print("Failed to save config: $e");
+      // print("Failed to save config: $e");
     }
   }
 }

@@ -24,7 +24,7 @@ class TemplateListPage extends StatelessWidget {
 
         if (configStore.configLoadStatus == ConfigLoadStatusEnum.loaded &&
             (configStore.configData['DiverName'] == null ||
-                configStore.configData['DiverName'].isEmpty)) {
+                configStore.configData['DiverName'].trim.isEmpty)) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             showDialog(
               context: context,

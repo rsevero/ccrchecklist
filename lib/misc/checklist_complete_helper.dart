@@ -1,4 +1,5 @@
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
+import 'package:intl/intl.dart';
 
 class ChecklistCompleteHelper {
   static String mainReport(ChecklistEditorStore checklistEditorStore) {
@@ -42,5 +43,10 @@ class ChecklistCompleteHelper {
         : "Has ${checklistEditorStore.nonOkChecksPerSection[sectionIndex]} issues.";
 
     return message;
+  }
+
+  static String formatDate(DateTime dateTime) {
+    DateFormat formatter = DateFormat('yyyy.MM.dd-HH:mm');
+    return formatter.format(dateTime);
   }
 }
