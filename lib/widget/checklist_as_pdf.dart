@@ -1,11 +1,12 @@
 import 'package:ccr_checklist/data/checklist_check.dart';
 import 'package:ccr_checklist/data/checklist_section.dart';
+import 'package:ccr_checklist/misc/checklist_complete_helper.dart';
 import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:ccr_checklist/store/config_store.dart';
 import 'package:flutter/services.dart';
+import 'package:htmltopdfwidgets/htmltopdfwidgets.dart';
 import 'package:intl/intl.dart';
-import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 
@@ -70,7 +71,8 @@ class ChecklistAsPdf {
                 _buildDiverDateRow(),
                 pw.SizedBox(height: 5),
               ] +
-              _buildChecks();
+              _buildChecks() +
+              _buildBrief();
         },
       ),
     );
@@ -78,8 +80,64 @@ class ChecklistAsPdf {
     return _pdf.save();
   }
 
+  List<pw.SpanningWidget> _buildBrief() {
+    final List<pw.SpanningWidget> rows = [];
+    final message = ChecklistCompleteHelper.mainReport(_checklistEditorStore);
+
+    rows.add(_buildBriefHeader());
+    rows.add(_text(message));
+
+    if (_checklistEditorStore.nonOkSectionsCount > 0) {
+      for (int i = 0; i < _checklistEditorStore.sections.length; i++) {
+        rows.add(pw.Divider(thickness: 0.2));
+        rows.add(
+          pw.Row(
+            crossAxisAlignment: pw.CrossAxisAlignment.start,
+            children: [
+              pw.Container(
+                width: 14,
+                height: 14,
+                margin: const pw.EdgeInsets.only(top: 2),
+                decoration: pw.BoxDecoration(
+                  shape: pw.BoxShape.circle,
+                  color: _checklistEditorStore.sectionsOk[i]
+                      ? PdfColors.green
+                      : PdfColors.red,
+                ),
+                child: pw.Center(
+                  child: pw.Text(
+                    _checklistEditorStore.sectionsOk[i] ? '✔' : '❗',
+                    style: pw.TextStyle(
+                      font: _checkFont,
+                      fontSize: 9,
+                      color: PdfColors.white,
+                    ),
+                  ),
+                ),
+              ),
+              pw.SizedBox(width: 5),
+              pw.Column(
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                children: [
+                  pw.Row(children: [
+                    _buildHeader2(_checklistEditorStore.sections[i].title)
+                  ]),
+                  _text(ChecklistCompleteHelper.sectionMessage(
+                      _checklistEditorStore, i)),
+                ],
+              ),
+            ],
+          ),
+        );
+      }
+    }
+
+    return rows;
+  }
+
   List<pw.SpanningWidget> _buildChecks() {
     final List<pw.SpanningWidget> rows = [];
+
     for (final section in _checklistEditorStore.sections) {
       rows.add(_buildSectionTitle(section));
       rows.add(pw.SizedBox(height: 5));
@@ -98,7 +156,17 @@ class ChecklistAsPdf {
       }
       rows.add(pw.Divider(thickness: 0.4));
     }
+
     return rows;
+  }
+
+  pw.SpanningWidget _buildBriefHeader() {
+    return pw.Container(
+      child: pw.Row(
+        crossAxisAlignment: pw.CrossAxisAlignment.start,
+        children: [_buildHeader1('Checklist brief')],
+      ),
+    );
   }
 
   pw.SpanningWidget _buildSectionTitle(ChecklistSection section) {
@@ -107,12 +175,20 @@ class ChecklistAsPdf {
       child: pw.Row(
         crossAxisAlignment: pw.CrossAxisAlignment.start,
         children: [
-          pw.Expanded(
-            child: _text(section.title, fontSize: 14, bold: true),
-          ),
+          _buildHeader1(section.title),
         ],
       ),
     );
+  }
+
+  pw.SpanningWidget _buildHeader1(String text) {
+    return pw.Expanded(
+      child: _text(text, fontSize: 14, bold: true),
+    );
+  }
+
+  pw.SpanningWidget _buildHeader2(String text) {
+    return _text(text, fontSize: 12, bold: true);
   }
 
   pw.SpanningWidget _buildDiverDateRow() {
