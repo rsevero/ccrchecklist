@@ -46,6 +46,7 @@ abstract class _ConfigStoreBaseToJson with Store implements TomlEncodableValue {
       final directory = await CCRDirectory.config();
       final path = '${directory.path}/$ccrConfigFile';
       if (!File(path).existsSync()) {
+        print("No TOML file to read");
         _configData = {};
         _configLoadStatus = ConfigLoadStatusEnum.loaded;
         return;
@@ -56,7 +57,7 @@ abstract class _ConfigStoreBaseToJson with Store implements TomlEncodableValue {
       _configLoadStatus = ConfigLoadStatusEnum.loaded;
     } catch (e) {
       _configLoadStatus = ConfigLoadStatusEnum.error;
-      // print("Failed to read TOML file: $e");
+      print("Failed to read TOML file: $e");
     }
   }
 

@@ -25,17 +25,19 @@ class TemplateListPage extends StatelessWidget {
         if (configStore.configLoadStatus == ConfigLoadStatusEnum.loaded &&
             (configStore.configData['DiverName'] == null ||
                 configStore.configData['DiverName'].trim.isEmpty)) {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            showDialog(
-              context: context,
-              builder: (context) => MissingDiverNameDialog(
-                onDiverNameSubmitted: (name) {
-                  configStore.setDiverName(name);
-                  configStore.saveConfig();
-                },
-              ),
-            );
-          });
+          WidgetsBinding.instance.addPostFrameCallback(
+            (_) {
+              showDialog(
+                context: context,
+                builder: (context) => MissingDiverNameDialog(
+                  onDiverNameSubmitted: (name) {
+                    configStore.setDiverName(name);
+                    configStore.saveConfig();
+                  },
+                ),
+              );
+            },
+          );
         }
 
         return Scaffold(
