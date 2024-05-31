@@ -13,7 +13,7 @@ _$ChecklistRegularCheckImpl _$$ChecklistRegularCheckImplFromJson(
       observation: json['observation'] as String,
       isChecked: json['isChecked'] as bool,
       lastChange: DateTime.parse(json['lastChange'] as String),
-      secondsTimer: json['secondsTimer'] as int,
+      secondsTimer: (json['secondsTimer'] as num).toInt(),
       references: (json['references'] as List<dynamic>)
           .map((e) => RegularCheckReference.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -38,7 +38,7 @@ _$ChecklistLinearityStep1CheckImpl _$$ChecklistLinearityStep1CheckImplFromJson(
       description: json['description'] as String,
       isChecked: json['isChecked'] as bool,
       lastChange: DateTime.parse(json['lastChange'] as String),
-      referenceCount: json['referenceCount'] as int,
+      referenceCount: (json['referenceCount'] as num).toInt(),
       $type: json['runtimeType'] as String?,
     );
 
@@ -58,7 +58,7 @@ _$ChecklistLinearityStep2CheckImpl _$$ChecklistLinearityStep2CheckImplFromJson(
       description: json['description'] as String,
       isChecked: json['isChecked'] as bool,
       lastChange: DateTime.parse(json['lastChange'] as String),
-      referenceCount: json['referenceCount'] as int,
+      referenceCount: (json['referenceCount'] as num).toInt(),
       $type: json['runtimeType'] as String?,
     );
 

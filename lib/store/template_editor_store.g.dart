@@ -19,7 +19,7 @@ TemplateEditorStore _$TemplateEditorStoreFromJson(Map<String, dynamic> json) =>
       .._checks =
           ObservableListJsonConverter.obsvbLstOfObsvbLstOfTemplateCheckFromJson(
               json['_checks'] as List<List<TemplateCheck>>)
-      .._selectedSectionIndex = json['_selectedSectionIndex'] as int
+      .._selectedSectionIndex = (json['_selectedSectionIndex'] as num).toInt()
       .._hasLinearityStep1 = json['_hasLinearityStep1'] as bool
       .._hasLinearityStep2 = json['_hasLinearityStep2'] as bool;
 

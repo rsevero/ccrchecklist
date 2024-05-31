@@ -10,7 +10,7 @@ _$TemplateRegularCheckImpl _$$TemplateRegularCheckImplFromJson(
         Map<String, dynamic> json) =>
     _$TemplateRegularCheckImpl(
       description: json['description'] as String,
-      secondsTimer: json['secondsTimer'] as int,
+      secondsTimer: (json['secondsTimer'] as num).toInt(),
       observation: json['observation'] as String,
       references: (json['references'] as List<dynamic>)
           .map((e) => RegularCheckReference.fromJson(e as Map<String, dynamic>))
@@ -32,7 +32,7 @@ _$TemplateLinearityStep1CheckImpl _$$TemplateLinearityStep1CheckImplFromJson(
         Map<String, dynamic> json) =>
     _$TemplateLinearityStep1CheckImpl(
       description: json['description'] as String,
-      referenceCount: json['referenceCount'] as int,
+      referenceCount: (json['referenceCount'] as num).toInt(),
       $type: json['runtimeType'] as String?,
     );
 
