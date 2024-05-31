@@ -1,7 +1,3 @@
-import 'dart:io';
-import 'dart:math';
-import 'dart:ui';
-import 'package:ccr_checklist/misc/ccr_directory_helper.dart';
 import 'package:flutter/material.dart';
 
 // Future<String> ccrCaptureIcon(IconData icon) async {
