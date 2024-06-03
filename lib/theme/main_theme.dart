@@ -14,8 +14,8 @@ final mainDarkTheme = ThemeData(
   useMaterial3: true,
 );
 
-final speedDialButtonBackgroundColor = mainLightTheme.colorScheme.background;
-final speedDialButtonTextColor = mainLightTheme.colorScheme.onBackground;
+final speedDialButtonBackgroundColor = mainLightTheme.colorScheme.surface;
+final speedDialButtonTextColor = mainLightTheme.colorScheme.onSurface;
 
 const speedDialButtonDisabledBackgroundColor =
     Color.fromRGBO(224, 224, 224, ccrDisabledOpacity);
