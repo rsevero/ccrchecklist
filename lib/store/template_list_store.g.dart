@@ -61,6 +61,16 @@ mixin _$TemplateListStore on TemplateListStoreBase, Store {
     return _$removeTemplateAsyncAction.run(() => super.removeTemplate(index));
   }
 
+  late final _$_getSharedTemplatesAsyncAction = AsyncAction(
+      'TemplateListStoreBase._getSharedTemplates',
+      context: context);
+
+  @override
+  Future<void> _getSharedTemplates(List<SharedMediaFile> sharedList) {
+    return _$_getSharedTemplatesAsyncAction
+        .run(() => super._getSharedTemplates(sharedList));
+  }
+
   late final _$TemplateListStoreBaseActionController =
       ActionController(name: 'TemplateListStoreBase', context: context);
 

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:ccr_checklist/data/template_file.dart';
@@ -6,6 +7,7 @@ import 'package:ccr_checklist/data/template.dart';
 import 'package:ccr_checklist/misc/ccr_directory_helper.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:mobx/mobx.dart';
+import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
 part 'template_list_store.g.dart';
 
@@ -24,6 +26,34 @@ abstract class TemplateListStoreBase with Store {
 
   @readonly
   TemplateListStoreState _state = TemplateListStoreState.outdated;
+
+  late StreamSubscription _intentSub;
+
+  TemplateListStoreBase() {
+    _init();
+  }
+
+  void _init() {
+    _intentSub = ReceiveSharingIntent.instance.getMediaStream().listen(
+      (List<SharedMediaFile> value) {
+        _getSharedTemplates(value);
+      },
+      onError: (err) {
+        print("-------------->>  getIntentDataStream error: $err");
+      },
+    );
+
+    // Get the media sharing coming from outside the app while the app is
+    // closed.
+    ReceiveSharingIntent.instance.getInitialMedia().then(
+      (List<SharedMediaFile> value) {
+        _getSharedTemplates(value);
+
+        // Tell the library that we are done processing the intent.
+        ReceiveSharingIntent.instance.reset();
+      },
+    );
+  }
 
   Future<Template> getTemplate(String templatePath,
       [bool isAsset = false]) async {
@@ -104,6 +134,14 @@ abstract class TemplateListStoreBase with Store {
     }
   }
 
+  @action
+  Future<void> _getSharedTemplates(List<SharedMediaFile> sharedList) async {
+    for (SharedMediaFile share in sharedList) {
+      final fileEntity = File(share.path);
+      await _getSavedTemplate(fileEntity);
+    }
+  }
+
   Future<void> _getSavedTemplates() async {
     final templateDirectory = await CCRDirectory.templates();
 
@@ -111,26 +149,29 @@ abstract class TemplateListStoreBase with Store {
     List<FileSystemEntity> fileList = templateDirectory.listSync();
 
     for (FileSystemEntity fileEntity in fileList) {
-      if ((fileEntity is! File) ||
-          !fileEntity.path.endsWith('.$ccrTemplateExtension')) {
-        continue;
-      }
-
-      final String jsonString = await fileEntity.readAsString();
-      final Map<String, dynamic> jsonMap = json.decode(jsonString);
-      final newTemplate = Template.fromJson(jsonMap);
-
-      final newTemplateFile = TemplateFile(
-        path: fileEntity.path,
-        rebreatherManufacturer: newTemplate.rebreatherManufacturer,
-        rebreatherModel: newTemplate.rebreatherModel,
-        title: newTemplate.title,
-        description: newTemplate.description,
-        isAsset: false,
-      );
-
-      _defaultTemplates.add(newTemplateFile);
+      await _getSavedTemplate(fileEntity);
     }
+  }
+
+  Future<void> _getSavedTemplate(FileSystemEntity aFile) async {
+    if ((aFile is! File) || !aFile.path.endsWith('.$ccrTemplateExtension')) {
+      return;
+    }
+
+    final String jsonString = await aFile.readAsString();
+    final Map<String, dynamic> jsonMap = json.decode(jsonString);
+    final newTemplate = Template.fromJson(jsonMap);
+
+    final newTemplateFile = TemplateFile(
+      path: aFile.path,
+      rebreatherManufacturer: newTemplate.rebreatherManufacturer,
+      rebreatherModel: newTemplate.rebreatherModel,
+      title: newTemplate.title,
+      description: newTemplate.description,
+      isAsset: false,
+    );
+
+    _defaultTemplates.add(newTemplateFile);
   }
 
   @action
