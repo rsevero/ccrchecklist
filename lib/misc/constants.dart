@@ -28,6 +28,8 @@ const ccrSectionOkColor = Colors.green;
 const ccrChecklistExtension = 'ccrc';
 const ccrTemplateExtension = 'ccrt';
 
+const ccrTemplateMimeType = 'application/vnd.ccrchecklist-ccrt+json';
+
 const ccrDirectory = 'ccr_checklist';
 const ccrTemplatesDirectory = 'templates';
 const ccrShareDirectory = 'share';

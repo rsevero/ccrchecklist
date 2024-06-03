@@ -1,4 +1,5 @@
 import 'package:ccr_checklist/data/template.dart';
+import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/misc/help_dialog_helper.dart';
 import 'package:ccr_checklist/misc/save_template_helper.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
@@ -68,9 +69,10 @@ class TemplateEditorPageAppBar extends AppBar {
       ];
 
   Future<void> _onPressedShare(BuildContext context) async {
-    final file = await templateEditorStore.createShareableFile();
+    final String file = await templateEditorStore.createShareableFile();
 
-    Share.shareXFiles([XFile(file)], text: 'Check out this template!');
+    Share.shareXFiles([XFile(file, mimeType: ccrTemplateMimeType)],
+        text: 'Check out this template!');
   }
 
   Future<void> _onPressedSaveTemplate(BuildContext context) async {
