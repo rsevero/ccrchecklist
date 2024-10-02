@@ -6,11 +6,32 @@ import 'package:ccr_checklist/store/template_list_store.dart';
 import 'package:ccr_checklist/theme/main_theme.dart';
 import 'package:ccr_checklist/undo/undo_redo_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:platform_info/platform_info.dart';
 import 'package:provider/provider.dart';
+import 'package:window_manager/window_manager.dart';
 
 final undoRedoStorage = UndoRedoStorage();
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  if (platform.linux || platform.windows || platform.macOS) {
+    await windowManager.ensureInitialized();
+
+    WindowOptions windowOptions = const WindowOptions(
+      // Regular mobile phone screen size
+      size: Size(412, 915),
+      center: true,
+      backgroundColor: Colors.transparent,
+      skipTaskbar: false,
+      // titleBarStyle: TitleBarStyle.hidden,
+    );
+    windowManager.waitUntilReadyToShow(windowOptions, () async {
+      await windowManager.show();
+      await windowManager.focus();
+    });
+  }
+
   runApp(const CCRChecklist());
 }
 
