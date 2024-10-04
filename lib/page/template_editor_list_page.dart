@@ -104,7 +104,6 @@ class TemplateEditorListPage extends StatelessWidget {
     final TextEditingController rebreatherModelController =
         TextEditingController();
     final TextEditingController descriptionController = TextEditingController();
-    final TextEditingController fileNameController = TextEditingController();
 
     bool confirmed = await showDialog(
           context: context,
@@ -115,18 +114,14 @@ class TemplateEditorListPage extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     TextField(
-                      controller: fileNameController,
-                      decoration: const InputDecoration(hintText: 'File name'),
-                      autofocus: true,
-                    ),
-                    TextField(
                       controller: rebreatherManufacturerController,
                       decoration: const InputDecoration(
                           hintText: 'Rebreather manufacturer'),
                       textInputAction: TextInputAction
                           .next, // Move focus to next input on "Enter"
-                      onSubmitted: (_) => FocusScope.of(context)
-                          .requestFocus(FocusNode()), // Optional
+                      onSubmitted: (_) =>
+                          FocusScope.of(context).requestFocus(FocusNode()),
+                      autofocus: true,
                     ),
                     TextField(
                       controller: rebreatherModelController,
@@ -174,29 +169,27 @@ class TemplateEditorListPage extends StatelessWidget {
         false;
 
     if (confirmed) {
-      final fileName = fileNameController.text.trim();
-      final rebreatherManufacturer =
+      final String rebreatherManufacturer =
           rebreatherManufacturerController.text.trim();
-      final rebreatherModel = rebreatherModelController.text.trim();
-      final title = titleController.text.trim();
-      final description = descriptionController.text.trim();
-      if (fileName.isNotEmpty &&
-          rebreatherManufacturer.isNotEmpty &&
+      final String rebreatherModel = rebreatherModelController.text.trim();
+      final String title = titleController.text.trim();
+      final String description = descriptionController.text.trim();
+      if (rebreatherManufacturer.isNotEmpty &&
           rebreatherModel.isNotEmpty &&
           title.isNotEmpty) {
-        var newTemplate = Template(
+        Template newTemplate = Template(
           rebreatherManufacturer: rebreatherManufacturer,
           rebreatherModel: rebreatherModel,
           title: title,
           description: description,
           sections: [],
         );
+        final String filename = await ccrFileNameFromTemplate(newTemplate);
         if (!context.mounted) return;
-        await ccrSaveAsTemplate(
-            context, newTemplate, fileNameController.text.trim());
+        await ccrSaveAsTemplate(context, newTemplate, filename);
 
         if (!context.mounted) return;
-        final templateListStore =
+        final TemplateListStore templateListStore =
             Provider.of<TemplateListStore>(context, listen: false);
 
         Navigator.of(context).push(

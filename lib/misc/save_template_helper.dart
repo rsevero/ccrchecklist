@@ -4,7 +4,9 @@ import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/misc/ccr_directory_helper.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:slugify/slugify.dart';
 
 Future<CCRFileExistsAction?> ccrShowFileExistsDialog(
     BuildContext context, String filepath) async {
@@ -37,32 +39,54 @@ Future<CCRFileExistsAction?> ccrShowFileExistsDialog(
   );
 }
 
-Future<String?> ccrPromptFileName(BuildContext context) async {
-  return await showDialog<String>(
-    context: context,
-    builder: (BuildContext context) {
-      final TextEditingController fileNameController = TextEditingController();
-      return AlertDialog(
-        title: const Text('Enter File Name'),
-        content: TextField(
-          controller: fileNameController,
-          decoration: const InputDecoration(hintText: 'File name'),
-          autofocus: true,
-        ),
-        actions: <Widget>[
-          TextButton(
-            child: const Text('Save'),
-            onPressed: () =>
-                Navigator.of(context).pop(fileNameController.text.trim()),
-          ),
-          TextButton(
-            child: const Text('Cancel'),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-        ],
-      );
-    },
-  );
+String nextLetter(String letter) {
+  if (letter.length != 1) {
+    throw ArgumentError('Input must be a single character');
+  }
+
+  final int charCode = letter.codeUnitAt(0);
+
+  if (charCode >= 97 && charCode <= 121) {
+    // Lowercase letters (a-y)
+    return String.fromCharCode((charCode - 97 + 1) % 26 + 97);
+  } else if (charCode >= 65 && charCode <= 89) {
+    // Uppercase letters (A-Y)
+    return String.fromCharCode((charCode - 65 + 1) % 26 + 65);
+  } else if (letter == 'z') {
+    return 'A';
+  } else if (letter == 'Z') {
+    return 'a';
+  } else {
+    throw ArgumentError('Input must be a letter');
+  }
+}
+
+Future<bool> fileExists(String filepath) async {
+  final file = File(filepath);
+  return await file.exists();
+}
+
+Future<String> ccrFileNameFromTemplate(Template template) async {
+  String filename = '';
+  String filepath = '';
+  String suffix = '';
+
+  do {
+    final DateTime now = DateTime.now();
+    final String formattedDate = DateFormat('yyyyMMdd_HHmmss').format(now);
+    filename =
+        '$formattedDate-${template.rebreatherManufacturer}-${template.rebreatherModel}-${template.title}';
+    if (suffix.isEmpty) {
+      suffix = 'a';
+    } else {
+      filename = '$filename-$suffix';
+      suffix = nextLetter(suffix);
+    }
+    filename = slugify(filename, delimiter: '_');
+    filepath = await ccrFilePathFromFileName(filename);
+  } while (await fileExists(filepath));
+
+  return filename;
 }
 
 Future<String> ccrFilePathFromFileName(String fileName) async {
@@ -79,11 +103,7 @@ Future<String> ccrFilePathFromFileName(String fileName) async {
 Future<void> ccrSaveAsTemplate(BuildContext context, Template template,
     [String? fileName = '']) async {
   if ((fileName == null) || (fileName == '')) {
-    fileName = await ccrPromptFileName(context);
-  }
-
-  if ((fileName == null) || (fileName == '')) {
-    return;
+    fileName = await ccrFileNameFromTemplate(template);
   }
 
   String filePath = await ccrFilePathFromFileName(fileName);
@@ -98,8 +118,8 @@ Future<void> ccrSaveAsTemplate(BuildContext context, Template template,
         break fileExistsLoop;
       case CCRFileExistsAction.chooseAnother:
         if (!context.mounted) return;
-        fileName = await ccrPromptFileName(context);
-        if ((fileName == null) || (fileName == '')) {
+        fileName = await ccrFileNameFromTemplate(template);
+        if (fileName == '') {
           return;
         }
         filePath = await ccrFilePathFromFileName(fileName);
