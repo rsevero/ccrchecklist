@@ -46,11 +46,9 @@ String nextLetter(String letter) {
 
   final int charCode = letter.codeUnitAt(0);
 
-  if (charCode >= 97 && charCode <= 121) {
-    // Lowercase letters (a-y)
-    return String.fromCharCode(charCode + 1);
-  } else if (charCode >= 65 && charCode <= 89) {
-    // Uppercase letters (A-Y)
+  if ((charCode >= 65 && charCode <= 89) ||
+      (charCode >= 97 && charCode <= 121)) {
+    // Letters (a-y and A-Y)
     return String.fromCharCode(charCode + 1);
   } else if (letter == 'z') {
     return 'A';
