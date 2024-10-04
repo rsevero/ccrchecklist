@@ -48,10 +48,10 @@ String nextLetter(String letter) {
 
   if (charCode >= 97 && charCode <= 121) {
     // Lowercase letters (a-y)
-    return String.fromCharCode((charCode - 97 + 1) % 26 + 97);
+    return String.fromCharCode(charCode + 1);
   } else if (charCode >= 65 && charCode <= 89) {
     // Uppercase letters (A-Y)
-    return String.fromCharCode((charCode - 65 + 1) % 26 + 65);
+    return String.fromCharCode(charCode + 1);
   } else if (letter == 'z') {
     return 'A';
   } else if (letter == 'Z') {
