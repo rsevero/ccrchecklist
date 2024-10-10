@@ -59,7 +59,7 @@ class TemplateList extends StatelessWidget {
             ),
           );
           if (models.length == 1) {
-            models[0] = _expandRegularTile(models[0]);
+            models[0] = _expandTile(models[0]);
           }
           manufacturers.add(
             ExpansionTile(
@@ -110,7 +110,7 @@ class TemplateList extends StatelessWidget {
 
     if (models.isNotEmpty) {
       if (models.length == 1) {
-        models[0] = _expandRegularTile(models[0]);
+        models[0] = _expandTile(models[0]);
       }
       manufacturers.add(
         ExpansionTile(
@@ -121,13 +121,13 @@ class TemplateList extends StatelessWidget {
     }
 
     if (manufacturers.length == 1) {
-      manufacturers[0] = _expandRegularTile(manufacturers[0]);
+      manufacturers[0] = _expandTile(manufacturers[0]);
     }
 
     return manufacturers;
   }
 
-  ExpansionTile _expandRegularTile(ExpansionTile tile) {
+  ExpansionTile _expandTile(ExpansionTile tile) {
     return ExpansionTile(
       title: tile.title,
       initiallyExpanded: true,
