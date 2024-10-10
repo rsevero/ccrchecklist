@@ -28,8 +28,12 @@ mixin _$Checklist {
   DateTime get date => throw _privateConstructorUsedError;
   List<ChecklistSection> get sections => throw _privateConstructorUsedError;
 
+  /// Serializes this Checklist to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Checklist
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ChecklistCopyWith<Checklist> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -59,6 +63,8 @@ class _$ChecklistCopyWithImpl<$Res, $Val extends Checklist>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Checklist
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -129,6 +135,8 @@ class __$$ChecklistImplCopyWithImpl<$Res>
       _$ChecklistImpl _value, $Res Function(_$ChecklistImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Checklist
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -242,7 +250,7 @@ class _$ChecklistImpl with DiagnosticableTreeMixin implements _Checklist {
             const DeepCollectionEquality().equals(other.sections, sections));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -254,7 +262,9 @@ class _$ChecklistImpl with DiagnosticableTreeMixin implements _Checklist {
       date,
       const DeepCollectionEquality().hash(sections));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Checklist
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ChecklistImplCopyWith<_$ChecklistImpl> get copyWith =>
@@ -295,8 +305,11 @@ abstract class _Checklist implements Checklist {
   DateTime get date;
   @override
   List<ChecklistSection> get sections;
+
+  /// Create a copy of Checklist
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ChecklistImplCopyWith<_$ChecklistImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

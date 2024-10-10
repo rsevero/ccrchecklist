@@ -23,8 +23,12 @@ mixin _$TemplateSection {
   String get title => throw _privateConstructorUsedError;
   List<TemplateCheck> get checks => throw _privateConstructorUsedError;
 
+  /// Serializes this TemplateSection to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TemplateSection
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TemplateSectionCopyWith<TemplateSection> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -48,6 +52,8 @@ class _$TemplateSectionCopyWithImpl<$Res, $Val extends TemplateSection>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TemplateSection
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -86,6 +92,8 @@ class __$$TemplateSectionImplCopyWithImpl<$Res>
       _$TemplateSectionImpl _value, $Res Function(_$TemplateSectionImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TemplateSection
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -133,12 +141,14 @@ class _$TemplateSectionImpl implements _TemplateSection {
             const DeepCollectionEquality().equals(other.checks, checks));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, title, const DeepCollectionEquality().hash(checks));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TemplateSection
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TemplateSectionImplCopyWith<_$TemplateSectionImpl> get copyWith =>
@@ -165,8 +175,11 @@ abstract class _TemplateSection implements TemplateSection {
   String get title;
   @override
   List<TemplateCheck> get checks;
+
+  /// Create a copy of TemplateSection
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TemplateSectionImplCopyWith<_$TemplateSectionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

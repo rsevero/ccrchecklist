@@ -26,10 +26,13 @@ void main() async {
       skipTaskbar: false,
       // titleBarStyle: TitleBarStyle.hidden,
     );
-    windowManager.waitUntilReadyToShow(windowOptions, () async {
-      await windowManager.show();
-      await windowManager.focus();
-    });
+    windowManager.waitUntilReadyToShow(
+      windowOptions,
+      () async {
+        await windowManager.show();
+        await windowManager.focus();
+      },
+    );
   }
 
   runApp(const CCRChecklist());

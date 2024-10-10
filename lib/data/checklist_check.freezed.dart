@@ -113,8 +113,13 @@ mixin _$ChecklistCheck {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Serializes this ChecklistCheck to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ChecklistCheck
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ChecklistCheckCopyWith<ChecklistCheck> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -138,6 +143,8 @@ class _$ChecklistCheckCopyWithImpl<$Res, $Val extends ChecklistCheck>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ChecklistCheck
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -188,6 +195,8 @@ class __$$ChecklistRegularCheckImplCopyWithImpl<$Res>
       $Res Function(_$ChecklistRegularCheckImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ChecklistCheck
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -298,7 +307,7 @@ class _$ChecklistRegularCheckImpl extends ChecklistRegularCheck
                 .equals(other.references, references));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -309,7 +318,9 @@ class _$ChecklistRegularCheckImpl extends ChecklistRegularCheck
       secondsTimer,
       const DeepCollectionEquality().hash(references));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ChecklistCheck
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ChecklistRegularCheckImplCopyWith<_$ChecklistRegularCheckImpl>
@@ -453,8 +464,11 @@ abstract class ChecklistRegularCheck extends ChecklistCheck {
   DateTime get lastChange;
   int get secondsTimer;
   List<RegularCheckReference> get references;
+
+  /// Create a copy of ChecklistCheck
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ChecklistRegularCheckImplCopyWith<_$ChecklistRegularCheckImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -485,6 +499,8 @@ class __$$ChecklistLinearityStep1CheckImplCopyWithImpl<$Res>
       $Res Function(_$ChecklistLinearityStep1CheckImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ChecklistCheck
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -574,12 +590,14 @@ class _$ChecklistLinearityStep1CheckImpl extends ChecklistLinearityStep1Check
                 other.referenceCount == referenceCount));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, description, isChecked, lastChange, referenceCount);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ChecklistCheck
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ChecklistLinearityStep1CheckImplCopyWith<
@@ -717,8 +735,11 @@ abstract class ChecklistLinearityStep1Check extends ChecklistCheck {
   @override
   DateTime get lastChange;
   int get referenceCount;
+
+  /// Create a copy of ChecklistCheck
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ChecklistLinearityStep1CheckImplCopyWith<
           _$ChecklistLinearityStep1CheckImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -750,6 +771,8 @@ class __$$ChecklistLinearityStep2CheckImplCopyWithImpl<$Res>
       $Res Function(_$ChecklistLinearityStep2CheckImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ChecklistCheck
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -839,12 +862,14 @@ class _$ChecklistLinearityStep2CheckImpl extends ChecklistLinearityStep2Check
                 other.referenceCount == referenceCount));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, description, isChecked, lastChange, referenceCount);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ChecklistCheck
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ChecklistLinearityStep2CheckImplCopyWith<
@@ -982,8 +1007,11 @@ abstract class ChecklistLinearityStep2Check extends ChecklistCheck {
   @override
   DateTime get lastChange;
   int get referenceCount;
+
+  /// Create a copy of ChecklistCheck
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ChecklistLinearityStep2CheckImplCopyWith<
           _$ChecklistLinearityStep2CheckImpl>
       get copyWith => throw _privateConstructorUsedError;

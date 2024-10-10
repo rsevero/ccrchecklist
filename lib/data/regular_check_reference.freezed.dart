@@ -25,8 +25,12 @@ mixin _$RegularCheckReference {
   String? get prefix => throw _privateConstructorUsedError;
   String? get suffix => throw _privateConstructorUsedError;
 
+  /// Serializes this RegularCheckReference to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of RegularCheckReference
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $RegularCheckReferenceCopyWith<RegularCheckReference> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -51,6 +55,8 @@ class _$RegularCheckReferenceCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of RegularCheckReference
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -96,6 +102,8 @@ class __$$RegularCheckReferenceImplCopyWithImpl<$Res>
       $Res Function(_$RegularCheckReferenceImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of RegularCheckReference
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -162,11 +170,13 @@ class _$RegularCheckReferenceImpl
             (identical(other.suffix, suffix) || other.suffix == suffix));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, value, prefix, suffix);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of RegularCheckReference
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$RegularCheckReferenceImplCopyWith<_$RegularCheckReferenceImpl>
@@ -196,8 +206,11 @@ abstract class _RegularCheckReference implements RegularCheckReference {
   String? get prefix;
   @override
   String? get suffix;
+
+  /// Create a copy of RegularCheckReference
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$RegularCheckReferenceImplCopyWith<_$RegularCheckReferenceImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

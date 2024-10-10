@@ -28,8 +28,12 @@ mixin _$Template {
   String get path => throw _privateConstructorUsedError;
   bool get isAsset => throw _privateConstructorUsedError;
 
+  /// Serializes this Template to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Template
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TemplateCopyWith<Template> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -59,6 +63,8 @@ class _$TemplateCopyWithImpl<$Res, $Val extends Template>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Template
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -129,6 +135,8 @@ class __$$TemplateImplCopyWithImpl<$Res>
       _$TemplateImpl _value, $Res Function(_$TemplateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Template
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -228,7 +236,7 @@ class _$TemplateImpl implements _Template {
             (identical(other.isAsset, isAsset) || other.isAsset == isAsset));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -240,7 +248,9 @@ class _$TemplateImpl implements _Template {
       path,
       isAsset);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Template
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TemplateImplCopyWith<_$TemplateImpl> get copyWith =>
@@ -281,8 +291,11 @@ abstract class _Template implements Template {
   String get path;
   @override
   bool get isAsset;
+
+  /// Create a copy of Template
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TemplateImplCopyWith<_$TemplateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

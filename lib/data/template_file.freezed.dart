@@ -27,8 +27,12 @@ mixin _$TemplateFile {
   String get description => throw _privateConstructorUsedError;
   bool get isAsset => throw _privateConstructorUsedError;
 
+  /// Serializes this TemplateFile to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TemplateFile
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TemplateFileCopyWith<TemplateFile> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -58,6 +62,8 @@ class _$TemplateFileCopyWithImpl<$Res, $Val extends TemplateFile>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TemplateFile
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -122,6 +128,8 @@ class __$$TemplateFileImplCopyWithImpl<$Res>
       _$TemplateFileImpl _value, $Res Function(_$TemplateFileImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TemplateFile
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -210,12 +218,14 @@ class _$TemplateFileImpl implements _TemplateFile {
             (identical(other.isAsset, isAsset) || other.isAsset == isAsset));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, path, rebreatherManufacturer,
       rebreatherModel, title, description, isAsset);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TemplateFile
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TemplateFileImplCopyWith<_$TemplateFileImpl> get copyWith =>
@@ -253,8 +263,11 @@ abstract class _TemplateFile implements TemplateFile {
   String get description;
   @override
   bool get isAsset;
+
+  /// Create a copy of TemplateFile
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TemplateFileImplCopyWith<_$TemplateFileImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

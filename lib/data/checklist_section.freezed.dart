@@ -23,8 +23,12 @@ mixin _$ChecklistSection {
   String get title => throw _privateConstructorUsedError;
   List<ChecklistCheck> get checks => throw _privateConstructorUsedError;
 
+  /// Serializes this ChecklistSection to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ChecklistSection
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ChecklistSectionCopyWith<ChecklistSection> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -48,6 +52,8 @@ class _$ChecklistSectionCopyWithImpl<$Res, $Val extends ChecklistSection>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ChecklistSection
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -86,6 +92,8 @@ class __$$ChecklistSectionImplCopyWithImpl<$Res>
       $Res Function(_$ChecklistSectionImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ChecklistSection
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -133,12 +141,14 @@ class _$ChecklistSectionImpl implements _ChecklistSection {
             const DeepCollectionEquality().equals(other.checks, checks));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, title, const DeepCollectionEquality().hash(checks));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ChecklistSection
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ChecklistSectionImplCopyWith<_$ChecklistSectionImpl> get copyWith =>
@@ -165,8 +175,11 @@ abstract class _ChecklistSection implements ChecklistSection {
   String get title;
   @override
   List<ChecklistCheck> get checks;
+
+  /// Create a copy of ChecklistSection
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ChecklistSectionImplCopyWith<_$ChecklistSectionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -83,8 +83,13 @@ mixin _$TemplateCheck {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Serializes this TemplateCheck to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TemplateCheck
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TemplateCheckCopyWith<TemplateCheck> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -108,6 +113,8 @@ class _$TemplateCheckCopyWithImpl<$Res, $Val extends TemplateCheck>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TemplateCheck
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -145,6 +152,8 @@ class __$$TemplateRegularCheckImplCopyWithImpl<$Res>
       $Res Function(_$TemplateRegularCheckImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TemplateCheck
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -233,12 +242,14 @@ class _$TemplateRegularCheckImpl extends TemplateRegularCheck
                 .equals(other.references, references));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, description, secondsTimer,
       observation, const DeepCollectionEquality().hash(references));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TemplateCheck
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TemplateRegularCheckImplCopyWith<_$TemplateRegularCheckImpl>
@@ -346,8 +357,11 @@ abstract class TemplateRegularCheck extends TemplateCheck {
   int get secondsTimer;
   String get observation;
   List<RegularCheckReference> get references;
+
+  /// Create a copy of TemplateCheck
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TemplateRegularCheckImplCopyWith<_$TemplateRegularCheckImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -373,6 +387,8 @@ class __$$TemplateLinearityStep1CheckImplCopyWithImpl<$Res>
       $Res Function(_$TemplateLinearityStep1CheckImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TemplateCheck
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -440,11 +456,13 @@ class _$TemplateLinearityStep1CheckImpl extends TemplateLinearityStep1Check
                 other.referenceCount == referenceCount));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, description, referenceCount);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TemplateCheck
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TemplateLinearityStep1CheckImplCopyWith<_$TemplateLinearityStep1CheckImpl>
@@ -546,8 +564,11 @@ abstract class TemplateLinearityStep1Check extends TemplateCheck {
   @override
   String get description;
   int get referenceCount;
+
+  /// Create a copy of TemplateCheck
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TemplateLinearityStep1CheckImplCopyWith<_$TemplateLinearityStep1CheckImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -573,6 +594,8 @@ class __$$TemplateLinearityStep2CheckImplCopyWithImpl<$Res>
       $Res Function(_$TemplateLinearityStep2CheckImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TemplateCheck
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -628,11 +651,13 @@ class _$TemplateLinearityStep2CheckImpl extends TemplateLinearityStep2Check
                 other.description == description));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, description);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TemplateCheck
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TemplateLinearityStep2CheckImplCopyWith<_$TemplateLinearityStep2CheckImpl>
@@ -732,8 +757,11 @@ abstract class TemplateLinearityStep2Check extends TemplateCheck {
 
   @override
   String get description;
+
+  /// Create a copy of TemplateCheck
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TemplateLinearityStep2CheckImplCopyWith<_$TemplateLinearityStep2CheckImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

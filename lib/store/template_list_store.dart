@@ -7,6 +7,7 @@ import 'package:ccr_checklist/data/template.dart';
 import 'package:ccr_checklist/misc/ccr_directory_helper.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:mobx/mobx.dart';
+import 'package:platform_info/platform_info.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
 part 'template_list_store.g.dart';
@@ -34,6 +35,12 @@ abstract class TemplateListStoreBase with Store {
   }
 
   void _init() {
+    if (platform.android || platform.iOS) {
+      _initReceiveSharingIntent();
+    }
+  }
+
+  void _initReceiveSharingIntent() {
     _intentSub = ReceiveSharingIntent.instance.getMediaStream().listen(
       (List<SharedMediaFile> value) {
         _getSharedTemplates(value);

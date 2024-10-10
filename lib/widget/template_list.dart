@@ -1,6 +1,7 @@
 import 'package:ccr_checklist/data/template_file.dart';
 import 'package:ccr_checklist/store/template_list_store.dart';
 import 'package:ccr_checklist/widget/template_list_tile_widget.dart';
+import 'package:expansion_tile_list/expansion_tile_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
@@ -29,17 +30,17 @@ class TemplateList extends StatelessWidget {
         }
 
         final defaultTemplates = templateListStore.defaultTemplates.toList();
-        return ListView(
+        return ExpansionTileList.radio(
           children: _buildDefaultTile(context, defaultTemplates),
         );
       },
     );
   }
 
-  List<Widget> _buildDefaultTile(
+  List<ExpansionTile> _buildDefaultTile(
       BuildContext context, List<TemplateFile> defaultTemplates) {
-    List<Widget> manufacturers = [];
-    List<Widget> models = [];
+    List<ExpansionTile> manufacturers = [];
+    List<ExpansionTile> models = [];
     List<Widget> templates = [];
 
     String currentManufacturer = '';
@@ -58,7 +59,7 @@ class TemplateList extends StatelessWidget {
             ),
           );
           if (models.length == 1) {
-            models[0] = _expandRegularTile(models[0] as ExpansionTile);
+            models[0] = _expandRegularTile(models[0]);
           }
           manufacturers.add(
             ExpansionTile(
@@ -109,7 +110,7 @@ class TemplateList extends StatelessWidget {
 
     if (models.isNotEmpty) {
       if (models.length == 1) {
-        models[0] = _expandRegularTile(models[0] as ExpansionTile);
+        models[0] = _expandRegularTile(models[0]);
       }
       manufacturers.add(
         ExpansionTile(
@@ -120,7 +121,7 @@ class TemplateList extends StatelessWidget {
     }
 
     if (manufacturers.length == 1) {
-      manufacturers[0] = _expandRegularTile(manufacturers[0] as ExpansionTile);
+      manufacturers[0] = _expandRegularTile(manufacturers[0]);
     }
 
     return manufacturers;
