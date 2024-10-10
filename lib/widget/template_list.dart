@@ -40,7 +40,7 @@ class TemplateList extends StatelessWidget {
   List<ExpansionTile> _buildDefaultTile(
       BuildContext context, List<TemplateFile> defaultTemplates) {
     List<ExpansionTile> manufacturers = [];
-    List<ExpansionTile> models = [];
+    List<Widget> models = [];
     List<Widget> templates = [];
 
     String currentManufacturer = '';
@@ -59,7 +59,13 @@ class TemplateList extends StatelessWidget {
             ),
           );
           if (models.length == 1) {
-            models[0] = _expandTile(models[0]);
+            models[0] = _expandTile(models[0] as ExpansionTile);
+          } else {
+            models = [
+              ExpansionTileList.radio(
+                children: models.map((e) => e as ExpansionTile).toList(),
+              ),
+            ];
           }
           manufacturers.add(
             ExpansionTile(
@@ -110,7 +116,13 @@ class TemplateList extends StatelessWidget {
 
     if (models.isNotEmpty) {
       if (models.length == 1) {
-        models[0] = _expandTile(models[0]);
+        models[0] = _expandTile(models[0] as ExpansionTile);
+      } else {
+        models = [
+          ExpansionTileList.radio(
+            children: models.map((e) => e as ExpansionTile).toList(),
+          ),
+        ];
       }
       manufacturers.add(
         ExpansionTile(
