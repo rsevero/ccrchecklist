@@ -3,7 +3,7 @@ import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:ccr_checklist/store/config_store.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
 import 'package:ccr_checklist/store/template_list_store.dart';
-import 'package:ccr_checklist/theme/main_theme.dart';
+import 'package:ccr_checklist/theme/material_theme.dart';
 import 'package:ccr_checklist/undo/undo_redo_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:platform_info/platform_info.dart';
@@ -70,11 +70,17 @@ class CCRChecklistApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final brightness = View.of(context).platformDispatcher.platformBrightness;
+    // Retrieves the default theme for the platform
+    //TextTheme textTheme = Theme.of(context).textTheme;
+    // Use with Google Fonts package to use downloadable fonts
+    TextTheme textTheme = createTextTheme(context, "Space Grotesk", "Jost");
+    MaterialTheme theme = MaterialTheme(textTheme);
+
     return MaterialApp(
       title: 'CCR Checklist',
       debugShowCheckedModeBanner: false,
-      theme: mainLightTheme,
-      darkTheme: mainDarkTheme,
+      theme: brightness == Brightness.light ? theme.light() : theme.dark(),
       home: page,
     );
   }

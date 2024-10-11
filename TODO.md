@@ -9,3 +9,4 @@
 - [ ] Opção de som ao terminar temporizador
 - [ ] Criar "Sobre": https://pub.dev/packages/about
 - [ ] Incluir licenças das fontes usadas
+- [ ] Fazer com que fontes usadas estejam disponíveis no app sem precisar baixar
