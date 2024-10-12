@@ -133,13 +133,12 @@ class MaterialTheme {
 
     return theme.copyWith(
       appBarTheme: AppBarTheme(
-        backgroundColor: colorScheme.primary,
-        foregroundColor: colorScheme.onPrimary,
+        backgroundColor: colorScheme.primaryContainer,
         toolbarHeight: 80,
         titleTextStyle: appBarTextStyle.copyWith(
-          fontVariations: [const FontVariation('wght', 500)],
-          fontSize: 30,
-          color: colorScheme.onPrimary,
+          fontFamily: 'JostBlack',
+          fontSize: 32,
+          color: colorScheme.onPrimaryContainer,
         ),
       ),
     );
