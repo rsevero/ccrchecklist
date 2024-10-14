@@ -136,7 +136,6 @@ class MaterialTheme {
       appBarTheme: AppBarTheme(
         backgroundColor: colorScheme.primaryContainer,
         foregroundColor: foregroundColor,
-        toolbarHeight: 80,
         titleTextStyle: appBarTextStyle.copyWith(
           fontFamily: 'Jost',
           fontWeight: FontWeight.w900,

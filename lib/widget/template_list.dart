@@ -46,6 +46,16 @@ class TemplateList extends StatelessWidget {
     String currentManufacturer = '';
     String currentModel = '';
 
+    final TextTheme currentTextTheme = Theme.of(context).textTheme;
+    final TextStyle manufacturerTextTheme =
+        currentTextTheme.headlineSmall!.copyWith(fontWeight: FontWeight.w200);
+    final TextStyle modelTextTheme =
+        currentTextTheme.titleLarge!.copyWith(fontWeight: FontWeight.w500);
+    final TextStyle templateTitleTextTheme =
+        currentTextTheme.titleMedium!.copyWith(fontWeight: FontWeight.w700);
+    final TextStyle templateDescriptionTextTheme =
+        currentTextTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w300);
+
     for (var templateIndex = 0;
         templateIndex < defaultTemplates.length;
         templateIndex++) {
@@ -54,7 +64,10 @@ class TemplateList extends StatelessWidget {
         if (currentManufacturer != '') {
           models.add(
             ExpansionTile(
-              title: Text(currentModel),
+              title: Text(
+                currentModel,
+                style: modelTextTheme,
+              ),
               children: templates,
             ),
           );
@@ -69,7 +82,10 @@ class TemplateList extends StatelessWidget {
           }
           manufacturers.add(
             ExpansionTile(
-              title: Text(currentManufacturer),
+              title: Text(
+                currentManufacturer,
+                style: manufacturerTextTheme,
+              ),
               children: models,
             ),
           );
@@ -82,7 +98,10 @@ class TemplateList extends StatelessWidget {
         if (currentModel != '') {
           models.add(
             ExpansionTile(
-              title: Text(currentModel),
+              title: Text(
+                currentModel,
+                style: modelTextTheme,
+              ),
               children: templates,
             ),
           );
@@ -92,8 +111,9 @@ class TemplateList extends StatelessWidget {
       }
       templates.add(
         TemplateListTileWidget(
-          title: template.title,
-          description: template.description,
+          title: Text(template.title, style: templateTitleTextTheme),
+          description:
+              Text(template.description, style: templateDescriptionTextTheme),
           isAsset: template.isAsset,
           isEditor: isEditor,
           templateIndex: templateIndex,
@@ -108,7 +128,10 @@ class TemplateList extends StatelessWidget {
     if (templates.isNotEmpty) {
       models.add(
         ExpansionTile(
-          title: Text(currentModel),
+          title: Text(
+            currentModel,
+            style: modelTextTheme,
+          ),
           children: templates,
         ),
       );
@@ -126,7 +149,10 @@ class TemplateList extends StatelessWidget {
       }
       manufacturers.add(
         ExpansionTile(
-          title: Text(currentManufacturer),
+          title: Text(
+            currentManufacturer,
+            style: manufacturerTextTheme,
+          ),
           children: models,
         ),
       );
