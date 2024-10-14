@@ -110,66 +110,65 @@ flutter:
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
   fonts:
-    - family: JostBlack
-      fonts:
-        - asset: assets/fonts/Jost-Black.ttf
-        - asset: assets/fonts/Jost-BlackItalic.ttf
-          style: italic
-    - family: JostBold
-      fonts:
-        - asset: assets/fonts/Jost-Bold.ttf
-        - asset: assets/fonts/Jost-BoldItalic.ttf
-          style: italic
-    - family: JostExtraBold
-      fonts:
-        - asset: assets/fonts/Jost-ExtraBold.ttf
-        - asset: assets/fonts/Jost-ExtraBoldItalic.ttf
-          style: italic
-    - family: JostExtraLight
-      fonts:
-        - asset: assets/fonts/Jost-ExtraLight.ttf
-        - asset: assets/fonts/Jost-ExtraLightItalic.ttf
-          style: italic
     - family: Jost
       fonts:
-        - asset: assets/fonts/Jost-Regular.ttf
-        - asset: assets/fonts/Jost-Italic.ttf
-          style: italic
-    - family: JostLight
-      fonts:
-        - asset: assets/fonts/Jost-Light.ttf
-        - asset: assets/fonts/Jost-LightItalic.ttf
-          style: italic
-    - family: JostMedium
-      fonts:
-        - asset: assets/fonts/Jost-Medium.ttf
-        - asset: assets/fonts/Jost-MediumItalic.ttf
-          style: italic
-    - family: JostSemiBold
-      fonts:
-        - asset: assets/fonts/Jost-SemiBold.ttf
-        - asset: assets/fonts/Jost-SemiBoldItalic.ttf
-          style: italic
-    - family: JostThin
-      fonts:
         - asset: assets/fonts/Jost-Thin.ttf
+          weight: 100
         - asset: assets/fonts/Jost-ThinItalic.ttf
+          weight: 100
+          style: italic
+        - asset: assets/fonts/Jost-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Jost-ExtraLightItalic.ttf
+          weight: 200
+          style: italic
+        - asset: assets/fonts/Jost-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Jost-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/Jost-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Jost-Italic.ttf
+          weight: 400
+          style: italic
+        - asset: assets/fonts/Jost-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Jost-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/Jost-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Jost-SemiBoldItalic.ttf
+          weight: 600
+          style: italic
+        - asset: assets/fonts/Jost-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Jost-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/Jost-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Jost-ExtraBoldItalic.ttf
+          weight: 800
+          style: italic
+        - asset: assets/fonts/Jost-Black.ttf
+          weight: 900
+        - asset: assets/fonts/Jost-BlackItalic.ttf
+          weight: 900
           style: italic
     - family: SpaceGrotesk
       fonts:
-        - asset: assets/fonts/SpaceGrotesk-Regular.ttf
-    - family: SpaceGroteskBold
-      fonts:
-        - asset: assets/fonts/SpaceGrotesk-Bold.ttf
-    - family: SpaceGroteskLight
-      fonts:
         - asset: assets/fonts/SpaceGrotesk-Light.ttf
-    - family: SpaceGroteskMedium
-      fonts:
+          weight: 300
+        - asset: assets/fonts/SpaceGrotesk-Regular.ttf
+          weight: 400
         - asset: assets/fonts/SpaceGrotesk-Medium.ttf
-    - family: SpaceGroteskSemiBold
-      fonts:
+          weight: 500
         - asset: assets/fonts/SpaceGrotesk-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/SpaceGrotesk-Bold.ttf
+          weight: 700
 
   assets:
     - assets/templates/

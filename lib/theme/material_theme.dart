@@ -130,15 +130,18 @@ class MaterialTheme {
 
     final TextStyle appBarTextStyle =
         theme.textTheme.headlineLarge ?? const TextStyle();
+    final Color foregroundColor = colorScheme.onPrimaryContainer;
 
     return theme.copyWith(
       appBarTheme: AppBarTheme(
         backgroundColor: colorScheme.primaryContainer,
+        foregroundColor: foregroundColor,
         toolbarHeight: 80,
         titleTextStyle: appBarTextStyle.copyWith(
-          fontFamily: 'JostBlack',
+          fontFamily: 'Jost',
+          fontWeight: FontWeight.w900,
           fontSize: 32,
-          color: colorScheme.onPrimaryContainer,
+          color: foregroundColor,
         ),
       ),
     );
