@@ -25,6 +25,8 @@ abstract class TemplateListStoreBase with Store {
   ObservableList<TemplateFile> _defaultTemplates =
       ObservableList<TemplateFile>();
 
+  List<TemplateFile> _defaultTemplatesList = [];
+
   @readonly
   TemplateListStoreState _state = TemplateListStoreState.outdated;
 
@@ -85,10 +87,11 @@ abstract class TemplateListStoreBase with Store {
 
   @action
   Future<void> _actuallyUpdate() async {
-    _defaultTemplates.clear();
+    _defaultTemplatesList.clear();
     await _getAssetTemplates();
     await _getSavedTemplates();
-    _defaultTemplates.sort(_compareTemplateFile);
+    _defaultTemplatesList.sort(_compareTemplateFile);
+    _defaultTemplates = ObservableList.of(_defaultTemplatesList);
     _state = TemplateListStoreState.uptodate;
   }
 
@@ -99,7 +102,7 @@ abstract class TemplateListStoreBase with Store {
 
   @action
   Future<void> removeTemplate(int index) async {
-    final templateFile = _defaultTemplates[index];
+    final templateFile = _defaultTemplatesList[index];
     if (templateFile.isAsset) {
       throw Exception('Cannot remove asset template');
     }
@@ -111,6 +114,7 @@ abstract class TemplateListStoreBase with Store {
       await templateFileHandle.delete();
     }
 
+    _defaultTemplatesList.removeAt(index);
     _defaultTemplates.removeAt(index);
   }
 
@@ -126,7 +130,7 @@ abstract class TemplateListStoreBase with Store {
       final templatePath = '$ccrDefaultTemplatesDirectory/$filename';
       final String jsonString = await rootBundle.loadString(templatePath);
       final Map<String, dynamic> jsonMap = json.decode(jsonString);
-      final newTemplate = Template.fromJson(jsonMap);
+      final Template newTemplate = Template.fromJson(jsonMap);
 
       final newTemplateFile = TemplateFile(
         path: templatePath,
@@ -137,7 +141,7 @@ abstract class TemplateListStoreBase with Store {
         isAsset: true,
       );
 
-      _defaultTemplates.add(newTemplateFile);
+      _defaultTemplatesList.add(newTemplateFile);
     }
   }
 
@@ -178,7 +182,7 @@ abstract class TemplateListStoreBase with Store {
       isAsset: false,
     );
 
-    _defaultTemplates.add(newTemplateFile);
+    _defaultTemplatesList.add(newTemplateFile);
   }
 
   @action
@@ -198,10 +202,12 @@ abstract class TemplateListStoreBase with Store {
       isAsset: false,
     );
 
-    _defaultTemplates.add(newTemplate);
-    _defaultTemplates.sort(_compareTemplateFile);
+    _defaultTemplatesList.add(newTemplate);
+    _defaultTemplatesList.sort(_compareTemplateFile);
 
-    final templateIndex = _defaultTemplates.indexOf(newTemplate);
+    final templateIndex = _defaultTemplatesList.indexOf(newTemplate);
+
+    _defaultTemplates = ObservableList.of(_defaultTemplatesList);
 
     return templateIndex;
   }
@@ -214,17 +220,20 @@ abstract class TemplateListStoreBase with Store {
     required String title,
     required String description,
   }) {
-    if (templateIndex < 0 || templateIndex >= _defaultTemplates.length) {
+    if (templateIndex < 0 || templateIndex >= _defaultTemplatesList.length) {
       throw Exception('Invalid template index');
     }
 
-    _defaultTemplates[templateIndex] =
-        _defaultTemplates[templateIndex].copyWith(
+    _defaultTemplatesList[templateIndex] =
+        _defaultTemplatesList[templateIndex].copyWith(
       rebreatherManufacturer: rebreatherManufacturer,
       rebreatherModel: rebreatherModel,
       title: title,
       description: description,
     );
+    _defaultTemplatesList.sort(_compareTemplateFile);
+
+    _defaultTemplates = ObservableList.of(_defaultTemplatesList);
   }
 
   int _compareTemplateFile(TemplateFile a, TemplateFile b) {
