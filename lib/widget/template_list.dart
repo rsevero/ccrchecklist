@@ -76,8 +76,10 @@ class _TemplateListState extends State<TemplateList> {
 
         defaultTemplates = observableDefaultTemplates.toList();
 
+        final manufacturers = _buildDefaultTile(context);
+
         return ListView(
-          children: _buildDefaultTile(context),
+          children: manufacturers,
         );
       },
     );
@@ -174,6 +176,7 @@ class _TemplateListState extends State<TemplateList> {
       textBaseline: style.textBaseline,
       wordSpacing: style.wordSpacing,
     );
+
     return uncoloredStyle;
   }
 
