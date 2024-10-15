@@ -34,19 +34,19 @@ class _TemplateListState extends State<TemplateList> {
   late TextStyle templateDescriptionTextTheme;
   late TemplateListStore templateListStore;
   late List<TemplateFile> defaultTemplates;
-  late String currentManufacturer;
-  late String currentModel;
   String expandedManufacturer = '';
   String expandedModel = '';
 
   @override
   Widget build(BuildContext context) {
     templateListStore = Provider.of<TemplateListStore>(context);
-    templateListStore.update();
 
     return Observer(
       builder: (_) {
+        templateListStore.update();
+
         final observableDefaultTemplates = templateListStore.defaultTemplates;
+        // ignore: unused_local_variable
         final templateListStoreState = templateListStore.state;
 
         defaultTemplates = observableDefaultTemplates.toList();
@@ -65,8 +65,8 @@ class _TemplateListState extends State<TemplateList> {
     List<ExpansionTile> models = [];
     List<Widget> templates = [];
 
-    currentManufacturer = '';
-    currentModel = '';
+    String currentManufacturer = '';
+    String currentModel = '';
 
     final ThemeData currentTheme = Theme.of(context);
 
@@ -99,11 +99,11 @@ class _TemplateListState extends State<TemplateList> {
       final template = defaultTemplates[templateIndex];
       if (template.rebreatherManufacturer != currentManufacturer) {
         if (currentManufacturer != '') {
-          models.add(_modelTile(templates));
+          models.add(_modelTile(currentModel, templates));
           if (models.length == 1) {
             models[0] = _expandTile(models[0]);
           }
-          manufacturers.add(_manufacturerTile(models));
+          manufacturers.add(_manufacturerTile(currentManufacturer, models));
         }
         currentManufacturer = template.rebreatherManufacturer;
         models = [];
@@ -111,7 +111,7 @@ class _TemplateListState extends State<TemplateList> {
         templates = [];
       } else if (template.rebreatherModel != currentModel) {
         if (currentModel != '') {
-          models.add(_modelTile(templates));
+          models.add(_modelTile(currentModel, templates));
         }
         currentModel = template.rebreatherModel;
         templates = [];
@@ -133,14 +133,14 @@ class _TemplateListState extends State<TemplateList> {
     }
 
     if (templates.isNotEmpty) {
-      models.add(_modelTile(templates));
+      models.add(_modelTile(currentModel, templates));
     }
 
     if (models.isNotEmpty) {
       if (models.length == 1) {
         models[0] = _expandTile(models[0]);
       }
-      manufacturers.add(_manufacturerTile(models));
+      manufacturers.add(_manufacturerTile(currentManufacturer, models));
     }
 
     if (manufacturers.length == 1) {
@@ -194,10 +194,10 @@ class _TemplateListState extends State<TemplateList> {
     return expandedTile;
   }
 
-  ExpansionTile _modelTile(List<Widget> templates) {
+  ExpansionTile _modelTile(String tileText, List<Widget> templates) {
     final ExpansionTile newModel = ExpansionTile(
       title: Text(
-        currentModel,
+        tileText,
         style: modelTextTheme,
       ),
       backgroundColor: expandedModelColor,
@@ -211,10 +211,10 @@ class _TemplateListState extends State<TemplateList> {
     return newModel;
   }
 
-  ExpansionTile _manufacturerTile(List<Widget> models) {
+  ExpansionTile _manufacturerTile(String tileText, List<Widget> models) {
     final ExpansionTile newManufacturer = ExpansionTile(
       title: Text(
-        currentManufacturer,
+        tileText,
         style: manufacturerTextTheme,
       ),
       backgroundColor: expandedManufacturerColor,
