@@ -41,33 +41,6 @@ class _TemplateListState extends State<TemplateList> {
   Widget build(BuildContext context) {
     templateListStore = Provider.of<TemplateListStore>(context);
 
-    return Observer(
-      builder: (_) {
-        templateListStore.update();
-
-        final observableDefaultTemplates = templateListStore.defaultTemplates;
-        // ignore: unused_local_variable
-        final templateListStoreState = templateListStore.state;
-
-        defaultTemplates = observableDefaultTemplates.toList();
-
-        final manufacturers = _buildDefaultTile(context);
-
-        return ListView(
-          children: manufacturers,
-        );
-      },
-    );
-  }
-
-  List<ExpansionTile> _buildDefaultTile(BuildContext context) {
-    List<ExpansionTile> manufacturers = [];
-    List<ExpansionTile> models = [];
-    List<Widget> templates = [];
-
-    String currentManufacturer = '';
-    String currentModel = '';
-
     final ThemeData currentTheme = Theme.of(context);
 
     final ColorScheme currentColorScheme = currentTheme.colorScheme;
@@ -92,6 +65,30 @@ class _TemplateListState extends State<TemplateList> {
         currentTextTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w300);
     templateDescriptionTextTheme =
         _copyUnsettingColor(templateDescriptionTextTheme);
+
+    return Observer(
+      builder: (_) {
+        templateListStore.update();
+
+        final observableDefaultTemplates = templateListStore.defaultTemplates;
+        // ignore: unused_local_variable
+        final templateListStoreState = templateListStore.state;
+
+        defaultTemplates = observableDefaultTemplates.toList();
+
+        return ListView(
+          children: _buildDefaultTile(context),
+        );
+      },
+    );
+  }
+
+  List<ExpansionTile> _buildDefaultTile(BuildContext context) {
+    List<ExpansionTile> manufacturers = [];
+    List<ExpansionTile> models = [];
+    List<Widget> templates = [];
+    String currentManufacturer = '';
+    String currentModel = '';
 
     for (var templateIndex = 0;
         templateIndex < defaultTemplates.length;
@@ -187,6 +184,7 @@ class _TemplateListState extends State<TemplateList> {
       textColor: tile.textColor,
       collapsedTextColor: tile.collapsedTextColor,
       iconColor: tile.iconColor,
+      collapsedIconColor: tile.collapsedIconColor,
       initiallyExpanded: true,
       children: tile.children,
     );
