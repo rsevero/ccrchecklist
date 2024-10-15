@@ -85,7 +85,6 @@ class TemplateEditorListPage extends StatelessWidget {
 
     templateEditorStore.setCurrentTemplate(template);
 
-    if (!context.mounted) return;
     final templateListStore =
         Provider.of<TemplateListStore>(context, listen: false);
     await Navigator.of(context).push(
@@ -94,7 +93,7 @@ class TemplateEditorListPage extends StatelessWidget {
       ),
     );
 
-    templateListStore.update();
+    templateListStore.invalidate();
   }
 
   void _addNewTemplate(BuildContext context) async {
@@ -198,7 +197,7 @@ class TemplateEditorListPage extends StatelessWidget {
           ),
         );
 
-        templateListStore.update();
+        templateListStore.invalidate();
       }
     }
   }

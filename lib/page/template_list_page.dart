@@ -75,16 +75,11 @@ class TemplateListPage extends StatelessWidget {
   }
 
   void _openSettingsEditor(BuildContext context) {
-    final templateListStore =
-        Provider.of<TemplateListStore>(context, listen: false);
-
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => SettingsPage(),
       ),
     );
-
-    templateListStore.update();
   }
 
   void _openTemplateEditor(BuildContext context) {
@@ -97,7 +92,7 @@ class TemplateListPage extends StatelessWidget {
       ),
     );
 
-    templateListStore.update();
+    templateListStore.invalidate();
   }
 
   void _onTapTemplateFile(BuildContext context, int index) async {
@@ -125,6 +120,6 @@ class TemplateListPage extends StatelessWidget {
       ),
     );
 
-    templateListStore.update();
+    templateListStore.invalidate();
   }
 }

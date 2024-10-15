@@ -43,17 +43,18 @@ class _TemplateListState extends State<TemplateList> {
   Widget build(BuildContext context) {
     templateListStore = Provider.of<TemplateListStore>(context);
     templateListStore.update();
-    currentManufacturer = '';
-    currentModel = '';
 
     return Observer(
       builder: (_) {
         final observableDefaultTemplates = templateListStore.defaultTemplates;
+        final templateListStoreState = templateListStore.state;
 
         defaultTemplates = observableDefaultTemplates.toList();
 
+        final manufacturers = _buildDefaultTile(context);
+
         return ListView(
-          children: _buildDefaultTile(context),
+          children: manufacturers,
         );
       },
     );
@@ -63,6 +64,9 @@ class _TemplateListState extends State<TemplateList> {
     List<ExpansionTile> manufacturers = [];
     List<ExpansionTile> models = [];
     List<Widget> templates = [];
+
+    currentManufacturer = '';
+    currentModel = '';
 
     final ThemeData currentTheme = Theme.of(context);
 
