@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:slugify/slugify.dart';
+import 'package:uuid/uuid.dart';
 
 Future<CCRFileExistsAction?> ccrShowFileExistsDialog(
     BuildContext context, String filepath) async {
@@ -39,26 +40,6 @@ Future<CCRFileExistsAction?> ccrShowFileExistsDialog(
   );
 }
 
-String nextLetter(String letter) {
-  if (letter.length != 1) {
-    throw ArgumentError('Input must be a single character');
-  }
-
-  final int charCode = letter.codeUnitAt(0);
-
-  if ((charCode >= 65 && charCode <= 89) ||
-      (charCode >= 97 && charCode <= 121)) {
-    // Letters (a-y and A-Y)
-    return String.fromCharCode(charCode + 1);
-  } else if (letter == 'z') {
-    return 'A';
-  } else if (letter == 'Z') {
-    return 'a';
-  } else {
-    throw ArgumentError('Input must be a letter');
-  }
-}
-
 Future<bool> fileExists(String filepath) async {
   final file = File(filepath);
   return await file.exists();
@@ -67,19 +48,10 @@ Future<bool> fileExists(String filepath) async {
 Future<String> ccrFileNameFromTemplate(Template template) async {
   String filename = '';
   String filepath = '';
-  String suffix = '';
 
+  const uuidGenerator = Uuid();
   do {
-    final DateTime now = DateTime.now();
-    final String formattedDate = DateFormat('yyyyMMdd_HHmmss').format(now);
-    filename =
-        '$formattedDate-${template.rebreatherManufacturer}-${template.rebreatherModel}-${template.title}';
-    if (suffix.isEmpty) {
-      suffix = 'a';
-    } else {
-      filename = '$filename-$suffix';
-      suffix = nextLetter(suffix);
-    }
+    filename = uuidGenerator.v7();
     filename = slugify(filename, delimiter: '_');
     filepath = await ccrFilePathFromFileName(filename);
   } while (await fileExists(filepath));
