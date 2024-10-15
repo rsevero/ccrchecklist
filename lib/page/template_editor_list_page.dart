@@ -28,6 +28,7 @@ class TemplateEditorListPage extends StatelessWidget {
         ],
       ),
       body: TemplateList(
+        context: context,
         isEditor: true,
         onTapTemplateFile: _onTapTemplateFile,
         onRemoveTemplateFile: _onRemoveTemplateFile,

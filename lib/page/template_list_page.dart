@@ -66,6 +66,7 @@ class TemplateListPage extends StatelessWidget {
             ],
           ),
           body: TemplateList(
+            context: context,
             isEditor: false,
             onTapTemplateFile: _onTapTemplateFile,
           ),

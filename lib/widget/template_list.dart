@@ -6,12 +6,14 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
 class TemplateList extends StatefulWidget {
+  final BuildContext context;
   final Function(BuildContext, int) onTapTemplateFile;
   final Function(BuildContext, int)? onRemoveTemplateFile;
   final bool isEditor;
 
   const TemplateList({
     super.key,
+    required this.context,
     required this.onTapTemplateFile,
     required this.isEditor,
     this.onRemoveTemplateFile,
@@ -38,8 +40,11 @@ class _TemplateListState extends State<TemplateList> {
   String expandedModel = '';
 
   @override
-  Widget build(BuildContext context) {
-    templateListStore = Provider.of<TemplateListStore>(context);
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    templateListStore =
+        Provider.of<TemplateListStore>(widget.context, listen: false);
 
     final ThemeData currentTheme = Theme.of(context);
 
@@ -65,7 +70,10 @@ class _TemplateListState extends State<TemplateList> {
         currentTextTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w300);
     templateDescriptionTextTheme =
         _copyUnsettingColor(templateDescriptionTextTheme);
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Observer(
       builder: (_) {
         templateListStore.update();
