@@ -25,11 +25,12 @@ abstract class TemplateListStoreBase with Store {
   ObservableList<TemplateFile> _defaultTemplates =
       ObservableList<TemplateFile>();
 
-  List<TemplateFile> _defaultTemplatesList = [];
+  final List<TemplateFile> _defaultTemplatesList = [];
 
   @readonly
   TemplateListStoreState _state = TemplateListStoreState.outdated;
 
+  // ignore: unused_field
   late StreamSubscription _intentSub;
 
   TemplateListStoreBase() {
