@@ -6,14 +6,12 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
 class TemplateList extends StatefulWidget {
-  final BuildContext context;
   final Function(BuildContext, int) onTapTemplateFile;
   final Function(BuildContext, int)? onRemoveTemplateFile;
   final bool isEditor;
 
   const TemplateList({
     super.key,
-    required this.context,
     required this.onTapTemplateFile,
     required this.isEditor,
     this.onRemoveTemplateFile,
@@ -43,8 +41,7 @@ class _TemplateListState extends State<TemplateList> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    templateListStore =
-        Provider.of<TemplateListStore>(widget.context, listen: false);
+    templateListStore = Provider.of<TemplateListStore>(context, listen: false);
 
     final ThemeData currentTheme = Theme.of(context);
 
