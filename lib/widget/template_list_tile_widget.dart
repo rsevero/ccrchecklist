@@ -6,6 +6,7 @@ class TemplateListTileWidget extends StatelessWidget {
   final bool isAsset;
   final bool isEditor;
   final int templateIndex;
+  final BorderRadius borderRadius;
   final Function() onTap;
   final Function(BuildContext, int)? onRemove;
 
@@ -15,6 +16,7 @@ class TemplateListTileWidget extends StatelessWidget {
     required this.description,
     required this.isAsset,
     required this.isEditor,
+    required this.borderRadius,
     required this.templateIndex,
     required this.onTap,
     this.onRemove,
@@ -26,6 +28,9 @@ class TemplateListTileWidget extends StatelessWidget {
       title: title,
       subtitle: description,
       onTap: onTap,
+      shape: RoundedRectangleBorder(
+        borderRadius: borderRadius,
+      ),
       trailing: !isEditor || isAsset
           ? null
           : IconButton(

@@ -34,6 +34,7 @@ class _TemplateListState extends State<TemplateList> {
   late TextStyle templateDescriptionTextTheme;
   late TemplateListStore templateListStore;
   late List<TemplateFile> defaultTemplates;
+  late BorderRadius templateListTileBorderRadius;
   String expandedManufacturer = '';
   String expandedModel = '';
 
@@ -42,7 +43,6 @@ class _TemplateListState extends State<TemplateList> {
     super.didChangeDependencies();
 
     templateListStore = Provider.of<TemplateListStore>(context, listen: false);
-
     final ThemeData currentTheme = Theme.of(context);
 
     final ColorScheme currentColorScheme = currentTheme.colorScheme;
@@ -67,6 +67,8 @@ class _TemplateListState extends State<TemplateList> {
         currentTextTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w300);
     templateDescriptionTextTheme =
         _copyUnsettingColor(templateDescriptionTextTheme);
+
+    templateListTileBorderRadius = BorderRadius.circular(16);
   }
 
   @override
@@ -128,6 +130,7 @@ class _TemplateListState extends State<TemplateList> {
           isAsset: template.isAsset,
           isEditor: widget.isEditor,
           templateIndex: templateIndex,
+          borderRadius: templateListTileBorderRadius,
           onTap: () {
             widget.onTapTemplateFile(context, templateIndex);
           },
@@ -211,6 +214,9 @@ class _TemplateListState extends State<TemplateList> {
       collapsedTextColor: collapsedModelTextColor,
       iconColor: expandedModelTextColor,
       collapsedIconColor: collapsedModelTextColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: templateListTileBorderRadius,
+      ),
       children: templates,
     );
 
@@ -228,6 +234,9 @@ class _TemplateListState extends State<TemplateList> {
       collapsedTextColor: collapsedManufacturerTextColor,
       iconColor: expandedManufacturerTextColor,
       collapsedIconColor: collapsedManufacturerTextColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: templateListTileBorderRadius,
+      ),
       children: models,
     );
 
