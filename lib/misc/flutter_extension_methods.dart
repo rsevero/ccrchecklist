@@ -6,8 +6,7 @@ extension BuildContextExtensions on BuildContext {
 
   TextTheme get textTheme => theme.textTheme;
 
-  CCRThemeExtension get textThemeExtension =>
-      theme.extension<CCRThemeExtension>()!;
+  CCRThemeExtension get themeExtension => theme.extension<CCRThemeExtension>()!;
 
   ColorScheme get colorScheme => theme.colorScheme;
 
