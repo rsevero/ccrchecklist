@@ -72,9 +72,7 @@ class CCRChecklistApp extends StatelessWidget {
     final brightness = View.of(context).platformDispatcher.platformBrightness;
     // Retrieves the default theme for the platform
     //TextTheme textTheme = Theme.of(context).textTheme;
-    // Use with Google Fonts package to use downloadable fonts
     TextTheme textTheme = createTextTheme(context, 'Jost', 'SpaceGrotesk');
-    // TextTheme textTheme = createTextTheme(context, 'SpaceGrotesk', 'Jost');
     MaterialTheme theme = MaterialTheme(textTheme);
 
     return MaterialApp(
