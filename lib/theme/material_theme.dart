@@ -1,4 +1,4 @@
-import "package:ccr_checklist/theme/ccr_text_theme_extension.dart";
+import "package:ccr_checklist/theme/ccr_theme_extension.dart";
 import "package:flutter/material.dart";
 
 class MaterialTheme {
@@ -145,7 +145,7 @@ class MaterialTheme {
         ),
       ),
       extensions: [
-        CCRTextThemeExtension(
+        CCRThemeExtension(
           displayLarge: textTheme.displayLarge!,
           displayMedium: textTheme.displayMedium!,
           displaySmall: textTheme.displaySmall!,

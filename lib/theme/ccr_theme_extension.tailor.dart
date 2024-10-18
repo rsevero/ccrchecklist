@@ -2,14 +2,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, unused_element, unnecessary_cast
 
-part of 'ccr_text_theme_extension.dart';
+part of 'ccr_theme_extension.dart';
 
 // **************************************************************************
 // TailorAnnotationsGenerator
 // **************************************************************************
 
-mixin _$CCRTextThemeExtensionTailorMixin
-    on ThemeExtension<CCRTextThemeExtension> {
+mixin _$CCRThemeExtensionTailorMixin on ThemeExtension<CCRThemeExtension> {
   TextStyle get displayLarge;
   TextStyle get displayMedium;
   TextStyle get displaySmall;
@@ -29,7 +28,7 @@ mixin _$CCRTextThemeExtensionTailorMixin
   TextStyle get templateDescriptionTextTheme;
 
   @override
-  CCRTextThemeExtension copyWith({
+  CCRThemeExtension copyWith({
     TextStyle? displayLarge,
     TextStyle? displayMedium,
     TextStyle? displaySmall,
@@ -48,7 +47,7 @@ mixin _$CCRTextThemeExtensionTailorMixin
     TextStyle? templateTitleTextTheme,
     TextStyle? templateDescriptionTextTheme,
   }) {
-    return CCRTextThemeExtension(
+    return CCRThemeExtension(
       displayLarge: displayLarge ?? this.displayLarge,
       displayMedium: displayMedium ?? this.displayMedium,
       displaySmall: displaySmall ?? this.displaySmall,
@@ -66,10 +65,10 @@ mixin _$CCRTextThemeExtensionTailorMixin
   }
 
   @override
-  CCRTextThemeExtension lerp(
-      covariant ThemeExtension<CCRTextThemeExtension>? other, double t) {
-    if (other is! CCRTextThemeExtension) return this as CCRTextThemeExtension;
-    return CCRTextThemeExtension(
+  CCRThemeExtension lerp(
+      covariant ThemeExtension<CCRThemeExtension>? other, double t) {
+    if (other is! CCRThemeExtension) return this as CCRThemeExtension;
+    return CCRThemeExtension(
       displayLarge: TextStyle.lerp(displayLarge, other.displayLarge, t)!,
       displayMedium: TextStyle.lerp(displayMedium, other.displayMedium, t)!,
       displaySmall: TextStyle.lerp(displaySmall, other.displaySmall, t)!,
@@ -90,7 +89,7 @@ mixin _$CCRTextThemeExtensionTailorMixin
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is CCRTextThemeExtension &&
+            other is CCRThemeExtension &&
             const DeepCollectionEquality()
                 .equals(displayLarge, other.displayLarge) &&
             const DeepCollectionEquality()
@@ -150,27 +149,27 @@ mixin _$CCRTextThemeExtensionTailorMixin
   }
 }
 
-extension CCRTextThemeExtensionBuildContextProps on BuildContext {
-  CCRTextThemeExtension get cCRTextThemeExtension =>
-      Theme.of(this).extension<CCRTextThemeExtension>()!;
-  TextStyle get displayLarge => cCRTextThemeExtension.displayLarge;
-  TextStyle get displayMedium => cCRTextThemeExtension.displayMedium;
-  TextStyle get displaySmall => cCRTextThemeExtension.displaySmall;
-  TextStyle get headlineLarge => cCRTextThemeExtension.headlineLarge;
-  TextStyle get headlineMedium => cCRTextThemeExtension.headlineMedium;
-  TextStyle get headlineSmall => cCRTextThemeExtension.headlineSmall;
-  TextStyle get titleLarge => cCRTextThemeExtension.titleLarge;
-  TextStyle get titleMedium => cCRTextThemeExtension.titleMedium;
-  TextStyle get titleSmall => cCRTextThemeExtension.titleSmall;
-  TextStyle get bodyLarge => cCRTextThemeExtension.bodyLarge;
-  TextStyle get bodyMedium => cCRTextThemeExtension.bodyMedium;
-  TextStyle get bodySmall => cCRTextThemeExtension.bodySmall;
-  TextStyle get labelLarge => cCRTextThemeExtension.labelLarge;
+extension CCRThemeExtensionBuildContextProps on BuildContext {
+  CCRThemeExtension get cCRThemeExtension =>
+      Theme.of(this).extension<CCRThemeExtension>()!;
+  TextStyle get displayLarge => cCRThemeExtension.displayLarge;
+  TextStyle get displayMedium => cCRThemeExtension.displayMedium;
+  TextStyle get displaySmall => cCRThemeExtension.displaySmall;
+  TextStyle get headlineLarge => cCRThemeExtension.headlineLarge;
+  TextStyle get headlineMedium => cCRThemeExtension.headlineMedium;
+  TextStyle get headlineSmall => cCRThemeExtension.headlineSmall;
+  TextStyle get titleLarge => cCRThemeExtension.titleLarge;
+  TextStyle get titleMedium => cCRThemeExtension.titleMedium;
+  TextStyle get titleSmall => cCRThemeExtension.titleSmall;
+  TextStyle get bodyLarge => cCRThemeExtension.bodyLarge;
+  TextStyle get bodyMedium => cCRThemeExtension.bodyMedium;
+  TextStyle get bodySmall => cCRThemeExtension.bodySmall;
+  TextStyle get labelLarge => cCRThemeExtension.labelLarge;
   TextStyle get manufacturerTextTheme =>
-      cCRTextThemeExtension.manufacturerTextTheme;
-  TextStyle get modelTextTheme => cCRTextThemeExtension.modelTextTheme;
+      cCRThemeExtension.manufacturerTextTheme;
+  TextStyle get modelTextTheme => cCRThemeExtension.modelTextTheme;
   TextStyle get templateTitleTextTheme =>
-      cCRTextThemeExtension.templateTitleTextTheme;
+      cCRThemeExtension.templateTitleTextTheme;
   TextStyle get templateDescriptionTextTheme =>
-      cCRTextThemeExtension.templateDescriptionTextTheme;
+      cCRThemeExtension.templateDescriptionTextTheme;
 }

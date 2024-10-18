@@ -1,4 +1,4 @@
-import 'package:ccr_checklist/theme/ccr_text_theme_extension.dart';
+import 'package:ccr_checklist/theme/ccr_theme_extension.dart';
 import 'package:flutter/material.dart';
 
 extension BuildContextExtensions on BuildContext {
@@ -6,8 +6,8 @@ extension BuildContextExtensions on BuildContext {
 
   TextTheme get textTheme => theme.textTheme;
 
-  CCRTextThemeExtension get textThemeExtension =>
-      theme.extension<CCRTextThemeExtension>()!;
+  CCRThemeExtension get textThemeExtension =>
+      theme.extension<CCRThemeExtension>()!;
 
   ColorScheme get colorScheme => theme.colorScheme;
 

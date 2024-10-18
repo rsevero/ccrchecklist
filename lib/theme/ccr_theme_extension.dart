@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:theme_tailor_annotation/theme_tailor_annotation.dart';
 
-part 'ccr_text_theme_extension.tailor.dart';
+part 'ccr_theme_extension.tailor.dart';
 
 @TailorMixin()
-class CCRTextThemeExtension extends ThemeExtension<CCRTextThemeExtension>
-    with _$CCRTextThemeExtensionTailorMixin {
-  CCRTextThemeExtension({
+class CCRThemeExtension extends ThemeExtension<CCRThemeExtension>
+    with _$CCRThemeExtensionTailorMixin {
+  CCRThemeExtension({
     required this.displayLarge,
     required this.displayMedium,
     required this.displaySmall,
