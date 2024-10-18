@@ -106,9 +106,9 @@ class _TemplateListState extends State<TemplateList> {
       templates.add(
         TemplateListTileWidget(
           title: Text(template.title,
-              style: context.themeExtension.templateTitleTextTheme),
+              style: context.ccrThemeExtension.templateTitleTextTheme),
           description: Text(template.description,
-              style: context.themeExtension.templateDescriptionTextTheme),
+              style: context.ccrThemeExtension.templateDescriptionTextTheme),
           isAsset: template.isAsset,
           isEditor: widget.isEditor,
           templateIndex: templateIndex,
@@ -158,7 +158,7 @@ class _TemplateListState extends State<TemplateList> {
     final ExpansionTile newModel = ExpansionTile(
       title: Text(
         tileText,
-        style: context.themeExtension.modelTextTheme,
+        style: context.ccrThemeExtension.modelTextTheme,
       ),
       backgroundColor: expandedModelColor,
       textColor: expandedModelTextColor,
@@ -178,7 +178,7 @@ class _TemplateListState extends State<TemplateList> {
     final ExpansionTile newManufacturer = ExpansionTile(
       title: Text(
         tileText,
-        style: context.themeExtension.manufacturerTextTheme,
+        style: context.ccrThemeExtension.manufacturerTextTheme,
       ),
       backgroundColor: expandedManufacturerColor,
       textColor: expandedManufacturerTextColor,
