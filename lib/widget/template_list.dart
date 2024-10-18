@@ -1,4 +1,5 @@
 import 'package:ccr_checklist/data/template_file.dart';
+import 'package:ccr_checklist/misc/flutter_extension_methods.dart';
 import 'package:ccr_checklist/store/template_list_store.dart';
 import 'package:ccr_checklist/widget/template_list_tile_widget.dart';
 import 'package:flutter/material.dart';
@@ -22,16 +23,12 @@ class TemplateList extends StatefulWidget {
 }
 
 class _TemplateListState extends State<TemplateList> {
-  late TextStyle manufacturerTextTheme;
-  late TextStyle modelTextTheme;
   late Color expandedManufacturerColor;
   late Color expandedModelColor;
   late Color expandedManufacturerTextColor;
   late Color expandedModelTextColor;
   late Color collapsedManufacturerTextColor;
   late Color collapsedModelTextColor;
-  late TextStyle templateTitleTextTheme;
-  late TextStyle templateDescriptionTextTheme;
   late TemplateListStore templateListStore;
   late List<TemplateFile> defaultTemplates;
   late BorderRadius templateListTileBorderRadius;
@@ -43,30 +40,14 @@ class _TemplateListState extends State<TemplateList> {
     super.didChangeDependencies();
 
     templateListStore = Provider.of<TemplateListStore>(context, listen: false);
-    final ThemeData currentTheme = Theme.of(context);
 
-    final ColorScheme currentColorScheme = currentTheme.colorScheme;
+    final ColorScheme currentColorScheme = context.colorScheme;
     expandedModelColor = currentColorScheme.secondaryContainer;
     expandedModelTextColor = currentColorScheme.onSecondaryContainer;
     expandedManufacturerColor = currentColorScheme.secondary;
     expandedManufacturerTextColor = currentColorScheme.onSecondary;
     collapsedManufacturerTextColor = currentColorScheme.onSurface;
     collapsedModelTextColor = currentColorScheme.onSurface;
-
-    final TextTheme currentTextTheme = currentTheme.textTheme;
-    manufacturerTextTheme =
-        currentTextTheme.headlineSmall!.copyWith(fontWeight: FontWeight.w200);
-    manufacturerTextTheme = _copyUnsettingColor(manufacturerTextTheme);
-    modelTextTheme =
-        currentTextTheme.titleLarge!.copyWith(fontWeight: FontWeight.w500);
-    modelTextTheme = _copyUnsettingColor(modelTextTheme);
-    templateTitleTextTheme =
-        currentTextTheme.titleMedium!.copyWith(fontWeight: FontWeight.w700);
-    templateTitleTextTheme = _copyUnsettingColor(templateTitleTextTheme);
-    templateDescriptionTextTheme =
-        currentTextTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w300);
-    templateDescriptionTextTheme =
-        _copyUnsettingColor(templateDescriptionTextTheme);
 
     templateListTileBorderRadius = BorderRadius.circular(16);
   }
@@ -124,9 +105,10 @@ class _TemplateListState extends State<TemplateList> {
       }
       templates.add(
         TemplateListTileWidget(
-          title: Text(template.title, style: templateTitleTextTheme),
-          description:
-              Text(template.description, style: templateDescriptionTextTheme),
+          title: Text(template.title,
+              style: context.textThemeExtension.templateTitleTextTheme),
+          description: Text(template.description,
+              style: context.textThemeExtension.templateDescriptionTextTheme),
           isAsset: template.isAsset,
           isEditor: widget.isEditor,
           templateIndex: templateIndex,
@@ -157,37 +139,6 @@ class _TemplateListState extends State<TemplateList> {
     return manufacturers;
   }
 
-  TextStyle _copyUnsettingColor(TextStyle style) {
-    final TextStyle uncoloredStyle = TextStyle(
-      background: style.background,
-      // color: style.color,
-      debugLabel: style.debugLabel,
-      decoration: style.decoration,
-      decorationColor: style.decorationColor,
-      decorationStyle: style.decorationStyle,
-      decorationThickness: style.decorationThickness,
-      fontFamily: style.fontFamily,
-      fontFamilyFallback: style.fontFamilyFallback,
-      fontFeatures: style.fontFeatures,
-      fontSize: style.fontSize,
-      fontStyle: style.fontStyle,
-      fontVariations: style.fontVariations,
-      fontWeight: style.fontWeight,
-      foreground: style.foreground,
-      height: style.height,
-      // inherit: style.inherit,
-      leadingDistribution: style.leadingDistribution,
-      letterSpacing: style.letterSpacing,
-      locale: style.locale,
-      overflow: style.overflow,
-      shadows: style.shadows,
-      textBaseline: style.textBaseline,
-      wordSpacing: style.wordSpacing,
-    );
-
-    return uncoloredStyle;
-  }
-
   ExpansionTile _expandTile(ExpansionTile tile) {
     final expandedTile = ExpansionTile(
       title: tile.title,
@@ -207,7 +158,7 @@ class _TemplateListState extends State<TemplateList> {
     final ExpansionTile newModel = ExpansionTile(
       title: Text(
         tileText,
-        style: modelTextTheme,
+        style: context.textThemeExtension.modelTextTheme,
       ),
       backgroundColor: expandedModelColor,
       textColor: expandedModelTextColor,
@@ -227,7 +178,7 @@ class _TemplateListState extends State<TemplateList> {
     final ExpansionTile newManufacturer = ExpansionTile(
       title: Text(
         tileText,
-        style: manufacturerTextTheme,
+        style: context.textThemeExtension.manufacturerTextTheme,
       ),
       backgroundColor: expandedManufacturerColor,
       textColor: expandedManufacturerTextColor,

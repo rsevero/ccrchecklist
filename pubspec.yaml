@@ -53,6 +53,8 @@ dependencies:
   receive_sharing_intent: ^1.8.0
   share_plus: ^7.2.1
   slugify: ^2.0.0
+  theme_tailor: ^3.0.1
+  theme_tailor_annotation: ^3.0.1
   toml: ^0.15.0
   uuid: ^4.5.1
   vibration: ^1.8.4

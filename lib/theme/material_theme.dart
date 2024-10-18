@@ -1,3 +1,4 @@
+import "package:ccr_checklist/theme/ccr_text_theme_extension.dart";
 import "package:flutter/material.dart";
 
 class MaterialTheme {
@@ -143,6 +144,23 @@ class MaterialTheme {
           color: foregroundColor,
         ),
       ),
+      extensions: [
+        CCRTextThemeExtension(
+          displayLarge: textTheme.displayLarge!,
+          displayMedium: textTheme.displayMedium!,
+          displaySmall: textTheme.displaySmall!,
+          headlineLarge: textTheme.headlineLarge!,
+          headlineMedium: textTheme.headlineMedium!,
+          headlineSmall: textTheme.headlineSmall!,
+          titleLarge: textTheme.titleLarge!,
+          titleMedium: textTheme.titleMedium!,
+          titleSmall: textTheme.titleSmall!,
+          bodyLarge: textTheme.bodyLarge!,
+          bodyMedium: textTheme.bodyMedium!,
+          bodySmall: textTheme.bodySmall!,
+          labelLarge: textTheme.labelLarge!,
+        ),
+      ],
     );
   }
 }
