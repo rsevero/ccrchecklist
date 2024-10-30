@@ -26,6 +26,8 @@ mixin _$CCRThemeExtensionTailorMixin on ThemeExtension<CCRThemeExtension> {
   TextStyle get modelTextTheme;
   TextStyle get templateTitleTextTheme;
   TextStyle get templateDescriptionTextTheme;
+  TextStyle get dialogTitleTextTheme;
+  TextStyle get dialogHintTextTheme;
 
   @override
   CCRThemeExtension copyWith({
@@ -46,6 +48,8 @@ mixin _$CCRThemeExtensionTailorMixin on ThemeExtension<CCRThemeExtension> {
     TextStyle? modelTextTheme,
     TextStyle? templateTitleTextTheme,
     TextStyle? templateDescriptionTextTheme,
+    TextStyle? dialogTitleTextTheme,
+    TextStyle? dialogHintTextTheme,
   }) {
     return CCRThemeExtension(
       displayLarge: displayLarge ?? this.displayLarge,
@@ -121,7 +125,11 @@ mixin _$CCRThemeExtensionTailorMixin on ThemeExtension<CCRThemeExtension> {
             const DeepCollectionEquality()
                 .equals(templateTitleTextTheme, other.templateTitleTextTheme) &&
             const DeepCollectionEquality().equals(templateDescriptionTextTheme,
-                other.templateDescriptionTextTheme));
+                other.templateDescriptionTextTheme) &&
+            const DeepCollectionEquality()
+                .equals(dialogTitleTextTheme, other.dialogTitleTextTheme) &&
+            const DeepCollectionEquality()
+                .equals(dialogHintTextTheme, other.dialogHintTextTheme));
   }
 
   @override
@@ -145,6 +153,8 @@ mixin _$CCRThemeExtensionTailorMixin on ThemeExtension<CCRThemeExtension> {
       const DeepCollectionEquality().hash(modelTextTheme),
       const DeepCollectionEquality().hash(templateTitleTextTheme),
       const DeepCollectionEquality().hash(templateDescriptionTextTheme),
+      const DeepCollectionEquality().hash(dialogTitleTextTheme),
+      const DeepCollectionEquality().hash(dialogHintTextTheme),
     );
   }
 }
@@ -172,4 +182,6 @@ extension CCRThemeExtensionBuildContextProps on BuildContext {
       cCRThemeExtension.templateTitleTextTheme;
   TextStyle get templateDescriptionTextTheme =>
       cCRThemeExtension.templateDescriptionTextTheme;
+  TextStyle get dialogTitleTextTheme => cCRThemeExtension.dialogTitleTextTheme;
+  TextStyle get dialogHintTextTheme => cCRThemeExtension.dialogHintTextTheme;
 }

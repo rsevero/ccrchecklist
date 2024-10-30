@@ -133,6 +133,17 @@ class MaterialTheme {
         theme.textTheme.headlineLarge ?? const TextStyle();
     final Color foregroundColor = colorScheme.onPrimaryContainer;
 
+    final ButtonStyle textButtonStyle = TextButton.styleFrom(
+      textStyle: TextStyle(
+        fontFamily: 'Jost',
+        fontWeight: FontWeight.w700,
+        fontSize: 16,
+        color: colorScheme.primary,
+      ),
+      backgroundColor: colorScheme.primaryContainer,
+      foregroundColor: colorScheme.onPrimaryContainer,
+    );
+
     return theme.copyWith(
       appBarTheme: AppBarTheme(
         backgroundColor: colorScheme.primaryContainer,
@@ -161,6 +172,7 @@ class MaterialTheme {
           labelLarge: textTheme.labelLarge!,
         ),
       ],
+      textButtonTheme: TextButtonThemeData(style: textButtonStyle),
     );
   }
 }

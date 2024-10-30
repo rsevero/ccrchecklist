@@ -15,6 +15,7 @@ final undoRedoStorage = UndoRedoStorage();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // Force mobile like screen size on desktop plataforms.
   if (platform.linux || platform.windows || platform.macOS) {
     await windowManager.ensureInitialized();
 

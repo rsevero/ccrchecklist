@@ -29,6 +29,10 @@ class CCRThemeExtension extends ThemeExtension<CCRThemeExtension>
         _copyUnsettingColor(titleMedium.copyWith(fontWeight: FontWeight.w700));
     templateDescriptionTextTheme =
         _copyUnsettingColor(bodyLarge.copyWith(fontWeight: FontWeight.w300));
+    dialogTitleTextTheme = _copyUnsettingColor(
+        headlineMedium.copyWith(fontWeight: FontWeight.w600));
+    dialogHintTextTheme =
+        _copyUnsettingColor(bodyLarge.copyWith(fontWeight: FontWeight.w400));
   }
 
   @override
@@ -65,6 +69,10 @@ class CCRThemeExtension extends ThemeExtension<CCRThemeExtension>
   late final TextStyle templateTitleTextTheme;
   @override
   late final TextStyle templateDescriptionTextTheme;
+  @override
+  late final TextStyle dialogTitleTextTheme;
+  @override
+  late final TextStyle dialogHintTextTheme;
 
   TextStyle _copyUnsettingColor(TextStyle style) {
     final TextStyle uncoloredStyle = TextStyle(

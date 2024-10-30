@@ -1,4 +1,5 @@
 import 'package:ccr_checklist/data/template.dart';
+import 'package:ccr_checklist/misc/flutter_extension_methods.dart';
 import 'package:ccr_checklist/misc/help_dialog_helper.dart';
 import 'package:ccr_checklist/misc/save_template_helper.dart';
 import 'package:ccr_checklist/misc/template_load_helper.dart';
@@ -108,14 +109,20 @@ class TemplateEditorListPage extends StatelessWidget {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: const Text('New Template'),
+              title: Text(
+                'New Template',
+                style: context.ccrThemeExtension.dialogTitleTextTheme,
+              ),
               content: SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
                     TextField(
                       controller: rebreatherManufacturerController,
-                      decoration: const InputDecoration(
-                          hintText: 'Rebreather manufacturer'),
+                      decoration: InputDecoration(
+                        hintStyle:
+                            context.ccrThemeExtension.dialogHintTextTheme,
+                        hintText: 'Rebreather manufacturer',
+                      ),
                       textInputAction: TextInputAction
                           .next, // Move focus to next input on "Enter"
                       onSubmitted: (_) =>
@@ -124,8 +131,10 @@ class TemplateEditorListPage extends StatelessWidget {
                     ),
                     TextField(
                       controller: rebreatherModelController,
-                      decoration:
-                          const InputDecoration(hintText: 'Rebreather model'),
+                      decoration: InputDecoration(
+                          hintStyle:
+                              context.ccrThemeExtension.dialogHintTextTheme,
+                          hintText: 'Rebreather model'),
                       autofocus: true,
                       textInputAction: TextInputAction
                           .next, // Move focus to next input on "Enter"
@@ -134,7 +143,10 @@ class TemplateEditorListPage extends StatelessWidget {
                     ),
                     TextField(
                       controller: titleController,
-                      decoration: const InputDecoration(hintText: 'Title'),
+                      decoration: InputDecoration(
+                          hintStyle:
+                              context.ccrThemeExtension.dialogHintTextTheme,
+                          hintText: 'Title'),
                       textInputAction: TextInputAction
                           .next, // Move focus to next input on "Enter"
                       onSubmitted: (_) => FocusScope.of(context)
@@ -142,8 +154,10 @@ class TemplateEditorListPage extends StatelessWidget {
                     ),
                     TextField(
                       controller: descriptionController,
-                      decoration:
-                          const InputDecoration(hintText: 'Description'),
+                      decoration: InputDecoration(
+                          hintStyle:
+                              context.ccrThemeExtension.dialogHintTextTheme,
+                          hintText: 'Description'),
                       textInputAction:
                           TextInputAction.done, // Done action for last input
                       onSubmitted: (_) => Navigator.of(context)
