@@ -1,6 +1,7 @@
 import 'package:ccr_checklist/data/regular_check_reference.dart';
 import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/misc/datetime_formater_helper.dart';
+import 'package:ccr_checklist/misc/flutter_extension_methods.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
 import 'package:ccr_checklist/widget/greyable_speed_dial_child_widget.dart';
 import 'package:flutter/material.dart';
@@ -401,7 +402,10 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
             return AlertDialog(
-              title: const Text('Add Check with References'),
+              title: Text(
+                'Add Check with References',
+                style: context.ccrThemeExtension.dialogTitleTextTheme,
+              ),
               content: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -411,27 +415,29 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Row(
+                          Row(
                             children: [
                               Text(
                                 'Description',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                ),
+                                style: context.ccrThemeExtension
+                                    .dialogFieldTitleTextTheme,
                               ),
                               Text(
                                 ' *',
-                                style: TextStyle(
-                                  color: Colors.red,
-                                  fontSize: 16,
-                                ),
+                                style: context
+                                    .ccrThemeExtension.dialogFieldTitleTextTheme
+                                    .copyWith(color: Colors.red),
                               ),
                             ],
                           ),
                           TextFormField(
                             controller: descriptionController,
-                            decoration: const InputDecoration(
+                            style: context
+                                .ccrThemeExtension.dialogFieldContentTextTheme,
+                            decoration: InputDecoration(
                               hintText: 'Enter check description',
+                              hintStyle:
+                                  context.ccrThemeExtension.dialogHintTextTheme,
                               border: OutlineInputBorder(),
                             ),
                             maxLines: null,
@@ -448,20 +454,23 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Row(
+                          Row(
                             children: [
                               Text(
                                 'Observation',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                ),
+                                style: context.ccrThemeExtension
+                                    .dialogFieldTitleTextTheme,
                               ),
                             ],
                           ),
                           TextFormField(
                             controller: observationController,
-                            decoration: const InputDecoration(
+                            style: context
+                                .ccrThemeExtension.dialogFieldContentTextTheme,
+                            decoration: InputDecoration(
                               hintText: 'Enter check observation',
+                              hintStyle:
+                                  context.ccrThemeExtension.dialogHintTextTheme,
                               border: OutlineInputBorder(),
                             ),
                             maxLines: null,
@@ -474,16 +483,14 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      width:
-                          ccrDescriptionFieldWidth, // Ensure this matches the width of your other fields
+                      width: ccrDescriptionFieldWidth,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             'Timer Duration',
-                            style: TextStyle(
-                              fontSize: 16,
-                            ),
+                            style: context
+                                .ccrThemeExtension.dialogFieldTitleTextTheme,
                           ),
                           InkWell(
                             onTap: () async {
@@ -507,9 +514,10 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                               child: Text(
                                 ccrFormatSecondsToMinutesSecondsTimer(
                                     timerDuration.inSeconds),
-                                style: const TextStyle(
-                                  color:
-                                      Colors.blue, // Styling similar to a link
+                                style: context
+                                    .ccrThemeExtension.dialogHintTextTheme
+                                    .copyWith(
+                                  color: Colors.blue,
                                 ),
                               ),
                             ),
@@ -517,27 +525,32 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.symmetric(vertical: 8.0),
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
                           'References',
-                          style: TextStyle(
-                            fontSize: 16,
-                          ),
+                          style: context
+                              .ccrThemeExtension.dialogFieldTitleTextTheme,
                         ),
                       ),
                     ),
                     if (numberOfReferences > 0)
-                      const Text(
-                          'References prefixes and suffixes are optional'),
+                      Text(
+                        'References prefixes and suffixes are optional',
+                        style: context.ccrThemeExtension.dialogHintTextTheme,
+                      ),
                     ...List.generate(
                       ccrMaxReferences + 1,
                       (index) => Column(
                         children: [
                           RadioListTile<int>(
-                            title: Text('$index'),
+                            title: Text(
+                              '$index',
+                              style: context.ccrThemeExtension
+                                  .dialogFieldContentTextTheme,
+                            ),
                             value: index,
                             groupValue: numberOfReferences,
                             onChanged: (int? value) {
@@ -551,6 +564,8 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                                 Expanded(
                                   child: TextFormField(
                                     controller: prefixControllers[index],
+                                    style: context.ccrThemeExtension
+                                        .dialogFieldContentTextTheme,
                                     decoration: InputDecoration(
                                         hintText: 'Prefix $index'),
                                   ),
@@ -561,6 +576,8 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                                 Expanded(
                                   child: TextFormField(
                                     controller: suffixControllers[index],
+                                    style: context.ccrThemeExtension
+                                        .dialogFieldContentTextTheme,
                                     decoration: InputDecoration(
                                         hintText: 'Suffix $index'),
                                   ),

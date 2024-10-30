@@ -27,6 +27,8 @@ mixin _$CCRThemeExtensionTailorMixin on ThemeExtension<CCRThemeExtension> {
   TextStyle get templateTitleTextTheme;
   TextStyle get templateDescriptionTextTheme;
   TextStyle get dialogTitleTextTheme;
+  TextStyle get dialogFieldTitleTextTheme;
+  TextStyle get dialogFieldContentTextTheme;
   TextStyle get dialogHintTextTheme;
 
   @override
@@ -49,6 +51,8 @@ mixin _$CCRThemeExtensionTailorMixin on ThemeExtension<CCRThemeExtension> {
     TextStyle? templateTitleTextTheme,
     TextStyle? templateDescriptionTextTheme,
     TextStyle? dialogTitleTextTheme,
+    TextStyle? dialogFieldTitleTextTheme,
+    TextStyle? dialogFieldContentTextTheme,
     TextStyle? dialogHintTextTheme,
   }) {
     return CCRThemeExtension(
@@ -128,13 +132,17 @@ mixin _$CCRThemeExtensionTailorMixin on ThemeExtension<CCRThemeExtension> {
                 other.templateDescriptionTextTheme) &&
             const DeepCollectionEquality()
                 .equals(dialogTitleTextTheme, other.dialogTitleTextTheme) &&
+            const DeepCollectionEquality().equals(
+                dialogFieldTitleTextTheme, other.dialogFieldTitleTextTheme) &&
+            const DeepCollectionEquality().equals(dialogFieldContentTextTheme,
+                other.dialogFieldContentTextTheme) &&
             const DeepCollectionEquality()
                 .equals(dialogHintTextTheme, other.dialogHintTextTheme));
   }
 
   @override
   int get hashCode {
-    return Object.hash(
+    return Object.hashAll([
       runtimeType.hashCode,
       const DeepCollectionEquality().hash(displayLarge),
       const DeepCollectionEquality().hash(displayMedium),
@@ -154,8 +162,10 @@ mixin _$CCRThemeExtensionTailorMixin on ThemeExtension<CCRThemeExtension> {
       const DeepCollectionEquality().hash(templateTitleTextTheme),
       const DeepCollectionEquality().hash(templateDescriptionTextTheme),
       const DeepCollectionEquality().hash(dialogTitleTextTheme),
+      const DeepCollectionEquality().hash(dialogFieldTitleTextTheme),
+      const DeepCollectionEquality().hash(dialogFieldContentTextTheme),
       const DeepCollectionEquality().hash(dialogHintTextTheme),
-    );
+    ]);
   }
 }
 
@@ -183,5 +193,9 @@ extension CCRThemeExtensionBuildContextProps on BuildContext {
   TextStyle get templateDescriptionTextTheme =>
       cCRThemeExtension.templateDescriptionTextTheme;
   TextStyle get dialogTitleTextTheme => cCRThemeExtension.dialogTitleTextTheme;
+  TextStyle get dialogFieldTitleTextTheme =>
+      cCRThemeExtension.dialogFieldTitleTextTheme;
+  TextStyle get dialogFieldContentTextTheme =>
+      cCRThemeExtension.dialogFieldContentTextTheme;
   TextStyle get dialogHintTextTheme => cCRThemeExtension.dialogHintTextTheme;
 }

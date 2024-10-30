@@ -40,7 +40,10 @@ class TemplateEditorPage extends StatelessWidget {
       return true;
     }
 
-    return await ccrConfirmActionDialog(context, 'Confirm losing modifications',
-        'You have unsaved modifications to the template. Do you want to proceed without saving them?');
+    return await ccrConfirmActionDialog(
+      context,
+      'Confirm losing modifications',
+      'You have unsaved modifications to the template. Do you want to proceed without saving them?',
+    );
   }
 }
