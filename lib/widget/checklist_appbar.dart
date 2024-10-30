@@ -6,17 +6,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
 class CheckListAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final String title;
-  final String description;
-  final String rebreatherManufacturer;
-  final String rebreatherModel;
-
   const CheckListAppBar({
     super.key,
-    required this.title,
-    required this.description,
-    required this.rebreatherManufacturer,
-    required this.rebreatherModel,
   });
 
   @override
@@ -28,14 +19,11 @@ class CheckListAppBar extends StatelessWidget implements PreferredSizeWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text('$title - $description'),
-          Text(
-            '$rebreatherManufacturer $rebreatherModel',
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
+          const Text('Checklist'),
         ],
       ),
       elevation: 1,
+      toolbarHeight: null, // Allow the AppBar to grow vertically
       actions: [
         Observer(
           builder: (_) => IconButton(

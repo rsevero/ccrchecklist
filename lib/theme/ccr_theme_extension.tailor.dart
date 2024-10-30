@@ -30,6 +30,7 @@ mixin _$CCRThemeExtensionTailorMixin on ThemeExtension<CCRThemeExtension> {
   TextStyle get dialogFieldTitleTextTheme;
   TextStyle get dialogFieldContentTextTheme;
   TextStyle get dialogHintTextTheme;
+  TextStyle get appBarSubtitleTextTheme;
 
   @override
   CCRThemeExtension copyWith({
@@ -54,6 +55,7 @@ mixin _$CCRThemeExtensionTailorMixin on ThemeExtension<CCRThemeExtension> {
     TextStyle? dialogFieldTitleTextTheme,
     TextStyle? dialogFieldContentTextTheme,
     TextStyle? dialogHintTextTheme,
+    TextStyle? appBarSubtitleTextTheme,
   }) {
     return CCRThemeExtension(
       displayLarge: displayLarge ?? this.displayLarge,
@@ -137,7 +139,9 @@ mixin _$CCRThemeExtensionTailorMixin on ThemeExtension<CCRThemeExtension> {
             const DeepCollectionEquality().equals(dialogFieldContentTextTheme,
                 other.dialogFieldContentTextTheme) &&
             const DeepCollectionEquality()
-                .equals(dialogHintTextTheme, other.dialogHintTextTheme));
+                .equals(dialogHintTextTheme, other.dialogHintTextTheme) &&
+            const DeepCollectionEquality().equals(
+                appBarSubtitleTextTheme, other.appBarSubtitleTextTheme));
   }
 
   @override
@@ -165,6 +169,7 @@ mixin _$CCRThemeExtensionTailorMixin on ThemeExtension<CCRThemeExtension> {
       const DeepCollectionEquality().hash(dialogFieldTitleTextTheme),
       const DeepCollectionEquality().hash(dialogFieldContentTextTheme),
       const DeepCollectionEquality().hash(dialogHintTextTheme),
+      const DeepCollectionEquality().hash(appBarSubtitleTextTheme),
     ]);
   }
 }
@@ -198,4 +203,6 @@ extension CCRThemeExtensionBuildContextProps on BuildContext {
   TextStyle get dialogFieldContentTextTheme =>
       cCRThemeExtension.dialogFieldContentTextTheme;
   TextStyle get dialogHintTextTheme => cCRThemeExtension.dialogHintTextTheme;
+  TextStyle get appBarSubtitleTextTheme =>
+      cCRThemeExtension.appBarSubtitleTextTheme;
 }

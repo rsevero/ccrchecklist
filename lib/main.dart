@@ -71,8 +71,6 @@ class CCRChecklistApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final brightness = View.of(context).platformDispatcher.platformBrightness;
-    // Retrieves the default theme for the platform
-    //TextTheme textTheme = Theme.of(context).textTheme;
     TextTheme textTheme = createTextTheme(context, 'Jost', 'SpaceGrotesk');
     MaterialTheme theme = MaterialTheme(textTheme);
 

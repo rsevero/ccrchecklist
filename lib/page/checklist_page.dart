@@ -31,12 +31,13 @@ class ChecklistPage extends StatelessWidget {
         }
       },
       child: Scaffold(
-        appBar: CheckListAppBar(
+        appBar: CheckListAppBar(),
+        body: ChecklistBody(
             title: checklistEditorStore.title,
             description: checklistEditorStore.description,
             rebreatherManufacturer: checklistEditorStore.rebreatherManufacturer,
-            rebreatherModel: checklistEditorStore.rebreatherModel),
-        body: ChecklistBody(sectionIndex: sectionIndex),
+            rebreatherModel: checklistEditorStore.rebreatherModel,
+            sectionIndex: sectionIndex),
         bottomNavigationBar: BottomAppBar(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

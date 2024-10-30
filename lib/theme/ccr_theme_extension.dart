@@ -39,6 +39,7 @@ class CCRThemeExtension extends ThemeExtension<CCRThemeExtension>
       fontWeight: FontWeight.w300,
       fontStyle: FontStyle.italic,
     ));
+    appBarSubtitleTextTheme = _copyUnsettingColor(titleSmall);
   }
 
   @override
@@ -83,6 +84,8 @@ class CCRThemeExtension extends ThemeExtension<CCRThemeExtension>
   late final TextStyle dialogFieldContentTextTheme;
   @override
   late final TextStyle dialogHintTextTheme;
+  @override
+  late final TextStyle appBarSubtitleTextTheme;
 
   TextStyle _copyUnsettingColor(TextStyle style) {
     final TextStyle uncoloredStyle = TextStyle(
