@@ -4,7 +4,7 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   printing
-  screen_retriever
+  screen_retriever_windows
   share_plus
   url_launcher_windows
   window_manager
