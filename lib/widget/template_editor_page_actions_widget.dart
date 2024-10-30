@@ -76,29 +76,50 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Edit Info'),
+          title: Text(
+            'Edit Info',
+            style: context.ccrThemeExtension.dialogTitleTextTheme,
+          ),
           content: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 TextFormField(
                   controller: rebreatherManufacturerController,
-                  decoration: const InputDecoration(
-                      labelText: 'Rebreather Manufacturer'),
+                  style: context.ccrThemeExtension.dialogFieldContentTextTheme,
+                  decoration: InputDecoration(
+                    labelText: 'Rebreather Manufacturer',
+                    labelStyle:
+                        context.ccrThemeExtension.dialogFieldTitleTextTheme,
+                  ),
                   autofocus: true,
                 ),
                 TextFormField(
                   controller: rebreatherModelController,
-                  decoration:
-                      const InputDecoration(labelText: 'Rebreather Model'),
+                  style: context.ccrThemeExtension.dialogFieldContentTextTheme,
+                  decoration: InputDecoration(
+                    labelText: 'Rebreather Model',
+                    labelStyle:
+                        context.ccrThemeExtension.dialogFieldTitleTextTheme,
+                  ),
                 ),
                 TextFormField(
                   controller: titleController,
-                  decoration: const InputDecoration(labelText: 'Title'),
+                  style: context.ccrThemeExtension.dialogFieldContentTextTheme,
+                  decoration: InputDecoration(
+                    labelText: 'Title',
+                    labelStyle:
+                        context.ccrThemeExtension.dialogFieldTitleTextTheme,
+                  ),
                 ),
                 TextFormField(
                   controller: descriptionController,
-                  decoration: const InputDecoration(labelText: 'Description'),
+                  style: context.ccrThemeExtension.dialogFieldContentTextTheme,
+                  decoration: InputDecoration(
+                    labelText: 'Description',
+                    labelStyle:
+                        context.ccrThemeExtension.dialogFieldTitleTextTheme,
+                  ),
                 ),
               ],
             ),
@@ -156,13 +177,19 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: const Text('New Page'),
+              title: Text(
+                'New Page',
+                style: context.ccrThemeExtension.dialogTitleTextTheme,
+              ),
               content: Form(
                 key: formKey,
                 child: TextFormField(
                   controller: titleController,
-                  decoration:
-                      const InputDecoration(hintText: 'Enter title here'),
+                  style: context.ccrThemeExtension.dialogFieldContentTextTheme,
+                  decoration: InputDecoration(
+                    hintText: 'Enter title here',
+                    hintStyle: context.ccrThemeExtension.dialogHintTextTheme,
+                  ),
                   autofocus: true,
                   onFieldSubmitted: (value) {
                     Navigator.of(context).pop(true);
@@ -207,7 +234,10 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Add step 1 of Linearity Check'),
+          title: Text(
+            'Add step 1 of Linearity Check',
+            style: context.ccrThemeExtension.dialogTitleTextTheme,
+          ),
           content: StatefulBuilder(
             builder: (BuildContext context, StateSetter setState) {
               return SingleChildScrollView(
@@ -219,17 +249,18 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Row(
+                          Row(
                             children: [
                               Text(
                                 'Description',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                ),
+                                style: context.ccrThemeExtension
+                                    .dialogFieldTitleTextTheme,
                               ),
                               Text(
                                 ' *',
-                                style: TextStyle(
+                                style: context
+                                    .ccrThemeExtension.dialogFieldTitleTextTheme
+                                    .copyWith(
                                   color: Colors.red,
                                   fontSize: 16,
                                 ),
@@ -238,8 +269,12 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                           ),
                           TextFormField(
                             controller: descriptionController,
-                            decoration: const InputDecoration(
+                            style: context
+                                .ccrThemeExtension.dialogFieldContentTextTheme,
+                            decoration: InputDecoration(
                               hintText: 'Enter check description',
+                              hintStyle:
+                                  context.ccrThemeExtension.dialogHintTextTheme,
                               border: OutlineInputBorder(),
                             ),
                             maxLines: null,
@@ -251,22 +286,25 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
+                    Padding(
+                      padding: EdgeInsets.only(top: 16.0),
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
                           'References',
-                          style: TextStyle(
-                            fontSize: 16,
-                          ),
+                          style: context
+                              .ccrThemeExtension.dialogFieldTitleTextTheme,
                         ),
                       ),
                     ),
                     ...List.generate(
                       ccrMaxReferences,
                       (index) => RadioListTile<int>(
-                        title: Text('${index + 1}'),
+                        title: Text(
+                          '${index + 1}',
+                          style: context
+                              .ccrThemeExtension.dialogFieldContentTextTheme,
+                        ),
                         value: index + 1,
                         groupValue: numberOfReferences,
                         onChanged: (int? value) {
@@ -314,7 +352,10 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Add step 2 of Linearity Check'),
+          title: Text(
+            'Add step 2 of Linearity Check',
+            style: context.ccrThemeExtension.dialogTitleTextTheme,
+          ),
           content: StatefulBuilder(
             builder: (BuildContext context, StateSetter setState) {
               return Column(
@@ -325,27 +366,29 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Row(
+                        Row(
                           children: [
                             Text(
                               'Description',
-                              style: TextStyle(
-                                fontSize: 16,
-                              ),
+                              style: context
+                                  .ccrThemeExtension.dialogFieldTitleTextTheme,
                             ),
                             Text(
                               ' *',
-                              style: TextStyle(
+                              style: context
+                                  .ccrThemeExtension.dialogFieldTitleTextTheme
+                                  .copyWith(
                                 color: Colors.red,
-                                fontSize: 16,
                               ),
                             ),
                           ],
                         ),
                         TextFormField(
                           controller: descriptionController,
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             hintText: 'Enter check description',
+                            hintStyle:
+                                context.ccrThemeExtension.dialogHintTextTheme,
                             border: OutlineInputBorder(),
                           ),
                           maxLines: null,
@@ -526,7 +569,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8.0),
+                      padding: EdgeInsets.only(top: 8.0),
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
