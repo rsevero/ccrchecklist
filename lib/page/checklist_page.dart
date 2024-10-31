@@ -32,14 +32,13 @@ class ChecklistPage extends StatelessWidget {
       },
       child: SafeArea(
         child: Scaffold(
-          appBar: CheckListAppBar(),
-          body: ChecklistBody(
-              title: checklistEditorStore.title,
-              description: checklistEditorStore.description,
-              rebreatherManufacturer:
-                  checklistEditorStore.rebreatherManufacturer,
-              rebreatherModel: checklistEditorStore.rebreatherModel,
-              sectionIndex: sectionIndex),
+          appBar: CheckListAppBar(
+            title: checklistEditorStore.title,
+            description: checklistEditorStore.description,
+            rebreatherManufacturer: checklistEditorStore.rebreatherManufacturer,
+            rebreatherModel: checklistEditorStore.rebreatherModel,
+          ),
+          body: ChecklistBody(sectionIndex: sectionIndex),
           bottomNavigationBar: BottomAppBar(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
