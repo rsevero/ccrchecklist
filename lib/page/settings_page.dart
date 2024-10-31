@@ -18,34 +18,36 @@ class SettingsPage extends StatelessWidget {
       configStore.setDiverName(_diverNameController.text);
     });
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Settings'),
-        actions: <Widget>[
-          Observer(builder: (context) {
-            return IconButton(
-              icon: const Icon(Icons.save),
-              onPressed: configStore.isModified
-                  ? () => configStore.saveConfig()
-                  : null,
-            );
-          }),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TextField(
-              controller: _diverNameController,
-              decoration: const InputDecoration(
-                labelText: 'Diver Name',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 20),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Settings'),
+          actions: <Widget>[
+            Observer(builder: (context) {
+              return IconButton(
+                icon: const Icon(Icons.save),
+                onPressed: configStore.isModified
+                    ? () => configStore.saveConfig()
+                    : null,
+              );
+            }),
           ],
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextField(
+                controller: _diverNameController,
+                decoration: const InputDecoration(
+                  labelText: 'Diver Name',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 20),
+            ],
+          ),
         ),
       ),
     );

@@ -44,37 +44,39 @@ class PdfPreviewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('PDF Preview'),
-        actions: [
-          if (defaultTargetPlatform == TargetPlatform.android) ...[
-            IconButton(
-              icon: const Icon(Icons.share),
-              onPressed: () => _onPressedShare(context),
-            ),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('PDF Preview'),
+          actions: [
+            if (defaultTargetPlatform == TargetPlatform.android) ...[
+              IconButton(
+                icon: const Icon(Icons.share),
+                onPressed: () => _onPressedShare(context),
+              ),
+            ],
           ],
-        ],
-      ),
-      body: PdfPreview(
-        initialPageFormat: PdfPageFormat.a4,
-        canDebug: false,
-        canChangePageFormat: true,
-        canChangeOrientation: false,
-        pageFormats: const {
-          'A4': PdfPageFormat.a4,
-          'Letter': PdfPageFormat.letter,
-          'Legal': PdfPageFormat.legal,
-        },
-        pdfFileName: _pdfFilename(),
-        build: (context) async {
-          final pdfBytes = await _generatePdf();
-          if (pdfBytes != null) {
-            return pdfBytes;
-          } else {
-            return Future.error('Failed to generate PDF');
-          }
-        },
+        ),
+        body: PdfPreview(
+          initialPageFormat: PdfPageFormat.a4,
+          canDebug: false,
+          canChangePageFormat: true,
+          canChangeOrientation: false,
+          pageFormats: const {
+            'A4': PdfPageFormat.a4,
+            'Letter': PdfPageFormat.letter,
+            'Legal': PdfPageFormat.legal,
+          },
+          pdfFileName: _pdfFilename(),
+          build: (context) async {
+            final pdfBytes = await _generatePdf();
+            if (pdfBytes != null) {
+              return pdfBytes;
+            } else {
+              return Future.error('Failed to generate PDF');
+            }
+          },
+        ),
       ),
     );
   }

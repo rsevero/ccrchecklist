@@ -17,48 +17,50 @@ class ChecklistCompletePage extends StatelessWidget {
     final nonOkSectionCount = checklistEditorStore.nonOkSectionsCount;
     final message = ChecklistCompleteHelper.mainReport(checklistEditorStore);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Checklist Report'),
-        actions: [
-          if (defaultTargetPlatform == TargetPlatform.linux) ...[
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Checklist Report'),
+          actions: [
+            if (defaultTargetPlatform == TargetPlatform.linux) ...[
+              IconButton(
+                icon: const Icon(Icons.picture_as_pdf),
+                onPressed: () => _onPressedShow(context),
+              ),
+            ],
+            if (defaultTargetPlatform == TargetPlatform.android) ...[
+              IconButton(
+                icon: const Icon(Icons.share),
+                onPressed: () => _onPressedShare(context),
+              ),
+            ],
             IconButton(
-              icon: const Icon(Icons.picture_as_pdf),
-              onPressed: () => _onPressedShow(context),
+              icon: const Icon(Icons.help_outline),
+              onPressed: () =>
+                  ccrOpenHelpDialog(context, 'ChecklistCompletePage'),
+              tooltip: 'Help',
             ),
           ],
-          if (defaultTargetPlatform == TargetPlatform.android) ...[
-            IconButton(
-              icon: const Icon(Icons.share),
-              onPressed: () => _onPressedShare(context),
-            ),
-          ],
-          IconButton(
-            icon: const Icon(Icons.help_outline),
-            onPressed: () =>
-                ccrOpenHelpDialog(context, 'ChecklistCompletePage'),
-            tooltip: 'Help',
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  const SizedBox(width: 20),
+                  Text(
+                    message,
+                    textScaler: const TextScaler.linear(1.3),
+                  ),
+                ],
+              ),
+              if (nonOkSectionCount > 0) ...[
+                const NonOkSectionsReport(),
+              ]
+            ],
           ),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                const SizedBox(width: 20),
-                Text(
-                  message,
-                  textScaler: const TextScaler.linear(1.3),
-                ),
-              ],
-            ),
-            if (nonOkSectionCount > 0) ...[
-              const NonOkSectionsReport(),
-            ]
-          ],
         ),
       ),
     );

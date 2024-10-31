@@ -25,10 +25,12 @@ class TemplateEditorPage extends StatelessWidget {
           navigator.pop();
         }
       },
-      child: Scaffold(
-        appBar: TemplateEditorPageAppBar(context, templateEditorStore),
-        body: const TemplateEditorPageBody(),
-        floatingActionButton: const TemplateEditorPageActionsWidget(),
+      child: SafeArea(
+        child: Scaffold(
+          appBar: TemplateEditorPageAppBar(context, templateEditorStore),
+          body: const TemplateEditorPageBody(),
+          floatingActionButton: const TemplateEditorPageActionsWidget(),
+        ),
       ),
     );
   }

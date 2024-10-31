@@ -43,31 +43,34 @@ class TemplateListPage extends StatelessWidget {
           );
         }
 
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text('CCR Checklist'),
-            elevation: 4,
-            actions: <Widget>[
-              IconButton(
-                icon: const Icon(Icons.edit),
-                onPressed: () => _openTemplateEditor(context),
-                tooltip: 'Template Editor',
-              ),
-              IconButton(
-                icon: const Icon(Icons.settings_outlined),
-                onPressed: () => _openSettingsEditor(context),
-                tooltip: 'Settings',
-              ),
-              IconButton(
-                icon: const Icon(Icons.help_outline),
-                onPressed: () => ccrOpenHelpDialog(context, 'TemplateListPage'),
-                tooltip: 'Help',
-              ),
-            ],
-          ),
-          body: TemplateList(
-            isEditor: false,
-            onTapTemplateFile: _onTapTemplateFile,
+        return SafeArea(
+          child: Scaffold(
+            appBar: AppBar(
+              title: const Text('CCR Checklist'),
+              elevation: 4,
+              actions: <Widget>[
+                IconButton(
+                  icon: const Icon(Icons.edit),
+                  onPressed: () => _openTemplateEditor(context),
+                  tooltip: 'Template Editor',
+                ),
+                IconButton(
+                  icon: const Icon(Icons.settings_outlined),
+                  onPressed: () => _openSettingsEditor(context),
+                  tooltip: 'Settings',
+                ),
+                IconButton(
+                  icon: const Icon(Icons.help_outline),
+                  onPressed: () =>
+                      ccrOpenHelpDialog(context, 'TemplateListPage'),
+                  tooltip: 'Help',
+                ),
+              ],
+            ),
+            body: TemplateList(
+              isEditor: false,
+              onTapTemplateFile: _onTapTemplateFile,
+            ),
           ),
         );
       },

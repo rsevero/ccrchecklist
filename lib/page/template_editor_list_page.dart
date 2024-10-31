@@ -15,28 +15,30 @@ class TemplateEditorListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Checklist Templates'),
-        elevation: 4,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.help_outline),
-            onPressed: () =>
-                ccrOpenHelpDialog(context, 'TemplateEditorListPage'),
-            tooltip: 'Help',
-          ),
-        ],
-      ),
-      body: TemplateList(
-        isEditor: true,
-        onTapTemplateFile: _onTapTemplateFile,
-        onRemoveTemplateFile: _onRemoveTemplateFile,
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _addNewTemplate(context),
-        tooltip: 'Create New Template',
-        child: const Icon(Icons.add),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Checklist Templates'),
+          elevation: 4,
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.help_outline),
+              onPressed: () =>
+                  ccrOpenHelpDialog(context, 'TemplateEditorListPage'),
+              tooltip: 'Help',
+            ),
+          ],
+        ),
+        body: TemplateList(
+          isEditor: true,
+          onTapTemplateFile: _onTapTemplateFile,
+          onRemoveTemplateFile: _onRemoveTemplateFile,
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => _addNewTemplate(context),
+          tooltip: 'Create New Template',
+          child: const Icon(Icons.add),
+        ),
       ),
     );
   }
