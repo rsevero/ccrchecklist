@@ -93,7 +93,7 @@ class CheckListAppBar extends StatelessWidget implements PreferredSizeWidget {
             children: [
               Text(
                 'Title',
-                style: context.textTheme.bodySmall,
+                style: context.textTheme.bodyMedium,
               ),
               Text(
                 title,
@@ -103,7 +103,7 @@ class CheckListAppBar extends StatelessWidget implements PreferredSizeWidget {
               SizedBox(height: context.textTheme.bodySmall?.fontSize ?? 8),
               Text(
                 'Description',
-                style: context.textTheme.bodySmall,
+                style: context.textTheme.bodyMedium,
               ),
               Text(
                 description,
@@ -112,7 +112,7 @@ class CheckListAppBar extends StatelessWidget implements PreferredSizeWidget {
               SizedBox(height: context.textTheme.bodySmall?.fontSize ?? 8),
               Text(
                 'Manufacturer/Model',
-                style: context.textTheme.bodySmall,
+                style: context.textTheme.bodyMedium,
               ),
               Text(
                 '$rebreatherManufacturer $rebreatherModel',
@@ -121,7 +121,7 @@ class CheckListAppBar extends StatelessWidget implements PreferredSizeWidget {
               SizedBox(height: context.textTheme.bodySmall?.fontSize ?? 8),
               Text(
                 'Diver',
-                style: context.textTheme.bodySmall,
+                style: context.textTheme.bodyMedium,
               ),
               Text(
                 diverName,
@@ -130,7 +130,7 @@ class CheckListAppBar extends StatelessWidget implements PreferredSizeWidget {
               SizedBox(height: context.textTheme.bodySmall?.fontSize ?? 8),
               Text(
                 'Creation date',
-                style: context.textTheme.bodySmall,
+                style: context.textTheme.bodyMedium,
               ),
               Text(
                 DateFormat('yyyy-MM-dd – kk:mm').format(date),
