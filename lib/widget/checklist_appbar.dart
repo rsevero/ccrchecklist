@@ -111,11 +111,20 @@ class CheckListAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
               SizedBox(height: context.textTheme.bodySmall?.fontSize ?? 8),
               Text(
-                'Manufacturer/Model',
+                'Manufacturer',
                 style: context.textTheme.bodyMedium,
               ),
               Text(
-                '$rebreatherManufacturer $rebreatherModel',
+                rebreatherManufacturer,
+                style: context.textTheme.titleMedium,
+              ),
+              SizedBox(height: context.textTheme.bodySmall?.fontSize ?? 8),
+              Text(
+                'Model',
+                style: context.textTheme.bodyMedium,
+              ),
+              Text(
+                rebreatherModel,
                 style: context.textTheme.titleMedium,
               ),
               SizedBox(height: context.textTheme.bodySmall?.fontSize ?? 8),
