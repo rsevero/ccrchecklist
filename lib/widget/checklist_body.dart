@@ -1,4 +1,3 @@
-import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/misc/flutter_extension_methods.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:ccr_checklist/widget/checklist_checklist.dart';
@@ -18,6 +17,7 @@ class ChecklistBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final checklistEditorStore = Provider.of<ChecklistEditorStore>(context);
     final section = checklistEditorStore.sections[sectionIndex];
+    final paddingSize = (context.textTheme.titleLarge?.fontSize ?? 22.0) * 0.75;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -27,13 +27,20 @@ class ChecklistBody extends StatelessWidget {
           Observer(
             builder: (_) => Container(
               width: double.infinity,
-              padding: const EdgeInsets.all(16.0),
-              color: checklistEditorStore.sectionsOk[sectionIndex]
-                  ? ccrSectionOkColor
-                  : context.colorScheme.error,
+              padding: EdgeInsets.all(paddingSize),
+              decoration: BoxDecoration(
+                color: checklistEditorStore.sectionsOk[sectionIndex]
+                    ? context.colorScheme.primary
+                    : context.colorScheme.error,
+                borderRadius: BorderRadius.circular(16.0),
+              ),
               child: Text(
                 "${section.title} - ${sectionIndex + 1}/${checklistEditorStore.sections.length}",
-                style: context.textTheme.titleLarge,
+                style: context.textTheme.titleLarge?.copyWith(
+                  color: checklistEditorStore.sectionsOk[sectionIndex]
+                      ? context.colorScheme.onPrimary
+                      : context.colorScheme.onError,
+                ),
               ),
             ),
           ),

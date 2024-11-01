@@ -31,6 +31,10 @@ mixin _$CCRThemeExtensionTailorMixin on ThemeExtension<CCRThemeExtension> {
   TextStyle get dialogFieldContentTextTheme;
   TextStyle get dialogHintTextTheme;
   TextStyle get appBarSubtitleTextTheme;
+  TextStyle get checkDescriptionTextTheme;
+  TextStyle get checkReferenceTextTheme;
+  TextStyle get linearityColumnTitleTextTheme;
+  TextStyle get linearityColumnContentTextTheme;
 
   @override
   CCRThemeExtension copyWith({
@@ -56,6 +60,10 @@ mixin _$CCRThemeExtensionTailorMixin on ThemeExtension<CCRThemeExtension> {
     TextStyle? dialogFieldContentTextTheme,
     TextStyle? dialogHintTextTheme,
     TextStyle? appBarSubtitleTextTheme,
+    TextStyle? checkDescriptionTextTheme,
+    TextStyle? checkReferenceTextTheme,
+    TextStyle? linearityColumnTitleTextTheme,
+    TextStyle? linearityColumnContentTextTheme,
   }) {
     return CCRThemeExtension(
       displayLarge: displayLarge ?? this.displayLarge,
@@ -141,7 +149,16 @@ mixin _$CCRThemeExtensionTailorMixin on ThemeExtension<CCRThemeExtension> {
             const DeepCollectionEquality()
                 .equals(dialogHintTextTheme, other.dialogHintTextTheme) &&
             const DeepCollectionEquality().equals(
-                appBarSubtitleTextTheme, other.appBarSubtitleTextTheme));
+                appBarSubtitleTextTheme, other.appBarSubtitleTextTheme) &&
+            const DeepCollectionEquality().equals(
+                checkDescriptionTextTheme, other.checkDescriptionTextTheme) &&
+            const DeepCollectionEquality().equals(
+                checkReferenceTextTheme, other.checkReferenceTextTheme) &&
+            const DeepCollectionEquality().equals(linearityColumnTitleTextTheme,
+                other.linearityColumnTitleTextTheme) &&
+            const DeepCollectionEquality().equals(
+                linearityColumnContentTextTheme,
+                other.linearityColumnContentTextTheme));
   }
 
   @override
@@ -170,6 +187,10 @@ mixin _$CCRThemeExtensionTailorMixin on ThemeExtension<CCRThemeExtension> {
       const DeepCollectionEquality().hash(dialogFieldContentTextTheme),
       const DeepCollectionEquality().hash(dialogHintTextTheme),
       const DeepCollectionEquality().hash(appBarSubtitleTextTheme),
+      const DeepCollectionEquality().hash(checkDescriptionTextTheme),
+      const DeepCollectionEquality().hash(checkReferenceTextTheme),
+      const DeepCollectionEquality().hash(linearityColumnTitleTextTheme),
+      const DeepCollectionEquality().hash(linearityColumnContentTextTheme),
     ]);
   }
 }
@@ -205,4 +226,12 @@ extension CCRThemeExtensionBuildContextProps on BuildContext {
   TextStyle get dialogHintTextTheme => cCRThemeExtension.dialogHintTextTheme;
   TextStyle get appBarSubtitleTextTheme =>
       cCRThemeExtension.appBarSubtitleTextTheme;
+  TextStyle get checkDescriptionTextTheme =>
+      cCRThemeExtension.checkDescriptionTextTheme;
+  TextStyle get checkReferenceTextTheme =>
+      cCRThemeExtension.checkReferenceTextTheme;
+  TextStyle get linearityColumnTitleTextTheme =>
+      cCRThemeExtension.linearityColumnTitleTextTheme;
+  TextStyle get linearityColumnContentTextTheme =>
+      cCRThemeExtension.linearityColumnContentTextTheme;
 }

@@ -154,6 +154,11 @@ class MaterialTheme {
           fontSize: 32,
           color: foregroundColor,
         ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(16.0),
+          ),
+        ),
       ),
       extensions: [
         CCRThemeExtension(

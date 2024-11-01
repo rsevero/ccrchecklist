@@ -1,4 +1,4 @@
-import 'package:ccr_checklist/misc/constants.dart';
+import 'package:ccr_checklist/misc/flutter_extension_methods.dart';
 import 'package:ccr_checklist/misc/helper_functions.dart';
 import 'package:ccr_checklist/page/checklist_complete_page.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
@@ -46,20 +46,28 @@ class ChecklistPage extends StatelessWidget {
                 Observer(
                   builder: (_) {
                     final buttonEnabled = sectionIndex > 0;
+                    Color? buttonColor;
+                    Color? iconColor;
+
+                    if (buttonEnabled) {
+                      buttonColor =
+                          checklistEditorStore.previousSectionsOk[sectionIndex]
+                              ? buttonColor = context.colorScheme.primary
+                              : context.colorScheme.error;
+                      iconColor =
+                          checklistEditorStore.previousSectionsOk[sectionIndex]
+                              ? context.colorScheme.onPrimary
+                              : context.colorScheme.onError;
+                    }
+
                     return DecoratedBox(
                       decoration: BoxDecoration(
-                          color: !buttonEnabled ||
-                                  checklistEditorStore
-                                      .previousSectionsOk[sectionIndex]
-                              ? null
-                              : Theme.of(context).colorScheme.error),
+                        color: buttonColor,
+                        borderRadius: BorderRadius.circular(16.0),
+                      ),
                       child: IconButton(
                         icon: const Icon(Icons.navigate_before),
-                        color: !buttonEnabled ||
-                                checklistEditorStore
-                                    .previousSectionsOk[sectionIndex]
-                            ? null
-                            : Theme.of(context).colorScheme.onError,
+                        color: iconColor,
                         onPressed: buttonEnabled
                             ? () => _onTapPreviousSection(context)
                             : null,
@@ -71,22 +79,26 @@ class ChecklistPage extends StatelessWidget {
                   builder: (_) {
                     final buttonEnabled = sectionIndex < totalSections;
                     Color? buttonColor;
+                    Color? iconColor;
+
                     if (buttonEnabled) {
                       buttonColor =
                           checklistEditorStore.sectionsOk[sectionIndex]
-                              ? ccrSectionOkColor
-                              : Theme.of(context).colorScheme.error;
+                              ? context.colorScheme.primary
+                              : context.colorScheme.error;
+                      iconColor = checklistEditorStore.sectionsOk[sectionIndex]
+                          ? context.colorScheme.onPrimary
+                          : context.colorScheme.onError;
                     }
+
                     return DecoratedBox(
                       decoration: BoxDecoration(
                         color: buttonColor,
+                        borderRadius: BorderRadius.circular(16.0),
                       ),
                       child: IconButton(
                         icon: const Icon(Icons.navigate_next),
-                        color: !buttonEnabled ||
-                                checklistEditorStore.sectionsOk[sectionIndex]
-                            ? null
-                            : Theme.of(context).colorScheme.onError,
+                        color: iconColor,
                         onPressed: buttonEnabled
                             ? () => _onTapNextSection(context, totalSections)
                             : null,

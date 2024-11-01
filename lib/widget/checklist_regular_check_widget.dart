@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:ccr_checklist/data/checklist_check.dart';
 import 'package:ccr_checklist/misc/constants.dart';
+import 'package:ccr_checklist/misc/flutter_extension_methods.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -66,7 +67,6 @@ class _ChecklistRegularCheckWidgetState
 
     return InkWell(
       onTap: () {
-        // Toggles the checkbox state
         checklistEditorStore.setCheckIsChecked(
             widget.sectionIndex, widget.checkIndex, !check.isChecked);
       },
@@ -87,11 +87,18 @@ class _ChecklistRegularCheckWidgetState
           children: [
             RichText(
               text: TextSpan(
-                style: Theme.of(context).textTheme.bodyLarge,
+                style: context.textTheme.bodyLarge,
                 children: [
-                  TextSpan(text: check.description),
+                  TextSpan(
+                    text: check.description,
+                    style: context.ccrThemeExtension.checkDescriptionTextTheme,
+                  ),
                   if (check.observation.isNotEmpty) ...[
-                    const TextSpan(text: ' '),
+                    TextSpan(
+                      text: ' ',
+                      style:
+                          context.ccrThemeExtension.checkDescriptionTextTheme,
+                    ),
                     WidgetSpan(
                       alignment: PlaceholderAlignment.middle,
                       child: MouseRegion(
@@ -193,7 +200,10 @@ class _ChecklistRegularCheckWidgetState
                   height: 68,
                   child: Align(
                     alignment: Alignment.center,
-                    child: Text(check.references[index].prefix ?? ''),
+                    child: Text(
+                      check.references[index].prefix ?? '',
+                      style: context.ccrThemeExtension.checkReferenceTextTheme,
+                    ),
                   ),
                 ),
               ),
@@ -216,10 +226,14 @@ class _ChecklistRegularCheckWidgetState
                               : check.references[index].value.toString(),
                           decoration: InputDecoration(
                             labelText: 'Ref ${index + 1}',
+                            labelStyle: context
+                                .ccrThemeExtension.dialogFieldTitleTextTheme,
                             border: const OutlineInputBorder(),
                             counterText: '',
                           ),
                           maxLength: 5,
+                          style: context
+                              .ccrThemeExtension.dialogFieldContentTextTheme,
                           keyboardType: const TextInputType.numberWithOptions(
                               decimal: true, signed: true),
                           inputFormatters: [
@@ -250,7 +264,10 @@ class _ChecklistRegularCheckWidgetState
                   height: 68,
                   child: Align(
                     alignment: Alignment.center,
-                    child: Text(check.references[index].suffix ?? ''),
+                    child: Text(
+                      check.references[index].suffix ?? '',
+                      style: context.ccrThemeExtension.checkReferenceTextTheme,
+                    ),
                   ),
                 ),
               ),

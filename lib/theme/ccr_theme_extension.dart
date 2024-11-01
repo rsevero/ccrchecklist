@@ -21,25 +21,32 @@ class CCRThemeExtension extends ThemeExtension<CCRThemeExtension>
     required this.bodySmall,
     required this.labelLarge,
   }) {
-    manufacturerTextTheme = _copyUnsettingColor(
-        headlineSmall.copyWith(fontWeight: FontWeight.w200));
+    manufacturerTextTheme = _copyUnsettingColor(headlineSmall)
+        .copyWith(fontWeight: FontWeight.w200);
     modelTextTheme =
-        _copyUnsettingColor(titleLarge.copyWith(fontWeight: FontWeight.w500));
+        _copyUnsettingColor(titleLarge).copyWith(fontWeight: FontWeight.w500);
     templateTitleTextTheme =
-        _copyUnsettingColor(titleMedium.copyWith(fontWeight: FontWeight.w700));
+        _copyUnsettingColor(titleMedium).copyWith(fontWeight: FontWeight.w700);
     templateDescriptionTextTheme =
-        _copyUnsettingColor(bodyLarge.copyWith(fontWeight: FontWeight.w300));
-    dialogTitleTextTheme = _copyUnsettingColor(
-        headlineMedium.copyWith(fontWeight: FontWeight.w600));
+        _copyUnsettingColor(bodyLarge).copyWith(fontWeight: FontWeight.w300);
+    dialogTitleTextTheme = _copyUnsettingColor(headlineMedium)
+        .copyWith(fontWeight: FontWeight.w600);
     dialogFieldTitleTextTheme =
-        _copyUnsettingColor(bodyLarge.copyWith(fontWeight: FontWeight.w400));
+        _copyUnsettingColor(bodyLarge).copyWith(fontWeight: FontWeight.w400);
     dialogFieldContentTextTheme =
-        _copyUnsettingColor(bodyLarge.copyWith(fontWeight: FontWeight.w500));
-    dialogHintTextTheme = _copyUnsettingColor(bodyLarge.copyWith(
-      fontWeight: FontWeight.w300,
+        _copyUnsettingColor(bodyLarge).copyWith(fontWeight: FontWeight.w500);
+    dialogHintTextTheme = _copyUnsettingColor(bodyLarge).copyWith(
       fontStyle: FontStyle.italic,
-    ));
+      fontWeight: FontWeight.w300,
+    );
     appBarSubtitleTextTheme = _copyUnsettingColor(titleSmall);
+    checkDescriptionTextTheme =
+        _copyUnsettingColor(bodyLarge).copyWith(fontWeight: FontWeight.w500);
+    checkReferenceTextTheme =
+        _copyUnsettingColor(bodyLarge).copyWith(fontStyle: FontStyle.italic);
+    linearityColumnTitleTextTheme =
+        _copyUnsettingColor(bodyLarge).copyWith(fontWeight: FontWeight.w500);
+    linearityColumnContentTextTheme = _copyUnsettingColor(bodyLarge);
   }
 
   @override
@@ -86,6 +93,14 @@ class CCRThemeExtension extends ThemeExtension<CCRThemeExtension>
   late final TextStyle dialogHintTextTheme;
   @override
   late final TextStyle appBarSubtitleTextTheme;
+  @override
+  late final TextStyle checkDescriptionTextTheme;
+  @override
+  late final TextStyle checkReferenceTextTheme;
+  @override
+  late final TextStyle linearityColumnTitleTextTheme;
+  @override
+  late final TextStyle linearityColumnContentTextTheme;
 
   TextStyle _copyUnsettingColor(TextStyle style) {
     final TextStyle uncoloredStyle = TextStyle(
