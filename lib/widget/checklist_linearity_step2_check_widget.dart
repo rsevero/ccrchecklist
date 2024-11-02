@@ -1,5 +1,6 @@
 import 'package:ccr_checklist/data/checklist_check.dart';
 import 'package:ccr_checklist/misc/constants.dart';
+import 'package:ccr_checklist/misc/flutter_extension_methods.dart';
 import 'package:ccr_checklist/misc/linearity_check_helper.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:ccr_checklist/widget/linearity_worksheet_text.dart';
@@ -87,15 +88,35 @@ class _ChecklistLinearityStep2CheckWidgetState
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Container(
-              color: Theme.of(context).colorScheme.tertiary,
+              color: context.ccrThemeExtension.tertiary,
               child: DataTable(
                 columnSpacing: 8,
-                columns: const [
-                  DataColumn(label: LinearityWorksheetText('mV')),
-                  DataColumn(label: LinearityWorksheetText('/0.21')),
-                  DataColumn(label: LinearityWorksheetText('x1.6')),
-                  DataColumn(label: LinearityWorksheetText('actual')),
-                  DataColumn(label: LinearityWorksheetText('%')),
+                columns: [
+                  DataColumn(
+                      label: LinearityWorksheetText(
+                          'mV',
+                          context.ccrThemeExtension
+                              .linearityColumnTitleTextTheme)),
+                  DataColumn(
+                      label: LinearityWorksheetText(
+                          '/0.21',
+                          context.ccrThemeExtension
+                              .linearityColumnTitleTextTheme)),
+                  DataColumn(
+                      label: LinearityWorksheetText(
+                          'x1.6',
+                          context.ccrThemeExtension
+                              .linearityColumnTitleTextTheme)),
+                  DataColumn(
+                      label: LinearityWorksheetText(
+                          'actual',
+                          context.ccrThemeExtension
+                              .linearityColumnTitleTextTheme)),
+                  DataColumn(
+                      label: LinearityWorksheetText(
+                          '%',
+                          context.ccrThemeExtension
+                              .linearityColumnTitleTextTheme)),
                 ],
                 rows: List<DataRow>.generate(
                   checklistEditorStore.linearityCheckReferenceCount,
@@ -223,18 +244,14 @@ class _ChecklistLinearityStep2CheckWidgetState
     final checklistEditorStore = Provider.of<ChecklistEditorStore>(context);
     return Container(
       color: _activeFieldIndex == index
-          ? Theme.of(context).colorScheme.primary // Active field color
-          : Theme.of(context)
-              .colorScheme
-              .secondaryContainer, // Normal field color
+          ? context.ccrThemeExtension.primary
+          : context.ccrThemeExtension.secondaryContainer,
       child: TextField(
         controller: _controllers[index],
         style: TextStyle(
           color: _activeFieldIndex == index
-              ? Theme.of(context).colorScheme.onPrimary // Active field color
-              : Theme.of(context)
-                  .colorScheme
-                  .onSecondaryContainer, // Normal field color
+              ? context.ccrThemeExtension.onPrimary
+              : context.ccrThemeExtension.onSecondaryContainer,
         ),
         decoration: const InputDecoration(
           counterText: '',

@@ -30,16 +30,16 @@ class ChecklistBody extends StatelessWidget {
               padding: EdgeInsets.all(paddingSize),
               decoration: BoxDecoration(
                 color: checklistEditorStore.sectionsOk[sectionIndex]
-                    ? context.colorScheme.primary
-                    : context.colorScheme.error,
+                    ? context.ccrThemeExtension.primary
+                    : context.ccrThemeExtension.error,
                 borderRadius: BorderRadius.circular(16.0),
               ),
               child: Text(
                 "${section.title} - ${sectionIndex + 1}/${checklistEditorStore.sections.length}",
                 style: context.textTheme.titleLarge?.copyWith(
                   color: checklistEditorStore.sectionsOk[sectionIndex]
-                      ? context.colorScheme.onPrimary
-                      : context.colorScheme.onError,
+                      ? context.ccrThemeExtension.onPrimary
+                      : context.ccrThemeExtension.onError,
                 ),
               ),
             ),

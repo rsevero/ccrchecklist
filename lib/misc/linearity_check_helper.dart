@@ -1,3 +1,4 @@
+import 'package:ccr_checklist/misc/flutter_extension_methods.dart';
 import 'package:ccr_checklist/widget/linearity_worksheet_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -10,7 +11,10 @@ Widget buildNonEditableLinearityCheckCell(
       onTap: onTap,
       child: Center(
         child: Observer(
-          builder: (_) => LinearityWorksheetText(text),
+          builder: (_) => LinearityWorksheetText(
+            text,
+            context.ccrThemeExtension.linearityColumnContentTextTheme,
+          ),
         ),
       ),
     ),

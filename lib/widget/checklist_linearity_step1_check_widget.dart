@@ -1,5 +1,6 @@
 import 'package:ccr_checklist/data/checklist_check.dart';
 import 'package:ccr_checklist/misc/constants.dart';
+import 'package:ccr_checklist/misc/flutter_extension_methods.dart';
 import 'package:ccr_checklist/misc/linearity_check_helper.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:ccr_checklist/widget/linearity_worksheet_text.dart';
@@ -82,84 +83,106 @@ class _ChecklistLinearityStep1CheckWidgetState
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(check.description),
-          const SizedBox(height: 8),
+          Text(
+            check.description,
+            style: context.ccrThemeExtension.checkDescriptionTextTheme,
+          ),
+          SizedBox(height: 8),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            child: Container(
-              color: Theme.of(context).colorScheme.tertiary,
-              child: DataTable(
-                columnSpacing: 8,
-                columns: const [
-                  DataColumn(label: LinearityWorksheetText('mV')),
-                  DataColumn(label: LinearityWorksheetText('/0.21')),
-                  DataColumn(label: LinearityWorksheetText('x1.6')),
-                ],
-                rows: List<DataRow>.generate(
-                  checklistEditorStore.linearityCheckReferenceCount,
-                  (index) => DataRow(
-                    cells: [
-                      DataCell(
-                        GestureDetector(
-                          onTap: () {
-                            FocusScope.of(context)
-                                .requestFocus(_focusNodes[index]);
-                            setState(() {
-                              _activeFieldIndex = index;
-                            });
-                          },
-                          child: _buildEditableFieldCell(context, index),
-                        ),
-                      ),
-                      DataCell(
-                        Observer(
-                          builder: (_) => buildNonEditableLinearityCheckCell(
-                            context,
-                            index,
-                            checklistEditorStore
-                                        .linearityWorksheet[index].divided ==
-                                    null
-                                ? ''
-                                : checklistEditorStore
-                                    .linearityWorksheet[index].divided!
-                                    .toStringAsFixed(1),
-                            () {
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(16.0),
+              child: Container(
+                color: context.ccrThemeExtension.secondaryContainer,
+                child: DataTable(
+                  columnSpacing: 8,
+                  columns: [
+                    DataColumn(
+                        label: LinearityWorksheetText(
+                            'mV',
+                            context.ccrThemeExtension
+                                .linearityColumnTitleTextTheme)),
+                    DataColumn(
+                        label: LinearityWorksheetText(
+                            '/0.21',
+                            context.ccrThemeExtension
+                                .linearityColumnTitleTextTheme)),
+                    DataColumn(
+                        label: LinearityWorksheetText(
+                            'x1.6',
+                            context.ccrThemeExtension
+                                .linearityColumnTitleTextTheme)),
+                  ],
+                  headingRowColor: WidgetStateProperty.resolveWith<Color?>(
+                      (Set<WidgetState> states) {
+                    return context.ccrThemeExtension.secondary;
+                  }),
+                  rows: List<DataRow>.generate(
+                    checklistEditorStore.linearityCheckReferenceCount,
+                    (index) => DataRow(
+                      cells: [
+                        DataCell(
+                          GestureDetector(
+                            onTap: () {
                               FocusScope.of(context)
                                   .requestFocus(_focusNodes[index]);
-                              setState(() => _activeFieldIndex = index);
-                              if (_focusNodes[index].hasFocus) {
-                                SystemChannels.textInput
-                                    .invokeMethod('TextInput.show');
-                              }
+                              setState(() {
+                                _activeFieldIndex = index;
+                              });
                             },
+                            child: _buildEditableFieldCell(context, index),
                           ),
                         ),
-                      ),
-                      DataCell(
-                        Observer(
-                          builder: (_) => buildNonEditableLinearityCheckCell(
-                            context,
-                            index,
-                            checklistEditorStore
-                                        .linearityWorksheet[index].multiplied ==
-                                    null
-                                ? ''
-                                : checklistEditorStore
-                                    .linearityWorksheet[index].multiplied!
-                                    .toStringAsFixed(1),
-                            () {
-                              FocusScope.of(context)
-                                  .requestFocus(_focusNodes[index]);
-                              setState(() => _activeFieldIndex = index);
-                              if (_focusNodes[index].hasFocus) {
-                                SystemChannels.textInput
-                                    .invokeMethod('TextInput.show');
-                              }
-                            },
+                        DataCell(
+                          Observer(
+                            builder: (_) => buildNonEditableLinearityCheckCell(
+                              context,
+                              index,
+                              checklistEditorStore
+                                          .linearityWorksheet[index].divided ==
+                                      null
+                                  ? ''
+                                  : checklistEditorStore
+                                      .linearityWorksheet[index].divided!
+                                      .toStringAsFixed(1),
+                              () {
+                                FocusScope.of(context)
+                                    .requestFocus(_focusNodes[index]);
+                                setState(() => _activeFieldIndex = index);
+                                if (_focusNodes[index].hasFocus) {
+                                  SystemChannels.textInput
+                                      .invokeMethod('TextInput.show');
+                                }
+                              },
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                        DataCell(
+                          Observer(
+                            builder: (_) => buildNonEditableLinearityCheckCell(
+                              context,
+                              index,
+                              checklistEditorStore.linearityWorksheet[index]
+                                          .multiplied ==
+                                      null
+                                  ? ''
+                                  : checklistEditorStore
+                                      .linearityWorksheet[index].multiplied!
+                                      .toStringAsFixed(1),
+                              () {
+                                FocusScope.of(context)
+                                    .requestFocus(_focusNodes[index]);
+                                setState(() => _activeFieldIndex = index);
+                                if (_focusNodes[index].hasFocus) {
+                                  SystemChannels.textInput
+                                      .invokeMethod('TextInput.show');
+                                }
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -174,19 +197,11 @@ class _ChecklistLinearityStep1CheckWidgetState
     final checklistEditorStore = Provider.of<ChecklistEditorStore>(context);
     return Container(
       height: 68,
-      color: _activeFieldIndex == index
-          ? Theme.of(context).colorScheme.primary // Active field color
-          : Theme.of(context)
-              .colorScheme
-              .secondaryContainer, // Normal field color
+      color: context.ccrThemeExtension.surface,
       child: TextField(
         controller: _controllers[index],
         style: TextStyle(
-          color: _activeFieldIndex == index
-              ? Theme.of(context).colorScheme.onPrimary // Active field color
-              : Theme.of(context)
-                  .colorScheme
-                  .onSecondaryContainer, // Normal field color
+          color: context.ccrThemeExtension.onSurface,
         ),
         decoration: const InputDecoration(
           counterText: '',
@@ -204,7 +219,7 @@ class _ChecklistLinearityStep1CheckWidgetState
         ],
         onTap: () {
           setState(() {
-            _activeFieldIndex = index; // Update the active field index
+            _activeFieldIndex = index;
           });
         },
         focusNode: _focusNodes[index],

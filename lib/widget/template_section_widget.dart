@@ -1,5 +1,7 @@
 import 'package:ccr_checklist/data/template_section.dart';
+import 'package:ccr_checklist/misc/flutter_extension_methods.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
+import 'package:ccr_checklist/theme/ccr_theme_extension.dart';
 import 'package:ccr_checklist/widget/template_check_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -22,7 +24,7 @@ class TemplateSectionWidget extends StatelessWidget {
     return Observer(
       key: ValueKey(sectionIndex),
       builder: (_) {
-        ColorScheme colorScheme = Theme.of(context).colorScheme;
+        CCRThemeExtension ccrThemeExtension = context.ccrThemeExtension;
 
         final isSelected =
             (sectionIndex == templateEditorStore.selectedSectionIndex);
@@ -30,7 +32,9 @@ class TemplateSectionWidget extends StatelessWidget {
         templateEditorStore.setExpandedSectionIfUnset(sectionIndex, isExpanded);
 
         return Container(
-          color: isSelected ? colorScheme.primaryContainer : Colors.transparent,
+          color: isSelected
+              ? ccrThemeExtension.primaryContainer
+              : Colors.transparent,
           child: GestureDetector(
             onTap: () => onTapSection(context, sectionIndex),
             child: ExpansionTile(
@@ -38,8 +42,8 @@ class TemplateSectionWidget extends StatelessWidget {
                 section.title,
                 style: TextStyle(
                   color: isSelected
-                      ? colorScheme.onPrimaryContainer
-                      : colorScheme.onSurface,
+                      ? ccrThemeExtension.onPrimaryContainer
+                      : ccrThemeExtension.onSurface,
                 ),
               ),
               onExpansionChanged: (expanded) {

@@ -9,6 +9,36 @@ part of 'ccr_theme_extension.dart';
 // **************************************************************************
 
 mixin _$CCRThemeExtensionTailorMixin on ThemeExtension<CCRThemeExtension> {
+  Color get primary;
+  Color get onPrimary;
+  Color get secondary;
+  Color get onSecondary;
+  Color get tertiary;
+  Color get onTertiary;
+  Color get primaryContainer;
+  Color get onPrimaryContainer;
+  Color get secondaryContainer;
+  Color get onSecondaryContainer;
+  Color get tertiaryContainer;
+  Color get onTertiaryContainer;
+  Color get error;
+  Color get onError;
+  Color get surface;
+  Color get onSurface;
+  Color get surfaceDim;
+  Color get surfaceBright;
+  Color get surfaceContainerLowest;
+  Color get surfaceContainerLow;
+  Color get surfaceContainer;
+  Color get surfaceContainerHigh;
+  Color get surfaceContainerHighest;
+  Color get outline;
+  Color get outlineVariant;
+  Color get shadow;
+  Color get scrim;
+  Color get inverseSurface;
+  Color get inversePrimary;
+  Color get onInverseSurface;
   TextStyle get displayLarge;
   TextStyle get displayMedium;
   TextStyle get displaySmall;
@@ -38,6 +68,36 @@ mixin _$CCRThemeExtensionTailorMixin on ThemeExtension<CCRThemeExtension> {
 
   @override
   CCRThemeExtension copyWith({
+    Color? primary,
+    Color? onPrimary,
+    Color? secondary,
+    Color? onSecondary,
+    Color? tertiary,
+    Color? onTertiary,
+    Color? primaryContainer,
+    Color? onPrimaryContainer,
+    Color? secondaryContainer,
+    Color? onSecondaryContainer,
+    Color? tertiaryContainer,
+    Color? onTertiaryContainer,
+    Color? error,
+    Color? onError,
+    Color? surface,
+    Color? onSurface,
+    Color? surfaceDim,
+    Color? surfaceBright,
+    Color? surfaceContainerLowest,
+    Color? surfaceContainerLow,
+    Color? surfaceContainer,
+    Color? surfaceContainerHigh,
+    Color? surfaceContainerHighest,
+    Color? outline,
+    Color? outlineVariant,
+    Color? shadow,
+    Color? scrim,
+    Color? inverseSurface,
+    Color? inversePrimary,
+    Color? onInverseSurface,
     TextStyle? displayLarge,
     TextStyle? displayMedium,
     TextStyle? displaySmall,
@@ -66,6 +126,38 @@ mixin _$CCRThemeExtensionTailorMixin on ThemeExtension<CCRThemeExtension> {
     TextStyle? linearityColumnContentTextTheme,
   }) {
     return CCRThemeExtension(
+      primary: primary ?? this.primary,
+      onPrimary: onPrimary ?? this.onPrimary,
+      secondary: secondary ?? this.secondary,
+      onSecondary: onSecondary ?? this.onSecondary,
+      tertiary: tertiary ?? this.tertiary,
+      onTertiary: onTertiary ?? this.onTertiary,
+      primaryContainer: primaryContainer ?? this.primaryContainer,
+      onPrimaryContainer: onPrimaryContainer ?? this.onPrimaryContainer,
+      secondaryContainer: secondaryContainer ?? this.secondaryContainer,
+      onSecondaryContainer: onSecondaryContainer ?? this.onSecondaryContainer,
+      tertiaryContainer: tertiaryContainer ?? this.tertiaryContainer,
+      onTertiaryContainer: onTertiaryContainer ?? this.onTertiaryContainer,
+      error: error ?? this.error,
+      onError: onError ?? this.onError,
+      surface: surface ?? this.surface,
+      onSurface: onSurface ?? this.onSurface,
+      surfaceDim: surfaceDim ?? this.surfaceDim,
+      surfaceBright: surfaceBright ?? this.surfaceBright,
+      surfaceContainerLowest:
+          surfaceContainerLowest ?? this.surfaceContainerLowest,
+      surfaceContainerLow: surfaceContainerLow ?? this.surfaceContainerLow,
+      surfaceContainer: surfaceContainer ?? this.surfaceContainer,
+      surfaceContainerHigh: surfaceContainerHigh ?? this.surfaceContainerHigh,
+      surfaceContainerHighest:
+          surfaceContainerHighest ?? this.surfaceContainerHighest,
+      outline: outline ?? this.outline,
+      outlineVariant: outlineVariant ?? this.outlineVariant,
+      shadow: shadow ?? this.shadow,
+      scrim: scrim ?? this.scrim,
+      inverseSurface: inverseSurface ?? this.inverseSurface,
+      inversePrimary: inversePrimary ?? this.inversePrimary,
+      onInverseSurface: onInverseSurface ?? this.onInverseSurface,
       displayLarge: displayLarge ?? this.displayLarge,
       displayMedium: displayMedium ?? this.displayMedium,
       displaySmall: displaySmall ?? this.displaySmall,
@@ -87,6 +179,48 @@ mixin _$CCRThemeExtensionTailorMixin on ThemeExtension<CCRThemeExtension> {
       covariant ThemeExtension<CCRThemeExtension>? other, double t) {
     if (other is! CCRThemeExtension) return this as CCRThemeExtension;
     return CCRThemeExtension(
+      primary: Color.lerp(primary, other.primary, t)!,
+      onPrimary: Color.lerp(onPrimary, other.onPrimary, t)!,
+      secondary: Color.lerp(secondary, other.secondary, t)!,
+      onSecondary: Color.lerp(onSecondary, other.onSecondary, t)!,
+      tertiary: Color.lerp(tertiary, other.tertiary, t)!,
+      onTertiary: Color.lerp(onTertiary, other.onTertiary, t)!,
+      primaryContainer:
+          Color.lerp(primaryContainer, other.primaryContainer, t)!,
+      onPrimaryContainer:
+          Color.lerp(onPrimaryContainer, other.onPrimaryContainer, t)!,
+      secondaryContainer:
+          Color.lerp(secondaryContainer, other.secondaryContainer, t)!,
+      onSecondaryContainer:
+          Color.lerp(onSecondaryContainer, other.onSecondaryContainer, t)!,
+      tertiaryContainer:
+          Color.lerp(tertiaryContainer, other.tertiaryContainer, t)!,
+      onTertiaryContainer:
+          Color.lerp(onTertiaryContainer, other.onTertiaryContainer, t)!,
+      error: Color.lerp(error, other.error, t)!,
+      onError: Color.lerp(onError, other.onError, t)!,
+      surface: Color.lerp(surface, other.surface, t)!,
+      onSurface: Color.lerp(onSurface, other.onSurface, t)!,
+      surfaceDim: Color.lerp(surfaceDim, other.surfaceDim, t)!,
+      surfaceBright: Color.lerp(surfaceBright, other.surfaceBright, t)!,
+      surfaceContainerLowest:
+          Color.lerp(surfaceContainerLowest, other.surfaceContainerLowest, t)!,
+      surfaceContainerLow:
+          Color.lerp(surfaceContainerLow, other.surfaceContainerLow, t)!,
+      surfaceContainer:
+          Color.lerp(surfaceContainer, other.surfaceContainer, t)!,
+      surfaceContainerHigh:
+          Color.lerp(surfaceContainerHigh, other.surfaceContainerHigh, t)!,
+      surfaceContainerHighest: Color.lerp(
+          surfaceContainerHighest, other.surfaceContainerHighest, t)!,
+      outline: Color.lerp(outline, other.outline, t)!,
+      outlineVariant: Color.lerp(outlineVariant, other.outlineVariant, t)!,
+      shadow: Color.lerp(shadow, other.shadow, t)!,
+      scrim: Color.lerp(scrim, other.scrim, t)!,
+      inverseSurface: Color.lerp(inverseSurface, other.inverseSurface, t)!,
+      inversePrimary: Color.lerp(inversePrimary, other.inversePrimary, t)!,
+      onInverseSurface:
+          Color.lerp(onInverseSurface, other.onInverseSurface, t)!,
       displayLarge: TextStyle.lerp(displayLarge, other.displayLarge, t)!,
       displayMedium: TextStyle.lerp(displayMedium, other.displayMedium, t)!,
       displaySmall: TextStyle.lerp(displaySmall, other.displaySmall, t)!,
@@ -108,6 +242,55 @@ mixin _$CCRThemeExtensionTailorMixin on ThemeExtension<CCRThemeExtension> {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is CCRThemeExtension &&
+            const DeepCollectionEquality().equals(primary, other.primary) &&
+            const DeepCollectionEquality().equals(onPrimary, other.onPrimary) &&
+            const DeepCollectionEquality().equals(secondary, other.secondary) &&
+            const DeepCollectionEquality()
+                .equals(onSecondary, other.onSecondary) &&
+            const DeepCollectionEquality().equals(tertiary, other.tertiary) &&
+            const DeepCollectionEquality()
+                .equals(onTertiary, other.onTertiary) &&
+            const DeepCollectionEquality()
+                .equals(primaryContainer, other.primaryContainer) &&
+            const DeepCollectionEquality()
+                .equals(onPrimaryContainer, other.onPrimaryContainer) &&
+            const DeepCollectionEquality()
+                .equals(secondaryContainer, other.secondaryContainer) &&
+            const DeepCollectionEquality()
+                .equals(onSecondaryContainer, other.onSecondaryContainer) &&
+            const DeepCollectionEquality()
+                .equals(tertiaryContainer, other.tertiaryContainer) &&
+            const DeepCollectionEquality()
+                .equals(onTertiaryContainer, other.onTertiaryContainer) &&
+            const DeepCollectionEquality().equals(error, other.error) &&
+            const DeepCollectionEquality().equals(onError, other.onError) &&
+            const DeepCollectionEquality().equals(surface, other.surface) &&
+            const DeepCollectionEquality().equals(onSurface, other.onSurface) &&
+            const DeepCollectionEquality()
+                .equals(surfaceDim, other.surfaceDim) &&
+            const DeepCollectionEquality()
+                .equals(surfaceBright, other.surfaceBright) &&
+            const DeepCollectionEquality()
+                .equals(surfaceContainerLowest, other.surfaceContainerLowest) &&
+            const DeepCollectionEquality()
+                .equals(surfaceContainerLow, other.surfaceContainerLow) &&
+            const DeepCollectionEquality()
+                .equals(surfaceContainer, other.surfaceContainer) &&
+            const DeepCollectionEquality()
+                .equals(surfaceContainerHigh, other.surfaceContainerHigh) &&
+            const DeepCollectionEquality().equals(
+                surfaceContainerHighest, other.surfaceContainerHighest) &&
+            const DeepCollectionEquality().equals(outline, other.outline) &&
+            const DeepCollectionEquality()
+                .equals(outlineVariant, other.outlineVariant) &&
+            const DeepCollectionEquality().equals(shadow, other.shadow) &&
+            const DeepCollectionEquality().equals(scrim, other.scrim) &&
+            const DeepCollectionEquality()
+                .equals(inverseSurface, other.inverseSurface) &&
+            const DeepCollectionEquality()
+                .equals(inversePrimary, other.inversePrimary) &&
+            const DeepCollectionEquality()
+                .equals(onInverseSurface, other.onInverseSurface) &&
             const DeepCollectionEquality()
                 .equals(displayLarge, other.displayLarge) &&
             const DeepCollectionEquality()
@@ -152,19 +335,45 @@ mixin _$CCRThemeExtensionTailorMixin on ThemeExtension<CCRThemeExtension> {
                 appBarSubtitleTextTheme, other.appBarSubtitleTextTheme) &&
             const DeepCollectionEquality().equals(
                 checkDescriptionTextTheme, other.checkDescriptionTextTheme) &&
-            const DeepCollectionEquality().equals(
-                checkReferenceTextTheme, other.checkReferenceTextTheme) &&
-            const DeepCollectionEquality().equals(linearityColumnTitleTextTheme,
-                other.linearityColumnTitleTextTheme) &&
-            const DeepCollectionEquality().equals(
-                linearityColumnContentTextTheme,
-                other.linearityColumnContentTextTheme));
+            const DeepCollectionEquality().equals(checkReferenceTextTheme, other.checkReferenceTextTheme) &&
+            const DeepCollectionEquality().equals(linearityColumnTitleTextTheme, other.linearityColumnTitleTextTheme) &&
+            const DeepCollectionEquality().equals(linearityColumnContentTextTheme, other.linearityColumnContentTextTheme));
   }
 
   @override
   int get hashCode {
     return Object.hashAll([
       runtimeType.hashCode,
+      const DeepCollectionEquality().hash(primary),
+      const DeepCollectionEquality().hash(onPrimary),
+      const DeepCollectionEquality().hash(secondary),
+      const DeepCollectionEquality().hash(onSecondary),
+      const DeepCollectionEquality().hash(tertiary),
+      const DeepCollectionEquality().hash(onTertiary),
+      const DeepCollectionEquality().hash(primaryContainer),
+      const DeepCollectionEquality().hash(onPrimaryContainer),
+      const DeepCollectionEquality().hash(secondaryContainer),
+      const DeepCollectionEquality().hash(onSecondaryContainer),
+      const DeepCollectionEquality().hash(tertiaryContainer),
+      const DeepCollectionEquality().hash(onTertiaryContainer),
+      const DeepCollectionEquality().hash(error),
+      const DeepCollectionEquality().hash(onError),
+      const DeepCollectionEquality().hash(surface),
+      const DeepCollectionEquality().hash(onSurface),
+      const DeepCollectionEquality().hash(surfaceDim),
+      const DeepCollectionEquality().hash(surfaceBright),
+      const DeepCollectionEquality().hash(surfaceContainerLowest),
+      const DeepCollectionEquality().hash(surfaceContainerLow),
+      const DeepCollectionEquality().hash(surfaceContainer),
+      const DeepCollectionEquality().hash(surfaceContainerHigh),
+      const DeepCollectionEquality().hash(surfaceContainerHighest),
+      const DeepCollectionEquality().hash(outline),
+      const DeepCollectionEquality().hash(outlineVariant),
+      const DeepCollectionEquality().hash(shadow),
+      const DeepCollectionEquality().hash(scrim),
+      const DeepCollectionEquality().hash(inverseSurface),
+      const DeepCollectionEquality().hash(inversePrimary),
+      const DeepCollectionEquality().hash(onInverseSurface),
       const DeepCollectionEquality().hash(displayLarge),
       const DeepCollectionEquality().hash(displayMedium),
       const DeepCollectionEquality().hash(displaySmall),
@@ -198,6 +407,37 @@ mixin _$CCRThemeExtensionTailorMixin on ThemeExtension<CCRThemeExtension> {
 extension CCRThemeExtensionBuildContextProps on BuildContext {
   CCRThemeExtension get cCRThemeExtension =>
       Theme.of(this).extension<CCRThemeExtension>()!;
+  Color get primary => cCRThemeExtension.primary;
+  Color get onPrimary => cCRThemeExtension.onPrimary;
+  Color get secondary => cCRThemeExtension.secondary;
+  Color get onSecondary => cCRThemeExtension.onSecondary;
+  Color get tertiary => cCRThemeExtension.tertiary;
+  Color get onTertiary => cCRThemeExtension.onTertiary;
+  Color get primaryContainer => cCRThemeExtension.primaryContainer;
+  Color get onPrimaryContainer => cCRThemeExtension.onPrimaryContainer;
+  Color get secondaryContainer => cCRThemeExtension.secondaryContainer;
+  Color get onSecondaryContainer => cCRThemeExtension.onSecondaryContainer;
+  Color get tertiaryContainer => cCRThemeExtension.tertiaryContainer;
+  Color get onTertiaryContainer => cCRThemeExtension.onTertiaryContainer;
+  Color get error => cCRThemeExtension.error;
+  Color get onError => cCRThemeExtension.onError;
+  Color get surface => cCRThemeExtension.surface;
+  Color get onSurface => cCRThemeExtension.onSurface;
+  Color get surfaceDim => cCRThemeExtension.surfaceDim;
+  Color get surfaceBright => cCRThemeExtension.surfaceBright;
+  Color get surfaceContainerLowest => cCRThemeExtension.surfaceContainerLowest;
+  Color get surfaceContainerLow => cCRThemeExtension.surfaceContainerLow;
+  Color get surfaceContainer => cCRThemeExtension.surfaceContainer;
+  Color get surfaceContainerHigh => cCRThemeExtension.surfaceContainerHigh;
+  Color get surfaceContainerHighest =>
+      cCRThemeExtension.surfaceContainerHighest;
+  Color get outline => cCRThemeExtension.outline;
+  Color get outlineVariant => cCRThemeExtension.outlineVariant;
+  Color get shadow => cCRThemeExtension.shadow;
+  Color get scrim => cCRThemeExtension.scrim;
+  Color get inverseSurface => cCRThemeExtension.inverseSurface;
+  Color get inversePrimary => cCRThemeExtension.inversePrimary;
+  Color get onInverseSurface => cCRThemeExtension.onInverseSurface;
   TextStyle get displayLarge => cCRThemeExtension.displayLarge;
   TextStyle get displayMedium => cCRThemeExtension.displayMedium;
   TextStyle get displaySmall => cCRThemeExtension.displaySmall;
