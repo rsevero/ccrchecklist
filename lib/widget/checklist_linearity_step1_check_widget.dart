@@ -28,7 +28,6 @@ class _ChecklistLinearityStep1CheckWidgetState
     extends State<ChecklistLinearityStep1CheckWidget> {
   final List<TextEditingController> _controllers = [];
   final List<FocusNode> _focusNodes = [];
-  int _activeFieldIndex = -1;
   bool _isInit = true;
 
   @override
@@ -78,6 +77,7 @@ class _ChecklistLinearityStep1CheckWidgetState
     final checklistEditorStore = Provider.of<ChecklistEditorStore>(context);
     final check = checklistEditorStore.checks[widget.sectionIndex]
         [widget.checkIndex] as ChecklistLinearityStep1Check;
+    final theme = context.ccrThemeExtension;
 
     return ListTile(
       title: Column(
@@ -85,7 +85,7 @@ class _ChecklistLinearityStep1CheckWidgetState
         children: [
           Text(
             check.description,
-            style: context.ccrThemeExtension.checkDescriptionTextTheme,
+            style: theme.checkDescriptionTextTheme,
           ),
           SizedBox(height: 8),
           SingleChildScrollView(
@@ -93,29 +93,23 @@ class _ChecklistLinearityStep1CheckWidgetState
             child: ClipRRect(
               borderRadius: BorderRadius.circular(16.0),
               child: Container(
-                color: context.ccrThemeExtension.secondaryContainer,
+                color: theme.secondaryContainer,
                 child: DataTable(
                   columnSpacing: 8,
                   columns: [
                     DataColumn(
                         label: LinearityWorksheetText(
-                            'mV',
-                            context.ccrThemeExtension
-                                .linearityColumnTitleTextTheme)),
+                            'mV', theme.linearityColumnTitleTextTheme)),
                     DataColumn(
                         label: LinearityWorksheetText(
-                            '/0.21',
-                            context.ccrThemeExtension
-                                .linearityColumnTitleTextTheme)),
+                            '/0.21', theme.linearityColumnTitleTextTheme)),
                     DataColumn(
                         label: LinearityWorksheetText(
-                            'x1.6',
-                            context.ccrThemeExtension
-                                .linearityColumnTitleTextTheme)),
+                            'x1.6', theme.linearityColumnTitleTextTheme)),
                   ],
                   headingRowColor: WidgetStateProperty.resolveWith<Color?>(
                       (Set<WidgetState> states) {
-                    return context.ccrThemeExtension.secondary;
+                    return theme.secondary;
                   }),
                   rows: List<DataRow>.generate(
                     checklistEditorStore.linearityCheckReferenceCount,
@@ -126,9 +120,6 @@ class _ChecklistLinearityStep1CheckWidgetState
                             onTap: () {
                               FocusScope.of(context)
                                   .requestFocus(_focusNodes[index]);
-                              setState(() {
-                                _activeFieldIndex = index;
-                              });
                             },
                             child: _buildEditableFieldCell(context, index),
                           ),
@@ -148,7 +139,6 @@ class _ChecklistLinearityStep1CheckWidgetState
                               () {
                                 FocusScope.of(context)
                                     .requestFocus(_focusNodes[index]);
-                                setState(() => _activeFieldIndex = index);
                                 if (_focusNodes[index].hasFocus) {
                                   SystemChannels.textInput
                                       .invokeMethod('TextInput.show');
@@ -172,7 +162,6 @@ class _ChecklistLinearityStep1CheckWidgetState
                               () {
                                 FocusScope.of(context)
                                     .requestFocus(_focusNodes[index]);
-                                setState(() => _activeFieldIndex = index);
                                 if (_focusNodes[index].hasFocus) {
                                   SystemChannels.textInput
                                       .invokeMethod('TextInput.show');
@@ -197,7 +186,7 @@ class _ChecklistLinearityStep1CheckWidgetState
     final checklistEditorStore = Provider.of<ChecklistEditorStore>(context);
     return Container(
       height: 68,
-      color: context.ccrThemeExtension.surface,
+      color: context.ccrThemeExtension.surfaceDim,
       child: TextField(
         controller: _controllers[index],
         style: TextStyle(
@@ -217,11 +206,6 @@ class _ChecklistLinearityStep1CheckWidgetState
         inputFormatters: [
           FilteringTextInputFormatter.allow(RegExp(r'[0-9.-]'))
         ],
-        onTap: () {
-          setState(() {
-            _activeFieldIndex = index;
-          });
-        },
         focusNode: _focusNodes[index],
       ),
     );
