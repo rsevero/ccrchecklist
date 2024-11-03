@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:ccr_checklist/data/checklist_check.dart';
 import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/misc/flutter_extension_methods.dart';
@@ -322,14 +323,14 @@ class _ChecklistRegularCheckWidgetState
           } else {
             _timer.cancel();
 
-            // Play sound alarm
-            // await audioPlayer
-            //     .play(AssetSource('assets/sounds/alarm-clock-short.mp3'));
-
             // Vibrate the device
             if (await Vibration.hasVibrator() ?? false) {
               Vibration.vibrate();
             }
+
+            // Play a sound
+            final player = AudioPlayer();
+            await player.play(AssetSource('sounds/alarm-clock-short.mp3'));
           }
         },
       );
