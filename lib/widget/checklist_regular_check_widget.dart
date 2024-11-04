@@ -6,7 +6,6 @@ import 'package:ccr_checklist/misc/flutter_extension_methods.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:vibration/vibration.dart';
 
@@ -186,6 +185,7 @@ class _ChecklistRegularCheckWidgetState
 
   List<Widget> _buildReferences(ChecklistRegularCheck check) {
     final checklistEditorStore = Provider.of<ChecklistEditorStore>(context);
+    final theme = context.ccrThemeExtension;
 
     return [
       SingleChildScrollView(
@@ -203,7 +203,7 @@ class _ChecklistRegularCheckWidgetState
                     alignment: Alignment.center,
                     child: Text(
                       check.references[index].prefix ?? '',
-                      style: context.ccrThemeExtension.checkReferenceTextTheme,
+                      style: theme.checkReferenceTextTheme,
                     ),
                   ),
                 ),
@@ -220,36 +220,31 @@ class _ChecklistRegularCheckWidgetState
                     height: 68,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Observer(
-                        builder: (_) => TextFormField(
-                          initialValue: check.references[index].value == null
-                              ? ''
-                              : check.references[index].value.toString(),
-                          decoration: InputDecoration(
-                            labelText: 'Ref ${index + 1}',
-                            labelStyle: context
-                                .ccrThemeExtension.dialogFieldTitleTextTheme,
-                            border: const OutlineInputBorder(),
-                            counterText: '',
-                          ),
-                          maxLength: 5,
-                          style: context
-                              .ccrThemeExtension.dialogFieldContentTextTheme,
-                          keyboardType: const TextInputType.numberWithOptions(
-                              decimal: true, signed: true),
-                          inputFormatters: [
-                            FilteringTextInputFormatter.allow(
-                                RegExp(r'[0-9.-]'))
-                          ],
-                          onChanged: (value) {
-                            double? newValue = double.tryParse(value);
-                            checklistEditorStore.setCheckReferenceValue(
-                                widget.sectionIndex,
-                                widget.checkIndex,
-                                index,
-                                newValue);
-                          },
+                      child: TextFormField(
+                        initialValue: check.references[index].value == null
+                            ? ''
+                            : check.references[index].value.toString(),
+                        decoration: InputDecoration(
+                          labelText: 'Ref ${index + 1}',
+                          labelStyle: theme.dialogFieldTitleTextTheme,
+                          border: const OutlineInputBorder(),
+                          counterText: '',
                         ),
+                        maxLength: 5,
+                        style: theme.dialogFieldContentTextTheme,
+                        keyboardType: const TextInputType.numberWithOptions(
+                            decimal: true, signed: true),
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(RegExp(r'[0-9.-]'))
+                        ],
+                        onChanged: (value) {
+                          double? newValue = double.tryParse(value);
+                          checklistEditorStore.setCheckReferenceValue(
+                              widget.sectionIndex,
+                              widget.checkIndex,
+                              index,
+                              newValue);
+                        },
                       ),
                     ),
                   ),
@@ -267,7 +262,7 @@ class _ChecklistRegularCheckWidgetState
                     alignment: Alignment.center,
                     child: Text(
                       check.references[index].suffix ?? '',
-                      style: context.ccrThemeExtension.checkReferenceTextTheme,
+                      style: theme.checkReferenceTextTheme,
                     ),
                   ),
                 ),

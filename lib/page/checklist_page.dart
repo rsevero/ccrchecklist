@@ -17,6 +17,7 @@ class ChecklistPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final checklistEditorStore = Provider.of<ChecklistEditorStore>(context);
     final totalSections = checklistEditorStore.sections.length;
+    final theme = context.ccrThemeExtension;
 
     return PopScope(
       canPop: false,
@@ -43,7 +44,7 @@ class ChecklistPage extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Observer(
+                Builder(
                   builder: (_) {
                     final buttonEnabled = sectionIndex > 0;
                     Color? buttonColor;
@@ -52,12 +53,12 @@ class ChecklistPage extends StatelessWidget {
                     if (buttonEnabled) {
                       buttonColor =
                           checklistEditorStore.previousSectionsOk[sectionIndex]
-                              ? buttonColor = context.colorScheme.primary
-                              : context.colorScheme.error;
+                              ? theme.primary
+                              : theme.error;
                       iconColor =
                           checklistEditorStore.previousSectionsOk[sectionIndex]
-                              ? context.colorScheme.onPrimary
-                              : context.colorScheme.onError;
+                              ? theme.onPrimary
+                              : theme.onError;
                     }
 
                     return DecoratedBox(
@@ -84,11 +85,11 @@ class ChecklistPage extends StatelessWidget {
                     if (buttonEnabled) {
                       buttonColor =
                           checklistEditorStore.sectionsOk[sectionIndex]
-                              ? context.colorScheme.primary
-                              : context.colorScheme.error;
+                              ? theme.primary
+                              : theme.error;
                       iconColor = checklistEditorStore.sectionsOk[sectionIndex]
-                          ? context.colorScheme.onPrimary
-                          : context.colorScheme.onError;
+                          ? theme.onPrimary
+                          : theme.onError;
                     }
 
                     return DecoratedBox(

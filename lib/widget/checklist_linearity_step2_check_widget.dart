@@ -240,12 +240,14 @@ class _ChecklistLinearityStep2CheckWidgetState
 
   Widget _buildEditableFieldCell(BuildContext context, int index) {
     final checklistEditorStore = Provider.of<ChecklistEditorStore>(context);
+    final theme = context.ccrThemeExtension;
+
     return Container(
-      color: context.ccrThemeExtension.surfaceDim,
+      color: theme.surfaceDim,
       child: TextField(
         controller: _controllers[index],
         style: TextStyle(
-          color: context.ccrThemeExtension.onSurface,
+          color: theme.onSurface,
         ),
         decoration: const InputDecoration(
           counterText: '',
