@@ -40,74 +40,83 @@ class ChecklistPage extends StatelessWidget {
             rebreatherModel: checklistEditorStore.rebreatherModel,
           ),
           body: ChecklistBody(sectionIndex: sectionIndex),
-          bottomNavigationBar: BottomAppBar(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Builder(
-                  builder: (_) {
-                    final buttonEnabled = sectionIndex > 0;
-                    Color? buttonColor;
-                    Color? iconColor;
+          bottomNavigationBar: ClipRRect(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(16.0),
+              topRight: Radius.circular(16.0),
+            ),
+            child: BottomAppBar(
+              color: theme.inversePrimary,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Builder(
+                    builder: (_) {
+                      final buttonEnabled = sectionIndex > 0;
+                      Color? buttonColor;
+                      Color? iconColor;
 
-                    if (buttonEnabled) {
-                      buttonColor =
-                          checklistEditorStore.previousSectionsOk[sectionIndex]
-                              ? theme.primary
-                              : theme.error;
-                      iconColor =
-                          checklistEditorStore.previousSectionsOk[sectionIndex]
-                              ? theme.onPrimary
-                              : theme.onError;
-                    }
+                      if (buttonEnabled) {
+                        buttonColor = checklistEditorStore
+                                .previousSectionsOk[sectionIndex]
+                            ? theme.primary
+                            : theme.error;
+                        iconColor = checklistEditorStore
+                                .previousSectionsOk[sectionIndex]
+                            ? theme.onPrimary
+                            : theme.onError;
+                      }
 
-                    return DecoratedBox(
-                      decoration: BoxDecoration(
-                        color: buttonColor,
-                        borderRadius: BorderRadius.circular(16.0),
-                      ),
-                      child: IconButton(
-                        icon: const Icon(Icons.navigate_before),
-                        color: iconColor,
-                        onPressed: buttonEnabled
-                            ? () => _onTapPreviousSection(context)
-                            : null,
-                      ),
-                    );
-                  },
-                ),
-                Observer(
-                  builder: (_) {
-                    final buttonEnabled = sectionIndex < totalSections;
-                    Color? buttonColor;
-                    Color? iconColor;
+                      return DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: buttonColor,
+                          borderRadius: BorderRadius.circular(16.0),
+                        ),
+                        child: IconButton(
+                          icon: const Icon(Icons.navigate_before),
+                          color: iconColor,
+                          disabledColor: theme.inversePrimary,
+                          onPressed: buttonEnabled
+                              ? () => _onTapPreviousSection(context)
+                              : null,
+                        ),
+                      );
+                    },
+                  ),
+                  Observer(
+                    builder: (_) {
+                      final buttonEnabled = sectionIndex < totalSections;
+                      Color? buttonColor;
+                      Color? iconColor;
 
-                    if (buttonEnabled) {
-                      buttonColor =
-                          checklistEditorStore.sectionsOk[sectionIndex]
-                              ? theme.primary
-                              : theme.error;
-                      iconColor = checklistEditorStore.sectionsOk[sectionIndex]
-                          ? theme.onPrimary
-                          : theme.onError;
-                    }
+                      if (buttonEnabled) {
+                        buttonColor =
+                            checklistEditorStore.sectionsOk[sectionIndex]
+                                ? theme.primary
+                                : theme.error;
+                        iconColor =
+                            checklistEditorStore.sectionsOk[sectionIndex]
+                                ? theme.onPrimary
+                                : theme.onError;
+                      }
 
-                    return DecoratedBox(
-                      decoration: BoxDecoration(
-                        color: buttonColor,
-                        borderRadius: BorderRadius.circular(16.0),
-                      ),
-                      child: IconButton(
-                        icon: const Icon(Icons.navigate_next),
-                        color: iconColor,
-                        onPressed: buttonEnabled
-                            ? () => _onTapNextSection(context, totalSections)
-                            : null,
-                      ),
-                    );
-                  },
-                ),
-              ],
+                      return DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: buttonColor,
+                          borderRadius: BorderRadius.circular(16.0),
+                        ),
+                        child: IconButton(
+                          icon: const Icon(Icons.navigate_next),
+                          color: iconColor,
+                          onPressed: buttonEnabled
+                              ? () => _onTapNextSection(context, totalSections)
+                              : null,
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),
