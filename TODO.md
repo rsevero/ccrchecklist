@@ -6,7 +6,7 @@
 - [X] Receber um template compartilhado
 - [ ] Criar testes
 - [ ] Internacionalizar app
-- [ ] Opção de som ao terminar temporizador
+- [X] Opção de som ao terminar temporizador
 - [ ] Criar "Sobre": https://pub.dev/packages/about
 - [ ] Incluir licenças das fontes usadas
 - [X] Fazer com que fontes usadas estejam disponíveis no app sem precisar baixar
