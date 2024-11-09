@@ -2,7 +2,7 @@
     <!-- Permission for Vibration -->
     <uses-permission android:name="android.permission.VIBRATE"/>
     <application
-        android:label="ccr_checklist"
+        android:label="CCRChecklist"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity
