@@ -35,7 +35,7 @@ dependencies:
   expansion_tile_list: ^0.1.1
   flutter:
     sdk: flutter
-  # flutter_launcher_icons: ^0.14.1
+  flutter_launcher_icons: ^0.14.1
   flutter_mobx: ^2.2.0
   flutter_sharing_intent: ^1.1.1
   flutter_speed_dial: ^7.0.0
