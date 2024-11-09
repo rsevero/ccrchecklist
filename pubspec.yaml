@@ -1,5 +1,5 @@
 name: ccr_checklist
-description: A configurable CCR Checklist helper.
+description: "A configurable CCR Checklist helper."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -16,10 +16,10 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 0.0.3+2
+version: 0.0.4
 
 environment:
-  sdk: '>=3.1.5 <4.0.0'
+  sdk: ^3.5.4
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -35,9 +35,9 @@ dependencies:
   expansion_tile_list: ^0.1.1
   flutter:
     sdk: flutter
-  flutter_launcher_icons: ^0.14.1
+  # flutter_launcher_icons: ^0.14.1
   flutter_mobx: ^2.2.0
-  flutter_sharing_intent: ^1.1.0
+  flutter_sharing_intent: ^1.1.1
   flutter_speed_dial: ^7.0.0
   freezed_annotation: ^2.4.1
   htmltopdfwidgets: ^1.0.3
@@ -47,13 +47,13 @@ dependencies:
   mobx: ^2.2.1
   mobx_codegen: ^2.4.0
   mockito: ^5.4.4
-  path_provider: ^2.1.1
+  path_provider: ^2.1.5
   pdf: ^3.10.8
   platform_info: ^5.0.0
-  printing: ^5.12.0
+  printing: ^5.13.4
   provider: ^6.1.1
   receive_sharing_intent: ^1.8.0
-  share_plus: ^10.1.1
+  share_plus: ^10.1.2
   slugify: ^2.0.0
   theme_tailor: ^3.0.1
   theme_tailor_annotation: ^3.0.1
