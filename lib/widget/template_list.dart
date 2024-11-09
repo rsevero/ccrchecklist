@@ -148,6 +148,7 @@ class _TemplateListState extends State<TemplateList> {
       iconColor: tile.iconColor,
       collapsedIconColor: tile.collapsedIconColor,
       initiallyExpanded: true,
+      shape: tile.shape,
       children: tile.children,
     );
 
