@@ -1,1 +1,334 @@
-{"rebreatherManufacturer":"Divesoft","rebreatherModel":"Liberty","title":"BMCL + BOV","description":"Divesoft Liberty Assembly Checklist","sections":[{"title":"Part 1","checks":[{"description":"Water trap present / fitted","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"Scrubber filled – residual time is sufficient for planned dive","secondsTimer":0,"observation":"Note dived hours","references":[{"value":null,"prefix":"Used","suffix":"h"}],"runtimeType":"regular"},{"description":"Scrubber is installed inside the canister","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"Safety plugs (jumpers) connected to batteries","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"Head O-rings clean, well lubed and not damaged","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"Head fits easily to canister. No visible gap between canister and head","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"Canister with head placed in frame lock is secured in backplate","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"}]},{"title":"Part 2","checks":[{"description":"Oxygen supply hose connected to head","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"Diluent tank analyzed, connected to 1st stage, secured with strap on LEFT side","secondsTimer":0,"observation":"","references":[{"value":null,"prefix":"O₂","suffix":"%"},{"value":null,"prefix":"H₂","suffix":"%"}],"runtimeType":"regular"},{"description":"Oxygen tank analyzed, connected to 1st stage, secured with strap on RIGHT side","secondsTimer":0,"observation":"","references":[{"value":null,"prefix":"O₂","suffix":"%"}],"runtimeType":"regular"}]},{"title":"Part 3","checks":[{"description":"Oxygen sensors calibrated (step 1)","referenceCount":4,"runtimeType":"linearityStep1"},{"description":"Oxygen sensors calibrated (step 2)","runtimeType":"linearityStep2"}]},{"title":"Part 4","checks":[{"description":"Counterlungs fitted to backplate and secured","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"Dump valve connected; opening cord available","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"Directional flow test ok","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"Corrugated hoses connected to head","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"Corrugated hoses connected to counterlungs","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"Oxygen LP hose connected to oxygen MAV (green hose to right green MAV)","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"Diluent LP hose connected to diluent MAV (black hose to left black MAV)","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"}]},{"title":"Part 5","checks":[{"description":"Regulator LP hose connected to BOV 2nd stage","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"HUD display connected to BOV","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"LP and HP system check for leaks","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"Pre-dive check on handsets done with no failure","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"}]},{"title":"Part 6","checks":[{"description":"Oxygen tank OPENED","secondsTimer":0,"observation":"","references":[{"value":null,"prefix":"","suffix":"BAR / PSI"}],"runtimeType":"regular"},{"description":"Diluent tank OPENED","secondsTimer":0,"observation":"","references":[{"value":null,"prefix":"","suffix":"BAR / PSI"}],"runtimeType":"regular"}]},{"title":"Part 7","checks":[{"description":"Both MAVs work and doesn't leak","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"ADV injects gas if pressed and closes when released","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"BOV 2nd stage working","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"Wing Inflator hose connected to shoulder harness works and doesn’t leak","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"}]},{"title":"Part 8","checks":[{"description":"Weight fastened","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"Central Canister strap fastened","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"Bailout tank analyzed and assembled","secondsTimer":0,"observation":"","references":[{"value":null,"prefix":"O₂","suffix":"%"},{"value":null,"prefix":"H₂","suffix":"%"}],"runtimeType":"regular"},{"description":"Bailout tank gas and pressure","secondsTimer":0,"observation":"","references":[{"value":null,"prefix":"","suffix":"BAR / PSI"}],"runtimeType":"regular"},{"description":"Diving light canister and dry suit supply fitted (if needed)","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"}]}],"path":"/home/rodrigo/Documents/ccr_checklist/templates/01931c3c-f231-7d8b-94f9-ff65284971b2.ccrt","isAsset":false}
+{
+  "rebreatherManufacturer": "Divesoft",
+  "rebreatherModel": "Liberty",
+  "title": "BMCL + BOV",
+  "description": "Divesoft Liberty Assembly Checklist",
+  "sections": [
+    {
+      "title": "Part 1",
+      "checks": [
+        {
+          "description": "Water trap present / fitted",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Scrubber filled – residual time is sufficient for planned dive",
+          "secondsTimer": 0,
+          "observation": "Note dived hours",
+          "references": [
+            {
+              "value": null,
+              "prefix": "Used",
+              "suffix": "h"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Scrubber is installed inside the canister",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Safety plugs (jumpers) connected to batteries",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Head O-rings clean, well lubed and not damaged",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Head fits easily to canister. No visible gap between canister and head",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Canister with head placed in frame lock is secured in backplate",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Part 2",
+      "checks": [
+        {
+          "description": "Oxygen supply hose connected to head",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Diluent tank analyzed, connected to 1st stage, secured with strap on LEFT side",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "O₂",
+              "suffix": "%"
+            },
+            {
+              "value": null,
+              "prefix": "H₂",
+              "suffix": "%"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Oxygen tank analyzed, connected to 1st stage, secured with strap on RIGHT side",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "O₂",
+              "suffix": "%"
+            }
+          ],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Part 3",
+      "checks": [
+        {
+          "description": "Oxygen sensors calibrated (step 1)",
+          "referenceCount": 4,
+          "runtimeType": "linearityStep1"
+        },
+        {
+          "description": "Oxygen sensors calibrated (step 2)",
+          "runtimeType": "linearityStep2"
+        }
+      ]
+    },
+    {
+      "title": "Part 4",
+      "checks": [
+        {
+          "description": "Counterlungs fitted to backplate and secured",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Dump valve connected; opening cord available",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Directional flow test ok",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Corrugated hoses connected to head",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Corrugated hoses connected to counterlungs",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Oxygen LP hose connected to oxygen MAV (green hose to right green MAV)",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Diluent LP hose connected to diluent MAV (black hose to left black MAV)",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Part 5",
+      "checks": [
+        {
+          "description": "Regulator LP hose connected to BOV 2nd stage",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "HUD display connected to BOV",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "LP and HP system check for leaks",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Pre-dive check on handsets done with no failure",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Part 6",
+      "checks": [
+        {
+          "description": "Oxygen tank OPENED",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "",
+              "suffix": "BAR / PSI"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Diluent tank OPENED",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "",
+              "suffix": "BAR / PSI"
+            }
+          ],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Part 7",
+      "checks": [
+        {
+          "description": "Both MAVs work and doesn't leak",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "ADV injects gas if pressed and closes when released",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "BOV 2nd stage working",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Wing Inflator hose connected to shoulder harness works and doesn’t leak",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Part 8",
+      "checks": [
+        {
+          "description": "Weight fastened",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Central Canister strap fastened",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Bailout tank analyzed and assembled",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "O₂",
+              "suffix": "%"
+            },
+            {
+              "value": null,
+              "prefix": "H₂",
+              "suffix": "%"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Bailout tank gas and pressure",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "",
+              "suffix": "BAR / PSI"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Diving light canister and dry suit supply fitted (if needed)",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    }
+  ],
+  "isAsset": true
+}

@@ -1,1 +1,163 @@
-{"rebreatherManufacturer":"Kiss","rebreatherModel":"Sidewinder","title":"Cave Adventurers","description":"Original version by Edd Sorenson - 2020-02","sections":[{"title":"Main","checks":[{"description":"Check mouth piece for tears","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"Mushroom valve check","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"INSPECT and lube o-rings on loop","secondsTimer":0,"observation":"When INSPECTING any o-rings, please note that you should not only inspect them visually but you should also lightly run your fingers over any and all o-rings to feel for nicks, bumps, or ANY IMPERFECTIONS!","references":[],"runtimeType":"regular"},{"description":"Turn on computer, note millivolts, do initial math on Linearity Worksheet and CHECK COMPUTER BATTERY","referenceCount":3,"runtimeType":"linearityStep1"},{"description":"Pack scrubber cannisters","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"INSPECT and lube cannister head o-rings","secondsTimer":0,"observation":"When INSPECTING any o-rings, please note that you should not only inspect them visually but you should also lightly run your fingers over any and all o-rings to feel for nicks, bumps, or ANY IMPERFECTIONS!","references":[],"runtimeType":"regular"},{"description":"Install heads with proper tower alignments","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"Install right side cannister onto harness plate","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"Properly route O₂ hose and 1st stage, connect to O₂ bottle","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"Install left side cannister onto harness plate","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"INSPECT and lube counter lung o-rings","secondsTimer":0,"observation":"When INSPECTING any o-rings, please note that you should not only inspect them visually but you should also lightly run your fingers over any and all o-rings to feel for nicks, bumps, or ANY IMPERFECTIONS!","references":[],"runtimeType":"regular"},{"description":"Install counter lung (be sure to install locking clips also)","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"Position counter lung and cannisters outside of waist belt","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"Connect bungee loops and cannister bungee retainers","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"Verify the EXHALE side (right side) of loop and install loop onto cannister towers","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"Perform NEGATIVE check","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"Plug in off board O₂ source to diluent hose","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"Add O₂ to unit in small spurts via ADV","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"Monitor pO₂ reading for smooth and even increases","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"Once stabilized lightly press ADV and hold for slow flow of O₂ and note millivolts and complete the LINEARITY WORKSHEET","runtimeType":"linearityStep2"},{"description":"If needed, calibrate your computer","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"},{"description":"Close DSV, perform POSITIVE check and then close valve on O₂ and purge remaining O₂ into SideWinder","secondsTimer":0,"observation":"","references":[],"runtimeType":"regular"}]}],"path":"/home/rodrigo/Documents/ccr_checklist/templates/Kiss-Sidewinder-Cave_Adventurers.ccrt"}
+{
+  "rebreatherManufacturer": "Kiss",
+  "rebreatherModel": "Sidewinder",
+  "title": "Cave Adventurers",
+  "description": "Original version by Edd Sorenson - 2020-02",
+  "sections": [
+    {
+      "title": "Main",
+      "checks": [
+        {
+          "description": "Check mouth piece for tears",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Mushroom valve check",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "INSPECT and lube o-rings on loop",
+          "secondsTimer": 0,
+          "observation": "When INSPECTING any o-rings, please note that you should not only inspect them visually but you should also lightly run your fingers over any and all o-rings to feel for nicks, bumps, or ANY IMPERFECTIONS!",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Turn on computer, note millivolts, do initial math on Linearity Worksheet and CHECK COMPUTER BATTERY",
+          "referenceCount": 3,
+          "runtimeType": "linearityStep1"
+        },
+        {
+          "description": "Pack scrubber cannisters",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "INSPECT and lube cannister head o-rings",
+          "secondsTimer": 0,
+          "observation": "When INSPECTING any o-rings, please note that you should not only inspect them visually but you should also lightly run your fingers over any and all o-rings to feel for nicks, bumps, or ANY IMPERFECTIONS!",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Install heads with proper tower alignments",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Install right side cannister onto harness plate",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Properly route O₂ hose and 1st stage, connect to O₂ bottle",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Install left side cannister onto harness plate",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "INSPECT and lube counter lung o-rings",
+          "secondsTimer": 0,
+          "observation": "When INSPECTING any o-rings, please note that you should not only inspect them visually but you should also lightly run your fingers over any and all o-rings to feel for nicks, bumps, or ANY IMPERFECTIONS!",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Install counter lung (be sure to install locking clips also)",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Position counter lung and cannisters outside of waist belt",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Connect bungee loops and cannister bungee retainers",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Verify the EXHALE side (right side) of loop and install loop onto cannister towers",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Perform NEGATIVE check",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Plug in off board O₂ source to diluent hose",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Add O₂ to unit in small spurts via ADV",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Monitor pO₂ reading for smooth and even increases",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Once stabilized lightly press ADV and hold for slow flow of O₂ and note millivolts and complete the LINEARITY WORKSHEET",
+          "runtimeType": "linearityStep2"
+        },
+        {
+          "description": "If needed, calibrate your computer",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Close DSV, perform POSITIVE check and then close valve on O₂ and purge remaining O₂ into SideWinder",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    }
+  ],
+  "isAsset": true
+}
