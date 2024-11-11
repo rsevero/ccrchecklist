@@ -173,54 +173,59 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
     final TextEditingController titleController = TextEditingController();
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-    bool confirmed = await showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text(
-                'New Page',
-                style: context.ccrThemeExtension.dialogTitleTextTheme,
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            'New Page',
+            style: context.ccrThemeExtension.dialogTitleTextTheme,
+          ),
+          content: Form(
+            key: formKey,
+            child: TextFormField(
+              controller: titleController,
+              style: context.ccrThemeExtension.dialogFieldContentTextTheme,
+              decoration: InputDecoration(
+                hintText: 'Enter title here',
+                hintStyle: context.ccrThemeExtension.dialogHintTextTheme,
               ),
-              content: Form(
-                key: formKey,
-                child: TextFormField(
-                  controller: titleController,
-                  style: context.ccrThemeExtension.dialogFieldContentTextTheme,
-                  decoration: InputDecoration(
-                    hintText: 'Enter title here',
-                    hintStyle: context.ccrThemeExtension.dialogHintTextTheme,
-                  ),
-                  autofocus: true,
-                  onFieldSubmitted: (value) {
-                    Navigator.of(context).pop(true);
-                  },
-                ),
-              ),
-              actions: <Widget>[
-                TextButton(
-                  child: const Text('Create'),
-                  onPressed: () {
-                    Navigator.of(context).pop(true);
-                  },
-                ),
-                TextButton(
-                  child: const Text('Cancel'),
-                  onPressed: () {
-                    if (!context.mounted) return;
-                    Navigator.of(context).pop(false);
-                  },
-                ),
-              ],
-            );
-          },
-        ) ??
-        false;
-    if (confirmed) {
-      final title = titleController.text.trim();
-      if (title.isNotEmpty) {
-        templateEditorStore.addSection(title: title);
-      }
-    }
+              autofocus: true,
+              onFieldSubmitted: (value) {
+                Navigator.of(context).pop(true);
+              },
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Create+'),
+              onPressed: () {
+                final title = titleController.text.trim();
+                if (title.isNotEmpty) {
+                  templateEditorStore.addSection(title: title);
+                }
+              },
+            ),
+            TextButton(
+              child: const Text('Create'),
+              onPressed: () {
+                final title = titleController.text.trim();
+                if (title.isNotEmpty) {
+                  templateEditorStore.addSection(title: title);
+                }
+                Navigator.of(context).pop(true);
+              },
+            ),
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   void _onTapAddLinearityStep1Check(BuildContext context) {
@@ -321,6 +326,18 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
           ),
           actions: <Widget>[
             TextButton(
+              child: const Text('Create+'),
+              onPressed: () {
+                final description = descriptionController.text;
+                if (description.isNotEmpty) {
+                  templateEditorStore.addLinearityStep1Check(
+                    description: description,
+                    referenceCount: numberOfReferences,
+                  );
+                }
+              },
+            ),
+            TextButton(
               child: const Text('Create'),
               onPressed: () {
                 final description = descriptionController.text;
@@ -405,6 +422,17 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
             },
           ),
           actions: <Widget>[
+            TextButton(
+              child: const Text('Create+'),
+              onPressed: () {
+                final description = descriptionController.text;
+                if (description.isNotEmpty) {
+                  templateEditorStore.addLinearityStep2Check(
+                    description: description,
+                  );
+                }
+              },
+            ),
             TextButton(
               child: const Text('Create'),
               onPressed: () {
@@ -636,6 +664,28 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
               ),
               actions: <Widget>[
                 TextButton(
+                  child: const Text('Create+'),
+                  onPressed: () {
+                    final description = descriptionController.text;
+                    final observation = observationController.text;
+                    if (description.isNotEmpty) {
+                      List<RegularCheckReference> references = List.generate(
+                        numberOfReferences,
+                        (i) => RegularCheckReference(
+                          prefix: prefixControllers[i + 1].text,
+                          suffix: suffixControllers[i + 1].text,
+                        ),
+                      );
+                      templateEditorStore.addRegularCheck(
+                        description: description,
+                        observation: observation,
+                        references: references,
+                        secondsTimer: timerDuration.inSeconds,
+                      );
+                    }
+                  },
+                ),
+                TextButton(
                   child: const Text('Create'),
                   onPressed: () {
                     final description = descriptionController.text;
@@ -654,8 +704,8 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                         references: references,
                         secondsTimer: timerDuration.inSeconds,
                       );
-                      Navigator.of(context).pop();
                     }
+                    Navigator.of(context).pop();
                   },
                 ),
                 TextButton(
