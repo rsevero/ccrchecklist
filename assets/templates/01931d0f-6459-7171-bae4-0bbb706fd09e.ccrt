@@ -1,0 +1,569 @@
+{
+  "rebreatherManufacturer": "Scuba Force",
+  "rebreatherModel": "SF@ ECCR",
+  "title": "Pre-dive checklist",
+  "description": "To be used before every dive",
+  "sections": [
+    {
+      "title": "Analysis Oxygen Cylinder",
+      "checks": [
+        {
+          "description": "Mixture",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "O₂",
+              "suffix": "%"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Pressure",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "",
+              "suffix": "Bar / PSI"
+            }
+          ],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Analysis Diluent Cylinder",
+      "checks": [
+        {
+          "description": "Mixture",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "O₂",
+              "suffix": "%"
+            },
+            {
+              "value": null,
+              "prefix": "H₂",
+              "suffix": "%"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Pressure",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "",
+              "suffix": "BAR / PSI"
+            }
+          ],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Head",
+      "checks": [
+        {
+          "description": "Dry, O-Ring clean lightly lubed",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Sensors (cells) dry and connected",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Plate with O-Ring in place and screwed down",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Scrubber Bucket",
+      "checks": [
+        {
+          "description": "Scrubber dry",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Active time",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "",
+              "suffix": "h"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "O-Ring in place and lightly lubed",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Mid-section",
+      "checks": [
+        {
+          "description": "Clean and dust-free",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "O-Ring inspected",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Diluent connected",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Off-board connected",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "ADV function checked",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Counterlung",
+      "checks": [
+        {
+          "description": "Clean and free of scrubber/debris",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "OPV functioning",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Inspected for damage",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Breathing Loop",
+      "checks": [
+        {
+          "description": "Mushroom valves inspected and checked",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Bailout function smooth",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Connections OK",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Mouthpiece ok",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Assembly",
+      "checks": [
+        {
+          "description": "Scrubber bucket and Mid-section stable",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Head aligned",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Clips closed",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "OPV set to dive",
+          "secondsTimer": 0,
+          "observation": "Do not turn after assembly",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Batteries",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Oxygen Supply",
+      "checks": [
+        {
+          "description": "Analyzed",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Connected",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Turned on",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Pressure check",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Calculate oxygen time",
+          "secondsTimer": 0,
+          "observation": "At 2L minute metabolic rate or known personal rate",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Diluent Supply",
+      "checks": [
+        {
+          "description": "Analyzed",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Connected",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Turned on",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Pressure check",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Manual add / LP inflator",
+      "checks": [
+        {
+          "description": "Check function",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Inspect hoses/position",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Connect loop",
+      "checks": [
+        {
+          "description": "Remember flow is from right to left",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Align for jaw fatigue",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check bailout",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Positive pressure test",
+      "checks": [
+        {
+          "description": "Close OPV",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Turn off diluent and oxygen supply",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Breathe into loop",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Close",
+          "secondsTimer": 120,
+          "observation": "Wait at least 120 seconds",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Negative pressure test",
+      "checks": [
+        {
+          "description": "Breathe gas from loop until counterlung is at absolute minimum",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Close",
+          "secondsTimer": 120,
+          "observation": "Wait at least 120 seconds",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Shut-Offs",
+      "checks": [
+        {
+          "description": "Check quick SO sliders are disengaged at O₂ and Diluent",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check manual add units",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Pressure-drop test",
+      "checks": [
+        {
+          "description": "Open oxygen and diluent valves",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Turn off oxygen and diluent valves",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Watch to ensure NO pressure drop in either system",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Sensors",
+      "checks": [
+        {
+          "description": "Check",
+          "referenceCount": 3,
+          "runtimeType": "linearityStep1"
+        },
+        {
+          "description": "Calibrate",
+          "runtimeType": "linearityStep2"
+        }
+      ]
+    },
+    {
+      "title": "Handset",
+      "checks": [
+        {
+          "description": "Re-check correct diluent",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Re-check gradient factors",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Re-check bailout options",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Re-check set-points",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Re-check other important settings ",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Pre-Breathe and Function Test",
+      "checks": [
+        {
+          "description": "Open oxygen and diluent supply",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Turn on handset",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Pre-breathe for three to five minutes",
+          "secondsTimer": 300,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    }
+  ],
+  "path": "/home/rodrigo/Documents/ccr_checklist/templates/01931d0f-6459-7171-bae4-0bbb706fd09e.ccrt",
+  "isAsset": false
+}
