@@ -33,7 +33,7 @@ class TemplateSectionWidget extends StatelessWidget {
         templateEditorStore.setExpandedSectionIfUnset(sectionIndex, isExpanded);
 
         return GestureDetector(
-          onTap: () => onTapSection(context, sectionIndex),
+          onTap: () => _onTapSection(context, sectionIndex),
           child: Container(
             decoration: BoxDecoration(
               color: isSelected
@@ -114,7 +114,7 @@ class TemplateSectionWidget extends StatelessWidget {
     );
   }
 
-  void onTapSection(context, sectionIndex) {
+  void _onTapSection(context, sectionIndex) {
     final templateEditorStore =
         Provider.of<TemplateEditorStore>(context, listen: false);
     templateEditorStore.setSelectedSectionByIndex(sectionIndex);

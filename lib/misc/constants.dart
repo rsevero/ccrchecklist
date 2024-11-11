@@ -42,4 +42,6 @@ const double ccrReferenceRadioButtonWidth = 40;
 
 const double ccrMinimumLinearity = 90;
 
-final BorderRadius ccrTemplateListTileBorderRadius = BorderRadius.circular(16);
+const double ccrBorderRadius = 16;
+final BorderRadius ccrTemplateListTileBorderRadius =
+    BorderRadius.circular(ccrBorderRadius);

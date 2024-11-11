@@ -1,4 +1,5 @@
 import 'package:ccr_checklist/data/template_file.dart';
+import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/misc/flutter_extension_methods.dart';
 import 'package:ccr_checklist/store/template_list_store.dart';
 import 'package:ccr_checklist/widget/template_list_tile_widget.dart';
@@ -31,7 +32,6 @@ class _TemplateListState extends State<TemplateList> {
   late Color collapsedModelTextColor;
   late TemplateListStore templateListStore;
   late List<TemplateFile> defaultTemplates;
-  late BorderRadius templateListTileBorderRadius;
   String expandedManufacturer = '';
   String expandedModel = '';
 
@@ -48,8 +48,6 @@ class _TemplateListState extends State<TemplateList> {
     expandedManufacturerTextColor = currentColorScheme.onSecondary;
     collapsedManufacturerTextColor = currentColorScheme.onSurface;
     collapsedModelTextColor = currentColorScheme.onSurface;
-
-    templateListTileBorderRadius = BorderRadius.circular(16);
   }
 
   @override
@@ -112,7 +110,7 @@ class _TemplateListState extends State<TemplateList> {
           isAsset: template.isAsset,
           isEditor: widget.isEditor,
           templateIndex: templateIndex,
-          borderRadius: templateListTileBorderRadius,
+          borderRadius: ccrTemplateListTileBorderRadius,
           onTap: () {
             widget.onTapTemplateFile(context, templateIndex);
           },
@@ -167,7 +165,7 @@ class _TemplateListState extends State<TemplateList> {
       iconColor: expandedModelTextColor,
       collapsedIconColor: collapsedModelTextColor,
       shape: RoundedRectangleBorder(
-        borderRadius: templateListTileBorderRadius,
+        borderRadius: ccrTemplateListTileBorderRadius,
       ),
       children: templates,
     );
@@ -187,7 +185,7 @@ class _TemplateListState extends State<TemplateList> {
       iconColor: expandedManufacturerTextColor,
       collapsedIconColor: collapsedManufacturerTextColor,
       shape: RoundedRectangleBorder(
-        borderRadius: templateListTileBorderRadius,
+        borderRadius: ccrTemplateListTileBorderRadius,
       ),
       children: models,
     );
