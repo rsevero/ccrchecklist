@@ -57,7 +57,7 @@ class TemplateCheckWidget extends StatelessWidget {
               Expanded(
                 child: ListTile(
                   title: Text(
-                    description,
+                    "${index + 1}: $description",
                     style: TextStyle(
                       color: isSelected
                           ? ccrThemeExtension.onPrimaryContainer
