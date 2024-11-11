@@ -33,7 +33,6 @@ class TemplateSectionWidget extends StatelessWidget {
         templateEditorStore.setExpandedSectionIfUnset(sectionIndex, isExpanded);
 
         return GestureDetector(
-          onTap: () => _onTapSection(context, sectionIndex),
           child: Container(
             decoration: BoxDecoration(
               color: isSelected
@@ -51,6 +50,7 @@ class TemplateSectionWidget extends StatelessWidget {
                 ),
               ),
               onExpansionChanged: (expanded) {
+                templateEditorStore.setSelectedSectionByIndex(sectionIndex);
                 templateEditorStore.setExpandedSection(sectionIndex, expanded);
               },
               controlAffinity: ListTileControlAffinity.leading,
@@ -112,12 +112,6 @@ class TemplateSectionWidget extends StatelessWidget {
         );
       },
     );
-  }
-
-  void _onTapSection(context, sectionIndex) {
-    final templateEditorStore =
-        Provider.of<TemplateEditorStore>(context, listen: false);
-    templateEditorStore.setSelectedSectionByIndex(sectionIndex);
   }
 
   void _editTemplateSection(BuildContext context,
