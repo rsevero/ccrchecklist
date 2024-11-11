@@ -1,4 +1,5 @@
 import 'package:ccr_checklist/data/template_section.dart';
+import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/misc/flutter_extension_methods.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
 import 'package:ccr_checklist/theme/ccr_theme_extension.dart';
@@ -31,12 +32,15 @@ class TemplateSectionWidget extends StatelessWidget {
         const isExpanded = false;
         templateEditorStore.setExpandedSectionIfUnset(sectionIndex, isExpanded);
 
-        return Container(
-          color: isSelected
-              ? ccrThemeExtension.primaryContainer
-              : Colors.transparent,
-          child: GestureDetector(
-            onTap: () => onTapSection(context, sectionIndex),
+        return GestureDetector(
+          onTap: () => onTapSection(context, sectionIndex),
+          child: Container(
+            decoration: BoxDecoration(
+              color: isSelected
+                  ? ccrThemeExtension.primaryContainer
+                  : Colors.transparent,
+              borderRadius: ccrTemplateListTileBorderRadius,
+            ),
             child: ExpansionTile(
               title: Text(
                 section.title,
