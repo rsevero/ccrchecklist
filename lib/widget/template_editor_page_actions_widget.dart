@@ -204,6 +204,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                 if (title.isNotEmpty) {
                   templateEditorStore.addSection(title: title);
                 }
+                titleController.text = '';
               },
             ),
             TextButton(
@@ -326,18 +327,6 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('Create+'),
-              onPressed: () {
-                final description = descriptionController.text;
-                if (description.isNotEmpty) {
-                  templateEditorStore.addLinearityStep1Check(
-                    description: description,
-                    referenceCount: numberOfReferences,
-                  );
-                }
-              },
-            ),
-            TextButton(
               child: const Text('Create'),
               onPressed: () {
                 final description = descriptionController.text;
@@ -422,17 +411,6 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
             },
           ),
           actions: <Widget>[
-            TextButton(
-              child: const Text('Create+'),
-              onPressed: () {
-                final description = descriptionController.text;
-                if (description.isNotEmpty) {
-                  templateEditorStore.addLinearityStep2Check(
-                    description: description,
-                  );
-                }
-              },
-            ),
             TextButton(
               child: const Text('Create'),
               onPressed: () {
@@ -683,6 +661,23 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                         secondsTimer: timerDuration.inSeconds,
                       );
                     }
+                    setState(() {
+                      descriptionController.text = '';
+                      observationController.text = '';
+                      numberOfReferences = 0;
+                      timerDuration = Duration.zero;
+
+                      prefixControllers.clear();
+                      suffixControllers.clear();
+                      prefixControllers.addAll(
+                        List.generate(ccrMaxReferences + 1,
+                            (_) => TextEditingController()),
+                      );
+                      suffixControllers.addAll(
+                        List.generate(ccrMaxReferences + 1,
+                            (_) => TextEditingController()),
+                      );
+                    });
                   },
                 ),
                 TextButton(
