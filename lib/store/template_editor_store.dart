@@ -135,7 +135,8 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
   }
 
   String createTemplateFile(Template template) {
-    String jsonTemplate = jsonEncode(template.toJson());
+    JsonEncoder encoder = JsonEncoder.withIndent('  ');
+    String jsonTemplate = encoder.convert(template.toJson());
     return jsonTemplate;
   }
 
