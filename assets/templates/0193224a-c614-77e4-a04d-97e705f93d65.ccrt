@@ -1,8 +1,8 @@
 {
   "rebreatherManufacturer": "SubGravity",
-  "rebreatherModel": "X-CCR",
-  "title": "Condensed functionality checklist",
-  "description": "After having completed full assembly checklist",
+  "rebreatherModel": "Defender CCR",
+  "title": "Condensed Functionality Checklist",
+  "description": "This checklist is intended for experienced rebreather divers only.",
   "sections": [
     {
       "title": "Main",
@@ -15,7 +15,7 @@
           "runtimeType": "regular"
         },
         {
-          "description": "Check Remaining Scrubber Duration",
+          "description": "Check Remaining Scrubber Duration & Reset Stack Timer if needed",
           "secondsTimer": 0,
           "observation": "",
           "references": [],
@@ -29,21 +29,28 @@
           "runtimeType": "regular"
         },
         {
-          "description": "Negative Pressure Test (hold for 1 minute minimum)",
+          "description": "Negative Pressure Test (hold for a minimum of 1 minute)",
           "secondsTimer": 60,
           "observation": "",
           "references": [],
           "runtimeType": "regular"
         },
         {
-          "description": "Positive Pressure Test (hold for 1 minute minimum)",
+          "description": "Positive Pressure Test (hold for a minimum of 1 minute)",
           "secondsTimer": 60,
           "observation": "",
           "references": [],
           "runtimeType": "regular"
         },
         {
-          "description": "Turn On X-CCR & Secondary",
+          "description": "Diluent & Oxygen System Leak Test (hold for a minimum of 30 seconds)",
+          "secondsTimer": 60,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Turn On Primary & Secondary",
           "secondsTimer": 0,
           "observation": "",
           "references": [],
@@ -64,15 +71,8 @@
           "runtimeType": "regular"
         },
         {
-          "description": "Check ADV, BOV, MAV and Power Inflator",
+          "description": "Check ADV, BOV, MAVs and Power Inflator",
           "secondsTimer": 0,
-          "observation": "",
-          "references": [],
-          "runtimeType": "regular"
-        },
-        {
-          "description": "Diluent & Oxygen System Leak Test (hold for 30 seconds minimum)",
-          "secondsTimer": 30,
           "observation": "",
           "references": [],
           "runtimeType": "regular"
@@ -87,20 +87,6 @@
         {
           "description": "Pre-Breathe (5 minutes)",
           "secondsTimer": 300,
-          "observation": "",
-          "references": [],
-          "runtimeType": "regular"
-        },
-        {
-          "description": "If Diving Immediately: Continue with “Pre-Dive Checks”",
-          "secondsTimer": 0,
-          "observation": "",
-          "references": [],
-          "runtimeType": "regular"
-        },
-        {
-          "description": "f NOT Diving Immediately: Close O2 + diluent cylinder valves, drain hoses, turn off electronics, and secure unit",
-          "secondsTimer": 0,
           "observation": "",
           "references": [],
           "runtimeType": "regular"

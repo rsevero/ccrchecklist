@@ -1,91 +1,70 @@
 {
-  "rebreatherManufacturer": "JJ-CCR Rebreathers",
-  "rebreatherModel": "JJ-CCR",
-  "title": "Shortly prior to diving",
-  "description": "",
+  "rebreatherManufacturer": "SubGravity",
+  "rebreatherModel": "X-CCR",
+  "title": "Just before the dive",
+  "description": "Execute all the checks according to this checklist",
   "sections": [
     {
       "title": "Main",
       "checks": [
         {
-          "description": "Open both tank valves.",
+          "description": "Open the tank valves on the both tanks and check the system, that no gas leak anywhere.",
           "secondsTimer": 0,
           "observation": "",
           "references": [],
           "runtimeType": "regular"
         },
         {
-          "description": "Check tank pressures.",
+          "description": "Check the manual adding valves that are working properly.",
           "secondsTimer": 0,
           "observation": "",
           "references": [],
           "runtimeType": "regular"
         },
         {
-          "description": "Check the manual supplemental valves.",
+          "description": "Check the manual adding valves that are working properly.",
           "secondsTimer": 0,
           "observation": "",
           "references": [],
           "runtimeType": "regular"
         },
         {
-          "description": "Check the ADV.",
+          "description": "Check the BCD wing inflating valve that it works properly.",
           "secondsTimer": 0,
           "observation": "",
           "references": [],
           "runtimeType": "regular"
         },
         {
-          "description": "Check the wing inflator.",
+          "description": "Check the BOV to ensure that the CC/OC switch and the 2nd stage regulator are working properly.",
           "secondsTimer": 0,
           "observation": "",
           "references": [],
           "runtimeType": "regular"
         },
         {
-          "description": "Check the DSV (Dive Surface Valve) to ensure it is functioning correctly.",
+          "description": "Perform the negative pressure test.",
           "secondsTimer": 0,
           "observation": "",
           "references": [],
           "runtimeType": "regular"
         },
         {
-          "description": "Carry out a positive pressure test.",
+          "description": "Perform the positive pressure test.",
           "secondsTimer": 0,
           "observation": "",
           "references": [],
           "runtimeType": "regular"
         },
         {
-          "description": "Carry out a negative pressure test.",
+          "description": "Turn On the primary controller handset and check the Low setpoint, status of batteries, pressure in the tanks, the HUD functioning and that the solenoid works correctly.",
           "secondsTimer": 0,
           "observation": "",
           "references": [],
           "runtimeType": "regular"
         },
         {
-          "description": "Switch the HUD on.",
-          "secondsTimer": 0,
-          "observation": "",
-          "references": [],
-          "runtimeType": "regular"
-        },
-        {
-          "description": "Switch the controller on.",
-          "secondsTimer": 0,
-          "observation": "",
-          "references": [],
-          "runtimeType": "regular"
-        },
-        {
-          "description": "Check the setting of the low and high setpoint on the controller.",
-          "secondsTimer": 0,
-          "observation": "",
-          "references": [],
-          "runtimeType": "regular"
-        },
-        {
-          "description": "Open the mouthpiece and breathe for at least 2-3 minutes.",
+          "description": "Breathe for 2-3 minutes from the unit in order to check that the CO₂ scrubber works properly.",
           "secondsTimer": 180,
           "observation": "",
           "references": [],

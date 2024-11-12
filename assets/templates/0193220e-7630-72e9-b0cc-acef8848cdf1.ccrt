@@ -1,0 +1,377 @@
+{
+  "rebreatherManufacturer": "SubGravity",
+  "rebreatherModel": "Defender CCR",
+  "title": "Assembly Checklist without Calibration Kit",
+  "description": "Should be utilized whenever assembling the Defender CCR",
+  "sections": [
+    {
+      "title": "Start",
+      "checks": [
+        {
+          "description": "Pack Scrubber (or note remaining scrubber duration if already packed)",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Assemble Canister",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Assemble Cylinders",
+      "checks": [
+        {
+          "description": "Assemble Cylinders",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Analyze and label oxygen and diluent cylinders",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Install cylinders on canister",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Install Scrubber",
+      "checks": [
+        {
+          "description": "Install Scrubber",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Ensure spacer is properly installed",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Assemble Head",
+      "checks": [
+        {
+          "description": "Assemble Head",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Connect handset cables to the head",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Turn on handsets and check battery voltage and verify sufficient charge",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check expiration date on oxygen sensors and verify within service range",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Install sensors into cell cartridge",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Install cell cartridge into head",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check sensor mv readings are within range (9-14 mv)",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Configure Handsets",
+      "checks": [
+        {
+          "description": "Configure Handsets",
+          "secondsTimer": 0,
+          "observation": "Reference SG-1 electronics and secondary handset user manual",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Set diluent and bailout gases",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Wing, Harness and Counterlung",
+      "checks": [
+        {
+          "description": "Install wing onto Canister",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Install harness onto Canister",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Install counterlungs onto Canister",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Assemble Breathing Loop",
+      "checks": [
+        {
+          "description": "Install head on the canister - verify red dots line up",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Install the oxygen feed line",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Install breathing hoses on T-pieces",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Install T-pieces on counterlungs",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Connect MAV hoses to T-pieces (BMCL only)",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Connect ADV feed hose to ADV (if equipped)",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Connect LP quick connects to MAVs",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Install breathing hoses on head",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Conduct flow direction test",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Install mouthpiece",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Connect BOV LP feed hose",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Negative Pressure Check",
+      "checks": [
+        {
+          "description": "Verify diluent and oxygen cylinders are off",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Pull negative on the loop and close mouthpiece",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Wait 60 seconds and verify successful check",
+          "secondsTimer": 60,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Positive Pressure Check",
+      "checks": [
+        {
+          "description": "Verify diluent and oxygen cylinders are off",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Add gas to the loop until OPV vents",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Wait 60 seconds and verify successful check",
+          "secondsTimer": 60,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Calibration",
+      "checks": [
+        {
+          "description": "Flush loop with oxygen 3 times",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check the calibration on the handsets to see if it is accurate",
+          "secondsTimer": 0,
+          "observation": "If at sea level calibrating with 100%\noxygen, all sensors should read 1.0\nPO₂. If not, follow the calibration instructions found in the SG-1 and secondary handset manufacturer’s\nmanual.",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "High Pressure Leak Checks",
+      "checks": [
+        {
+          "description": "Ensure the primary handset is turned off",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Turn on both the oxygen and diluent tank valves, noting the pressure reading on the SPGs",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Turn both cylinders off and let sit for a minimum of 60 seconds",
+          "secondsTimer": 60,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "One at a time, turn each cylinder on while watching the pressure gauge, verify successful check",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Final",
+      "checks": [
+        {
+          "description": "If not diving immediately, verify PO2 in the loop is above 0.4 and the mouthpiece is closed. Shut down handset and cylinders, and bleed any pressure out of the system.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "If diving immediately, proceed to predive checks.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    }
+  ],
+  "isAsset": true
+}

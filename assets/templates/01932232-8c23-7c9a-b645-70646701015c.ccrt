@@ -1,0 +1,351 @@
+{
+  "rebreatherManufacturer": "SubGravity",
+  "rebreatherModel": "Defender CCR",
+  "title": "Detailed Functionality Checklist",
+  "description": "To be competed each dive day, after having completed the full assembly checklist",
+  "sections": [
+    {
+      "title": "Start",
+      "checks": [
+        {
+          "description": "Mushroom Valve Check",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check Remaining Scrubber Duration",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Re-pack scrubber if needed",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Reset stack timer to appropriate time",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Install Analyzed + Labeled Gas Cylinders",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Negative Pressure Test",
+      "checks": [
+        {
+          "description": "Open BOV",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Inhale from BOV in CC mode, exhaling through nose until counterlungs are fully collapsed",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Close BOV",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Positive Pressure Test",
+      "checks": [
+        {
+          "description": "Close OPV",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Fill loop fully until OPV vents",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Allow to sit for one minute, watch for signs of leaks",
+          "secondsTimer": 60,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Open BOV to release pressure, close BOV",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Diluent & Oxygen System Leak Test",
+      "checks": [
+        {
+          "description": "Open diluent & oxygen cylinders slowly allowing hoses to pressurize, close valves",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Watch pressure gauges for pressure lost for a minimum of 30 sec",
+          "secondsTimer": 60,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Open diluent & oxygen cylinders",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Turn On SG-1 & Secondary",
+      "checks": [
+        {
+          "description": "Turn On SG-1 & Secondary",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Change to MANUAL (M) Setpoint",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Flush Loop with Oxygen",
+      "checks": [
+        {
+          "description": "Close BOV",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Fill loop with oxygen",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Evacuate loop fully (if equipped, ensure ADV is isolated)",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Repeat 2 previous steps one more time",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Fill loop with oxygen",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Quickly open and close the BOV to bring loop to ambient pressure",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Check Calibration",
+      "checks": [
+        {
+          "description": "Check for appropriate PO₂ (considering altitude)",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "If needed, perform calibration according to user manual",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check mV readings (acceptable: 40 mV or greater in 100% oxygen at sea level)",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "ADV, BOV, MAV and Power Inflator",
+      "checks": [
+        {
+          "description": "Inhale from BOV (being cautious if using a hypoxic diluent)",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Open BOV, inhale from loop until ADV engages (if equipped), dropping loop PO₂",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "BCD Inflation + deflation mechanisms & BCD air holding",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Confirm Diuentl & O₂ MAV function",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Solenoid & Wrist Display Battery",
+      "checks": [
+        {
+          "description": "Change SG-1 to LOW setpoint",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Solenoid fires, O₂ injection verified",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Change SG-1 to MANUAL setpoint",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check battery status for both SG-1 & Secondary",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "If less than 3.7 V, recharge before continuing",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Pre-Breathe",
+      "checks": [
+        {
+          "description": "Change SG-1 to LOW setpoint",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Block nose and begin breathing from the Defender CCR (in a safe location / position)",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Observe setpoint maintenance and HUD functions",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Pay close attention to how you feel as well as how the CCR is functioning for a full 5 minutes",
+          "secondsTimer": 300,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Final",
+      "checks": [
+        {
+          "description": "If not diving immediately, verify PO₂ in the loop is above 0.4 and the mouthpiece is closed. Shut down handset and cylinders, and bleed any pressure out of the system.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "If diving immediately, proceed to predive checks.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    }
+  ],
+  "isAsset": true
+}

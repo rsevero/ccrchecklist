@@ -1,5 +1,5 @@
 {
-  "rebreatherManufacturer": "TDISDI",
+  "rebreatherManufacturer": "TDI/SDI",
   "rebreatherModel": "All",
   "title": "Preflight Checklist",
   "description": "Build unit based on manufacturer's recommendations",
@@ -115,5 +115,5 @@
       ]
     }
   ],
-  "isAsset": false
+  "isAsset": true
 }

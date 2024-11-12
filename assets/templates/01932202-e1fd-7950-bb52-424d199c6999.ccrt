@@ -1,0 +1,203 @@
+{
+  "rebreatherManufacturer": "SubGravity",
+  "rebreatherModel": "X-CCR",
+  "title": "Prior the dive",
+  "description": "Essential that the diver executes all the checks according to this checklist",
+  "sections": [
+    {
+      "title": "Main",
+      "checks": [
+        {
+          "description": "Check the CO₂ scrubber that is filled with new soda lime that has never been used before.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check that the CO₂ scrubber is inserted in the canister.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check the sensor cartridge is inserted into the head.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check the sensor lid is inserted and locked.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Analyze the content and the sufficient pressure of the diluent and oxygen tanks.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check the tanks are fastened properly.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Take a Bailout system adequate for the dive, while assume the worst case scenarios.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Open the tank valves on the both tanks and check displaying of the pressure.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check the medium pressure of both 1st stage regulators.",
+          "secondsTimer": 0,
+          "observation": "The medium pressure of oxygen and diluent pressure must be within the range 9,5 +/-0,5 bar and stable. It is prohibited to dive the unit, if the medium pressure is out of the range.",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Calibrate the O₂ sensors and CO₂ sensor.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Place the head onto the canister and lock the head bayonet.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check the head bayonet whether red dot marks being accurately one above the other.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check all the LP and HP hoses are connected.",
+          "secondsTimer": 0,
+          "observation": "Take care to ensure that the O-rings are clean.",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check that the both one-way directional valves in the BOV are in good condition and work correctly!",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check the manual adding valves that are working properly.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check the ADV that is working properly.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check the BCD wing inflating valve that it works properly.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check the BOV to ensure that the CC/OC switch and the 2nd stage regulator are working properly.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check the overpressure / drain valve on the counterlungs that is working properly.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Perform the negative pressure test: Close the both tank valves and perform suction via the mouthpiece and make underpressure in the breathing loop. Close the BOV and wait a few minutes, whether the breathing loop still keeps underpressure.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Open the both tank valves.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Perform the positive pressure test: Fill the breathing loop with air fully via the mouthpiece, until the overpressure valve on the counterlungs releasing the overpressure. Close the mouthpiece and wait a few minutes, whether the breathing loop still keeps overpressure.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Switch the primary handset on and check the status of batteries, pressure in the tanks, the HUD functioning well, solenoid works correctly",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Open the BOV - switch to CC mode.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Breathe for 2-3 minutes from the unit in order to check that the CO₂ scrubber works properly.",
+          "secondsTimer": 180,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Close the BOV - switch to OC mode.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Switch the primary handset off and close the both tank valves.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    }
+  ],
+  "isAsset": true
+}
