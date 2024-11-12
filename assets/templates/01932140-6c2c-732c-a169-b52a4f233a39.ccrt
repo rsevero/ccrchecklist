@@ -1,0 +1,322 @@
+{
+  "rebreatherManufacturer": "JJ-CCR Rebreathers",
+  "rebreatherModel": "JJ-CCR",
+  "title": "Preparations on land",
+  "description": "",
+  "sections": [
+    {
+      "title": "Mounting",
+      "checks": [
+        {
+          "description": "Do I feel, healthy, well and calm?",
+          "secondsTimer": 0,
+          "observation": "If not, it is best not to dive!",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Is the soda lime canister filled with new soda lime that has never been used?",
+          "secondsTimer": 0,
+          "observation": "Soda lime that has already been used must never be used for another dive.",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Analyse the contents of the diluent tank",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "O₂",
+              "suffix": "%"
+            },
+            {
+              "value": null,
+              "prefix": "H₂",
+              "suffix": "%"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Analyse the contents of the oxygen tank",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "O₂",
+              "suffix": "%"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check pressure for diluent tank",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "",
+              "suffix": "BAR / PSI"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check pressure for oxygen tank",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "",
+              "suffix": "BAR / PSI"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Never forget to carry an adequate Bailout system for the dive.",
+          "secondsTimer": 0,
+          "observation": "When calculating the required Bailout system, always assume the worst case scenarios. You can never take too much Bailout gas with you!",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Secure the tanks (O2 and diluent) to the Rebreather.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Place the lid with the soda lime canister into the aluminium housing.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Connect all hoses.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Take care to ensure that the O-rings are clean.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Always check that the DSV shutter valves are functioning correctly in the breathing hose.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Open both tank valves and check the tank pressure.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check the medium pressure of the diluent first stage: must be between 9.0 and 10.0 bar.",
+          "secondsTimer": 0,
+          "observation": "It is prohibited to dive using\nthe equipment if these values are not correct!",
+          "references": [
+            {
+              "value": null,
+              "prefix": "",
+              "suffix": "BAR"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check the medium pressure of the oxygen first stage: must be between 7.0 and 7.5 bar.",
+          "secondsTimer": 0,
+          "observation": "It is prohibited to dive using\nthe equipment if these values are not correct!",
+          "references": [
+            {
+              "value": null,
+              "prefix": "",
+              "suffix": "BAR"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check the manual supplemental valve to ensure it is functioning correctly.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check the ADV to ensure it is functioning correctly.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check the wing inflator to ensure it is functioning correctly.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check the DSV (Dive Surface Valve) to ensure it is functioning correctly.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Positive pressure test",
+      "checks": [
+        {
+          "description": "Fill the circuit fully with air via the mouthpiece, until the overpressure valve of the counter lung triggers.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Close the mouthpiece and wait a few minutes.",
+          "secondsTimer": 300,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Now open the mouthpiece again.",
+          "secondsTimer": 0,
+          "observation": "If the system still contains overpressure then you will hear the gas escaping upon opening the mouthpiece.",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Actuate the fast drain valve on the counter lung in order to ensure that it functions correctly.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Negative pressure test",
+      "checks": [
+        {
+          "description": "Close both tank valves.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Using the mouthpiece, generate a vacuum in the circuit.",
+          "secondsTimer": 0,
+          "observation": "A clear sign of a vacuum is the position of the ADV membrane.",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Close the mouthpiece and wait.",
+          "secondsTimer": 300,
+          "observation": "If the position of the ADV membrane does not change, the test has been successful.",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "As soon as you open the mouthpiece again you should also hear the noise of air being drawn in.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Final checks",
+      "checks": [
+        {
+          "description": "Open both tank valves again.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Open the mouthpiece (=CC mode).",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Switch the HUD and the controller on.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Calibrate the oxygen sensors with the controller and then with the HUD.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check to voltage of the controller and solonoid battery.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Breathe for 2-3 minutes from the device, in order to check that the soda lime is functioning correctly.",
+          "secondsTimer": 180,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Close the mouthpiece (OC mode).",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Switch off the controller and the HUD.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Close both tank valves.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    }
+  ],
+  "isAsset": false
+}
