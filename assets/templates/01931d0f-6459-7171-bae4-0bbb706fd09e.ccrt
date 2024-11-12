@@ -1,6 +1,6 @@
 {
   "rebreatherManufacturer": "Scuba Force",
-  "rebreatherModel": "SF@ ECCR",
+  "rebreatherModel": "SF2 ECCR",
   "title": "Pre-dive checklist",
   "description": "To be used before every dive",
   "sections": [
@@ -564,6 +564,5 @@
       ]
     }
   ],
-  "path": "/home/rodrigo/Documents/ccr_checklist/templates/01931d0f-6459-7171-bae4-0bbb706fd09e.ccrt",
   "isAsset": false
 }
