@@ -1,0 +1,112 @@
+{
+  "rebreatherManufacturer": "Subgravity",
+  "rebreatherModel": "X-CCR",
+  "title": "Condensed functionality checklist",
+  "description": "After having completed full assembly checklist",
+  "sections": [
+    {
+      "title": "Main",
+      "checks": [
+        {
+          "description": "Mushroom Valve Check",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check Remaining Scrubber Duration",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Install Analyzed + Labeled Gas Cylinders",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Negative Pressure Test (hold for 1 minute minimum)",
+          "secondsTimer": 60,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Positive Pressure Test (hold for 1 minute minimum)",
+          "secondsTimer": 60,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Turn On X-CCR & Secondary",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Flush Loop with Oxygen (3 times)",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check Calibration",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check ADV, BOV, MAV and Power Inflator",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Diluent & Oxygen System Leak Test (hold for 30 seconds minimum)",
+          "secondsTimer": 30,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check Solenoid & Wrist Display Battery",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Pre-Breathe (5 minutes)",
+          "secondsTimer": 300,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "If Diving Immediately: Continue with “Pre-Dive Checks”",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "f NOT Diving Immediately: Close O2 + diluent cylinder valves, drain hoses, turn off electronics, and secure unit",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    }
+  ],
+  "isAsset": false
+}
