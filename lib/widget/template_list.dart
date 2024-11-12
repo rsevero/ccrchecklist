@@ -41,13 +41,13 @@ class _TemplateListState extends State<TemplateList> {
 
     templateListStore = Provider.of<TemplateListStore>(context, listen: false);
 
-    final ColorScheme currentColorScheme = context.colorScheme;
-    expandedModelColor = currentColorScheme.secondaryContainer;
-    expandedModelTextColor = currentColorScheme.onSecondaryContainer;
-    expandedManufacturerColor = currentColorScheme.secondary;
-    expandedManufacturerTextColor = currentColorScheme.onSecondary;
-    collapsedManufacturerTextColor = currentColorScheme.onSurface;
-    collapsedModelTextColor = currentColorScheme.onSurface;
+    final ColorScheme colorScheme = context.colorScheme;
+    expandedModelColor = colorScheme.secondaryContainer;
+    expandedModelTextColor = colorScheme.onSecondaryContainer;
+    expandedManufacturerColor = colorScheme.secondary;
+    expandedManufacturerTextColor = colorScheme.onSecondary;
+    collapsedManufacturerTextColor = colorScheme.onSurface;
+    collapsedModelTextColor = colorScheme.onSurface;
   }
 
   @override
