@@ -47,7 +47,7 @@ class _TemplateListState extends State<TemplateList> {
     expandedManufacturerColor = colorScheme.secondary;
     expandedManufacturerTextColor = colorScheme.onSecondary;
     collapsedManufacturerTextColor = colorScheme.onSurface;
-    collapsedModelTextColor = colorScheme.onSurface;
+    collapsedModelTextColor = colorScheme.onSecondary;
   }
 
   @override
