@@ -1,5 +1,6 @@
 import 'package:ccr_checklist/misc/helper_functions.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
+import 'package:ccr_checklist/store/template_list_store.dart';
 import 'package:ccr_checklist/widget/template_editor_page_actions_widget.dart';
 import 'package:ccr_checklist/widget/template_editor_page_app_bar.dart';
 import 'package:ccr_checklist/widget/template_editor_page_body.dart';
@@ -22,6 +23,10 @@ class TemplateEditorPage extends StatelessWidget {
         final NavigatorState navigator = Navigator.of(context);
         final bool shouldPop = await _onBackPress(context);
         if (shouldPop) {
+          if (!context.mounted) return;
+          final TemplateListStore templateListStore =
+              Provider.of<TemplateListStore>(context, listen: false);
+          templateListStore.invalidate();
           navigator.pop();
         }
       },
