@@ -455,7 +455,7 @@ class TemplateCheckWidget extends StatelessWidget {
                       child: Text('Amount of references'),
                     ),
                     ...List.generate(
-                      5,
+                      ccrMaxLinearityMeasurements,
                       (index) => RadioListTile<int>(
                         title: Text('${index + 1}'),
                         value: index + 1,
@@ -566,7 +566,7 @@ class TemplateCheckWidget extends StatelessWidget {
                       child: Text('Amount of references'),
                     ),
                     ...List.generate(
-                      5,
+                      ccrMaxLinearityMeasurements,
                       (index) => RadioListTile<int>(
                         title: Text('${index + 1}'),
                         value: index + 1,

@@ -21,7 +21,8 @@ const ccrTimerTextColorNotRunning = Color(0xffffffff);
 const ccrLinearityWorksheetDivider = 0.21;
 const ccrLinearityWorksheetMultiplier = 1.6;
 
-const ccrMaxReferences = 5;
+const ccrMaxReferences = 8;
+const ccrMaxLinearityMeasurements = 8;
 
 const ccrSectionOkColor = Colors.green;
 
