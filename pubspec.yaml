@@ -46,6 +46,7 @@ dependencies:
   mobx: ^2.2.1
   mobx_codegen: ^2.4.0
   mockito: ^5.4.4
+  numberpicker: ^2.1.2
   path_provider: ^2.1.5
   pdf: ^3.10.8
   platform_info: ^5.0.0

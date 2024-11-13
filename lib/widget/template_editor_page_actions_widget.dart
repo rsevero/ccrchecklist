@@ -7,6 +7,7 @@ import 'package:ccr_checklist/widget/greyable_speed_dial_child_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:numberpicker/numberpicker.dart';
 import 'package:provider/provider.dart';
 
 class TemplateEditorPageActionsWidget extends StatelessWidget {
@@ -236,17 +237,19 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
   }
 
   void _onTapAddCompleteLinearityCheck(BuildContext context) {
-    final templateEditorStore =
-        Provider.of<TemplateEditorStore>(context, listen: false);
-    final theme = context.ccrThemeExtension;
-    final TextEditingController measurementController = TextEditingController();
-    final TextEditingController descriptionController = TextEditingController();
-
-    int numberOfReferences = 1;
-
     showDialog(
       context: context,
       builder: (BuildContext context) {
+        final templateEditorStore =
+            Provider.of<TemplateEditorStore>(context, listen: false);
+        final theme = context.ccrThemeExtension;
+        final TextEditingController measurementController =
+            TextEditingController();
+        final TextEditingController descriptionController =
+            TextEditingController();
+
+        int referenceCount = 1;
+
         return AlertDialog(
           title: Text(
             'Add Complete Linearity Check',
@@ -342,20 +345,17 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                    ...List.generate(
-                      ccrMaxReferences,
-                      (index) => RadioListTile<int>(
-                        title: Text(
-                          '${index + 1}',
-                          style: theme.dialogFieldContentTextTheme,
-                        ),
-                        value: index + 1,
-                        groupValue: numberOfReferences,
-                        onChanged: (int? value) {
-                          if (value != null) {
-                            setState(() => numberOfReferences = value);
-                          }
-                        },
+                    NumberPicker(
+                      value: referenceCount,
+                      minValue: 1,
+                      maxValue: ccrMaxLinearityMeasurements,
+                      onChanged: (value) {
+                        setState(() => referenceCount = value);
+                      },
+                      decoration: BoxDecoration(
+                        borderRadius: ccrTemplateListTileBorderRadius,
+                        border: Border.all(
+                            color: context.ccrThemeExtension.outline),
                       ),
                     ),
                   ],
@@ -373,7 +373,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                   templateEditorStore.addCompleteLinearityCheck(
                     measurement: measurement,
                     description: description,
-                    referenceCount: numberOfReferences,
+                    referenceCount: referenceCount,
                   );
                   Navigator.of(context).pop();
                 }
@@ -390,15 +390,16 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
   }
 
   void _onTapAddLinearityStep1Check(BuildContext context) {
-    final templateEditorStore =
-        Provider.of<TemplateEditorStore>(context, listen: false);
-    final TextEditingController descriptionController = TextEditingController();
-
-    int numberOfReferences = 1;
-
     showDialog(
       context: context,
       builder: (BuildContext context) {
+        final templateEditorStore =
+            Provider.of<TemplateEditorStore>(context, listen: false);
+        final TextEditingController descriptionController =
+            TextEditingController();
+
+        int referenceCount = 1;
+
         return AlertDialog(
           title: Text(
             'Add step 1 of Linearity Check',
@@ -463,21 +464,17 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                    ...List.generate(
-                      ccrMaxReferences,
-                      (index) => RadioListTile<int>(
-                        title: Text(
-                          '${index + 1}',
-                          style: context
-                              .ccrThemeExtension.dialogFieldContentTextTheme,
-                        ),
-                        value: index + 1,
-                        groupValue: numberOfReferences,
-                        onChanged: (int? value) {
-                          if (value != null) {
-                            setState(() => numberOfReferences = value);
-                          }
-                        },
+                    NumberPicker(
+                      value: referenceCount,
+                      minValue: 1,
+                      maxValue: ccrMaxLinearityMeasurements,
+                      onChanged: (value) {
+                        setState(() => referenceCount = value);
+                      },
+                      decoration: BoxDecoration(
+                        borderRadius: ccrTemplateListTileBorderRadius,
+                        border: Border.all(
+                            color: context.ccrThemeExtension.outline),
                       ),
                     ),
                   ],
@@ -493,7 +490,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                 if (description.isNotEmpty) {
                   templateEditorStore.addLinearityStep1Check(
                     description: description,
-                    referenceCount: numberOfReferences,
+                    referenceCount: referenceCount,
                   );
                   Navigator.of(context).pop();
                 }

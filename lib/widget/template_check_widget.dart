@@ -7,6 +7,7 @@ import 'package:ccr_checklist/store/template_editor_store.dart';
 import 'package:ccr_checklist/theme/ccr_theme_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:numberpicker/numberpicker.dart';
 import 'package:provider/provider.dart';
 
 class TemplateCheckWidget extends StatelessWidget {
@@ -355,19 +356,19 @@ class TemplateCheckWidget extends StatelessWidget {
 
   void _editTemplateCompleteLinearityCheck(
       BuildContext context, int sectionIndex, int index) {
-    final templateEditorStore =
-        Provider.of<TemplateEditorStore>(context, listen: false);
-    final TemplateCompleteLinearityCheck check = templateEditorStore
-        .checks[sectionIndex][index] as TemplateCompleteLinearityCheck;
-    final TextEditingController measurementController =
-        TextEditingController(text: check.measurement);
-    final TextEditingController descriptionController =
-        TextEditingController(text: check.description);
-    int referenceCount = check.referenceCount;
-
     showDialog(
       context: context,
       builder: (BuildContext context) {
+        final templateEditorStore =
+            Provider.of<TemplateEditorStore>(context, listen: false);
+        final TemplateCompleteLinearityCheck check = templateEditorStore
+            .checks[sectionIndex][index] as TemplateCompleteLinearityCheck;
+        final TextEditingController measurementController =
+            TextEditingController(text: check.measurement);
+        final TextEditingController descriptionController =
+            TextEditingController(text: check.description);
+        int referenceCount = check.referenceCount;
+
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
             return AlertDialog(
@@ -454,17 +455,17 @@ class TemplateCheckWidget extends StatelessWidget {
                       padding: EdgeInsets.symmetric(vertical: 8.0),
                       child: Text('Amount of references'),
                     ),
-                    ...List.generate(
-                      ccrMaxLinearityMeasurements,
-                      (index) => RadioListTile<int>(
-                        title: Text('${index + 1}'),
-                        value: index + 1,
-                        groupValue: referenceCount,
-                        onChanged: (int? value) {
-                          if (value != null) {
-                            setState(() => (referenceCount = value));
-                          }
-                        },
+                    NumberPicker(
+                      value: referenceCount,
+                      minValue: 1,
+                      maxValue: ccrMaxLinearityMeasurements,
+                      onChanged: (value) {
+                        setState(() => referenceCount = value);
+                      },
+                      decoration: BoxDecoration(
+                        borderRadius: ccrTemplateListTileBorderRadius,
+                        border: Border.all(
+                            color: context.ccrThemeExtension.outline),
                       ),
                     ),
                   ],
@@ -502,17 +503,17 @@ class TemplateCheckWidget extends StatelessWidget {
 
   void _editTemplateLinearityStep1Check(
       BuildContext context, int sectionIndex, int index) {
-    final templateEditorStore =
-        Provider.of<TemplateEditorStore>(context, listen: false);
-    final TemplateLinearityStep1Check check = templateEditorStore
-        .checks[sectionIndex][index] as TemplateLinearityStep1Check;
-    final TextEditingController descriptionController =
-        TextEditingController(text: check.description);
-    int referenceCount = check.referenceCount;
-
     showDialog(
       context: context,
       builder: (BuildContext context) {
+        final templateEditorStore =
+            Provider.of<TemplateEditorStore>(context, listen: false);
+        final TemplateLinearityStep1Check check = templateEditorStore
+            .checks[sectionIndex][index] as TemplateLinearityStep1Check;
+        final TextEditingController descriptionController =
+            TextEditingController(text: check.description);
+        int referenceCount = check.referenceCount;
+
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
             return AlertDialog(
@@ -549,13 +550,10 @@ class TemplateCheckWidget extends StatelessWidget {
                               hintText: 'Enter check description',
                               border: OutlineInputBorder(),
                             ),
-                            maxLines: null, // Makes the input field expandable
-                            minLines:
-                                1, // Minimum lines the TextFormField will take
-                            keyboardType: TextInputType
-                                .multiline, // Keyboard type for multiline input
-                            textCapitalization: TextCapitalization
-                                .sentences, // Capitalize first letter of sentences
+                            maxLines: null,
+                            minLines: 1,
+                            keyboardType: TextInputType.multiline,
+                            textCapitalization: TextCapitalization.sentences,
                             autofocus: true,
                           ),
                         ],
@@ -565,17 +563,17 @@ class TemplateCheckWidget extends StatelessWidget {
                       padding: EdgeInsets.symmetric(vertical: 8.0),
                       child: Text('Amount of references'),
                     ),
-                    ...List.generate(
-                      ccrMaxLinearityMeasurements,
-                      (index) => RadioListTile<int>(
-                        title: Text('${index + 1}'),
-                        value: index + 1,
-                        groupValue: referenceCount,
-                        onChanged: (int? value) {
-                          if (value != null) {
-                            setState(() => (referenceCount = value));
-                          }
-                        },
+                    NumberPicker(
+                      value: referenceCount,
+                      minValue: 1,
+                      maxValue: ccrMaxLinearityMeasurements,
+                      onChanged: (value) {
+                        setState(() => referenceCount = value);
+                      },
+                      decoration: BoxDecoration(
+                        borderRadius: ccrTemplateListTileBorderRadius,
+                        border: Border.all(
+                            color: context.ccrThemeExtension.outline),
                       ),
                     ),
                   ],
@@ -638,8 +636,7 @@ class TemplateCheckWidget extends StatelessWidget {
                               Text(
                                 'Description',
                                 style: TextStyle(
-                                  fontSize:
-                                      16, // Adjust the font size as needed
+                                  fontSize: 16,
                                 ),
                               ),
                               Text(
@@ -658,13 +655,10 @@ class TemplateCheckWidget extends StatelessWidget {
                               hintText: 'Enter check description',
                               border: OutlineInputBorder(),
                             ),
-                            maxLines: null, // Makes the input field expandable
-                            minLines:
-                                1, // Minimum lines the TextFormField will take
-                            keyboardType: TextInputType
-                                .multiline, // Keyboard type for multiline input
-                            textCapitalization: TextCapitalization
-                                .sentences, // Capitalize first letter of sentences
+                            maxLines: null,
+                            minLines: 1,
+                            keyboardType: TextInputType.multiline,
+                            textCapitalization: TextCapitalization.sentences,
                             autofocus: true,
                           ),
                         ],
@@ -734,7 +728,6 @@ class TemplateCheckWidget extends StatelessWidget {
                           groupValue: selectedNewSectionIndex,
                           onChanged: (int? value) {
                             setState(() {
-                              // Update the local state
                               selectedNewSectionIndex = value;
                             });
                           },
