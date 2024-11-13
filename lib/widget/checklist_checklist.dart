@@ -1,5 +1,6 @@
 import 'package:ccr_checklist/data/checklist_check.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
+import 'package:ccr_checklist/widget/checklist_complete_linearity_check_widget.dart';
 import 'package:ccr_checklist/widget/checklist_linearity_step1_check_widget.dart';
 import 'package:ccr_checklist/widget/checklist_linearity_step2_check_widget.dart';
 import 'package:ccr_checklist/widget/checklist_regular_check_widget.dart';
@@ -24,6 +25,9 @@ class CheckListCheckList extends StatelessWidget {
             var check = checklistEditorStore.checks[sectionIndex][index];
             if (check is ChecklistRegularCheck) {
               return ChecklistRegularCheckWidget(
+                  sectionIndex: sectionIndex, checkIndex: index);
+            } else if (check is ChecklistCompleteLinearityCheck) {
+              return ChecklistCompleteLinearityCheckWidget(
                   sectionIndex: sectionIndex, checkIndex: index);
             } else if (check is ChecklistLinearityStep1Check) {
               return ChecklistLinearityStep1CheckWidget(

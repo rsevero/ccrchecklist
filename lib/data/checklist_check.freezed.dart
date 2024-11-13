@@ -22,6 +22,8 @@ ChecklistCheck _$ChecklistCheckFromJson(Map<String, dynamic> json) {
       return ChecklistLinearityStep1Check.fromJson(json);
     case 'linearityStep2':
       return ChecklistLinearityStep2Check.fromJson(json);
+    case 'completeLinearity':
+      return ChecklistCompleteLinearityCheck.fromJson(json);
 
     default:
       throw CheckedFromJsonException(json, 'runtimeType', 'ChecklistCheck',
@@ -47,9 +49,12 @@ mixin _$ChecklistCheck {
     required TResult Function(String description, bool isChecked,
             DateTime lastChange, int referenceCount)
         linearityStep1,
+    required TResult Function(
+            String description, bool isChecked, DateTime lastChange)
+        linearityStep2,
     required TResult Function(String description, bool isChecked,
             DateTime lastChange, int referenceCount)
-        linearityStep2,
+        completeLinearity,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -65,9 +70,11 @@ mixin _$ChecklistCheck {
     TResult? Function(String description, bool isChecked, DateTime lastChange,
             int referenceCount)?
         linearityStep1,
+    TResult? Function(String description, bool isChecked, DateTime lastChange)?
+        linearityStep2,
     TResult? Function(String description, bool isChecked, DateTime lastChange,
             int referenceCount)?
-        linearityStep2,
+        completeLinearity,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -83,9 +90,11 @@ mixin _$ChecklistCheck {
     TResult Function(String description, bool isChecked, DateTime lastChange,
             int referenceCount)?
         linearityStep1,
+    TResult Function(String description, bool isChecked, DateTime lastChange)?
+        linearityStep2,
     TResult Function(String description, bool isChecked, DateTime lastChange,
             int referenceCount)?
-        linearityStep2,
+        completeLinearity,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -96,6 +105,8 @@ mixin _$ChecklistCheck {
         linearityStep1,
     required TResult Function(ChecklistLinearityStep2Check value)
         linearityStep2,
+    required TResult Function(ChecklistCompleteLinearityCheck value)
+        completeLinearity,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -103,6 +114,7 @@ mixin _$ChecklistCheck {
     TResult? Function(ChecklistRegularCheck value)? regular,
     TResult? Function(ChecklistLinearityStep1Check value)? linearityStep1,
     TResult? Function(ChecklistLinearityStep2Check value)? linearityStep2,
+    TResult? Function(ChecklistCompleteLinearityCheck value)? completeLinearity,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -110,6 +122,7 @@ mixin _$ChecklistCheck {
     TResult Function(ChecklistRegularCheck value)? regular,
     TResult Function(ChecklistLinearityStep1Check value)? linearityStep1,
     TResult Function(ChecklistLinearityStep2Check value)? linearityStep2,
+    TResult Function(ChecklistCompleteLinearityCheck value)? completeLinearity,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -341,9 +354,12 @@ class _$ChecklistRegularCheckImpl extends ChecklistRegularCheck
     required TResult Function(String description, bool isChecked,
             DateTime lastChange, int referenceCount)
         linearityStep1,
+    required TResult Function(
+            String description, bool isChecked, DateTime lastChange)
+        linearityStep2,
     required TResult Function(String description, bool isChecked,
             DateTime lastChange, int referenceCount)
-        linearityStep2,
+        completeLinearity,
   }) {
     return regular(description, observation, isChecked, lastChange,
         secondsTimer, references);
@@ -363,9 +379,11 @@ class _$ChecklistRegularCheckImpl extends ChecklistRegularCheck
     TResult? Function(String description, bool isChecked, DateTime lastChange,
             int referenceCount)?
         linearityStep1,
+    TResult? Function(String description, bool isChecked, DateTime lastChange)?
+        linearityStep2,
     TResult? Function(String description, bool isChecked, DateTime lastChange,
             int referenceCount)?
-        linearityStep2,
+        completeLinearity,
   }) {
     return regular?.call(description, observation, isChecked, lastChange,
         secondsTimer, references);
@@ -385,9 +403,11 @@ class _$ChecklistRegularCheckImpl extends ChecklistRegularCheck
     TResult Function(String description, bool isChecked, DateTime lastChange,
             int referenceCount)?
         linearityStep1,
+    TResult Function(String description, bool isChecked, DateTime lastChange)?
+        linearityStep2,
     TResult Function(String description, bool isChecked, DateTime lastChange,
             int referenceCount)?
-        linearityStep2,
+        completeLinearity,
     required TResult orElse(),
   }) {
     if (regular != null) {
@@ -405,6 +425,8 @@ class _$ChecklistRegularCheckImpl extends ChecklistRegularCheck
         linearityStep1,
     required TResult Function(ChecklistLinearityStep2Check value)
         linearityStep2,
+    required TResult Function(ChecklistCompleteLinearityCheck value)
+        completeLinearity,
   }) {
     return regular(this);
   }
@@ -415,6 +437,7 @@ class _$ChecklistRegularCheckImpl extends ChecklistRegularCheck
     TResult? Function(ChecklistRegularCheck value)? regular,
     TResult? Function(ChecklistLinearityStep1Check value)? linearityStep1,
     TResult? Function(ChecklistLinearityStep2Check value)? linearityStep2,
+    TResult? Function(ChecklistCompleteLinearityCheck value)? completeLinearity,
   }) {
     return regular?.call(this);
   }
@@ -425,6 +448,7 @@ class _$ChecklistRegularCheckImpl extends ChecklistRegularCheck
     TResult Function(ChecklistRegularCheck value)? regular,
     TResult Function(ChecklistLinearityStep1Check value)? linearityStep1,
     TResult Function(ChecklistLinearityStep2Check value)? linearityStep2,
+    TResult Function(ChecklistCompleteLinearityCheck value)? completeLinearity,
     required TResult orElse(),
   }) {
     if (regular != null) {
@@ -619,9 +643,12 @@ class _$ChecklistLinearityStep1CheckImpl extends ChecklistLinearityStep1Check
     required TResult Function(String description, bool isChecked,
             DateTime lastChange, int referenceCount)
         linearityStep1,
+    required TResult Function(
+            String description, bool isChecked, DateTime lastChange)
+        linearityStep2,
     required TResult Function(String description, bool isChecked,
             DateTime lastChange, int referenceCount)
-        linearityStep2,
+        completeLinearity,
   }) {
     return linearityStep1(description, isChecked, lastChange, referenceCount);
   }
@@ -640,9 +667,11 @@ class _$ChecklistLinearityStep1CheckImpl extends ChecklistLinearityStep1Check
     TResult? Function(String description, bool isChecked, DateTime lastChange,
             int referenceCount)?
         linearityStep1,
+    TResult? Function(String description, bool isChecked, DateTime lastChange)?
+        linearityStep2,
     TResult? Function(String description, bool isChecked, DateTime lastChange,
             int referenceCount)?
-        linearityStep2,
+        completeLinearity,
   }) {
     return linearityStep1?.call(
         description, isChecked, lastChange, referenceCount);
@@ -662,9 +691,11 @@ class _$ChecklistLinearityStep1CheckImpl extends ChecklistLinearityStep1Check
     TResult Function(String description, bool isChecked, DateTime lastChange,
             int referenceCount)?
         linearityStep1,
+    TResult Function(String description, bool isChecked, DateTime lastChange)?
+        linearityStep2,
     TResult Function(String description, bool isChecked, DateTime lastChange,
             int referenceCount)?
-        linearityStep2,
+        completeLinearity,
     required TResult orElse(),
   }) {
     if (linearityStep1 != null) {
@@ -681,6 +712,8 @@ class _$ChecklistLinearityStep1CheckImpl extends ChecklistLinearityStep1Check
         linearityStep1,
     required TResult Function(ChecklistLinearityStep2Check value)
         linearityStep2,
+    required TResult Function(ChecklistCompleteLinearityCheck value)
+        completeLinearity,
   }) {
     return linearityStep1(this);
   }
@@ -691,6 +724,7 @@ class _$ChecklistLinearityStep1CheckImpl extends ChecklistLinearityStep1Check
     TResult? Function(ChecklistRegularCheck value)? regular,
     TResult? Function(ChecklistLinearityStep1Check value)? linearityStep1,
     TResult? Function(ChecklistLinearityStep2Check value)? linearityStep2,
+    TResult? Function(ChecklistCompleteLinearityCheck value)? completeLinearity,
   }) {
     return linearityStep1?.call(this);
   }
@@ -701,6 +735,7 @@ class _$ChecklistLinearityStep1CheckImpl extends ChecklistLinearityStep1Check
     TResult Function(ChecklistRegularCheck value)? regular,
     TResult Function(ChecklistLinearityStep1Check value)? linearityStep1,
     TResult Function(ChecklistLinearityStep2Check value)? linearityStep2,
+    TResult Function(ChecklistCompleteLinearityCheck value)? completeLinearity,
     required TResult orElse(),
   }) {
     if (linearityStep1 != null) {
@@ -754,11 +789,7 @@ abstract class _$$ChecklistLinearityStep2CheckImplCopyWith<$Res>
       __$$ChecklistLinearityStep2CheckImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String description,
-      bool isChecked,
-      DateTime lastChange,
-      int referenceCount});
+  $Res call({String description, bool isChecked, DateTime lastChange});
 }
 
 /// @nodoc
@@ -779,7 +810,6 @@ class __$$ChecklistLinearityStep2CheckImplCopyWithImpl<$Res>
     Object? description = null,
     Object? isChecked = null,
     Object? lastChange = null,
-    Object? referenceCount = null,
   }) {
     return _then(_$ChecklistLinearityStep2CheckImpl(
       description: null == description
@@ -794,10 +824,6 @@ class __$$ChecklistLinearityStep2CheckImplCopyWithImpl<$Res>
           ? _value.lastChange
           : lastChange // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      referenceCount: null == referenceCount
-          ? _value.referenceCount
-          : referenceCount // ignore: cast_nullable_to_non_nullable
-              as int,
     ));
   }
 }
@@ -810,7 +836,6 @@ class _$ChecklistLinearityStep2CheckImpl extends ChecklistLinearityStep2Check
       {required this.description,
       required this.isChecked,
       required this.lastChange,
-      required this.referenceCount,
       final String? $type})
       : $type = $type ?? 'linearityStep2',
         super._();
@@ -825,15 +850,13 @@ class _$ChecklistLinearityStep2CheckImpl extends ChecklistLinearityStep2Check
   final bool isChecked;
   @override
   final DateTime lastChange;
-  @override
-  final int referenceCount;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ChecklistCheck.linearityStep2(description: $description, isChecked: $isChecked, lastChange: $lastChange, referenceCount: $referenceCount)';
+    return 'ChecklistCheck.linearityStep2(description: $description, isChecked: $isChecked, lastChange: $lastChange)';
   }
 
   @override
@@ -843,8 +866,7 @@ class _$ChecklistLinearityStep2CheckImpl extends ChecklistLinearityStep2Check
       ..add(DiagnosticsProperty('type', 'ChecklistCheck.linearityStep2'))
       ..add(DiagnosticsProperty('description', description))
       ..add(DiagnosticsProperty('isChecked', isChecked))
-      ..add(DiagnosticsProperty('lastChange', lastChange))
-      ..add(DiagnosticsProperty('referenceCount', referenceCount));
+      ..add(DiagnosticsProperty('lastChange', lastChange));
   }
 
   @override
@@ -857,15 +879,13 @@ class _$ChecklistLinearityStep2CheckImpl extends ChecklistLinearityStep2Check
             (identical(other.isChecked, isChecked) ||
                 other.isChecked == isChecked) &&
             (identical(other.lastChange, lastChange) ||
-                other.lastChange == lastChange) &&
-            (identical(other.referenceCount, referenceCount) ||
-                other.referenceCount == referenceCount));
+                other.lastChange == lastChange));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, description, isChecked, lastChange, referenceCount);
+  int get hashCode =>
+      Object.hash(runtimeType, description, isChecked, lastChange);
 
   /// Create a copy of ChecklistCheck
   /// with the given fields replaced by the non-null parameter values.
@@ -891,11 +911,14 @@ class _$ChecklistLinearityStep2CheckImpl extends ChecklistLinearityStep2Check
     required TResult Function(String description, bool isChecked,
             DateTime lastChange, int referenceCount)
         linearityStep1,
+    required TResult Function(
+            String description, bool isChecked, DateTime lastChange)
+        linearityStep2,
     required TResult Function(String description, bool isChecked,
             DateTime lastChange, int referenceCount)
-        linearityStep2,
+        completeLinearity,
   }) {
-    return linearityStep2(description, isChecked, lastChange, referenceCount);
+    return linearityStep2(description, isChecked, lastChange);
   }
 
   @override
@@ -912,12 +935,13 @@ class _$ChecklistLinearityStep2CheckImpl extends ChecklistLinearityStep2Check
     TResult? Function(String description, bool isChecked, DateTime lastChange,
             int referenceCount)?
         linearityStep1,
+    TResult? Function(String description, bool isChecked, DateTime lastChange)?
+        linearityStep2,
     TResult? Function(String description, bool isChecked, DateTime lastChange,
             int referenceCount)?
-        linearityStep2,
+        completeLinearity,
   }) {
-    return linearityStep2?.call(
-        description, isChecked, lastChange, referenceCount);
+    return linearityStep2?.call(description, isChecked, lastChange);
   }
 
   @override
@@ -934,13 +958,15 @@ class _$ChecklistLinearityStep2CheckImpl extends ChecklistLinearityStep2Check
     TResult Function(String description, bool isChecked, DateTime lastChange,
             int referenceCount)?
         linearityStep1,
+    TResult Function(String description, bool isChecked, DateTime lastChange)?
+        linearityStep2,
     TResult Function(String description, bool isChecked, DateTime lastChange,
             int referenceCount)?
-        linearityStep2,
+        completeLinearity,
     required TResult orElse(),
   }) {
     if (linearityStep2 != null) {
-      return linearityStep2(description, isChecked, lastChange, referenceCount);
+      return linearityStep2(description, isChecked, lastChange);
     }
     return orElse();
   }
@@ -953,6 +979,8 @@ class _$ChecklistLinearityStep2CheckImpl extends ChecklistLinearityStep2Check
         linearityStep1,
     required TResult Function(ChecklistLinearityStep2Check value)
         linearityStep2,
+    required TResult Function(ChecklistCompleteLinearityCheck value)
+        completeLinearity,
   }) {
     return linearityStep2(this);
   }
@@ -963,6 +991,7 @@ class _$ChecklistLinearityStep2CheckImpl extends ChecklistLinearityStep2Check
     TResult? Function(ChecklistRegularCheck value)? regular,
     TResult? Function(ChecklistLinearityStep1Check value)? linearityStep1,
     TResult? Function(ChecklistLinearityStep2Check value)? linearityStep2,
+    TResult? Function(ChecklistCompleteLinearityCheck value)? completeLinearity,
   }) {
     return linearityStep2?.call(this);
   }
@@ -973,6 +1002,7 @@ class _$ChecklistLinearityStep2CheckImpl extends ChecklistLinearityStep2Check
     TResult Function(ChecklistRegularCheck value)? regular,
     TResult Function(ChecklistLinearityStep1Check value)? linearityStep1,
     TResult Function(ChecklistLinearityStep2Check value)? linearityStep2,
+    TResult Function(ChecklistCompleteLinearityCheck value)? completeLinearity,
     required TResult orElse(),
   }) {
     if (linearityStep2 != null) {
@@ -993,12 +1023,296 @@ abstract class ChecklistLinearityStep2Check extends ChecklistCheck {
   factory ChecklistLinearityStep2Check(
       {required final String description,
       required final bool isChecked,
-      required final DateTime lastChange,
-      required final int referenceCount}) = _$ChecklistLinearityStep2CheckImpl;
+      required final DateTime lastChange}) = _$ChecklistLinearityStep2CheckImpl;
   ChecklistLinearityStep2Check._() : super._();
 
   factory ChecklistLinearityStep2Check.fromJson(Map<String, dynamic> json) =
       _$ChecklistLinearityStep2CheckImpl.fromJson;
+
+  @override
+  String get description;
+  @override
+  bool get isChecked;
+  @override
+  DateTime get lastChange;
+
+  /// Create a copy of ChecklistCheck
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ChecklistLinearityStep2CheckImplCopyWith<
+          _$ChecklistLinearityStep2CheckImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ChecklistCompleteLinearityCheckImplCopyWith<$Res>
+    implements $ChecklistCheckCopyWith<$Res> {
+  factory _$$ChecklistCompleteLinearityCheckImplCopyWith(
+          _$ChecklistCompleteLinearityCheckImpl value,
+          $Res Function(_$ChecklistCompleteLinearityCheckImpl) then) =
+      __$$ChecklistCompleteLinearityCheckImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String description,
+      bool isChecked,
+      DateTime lastChange,
+      int referenceCount});
+}
+
+/// @nodoc
+class __$$ChecklistCompleteLinearityCheckImplCopyWithImpl<$Res>
+    extends _$ChecklistCheckCopyWithImpl<$Res,
+        _$ChecklistCompleteLinearityCheckImpl>
+    implements _$$ChecklistCompleteLinearityCheckImplCopyWith<$Res> {
+  __$$ChecklistCompleteLinearityCheckImplCopyWithImpl(
+      _$ChecklistCompleteLinearityCheckImpl _value,
+      $Res Function(_$ChecklistCompleteLinearityCheckImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ChecklistCheck
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? description = null,
+    Object? isChecked = null,
+    Object? lastChange = null,
+    Object? referenceCount = null,
+  }) {
+    return _then(_$ChecklistCompleteLinearityCheckImpl(
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      isChecked: null == isChecked
+          ? _value.isChecked
+          : isChecked // ignore: cast_nullable_to_non_nullable
+              as bool,
+      lastChange: null == lastChange
+          ? _value.lastChange
+          : lastChange // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      referenceCount: null == referenceCount
+          ? _value.referenceCount
+          : referenceCount // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ChecklistCompleteLinearityCheckImpl
+    extends ChecklistCompleteLinearityCheck with DiagnosticableTreeMixin {
+  _$ChecklistCompleteLinearityCheckImpl(
+      {required this.description,
+      required this.isChecked,
+      required this.lastChange,
+      required this.referenceCount,
+      final String? $type})
+      : $type = $type ?? 'completeLinearity',
+        super._();
+
+  factory _$ChecklistCompleteLinearityCheckImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$ChecklistCompleteLinearityCheckImplFromJson(json);
+
+  @override
+  final String description;
+  @override
+  final bool isChecked;
+  @override
+  final DateTime lastChange;
+  @override
+  final int referenceCount;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ChecklistCheck.completeLinearity(description: $description, isChecked: $isChecked, lastChange: $lastChange, referenceCount: $referenceCount)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ChecklistCheck.completeLinearity'))
+      ..add(DiagnosticsProperty('description', description))
+      ..add(DiagnosticsProperty('isChecked', isChecked))
+      ..add(DiagnosticsProperty('lastChange', lastChange))
+      ..add(DiagnosticsProperty('referenceCount', referenceCount));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ChecklistCompleteLinearityCheckImpl &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.isChecked, isChecked) ||
+                other.isChecked == isChecked) &&
+            (identical(other.lastChange, lastChange) ||
+                other.lastChange == lastChange) &&
+            (identical(other.referenceCount, referenceCount) ||
+                other.referenceCount == referenceCount));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, description, isChecked, lastChange, referenceCount);
+
+  /// Create a copy of ChecklistCheck
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ChecklistCompleteLinearityCheckImplCopyWith<
+          _$ChecklistCompleteLinearityCheckImpl>
+      get copyWith => __$$ChecklistCompleteLinearityCheckImplCopyWithImpl<
+          _$ChecklistCompleteLinearityCheckImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String description,
+            String observation,
+            bool isChecked,
+            DateTime lastChange,
+            int secondsTimer,
+            List<RegularCheckReference> references)
+        regular,
+    required TResult Function(String description, bool isChecked,
+            DateTime lastChange, int referenceCount)
+        linearityStep1,
+    required TResult Function(
+            String description, bool isChecked, DateTime lastChange)
+        linearityStep2,
+    required TResult Function(String description, bool isChecked,
+            DateTime lastChange, int referenceCount)
+        completeLinearity,
+  }) {
+    return completeLinearity(
+        description, isChecked, lastChange, referenceCount);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String description,
+            String observation,
+            bool isChecked,
+            DateTime lastChange,
+            int secondsTimer,
+            List<RegularCheckReference> references)?
+        regular,
+    TResult? Function(String description, bool isChecked, DateTime lastChange,
+            int referenceCount)?
+        linearityStep1,
+    TResult? Function(String description, bool isChecked, DateTime lastChange)?
+        linearityStep2,
+    TResult? Function(String description, bool isChecked, DateTime lastChange,
+            int referenceCount)?
+        completeLinearity,
+  }) {
+    return completeLinearity?.call(
+        description, isChecked, lastChange, referenceCount);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String description,
+            String observation,
+            bool isChecked,
+            DateTime lastChange,
+            int secondsTimer,
+            List<RegularCheckReference> references)?
+        regular,
+    TResult Function(String description, bool isChecked, DateTime lastChange,
+            int referenceCount)?
+        linearityStep1,
+    TResult Function(String description, bool isChecked, DateTime lastChange)?
+        linearityStep2,
+    TResult Function(String description, bool isChecked, DateTime lastChange,
+            int referenceCount)?
+        completeLinearity,
+    required TResult orElse(),
+  }) {
+    if (completeLinearity != null) {
+      return completeLinearity(
+          description, isChecked, lastChange, referenceCount);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ChecklistRegularCheck value) regular,
+    required TResult Function(ChecklistLinearityStep1Check value)
+        linearityStep1,
+    required TResult Function(ChecklistLinearityStep2Check value)
+        linearityStep2,
+    required TResult Function(ChecklistCompleteLinearityCheck value)
+        completeLinearity,
+  }) {
+    return completeLinearity(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ChecklistRegularCheck value)? regular,
+    TResult? Function(ChecklistLinearityStep1Check value)? linearityStep1,
+    TResult? Function(ChecklistLinearityStep2Check value)? linearityStep2,
+    TResult? Function(ChecklistCompleteLinearityCheck value)? completeLinearity,
+  }) {
+    return completeLinearity?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ChecklistRegularCheck value)? regular,
+    TResult Function(ChecklistLinearityStep1Check value)? linearityStep1,
+    TResult Function(ChecklistLinearityStep2Check value)? linearityStep2,
+    TResult Function(ChecklistCompleteLinearityCheck value)? completeLinearity,
+    required TResult orElse(),
+  }) {
+    if (completeLinearity != null) {
+      return completeLinearity(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ChecklistCompleteLinearityCheckImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class ChecklistCompleteLinearityCheck extends ChecklistCheck {
+  factory ChecklistCompleteLinearityCheck(
+          {required final String description,
+          required final bool isChecked,
+          required final DateTime lastChange,
+          required final int referenceCount}) =
+      _$ChecklistCompleteLinearityCheckImpl;
+  ChecklistCompleteLinearityCheck._() : super._();
+
+  factory ChecklistCompleteLinearityCheck.fromJson(Map<String, dynamic> json) =
+      _$ChecklistCompleteLinearityCheckImpl.fromJson;
 
   @override
   String get description;
@@ -1012,7 +1326,7 @@ abstract class ChecklistLinearityStep2Check extends ChecklistCheck {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ChecklistLinearityStep2CheckImplCopyWith<
-          _$ChecklistLinearityStep2CheckImpl>
+  _$$ChecklistCompleteLinearityCheckImplCopyWith<
+          _$ChecklistCompleteLinearityCheckImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

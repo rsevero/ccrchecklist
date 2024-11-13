@@ -8,6 +8,7 @@ import 'package:ccr_checklist/data/template.dart';
 import 'package:ccr_checklist/data/template_check.dart';
 import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/misc/ccr_directory_helper.dart';
+import 'package:ccr_checklist/misc/linearity_check_helper.dart';
 import 'package:ccr_checklist/store/observablelist_json_converter.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -83,6 +84,13 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
 
   @readonly
   int _linearityCheckReferenceCount = -1;
+
+  @readonly
+  ObservableMap<String, ObservableList<LinearityRow>> _linearityWorksheets =
+      ObservableMap();
+
+  @readonly
+  ObservableMap<String, int> _linearityCheckReferenceCounts = ObservableMap();
 
   @readonly
   ObservableList<ObservableList<bool>> _checksOk =
@@ -298,9 +306,73 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
         break;
       }
     }
-
     _setCheckIsChecked(
         _linearityStep1SectionIndex, _linearityStep1CheckIndex, isOk);
+
+    _checklistChanged = true;
+  }
+
+  int getCompleteLinearityReferenceCount(int sectionIndex, int checkIndex) {
+    final String key = _getCompleteLinearityKey(sectionIndex, checkIndex);
+
+    return _linearityCheckReferenceCounts[key] ?? 0;
+  }
+
+  int getCompleteLinearityReferenceCountByKey(String key) {
+    return _linearityCheckReferenceCounts[key] ?? 0;
+  }
+
+  ObservableList<LinearityRow> getCompleteLinearityWorksheet(
+    int sectionIndex,
+    int checkIndex,
+  ) {
+    final String key = _getCompleteLinearityKey(sectionIndex, checkIndex);
+
+    return _linearityWorksheets[key] ?? ObservableList();
+  }
+
+  String _getCompleteLinearityKey(int sectionIndex, int checkIndex) {
+    return '$sectionIndex-$checkIndex';
+  }
+
+  @action
+  void updateCompleteLinearity(
+    int sectionIndex,
+    int checkIndex,
+    int rowIndex,
+    LinearityCheckDataType dataType,
+    double value,
+  ) {
+    final String key = _getCompleteLinearityKey(sectionIndex, checkIndex);
+
+    if (!_linearityWorksheets.containsKey(key) ||
+        !_linearityCheckReferenceCounts.containsKey(key)) {
+      return;
+    }
+
+    switch (dataType) {
+      case LinearityCheckDataType.mv:
+        _linearityWorksheets[key]![rowIndex] =
+            _linearityWorksheets[key]![rowIndex].copyWith(mv: value);
+        break;
+      case LinearityCheckDataType.actual:
+        _linearityWorksheets[key]![rowIndex] =
+            _linearityWorksheets[key]![rowIndex].copyWith(actual: value);
+        break;
+    }
+
+    bool isOk = true;
+    final int maxReferences = _linearityCheckReferenceCounts[key] ?? 0;
+    for (var index = 0; index < maxReferences; index++) {
+      final row = _linearityWorksheets[key]![index];
+
+      if ((row.mv == null) || (row.actual == null)) {
+        isOk = false;
+        break;
+      }
+    }
+    _setCheckIsChecked(sectionIndex, checkIndex, isOk);
+
     _checklistChanged = true;
   }
 
@@ -316,9 +388,9 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
         break;
       }
     }
-
     _setCheckIsChecked(
         _linearityStep2SectionIndex, _linearityStep2CheckIndex, isOk);
+
     _checklistChanged = true;
   }
 
@@ -334,6 +406,8 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
     _emptyReferences.clear();
     _sectionsOk.clear();
     _previousSectionsOk.clear();
+    _linearityWorksheets.clear();
+    _linearityCheckReferenceCounts.clear();
     _linearityWorksheet.clear();
     _linearityCheckReferenceCount = -1;
     _linearityStep1SectionIndex = -1;
@@ -436,9 +510,9 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
     List<ChecklistCheck> checks = [];
 
     for (int checkIndex = 0; checkIndex < templateChecks.length; checkIndex++) {
+      ChecklistCheck checklistCheck;
       final templateCheck = templateChecks[checkIndex];
 
-      ChecklistCheck checklistCheck;
       if (templateCheck is TemplateRegularCheck) {
         final checklistReferences = List<RegularCheckReference>.generate(
           templateCheck.references.length,
@@ -456,6 +530,24 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
           references: checklistReferences,
           secondsTimer: templateCheck.secondsTimer,
         );
+      } else if (templateCheck is TemplateCompleteLinearityCheck) {
+        final String key = _getCompleteLinearityKey(sectionIndex, checkIndex);
+        final referenceCount = templateCheck.referenceCount;
+
+        _linearityCheckReferenceCounts[key] = referenceCount;
+        _linearityWorksheets[key] = ObservableList();
+        _linearityWorksheets[key]!.addAll(
+          List<LinearityRow>.generate(
+            referenceCount,
+            (index) => LinearityRow(),
+          ),
+        );
+        checklistCheck = ChecklistCompleteLinearityCheck(
+          description: templateCheck.description,
+          lastChange: DateTime.now(),
+          isChecked: false,
+          referenceCount: referenceCount,
+        );
       } else if (templateCheck is TemplateLinearityStep1Check) {
         _linearityStep1SectionIndex = sectionIndex;
         _linearityStep1CheckIndex = checkIndex;
@@ -463,7 +555,7 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
         _linearityWorksheet.clear();
         _linearityWorksheet.addAll(
           List<LinearityRow>.generate(
-            templateCheck.referenceCount,
+            _linearityCheckReferenceCount,
             (index) => LinearityRow(),
           ),
         );
@@ -480,9 +572,9 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
           description: templateCheck.description,
           lastChange: DateTime.now(),
           isChecked: false,
-          referenceCount: 0,
         );
       }
+
       checks.add(checklistCheck);
     }
 

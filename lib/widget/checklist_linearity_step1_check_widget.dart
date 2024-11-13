@@ -91,7 +91,7 @@ class _ChecklistLinearityStep1CheckWidgetState
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(16.0),
+              borderRadius: ccrTemplateListTileBorderRadius,
               child: Container(
                 color: theme.secondaryContainer,
                 child: DataTable(

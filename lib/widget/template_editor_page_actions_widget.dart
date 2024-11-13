@@ -23,16 +23,22 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
           tooltip: 'Options',
           children: [
             GreyableSpeedDialChild(
-              child: const Icon(Icons.linear_scale),
+              child: const Icon(Icons.calculate_outlined),
               text: 'Add Linearity Step 2 Check',
               isEnabled: templateEditorStore.enableLinearityStep2Creation,
               onTap: () => _onTapAddLinearityStep2Check(context),
             ),
             GreyableSpeedDialChild(
-              child: const Icon(Icons.linear_scale_rounded),
+              child: const Icon(Icons.addchart),
               text: 'Add Linearity Step 1 Check',
               isEnabled: templateEditorStore.enableLinearityStep1Creation,
               onTap: () => _onTapAddLinearityStep1Check(context),
+            ),
+            GreyableSpeedDialChild(
+              child: const Icon(Icons.table_view),
+              text: 'Add Complete Linearity Check',
+              isEnabled: templateEditorStore.enableCheckCreation,
+              onTap: () => _onTapAddCompleteLinearityCheck(context),
             ),
             GreyableSpeedDialChild(
               child: const Icon(Icons.check),
@@ -222,6 +228,126 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pop(false);
               },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _onTapAddCompleteLinearityCheck(BuildContext context) {
+    final templateEditorStore =
+        Provider.of<TemplateEditorStore>(context, listen: false);
+    final TextEditingController descriptionController = TextEditingController();
+
+    int numberOfReferences = 1;
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            'Add Complete Linearity Check',
+            style: context.ccrThemeExtension.dialogTitleTextTheme,
+          ),
+          content: StatefulBuilder(
+            builder: (BuildContext context, StateSetter setState) {
+              return SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    SizedBox(
+                      width: ccrDescriptionFieldWidth,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                'Description',
+                                style: context.ccrThemeExtension
+                                    .dialogFieldTitleTextTheme,
+                              ),
+                              Text(
+                                ' *',
+                                style: context
+                                    .ccrThemeExtension.dialogFieldTitleTextTheme
+                                    .copyWith(
+                                  color: Colors.red,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
+                          TextFormField(
+                            controller: descriptionController,
+                            style: context
+                                .ccrThemeExtension.dialogFieldContentTextTheme,
+                            decoration: InputDecoration(
+                              hintText: 'Enter check description',
+                              hintStyle:
+                                  context.ccrThemeExtension.dialogHintTextTheme,
+                              border: OutlineInputBorder(),
+                            ),
+                            maxLines: null,
+                            minLines: 1,
+                            keyboardType: TextInputType.multiline,
+                            textCapitalization: TextCapitalization.sentences,
+                            autofocus: true,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 16.0),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'References',
+                          style: context
+                              .ccrThemeExtension.dialogFieldTitleTextTheme,
+                        ),
+                      ),
+                    ),
+                    ...List.generate(
+                      ccrMaxReferences,
+                      (index) => RadioListTile<int>(
+                        title: Text(
+                          '${index + 1}',
+                          style: context
+                              .ccrThemeExtension.dialogFieldContentTextTheme,
+                        ),
+                        value: index + 1,
+                        groupValue: numberOfReferences,
+                        onChanged: (int? value) {
+                          if (value != null) {
+                            setState(() => numberOfReferences = value);
+                          }
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Create'),
+              onPressed: () {
+                final description = descriptionController.text;
+                if (description.isNotEmpty) {
+                  templateEditorStore.addCompleteLinearityCheck(
+                    description: description,
+                    referenceCount: numberOfReferences,
+                  );
+                  Navigator.of(context).pop();
+                }
+              },
+            ),
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () => Navigator.of(context).pop(),
             ),
           ],
         );

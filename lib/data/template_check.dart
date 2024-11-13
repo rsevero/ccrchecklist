@@ -25,6 +25,11 @@ sealed class TemplateCheck with _$TemplateCheck {
     required String description,
   }) = TemplateLinearityStep2Check;
 
+  factory TemplateCheck.completeLinearity({
+    required String description,
+    required int referenceCount,
+  }) = TemplateCompleteLinearityCheck;
+
   factory TemplateCheck.fromJson(Map<String, Object?> json) =>
       _$TemplateCheckFromJson(json);
 }

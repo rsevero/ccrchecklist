@@ -424,6 +424,20 @@ mixin _$TemplateEditorStore on _TemplateEditorStoreBaseToJson, Store {
   }
 
   @override
+  void addCompleteLinearityCheck(
+      {required String description, required int referenceCount}) {
+    final _$actionInfo =
+        _$_TemplateEditorStoreBaseToJsonActionController.startAction(
+            name: '_TemplateEditorStoreBaseToJson.addCompleteLinearityCheck');
+    try {
+      return super.addCompleteLinearityCheck(
+          description: description, referenceCount: referenceCount);
+    } finally {
+      _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void addRegularCheck(
       {required String description,
       required String observation,

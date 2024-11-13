@@ -1,11 +1,13 @@
 import 'package:ccr_checklist/data/checklist_check.dart';
 import 'package:ccr_checklist/data/checklist_section.dart';
+import 'package:ccr_checklist/data/linearity_row.dart';
 import 'package:ccr_checklist/misc/checklist_complete_helper.dart';
 import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:ccr_checklist/store/config_store.dart';
 import 'package:flutter/services.dart';
 import 'package:htmltopdfwidgets/htmltopdfwidgets.dart';
+import 'package:mobx/mobx.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 
@@ -137,13 +139,26 @@ class ChecklistAsPdf {
   List<pw.SpanningWidget> _buildChecks() {
     final List<pw.SpanningWidget> rows = [];
 
-    for (final section in _checklistEditorStore.sections) {
+    for (final sectionEntry in _checklistEditorStore.sections.asMap().entries) {
+      final sectionIndex = sectionEntry.key;
+      final section = sectionEntry.value;
+
       rows.add(_buildSectionTitle(section));
       rows.add(pw.SizedBox(height: 5));
-      for (final check in section.checks) {
+      for (final checkEntry in section.checks.asMap().entries) {
+        final checkIndex = checkEntry.key;
+        final check = checkEntry.value;
+
         switch (check) {
           case ChecklistRegularCheck():
             rows.add(_regularChecklistItem(check));
+            break;
+          case ChecklistCompleteLinearityCheck():
+            rows.add(_completeLinearityChecklistItem(
+              check,
+              sectionIndex,
+              checkIndex,
+            ));
             break;
           case ChecklistLinearityStep1Check():
             rows.add(_linearityStep1ChecklistItem(check));
@@ -153,6 +168,7 @@ class ChecklistAsPdf {
             break;
         }
       }
+
       rows.add(pw.Divider(thickness: 0.4));
     }
 
@@ -339,6 +355,30 @@ class ChecklistAsPdf {
 
   pw.SpanningWidget _linearityStep2ChecklistItem(
       ChecklistLinearityStep2Check check) {
+    return _linearityWorksheetItem(
+        check, _checklistEditorStore.linearityWorksheet);
+  }
+
+  pw.SpanningWidget _completeLinearityChecklistItem(
+    ChecklistCompleteLinearityCheck check,
+    int sectionIndex,
+    int checkIndex,
+  ) {
+    final linearityWorksheet = _checklistEditorStore
+        .getCompleteLinearityWorksheet(sectionIndex, checkIndex);
+
+    return _linearityWorksheetItem(check, linearityWorksheet);
+  }
+
+  pw.SpanningWidget _linearityWorksheetItem(
+    ChecklistCheck check,
+    ObservableList<LinearityRow> linearityWorksheet,
+  ) {
+    if ((check is! ChecklistCompleteLinearityCheck) &&
+        (check is! ChecklistLinearityStep2Check)) {
+      throw Exception('Invalid check type');
+    }
+
     List<pw.SpanningWidget> rows = [];
     bool isOk = true;
 
@@ -368,7 +408,7 @@ class ChecklistAsPdf {
       _text('%', fontSize: 10, italic: true)
     ];
 
-    for (final line in _checklistEditorStore.linearityWorksheet) {
+    for (final line in linearityWorksheet) {
       final String mv = ((line.mv == null) || (line.mv!.isNaN))
           ? '—'
           : line.mv!.toStringAsFixed(1);

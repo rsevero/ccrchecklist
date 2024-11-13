@@ -246,23 +246,32 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
 
   @action
   void addLinearityStep2Check({required String description}) {
-    final newLinearityStep2Check =
-        TemplateLinearityStep2Check(description: description);
-    _selectedSection.checks.add(newLinearityStep2Check);
-    _checks[_selectedSectionIndex].add(newLinearityStep2Check);
+    final newCheck = TemplateLinearityStep2Check(description: description);
+    _selectedSection.checks.add(newCheck);
+    _checks[_selectedSectionIndex].add(newCheck);
     _updateHasLinearitySteps();
-    _saveSnapshot('Add linearity step 2');
+    _saveSnapshot('Add linearity step 2 check');
   }
 
   @action
   void addLinearityStep1Check(
       {required String description, required int referenceCount}) {
-    final newLinearityStep1Check = TemplateLinearityStep1Check(
+    final newCheck = TemplateLinearityStep1Check(
         referenceCount: referenceCount, description: description);
-    _selectedSection.checks.add(newLinearityStep1Check);
-    _checks[_selectedSectionIndex].add(newLinearityStep1Check);
+    _selectedSection.checks.add(newCheck);
+    _checks[_selectedSectionIndex].add(newCheck);
     _updateHasLinearitySteps();
-    _saveSnapshot('Add linearity step 1');
+    _saveSnapshot('Add linearity step 1 check');
+  }
+
+  @action
+  void addCompleteLinearityCheck(
+      {required String description, required int referenceCount}) {
+    final newCheck = TemplateCompleteLinearityCheck(
+        referenceCount: referenceCount, description: description);
+    _selectedSection.checks.add(newCheck);
+    _checks[_selectedSectionIndex].add(newCheck);
+    _saveSnapshot('Add complete linearity check');
   }
 
   @action
@@ -271,13 +280,13 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
       required String observation,
       required int secondsTimer,
       required List<RegularCheckReference> references}) {
-    final newRegularCheck = TemplateRegularCheck(
+    final newCheck = TemplateRegularCheck(
         description: description,
         observation: observation,
         secondsTimer: secondsTimer,
         references: references);
-    _selectedSection.checks.add(newRegularCheck);
-    _checks[_selectedSectionIndex].add(newRegularCheck);
+    _selectedSection.checks.add(newCheck);
+    _checks[_selectedSectionIndex].add(newCheck);
     _saveSnapshot('Add regular check');
   }
 

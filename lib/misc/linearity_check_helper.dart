@@ -17,3 +17,8 @@ Widget buildNonEditableLinearityCheckCell(
     ),
   );
 }
+
+enum LinearityCheckDataType {
+  mv,
+  actual,
+}
