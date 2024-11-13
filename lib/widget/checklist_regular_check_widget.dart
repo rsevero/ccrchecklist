@@ -2,10 +2,12 @@ import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:ccr_checklist/data/checklist_check.dart';
 import 'package:ccr_checklist/misc/constants.dart';
+import 'package:ccr_checklist/misc/datetime_formater_helper.dart';
 import 'package:ccr_checklist/misc/flutter_extension_methods.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:numberpicker/numberpicker.dart';
 import 'package:provider/provider.dart';
 import 'package:vibration/vibration.dart';
 
@@ -172,7 +174,7 @@ class _ChecklistRegularCheckWidgetState
             borderRadius: BorderRadius.circular(10.0),
           ),
           child: Text(
-            _formatTime(_remainingSeconds),
+            ccrFormatSecondsToMinutesSecondsTimer(_remainingSeconds),
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: _getTimerTextColor(),
@@ -335,28 +337,134 @@ class _ChecklistRegularCheckWidgetState
     }
   }
 
-  void _changeTimerValue() async {
-    final currentMinutes = _remainingSeconds ~/ ccrSecondsInAMinute;
-    final currentSeconds = _remainingSeconds % ccrSecondsInAMinute;
+  Future<void> _changeTimerValue() async {
+    int currentMinutes = _remainingSeconds ~/ ccrSecondsInAMinute;
+    int currentSeconds = _remainingSeconds % ccrSecondsInAMinute;
 
-    final TimeOfDay? pickedTime = await showTimePicker(
+    await showDialog(
       context: context,
-      initialTime: TimeOfDay(hour: currentMinutes, minute: currentSeconds),
+      builder: (BuildContext context) {
+        final theme = context.ccrThemeExtension;
+
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+            return AlertDialog(
+              title: Text(
+                'Edit Timer Duration',
+                style: theme.dialogTitleTextTheme,
+              ),
+              content: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: ccrVerticalPaddingItem),
+                      child: SizedBox(
+                        width: ccrDescriptionFieldWidth,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Timer Duration',
+                              style: theme.dialogFieldTitleTextTheme,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        // NumberPicker for minutes
+                        Column(
+                          children: [
+                            const Text('minutes'),
+                            NumberPicker(
+                              value: currentMinutes,
+                              minValue: 0,
+                              maxValue: 99,
+                              infiniteLoop: true,
+                              onChanged: (value) {
+                                setState(() {
+                                  currentMinutes = value;
+                                });
+                              },
+                              decoration: BoxDecoration(
+                                borderRadius: ccrTemplateListTileBorderRadius,
+                                border: Border.all(
+                                    color: context.ccrThemeExtension.outline),
+                              ),
+                            ),
+                            const Text('minutes'),
+                          ],
+                        ),
+                        Text(
+                          ':',
+                          style: theme.timerTextTheme,
+                        ),
+                        // NumberPicker for seconds
+                        Column(
+                          children: [
+                            const Text('seconds'),
+                            NumberPicker(
+                              value: currentSeconds,
+                              minValue: 0,
+                              maxValue: 59,
+                              infiniteLoop: true,
+                              onChanged: (value) {
+                                setState(() {
+                                  currentSeconds = value;
+                                });
+                              },
+                              decoration: BoxDecoration(
+                                borderRadius: ccrTemplateListTileBorderRadius,
+                                border: Border.all(
+                                    color: context.ccrThemeExtension.outline),
+                              ),
+                            ),
+                            const Text('seconds'),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 8, left: 8),
+                          child: Text(
+                            ccrFormatMinutesSecondsToMinutesSecondsTimer(
+                              currentMinutes,
+                              currentSeconds,
+                            ),
+                            style: theme.dialogHintTextTheme.copyWith(
+                              color: Colors.blue,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('Cancel'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    setState(() {
+                      _remainingSeconds =
+                          (currentMinutes * ccrSecondsInAMinute) +
+                              currentSeconds;
+                    });
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('OK'),
+                ),
+              ],
+            );
+          },
+        );
+      },
     );
-    if (pickedTime != null) {
-      setState(
-        () {
-          _remainingSeconds =
-              (pickedTime.hour * ccrSecondsInAMinute) + pickedTime.minute;
-        },
-      );
-    }
-  }
-
-  String _formatTime(int totalSeconds) {
-    int minutes = totalSeconds ~/ ccrSecondsInAMinute;
-    int seconds = totalSeconds % ccrSecondsInAMinute;
-
-    return "${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}";
   }
 }

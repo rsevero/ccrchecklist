@@ -270,6 +270,7 @@ class TemplateCheckWidget extends StatelessWidget {
                                       value: timerDurationMinutes,
                                       minValue: 0,
                                       maxValue: 99,
+                                      infiniteLoop: true,
                                       onChanged: (value) {
                                         setState(() {
                                           timerDurationMinutes = value;
@@ -297,6 +298,7 @@ class TemplateCheckWidget extends StatelessWidget {
                                       value: timerDurationSeconds,
                                       minValue: 0,
                                       maxValue: 59,
+                                      infiniteLoop: true,
                                       onChanged: (value) {
                                         setState(() {
                                           timerDurationSeconds = value;
