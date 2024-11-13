@@ -601,19 +601,21 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
             TextEditingController();
         final TextEditingController observationController =
             TextEditingController();
-        int numberOfReferences = 0;
-        int timerDurationSeconds = 0;
-        int timerDurationMinutes = 0;
+
         final List<TextEditingController> prefixControllers =
             List.generate(ccrMaxReferences + 1, (_) => TextEditingController());
         final List<TextEditingController> suffixControllers =
             List.generate(ccrMaxReferences + 1, (_) => TextEditingController());
 
+        int numberOfReferences = 0;
+        int timerDurationSeconds = 0;
+        int timerDurationMinutes = 0;
+
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
             return AlertDialog(
               title: Text(
-                'Add Check with References',
+                'Add Regular Check',
                 style: theme.dialogTitleTextTheme,
               ),
               content: SingleChildScrollView(
@@ -646,7 +648,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                               hintStyle: theme.dialogHintTextTheme,
                               border: OutlineInputBorder(),
                             ),
-                            maxLines: null,
+                            maxLines: null, // Makes the input field expandable
                             minLines: 1,
                             keyboardType: TextInputType.multiline,
                             textCapitalization: TextCapitalization.sentences,
@@ -676,7 +678,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                               hintStyle: theme.dialogHintTextTheme,
                               border: OutlineInputBorder(),
                             ),
-                            maxLines: null,
+                            maxLines: null, // Makes the input field expandable
                             minLines: 1,
                             keyboardType: TextInputType.multiline,
                             textCapitalization: TextCapitalization.sentences,
@@ -783,46 +785,68 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                       ),
                     ...List.generate(
                       ccrMaxReferences + 1,
-                      (index) => Column(
-                        children: [
-                          RadioListTile<int>(
-                            title: Text(
-                              '$index',
-                              style: theme.dialogFieldContentTextTheme,
+                      (index) => Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: theme.onSurface,
+                              width: 1,
                             ),
-                            value: index,
-                            groupValue: numberOfReferences,
-                            onChanged: (int? value) {
-                              setState(() => numberOfReferences = value ?? 0);
-                            },
+                            borderRadius: ccrTemplateListTileBorderRadius,
                           ),
-                          Visibility(
-                            visible: index > 0 && index <= numberOfReferences,
-                            child: Row(
-                              children: [
-                                Expanded(
+                          padding: const EdgeInsets.only(
+                            bottom: 8,
+                            left: 8,
+                            right: 8,
+                          ),
+                          child: Row(
+                            children: [
+                              Flexible(
+                                flex: 2,
+                                child: Visibility(
+                                  visible:
+                                      index > 0 && index <= numberOfReferences,
+                                  maintainSize: true,
+                                  maintainState: true,
+                                  maintainAnimation: true,
                                   child: TextFormField(
                                     controller: prefixControllers[index],
-                                    style: theme.dialogFieldContentTextTheme,
                                     decoration: InputDecoration(
                                         hintText: 'Prefix $index'),
                                   ),
                                 ),
-                                const SizedBox(
-                                  width: 10,
+                              ),
+                              SizedBox(
+                                width: 90,
+                                child: RadioListTile<int>(
+                                  title: Text('$index'),
+                                  value: index,
+                                  groupValue: numberOfReferences,
+                                  onChanged: (int? value) {
+                                    setState(
+                                        () => numberOfReferences = value ?? 0);
+                                  },
                                 ),
-                                Expanded(
+                              ),
+                              Flexible(
+                                flex: 2,
+                                child: Visibility(
+                                  visible:
+                                      index > 0 && index <= numberOfReferences,
+                                  maintainSize: true,
+                                  maintainState: true,
+                                  maintainAnimation: true,
                                   child: TextFormField(
                                     controller: suffixControllers[index],
-                                    style: theme.dialogFieldContentTextTheme,
                                     decoration: InputDecoration(
                                         hintText: 'Suffix $index'),
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                        ],
+                        ),
                       ),
                     ),
                   ],

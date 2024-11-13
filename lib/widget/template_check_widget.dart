@@ -162,11 +162,14 @@ class TemplateCheckWidget extends StatelessWidget {
             List.generate(ccrMaxReferences - numberOfReferences,
                 (i) => TextEditingController(text: ''));
 
-        return AlertDialog(
-          title: const Text('Edit Regular Check'),
-          content: StatefulBuilder(
-            builder: (BuildContext context, StateSetter setState) {
-              return SingleChildScrollView(
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+            return AlertDialog(
+              title: Text(
+                'Edit Regular Check',
+                style: theme.dialogTitleTextTheme,
+              ),
+              content: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
@@ -175,27 +178,25 @@ class TemplateCheckWidget extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Row(
+                          Row(
                             children: [
                               Text(
                                 'Description',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                ),
+                                style: theme.dialogFieldTitleTextTheme,
                               ),
                               Text(
                                 ' *',
-                                style: TextStyle(
-                                  color: Colors.red,
-                                  fontSize: 16,
-                                ),
+                                style: theme.dialogFieldTitleTextTheme
+                                    .copyWith(color: Colors.red),
                               ),
                             ],
                           ),
                           TextFormField(
                             controller: descriptionController,
-                            decoration: const InputDecoration(
+                            style: theme.dialogFieldContentTextTheme,
+                            decoration: InputDecoration(
                               hintText: 'Enter check description',
+                              hintStyle: theme.dialogHintTextTheme,
                               border: OutlineInputBorder(),
                             ),
                             maxLines: null, // Makes the input field expandable
@@ -212,20 +213,20 @@ class TemplateCheckWidget extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Row(
+                          Row(
                             children: [
                               Text(
                                 'Observation',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                ),
+                                style: theme.dialogFieldTitleTextTheme,
                               ),
                             ],
                           ),
                           TextFormField(
                             controller: observationController,
-                            decoration: const InputDecoration(
+                            style: theme.dialogFieldContentTextTheme,
+                            decoration: InputDecoration(
                               hintText: 'Enter check observation',
+                              hintStyle: theme.dialogHintTextTheme,
                               border: OutlineInputBorder(),
                             ),
                             maxLines: null, // Makes the input field expandable
@@ -239,169 +240,201 @@ class TemplateCheckWidget extends StatelessWidget {
                     ),
                     SizedBox(
                       width: ccrDescriptionFieldWidth,
-                      child: ListTile(
-                        title: const Text('Timer Duration'),
-                        subtitle:
-                            Text(ccrFormatMinutesSecondsToMinutesSecondsTimer(
-                          timerDurationMinutes,
-                          timerDurationSeconds,
-                        )),
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        // NumberPicker for minutes
-                        Column(
-                          children: [
-                            const Text('minutes'),
-                            NumberPicker(
-                              value: timerDurationMinutes,
-                              minValue: 0,
-                              maxValue: 99,
-                              onChanged: (value) {
-                                setState(() {
-                                  timerDurationMinutes = value;
-                                });
-                              },
-                              decoration: BoxDecoration(
-                                borderRadius: ccrTemplateListTileBorderRadius,
-                                border: Border.all(color: theme.outline),
-                              ),
-                            ),
-                            const Text('minutes'),
-                          ],
-                        ),
-                        Text(
-                          ':',
-                          style: theme.timerTextTheme,
-                        ),
-                        // NumberPicker for seconds
-                        Column(
-                          children: [
-                            const Text('seconds'),
-                            NumberPicker(
-                              value: timerDurationSeconds,
-                              minValue: 0,
-                              maxValue: 59,
-                              onChanged: (value) {
-                                setState(() {
-                                  timerDurationSeconds = value;
-                                });
-                              },
-                              decoration: BoxDecoration(
-                                borderRadius: ccrTemplateListTileBorderRadius,
-                                border: Border.all(color: theme.outline),
-                              ),
-                            ),
-                            const Text('seconds'),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 8, left: 8),
-                          child: Text(
-                            ccrFormatMinutesSecondsToMinutesSecondsTimer(
-                              timerDurationMinutes,
-                              timerDurationSeconds,
-                            ),
-                            style: theme.dialogHintTextTheme.copyWith(
-                              color: Colors.blue,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    if (numberOfReferences > 0)
-                      const Text(
-                          'References prefixes and suffixes are optional'),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text('Amount of references'),
-                    ),
-                    ...List.generate(
-                      ccrMaxReferences + 1,
-                      (index) => Row(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Flexible(
-                            flex: 2,
-                            child: Visibility(
-                              visible: index > 0 && index <= numberOfReferences,
-                              maintainSize: true,
-                              maintainState: true,
-                              maintainAnimation: true,
-                              child: TextFormField(
-                                controller: prefixControllers[index],
-                                decoration:
-                                    InputDecoration(hintText: 'Prefix $index'),
-                              ),
-                            ),
+                          Text(
+                            'Timer Duration',
+                            style: theme.dialogFieldTitleTextTheme,
                           ),
-                          SizedBox(
-                            width: 90,
-                            child: RadioListTile<int>(
-                              title: Text('$index'),
-                              value: index,
-                              groupValue: numberOfReferences,
-                              onChanged: (int? value) {
-                                setState(() => numberOfReferences = value ?? 0);
-                              },
-                            ),
-                          ),
-                          Flexible(
-                            flex: 2,
-                            child: Visibility(
-                              visible: index > 0 && index <= numberOfReferences,
-                              maintainSize: true,
-                              maintainState: true,
-                              maintainAnimation: true,
-                              child: TextFormField(
-                                controller: suffixControllers[index],
-                                decoration:
-                                    InputDecoration(hintText: 'Suffix $index'),
+                          Row(
+                            children: [
+                              // NumberPicker for minutes
+                              Column(
+                                children: [
+                                  const Text('minutes'),
+                                  NumberPicker(
+                                    value: timerDurationMinutes,
+                                    minValue: 0,
+                                    maxValue: 99,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        timerDurationMinutes = value;
+                                      });
+                                    },
+                                    decoration: BoxDecoration(
+                                      borderRadius:
+                                          ccrTemplateListTileBorderRadius,
+                                      border: Border.all(color: theme.outline),
+                                    ),
+                                  ),
+                                  const Text('minutes'),
+                                ],
                               ),
-                            ),
+                              Text(
+                                ':',
+                                style: theme.timerTextTheme,
+                              ),
+                              // NumberPicker for seconds
+                              Column(
+                                children: [
+                                  const Text('seconds'),
+                                  NumberPicker(
+                                    value: timerDurationSeconds,
+                                    minValue: 0,
+                                    maxValue: 59,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        timerDurationSeconds = value;
+                                      });
+                                    },
+                                    decoration: BoxDecoration(
+                                      borderRadius:
+                                          ccrTemplateListTileBorderRadius,
+                                      border: Border.all(color: theme.outline),
+                                    ),
+                                  ),
+                                  const Text('seconds'),
+                                ],
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(bottom: 8, left: 8),
+                                child: Text(
+                                  ccrFormatMinutesSecondsToMinutesSecondsTimer(
+                                    timerDurationMinutes,
+                                    timerDurationSeconds,
+                                  ),
+                                  style: theme.dialogHintTextTheme.copyWith(
+                                    color: Colors.blue,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
                     ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 8.0),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'References',
+                          style: theme.dialogFieldTitleTextTheme,
+                        ),
+                      ),
+                    ),
+                    if (numberOfReferences > 0)
+                      Text(
+                        'References prefixes and suffixes are optional',
+                        style: theme.dialogHintTextTheme,
+                      ),
+                    ...List.generate(
+                      ccrMaxReferences + 1,
+                      (index) => Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: theme.onSurface,
+                              width: 1,
+                            ),
+                            borderRadius: ccrTemplateListTileBorderRadius,
+                          ),
+                          padding: const EdgeInsets.only(
+                            bottom: 8,
+                            left: 8,
+                            right: 8,
+                          ),
+                          child: Row(
+                            children: [
+                              Flexible(
+                                flex: 2,
+                                child: Visibility(
+                                  visible:
+                                      index > 0 && index <= numberOfReferences,
+                                  maintainSize: true,
+                                  maintainState: true,
+                                  maintainAnimation: true,
+                                  child: TextFormField(
+                                    controller: prefixControllers[index],
+                                    decoration: InputDecoration(
+                                        hintText: 'Prefix $index'),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 90,
+                                child: RadioListTile<int>(
+                                  title: Text('$index'),
+                                  value: index,
+                                  groupValue: numberOfReferences,
+                                  onChanged: (int? value) {
+                                    setState(
+                                        () => numberOfReferences = value ?? 0);
+                                  },
+                                ),
+                              ),
+                              Flexible(
+                                flex: 2,
+                                child: Visibility(
+                                  visible:
+                                      index > 0 && index <= numberOfReferences,
+                                  maintainSize: true,
+                                  maintainState: true,
+                                  maintainAnimation: true,
+                                  child: TextFormField(
+                                    controller: suffixControllers[index],
+                                    decoration: InputDecoration(
+                                        hintText: 'Suffix $index'),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
-              );
-            },
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Update'),
-              onPressed: () {
-                final newDescription = descriptionController.text.trim();
-                final newObservation = observationController.text.trim();
-                final totalSeconds =
-                    (timerDurationMinutes * ccrSecondsInAMinute) +
-                        timerDurationSeconds;
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('Update'),
+                  onPressed: () {
+                    final newDescription = descriptionController.text.trim();
+                    final newObservation = observationController.text.trim();
+                    final totalSeconds =
+                        (timerDurationMinutes * ccrSecondsInAMinute) +
+                            timerDurationSeconds;
 
-                List<RegularCheckReference> newReferences = List.generate(
-                  numberOfReferences,
-                  (i) => RegularCheckReference(
-                    prefix: i < prefixControllers.length
-                        ? prefixControllers[i + 1].text
-                        : '',
-                    suffix: i < suffixControllers.length
-                        ? suffixControllers[i + 1].text
-                        : '',
-                  ),
-                );
-                templateEditorStore.updateRegularCheck(sectionIndex, index,
-                    description: newDescription,
-                    observation: newObservation,
-                    references: newReferences,
-                    timerDuration: totalSeconds);
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: const Text('Cancel'),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-          ],
+                    List<RegularCheckReference> newReferences = List.generate(
+                      numberOfReferences,
+                      (i) => RegularCheckReference(
+                        prefix: i < prefixControllers.length
+                            ? prefixControllers[i + 1].text
+                            : '',
+                        suffix: i < suffixControllers.length
+                            ? suffixControllers[i + 1].text
+                            : '',
+                      ),
+                    );
+                    templateEditorStore.updateRegularCheck(sectionIndex, index,
+                        description: newDescription,
+                        observation: newObservation,
+                        references: newReferences,
+                        timerDuration: totalSeconds);
+                    Navigator.of(context).pop();
+                  },
+                ),
+                TextButton(
+                  child: const Text('Cancel'),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+              ],
+            );
+          },
         );
       },
     );
