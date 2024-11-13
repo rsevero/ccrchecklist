@@ -591,26 +591,30 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
   }
 
   void _onTapAddRegularCheck(BuildContext context) {
-    final templateEditorStore =
-        Provider.of<TemplateEditorStore>(context, listen: false);
-    final TextEditingController descriptionController = TextEditingController();
-    final TextEditingController observationController = TextEditingController();
-    int numberOfReferences = 0;
-    Duration timerDuration = Duration.zero;
-    final List<TextEditingController> prefixControllers =
-        List.generate(ccrMaxReferences + 1, (_) => TextEditingController());
-    final List<TextEditingController> suffixControllers =
-        List.generate(ccrMaxReferences + 1, (_) => TextEditingController());
-
     showDialog(
       context: context,
       builder: (BuildContext context) {
+        final templateEditorStore =
+            Provider.of<TemplateEditorStore>(context, listen: false);
+        final theme = context.ccrThemeExtension;
+        final TextEditingController descriptionController =
+            TextEditingController();
+        final TextEditingController observationController =
+            TextEditingController();
+        int numberOfReferences = 0;
+        int timerDurationSeconds = 0;
+        int timerDurationMinutes = 0;
+        final List<TextEditingController> prefixControllers =
+            List.generate(ccrMaxReferences + 1, (_) => TextEditingController());
+        final List<TextEditingController> suffixControllers =
+            List.generate(ccrMaxReferences + 1, (_) => TextEditingController());
+
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
             return AlertDialog(
               title: Text(
                 'Add Check with References',
-                style: context.ccrThemeExtension.dialogTitleTextTheme,
+                style: theme.dialogTitleTextTheme,
               ),
               content: SingleChildScrollView(
                 child: Column(
@@ -625,25 +629,21 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                             children: [
                               Text(
                                 'Description',
-                                style: context.ccrThemeExtension
-                                    .dialogFieldTitleTextTheme,
+                                style: theme.dialogFieldTitleTextTheme,
                               ),
                               Text(
                                 ' *',
-                                style: context
-                                    .ccrThemeExtension.dialogFieldTitleTextTheme
+                                style: theme.dialogFieldTitleTextTheme
                                     .copyWith(color: Colors.red),
                               ),
                             ],
                           ),
                           TextFormField(
                             controller: descriptionController,
-                            style: context
-                                .ccrThemeExtension.dialogFieldContentTextTheme,
+                            style: theme.dialogFieldContentTextTheme,
                             decoration: InputDecoration(
                               hintText: 'Enter check description',
-                              hintStyle:
-                                  context.ccrThemeExtension.dialogHintTextTheme,
+                              hintStyle: theme.dialogHintTextTheme,
                               border: OutlineInputBorder(),
                             ),
                             maxLines: null,
@@ -664,19 +664,16 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                             children: [
                               Text(
                                 'Observation',
-                                style: context.ccrThemeExtension
-                                    .dialogFieldTitleTextTheme,
+                                style: theme.dialogFieldTitleTextTheme,
                               ),
                             ],
                           ),
                           TextFormField(
                             controller: observationController,
-                            style: context
-                                .ccrThemeExtension.dialogFieldContentTextTheme,
+                            style: theme.dialogFieldContentTextTheme,
                             decoration: InputDecoration(
                               hintText: 'Enter check observation',
-                              hintStyle:
-                                  context.ccrThemeExtension.dialogHintTextTheme,
+                              hintStyle: theme.dialogHintTextTheme,
                               border: OutlineInputBorder(),
                             ),
                             maxLines: null,
@@ -695,38 +692,76 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                         children: [
                           Text(
                             'Timer Duration',
-                            style: context
-                                .ccrThemeExtension.dialogFieldTitleTextTheme,
+                            style: theme.dialogFieldTitleTextTheme,
                           ),
-                          InkWell(
-                            onTap: () async {
-                              final TimeOfDay? pickedTime =
-                                  await showTimePicker(
-                                context: context,
-                                initialTime: TimeOfDay(
-                                    hour: timerDuration.inMinutes,
-                                    minute: timerDuration.inSeconds % 60),
-                              );
-                              if (pickedTime != null) {
-                                setState(() {
-                                  timerDuration = Duration(
-                                      minutes: pickedTime.hour,
-                                      seconds: pickedTime.minute);
-                                });
-                              }
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.only(bottom: 8.0),
-                              child: Text(
-                                ccrFormatSecondsToMinutesSecondsTimer(
-                                    timerDuration.inSeconds),
-                                style: context
-                                    .ccrThemeExtension.dialogHintTextTheme
-                                    .copyWith(
-                                  color: Colors.blue,
+                          Row(
+                            children: [
+                              // NumberPicker for minutes
+                              Column(
+                                children: [
+                                  const Text('minutes'),
+                                  NumberPicker(
+                                    value: timerDurationMinutes,
+                                    minValue: 0,
+                                    maxValue: 99,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        timerDurationMinutes = value;
+                                      });
+                                    },
+                                    decoration: BoxDecoration(
+                                      borderRadius:
+                                          ccrTemplateListTileBorderRadius,
+                                      border: Border.all(
+                                          color: context
+                                              .ccrThemeExtension.outline),
+                                    ),
+                                  ),
+                                  const Text('minutes'),
+                                ],
+                              ),
+                              Text(
+                                ':',
+                                style: theme.timerTextTheme,
+                              ),
+                              // NumberPicker for seconds
+                              Column(
+                                children: [
+                                  const Text('seconds'),
+                                  NumberPicker(
+                                    value: timerDurationSeconds,
+                                    minValue: 0,
+                                    maxValue: 59,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        timerDurationSeconds = value;
+                                      });
+                                    },
+                                    decoration: BoxDecoration(
+                                      borderRadius:
+                                          ccrTemplateListTileBorderRadius,
+                                      border: Border.all(
+                                          color: context
+                                              .ccrThemeExtension.outline),
+                                    ),
+                                  ),
+                                  const Text('seconds'),
+                                ],
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(bottom: 8, left: 8),
+                                child: Text(
+                                  ccrFormatMinutesSecondsToMinutesSecondsTimer(
+                                    timerDurationMinutes,
+                                    timerDurationSeconds,
+                                  ),
+                                  style: theme.dialogHintTextTheme.copyWith(
+                                    color: Colors.blue,
+                                  ),
                                 ),
                               ),
-                            ),
+                            ],
                           ),
                         ],
                       ),
@@ -737,15 +772,14 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           'References',
-                          style: context
-                              .ccrThemeExtension.dialogFieldTitleTextTheme,
+                          style: theme.dialogFieldTitleTextTheme,
                         ),
                       ),
                     ),
                     if (numberOfReferences > 0)
                       Text(
                         'References prefixes and suffixes are optional',
-                        style: context.ccrThemeExtension.dialogHintTextTheme,
+                        style: theme.dialogHintTextTheme,
                       ),
                     ...List.generate(
                       ccrMaxReferences + 1,
@@ -754,8 +788,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                           RadioListTile<int>(
                             title: Text(
                               '$index',
-                              style: context.ccrThemeExtension
-                                  .dialogFieldContentTextTheme,
+                              style: theme.dialogFieldContentTextTheme,
                             ),
                             value: index,
                             groupValue: numberOfReferences,
@@ -770,8 +803,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                                 Expanded(
                                   child: TextFormField(
                                     controller: prefixControllers[index],
-                                    style: context.ccrThemeExtension
-                                        .dialogFieldContentTextTheme,
+                                    style: theme.dialogFieldContentTextTheme,
                                     decoration: InputDecoration(
                                         hintText: 'Prefix $index'),
                                   ),
@@ -782,8 +814,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                                 Expanded(
                                   child: TextFormField(
                                     controller: suffixControllers[index],
-                                    style: context.ccrThemeExtension
-                                        .dialogFieldContentTextTheme,
+                                    style: theme.dialogFieldContentTextTheme,
                                     decoration: InputDecoration(
                                         hintText: 'Suffix $index'),
                                   ),
@@ -801,8 +832,14 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                 TextButton(
                   child: const Text('Create+'),
                   onPressed: () {
-                    final description = descriptionController.text.trim();
-                    final observation = observationController.text.trim();
+                    final String description =
+                        descriptionController.text.trim();
+                    final String observation =
+                        observationController.text.trim();
+                    final int totalSeconds =
+                        (timerDurationMinutes * ccrSecondsInAMinute) +
+                            timerDurationSeconds;
+
                     if (description.isNotEmpty) {
                       List<RegularCheckReference> references = List.generate(
                         numberOfReferences,
@@ -815,14 +852,15 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                         description: description,
                         observation: observation,
                         references: references,
-                        secondsTimer: timerDuration.inSeconds,
+                        secondsTimer: totalSeconds,
                       );
                     }
                     setState(() {
                       descriptionController.text = '';
                       observationController.text = '';
                       numberOfReferences = 0;
-                      timerDuration = Duration.zero;
+                      timerDurationMinutes = 0;
+                      timerDurationSeconds = 0;
 
                       prefixControllers.clear();
                       suffixControllers.clear();
@@ -840,8 +878,14 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                 TextButton(
                   child: const Text('Create'),
                   onPressed: () {
-                    final description = descriptionController.text;
-                    final observation = observationController.text;
+                    final String description =
+                        descriptionController.text.trim();
+                    final String observation =
+                        observationController.text.trim();
+                    final int totalSeconds =
+                        (timerDurationMinutes * ccrSecondsInAMinute) +
+                            timerDurationSeconds;
+
                     if (description.isNotEmpty) {
                       List<RegularCheckReference> references = List.generate(
                         numberOfReferences,
@@ -854,7 +898,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                         description: description,
                         observation: observation,
                         references: references,
-                        secondsTimer: timerDuration.inSeconds,
+                        secondsTimer: totalSeconds,
                       );
                     }
                     Navigator.of(context).pop();

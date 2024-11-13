@@ -65,6 +65,7 @@ mixin _$CCRThemeExtensionTailorMixin on ThemeExtension<CCRThemeExtension> {
   TextStyle get checkReferenceTextTheme;
   TextStyle get linearityColumnTitleTextTheme;
   TextStyle get linearityColumnContentTextTheme;
+  TextStyle get timerTextTheme;
 
   @override
   CCRThemeExtension copyWith({
@@ -124,6 +125,7 @@ mixin _$CCRThemeExtensionTailorMixin on ThemeExtension<CCRThemeExtension> {
     TextStyle? checkReferenceTextTheme,
     TextStyle? linearityColumnTitleTextTheme,
     TextStyle? linearityColumnContentTextTheme,
+    TextStyle? timerTextTheme,
   }) {
     return CCRThemeExtension(
       primary: primary ?? this.primary,
@@ -337,7 +339,8 @@ mixin _$CCRThemeExtensionTailorMixin on ThemeExtension<CCRThemeExtension> {
                 checkDescriptionTextTheme, other.checkDescriptionTextTheme) &&
             const DeepCollectionEquality().equals(checkReferenceTextTheme, other.checkReferenceTextTheme) &&
             const DeepCollectionEquality().equals(linearityColumnTitleTextTheme, other.linearityColumnTitleTextTheme) &&
-            const DeepCollectionEquality().equals(linearityColumnContentTextTheme, other.linearityColumnContentTextTheme));
+            const DeepCollectionEquality().equals(linearityColumnContentTextTheme, other.linearityColumnContentTextTheme) &&
+            const DeepCollectionEquality().equals(timerTextTheme, other.timerTextTheme));
   }
 
   @override
@@ -400,6 +403,7 @@ mixin _$CCRThemeExtensionTailorMixin on ThemeExtension<CCRThemeExtension> {
       const DeepCollectionEquality().hash(checkReferenceTextTheme),
       const DeepCollectionEquality().hash(linearityColumnTitleTextTheme),
       const DeepCollectionEquality().hash(linearityColumnContentTextTheme),
+      const DeepCollectionEquality().hash(timerTextTheme),
     ]);
   }
 }
@@ -474,4 +478,5 @@ extension CCRThemeExtensionBuildContextProps on BuildContext {
       cCRThemeExtension.linearityColumnTitleTextTheme;
   TextStyle get linearityColumnContentTextTheme =>
       cCRThemeExtension.linearityColumnContentTextTheme;
+  TextStyle get timerTextTheme => cCRThemeExtension.timerTextTheme;
 }

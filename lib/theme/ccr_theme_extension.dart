@@ -118,6 +118,8 @@ class CCRThemeExtension extends ThemeExtension<CCRThemeExtension>
   late final TextStyle linearityColumnTitleTextTheme;
   @override
   late final TextStyle linearityColumnContentTextTheme;
+  @override
+  late final TextStyle timerTextTheme;
 
   CCRThemeExtension({
     required this.primary,
@@ -193,6 +195,8 @@ class CCRThemeExtension extends ThemeExtension<CCRThemeExtension>
     );
     linearityColumnContentTextTheme =
         _copyUnsettingColor(bodyLarge).copyWith(color: onSecondaryContainer);
+    timerTextTheme =
+        _copyUnsettingColor(headlineLarge).copyWith(color: onSurface);
   }
 
   TextStyle _copyUnsettingColor(TextStyle style) {

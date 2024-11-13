@@ -24,6 +24,8 @@ const ccrLinearityWorksheetMultiplier = 1.6;
 const ccrMaxReferences = 8;
 const ccrMaxLinearityMeasurements = 8;
 
+const ccrSecondsInAMinute = 60;
+
 const ccrSectionOkColor = Colors.green;
 
 const ccrChecklistExtension = 'ccrc';

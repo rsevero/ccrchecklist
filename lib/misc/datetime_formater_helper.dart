@@ -1,34 +1,29 @@
 import 'package:ccr_checklist/misc/constants.dart';
 
-String ccrFormatSecondsToMinutesSecondsTimer(int totalSeconds) {
-  if (totalSeconds < 0) {
-    return "Invalid Input"; // Handle negative input
+String ccrFormatMinutesSecondsToMinutesSecondsTimer(int minutes, int seconds) {
+  if ((minutes < 0) || (seconds < 0)) {
+    return "Invalid Input";
   }
 
-  if (totalSeconds == 0) {
-    return ccrNoTimer; // Handle 0 input
+  if ((minutes == 0) && (seconds == 0)) {
+    return ccrNoTimer;
   }
 
   final String formattedTime =
-      "${ccrFormatSecondsToMinutesSeconds(totalSeconds)}s";
+      "${minutes.toString().padLeft(1, '0')}:${seconds.toString().padLeft(2, '0')}s";
 
   return formattedTime;
 }
 
-String ccrFormatSecondsToMinutesSeconds(int totalSeconds) {
-  if (totalSeconds < 0) {
-    return "Invalid Input";
-  }
+String ccrFormatSecondsToMinutesSecondsTimer(int totalSeconds) {
+  final (minutes, seconds) = ccrConvertSecondsToMinutesSeconds(totalSeconds);
 
-  if (totalSeconds == 0) {
-    return ccrNoTimer;
-  }
+  return ccrFormatMinutesSecondsToMinutesSecondsTimer(minutes, seconds);
+}
 
-  int minutes = totalSeconds ~/ 60; // Integer division to get minutes
-  int seconds = totalSeconds % 60; // Remainder to get seconds
+(int, int) ccrConvertSecondsToMinutesSeconds(int totalSeconds) {
+  final int minutes = totalSeconds ~/ ccrSecondsInAMinute;
+  final int seconds = totalSeconds % ccrSecondsInAMinute;
 
-  String formattedTime =
-      "${minutes.toString().padLeft(1, '0')}:${seconds.toString().padLeft(2, '0')}";
-
-  return formattedTime;
+  return (minutes, seconds);
 }

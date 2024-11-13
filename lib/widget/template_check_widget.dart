@@ -127,36 +127,41 @@ class TemplateCheckWidget extends StatelessWidget {
 
   void _editTemplateRegularCheck(
       BuildContext context, int sectionIndex, int index) {
-    final templateEditorStore =
-        Provider.of<TemplateEditorStore>(context, listen: false);
-    final TemplateRegularCheck check =
-        templateEditorStore.checks[sectionIndex][index] as TemplateRegularCheck;
-    final TextEditingController descriptionController =
-        TextEditingController(text: check.description);
-    final TextEditingController observationController =
-        TextEditingController(text: check.observation);
-    int numberOfReferences = check.references.length;
-    Duration timerDuration = Duration(seconds: check.secondsTimer);
-
-    // Initialize prefix and suffix controllers
-    List<TextEditingController> prefixControllers = [
-          TextEditingController(text: '')
-        ] +
-        List.generate(numberOfReferences,
-            (i) => TextEditingController(text: check.references[i].prefix)) +
-        List.generate(ccrMaxReferences - numberOfReferences,
-            (i) => TextEditingController(text: ''));
-    List<TextEditingController> suffixControllers = [
-          TextEditingController(text: '')
-        ] +
-        List.generate(numberOfReferences,
-            (i) => TextEditingController(text: check.references[i].suffix)) +
-        List.generate(ccrMaxReferences - numberOfReferences,
-            (i) => TextEditingController(text: ''));
-
     showDialog(
       context: context,
       builder: (BuildContext context) {
+        final templateEditorStore =
+            Provider.of<TemplateEditorStore>(context, listen: false);
+        final theme = context.ccrThemeExtension;
+        final TemplateRegularCheck check = templateEditorStore
+            .checks[sectionIndex][index] as TemplateRegularCheck;
+        final TextEditingController descriptionController =
+            TextEditingController(text: check.description);
+        final TextEditingController observationController =
+            TextEditingController(text: check.observation);
+        int numberOfReferences = check.references.length;
+        var (timerDurationSeconds, timerDurationMinutes) =
+            ccrConvertSecondsToMinutesSeconds(check.secondsTimer);
+
+        List<TextEditingController> prefixControllers = [
+              TextEditingController(text: '')
+            ] +
+            List.generate(
+                numberOfReferences,
+                (i) =>
+                    TextEditingController(text: check.references[i].prefix)) +
+            List.generate(ccrMaxReferences - numberOfReferences,
+                (i) => TextEditingController(text: ''));
+        List<TextEditingController> suffixControllers = [
+              TextEditingController(text: '')
+            ] +
+            List.generate(
+                numberOfReferences,
+                (i) =>
+                    TextEditingController(text: check.references[i].suffix)) +
+            List.generate(ccrMaxReferences - numberOfReferences,
+                (i) => TextEditingController(text: ''));
+
         return AlertDialog(
           title: const Text('Edit Regular Check'),
           content: StatefulBuilder(
@@ -194,12 +199,9 @@ class TemplateCheckWidget extends StatelessWidget {
                               border: OutlineInputBorder(),
                             ),
                             maxLines: null, // Makes the input field expandable
-                            minLines:
-                                1, // Minimum lines the TextFormField will take
-                            keyboardType: TextInputType
-                                .multiline, // Keyboard type for multiline input
-                            textCapitalization: TextCapitalization
-                                .sentences, // Capitalize first letter of sentences
+                            minLines: 1,
+                            keyboardType: TextInputType.multiline,
+                            textCapitalization: TextCapitalization.sentences,
                             autofocus: true,
                           ),
                         ],
@@ -227,12 +229,9 @@ class TemplateCheckWidget extends StatelessWidget {
                               border: OutlineInputBorder(),
                             ),
                             maxLines: null, // Makes the input field expandable
-                            minLines:
-                                1, // Minimum lines the TextFormField will take
-                            keyboardType: TextInputType
-                                .multiline, // Keyboard type for multiline input
-                            textCapitalization: TextCapitalization
-                                .sentences, // Capitalize first letter of sentences
+                            minLines: 1,
+                            keyboardType: TextInputType.multiline,
+                            textCapitalization: TextCapitalization.sentences,
                             autofocus: true,
                           ),
                         ],
@@ -241,25 +240,75 @@ class TemplateCheckWidget extends StatelessWidget {
                     SizedBox(
                       width: ccrDescriptionFieldWidth,
                       child: ListTile(
-                        title: const Text('Set Timer Duration'),
-                        subtitle: Text(ccrFormatSecondsToMinutesSecondsTimer(
-                            timerDuration.inSeconds)),
-                        onTap: () async {
-                          final TimeOfDay? pickedTime = await showTimePicker(
-                            context: context,
-                            initialTime: TimeOfDay(
-                                hour: timerDuration.inMinutes,
-                                minute: timerDuration.inSeconds % 60),
-                          );
-                          if (pickedTime != null) {
-                            setState(() {
-                              timerDuration = Duration(
-                                  minutes: pickedTime.hour,
-                                  seconds: pickedTime.minute);
-                            });
-                          }
-                        },
+                        title: const Text('Timer Duration'),
+                        subtitle:
+                            Text(ccrFormatMinutesSecondsToMinutesSecondsTimer(
+                          timerDurationMinutes,
+                          timerDurationSeconds,
+                        )),
                       ),
+                    ),
+                    Row(
+                      children: [
+                        // NumberPicker for minutes
+                        Column(
+                          children: [
+                            const Text('minutes'),
+                            NumberPicker(
+                              value: timerDurationMinutes,
+                              minValue: 0,
+                              maxValue: 99,
+                              onChanged: (value) {
+                                setState(() {
+                                  timerDurationMinutes = value;
+                                });
+                              },
+                              decoration: BoxDecoration(
+                                borderRadius: ccrTemplateListTileBorderRadius,
+                                border: Border.all(color: theme.outline),
+                              ),
+                            ),
+                            const Text('minutes'),
+                          ],
+                        ),
+                        Text(
+                          ':',
+                          style: theme.timerTextTheme,
+                        ),
+                        // NumberPicker for seconds
+                        Column(
+                          children: [
+                            const Text('seconds'),
+                            NumberPicker(
+                              value: timerDurationSeconds,
+                              minValue: 0,
+                              maxValue: 59,
+                              onChanged: (value) {
+                                setState(() {
+                                  timerDurationSeconds = value;
+                                });
+                              },
+                              decoration: BoxDecoration(
+                                borderRadius: ccrTemplateListTileBorderRadius,
+                                border: Border.all(color: theme.outline),
+                              ),
+                            ),
+                            const Text('seconds'),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 8, left: 8),
+                          child: Text(
+                            ccrFormatMinutesSecondsToMinutesSecondsTimer(
+                              timerDurationMinutes,
+                              timerDurationSeconds,
+                            ),
+                            style: theme.dialogHintTextTheme.copyWith(
+                              color: Colors.blue,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                     if (numberOfReferences > 0)
                       const Text(
@@ -325,6 +374,10 @@ class TemplateCheckWidget extends StatelessWidget {
               onPressed: () {
                 final newDescription = descriptionController.text.trim();
                 final newObservation = observationController.text.trim();
+                final totalSeconds =
+                    (timerDurationMinutes * ccrSecondsInAMinute) +
+                        timerDurationSeconds;
+
                 List<RegularCheckReference> newReferences = List.generate(
                   numberOfReferences,
                   (i) => RegularCheckReference(
@@ -340,7 +393,7 @@ class TemplateCheckWidget extends StatelessWidget {
                     description: newDescription,
                     observation: newObservation,
                     references: newReferences,
-                    timerDuration: timerDuration.inSeconds);
+                    timerDuration: totalSeconds);
                 Navigator.of(context).pop();
               },
             ),
