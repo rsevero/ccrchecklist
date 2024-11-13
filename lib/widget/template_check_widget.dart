@@ -344,8 +344,8 @@ class TemplateCheckWidget extends StatelessWidget {
                           ),
                           padding: const EdgeInsets.only(
                             bottom: 8,
-                            left: 8,
-                            right: 8,
+                            left: 16,
+                            right: 16,
                           ),
                           child: Row(
                             children: [
@@ -359,8 +359,11 @@ class TemplateCheckWidget extends StatelessWidget {
                                   maintainAnimation: true,
                                   child: TextFormField(
                                     controller: prefixControllers[index],
+                                    style: theme.dialogFieldContentTextTheme,
                                     decoration: InputDecoration(
-                                        hintText: 'Prefix $index'),
+                                      hintText: 'Prefix $index',
+                                      hintStyle: theme.dialogHintTextTheme,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -386,8 +389,11 @@ class TemplateCheckWidget extends StatelessWidget {
                                   maintainAnimation: true,
                                   child: TextFormField(
                                     controller: suffixControllers[index],
+                                    style: theme.dialogFieldContentTextTheme,
                                     decoration: InputDecoration(
-                                        hintText: 'Suffix $index'),
+                                      hintText: 'Suffix $index',
+                                      hintStyle: theme.dialogHintTextTheme,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -403,9 +409,11 @@ class TemplateCheckWidget extends StatelessWidget {
                 TextButton(
                   child: const Text('Update'),
                   onPressed: () {
-                    final newDescription = descriptionController.text.trim();
-                    final newObservation = observationController.text.trim();
-                    final totalSeconds =
+                    final String newDescription =
+                        descriptionController.text.trim();
+                    final String newObservation =
+                        observationController.text.trim();
+                    final int totalSeconds =
                         (timerDurationMinutes * ccrSecondsInAMinute) +
                             timerDurationSeconds;
 

@@ -797,8 +797,8 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                           ),
                           padding: const EdgeInsets.only(
                             bottom: 8,
-                            left: 8,
-                            right: 8,
+                            left: 16,
+                            right: 16,
                           ),
                           child: Row(
                             children: [
@@ -812,8 +812,11 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                                   maintainAnimation: true,
                                   child: TextFormField(
                                     controller: prefixControllers[index],
+                                    style: theme.dialogFieldContentTextTheme,
                                     decoration: InputDecoration(
-                                        hintText: 'Prefix $index'),
+                                      hintText: 'Prefix $index',
+                                      hintStyle: theme.dialogHintTextTheme,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -839,8 +842,11 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                                   maintainAnimation: true,
                                   child: TextFormField(
                                     controller: suffixControllers[index],
+                                    style: theme.dialogFieldContentTextTheme,
                                     decoration: InputDecoration(
-                                        hintText: 'Suffix $index'),
+                                      hintText: 'Suffix $index',
+                                      hintStyle: theme.dialogHintTextTheme,
+                                    ),
                                   ),
                                 ),
                               ),
