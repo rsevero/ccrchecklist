@@ -778,80 +778,63 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                    if (numberOfReferences > 0)
-                      Text(
-                        'References prefixes and suffixes are optional',
-                        style: theme.dialogHintTextTheme,
-                      ),
                     ...List.generate(
                       ccrMaxReferences + 1,
                       (index) => Padding(
                         padding: const EdgeInsets.symmetric(vertical: 4),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: theme.onSurface,
-                              width: 1,
+                        child: Row(
+                          children: [
+                            Flexible(
+                              flex: 2,
+                              child: Visibility(
+                                visible:
+                                    index > 0 && index <= numberOfReferences,
+                                maintainSize: true,
+                                maintainState: true,
+                                maintainAnimation: true,
+                                child: TextFormField(
+                                  controller: prefixControllers[index],
+                                  style: theme.dialogFieldContentTextTheme,
+                                  decoration: InputDecoration(
+                                    hintText: 'Prefix $index',
+                                    hintStyle: theme.dialogHintTextTheme,
+                                    border: OutlineInputBorder(),
+                                  ),
+                                ),
+                              ),
                             ),
-                            borderRadius: ccrTemplateListTileBorderRadius,
-                          ),
-                          padding: const EdgeInsets.only(
-                            bottom: 8,
-                            left: 16,
-                            right: 16,
-                          ),
-                          child: Row(
-                            children: [
-                              Flexible(
-                                flex: 2,
-                                child: Visibility(
-                                  visible:
-                                      index > 0 && index <= numberOfReferences,
-                                  maintainSize: true,
-                                  maintainState: true,
-                                  maintainAnimation: true,
-                                  child: TextFormField(
-                                    controller: prefixControllers[index],
-                                    style: theme.dialogFieldContentTextTheme,
-                                    decoration: InputDecoration(
-                                      hintText: 'Prefix $index',
-                                      hintStyle: theme.dialogHintTextTheme,
-                                    ),
+                            SizedBox(
+                              width: 90,
+                              child: RadioListTile<int>(
+                                title: Text('$index'),
+                                value: index,
+                                groupValue: numberOfReferences,
+                                onChanged: (int? value) {
+                                  setState(
+                                      () => numberOfReferences = value ?? 0);
+                                },
+                              ),
+                            ),
+                            Flexible(
+                              flex: 2,
+                              child: Visibility(
+                                visible:
+                                    index > 0 && index <= numberOfReferences,
+                                maintainSize: true,
+                                maintainState: true,
+                                maintainAnimation: true,
+                                child: TextFormField(
+                                  controller: suffixControllers[index],
+                                  style: theme.dialogFieldContentTextTheme,
+                                  decoration: InputDecoration(
+                                    hintText: 'Suffix $index',
+                                    hintStyle: theme.dialogHintTextTheme,
+                                    border: OutlineInputBorder(),
                                   ),
                                 ),
                               ),
-                              SizedBox(
-                                width: 90,
-                                child: RadioListTile<int>(
-                                  title: Text('$index'),
-                                  value: index,
-                                  groupValue: numberOfReferences,
-                                  onChanged: (int? value) {
-                                    setState(
-                                        () => numberOfReferences = value ?? 0);
-                                  },
-                                ),
-                              ),
-                              Flexible(
-                                flex: 2,
-                                child: Visibility(
-                                  visible:
-                                      index > 0 && index <= numberOfReferences,
-                                  maintainSize: true,
-                                  maintainState: true,
-                                  maintainAnimation: true,
-                                  child: TextFormField(
-                                    controller: suffixControllers[index],
-                                    style: theme.dialogFieldContentTextTheme,
-                                    decoration: InputDecoration(
-                                      hintText: 'Suffix $index',
-                                      hintStyle: theme.dialogHintTextTheme,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
