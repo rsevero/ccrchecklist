@@ -173,146 +173,162 @@ class TemplateCheckWidget extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    SizedBox(
-                      width: ccrDescriptionFieldWidth,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                'Description',
-                                style: theme.dialogFieldTitleTextTheme,
-                              ),
-                              Text(
-                                ' *',
-                                style: theme.dialogFieldTitleTextTheme
-                                    .copyWith(color: Colors.red),
-                              ),
-                            ],
-                          ),
-                          TextFormField(
-                            controller: descriptionController,
-                            style: theme.dialogFieldContentTextTheme,
-                            decoration: InputDecoration(
-                              hintText: 'Enter check description',
-                              hintStyle: theme.dialogHintTextTheme,
-                              border: OutlineInputBorder(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: ccrVerticalPaddingItem),
+                      child: SizedBox(
+                        width: ccrDescriptionFieldWidth,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  'Description',
+                                  style: theme.dialogFieldTitleTextTheme,
+                                ),
+                                Text(
+                                  ' *',
+                                  style: theme.dialogFieldTitleTextTheme
+                                      .copyWith(color: Colors.red),
+                                ),
+                              ],
                             ),
-                            maxLines: null, // Makes the input field expandable
-                            minLines: 1,
-                            keyboardType: TextInputType.multiline,
-                            textCapitalization: TextCapitalization.sentences,
-                            autofocus: true,
-                          ),
-                        ],
+                            TextFormField(
+                              controller: descriptionController,
+                              style: theme.dialogFieldContentTextTheme,
+                              decoration: InputDecoration(
+                                hintText: 'Enter check description',
+                                hintStyle: theme.dialogHintTextTheme,
+                                border: OutlineInputBorder(),
+                              ),
+                              maxLines:
+                                  null, // Makes the input field expandable
+                              minLines: 1,
+                              keyboardType: TextInputType.multiline,
+                              textCapitalization: TextCapitalization.sentences,
+                              autofocus: true,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                    SizedBox(
-                      width: ccrDescriptionFieldWidth,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                'Observation',
-                                style: theme.dialogFieldTitleTextTheme,
-                              ),
-                            ],
-                          ),
-                          TextFormField(
-                            controller: observationController,
-                            style: theme.dialogFieldContentTextTheme,
-                            decoration: InputDecoration(
-                              hintText: 'Enter check observation',
-                              hintStyle: theme.dialogHintTextTheme,
-                              border: OutlineInputBorder(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: ccrVerticalPaddingItem),
+                      child: SizedBox(
+                        width: ccrDescriptionFieldWidth,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  'Observation',
+                                  style: theme.dialogFieldTitleTextTheme,
+                                ),
+                              ],
                             ),
-                            maxLines: null, // Makes the input field expandable
-                            minLines: 1,
-                            keyboardType: TextInputType.multiline,
-                            textCapitalization: TextCapitalization.sentences,
-                            autofocus: true,
-                          ),
-                        ],
+                            TextFormField(
+                              controller: observationController,
+                              style: theme.dialogFieldContentTextTheme,
+                              decoration: InputDecoration(
+                                hintText: 'Enter check observation',
+                                hintStyle: theme.dialogHintTextTheme,
+                                border: OutlineInputBorder(),
+                              ),
+                              maxLines:
+                                  null, // Makes the input field expandable
+                              minLines: 1,
+                              keyboardType: TextInputType.multiline,
+                              textCapitalization: TextCapitalization.sentences,
+                              autofocus: true,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                    SizedBox(
-                      width: ccrDescriptionFieldWidth,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Timer Duration',
-                            style: theme.dialogFieldTitleTextTheme,
-                          ),
-                          Row(
-                            children: [
-                              // NumberPicker for minutes
-                              Column(
-                                children: [
-                                  const Text('minutes'),
-                                  NumberPicker(
-                                    value: timerDurationMinutes,
-                                    minValue: 0,
-                                    maxValue: 99,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        timerDurationMinutes = value;
-                                      });
-                                    },
-                                    decoration: BoxDecoration(
-                                      borderRadius:
-                                          ccrTemplateListTileBorderRadius,
-                                      border: Border.all(color: theme.outline),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: ccrVerticalPaddingItem),
+                      child: SizedBox(
+                        width: ccrDescriptionFieldWidth,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Timer Duration',
+                              style: theme.dialogFieldTitleTextTheme,
+                            ),
+                            Row(
+                              children: [
+                                // NumberPicker for minutes
+                                Column(
+                                  children: [
+                                    const Text('minutes'),
+                                    NumberPicker(
+                                      value: timerDurationMinutes,
+                                      minValue: 0,
+                                      maxValue: 99,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          timerDurationMinutes = value;
+                                        });
+                                      },
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            ccrTemplateListTileBorderRadius,
+                                        border:
+                                            Border.all(color: theme.outline),
+                                      ),
                                     ),
-                                  ),
-                                  const Text('minutes'),
-                                ],
-                              ),
-                              Text(
-                                ':',
-                                style: theme.timerTextTheme,
-                              ),
-                              // NumberPicker for seconds
-                              Column(
-                                children: [
-                                  const Text('seconds'),
-                                  NumberPicker(
-                                    value: timerDurationSeconds,
-                                    minValue: 0,
-                                    maxValue: 59,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        timerDurationSeconds = value;
-                                      });
-                                    },
-                                    decoration: BoxDecoration(
-                                      borderRadius:
-                                          ccrTemplateListTileBorderRadius,
-                                      border: Border.all(color: theme.outline),
+                                    const Text('minutes'),
+                                  ],
+                                ),
+                                Text(
+                                  ':',
+                                  style: theme.timerTextTheme,
+                                ),
+                                // NumberPicker for seconds
+                                Column(
+                                  children: [
+                                    const Text('seconds'),
+                                    NumberPicker(
+                                      value: timerDurationSeconds,
+                                      minValue: 0,
+                                      maxValue: 59,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          timerDurationSeconds = value;
+                                        });
+                                      },
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            ccrTemplateListTileBorderRadius,
+                                        border:
+                                            Border.all(color: theme.outline),
+                                      ),
                                     ),
-                                  ),
-                                  const Text('seconds'),
-                                ],
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(bottom: 8, left: 8),
-                                child: Text(
-                                  ccrFormatMinutesSecondsToMinutesSecondsTimer(
-                                    timerDurationMinutes,
-                                    timerDurationSeconds,
-                                  ),
-                                  style: theme.dialogHintTextTheme.copyWith(
-                                    color: Colors.blue,
+                                    const Text('seconds'),
+                                  ],
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(bottom: 8, left: 8),
+                                  child: Text(
+                                    ccrFormatMinutesSecondsToMinutesSecondsTimer(
+                                      timerDurationMinutes,
+                                      timerDurationSeconds,
+                                    ),
+                                    style: theme.dialogHintTextTheme.copyWith(
+                                      color: Colors.blue,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     Padding(
@@ -438,6 +454,7 @@ class TemplateCheckWidget extends StatelessWidget {
       builder: (BuildContext context) {
         final templateEditorStore =
             Provider.of<TemplateEditorStore>(context, listen: false);
+        final theme = context.ccrThemeExtension;
         final TemplateCompleteLinearityCheck check = templateEditorStore
             .checks[sectionIndex][index] as TemplateCompleteLinearityCheck;
         final TextEditingController measurementController =
@@ -454,83 +471,95 @@ class TemplateCheckWidget extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    SizedBox(
-                      width: ccrDescriptionFieldWidth,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Row(
-                            children: [
-                              Text(
-                                'Measurement',
-                                style: TextStyle(
-                                  fontSize: 16,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: ccrVerticalPaddingItem),
+                      child: SizedBox(
+                        width: ccrDescriptionFieldWidth,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  'Measurement',
+                                  style: theme.dialogFieldTitleTextTheme,
                                 ),
-                              ),
-                              Text(
-                                ' *',
-                                style: TextStyle(
-                                  color: Colors.red,
-                                  fontSize: 16,
+                                Text(
+                                  ' *',
+                                  style: theme.dialogFieldTitleTextTheme
+                                      .copyWith(color: Colors.red),
                                 ),
-                              ),
-                            ],
-                          ),
-                          TextFormField(
-                            controller: measurementController,
-                            decoration: const InputDecoration(
-                              hintText: 'Enter measurement name',
-                              border: OutlineInputBorder(),
+                              ],
                             ),
-                            maxLines: 1,
-                            minLines: 1,
-                            keyboardType: TextInputType.multiline,
-                            textCapitalization: TextCapitalization.sentences,
-                            autofocus: true,
-                          ),
-                        ],
+                            TextFormField(
+                              controller: measurementController,
+                              decoration: const InputDecoration(
+                                hintText: 'Enter measurement name',
+                                border: OutlineInputBorder(),
+                              ),
+                              maxLines: 1,
+                              minLines: 1,
+                              keyboardType: TextInputType.multiline,
+                              textCapitalization: TextCapitalization.sentences,
+                              autofocus: true,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                    SizedBox(
-                      width: ccrDescriptionFieldWidth,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Row(
-                            children: [
-                              Text(
-                                'Description',
-                                style: TextStyle(
-                                  fontSize: 16,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: ccrVerticalPaddingItem),
+                      child: SizedBox(
+                        width: ccrDescriptionFieldWidth,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  'Description',
+                                  style: theme.dialogFieldTitleTextTheme,
                                 ),
-                              ),
-                              Text(
-                                ' *',
-                                style: TextStyle(
-                                  color: Colors.red,
-                                  fontSize: 16,
+                                Text(
+                                  ' *',
+                                  style: theme.dialogFieldTitleTextTheme
+                                      .copyWith(color: Colors.red),
                                 ),
-                              ),
-                            ],
-                          ),
-                          TextFormField(
-                            controller: descriptionController,
-                            decoration: const InputDecoration(
-                              hintText: 'Enter check description',
-                              border: OutlineInputBorder(),
+                              ],
                             ),
-                            maxLines: null,
-                            minLines: 1,
-                            keyboardType: TextInputType.multiline,
-                            textCapitalization: TextCapitalization.sentences,
-                            autofocus: true,
-                          ),
-                        ],
+                            TextFormField(
+                              controller: descriptionController,
+                              decoration: const InputDecoration(
+                                hintText: 'Enter check description',
+                                border: OutlineInputBorder(),
+                              ),
+                              maxLines: null,
+                              minLines: 1,
+                              keyboardType: TextInputType.multiline,
+                              textCapitalization: TextCapitalization.sentences,
+                              autofocus: true,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text('Amount of references'),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: ccrVerticalPaddingItem),
+                      child: SizedBox(
+                        width: ccrDescriptionFieldWidth,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Amount of references',
+                              style: theme.dialogFieldTitleTextTheme,
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                     NumberPicker(
                       value: referenceCount,
@@ -599,45 +628,49 @@ class TemplateCheckWidget extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    SizedBox(
-                      width: ccrDescriptionFieldWidth,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Row(
-                            children: [
-                              Text(
-                                'Description',
-                                style: TextStyle(
-                                  fontSize: 16,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: ccrVerticalPaddingItem),
+                      child: SizedBox(
+                        width: ccrDescriptionFieldWidth,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Row(
+                              children: [
+                                Text(
+                                  'Description',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                ' *',
-                                style: TextStyle(
-                                  color: Colors.red,
-                                  fontSize: 16,
+                                Text(
+                                  ' *',
+                                  style: TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 16,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          TextFormField(
-                            controller: descriptionController,
-                            decoration: const InputDecoration(
-                              hintText: 'Enter check description',
-                              border: OutlineInputBorder(),
+                              ],
                             ),
-                            maxLines: null,
-                            minLines: 1,
-                            keyboardType: TextInputType.multiline,
-                            textCapitalization: TextCapitalization.sentences,
-                            autofocus: true,
-                          ),
-                        ],
+                            TextFormField(
+                              controller: descriptionController,
+                              decoration: const InputDecoration(
+                                hintText: 'Enter check description',
+                                border: OutlineInputBorder(),
+                              ),
+                              maxLines: null,
+                              minLines: 1,
+                              keyboardType: TextInputType.multiline,
+                              textCapitalization: TextCapitalization.sentences,
+                              autofocus: true,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8.0),
+                      padding: EdgeInsets.only(top: ccrVerticalPaddingItem),
                       child: Text('Amount of references'),
                     ),
                     NumberPicker(
@@ -703,42 +736,46 @@ class TemplateCheckWidget extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    SizedBox(
-                      width: ccrDescriptionFieldWidth,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Row(
-                            children: [
-                              Text(
-                                'Description',
-                                style: TextStyle(
-                                  fontSize: 16,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: ccrVerticalPaddingItem),
+                      child: SizedBox(
+                        width: ccrDescriptionFieldWidth,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Row(
+                              children: [
+                                Text(
+                                  'Description',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                ' *', // Red asterisk with preceding space for separation
-                                style: TextStyle(
-                                  color: Colors.red,
-                                  fontSize:
-                                      16, // Adjust the font size to match the label
+                                Text(
+                                  ' *', // Red asterisk with preceding space for separation
+                                  style: TextStyle(
+                                    color: Colors.red,
+                                    fontSize:
+                                        16, // Adjust the font size to match the label
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          TextFormField(
-                            controller: descriptionController,
-                            decoration: const InputDecoration(
-                              hintText: 'Enter check description',
-                              border: OutlineInputBorder(),
+                              ],
                             ),
-                            maxLines: null,
-                            minLines: 1,
-                            keyboardType: TextInputType.multiline,
-                            textCapitalization: TextCapitalization.sentences,
-                            autofocus: true,
-                          ),
-                        ],
+                            TextFormField(
+                              controller: descriptionController,
+                              decoration: const InputDecoration(
+                                hintText: 'Enter check description',
+                                border: OutlineInputBorder(),
+                              ),
+                              maxLines: null,
+                              minLines: 1,
+                              keyboardType: TextInputType.multiline,
+                              textCapitalization: TextCapitalization.sentences,
+                              autofocus: true,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -787,7 +824,6 @@ class TemplateCheckWidget extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return StatefulBuilder(
-          // Using StatefulBuilder to manage local state
           builder: (BuildContext context, StateSetter setState) {
             return AlertDialog(
               title: const Text('Move Check to New Section'),
