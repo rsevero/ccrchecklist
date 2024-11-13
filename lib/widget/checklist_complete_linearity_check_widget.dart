@@ -123,7 +123,9 @@ class _ChecklistCompleteLinearityCheckWidgetState
                   columns: [
                     DataColumn(
                         label: LinearityWorksheetText(
-                            'mV', theme.linearityColumnTitleTextTheme)),
+                      check.measurement,
+                      theme.linearityColumnTitleTextTheme,
+                    )),
                     DataColumn(
                         label: LinearityWorksheetText(
                             '/0.21', theme.linearityColumnTitleTextTheme)),

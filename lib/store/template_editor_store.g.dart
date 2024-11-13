@@ -425,13 +425,17 @@ mixin _$TemplateEditorStore on _TemplateEditorStoreBaseToJson, Store {
 
   @override
   void addCompleteLinearityCheck(
-      {required String description, required int referenceCount}) {
+      {required String measurement,
+      required String description,
+      required int referenceCount}) {
     final _$actionInfo =
         _$_TemplateEditorStoreBaseToJsonActionController.startAction(
             name: '_TemplateEditorStoreBaseToJson.addCompleteLinearityCheck');
     try {
       return super.addCompleteLinearityCheck(
-          description: description, referenceCount: referenceCount);
+          measurement: measurement,
+          description: description,
+          referenceCount: referenceCount);
     } finally {
       _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
     }
@@ -517,6 +521,25 @@ mixin _$TemplateEditorStore on _TemplateEditorStoreBaseToJson, Store {
           observation: observation,
           timerDuration: timerDuration,
           references: references);
+    } finally {
+      _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void updateCompleteLinearityCheck(int sectionIndex, int checkIndex,
+      {required String measurement,
+      required int referenceCount,
+      required String description}) {
+    final _$actionInfo =
+        _$_TemplateEditorStoreBaseToJsonActionController.startAction(
+            name:
+                '_TemplateEditorStoreBaseToJson.updateCompleteLinearityCheck');
+    try {
+      return super.updateCompleteLinearityCheck(sectionIndex, checkIndex,
+          measurement: measurement,
+          referenceCount: referenceCount,
+          description: description);
     } finally {
       _$_TemplateEditorStoreBaseToJsonActionController.endAction(_$actionInfo);
     }

@@ -41,6 +41,9 @@ class TemplateCheckWidget extends StatelessWidget {
           if (observation.isNotEmpty) {
             observation = "Obs.: $observation";
           }
+        } else if (check is TemplateCompleteLinearityCheck) {
+          description +=
+              ' (Complete linearity check - Measurement: ${check.measurement} - Ref count: ${check.referenceCount})';
         } else if (check is TemplateLinearityStep1Check) {
           description +=
               ' (Linearity step 1 - Ref count: ${check.referenceCount})';
@@ -125,13 +128,12 @@ class TemplateCheckWidget extends StatelessWidget {
       BuildContext context, int sectionIndex, int index) {
     final templateEditorStore =
         Provider.of<TemplateEditorStore>(context, listen: false);
-    final TextEditingController descriptionController = TextEditingController();
-    final TextEditingController observationController = TextEditingController();
-
     final TemplateRegularCheck check =
         templateEditorStore.checks[sectionIndex][index] as TemplateRegularCheck;
-    descriptionController.text = check.description;
-    observationController.text = check.observation;
+    final TextEditingController descriptionController =
+        TextEditingController(text: check.description);
+    final TextEditingController observationController =
+        TextEditingController(text: check.observation);
     int numberOfReferences = check.references.length;
     Duration timerDuration = Duration(seconds: check.secondsTimer);
 
@@ -351,14 +353,161 @@ class TemplateCheckWidget extends StatelessWidget {
     );
   }
 
+  void _editTemplateCompleteLinearityCheck(
+      BuildContext context, int sectionIndex, int index) {
+    final templateEditorStore =
+        Provider.of<TemplateEditorStore>(context, listen: false);
+    final TemplateCompleteLinearityCheck check = templateEditorStore
+        .checks[sectionIndex][index] as TemplateCompleteLinearityCheck;
+    final TextEditingController measurementController =
+        TextEditingController(text: check.measurement);
+    final TextEditingController descriptionController =
+        TextEditingController(text: check.description);
+    int referenceCount = check.referenceCount;
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+            return AlertDialog(
+              title: const Text('Edit Complete Linearity Check'),
+              content: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    SizedBox(
+                      width: ccrDescriptionFieldWidth,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Row(
+                            children: [
+                              Text(
+                                'Measurement',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                ),
+                              ),
+                              Text(
+                                ' *',
+                                style: TextStyle(
+                                  color: Colors.red,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
+                          TextFormField(
+                            controller: measurementController,
+                            decoration: const InputDecoration(
+                              hintText: 'Enter measurement name',
+                              border: OutlineInputBorder(),
+                            ),
+                            maxLines: 1,
+                            minLines: 1,
+                            keyboardType: TextInputType.multiline,
+                            textCapitalization: TextCapitalization.sentences,
+                            autofocus: true,
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: ccrDescriptionFieldWidth,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Row(
+                            children: [
+                              Text(
+                                'Description',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                ),
+                              ),
+                              Text(
+                                ' *',
+                                style: TextStyle(
+                                  color: Colors.red,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
+                          TextFormField(
+                            controller: descriptionController,
+                            decoration: const InputDecoration(
+                              hintText: 'Enter check description',
+                              border: OutlineInputBorder(),
+                            ),
+                            maxLines: null,
+                            minLines: 1,
+                            keyboardType: TextInputType.multiline,
+                            textCapitalization: TextCapitalization.sentences,
+                            autofocus: true,
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text('Amount of references'),
+                    ),
+                    ...List.generate(
+                      5,
+                      (index) => RadioListTile<int>(
+                        title: Text('${index + 1}'),
+                        value: index + 1,
+                        groupValue: referenceCount,
+                        onChanged: (int? value) {
+                          if (value != null) {
+                            setState(() => (referenceCount = value));
+                          }
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('Update'),
+                  onPressed: () {
+                    final newDescription = descriptionController.text.trim();
+                    final newMeasurement = measurementController.text.trim();
+                    templateEditorStore.updateCompleteLinearityCheck(
+                      sectionIndex,
+                      index,
+                      referenceCount: referenceCount,
+                      description: newDescription,
+                      measurement: newMeasurement,
+                    );
+                    Navigator.of(context).pop();
+                  },
+                ),
+                TextButton(
+                  child: const Text('Cancel'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+
   void _editTemplateLinearityStep1Check(
       BuildContext context, int sectionIndex, int index) {
     final templateEditorStore =
         Provider.of<TemplateEditorStore>(context, listen: false);
-    final TextEditingController descriptionController = TextEditingController();
     final TemplateLinearityStep1Check check = templateEditorStore
         .checks[sectionIndex][index] as TemplateLinearityStep1Check;
-    descriptionController.text = check.description;
+    final TextEditingController descriptionController =
+        TextEditingController(text: check.description);
     int referenceCount = check.referenceCount;
 
     showDialog(
@@ -462,10 +611,10 @@ class TemplateCheckWidget extends StatelessWidget {
       BuildContext context, int sectionIndex, int index) {
     final templateEditorStore =
         Provider.of<TemplateEditorStore>(context, listen: false);
-    final TextEditingController descriptionController = TextEditingController();
     final TemplateLinearityStep2Check check = templateEditorStore
         .checks[sectionIndex][index] as TemplateLinearityStep2Check;
-    descriptionController.text = check.description;
+    final TextEditingController descriptionController =
+        TextEditingController(text: check.description);
 
     showDialog(
       context: context,
@@ -625,6 +774,8 @@ class TemplateCheckWidget extends StatelessWidget {
 
     if (check is TemplateRegularCheck) {
       _editTemplateRegularCheck(context, sectionIndex, index);
+    } else if (check is TemplateCompleteLinearityCheck) {
+      _editTemplateCompleteLinearityCheck(context, sectionIndex, index);
     } else if (check is TemplateLinearityStep1Check) {
       _editTemplateLinearityStep1Check(context, sectionIndex, index);
     } else if (check is TemplateLinearityStep2Check) {

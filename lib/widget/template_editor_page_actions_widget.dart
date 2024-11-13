@@ -164,10 +164,10 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
     final templateEditorStore =
         Provider.of<TemplateEditorStore>(context, listen: false);
     templateEditorStore.updateTemplate(
-      rebreatherManufacturer: rebreatherManufacturer,
-      rebreatherModel: rebreatherModel,
-      title: title,
-      description: description,
+      rebreatherManufacturer: rebreatherManufacturer.trim(),
+      rebreatherModel: rebreatherModel.trim(),
+      title: title.trim(),
+      description: description.trim(),
     );
 
     Navigator.of(context).pop();
@@ -238,6 +238,8 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
   void _onTapAddCompleteLinearityCheck(BuildContext context) {
     final templateEditorStore =
         Provider.of<TemplateEditorStore>(context, listen: false);
+    final theme = context.ccrThemeExtension;
+    final TextEditingController measurementController = TextEditingController();
     final TextEditingController descriptionController = TextEditingController();
 
     int numberOfReferences = 1;
@@ -264,15 +266,49 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                'Description',
-                                style: context.ccrThemeExtension
-                                    .dialogFieldTitleTextTheme,
+                                'Measurement name',
+                                style: theme.dialogFieldTitleTextTheme,
                               ),
                               Text(
                                 ' *',
-                                style: context
-                                    .ccrThemeExtension.dialogFieldTitleTextTheme
-                                    .copyWith(
+                                style: theme.dialogFieldTitleTextTheme.copyWith(
+                                  color: Colors.red,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
+                          TextFormField(
+                            controller: measurementController,
+                            style: theme.dialogFieldContentTextTheme,
+                            decoration: InputDecoration(
+                              hintText: 'Enter the name of the measurement',
+                              hintStyle: theme.dialogHintTextTheme,
+                              border: OutlineInputBorder(),
+                            ),
+                            maxLines: null,
+                            minLines: 1,
+                            keyboardType: TextInputType.multiline,
+                            textCapitalization: TextCapitalization.sentences,
+                            autofocus: true,
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: ccrDescriptionFieldWidth,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                'Description',
+                                style: theme.dialogFieldTitleTextTheme,
+                              ),
+                              Text(
+                                ' *',
+                                style: theme.dialogFieldTitleTextTheme.copyWith(
                                   color: Colors.red,
                                   fontSize: 16,
                                 ),
@@ -281,12 +317,10 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                           ),
                           TextFormField(
                             controller: descriptionController,
-                            style: context
-                                .ccrThemeExtension.dialogFieldContentTextTheme,
+                            style: theme.dialogFieldContentTextTheme,
                             decoration: InputDecoration(
                               hintText: 'Enter check description',
-                              hintStyle:
-                                  context.ccrThemeExtension.dialogHintTextTheme,
+                              hintStyle: theme.dialogHintTextTheme,
                               border: OutlineInputBorder(),
                             ),
                             maxLines: null,
@@ -304,8 +338,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           'References',
-                          style: context
-                              .ccrThemeExtension.dialogFieldTitleTextTheme,
+                          style: theme.dialogFieldTitleTextTheme,
                         ),
                       ),
                     ),
@@ -314,8 +347,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                       (index) => RadioListTile<int>(
                         title: Text(
                           '${index + 1}',
-                          style: context
-                              .ccrThemeExtension.dialogFieldContentTextTheme,
+                          style: theme.dialogFieldContentTextTheme,
                         ),
                         value: index + 1,
                         groupValue: numberOfReferences,
@@ -335,9 +367,11 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
             TextButton(
               child: const Text('Create'),
               onPressed: () {
-                final description = descriptionController.text;
+                final description = descriptionController.text.trim();
+                final measurement = measurementController.text.trim();
                 if (description.isNotEmpty) {
                   templateEditorStore.addCompleteLinearityCheck(
+                    measurement: measurement,
                     description: description,
                     referenceCount: numberOfReferences,
                   );
@@ -455,7 +489,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
             TextButton(
               child: const Text('Create'),
               onPressed: () {
-                final description = descriptionController.text;
+                final description = descriptionController.text.trim();
                 if (description.isNotEmpty) {
                   templateEditorStore.addLinearityStep1Check(
                     description: description,
@@ -540,7 +574,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
             TextButton(
               child: const Text('Create'),
               onPressed: () {
-                final description = descriptionController.text;
+                final description = descriptionController.text.trim();
                 if (description.isNotEmpty) {
                   templateEditorStore.addLinearityStep2Check(
                     description: description,
@@ -770,8 +804,8 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                 TextButton(
                   child: const Text('Create+'),
                   onPressed: () {
-                    final description = descriptionController.text;
-                    final observation = observationController.text;
+                    final description = descriptionController.text.trim();
+                    final observation = observationController.text.trim();
                     if (description.isNotEmpty) {
                       List<RegularCheckReference> references = List.generate(
                         numberOfReferences,

@@ -394,7 +394,11 @@ class ChecklistAsPdf {
       ),
     );
 
-    final List<pw.SpanningWidget> mvs = [_text('mV', fontSize: 10, bold: true)];
+    final measurement =
+        check is ChecklistCompleteLinearityCheck ? check.measurement : 'mV';
+    final List<pw.SpanningWidget> mvs = [
+      _text(measurement, fontSize: 10, bold: true)
+    ];
     final List<pw.SpanningWidget> oxygens1_0 = [
       _text('/0.21', fontSize: 10, italic: true)
     ];

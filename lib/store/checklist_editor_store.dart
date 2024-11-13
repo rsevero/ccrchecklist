@@ -543,6 +543,7 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
           ),
         );
         checklistCheck = ChecklistCompleteLinearityCheck(
+          measurement: templateCheck.measurement,
           description: templateCheck.description,
           lastChange: DateTime.now(),
           isChecked: false,

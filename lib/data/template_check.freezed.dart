@@ -42,7 +42,8 @@ mixin _$TemplateCheck {
     required TResult Function(String description, int referenceCount)
         linearityStep1,
     required TResult Function(String description) linearityStep2,
-    required TResult Function(String description, int referenceCount)
+    required TResult Function(
+            String measurement, String description, int referenceCount)
         completeLinearity,
   }) =>
       throw _privateConstructorUsedError;
@@ -53,7 +54,8 @@ mixin _$TemplateCheck {
         regular,
     TResult? Function(String description, int referenceCount)? linearityStep1,
     TResult? Function(String description)? linearityStep2,
-    TResult? Function(String description, int referenceCount)?
+    TResult? Function(
+            String measurement, String description, int referenceCount)?
         completeLinearity,
   }) =>
       throw _privateConstructorUsedError;
@@ -64,7 +66,9 @@ mixin _$TemplateCheck {
         regular,
     TResult Function(String description, int referenceCount)? linearityStep1,
     TResult Function(String description)? linearityStep2,
-    TResult Function(String description, int referenceCount)? completeLinearity,
+    TResult Function(
+            String measurement, String description, int referenceCount)?
+        completeLinearity,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -277,7 +281,8 @@ class _$TemplateRegularCheckImpl extends TemplateRegularCheck
     required TResult Function(String description, int referenceCount)
         linearityStep1,
     required TResult Function(String description) linearityStep2,
-    required TResult Function(String description, int referenceCount)
+    required TResult Function(
+            String measurement, String description, int referenceCount)
         completeLinearity,
   }) {
     return regular(description, secondsTimer, observation, references);
@@ -291,7 +296,8 @@ class _$TemplateRegularCheckImpl extends TemplateRegularCheck
         regular,
     TResult? Function(String description, int referenceCount)? linearityStep1,
     TResult? Function(String description)? linearityStep2,
-    TResult? Function(String description, int referenceCount)?
+    TResult? Function(
+            String measurement, String description, int referenceCount)?
         completeLinearity,
   }) {
     return regular?.call(description, secondsTimer, observation, references);
@@ -305,7 +311,9 @@ class _$TemplateRegularCheckImpl extends TemplateRegularCheck
         regular,
     TResult Function(String description, int referenceCount)? linearityStep1,
     TResult Function(String description)? linearityStep2,
-    TResult Function(String description, int referenceCount)? completeLinearity,
+    TResult Function(
+            String measurement, String description, int referenceCount)?
+        completeLinearity,
     required TResult orElse(),
   }) {
     if (regular != null) {
@@ -498,7 +506,8 @@ class _$TemplateLinearityStep1CheckImpl extends TemplateLinearityStep1Check
     required TResult Function(String description, int referenceCount)
         linearityStep1,
     required TResult Function(String description) linearityStep2,
-    required TResult Function(String description, int referenceCount)
+    required TResult Function(
+            String measurement, String description, int referenceCount)
         completeLinearity,
   }) {
     return linearityStep1(description, referenceCount);
@@ -512,7 +521,8 @@ class _$TemplateLinearityStep1CheckImpl extends TemplateLinearityStep1Check
         regular,
     TResult? Function(String description, int referenceCount)? linearityStep1,
     TResult? Function(String description)? linearityStep2,
-    TResult? Function(String description, int referenceCount)?
+    TResult? Function(
+            String measurement, String description, int referenceCount)?
         completeLinearity,
   }) {
     return linearityStep1?.call(description, referenceCount);
@@ -526,7 +536,9 @@ class _$TemplateLinearityStep1CheckImpl extends TemplateLinearityStep1Check
         regular,
     TResult Function(String description, int referenceCount)? linearityStep1,
     TResult Function(String description)? linearityStep2,
-    TResult Function(String description, int referenceCount)? completeLinearity,
+    TResult Function(
+            String measurement, String description, int referenceCount)?
+        completeLinearity,
     required TResult orElse(),
   }) {
     if (linearityStep1 != null) {
@@ -702,7 +714,8 @@ class _$TemplateLinearityStep2CheckImpl extends TemplateLinearityStep2Check
     required TResult Function(String description, int referenceCount)
         linearityStep1,
     required TResult Function(String description) linearityStep2,
-    required TResult Function(String description, int referenceCount)
+    required TResult Function(
+            String measurement, String description, int referenceCount)
         completeLinearity,
   }) {
     return linearityStep2(description);
@@ -716,7 +729,8 @@ class _$TemplateLinearityStep2CheckImpl extends TemplateLinearityStep2Check
         regular,
     TResult? Function(String description, int referenceCount)? linearityStep1,
     TResult? Function(String description)? linearityStep2,
-    TResult? Function(String description, int referenceCount)?
+    TResult? Function(
+            String measurement, String description, int referenceCount)?
         completeLinearity,
   }) {
     return linearityStep2?.call(description);
@@ -730,7 +744,9 @@ class _$TemplateLinearityStep2CheckImpl extends TemplateLinearityStep2Check
         regular,
     TResult Function(String description, int referenceCount)? linearityStep1,
     TResult Function(String description)? linearityStep2,
-    TResult Function(String description, int referenceCount)? completeLinearity,
+    TResult Function(
+            String measurement, String description, int referenceCount)?
+        completeLinearity,
     required TResult orElse(),
   }) {
     if (linearityStep2 != null) {
@@ -813,7 +829,7 @@ abstract class _$$TemplateCompleteLinearityCheckImplCopyWith<$Res>
       __$$TemplateCompleteLinearityCheckImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String description, int referenceCount});
+  $Res call({String measurement, String description, int referenceCount});
 }
 
 /// @nodoc
@@ -831,10 +847,15 @@ class __$$TemplateCompleteLinearityCheckImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? measurement = null,
     Object? description = null,
     Object? referenceCount = null,
   }) {
     return _then(_$TemplateCompleteLinearityCheckImpl(
+      measurement: null == measurement
+          ? _value.measurement
+          : measurement // ignore: cast_nullable_to_non_nullable
+              as String,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -852,7 +873,8 @@ class __$$TemplateCompleteLinearityCheckImplCopyWithImpl<$Res>
 class _$TemplateCompleteLinearityCheckImpl
     extends TemplateCompleteLinearityCheck with DiagnosticableTreeMixin {
   _$TemplateCompleteLinearityCheckImpl(
-      {required this.description,
+      {required this.measurement,
+      required this.description,
       required this.referenceCount,
       final String? $type})
       : $type = $type ?? 'completeLinearity',
@@ -863,6 +885,8 @@ class _$TemplateCompleteLinearityCheckImpl
       _$$TemplateCompleteLinearityCheckImplFromJson(json);
 
   @override
+  final String measurement;
+  @override
   final String description;
   @override
   final int referenceCount;
@@ -872,7 +896,7 @@ class _$TemplateCompleteLinearityCheckImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TemplateCheck.completeLinearity(description: $description, referenceCount: $referenceCount)';
+    return 'TemplateCheck.completeLinearity(measurement: $measurement, description: $description, referenceCount: $referenceCount)';
   }
 
   @override
@@ -880,6 +904,7 @@ class _$TemplateCompleteLinearityCheckImpl
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'TemplateCheck.completeLinearity'))
+      ..add(DiagnosticsProperty('measurement', measurement))
       ..add(DiagnosticsProperty('description', description))
       ..add(DiagnosticsProperty('referenceCount', referenceCount));
   }
@@ -889,6 +914,8 @@ class _$TemplateCompleteLinearityCheckImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TemplateCompleteLinearityCheckImpl &&
+            (identical(other.measurement, measurement) ||
+                other.measurement == measurement) &&
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.referenceCount, referenceCount) ||
@@ -897,7 +924,8 @@ class _$TemplateCompleteLinearityCheckImpl
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, description, referenceCount);
+  int get hashCode =>
+      Object.hash(runtimeType, measurement, description, referenceCount);
 
   /// Create a copy of TemplateCheck
   /// with the given fields replaced by the non-null parameter values.
@@ -918,10 +946,11 @@ class _$TemplateCompleteLinearityCheckImpl
     required TResult Function(String description, int referenceCount)
         linearityStep1,
     required TResult Function(String description) linearityStep2,
-    required TResult Function(String description, int referenceCount)
+    required TResult Function(
+            String measurement, String description, int referenceCount)
         completeLinearity,
   }) {
-    return completeLinearity(description, referenceCount);
+    return completeLinearity(measurement, description, referenceCount);
   }
 
   @override
@@ -932,10 +961,11 @@ class _$TemplateCompleteLinearityCheckImpl
         regular,
     TResult? Function(String description, int referenceCount)? linearityStep1,
     TResult? Function(String description)? linearityStep2,
-    TResult? Function(String description, int referenceCount)?
+    TResult? Function(
+            String measurement, String description, int referenceCount)?
         completeLinearity,
   }) {
-    return completeLinearity?.call(description, referenceCount);
+    return completeLinearity?.call(measurement, description, referenceCount);
   }
 
   @override
@@ -946,11 +976,13 @@ class _$TemplateCompleteLinearityCheckImpl
         regular,
     TResult Function(String description, int referenceCount)? linearityStep1,
     TResult Function(String description)? linearityStep2,
-    TResult Function(String description, int referenceCount)? completeLinearity,
+    TResult Function(
+            String measurement, String description, int referenceCount)?
+        completeLinearity,
     required TResult orElse(),
   }) {
     if (completeLinearity != null) {
-      return completeLinearity(description, referenceCount);
+      return completeLinearity(measurement, description, referenceCount);
     }
     return orElse();
   }
@@ -1003,7 +1035,8 @@ class _$TemplateCompleteLinearityCheckImpl
 
 abstract class TemplateCompleteLinearityCheck extends TemplateCheck {
   factory TemplateCompleteLinearityCheck(
-          {required final String description,
+          {required final String measurement,
+          required final String description,
           required final int referenceCount}) =
       _$TemplateCompleteLinearityCheckImpl;
   TemplateCompleteLinearityCheck._() : super._();
@@ -1011,6 +1044,7 @@ abstract class TemplateCompleteLinearityCheck extends TemplateCheck {
   factory TemplateCompleteLinearityCheck.fromJson(Map<String, dynamic> json) =
       _$TemplateCompleteLinearityCheckImpl.fromJson;
 
+  String get measurement;
   @override
   String get description;
   int get referenceCount;

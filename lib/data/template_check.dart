@@ -26,6 +26,7 @@ sealed class TemplateCheck with _$TemplateCheck {
   }) = TemplateLinearityStep2Check;
 
   factory TemplateCheck.completeLinearity({
+    required String measurement,
     required String description,
     required int referenceCount,
   }) = TemplateCompleteLinearityCheck;

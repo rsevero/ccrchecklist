@@ -265,10 +265,16 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
   }
 
   @action
-  void addCompleteLinearityCheck(
-      {required String description, required int referenceCount}) {
+  void addCompleteLinearityCheck({
+    required String measurement,
+    required String description,
+    required int referenceCount,
+  }) {
     final newCheck = TemplateCompleteLinearityCheck(
-        referenceCount: referenceCount, description: description);
+      measurement: measurement,
+      referenceCount: referenceCount,
+      description: description,
+    );
     _selectedSection.checks.add(newCheck);
     _checks[_selectedSectionIndex].add(newCheck);
     _saveSnapshot('Add complete linearity check');
@@ -407,6 +413,27 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
     _currentTemplate.sections[sectionIndex].checks[checkIndex] = newCheck;
     _checks[sectionIndex][checkIndex] = newCheck;
     _saveSnapshot('Update regular check');
+  }
+
+  @action
+  void updateCompleteLinearityCheck(
+    int sectionIndex,
+    int checkIndex, {
+    required String measurement,
+    required int referenceCount,
+    required String description,
+  }) {
+    final check =
+        _checks[sectionIndex][checkIndex] as TemplateCompleteLinearityCheck;
+    final newCheck = check.copyWith(
+      referenceCount: referenceCount,
+      description: description,
+      measurement: measurement,
+    );
+
+    _currentTemplate.sections[sectionIndex].checks[checkIndex] = newCheck;
+    _checks[sectionIndex][checkIndex] = newCheck;
+    _saveSnapshot('Update complete linearity check');
   }
 
   @action

@@ -32,6 +32,7 @@ sealed class ChecklistCheck with _$ChecklistCheck {
   }) = ChecklistLinearityStep2Check;
 
   factory ChecklistCheck.completeLinearity({
+    required String measurement,
     required String description,
     required bool isChecked,
     required DateTime lastChange,
