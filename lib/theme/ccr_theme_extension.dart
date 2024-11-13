@@ -120,6 +120,20 @@ class CCRThemeExtension extends ThemeExtension<CCRThemeExtension>
   late final TextStyle linearityColumnContentTextTheme;
   @override
   late final TextStyle timerTextTheme;
+  @override
+  late final Color ccrTimerBackgroundcolorFinished;
+  @override
+  late final Color ccrTimerBackgroundcolorRunning;
+  @override
+  late final Color ccrTimerBackgroundcolorNotRunning;
+  @override
+  late final Color ccrTimerTextColorFinished;
+  @override
+  late final Color ccrTimerTextColorRunning;
+  @override
+  late final Color ccrTimerTextColorNotRunning;
+  @override
+  late final Color ccrSectionOkColor;
 
   CCRThemeExtension({
     required this.primary,
@@ -166,6 +180,14 @@ class CCRThemeExtension extends ThemeExtension<CCRThemeExtension>
     required this.bodySmall,
     required this.labelLarge,
   }) {
+    ccrTimerBackgroundcolorFinished = Color(0xff018571);
+    ccrTimerBackgroundcolorRunning = Color(0xff00e2ff);
+    ccrTimerBackgroundcolorNotRunning = Color(0xffe66101);
+    ccrTimerTextColorFinished = Color(0xffffffff);
+    ccrTimerTextColorRunning = Color(0xff666666);
+    ccrTimerTextColorNotRunning = Color(0xffffffff);
+    ccrSectionOkColor = Colors.green;
+
     manufacturerTextTheme = _copyUnsettingColor(headlineSmall)
         .copyWith(fontWeight: FontWeight.w200);
     modelTextTheme =

@@ -288,21 +288,24 @@ class _ChecklistRegularCheckWidgetState
 
   Color _getTimerTextColor() {
     if (_remainingSeconds == 0) {
-      return ccrTimerTextColorFinished;
+      return context.ccrThemeExtension.ccrTimerTextColorFinished;
     } else if (_timer.isActive) {
-      return ccrTimerTextColorRunning;
+      return context.ccrThemeExtension.ccrTimerTextColorRunning;
     } else {
-      return ccrTimerTextColorNotRunning;
+      return context.ccrThemeExtension.ccrTimerTextColorNotRunning;
     }
   }
 
   Color _getTimerBackgroundColor() {
     if (_remainingSeconds == 0) {
-      return ccrTimerBackgroundcolorFinished; // Timer reached zero
+      return context.ccrThemeExtension
+          .ccrTimerBackgroundcolorFinished; // Timer reached zero
     } else if (_timer.isActive) {
-      return ccrTimerBackgroundcolorRunning; // Timer is running
+      return context
+          .ccrThemeExtension.ccrTimerBackgroundcolorRunning; // Timer is running
     } else {
-      return ccrTimerBackgroundcolorNotRunning; // Timer is stopped but not zero
+      return context.ccrThemeExtension
+          .ccrTimerBackgroundcolorNotRunning; // Timer is stopped but not zero
     }
   }
 
@@ -333,8 +336,8 @@ class _ChecklistRegularCheckWidgetState
   }
 
   void _changeTimerValue() async {
-    final currentMinutes = _remainingSeconds ~/ 60;
-    final currentSeconds = _remainingSeconds % 60;
+    final currentMinutes = _remainingSeconds ~/ ccrSecondsInAMinute;
+    final currentSeconds = _remainingSeconds % ccrSecondsInAMinute;
 
     final TimeOfDay? pickedTime = await showTimePicker(
       context: context,
@@ -343,15 +346,17 @@ class _ChecklistRegularCheckWidgetState
     if (pickedTime != null) {
       setState(
         () {
-          _remainingSeconds = (pickedTime.hour * 60) + pickedTime.minute;
+          _remainingSeconds =
+              (pickedTime.hour * ccrSecondsInAMinute) + pickedTime.minute;
         },
       );
     }
   }
 
   String _formatTime(int totalSeconds) {
-    int minutes = totalSeconds ~/ 60;
-    int seconds = totalSeconds % 60;
+    int minutes = totalSeconds ~/ ccrSecondsInAMinute;
+    int seconds = totalSeconds % ccrSecondsInAMinute;
+
     return "${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}";
   }
 }

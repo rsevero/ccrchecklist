@@ -66,6 +66,13 @@ mixin _$CCRThemeExtensionTailorMixin on ThemeExtension<CCRThemeExtension> {
   TextStyle get linearityColumnTitleTextTheme;
   TextStyle get linearityColumnContentTextTheme;
   TextStyle get timerTextTheme;
+  Color get ccrTimerBackgroundcolorFinished;
+  Color get ccrTimerBackgroundcolorRunning;
+  Color get ccrTimerBackgroundcolorNotRunning;
+  Color get ccrTimerTextColorFinished;
+  Color get ccrTimerTextColorRunning;
+  Color get ccrTimerTextColorNotRunning;
+  Color get ccrSectionOkColor;
 
   @override
   CCRThemeExtension copyWith({
@@ -126,6 +133,13 @@ mixin _$CCRThemeExtensionTailorMixin on ThemeExtension<CCRThemeExtension> {
     TextStyle? linearityColumnTitleTextTheme,
     TextStyle? linearityColumnContentTextTheme,
     TextStyle? timerTextTheme,
+    Color? ccrTimerBackgroundcolorFinished,
+    Color? ccrTimerBackgroundcolorRunning,
+    Color? ccrTimerBackgroundcolorNotRunning,
+    Color? ccrTimerTextColorFinished,
+    Color? ccrTimerTextColorRunning,
+    Color? ccrTimerTextColorNotRunning,
+    Color? ccrSectionOkColor,
   }) {
     return CCRThemeExtension(
       primary: primary ?? this.primary,
@@ -340,7 +354,14 @@ mixin _$CCRThemeExtensionTailorMixin on ThemeExtension<CCRThemeExtension> {
             const DeepCollectionEquality().equals(checkReferenceTextTheme, other.checkReferenceTextTheme) &&
             const DeepCollectionEquality().equals(linearityColumnTitleTextTheme, other.linearityColumnTitleTextTheme) &&
             const DeepCollectionEquality().equals(linearityColumnContentTextTheme, other.linearityColumnContentTextTheme) &&
-            const DeepCollectionEquality().equals(timerTextTheme, other.timerTextTheme));
+            const DeepCollectionEquality().equals(timerTextTheme, other.timerTextTheme) &&
+            const DeepCollectionEquality().equals(ccrTimerBackgroundcolorFinished, other.ccrTimerBackgroundcolorFinished) &&
+            const DeepCollectionEquality().equals(ccrTimerBackgroundcolorRunning, other.ccrTimerBackgroundcolorRunning) &&
+            const DeepCollectionEquality().equals(ccrTimerBackgroundcolorNotRunning, other.ccrTimerBackgroundcolorNotRunning) &&
+            const DeepCollectionEquality().equals(ccrTimerTextColorFinished, other.ccrTimerTextColorFinished) &&
+            const DeepCollectionEquality().equals(ccrTimerTextColorRunning, other.ccrTimerTextColorRunning) &&
+            const DeepCollectionEquality().equals(ccrTimerTextColorNotRunning, other.ccrTimerTextColorNotRunning) &&
+            const DeepCollectionEquality().equals(ccrSectionOkColor, other.ccrSectionOkColor));
   }
 
   @override
@@ -404,6 +425,13 @@ mixin _$CCRThemeExtensionTailorMixin on ThemeExtension<CCRThemeExtension> {
       const DeepCollectionEquality().hash(linearityColumnTitleTextTheme),
       const DeepCollectionEquality().hash(linearityColumnContentTextTheme),
       const DeepCollectionEquality().hash(timerTextTheme),
+      const DeepCollectionEquality().hash(ccrTimerBackgroundcolorFinished),
+      const DeepCollectionEquality().hash(ccrTimerBackgroundcolorRunning),
+      const DeepCollectionEquality().hash(ccrTimerBackgroundcolorNotRunning),
+      const DeepCollectionEquality().hash(ccrTimerTextColorFinished),
+      const DeepCollectionEquality().hash(ccrTimerTextColorRunning),
+      const DeepCollectionEquality().hash(ccrTimerTextColorNotRunning),
+      const DeepCollectionEquality().hash(ccrSectionOkColor),
     ]);
   }
 }
@@ -479,4 +507,17 @@ extension CCRThemeExtensionBuildContextProps on BuildContext {
   TextStyle get linearityColumnContentTextTheme =>
       cCRThemeExtension.linearityColumnContentTextTheme;
   TextStyle get timerTextTheme => cCRThemeExtension.timerTextTheme;
+  Color get ccrTimerBackgroundcolorFinished =>
+      cCRThemeExtension.ccrTimerBackgroundcolorFinished;
+  Color get ccrTimerBackgroundcolorRunning =>
+      cCRThemeExtension.ccrTimerBackgroundcolorRunning;
+  Color get ccrTimerBackgroundcolorNotRunning =>
+      cCRThemeExtension.ccrTimerBackgroundcolorNotRunning;
+  Color get ccrTimerTextColorFinished =>
+      cCRThemeExtension.ccrTimerTextColorFinished;
+  Color get ccrTimerTextColorRunning =>
+      cCRThemeExtension.ccrTimerTextColorRunning;
+  Color get ccrTimerTextColorNotRunning =>
+      cCRThemeExtension.ccrTimerTextColorNotRunning;
+  Color get ccrSectionOkColor => cCRThemeExtension.ccrSectionOkColor;
 }
