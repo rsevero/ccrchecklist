@@ -5,6 +5,7 @@ import 'package:ccr_checklist/misc/datetime_formater_helper.dart';
 import 'package:ccr_checklist/misc/flutter_extension_methods.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
 import 'package:ccr_checklist/theme/ccr_theme_extension.dart';
+import 'package:ccr_checklist/widget/timer_duration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:numberpicker/numberpicker.dart';
@@ -140,7 +141,7 @@ class TemplateCheckWidget extends StatelessWidget {
         final TextEditingController observationController =
             TextEditingController(text: check.observation);
         int numberOfReferences = check.references.length;
-        var (timerDurationSeconds, timerDurationMinutes) =
+        var (timerDurationMinutes, timerDurationSeconds) =
             ccrConvertSecondsToMinutesSeconds(check.secondsTimer);
 
         List<TextEditingController> prefixControllers = [
@@ -248,90 +249,19 @@ class TemplateCheckWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: ccrVerticalPaddingItem),
-                      child: SizedBox(
-                        width: ccrDescriptionFieldWidth,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Timer Duration',
-                              style: theme.dialogFieldTitleTextTheme,
-                            ),
-                            Row(
-                              children: [
-                                // NumberPicker for minutes
-                                Column(
-                                  children: [
-                                    const Text('minutes'),
-                                    NumberPicker(
-                                      value: timerDurationMinutes,
-                                      minValue: 0,
-                                      maxValue: 99,
-                                      infiniteLoop: true,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          timerDurationMinutes = value;
-                                        });
-                                      },
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            ccrTemplateListTileBorderRadius,
-                                        border:
-                                            Border.all(color: theme.outline),
-                                      ),
-                                    ),
-                                    const Text('minutes'),
-                                  ],
-                                ),
-                                Text(
-                                  ':',
-                                  style: theme.timerTextTheme,
-                                ),
-                                // NumberPicker for seconds
-                                Column(
-                                  children: [
-                                    const Text('seconds'),
-                                    NumberPicker(
-                                      value: timerDurationSeconds,
-                                      minValue: 0,
-                                      maxValue: 59,
-                                      infiniteLoop: true,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          timerDurationSeconds = value;
-                                        });
-                                      },
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            ccrTemplateListTileBorderRadius,
-                                        border:
-                                            Border.all(color: theme.outline),
-                                      ),
-                                    ),
-                                    const Text('seconds'),
-                                  ],
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(bottom: 8, left: 8),
-                                  child: Text(
-                                    ccrFormatMinutesSecondsToMinutesSecondsTimer(
-                                      timerDurationMinutes,
-                                      timerDurationSeconds,
-                                    ),
-                                    style: theme.dialogHintTextTheme.copyWith(
-                                      color: Colors.blue,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
+                    TimerDuration(
+                      minutes: timerDurationMinutes,
+                      seconds: timerDurationSeconds,
+                      onMinutesChanged: (value) {
+                        setState(() {
+                          timerDurationMinutes = value;
+                        });
+                      },
+                      onSecondsChanged: (value) {
+                        setState(() {
+                          timerDurationSeconds = value;
+                        });
+                      },
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 8.0),

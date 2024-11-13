@@ -5,9 +5,9 @@ import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/misc/datetime_formater_helper.dart';
 import 'package:ccr_checklist/misc/flutter_extension_methods.dart';
 import 'package:ccr_checklist/store/checklist_editor_store.dart';
+import 'package:ccr_checklist/widget/timer_duration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:numberpicker/numberpicker.dart';
 import 'package:provider/provider.dart';
 import 'package:vibration/vibration.dart';
 
@@ -338,8 +338,8 @@ class _ChecklistRegularCheckWidgetState
   }
 
   Future<void> _changeTimerValue() async {
-    int currentMinutes = _remainingSeconds ~/ ccrSecondsInAMinute;
-    int currentSeconds = _remainingSeconds % ccrSecondsInAMinute;
+    var (currentMinutes, currentSeconds) =
+        ccrConvertSecondsToMinutesSeconds(_remainingSeconds);
 
     await showDialog(
       context: context,
@@ -353,94 +353,19 @@ class _ChecklistRegularCheckWidgetState
                 'Edit Timer Duration',
                 style: theme.dialogTitleTextTheme,
               ),
-              content: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: ccrVerticalPaddingItem),
-                      child: SizedBox(
-                        width: ccrDescriptionFieldWidth,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Timer Duration',
-                              style: theme.dialogFieldTitleTextTheme,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        // NumberPicker for minutes
-                        Column(
-                          children: [
-                            const Text('minutes'),
-                            NumberPicker(
-                              value: currentMinutes,
-                              minValue: 0,
-                              maxValue: 99,
-                              infiniteLoop: true,
-                              onChanged: (value) {
-                                setState(() {
-                                  currentMinutes = value;
-                                });
-                              },
-                              decoration: BoxDecoration(
-                                borderRadius: ccrTemplateListTileBorderRadius,
-                                border: Border.all(
-                                    color: context.ccrThemeExtension.outline),
-                              ),
-                            ),
-                            const Text('minutes'),
-                          ],
-                        ),
-                        Text(
-                          ':',
-                          style: theme.timerTextTheme,
-                        ),
-                        // NumberPicker for seconds
-                        Column(
-                          children: [
-                            const Text('seconds'),
-                            NumberPicker(
-                              value: currentSeconds,
-                              minValue: 0,
-                              maxValue: 59,
-                              infiniteLoop: true,
-                              onChanged: (value) {
-                                setState(() {
-                                  currentSeconds = value;
-                                });
-                              },
-                              decoration: BoxDecoration(
-                                borderRadius: ccrTemplateListTileBorderRadius,
-                                border: Border.all(
-                                    color: context.ccrThemeExtension.outline),
-                              ),
-                            ),
-                            const Text('seconds'),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 8, left: 8),
-                          child: Text(
-                            ccrFormatMinutesSecondsToMinutesSecondsTimer(
-                              currentMinutes,
-                              currentSeconds,
-                            ),
-                            style: theme.dialogHintTextTheme.copyWith(
-                              color: Colors.blue,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+              content: TimerDuration(
+                minutes: currentMinutes,
+                seconds: currentSeconds,
+                onMinutesChanged: (value) {
+                  setState(() {
+                    currentMinutes = value;
+                  });
+                },
+                onSecondsChanged: (value) {
+                  setState(() {
+                    currentSeconds = value;
+                  });
+                },
               ),
               actions: [
                 TextButton(
