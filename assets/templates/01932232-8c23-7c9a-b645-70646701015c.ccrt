@@ -199,7 +199,7 @@
       "title": "Check Calibration",
       "checks": [
         {
-          "description": "Check for appropriate PO₂ (considering altitude)",
+          "description": "Check for appropriate pO₂ (considering altitude)",
           "secondsTimer": 0,
           "observation": "",
           "references": [],
@@ -232,7 +232,7 @@
           "runtimeType": "regular"
         },
         {
-          "description": "Open BOV, inhale from loop until ADV engages (if equipped), dropping loop PO₂",
+          "description": "Open BOV, inhale from loop until ADV engages (if equipped), dropping loop pO₂",
           "secondsTimer": 0,
           "observation": "",
           "references": [],
@@ -331,7 +331,7 @@
       "title": "Final",
       "checks": [
         {
-          "description": "If not diving immediately, verify PO₂ in the loop is above 0.4 and the mouthpiece is closed. Shut down handset and cylinders, and bleed any pressure out of the system.",
+          "description": "If not diving immediately, verify pO₂ in the loop is above 0.4 and the mouthpiece is closed. Shut down handset and cylinders, and bleed any pressure out of the system.",
           "secondsTimer": 0,
           "observation": "",
           "references": [],

@@ -64,7 +64,7 @@
           "runtimeType": "regular"
         },
         {
-          "description": "Check PO₂",
+          "description": "Check pO₂",
           "secondsTimer": 0,
           "observation": "",
           "references": [],
@@ -106,7 +106,7 @@
           "runtimeType": "regular"
         },
         {
-          "description": "Always know your PO₂",
+          "description": "Always know your pO₂",
           "secondsTimer": 0,
           "observation": "",
           "references": [],

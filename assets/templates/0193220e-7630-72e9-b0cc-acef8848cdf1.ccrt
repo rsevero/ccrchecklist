@@ -314,7 +314,7 @@
         {
           "description": "Check the calibration on the handsets to see if it is accurate",
           "secondsTimer": 0,
-          "observation": "If at sea level calibrating with 100%\noxygen, all sensors should read 1.0\nPO₂. If not, follow the calibration instructions found in the SG-1 and secondary handset manufacturer’s\nmanual.",
+          "observation": "If at sea level calibrating with 100% oxygen, all sensors should read 1.0 pO₂. If not, follow the calibration instructions found in the SG-1 and secondary handset manufacturer’s manual.",
           "references": [],
           "runtimeType": "regular"
         }
