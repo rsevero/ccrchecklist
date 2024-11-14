@@ -452,6 +452,7 @@ class TemplateCheckWidget extends StatelessWidget {
                       value: referenceCount,
                       minValue: 1,
                       maxValue: ccrMaxLinearityMeasurements,
+                      infiniteLoop: true,
                       onChanged: (value) {
                         setState(() => referenceCount = value);
                       },
@@ -555,6 +556,7 @@ class TemplateCheckWidget extends StatelessWidget {
                       value: referenceCount,
                       minValue: 1,
                       maxValue: ccrMaxLinearityMeasurements,
+                      infiniteLoop: true,
                       onChanged: (value) {
                         setState(() => referenceCount = value);
                       },
