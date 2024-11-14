@@ -2,6 +2,7 @@ import 'package:ccr_checklist/data/regular_check_reference.dart';
 import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/misc/flutter_extension_methods.dart';
 import 'package:ccr_checklist/store/template_editor_store.dart';
+import 'package:ccr_checklist/widget/dialog_box_column_item.dart';
 import 'package:ccr_checklist/widget/greyable_speed_dial_child_widget.dart';
 import 'package:ccr_checklist/widget/timer_duration.dart';
 import 'package:flutter/material.dart';
@@ -281,105 +282,79 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: ccrVerticalPaddingItem),
-                      child: SizedBox(
-                        width: ccrDescriptionFieldWidth,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  'Measurement name',
-                                  style: theme.dialogFieldTitleTextTheme,
-                                ),
-                                Text(
-                                  ' *',
-                                  style:
-                                      theme.dialogFieldTitleTextTheme.copyWith(
-                                    color: Colors.red,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            TextFormField(
-                              controller: measurementController,
-                              style: theme.dialogFieldContentTextTheme,
-                              decoration: InputDecoration(
-                                hintText: 'Enter the name of the measurement',
-                                hintStyle: theme.dialogHintTextTheme,
-                                border: OutlineInputBorder(),
-                              ),
-                              maxLines: null,
-                              minLines: 1,
-                              keyboardType: TextInputType.multiline,
-                              textCapitalization: TextCapitalization.sentences,
-                              autofocus: true,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: ccrVerticalPaddingItem),
-                      child: SizedBox(
-                        width: ccrDescriptionFieldWidth,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  'Description',
-                                  style: theme.dialogFieldTitleTextTheme,
-                                ),
-                                Text(
-                                  ' *',
-                                  style:
-                                      theme.dialogFieldTitleTextTheme.copyWith(
-                                    color: Colors.red,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            TextFormField(
-                              controller: descriptionController,
-                              style: theme.dialogFieldContentTextTheme,
-                              decoration: InputDecoration(
-                                hintText: 'Enter check description',
-                                hintStyle: theme.dialogHintTextTheme,
-                                border: OutlineInputBorder(),
-                              ),
-                              maxLines: null,
-                              minLines: 1,
-                              keyboardType: TextInputType.multiline,
-                              textCapitalization: TextCapitalization.sentences,
-                              autofocus: true,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: ccrVerticalPaddingItem),
-                      child: SizedBox(
-                        width: ccrDescriptionFieldWidth,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                    DialogBoxColumnItem(
+                      children: [
+                        Row(
                           children: [
                             Text(
-                              'References',
+                              'Measurement name',
                               style: theme.dialogFieldTitleTextTheme,
+                            ),
+                            Text(
+                              ' *',
+                              style: theme.dialogFieldTitleTextTheme.copyWith(
+                                color: Colors.red,
+                                fontSize: 16,
+                              ),
                             ),
                           ],
                         ),
-                      ),
+                        TextFormField(
+                          controller: measurementController,
+                          style: theme.dialogFieldContentTextTheme,
+                          decoration: InputDecoration(
+                            hintText: 'Enter the name of the measurement',
+                            hintStyle: theme.dialogHintTextTheme,
+                            border: OutlineInputBorder(),
+                          ),
+                          maxLines: null,
+                          minLines: 1,
+                          keyboardType: TextInputType.multiline,
+                          textCapitalization: TextCapitalization.sentences,
+                          autofocus: true,
+                        ),
+                      ],
+                    ),
+                    DialogBoxColumnItem(
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              'Description',
+                              style: theme.dialogFieldTitleTextTheme,
+                            ),
+                            Text(
+                              ' *',
+                              style: theme.dialogFieldTitleTextTheme.copyWith(
+                                color: Colors.red,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
+                        TextFormField(
+                          controller: descriptionController,
+                          style: theme.dialogFieldContentTextTheme,
+                          decoration: InputDecoration(
+                            hintText: 'Enter check description',
+                            hintStyle: theme.dialogHintTextTheme,
+                            border: OutlineInputBorder(),
+                          ),
+                          maxLines: null,
+                          minLines: 1,
+                          keyboardType: TextInputType.multiline,
+                          textCapitalization: TextCapitalization.sentences,
+                          autofocus: true,
+                        ),
+                      ],
+                    ),
+                    DialogBoxColumnItem(
+                      children: [
+                        Text(
+                          'References',
+                          style: theme.dialogFieldTitleTextTheme,
+                        ),
+                      ],
                     ),
                     NumberPicker(
                       value: referenceCount,
@@ -447,65 +422,49 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: ccrVerticalPaddingItem),
-                      child: SizedBox(
-                        width: ccrDescriptionFieldWidth,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  'Description',
-                                  style: context.ccrThemeExtension
-                                      .dialogFieldTitleTextTheme,
-                                ),
-                                Text(
-                                  ' *',
-                                  style: context.ccrThemeExtension
-                                      .dialogFieldTitleTextTheme
-                                      .copyWith(color: Colors.red),
-                                ),
-                              ],
-                            ),
-                            TextFormField(
-                              controller: descriptionController,
-                              style: context.ccrThemeExtension
-                                  .dialogFieldContentTextTheme,
-                              decoration: InputDecoration(
-                                hintText: 'Enter check description',
-                                hintStyle: context
-                                    .ccrThemeExtension.dialogHintTextTheme,
-                                border: OutlineInputBorder(),
-                              ),
-                              maxLines: null,
-                              minLines: 1,
-                              keyboardType: TextInputType.multiline,
-                              textCapitalization: TextCapitalization.sentences,
-                              autofocus: true,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: ccrVerticalPaddingItem),
-                      child: SizedBox(
-                        width: ccrDescriptionFieldWidth,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                    DialogBoxColumnItem(
+                      children: [
+                        Row(
                           children: [
                             Text(
-                              'References',
+                              'Description',
                               style: context
                                   .ccrThemeExtension.dialogFieldTitleTextTheme,
                             ),
+                            Text(
+                              ' *',
+                              style: context
+                                  .ccrThemeExtension.dialogFieldTitleTextTheme
+                                  .copyWith(color: Colors.red),
+                            ),
                           ],
                         ),
-                      ),
+                        TextFormField(
+                          controller: descriptionController,
+                          style: context
+                              .ccrThemeExtension.dialogFieldContentTextTheme,
+                          decoration: InputDecoration(
+                            hintText: 'Enter check description',
+                            hintStyle:
+                                context.ccrThemeExtension.dialogHintTextTheme,
+                            border: OutlineInputBorder(),
+                          ),
+                          maxLines: null,
+                          minLines: 1,
+                          keyboardType: TextInputType.multiline,
+                          textCapitalization: TextCapitalization.sentences,
+                          autofocus: true,
+                        ),
+                      ],
+                    ),
+                    DialogBoxColumnItem(
+                      children: [
+                        Text(
+                          'References',
+                          style: context
+                              .ccrThemeExtension.dialogFieldTitleTextTheme,
+                        ),
+                      ],
                     ),
                     NumberPicker(
                       value: referenceCount,
@@ -667,80 +626,62 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: ccrVerticalPaddingItem),
-                      child: SizedBox(
-                        width: ccrDescriptionFieldWidth,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                    DialogBoxColumnItem(
+                      children: [
+                        Row(
                           children: [
-                            Row(
-                              children: [
-                                Text(
-                                  'Description',
-                                  style: theme.dialogFieldTitleTextTheme,
-                                ),
-                                Text(
-                                  ' *',
-                                  style: theme.dialogFieldTitleTextTheme
-                                      .copyWith(color: Colors.red),
-                                ),
-                              ],
+                            Text(
+                              'Description',
+                              style: theme.dialogFieldTitleTextTheme,
                             ),
-                            TextFormField(
-                              controller: descriptionController,
-                              style: theme.dialogFieldContentTextTheme,
-                              decoration: InputDecoration(
-                                hintText: 'Enter check description',
-                                hintStyle: theme.dialogHintTextTheme,
-                                border: OutlineInputBorder(),
-                              ),
-                              maxLines:
-                                  null, // Makes the input field expandable
-                              minLines: 1,
-                              keyboardType: TextInputType.multiline,
-                              textCapitalization: TextCapitalization.sentences,
-                              autofocus: true,
+                            Text(
+                              ' *',
+                              style: theme.dialogFieldTitleTextTheme
+                                  .copyWith(color: Colors.red),
                             ),
                           ],
                         ),
-                      ),
+                        TextFormField(
+                          controller: descriptionController,
+                          style: theme.dialogFieldContentTextTheme,
+                          decoration: InputDecoration(
+                            hintText: 'Enter check description',
+                            hintStyle: theme.dialogHintTextTheme,
+                            border: OutlineInputBorder(),
+                          ),
+                          maxLines: null, // Makes the input field expandable
+                          minLines: 1,
+                          keyboardType: TextInputType.multiline,
+                          textCapitalization: TextCapitalization.sentences,
+                          autofocus: true,
+                        ),
+                      ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: ccrVerticalPaddingItem),
-                      child: SizedBox(
-                        width: ccrDescriptionFieldWidth,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                    DialogBoxColumnItem(
+                      children: [
+                        Row(
                           children: [
-                            Row(
-                              children: [
-                                Text(
-                                  'Observation',
-                                  style: theme.dialogFieldTitleTextTheme,
-                                ),
-                              ],
-                            ),
-                            TextFormField(
-                              controller: observationController,
-                              style: theme.dialogFieldContentTextTheme,
-                              decoration: InputDecoration(
-                                hintText: 'Enter check observation',
-                                hintStyle: theme.dialogHintTextTheme,
-                                border: OutlineInputBorder(),
-                              ),
-                              maxLines:
-                                  null, // Makes the input field expandable
-                              minLines: 1,
-                              keyboardType: TextInputType.multiline,
-                              textCapitalization: TextCapitalization.sentences,
-                              autofocus: true,
+                            Text(
+                              'Observation',
+                              style: theme.dialogFieldTitleTextTheme,
                             ),
                           ],
                         ),
-                      ),
+                        TextFormField(
+                          controller: observationController,
+                          style: theme.dialogFieldContentTextTheme,
+                          decoration: InputDecoration(
+                            hintText: 'Enter check observation',
+                            hintStyle: theme.dialogHintTextTheme,
+                            border: OutlineInputBorder(),
+                          ),
+                          maxLines: null, // Makes the input field expandable
+                          minLines: 1,
+                          keyboardType: TextInputType.multiline,
+                          textCapitalization: TextCapitalization.sentences,
+                          autofocus: true,
+                        ),
+                      ],
                     ),
                     TimerDuration(
                       minutes: timerDurationMinutes,
@@ -756,21 +697,13 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                         });
                       },
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: ccrVerticalPaddingItem),
-                      child: SizedBox(
-                        width: ccrDescriptionFieldWidth,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'References',
-                              style: theme.dialogFieldTitleTextTheme,
-                            ),
-                          ],
+                    DialogBoxColumnItem(
+                      children: [
+                        Text(
+                          'References',
+                          style: theme.dialogFieldTitleTextTheme,
                         ),
-                      ),
+                      ],
                     ),
                     ...List.generate(
                       ccrMaxReferences + 1,
