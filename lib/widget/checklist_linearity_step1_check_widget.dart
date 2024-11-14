@@ -99,13 +99,19 @@ class _ChecklistLinearityStep1CheckWidgetState
                   columns: [
                     DataColumn(
                         label: LinearityWorksheetText(
-                            'mV', theme.linearityColumnTitleTextTheme)),
+                      check.measurement,
+                      theme.linearityColumnTitleTextTheme,
+                    )),
                     DataColumn(
                         label: LinearityWorksheetText(
-                            '/0.21', theme.linearityColumnTitleTextTheme)),
+                      '/0.21',
+                      theme.linearityColumnTitleTextTheme,
+                    )),
                     DataColumn(
                         label: LinearityWorksheetText(
-                            'x1.6', theme.linearityColumnTitleTextTheme)),
+                      'x1.6',
+                      theme.linearityColumnTitleTextTheme,
+                    )),
                   ],
                   headingRowColor: WidgetStateProperty.resolveWith<Color?>(
                       (Set<WidgetState> states) {

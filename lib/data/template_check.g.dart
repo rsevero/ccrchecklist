@@ -31,6 +31,7 @@ Map<String, dynamic> _$$TemplateRegularCheckImplToJson(
 _$TemplateLinearityStep1CheckImpl _$$TemplateLinearityStep1CheckImplFromJson(
         Map<String, dynamic> json) =>
     _$TemplateLinearityStep1CheckImpl(
+      measurement: json['measurement'] as String,
       description: json['description'] as String,
       referenceCount: (json['referenceCount'] as num).toInt(),
       $type: json['runtimeType'] as String?,
@@ -39,6 +40,7 @@ _$TemplateLinearityStep1CheckImpl _$$TemplateLinearityStep1CheckImplFromJson(
 Map<String, dynamic> _$$TemplateLinearityStep1CheckImplToJson(
         _$TemplateLinearityStep1CheckImpl instance) =>
     <String, dynamic>{
+      'measurement': instance.measurement,
       'description': instance.description,
       'referenceCount': instance.referenceCount,
       'runtimeType': instance.$type,

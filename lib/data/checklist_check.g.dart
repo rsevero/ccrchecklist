@@ -35,6 +35,7 @@ Map<String, dynamic> _$$ChecklistRegularCheckImplToJson(
 _$ChecklistLinearityStep1CheckImpl _$$ChecklistLinearityStep1CheckImplFromJson(
         Map<String, dynamic> json) =>
     _$ChecklistLinearityStep1CheckImpl(
+      measurement: json['measurement'] as String,
       description: json['description'] as String,
       isChecked: json['isChecked'] as bool,
       lastChange: DateTime.parse(json['lastChange'] as String),
@@ -45,6 +46,7 @@ _$ChecklistLinearityStep1CheckImpl _$$ChecklistLinearityStep1CheckImplFromJson(
 Map<String, dynamic> _$$ChecklistLinearityStep1CheckImplToJson(
         _$ChecklistLinearityStep1CheckImpl instance) =>
     <String, dynamic>{
+      'measurement': instance.measurement,
       'description': instance.description,
       'isChecked': instance.isChecked,
       'lastChange': instance.lastChange.toIso8601String(),

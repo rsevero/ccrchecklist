@@ -92,6 +92,7 @@
       "title": "Part 2",
       "checks": [
         {
+          "measurement": "mV",
           "description": "Oxygen sensors calibrated (step 1)",
           "referenceCount": 4,
           "runtimeType": "linearityStep1"

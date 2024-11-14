@@ -17,6 +17,7 @@ sealed class TemplateCheck with _$TemplateCheck {
   }) = TemplateRegularCheck;
 
   factory TemplateCheck.linearityStep1({
+    required String measurement,
     required String description,
     required int referenceCount,
   }) = TemplateLinearityStep1Check;

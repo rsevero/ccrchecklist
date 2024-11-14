@@ -487,6 +487,7 @@
       "title": "Sensors",
       "checks": [
         {
+          "measurement": "mV",
           "description": "Check",
           "referenceCount": 3,
           "runtimeType": "linearityStep1"

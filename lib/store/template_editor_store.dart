@@ -254,10 +254,16 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
   }
 
   @action
-  void addLinearityStep1Check(
-      {required String description, required int referenceCount}) {
+  void addLinearityStep1Check({
+    required String measurement,
+    required String description,
+    required int referenceCount,
+  }) {
     final newCheck = TemplateLinearityStep1Check(
-        referenceCount: referenceCount, description: description);
+      measurement: measurement,
+      referenceCount: referenceCount,
+      description: description,
+    );
     _selectedSection.checks.add(newCheck);
     _checks[_selectedSectionIndex].add(newCheck);
     _updateHasLinearitySteps();
@@ -440,13 +446,17 @@ abstract class _TemplateEditorStoreBaseToJson with Store {
   void updateLinearityStep1Check(
     int sectionIndex,
     int checkIndex, {
-    required int referenceCount,
+    required String measurement,
     required String description,
+    required int referenceCount,
   }) {
     final check =
         _checks[sectionIndex][checkIndex] as TemplateLinearityStep1Check;
     final newCheck = check.copyWith(
-        referenceCount: referenceCount, description: description);
+      referenceCount: referenceCount,
+      description: description,
+      measurement: measurement,
+    );
 
     _currentTemplate.sections[sectionIndex].checks[checkIndex] = newCheck;
     _checks[sectionIndex][checkIndex] = newCheck;

@@ -381,7 +381,8 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
               onPressed: () {
                 final description = descriptionController.text.trim();
                 final measurement = measurementController.text.trim();
-                if (description.isNotEmpty) {
+
+                if (description.isNotEmpty && measurement.isNotEmpty) {
                   templateEditorStore.addCompleteLinearityCheck(
                     measurement: measurement,
                     description: description,
@@ -407,6 +408,8 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
       builder: (BuildContext context) {
         final templateEditorStore =
             Provider.of<TemplateEditorStore>(context, listen: false);
+        final TextEditingController measurementController =
+            TextEditingController();
         final TextEditingController descriptionController =
             TextEditingController();
 
@@ -423,6 +426,41 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
+                    DialogBoxColumnItem(
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              'Measurement',
+                              style: context
+                                  .ccrThemeExtension.dialogFieldTitleTextTheme,
+                            ),
+                            Text(
+                              ' *',
+                              style: context
+                                  .ccrThemeExtension.dialogFieldTitleTextTheme
+                                  .copyWith(color: Colors.red),
+                            ),
+                          ],
+                        ),
+                        TextFormField(
+                          controller: measurementController,
+                          style: context
+                              .ccrThemeExtension.dialogFieldContentTextTheme,
+                          decoration: InputDecoration(
+                            hintText: 'Enter measurement name',
+                            hintStyle:
+                                context.ccrThemeExtension.dialogHintTextTheme,
+                            border: OutlineInputBorder(),
+                          ),
+                          maxLines: null,
+                          minLines: 1,
+                          keyboardType: TextInputType.multiline,
+                          textCapitalization: TextCapitalization.sentences,
+                          autofocus: true,
+                        ),
+                      ],
+                    ),
                     DialogBoxColumnItem(
                       children: [
                         Row(
@@ -490,9 +528,12 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
             TextButton(
               child: const Text('Create'),
               onPressed: () {
+                final measurement = measurementController.text.trim();
                 final description = descriptionController.text.trim();
-                if (description.isNotEmpty) {
+
+                if (description.isNotEmpty && measurement.isNotEmpty) {
                   templateEditorStore.addLinearityStep1Check(
+                    measurement: measurement,
                     description: description,
                     referenceCount: referenceCount,
                   );

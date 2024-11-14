@@ -69,6 +69,7 @@
       "title": "Computers",
       "checks": [
         {
+          "measurement": "mV",
           "description": "Turn on computer, note milivolts (mV), do initial math on Linearity Worksheet",
           "referenceCount": 3,
           "runtimeType": "linearityStep1"

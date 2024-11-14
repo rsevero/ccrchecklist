@@ -251,6 +251,26 @@ mixin _$ChecklistEditorStore on _ChecklistEditorStoreBaseToJson, Store {
     });
   }
 
+  late final _$_linearityCheckMeasurementAtom = Atom(
+      name: '_ChecklistEditorStoreBaseToJson._linearityCheckMeasurement',
+      context: context);
+
+  String get linearityCheckMeasurement {
+    _$_linearityCheckMeasurementAtom.reportRead();
+    return super._linearityCheckMeasurement;
+  }
+
+  @override
+  String get _linearityCheckMeasurement => linearityCheckMeasurement;
+
+  @override
+  set _linearityCheckMeasurement(String value) {
+    _$_linearityCheckMeasurementAtom
+        .reportWrite(value, super._linearityCheckMeasurement, () {
+      super._linearityCheckMeasurement = value;
+    });
+  }
+
   late final _$_linearityWorksheetsAtom = Atom(
       name: '_ChecklistEditorStoreBaseToJson._linearityWorksheets',
       context: context);

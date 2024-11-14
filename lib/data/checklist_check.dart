@@ -19,6 +19,7 @@ sealed class ChecklistCheck with _$ChecklistCheck {
   }) = ChecklistRegularCheck;
 
   factory ChecklistCheck.linearityStep1({
+    required String measurement,
     required String description,
     required bool isChecked,
     required DateTime lastChange,

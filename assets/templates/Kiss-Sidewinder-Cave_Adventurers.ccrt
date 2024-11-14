@@ -29,6 +29,7 @@
           "runtimeType": "regular"
         },
         {
+          "measurement": "mV",
           "description": "Turn on computer, note millivolts, do initial math on Linearity Worksheet and CHECK COMPUTER BATTERY",
           "referenceCount": 3,
           "runtimeType": "linearityStep1"

@@ -471,6 +471,7 @@ class TemplateCheckWidget extends StatelessWidget {
                   onPressed: () {
                     final newDescription = descriptionController.text.trim();
                     final newMeasurement = measurementController.text.trim();
+
                     templateEditorStore.updateCompleteLinearityCheck(
                       sectionIndex,
                       index,
@@ -504,6 +505,8 @@ class TemplateCheckWidget extends StatelessWidget {
             Provider.of<TemplateEditorStore>(context, listen: false);
         final TemplateLinearityStep1Check check = templateEditorStore
             .checks[sectionIndex][index] as TemplateLinearityStep1Check;
+        final TextEditingController measurementController =
+            TextEditingController(text: check.measurement);
         final TextEditingController descriptionController =
             TextEditingController(text: check.description);
         int referenceCount = check.referenceCount;
@@ -516,6 +519,39 @@ class TemplateCheckWidget extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
+                    DialogBoxColumnItem(
+                      children: [
+                        const Row(
+                          children: [
+                            Text(
+                              'Measurement',
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
+                            Text(
+                              ' *',
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
+                        TextFormField(
+                          controller: measurementController,
+                          decoration: const InputDecoration(
+                            hintText: 'Enter measurement name',
+                            border: OutlineInputBorder(),
+                          ),
+                          maxLines: null,
+                          minLines: 1,
+                          keyboardType: TextInputType.multiline,
+                          textCapitalization: TextCapitalization.sentences,
+                          autofocus: true,
+                        ),
+                      ],
+                    ),
                     DialogBoxColumnItem(
                       children: [
                         const Row(
@@ -574,10 +610,15 @@ class TemplateCheckWidget extends StatelessWidget {
                   child: const Text('Update'),
                   onPressed: () {
                     final newDescription = descriptionController.text.trim();
+                    final newMeasurement = measurementController.text.trim();
+
                     templateEditorStore.updateLinearityStep1Check(
-                        sectionIndex, index,
-                        referenceCount: referenceCount,
-                        description: newDescription);
+                      sectionIndex,
+                      index,
+                      referenceCount: referenceCount,
+                      measurement: newMeasurement,
+                      description: newDescription,
+                    );
                     Navigator.of(context).pop();
                   },
                 ),

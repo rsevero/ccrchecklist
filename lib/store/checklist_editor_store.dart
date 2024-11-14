@@ -86,6 +86,9 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
   int _linearityCheckReferenceCount = -1;
 
   @readonly
+  String _linearityCheckMeasurement = '';
+
+  @readonly
   ObservableMap<String, ObservableList<LinearityRow>> _linearityWorksheets =
       ObservableMap();
 
@@ -410,6 +413,7 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
     _linearityCheckReferenceCounts.clear();
     _linearityWorksheet.clear();
     _linearityCheckReferenceCount = -1;
+    _linearityCheckMeasurement = '';
     _linearityStep1SectionIndex = -1;
     _linearityStep1CheckIndex = -1;
     _linearityStep2SectionIndex = -1;
@@ -553,6 +557,7 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
         _linearityStep1SectionIndex = sectionIndex;
         _linearityStep1CheckIndex = checkIndex;
         _linearityCheckReferenceCount = templateCheck.referenceCount;
+        _linearityCheckMeasurement = templateCheck.measurement;
         _linearityWorksheet.clear();
         _linearityWorksheet.addAll(
           List<LinearityRow>.generate(
@@ -561,6 +566,7 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
           ),
         );
         checklistCheck = ChecklistLinearityStep1Check(
+          measurement: templateCheck.measurement,
           description: templateCheck.description,
           lastChange: DateTime.now(),
           isChecked: false,
