@@ -45,6 +45,61 @@ mixin _$TemplateListStore on TemplateListStoreBase, Store {
     });
   }
 
+  late final _$_showedTemplateStatsAtom = Atom(
+      name: 'TemplateListStoreBase._showedTemplateStats', context: context);
+
+  bool get showedTemplateStats {
+    _$_showedTemplateStatsAtom.reportRead();
+    return super._showedTemplateStats;
+  }
+
+  @override
+  bool get _showedTemplateStats => showedTemplateStats;
+
+  @override
+  set _showedTemplateStats(bool value) {
+    _$_showedTemplateStatsAtom.reportWrite(value, super._showedTemplateStats,
+        () {
+      super._showedTemplateStats = value;
+    });
+  }
+
+  late final _$_assetTemplateCountAtom =
+      Atom(name: 'TemplateListStoreBase._assetTemplateCount', context: context);
+
+  int get assetTemplateCount {
+    _$_assetTemplateCountAtom.reportRead();
+    return super._assetTemplateCount;
+  }
+
+  @override
+  int get _assetTemplateCount => assetTemplateCount;
+
+  @override
+  set _assetTemplateCount(int value) {
+    _$_assetTemplateCountAtom.reportWrite(value, super._assetTemplateCount, () {
+      super._assetTemplateCount = value;
+    });
+  }
+
+  late final _$_savedTemplateCountAtom =
+      Atom(name: 'TemplateListStoreBase._savedTemplateCount', context: context);
+
+  int get savedTemplateCount {
+    _$_savedTemplateCountAtom.reportRead();
+    return super._savedTemplateCount;
+  }
+
+  @override
+  int get _savedTemplateCount => savedTemplateCount;
+
+  @override
+  set _savedTemplateCount(int value) {
+    _$_savedTemplateCountAtom.reportWrite(value, super._savedTemplateCount, () {
+      super._savedTemplateCount = value;
+    });
+  }
+
   late final _$_actuallyUpdateAsyncAction =
       AsyncAction('TemplateListStoreBase._actuallyUpdate', context: context);
 
@@ -73,6 +128,17 @@ mixin _$TemplateListStore on TemplateListStoreBase, Store {
 
   late final _$TemplateListStoreBaseActionController =
       ActionController(name: 'TemplateListStoreBase', context: context);
+
+  @override
+  void setShowedTemplateStats() {
+    final _$actionInfo = _$TemplateListStoreBaseActionController.startAction(
+        name: 'TemplateListStoreBase.setShowedTemplateStats');
+    try {
+      return super.setShowedTemplateStats();
+    } finally {
+      _$TemplateListStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void invalidate() {

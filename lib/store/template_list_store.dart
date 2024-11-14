@@ -33,6 +33,15 @@ abstract class TemplateListStoreBase with Store {
   // ignore: unused_field
   late StreamSubscription _intentSub;
 
+  @readonly
+  bool _showedTemplateStats = false;
+
+  @readonly
+  int _assetTemplateCount = 0;
+
+  @readonly
+  int _savedTemplateCount = 0;
+
   TemplateListStoreBase() {
     _init();
   }
@@ -63,6 +72,13 @@ abstract class TemplateListStoreBase with Store {
         ReceiveSharingIntent.instance.reset();
       },
     );
+  }
+
+  @action
+  void setShowedTemplateStats() {
+    if (!_showedTemplateStats) {
+      _showedTemplateStats = true;
+    }
   }
 
   Future<Template> getTemplate(String templatePath,
@@ -143,6 +159,7 @@ abstract class TemplateListStoreBase with Store {
       );
 
       _defaultTemplatesList.add(newTemplateFile);
+      _assetTemplateCount++;
     }
   }
 
@@ -184,6 +201,7 @@ abstract class TemplateListStoreBase with Store {
     );
 
     _defaultTemplatesList.add(newTemplateFile);
+    _savedTemplateCount++;
   }
 
   @action

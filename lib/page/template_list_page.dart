@@ -1,4 +1,5 @@
 import 'package:ccr_checklist/data/template.dart';
+import 'package:ccr_checklist/misc/constants.dart';
 import 'package:ccr_checklist/misc/help_dialog_helper.dart';
 import 'package:ccr_checklist/misc/template_load_helper.dart';
 import 'package:ccr_checklist/page/checklist_page.dart';
@@ -11,10 +12,34 @@ import 'package:ccr_checklist/widget/missing_diver_name_dialog.dart';
 import 'package:ccr_checklist/widget/template_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 
-class TemplateListPage extends StatelessWidget {
+class TemplateListPage extends StatefulWidget {
   const TemplateListPage({super.key});
+
+  @override
+  State<TemplateListPage> createState() => _TemplateListPageState();
+}
+
+class _TemplateListPageState extends State<TemplateListPage> {
+  late TemplateListStore templateListStore;
+
+  @override
+  void initState() {
+    super.initState();
+
+    templateListStore = Provider.of<TemplateListStore>(context, listen: false);
+
+    _waitForTemplateLoad();
+  }
+
+  void _waitForTemplateLoad() async {
+    await asyncWhen((_) => ((!templateListStore.showedTemplateStats) &&
+        (templateListStore.state == TemplateListStoreState.uptodate)));
+
+    _showTemplatesStats();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +47,7 @@ class TemplateListPage extends StatelessWidget {
       builder: (context) {
         final configStore = Provider.of<ConfigStore>(context);
 
-        if (configStore.configLoadStatus == ConfigLoadStatusEnum.loaded &&
+        if ((configStore.configLoadStatus == ConfigLoadStatusEnum.loaded) &&
             (configStore.configData['DiverName'] == null ||
                 configStore.configData['DiverName']
                     .toString()
@@ -75,6 +100,25 @@ class TemplateListPage extends StatelessWidget {
         );
       },
     );
+  }
+
+  void _showTemplatesStats() {
+    final String templatesStats =
+        "Loaded ${templateListStore.assetTemplateCount} asset templates and ${templateListStore.savedTemplateCount} saved templates.";
+
+    final snackBar = SnackBar(
+      content: Text(templatesStats),
+      duration: Duration(seconds: 5),
+      margin: EdgeInsets.all(16),
+      behavior: SnackBarBehavior.floating,
+      shape: RoundedRectangleBorder(
+        borderRadius: ccrTemplateListTileBorderRadius,
+      ),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+    templateListStore.setShowedTemplateStats();
   }
 
   void _openSettingsEditor(BuildContext context) {
