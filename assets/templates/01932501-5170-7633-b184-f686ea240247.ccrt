@@ -1,0 +1,425 @@
+{
+  "rebreatherManufacturer": "SubGravity",
+  "rebreatherModel": "FX-CCR",
+  "title": "Detailed Functionality Checklist",
+  "description": "Calibration Kit",
+  "sections": [
+    {
+      "title": "Start",
+      "checks": [
+        {
+          "description": "Install Analyzed + Labeled Gas Cylinder",
+          "secondsTimer": 240,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Mushroom Valve Check",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Mouthpiece Check",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Turn On Controller & Secondary",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Change to .19 Setpoint",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Scrubber",
+      "checks": [
+        {
+          "description": "Check Remaining Scrubber Duration",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Re-pack scrubber if needed, install in can",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Ensure water trap is properly installed",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Ensure head is installed with 2 lock lines in place",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Reset stack timer to appropriate time",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Calibration",
+      "checks": [
+        {
+          "measurement": "mV/pO₂",
+          "description": "Record mV & pO₂ readings in air",
+          "referenceCount": 6,
+          "runtimeType": "linearityStep1"
+        },
+        {
+          "description": "Using calibration kit, flush head with Oxygen until the mV/pO₂ readings stabilize",
+          "runtimeType": "linearityStep2"
+        },
+        {
+          "description": "Compare expected and measured values",
+          "secondsTimer": 0,
+          "observation": "Tables above assume use of 100% oxygen, math will need to be adjusted for less than 100% (eg: 93%)",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "If needed, perform cal according to manual",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Connections",
+      "checks": [
+        {
+          "description": "Check threaded connections",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check bayonet connections",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Negative Pressure Test",
+      "checks": [
+        {
+          "description": "Open BOV",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Inhale from BOV in CC mode, exhaling through nose until counterlungs are fully collapsed",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Close BOV",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Allow to sit for one minute (minimum); watch for signs of leaks.",
+          "secondsTimer": 60,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Positive Pressure Test",
+      "checks": [
+        {
+          "description": "Close counterlung OPV",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Fill loop fully until OPV vents",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Allow to sit for one minute, watch for signs of leaks",
+          "secondsTimer": 60,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Open BOV to release pressure, close BOV",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Open counterlung OPV",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Check ADV, BOV & MAVs",
+      "checks": [
+        {
+          "description": "Slowly open diluent & oxygen cylinder",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Inhale from BOV (being cautious if using a hypoxic diluent)",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Open BOV, inhale from loop until ADV engages",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Confirm Dil & O2 MAV function",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Diluent & O2 Leak Test",
+      "checks": [
+        {
+          "description": "Open diluent & oxygen cylinders slowly allowing hoses to pressurize",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Close valves",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Monitor for pressure loss",
+          "secondsTimer": 30,
+          "observation": "30 sec min",
+          "references": [
+            {
+              "value": null,
+              "prefix": "Start Dil",
+              "suffix": "BAR / PSI"
+            },
+            {
+              "value": null,
+              "prefix": "Start O₂",
+              "suffix": "BAR / PSI"
+            },
+            {
+              "value": null,
+              "prefix": "End Dil",
+              "suffix": "BAR / PSI"
+            },
+            {
+              "value": null,
+              "prefix": "End O₂",
+              "suffix": "BAR / PSI"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Open diluent & oxygen cylinders",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Check Head & Display Batteries",
+      "checks": [
+        {
+          "description": "Change FX-CCR to LOW setpoint",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Solenoid fires, O₂ injection verified",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Change FX-CCR to .19 setpoint",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check battery status for B1 & B2 & all handsets / NERD",
+          "secondsTimer": 0,
+          "observation": "B1 & B2: If less than 3.9v (~62%), change / recharge before continuing.\nHandset(s) / NERD:\nYellow: battery must be be changed / charged.\nRed: battery must be changed / charged immediately.",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Computer Settings",
+      "checks": [
+        {
+          "description": "Primary: CC/BO Gases",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Primary: Low SP / High SP",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Primary: Deco Settings",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Secondary: CC/BO Gases",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Secondary: Low SP / High SP",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Secondary: Deco Settings",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Pre-Breathe",
+      "checks": [
+        {
+          "description": "Change FX-CCR to LOW setpoint",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Block nose and begin breathing from the FX-CCR (in a safe location / position)",
+          "secondsTimer": 300,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Observe setpoint maintenance and HUD functions",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Pay attention to how you feel as well as how the CCR is functioning",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "If Diving Immediately: Continue with \"Pre-Dive Checks”",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "If NOT Diving Immediately: Close O₂ + diluent cylinder valves, drain hoses, turn off electronics, and secure unit",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    }
+  ],
+  "path": "/home/rodrigo/Documents/ccr_checklist/templates/01932501-5170-7633-b184-f686ea240247.ccrt",
+  "isAsset": false
+}

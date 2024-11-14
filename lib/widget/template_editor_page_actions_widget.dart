@@ -229,6 +229,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
               child: const Text('Create+'),
               onPressed: () {
                 final title = titleController.text.trim();
+
                 if (title.isNotEmpty) {
                   templateEditorStore.addSection(title: title);
                 }
@@ -239,6 +240,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
               child: const Text('Create'),
               onPressed: () {
                 final title = titleController.text.trim();
+
                 if (title.isNotEmpty) {
                   templateEditorStore.addSection(title: title);
                 }

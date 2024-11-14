@@ -1,14 +1,35 @@
 {
   "rebreatherManufacturer": "SubGravity",
   "rebreatherModel": "X-CCR",
-  "title": "Condensed functionality checklist",
-  "description": "After having completed full assembly checklist - Version 1.3",
+  "title": "Condensed Functionality Checklist - Calibration Kit",
+  "description": "Version 1.5",
   "sections": [
     {
       "title": "Main",
       "checks": [
         {
-          "description": "Mushroom Valve Check",
+          "description": "Install Analyzed + Labeled Gas Cylinders",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Mushroom Valve & Mouthpiece Check",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Turn On X-CCR & Secondary",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check mV & Calibration in Air & O₂",
           "secondsTimer": 0,
           "observation": "",
           "references": [],
@@ -22,44 +43,23 @@
           "runtimeType": "regular"
         },
         {
-          "description": "Install Analyzed + Labeled Gas Cylinders",
+          "description": "Check All Connections",
           "secondsTimer": 0,
-          "observation": "",
+          "observation": "Threaded & bayonet",
           "references": [],
           "runtimeType": "regular"
         },
         {
-          "description": "Negative Pressure Test (hold for 1 minute minimum)",
+          "description": "Negative Pressure Test",
           "secondsTimer": 60,
-          "observation": "",
+          "observation": "1 minute min",
           "references": [],
           "runtimeType": "regular"
         },
         {
-          "description": "Positive Pressure Test (hold for 1 minute minimum)",
+          "description": "Positive Pressure Test",
           "secondsTimer": 60,
-          "observation": "",
-          "references": [],
-          "runtimeType": "regular"
-        },
-        {
-          "description": "Turn On X-CCR & Secondary",
-          "secondsTimer": 0,
-          "observation": "",
-          "references": [],
-          "runtimeType": "regular"
-        },
-        {
-          "description": "Flush Loop with Oxygen (3 times)",
-          "secondsTimer": 0,
-          "observation": "",
-          "references": [],
-          "runtimeType": "regular"
-        },
-        {
-          "description": "Check Calibration",
-          "secondsTimer": 0,
-          "observation": "",
+          "observation": "1 minute min",
           "references": [],
           "runtimeType": "regular"
         },
@@ -71,9 +71,9 @@
           "runtimeType": "regular"
         },
         {
-          "description": "Diluent & Oxygen System Leak Test (hold for 30 seconds minimum)",
+          "description": "Diluent & Oxygen Leak Test",
           "secondsTimer": 30,
-          "observation": "",
+          "observation": "30 sec min",
           "references": [],
           "runtimeType": "regular"
         },
@@ -85,21 +85,28 @@
           "runtimeType": "regular"
         },
         {
-          "description": "Pre-Breathe (5 minutes)",
-          "secondsTimer": 300,
-          "observation": "",
+          "description": "Computer Settings",
+          "secondsTimer": 0,
+          "observation": "primary & secondary",
           "references": [],
           "runtimeType": "regular"
         },
         {
-          "description": "If Diving Immediately: Continue with “Pre-Dive Checks”",
+          "description": "Pre-Breathe",
+          "secondsTimer": 300,
+          "observation": "5 minutes",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "If Diving Immediately:\nContinue with “Pre-Dive Checks”",
           "secondsTimer": 0,
           "observation": "",
           "references": [],
           "runtimeType": "regular"
         },
         {
-          "description": "f NOT Diving Immediately: Close O2 + diluent cylinder valves, drain hoses, turn off electronics, and secure unit",
+          "description": "If NOT Diving Immediately:\nClose O₂ + diluent cylinder valves, drain hoses, turn off electronics, and secure unit",
           "secondsTimer": 0,
           "observation": "",
           "references": [],
@@ -108,5 +115,6 @@
       ]
     }
   ],
-  "isAsset": true
+  "path": "/home/rodrigo/Documents/ccr_checklist/templates/01932c4c-dcd1-7646-bc45-48322bdf8bad.ccrt",
+  "isAsset": false
 }
