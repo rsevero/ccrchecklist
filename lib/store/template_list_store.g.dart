@@ -100,6 +100,42 @@ mixin _$TemplateListStore on TemplateListStoreBase, Store {
     });
   }
 
+  late final _$_manufacturerCountAtom =
+      Atom(name: 'TemplateListStoreBase._manufacturerCount', context: context);
+
+  int get manufacturerCount {
+    _$_manufacturerCountAtom.reportRead();
+    return super._manufacturerCount;
+  }
+
+  @override
+  int get _manufacturerCount => manufacturerCount;
+
+  @override
+  set _manufacturerCount(int value) {
+    _$_manufacturerCountAtom.reportWrite(value, super._manufacturerCount, () {
+      super._manufacturerCount = value;
+    });
+  }
+
+  late final _$_modelCountAtom =
+      Atom(name: 'TemplateListStoreBase._modelCount', context: context);
+
+  int get modelCount {
+    _$_modelCountAtom.reportRead();
+    return super._modelCount;
+  }
+
+  @override
+  int get _modelCount => modelCount;
+
+  @override
+  set _modelCount(int value) {
+    _$_modelCountAtom.reportWrite(value, super._modelCount, () {
+      super._modelCount = value;
+    });
+  }
+
   late final _$_actuallyUpdateAsyncAction =
       AsyncAction('TemplateListStoreBase._actuallyUpdate', context: context);
 

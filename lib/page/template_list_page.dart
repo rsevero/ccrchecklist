@@ -104,7 +104,7 @@ class _TemplateListPageState extends State<TemplateListPage> {
 
   void _showTemplatesStats() {
     final String templatesStats =
-        "Loaded ${templateListStore.assetTemplateCount} asset templates and ${templateListStore.savedTemplateCount} saved templates.";
+        "Loaded ${templateListStore.assetTemplateCount} asset templates and ${templateListStore.savedTemplateCount} saved templates for ${templateListStore.modelCount} rebreather models from ${templateListStore.manufacturerCount} manufacturers.";
 
     final snackBar = SnackBar(
       content: Text(templatesStats),

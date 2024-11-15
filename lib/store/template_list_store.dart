@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
 import 'package:ccr_checklist/data/template_file.dart';
@@ -41,6 +42,16 @@ abstract class TemplateListStoreBase with Store {
 
   @readonly
   int _savedTemplateCount = 0;
+
+  @readonly
+  int _manufacturerCount = 0;
+
+  @readonly
+  int _modelCount = 0;
+
+  final Set<String> _manufacturers = {};
+
+  final Set<String> _models = {};
 
   TemplateListStoreBase() {
     _init();
@@ -102,13 +113,25 @@ abstract class TemplateListStoreBase with Store {
     _actuallyUpdate();
   }
 
+  void _reset() {
+    _defaultTemplatesList.clear();
+    _manufacturers.clear();
+    _models.clear();
+    _assetTemplateCount = 0;
+    _savedTemplateCount = 0;
+    _manufacturerCount = 0;
+    _modelCount = 0;
+  }
+
   @action
   Future<void> _actuallyUpdate() async {
-    _defaultTemplatesList.clear();
+    _reset();
     await _getAssetTemplates();
     await _getSavedTemplates();
     _defaultTemplatesList.sort(_compareTemplateFile);
     _defaultTemplates = ObservableList.of(_defaultTemplatesList);
+    _manufacturerCount = _manufacturers.length;
+    _modelCount = _models.length;
     _state = TemplateListStoreState.uptodate;
   }
 
@@ -159,6 +182,8 @@ abstract class TemplateListStoreBase with Store {
       );
 
       _defaultTemplatesList.add(newTemplateFile);
+      _manufacturers.add(newTemplate.rebreatherManufacturer);
+      _models.add(newTemplate.rebreatherModel);
       _assetTemplateCount++;
     }
   }
@@ -201,6 +226,8 @@ abstract class TemplateListStoreBase with Store {
     );
 
     _defaultTemplatesList.add(newTemplateFile);
+    _manufacturers.add(newTemplate.rebreatherManufacturer);
+    _models.add(newTemplate.rebreatherModel);
     _savedTemplateCount++;
   }
 
