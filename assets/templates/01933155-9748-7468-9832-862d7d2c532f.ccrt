@@ -1,0 +1,358 @@
+{
+  "rebreatherManufacturer": "Kiss",
+  "rebreatherModel": "GEM Sidekick",
+  "title": "Pre-dive Checklist",
+  "description": "This pre-dive check should be completed after the assembly checklist, prior to entering the water. R.5",
+  "sections": [
+    {
+      "title": "Dive Planning",
+      "checks": [
+        {
+          "description": "Supply cylinder",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "O₂",
+              "suffix": "%"
+            },
+            {
+              "value": null,
+              "prefix": "MOD",
+              "suffix": "ft / m"
+            },
+            {
+              "value": null,
+              "prefix": "Pressure",
+              "suffix": "PSI / BAR"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Surface Interval",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "Duration",
+              "suffix": "h"
+            },
+            {
+              "value": null,
+              "prefix": "Current CNS",
+              "suffix": "%"
+            },
+            {
+              "value": null,
+              "prefix": "Current OTUs",
+              "suffix": ""
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Planned dive depth",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "",
+              "suffix": "ft / m"
+            },
+            {
+              "value": null,
+              "prefix": "Planned Bottom Time",
+              "suffix": "min"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "PPO₂ of supply cylinder gas at depth",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "PPO₂",
+              "suffix": "ata"
+            },
+            {
+              "value": null,
+              "prefix": "Planned CNS",
+              "suffix": "%"
+            },
+            {
+              "value": null,
+              "prefix": "Planned OTUs",
+              "suffix": ""
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Gas required for the planned dive",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "",
+              "suffix": "cft / l"
+            },
+            {
+              "value": null,
+              "prefix": "Bailout gas",
+              "suffix": "cft / l"
+            },
+            {
+              "value": null,
+              "prefix": "Inflation gas",
+              "suffix": "cft / l"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Verify that the planned dive depth does not exceed the MOD of the supply cylinder gas",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Verify that the dive depth does not exceed diver certification",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Verify that the final CNS does not exceed 80%",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Verify that the final OTUs do not exceed the daily limits",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Verify that the supply cylinder has adequate gas for the planned dive, bailout and reserve",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Dive Buddy",
+      "checks": [
+        {
+          "description": "Review dive plan, emergency procedures and hand signals",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Review Sidekick operation, buddy check and bubble check procedures",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "System Check",
+      "checks": [
+        {
+          "description": "Verify that the unit is properly assembled as per the instructions in the manual.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Gently shake mouthpiece to verify right side valve is moving freely.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Inspect the left side mushroom valve and ensure it is flat and smooth and not damaged in any way. Also ensure that it is properly installed so the gas flow goes left to right",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Perform a mouthpiece & loop hose positive and negative test to verify that the mushroom valve and right side valve assembly are properly working.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Verify that the mouthpiece discharge port diaphragms are properly venting by breathing on the mouthpiece and that the diaphragms are not damaged.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Verify that the mouthpiece vent hole is unobstructed and is venting properly. Do this by exhaling into the mouthpiece with it in the closed position.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Perform negative and positive pressure tests.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Re-inspect the mouthpiece discharge port diaphragm’s and button’s; re-seat them if necessary.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Turn on PPO₂ monitor and calibrate / verify the display in air.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Verify OPV is closed (clockwise).",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Visually inspect the assembled unit and display cable to ensure that all is in good working order.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Plug the off board gas whip into the scrubber head.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Open the cylinder and verify that the cylinder has adequate gas and log the pressure above.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Close the cylinder and watch the pressure gauge for any leaks. Once complete, open the cylinder valve again.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Verify that the ADV works: Inhale from the mouthpiece and exhale from your nose and ensure that it works as it should. Watch the PPO₂ display as you do this and ensure that it is reacting accordingly.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Test manual operation of ADV pushing on the lever.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Flush unit with Nitrox from the supply cylinder (mouthpiece is open).",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Verify PPO₂ monitor against supply cylinder Nitrox (close mouthpiece once nitrox mix is verified).",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Inspect the wing inflation and dry suit inflation system’s and ensure they are working properly.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Inspect the harness and side mount system.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Verify bailout regulator is working properly and is easily accessible.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Perform the 5 minute pre-breathe & monitor the PPO₂ constantly ensuring the percentage does not fall below 21%.",
+          "secondsTimer": 300,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Prior to jumping in the water, double check that the cylinder is open, the display is on, and any computer’s properly programed. If the cylinder is secured to the diver prior to jumping in the water, double check that the gas is connected to the rebreather.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Perform buddy checks.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "If the cylinder is secured in the water, I will ensure that I have connected the off board gas whip to the rebreather and confirmed that it is working properly.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    }
+  ],
+  "isAsset": true
+}

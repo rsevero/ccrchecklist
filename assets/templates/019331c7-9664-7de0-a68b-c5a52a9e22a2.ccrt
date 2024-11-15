@@ -1,0 +1,77 @@
+{
+  "rebreatherManufacturer": "Kiss",
+  "rebreatherModel": "GEM Sidekick",
+  "title": "Post Dive Check List - Sidekick Disassembly",
+  "description": "R. 5",
+  "sections": [
+    {
+      "title": "Main",
+      "checks": [
+        {
+          "description": "Close supply cylinder valve",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Purge and remove the first stage",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Rinse regulator set in fresh water",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Disconnect the loop hoses from the scrubber head",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Remove the circ-clips, (put them someplace safe) from the mouthpiece and pull the loop hoses free",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Unscrew the knurled nuts from the scrubber head, and remove the scrubber canister assembly from the counterlung",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Remove the scrubber bottom and discard the used scrubber material (EAC or granular)",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Sanitize the mouthpiece, loop hoses and counterlung",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Rinse with fresh water and hang to dry",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    }
+  ],
+  "isAsset": true
+}
