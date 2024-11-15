@@ -265,8 +265,9 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
 
                     if (result) {
                       titleController.text = '';
-                      titleFocusNode.requestFocus();
                     }
+
+                    titleFocusNode.requestFocus();
                   },
                 ),
                 TextButton(
@@ -302,33 +303,68 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
     final TextEditingController measurementController = TextEditingController();
     final TextEditingController descriptionController = TextEditingController();
     final FocusNode measurementFocusNode = FocusNode();
+    String measurementHintText = 'Enter the name of the measurement';
+    Color? measurementHintColor = theme.dialogHintTextTheme.color;
+    String descriptionHintText = 'Enter check description';
+    Color? descriptionHintColor = theme.dialogHintTextTheme.color;
+    bool measurementOk = true;
+    bool descriptionOk = true;
 
     int referenceCount = 1;
-
-    void addCompleteLinearityCheck() {
-      final description = descriptionController.text.trim();
-      final measurement = measurementController.text.trim();
-
-      if (description.isNotEmpty && measurement.isNotEmpty) {
-        templateEditorStore.addCompleteLinearityCheck(
-          measurement: measurement,
-          description: description,
-          referenceCount: referenceCount,
-        );
-      }
-    }
 
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(
-            'Add Complete Linearity Check',
-            style: context.ccrThemeExtension.dialogTitleTextTheme,
-          ),
-          content: StatefulBuilder(
-            builder: (BuildContext context, StateSetter setState) {
-              return SingleChildScrollView(
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+            void setHints() {
+              setState(
+                () {
+                  if (measurementOk) {
+                    measurementHintText = 'Enter the name of the measurement';
+                    measurementHintColor = theme.dialogHintTextTheme.color;
+                  } else {
+                    measurementHintText = 'Measurement cannot be empty';
+                    measurementHintColor = Colors.red;
+                  }
+
+                  if (descriptionOk) {
+                    descriptionHintText = 'Enter check description';
+                    descriptionHintColor = theme.dialogHintTextTheme.color;
+                  } else {
+                    descriptionHintText = 'Description cannot be empty';
+                    descriptionHintColor = Colors.red;
+                  }
+                },
+              );
+            }
+
+            bool addCompleteLinearityCheck() {
+              final description = descriptionController.text.trim();
+              final measurement = measurementController.text.trim();
+
+              measurementOk = measurement.isNotEmpty;
+              descriptionOk = description.isNotEmpty;
+
+              if (measurementOk && descriptionOk) {
+                templateEditorStore.addCompleteLinearityCheck(
+                  measurement: measurement,
+                  description: description,
+                  referenceCount: referenceCount,
+                );
+              }
+
+              setHints();
+
+              return measurementOk && descriptionOk;
+            }
+
+            return AlertDialog(
+              title: Text(
+                'Add Complete Linearity Check',
+                style: context.ccrThemeExtension.dialogTitleTextTheme,
+              ),
+              content: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
@@ -354,8 +390,10 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                           focusNode: measurementFocusNode,
                           style: theme.dialogFieldContentTextTheme,
                           decoration: InputDecoration(
-                            hintText: 'Enter the name of the measurement',
-                            hintStyle: theme.dialogHintTextTheme,
+                            hintText: measurementHintText,
+                            hintStyle: theme.dialogHintTextTheme.copyWith(
+                              color: measurementHintColor,
+                            ),
                             border: OutlineInputBorder(),
                           ),
                           maxLines: null,
@@ -387,8 +425,10 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                           controller: descriptionController,
                           style: theme.dialogFieldContentTextTheme,
                           decoration: InputDecoration(
-                            hintText: 'Enter check description',
-                            hintStyle: theme.dialogHintTextTheme,
+                            hintText: descriptionHintText,
+                            hintStyle: theme.dialogHintTextTheme.copyWith(
+                              color: descriptionHintColor,
+                            ),
                             border: OutlineInputBorder(),
                           ),
                           maxLines: null,
@@ -423,40 +463,41 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-              );
-            },
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Create+'),
-              onPressed: () {
-                addCompleteLinearityCheck();
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('Create+'),
+                  onPressed: () {
+                    final bool result = addCompleteLinearityCheck();
 
-                measurementFocusNode.requestFocus();
-              },
-            ),
-            TextButton(
-              child: const Text('Create'),
-              onPressed: () {
-                addCompleteLinearityCheck();
-                final description = descriptionController.text.trim();
-                final measurement = measurementController.text.trim();
+                    if (result) {
+                      measurementController.text = '';
+                      descriptionController.text = '';
+                      referenceCount = 1;
+                    }
 
-                if (description.isNotEmpty && measurement.isNotEmpty) {
-                  templateEditorStore.addCompleteLinearityCheck(
-                    measurement: measurement,
-                    description: description,
-                    referenceCount: referenceCount,
-                  );
-                }
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: const Text('Cancel'),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-          ],
+                    measurementFocusNode.requestFocus();
+                  },
+                ),
+                TextButton(
+                  child: const Text('Create'),
+                  onPressed: () {
+                    final bool result = addCompleteLinearityCheck();
+
+                    if (result) {
+                      Navigator.of(context).pop();
+                    } else {
+                      measurementFocusNode.requestFocus();
+                    }
+                  },
+                ),
+                TextButton(
+                  child: const Text('Cancel'),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+              ],
+            );
+          },
         );
       },
     );
