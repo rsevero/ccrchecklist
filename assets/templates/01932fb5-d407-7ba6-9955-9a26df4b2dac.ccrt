@@ -1,0 +1,120 @@
+{
+  "rebreatherManufacturer": "AP Diving",
+  "rebreatherModel": "Inspiration Classic",
+  "title": "Pre Dive Check List",
+  "description": "Rev. october 2010",
+  "sections": [
+    {
+      "title": "Main",
+      "checks": [
+        {
+          "description": "Analyse diluent and O₂ cylinder",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check diluent supply and oxygen cylinder pressures, and assemble into unit",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Confirm correct operation of non-return valves",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Assemble breathing hoses and mouthpiece, checking for any leaks",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check operation of mouthpiece and direction of gas flow through convoluted hoses, it should exhale towards the diver’s right shoulder.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Carry out positive and negative pressure tests (see Section 1.14)",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Turn on gas supply and check function of valves and bailout regulator systems",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check the Oxygen’s Interstage Pressure (it should be 7.5 bar). If the pressure is higher the solenoid may not open, if the pressure is lower the solenoid may not close.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Switch on one Oxygen Controller (Master)",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Verify sufficient absorbent time remaining",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Switch on second Oxygen Controller and verify proper function",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Verify proper computer function",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Verify correct calibration of O₂ sensors",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check display for battery warnings.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Flush with air and check for low oxygen warning display and buzzer",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    }
+  ],
+  "path": "/home/rodrigo/Documents/ccr_checklist/templates/01932fb5-d407-7ba6-9955-9a26df4b2dac.ccrt",
+  "isAsset": false
+}

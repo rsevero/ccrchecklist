@@ -1,0 +1,155 @@
+{
+  "rebreatherManufacturer": "AP Diving",
+  "rebreatherModel": "Inspiration XPD/EVO/EVP",
+  "title": "Pre-Dive/Assembly Check List",
+  "description": "Vision Eletronics - Rev. november 2019",
+  "sections": [
+    {
+      "title": "Main",
+      "checks": [
+        {
+          "description": "Fill scrubber cartridge with fresh Sofnolime (797) and place in scrubber.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Ensure Scrubber O ring is clean and undamaged and lubricate with O₂ compatible grease.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Place O ring on top of scrubber cartridge. Ensuring it is clean and lubricated with O₂ compatible grease.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Place the spacer ring on top of scrubber cartridge, push down on ring and release ensuring free movement.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Switch on handset and check cells and batteries pass power on tests. Switch off",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Fit lid to scrubber and assemble into rebreather",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Analyse diluent and O₂ cylinders and place in rebreather, connecting the first stages securely.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Holding solenoid hose away from eyes, briefly open the O₂ cylinder valve and close again, which clears debris/water from the oxygen hose. Connect solenoid hose to scrubber fitting.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Open cylinder valves and check diluent and oxygen cylinder pressures, refill if necessary",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check function of valves and bailout systems.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check the Oxygen’s Interstage Pressure (it should be 7.5 bar). If the pressure is higher the solenoid may not open, if the pressure is lower the solenoid may not close.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Confirm correct operation of non-return valves in mouthpiece and re-connect to T-pieces.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check operation of mouthpiece and direction of gas flow through convoluted hoses, it should exhale towards the diver’s right shoulder.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Carry out positive and negative pressure tests (see Section 1.16).",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Verify sufficient absorbent time remaining for planned dive.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Switch on electronic handset and proceed to dive mode.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Verify proper computer function, ppO₂ displays must move with gas changes.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Verify correct calibration of O₂ sensors.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Verify Battery levels are sufficient for planned dive.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Flush with air and check for low oxygen warning display and buzzer",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    }
+  ],
+  "path": "/home/rodrigo/Documents/ccr_checklist/templates/01932fa7-b844-7cf3-8701-eac47d9e8596.ccrt",
+  "isAsset": false
+}

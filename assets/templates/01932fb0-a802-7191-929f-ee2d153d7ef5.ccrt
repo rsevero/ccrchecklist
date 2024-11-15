@@ -1,0 +1,64 @@
+{
+  "rebreatherManufacturer": "AP Diving",
+  "rebreatherModel": "Inspiration XPD/EVO/EVP",
+  "title": "In-Water Checks and Important Procedures",
+  "description": "Vision Eletronics - Rev. november 2019",
+  "sections": [
+    {
+      "title": "Main",
+      "checks": [
+        {
+          "description": "After entering the water and before descending, ensure the oxygen controller is functioning.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Ask your buddy to do a “bubble check” at 6m (20ft) on your equipment. It is easier to abort the dive at 6m (20ft) and surface to fix any leaks.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Add Diluent during the descent. It is dangerous to confuse the diluent and oxygen inflators. Adding oxygen will cause a high ppO2 in the breathing loop.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Once on the bottom, or below 20m, switch the setpoint to the HIGH setpoint. If the Auto setpoint facility is selected, on the bottom, ensure the unit HAS changed to the HIGH setpoint.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Ensure the HIGH setpoint is maintained throughout the dive and is appropriate for the planned decompression schedule.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "During the ascent, dump the expanding gas by pulling the exhaust valve override or by exhaling around the mouthpiece, or through the nose. No later than 4m, switch back to the low setpoint.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "KNOW YOUR ppO₂ AT ALL TIMES !",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    }
+  ],
+  "path": "/home/rodrigo/Documents/ccr_checklist/templates/01932fb0-a802-7191-929f-ee2d153d7ef5.ccrt",
+  "isAsset": false
+}

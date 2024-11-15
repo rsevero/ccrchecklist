@@ -1,0 +1,78 @@
+{
+  "rebreatherManufacturer": "AP Diving",
+  "rebreatherModel": "Inspiration Classic",
+  "title": "Pre-Breathe Sequence",
+  "description": "Rev. october 2010",
+  "sections": [
+    {
+      "title": "Main",
+      "checks": [
+        {
+          "description": "Select the LOW setpoint",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Ensure the ppO₂ drops rapidly as you exhale into the loop and check for slow changing cell values",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Confirm the O₂ control system properly maintains the setpoint for a minimum of 3 minutes",
+          "secondsTimer": 180,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Verify ppO₂ values using backup display (Slave Controller)",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Confirm CO₂ absorbent is functioning properly (pay attention for symptoms of hypercapnia)",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Confirm operation of diluent and oxygen inflators (and ADV, if fitted)",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Confirm operation of bailout systems",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Ensure both counterlungs are fastened down with the Fastex buckles",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check the mouthpiece valve is fully open. Partially open will allow water in.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    }
+  ],
+  "path": "/home/rodrigo/Documents/ccr_checklist/templates/01932fb9-0b9e-7f16-b521-67eca60f2486.ccrt",
+  "isAsset": false
+}

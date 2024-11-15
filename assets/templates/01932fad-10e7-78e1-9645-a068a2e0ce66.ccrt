@@ -1,0 +1,92 @@
+{
+  "rebreatherManufacturer": "AP Diving",
+  "rebreatherModel": "Inspiration XPD/EVO/EVP",
+  "title": "Pre-Breathe Sequence",
+  "description": "Vision Eletronics - Rev. november 2019",
+  "sections": [
+    {
+      "title": "Main",
+      "checks": [
+        {
+          "description": "Confirm operation of diluent and oxygen inflators (and ADV, if fitted), watching HP gauges. (If the pressure dips, open the cylinder valve more).",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Confirm operation of bailout systems.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Ensure both counterlungs are fastened down with the Fastex buckles and crotch strap is secure.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Select the LOW setpoint.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Ensure the ppO₂ drops rapidly as you exhale into the loop and check for slow changing cell values.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Confirm the O₂ control system properly maintains the setpoint for a minimum of 3 minutes.",
+          "secondsTimer": 180,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Confirm CO₂ absorbent is functioning properly (pay attention for symptoms of Hypercapnia).",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "If TempStik is fitted pre-breathe until at least the left hand block on the display is green.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Ensure correct diluent is selected.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "If setpoint change Auto is selected, ensure the switch depth is appropriate for planned dive.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Ensure the Conservatism (Nitrox) or Gradient Factors (Trimix) settings are appropriate for planned dive.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    }
+  ],
+  "path": "/home/rodrigo/Documents/ccr_checklist/templates/01932fad-10e7-78e1-9645-a068a2e0ce66.ccrt",
+  "isAsset": false
+}

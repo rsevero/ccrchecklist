@@ -1,0 +1,64 @@
+{
+  "rebreatherManufacturer": "AP Diving",
+  "rebreatherModel": "Inspiration XPD/EVO/EVP",
+  "title": "Post-Dive Actions",
+  "description": "Vision Eletronics - Rev. november 2019",
+  "sections": [
+    {
+      "title": "Main",
+      "checks": [
+        {
+          "description": "Stand the unit upright or lean gently forward onto the counterlungs. DO NOT lay down on its back.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Remove the mouthpiece and hose assembly by unscrewing from the T-pieces, drain and if required, rinse with fresh water, ensuring the non-return valves work properly prior to storage.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check the scrubber for water and drain off excess.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Dry the scrubber lid shaking off (gently) excess water and leave to air dry. Once dry, reassemble to the scrubber.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Remove the unit from direct sunlight (put a towel over it, if there is no shade).",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Leave cylinder valves open until all the day’s diving is finished.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Conduct post-dive maintenance:\nRinse counterlungs, mouthpiece, valves and BC with fresh water.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    }
+  ],
+  "path": "/home/rodrigo/Documents/ccr_checklist/templates/01932fb2-e129-7605-87bd-f309c3bec6e4.ccrt",
+  "isAsset": false
+}
