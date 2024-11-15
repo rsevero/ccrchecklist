@@ -12,31 +12,40 @@ void main() async {
   final ccrtFiles = directory
       .listSync()
       .where((file) => file.path.endsWith('.ccrt'))
-      .map((file) => file.uri.pathSegments.last)
+      .map((file) => File(file.path))
       .toList();
 
-  // Sort the list of .ccrt files alphabetically
-  ccrtFiles.sort();
+  // Sort the list of .ccrt files alphabetically by their file names
+  ccrtFiles.sort((a, b) => a.path.compareTo(b.path));
 
   // Process each .ccrt file
-  for (final filename in ccrtFiles) {
-    final file = File("${directory.path}/$filename");
-
+  for (final file in ccrtFiles) {
     // Read the file contents
-    final contents = await file.readAsString();
+    String contents = await file.readAsString();
 
     // Replace all occurrences of "O2" with "O₂"
-    final updatedContents = contents.replaceAll('O2', 'O₂');
+    contents = contents.replaceAll('O2', 'O₂');
+
+    // Parse the JSON content
+    final jsonData = jsonDecode(contents);
+
+    // Update the JSON content
+    if (jsonData is Map<String, dynamic>) {
+      jsonData['isAsset'] = true;
+      jsonData.remove('path');
+    }
+
+    final updatedContents = JsonEncoder.withIndent('  ').convert(jsonData);
 
     // Write the updated contents back to the file
     await file.writeAsString(updatedContents);
 
-    print('Updated $filename');
+    print('Updated ${file.path}');
   }
 
   // Create the updated manifest data
   final manifestData = {
-    "templates": ccrtFiles,
+    "templates": ccrtFiles.map((file) => file.uri.pathSegments.last).toList(),
   };
 
   // Write the updated manifest data to the manifest.json file
