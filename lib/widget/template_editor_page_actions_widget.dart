@@ -303,6 +303,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
     final TextEditingController measurementController = TextEditingController();
     final TextEditingController descriptionController = TextEditingController();
     final FocusNode measurementFocusNode = FocusNode();
+    final FocusNode descriptionFocusNode = FocusNode();
     String measurementHintText = 'Enter the name of the measurement';
     Color? measurementHintColor = theme.dialogHintTextTheme.color;
     String descriptionHintText = 'Enter check description';
@@ -357,6 +358,14 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
               setHints();
 
               return measurementOk && descriptionOk;
+            }
+
+            void setFocus() {
+              if (measurementOk) {
+                descriptionFocusNode.requestFocus();
+              } else {
+                measurementFocusNode.requestFocus();
+              }
             }
 
             return AlertDialog(
@@ -423,6 +432,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                         ),
                         TextFormField(
                           controller: descriptionController,
+                          focusNode: descriptionFocusNode,
                           style: theme.dialogFieldContentTextTheme,
                           decoration: InputDecoration(
                             hintText: descriptionHintText,
@@ -476,7 +486,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                       referenceCount = 1;
                     }
 
-                    measurementFocusNode.requestFocus();
+                    setFocus();
                   },
                 ),
                 TextButton(
@@ -487,7 +497,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                     if (result) {
                       Navigator.of(context).pop();
                     } else {
-                      measurementFocusNode.requestFocus();
+                      setFocus();
                     }
                   },
                 ),
