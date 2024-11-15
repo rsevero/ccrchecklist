@@ -25,7 +25,7 @@
             {
               "value": null,
               "prefix": "Bail 1",
-              "suffix": "H"
+              "suffix": "He"
             },
             {
               "value": null,
@@ -35,7 +35,7 @@
             {
               "value": null,
               "prefix": "Bail 2",
-              "suffix": "H"
+              "suffix": "He"
             }
           ],
           "runtimeType": "regular"
