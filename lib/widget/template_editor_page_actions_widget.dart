@@ -198,81 +198,129 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
   void _onTapAddSection(BuildContext context) async {
     final templateEditorStore =
         Provider.of<TemplateEditorStore>(context, listen: false);
+    final theme = context.ccrThemeExtension;
     final TextEditingController titleController = TextEditingController();
+    final FocusNode titleFocusNode = FocusNode();
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+    String titleHintText = 'Enter title here';
+    Color? titleHintColor = theme.dialogHintTextTheme.color;
+    bool titleOk = true;
 
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(
-            'New Page',
-            style: context.ccrThemeExtension.dialogTitleTextTheme,
-          ),
-          content: Form(
-            key: formKey,
-            child: TextFormField(
-              controller: titleController,
-              style: context.ccrThemeExtension.dialogFieldContentTextTheme,
-              decoration: InputDecoration(
-                hintText: 'Enter title here',
-                hintStyle: context.ccrThemeExtension.dialogHintTextTheme,
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+            void setTitleHint() {
+              setState(() {
+                if (titleOk) {
+                  titleHintText = 'Enter title here';
+                  titleHintColor = theme.dialogHintTextTheme.color;
+                } else {
+                  titleHintText = 'Title cannot be empty';
+                  titleHintColor = Colors.red;
+                }
+              });
+            }
+
+            bool addSection() {
+              final title = titleController.text.trim();
+              titleOk = title.isNotEmpty;
+
+              if (titleOk) {
+                templateEditorStore.addSection(title: title);
+              }
+
+              setTitleHint();
+              return titleOk;
+            }
+
+            return AlertDialog(
+              title: Text(
+                'New Page',
+                style: context.ccrThemeExtension.dialogTitleTextTheme,
               ),
-              autofocus: true,
-              onFieldSubmitted: (value) {
-                Navigator.of(context).pop(true);
-              },
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Create+'),
-              onPressed: () {
-                final title = titleController.text.trim();
+              content: Form(
+                key: formKey,
+                child: TextFormField(
+                  controller: titleController,
+                  focusNode: titleFocusNode,
+                  style: context.ccrThemeExtension.dialogFieldContentTextTheme,
+                  decoration: InputDecoration(
+                    hintText: titleHintText,
+                    hintStyle: theme.dialogHintTextTheme
+                        .copyWith(color: titleHintColor),
+                  ),
+                  autofocus: true,
+                  onFieldSubmitted: (value) {
+                    Navigator.of(context).pop(true);
+                  },
+                ),
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('Create+'),
+                  onPressed: () {
+                    final bool result = addSection();
 
-                if (title.isNotEmpty) {
-                  templateEditorStore.addSection(title: title);
-                }
-                titleController.text = '';
-              },
-            ),
-            TextButton(
-              child: const Text('Create'),
-              onPressed: () {
-                final title = titleController.text.trim();
+                    if (result) {
+                      titleController.text = '';
+                      titleFocusNode.requestFocus();
+                    }
+                  },
+                ),
+                TextButton(
+                  child: const Text('Create'),
+                  onPressed: () {
+                    final bool result = addSection();
 
-                if (title.isNotEmpty) {
-                  templateEditorStore.addSection(title: title);
-                }
-                Navigator.of(context).pop(true);
-              },
-            ),
-            TextButton(
-              child: const Text('Cancel'),
-              onPressed: () {
-                Navigator.of(context).pop(false);
-              },
-            ),
-          ],
+                    if (result) {
+                      Navigator.of(context).pop(true);
+                    } else {
+                      titleFocusNode.requestFocus();
+                    }
+                  },
+                ),
+                TextButton(
+                  child: const Text('Cancel'),
+                  onPressed: () {
+                    Navigator.of(context).pop(false);
+                  },
+                ),
+              ],
+            );
+          },
         );
       },
     );
   }
 
   void _onTapAddCompleteLinearityCheck(BuildContext context) {
+    final templateEditorStore =
+        Provider.of<TemplateEditorStore>(context, listen: false);
+    final theme = context.ccrThemeExtension;
+    final TextEditingController measurementController = TextEditingController();
+    final TextEditingController descriptionController = TextEditingController();
+    final FocusNode measurementFocusNode = FocusNode();
+
+    int referenceCount = 1;
+
+    void addCompleteLinearityCheck() {
+      final description = descriptionController.text.trim();
+      final measurement = measurementController.text.trim();
+
+      if (description.isNotEmpty && measurement.isNotEmpty) {
+        templateEditorStore.addCompleteLinearityCheck(
+          measurement: measurement,
+          description: description,
+          referenceCount: referenceCount,
+        );
+      }
+    }
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        final templateEditorStore =
-            Provider.of<TemplateEditorStore>(context, listen: false);
-        final theme = context.ccrThemeExtension;
-        final TextEditingController measurementController =
-            TextEditingController();
-        final TextEditingController descriptionController =
-            TextEditingController();
-
-        int referenceCount = 1;
-
         return AlertDialog(
           title: Text(
             'Add Complete Linearity Check',
@@ -303,6 +351,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                         ),
                         TextFormField(
                           controller: measurementController,
+                          focusNode: measurementFocusNode,
                           style: theme.dialogFieldContentTextTheme,
                           decoration: InputDecoration(
                             hintText: 'Enter the name of the measurement',
@@ -379,8 +428,17 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
           ),
           actions: <Widget>[
             TextButton(
+              child: const Text('Create+'),
+              onPressed: () {
+                addCompleteLinearityCheck();
+
+                measurementFocusNode.requestFocus();
+              },
+            ),
+            TextButton(
               child: const Text('Create'),
               onPressed: () {
+                addCompleteLinearityCheck();
                 final description = descriptionController.text.trim();
                 final measurement = measurementController.text.trim();
 
@@ -390,8 +448,8 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                     description: description,
                     referenceCount: referenceCount,
                   );
-                  Navigator.of(context).pop();
                 }
+                Navigator.of(context).pop();
               },
             ),
             TextButton(
@@ -650,6 +708,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
             TextEditingController();
         final TextEditingController observationController =
             TextEditingController();
+        final FocusNode descriptionFocusNode = FocusNode();
 
         final List<TextEditingController> prefixControllers =
             List.generate(ccrMaxReferences + 1, (_) => TextEditingController());
@@ -688,6 +747,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                         ),
                         TextFormField(
                           controller: descriptionController,
+                          focusNode: descriptionFocusNode,
                           style: theme.dialogFieldContentTextTheme,
                           decoration: InputDecoration(
                             hintText: 'Enter check description',
@@ -858,6 +918,7 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                             (_) => TextEditingController()),
                       );
                     });
+                    descriptionFocusNode.requestFocus();
                   },
                 ),
                 TextButton(
