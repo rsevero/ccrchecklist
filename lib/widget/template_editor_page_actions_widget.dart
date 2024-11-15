@@ -739,29 +739,76 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
   }
 
   void _onTapAddRegularCheck(BuildContext context) {
+    final templateEditorStore =
+        Provider.of<TemplateEditorStore>(context, listen: false);
+    final theme = context.ccrThemeExtension;
+    final TextEditingController descriptionController = TextEditingController();
+    final TextEditingController observationController = TextEditingController();
+    final FocusNode descriptionFocusNode = FocusNode();
+
+    String descriptionHintText = 'Enter check description';
+    Color? descriptionHintColor = theme.dialogHintTextTheme.color;
+    bool descriptionOk = true;
+
+    final List<TextEditingController> prefixControllers =
+        List.generate(ccrMaxReferences + 1, (_) => TextEditingController());
+    final List<TextEditingController> suffixControllers =
+        List.generate(ccrMaxReferences + 1, (_) => TextEditingController());
+
+    int numberOfReferences = 0;
+    int timerDurationSeconds = 0;
+    int timerDurationMinutes = 0;
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        final templateEditorStore =
-            Provider.of<TemplateEditorStore>(context, listen: false);
-        final theme = context.ccrThemeExtension;
-        final TextEditingController descriptionController =
-            TextEditingController();
-        final TextEditingController observationController =
-            TextEditingController();
-        final FocusNode descriptionFocusNode = FocusNode();
-
-        final List<TextEditingController> prefixControllers =
-            List.generate(ccrMaxReferences + 1, (_) => TextEditingController());
-        final List<TextEditingController> suffixControllers =
-            List.generate(ccrMaxReferences + 1, (_) => TextEditingController());
-
-        int numberOfReferences = 0;
-        int timerDurationSeconds = 0;
-        int timerDurationMinutes = 0;
-
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
+            void setHint() {
+              setState(
+                () {
+                  if (descriptionOk) {
+                    descriptionHintText = 'Enter check description';
+                    descriptionHintColor = theme.dialogHintTextTheme.color;
+                  } else {
+                    descriptionHintText = 'Description cannot be empty';
+                    descriptionHintColor = Colors.red;
+                  }
+                },
+              );
+            }
+
+            bool addRegularCheck() {
+              final String description = descriptionController.text.trim();
+
+              descriptionOk = description.isNotEmpty;
+
+              if (descriptionOk) {
+                final String observation = observationController.text.trim();
+                final int totalSeconds =
+                    (timerDurationMinutes * ccrSecondsInAMinute) +
+                        timerDurationSeconds;
+                final List<RegularCheckReference> references = List.generate(
+                  numberOfReferences,
+                  (i) => RegularCheckReference(
+                    prefix: prefixControllers[i + 1].text,
+                    suffix: suffixControllers[i + 1].text,
+                  ),
+                );
+
+                templateEditorStore.addRegularCheck(
+                  description: description,
+                  observation: observation,
+                  references: references,
+                  secondsTimer: totalSeconds,
+                );
+              }
+
+              setHint();
+
+              return descriptionOk;
+            }
+
             return AlertDialog(
               title: Text(
                 'Add Regular Check',
@@ -791,8 +838,10 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                           focusNode: descriptionFocusNode,
                           style: theme.dialogFieldContentTextTheme,
                           decoration: InputDecoration(
-                            hintText: 'Enter check description',
-                            hintStyle: theme.dialogHintTextTheme,
+                            hintText: descriptionHintText,
+                            hintStyle: theme.dialogHintTextTheme.copyWith(
+                              color: descriptionHintColor,
+                            ),
                             border: OutlineInputBorder(),
                           ),
                           maxLines: null, // Makes the input field expandable
@@ -918,77 +967,43 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
                 TextButton(
                   child: const Text('Create+'),
                   onPressed: () {
-                    final String description =
-                        descriptionController.text.trim();
-                    final String observation =
-                        observationController.text.trim();
-                    final int totalSeconds =
-                        (timerDurationMinutes * ccrSecondsInAMinute) +
-                            timerDurationSeconds;
+                    final bool result = addRegularCheck();
 
-                    if (description.isNotEmpty) {
-                      List<RegularCheckReference> references = List.generate(
-                        numberOfReferences,
-                        (i) => RegularCheckReference(
-                          prefix: prefixControllers[i + 1].text,
-                          suffix: suffixControllers[i + 1].text,
-                        ),
-                      );
-                      templateEditorStore.addRegularCheck(
-                        description: description,
-                        observation: observation,
-                        references: references,
-                        secondsTimer: totalSeconds,
-                      );
+                    if (result) {
+                      setState(() {
+                        descriptionController.text = '';
+                        observationController.text = '';
+                        numberOfReferences = 0;
+                        timerDurationMinutes = 0;
+                        timerDurationSeconds = 0;
+
+                        prefixControllers.clear();
+                        prefixControllers.addAll(
+                          List.generate(ccrMaxReferences + 1,
+                              (_) => TextEditingController()),
+                        );
+
+                        suffixControllers.clear();
+                        suffixControllers.addAll(
+                          List.generate(ccrMaxReferences + 1,
+                              (_) => TextEditingController()),
+                        );
+                      });
                     }
-                    setState(() {
-                      descriptionController.text = '';
-                      observationController.text = '';
-                      numberOfReferences = 0;
-                      timerDurationMinutes = 0;
-                      timerDurationSeconds = 0;
 
-                      prefixControllers.clear();
-                      suffixControllers.clear();
-                      prefixControllers.addAll(
-                        List.generate(ccrMaxReferences + 1,
-                            (_) => TextEditingController()),
-                      );
-                      suffixControllers.addAll(
-                        List.generate(ccrMaxReferences + 1,
-                            (_) => TextEditingController()),
-                      );
-                    });
                     descriptionFocusNode.requestFocus();
                   },
                 ),
                 TextButton(
                   child: const Text('Create'),
                   onPressed: () {
-                    final String description =
-                        descriptionController.text.trim();
-                    final String observation =
-                        observationController.text.trim();
-                    final int totalSeconds =
-                        (timerDurationMinutes * ccrSecondsInAMinute) +
-                            timerDurationSeconds;
+                    final bool result = addRegularCheck();
 
-                    if (description.isNotEmpty) {
-                      List<RegularCheckReference> references = List.generate(
-                        numberOfReferences,
-                        (i) => RegularCheckReference(
-                          prefix: prefixControllers[i + 1].text,
-                          suffix: suffixControllers[i + 1].text,
-                        ),
-                      );
-                      templateEditorStore.addRegularCheck(
-                        description: description,
-                        observation: observation,
-                        references: references,
-                        secondsTimer: totalSeconds,
-                      );
+                    if (result) {
+                      Navigator.of(context).pop();
+                    } else {
+                      descriptionFocusNode.requestFocus();
                     }
-                    Navigator.of(context).pop();
                   },
                 ),
                 TextButton(
