@@ -86,6 +86,9 @@ class TemplateCheckWidget extends StatelessWidget {
                         case 'Edit':
                           _editCheck(context, sectionIndex, index);
                           break;
+                        case 'Duplicate':
+                          _duplicateRegularCheck(context, sectionIndex, index);
+                          break;
                         case 'Move to new page':
                           _moveCheckNewSection(context, sectionIndex, index);
                           break;
@@ -100,6 +103,11 @@ class TemplateCheckWidget extends StatelessWidget {
                         value: 'Edit',
                         child: Text('Edit'),
                       ),
+                      if (check is TemplateRegularCheck)
+                        const PopupMenuItem<String>(
+                          value: 'Duplicate',
+                          child: Text('Duplicate'),
+                        ),
                       PopupMenuItem<String>(
                         value: 'Move to new page',
                         enabled: templateEditorStore.sections.length > 1,
@@ -783,6 +791,27 @@ class TemplateCheckWidget extends StatelessWidget {
           },
         );
       },
+    );
+  }
+
+  void _duplicateRegularCheck(
+    BuildContext context,
+    int sectionIndex,
+    int index,
+  ) {
+    final templateEditorStore =
+        Provider.of<TemplateEditorStore>(context, listen: false);
+    final check = templateEditorStore.checks[sectionIndex][index];
+
+    if (check is! TemplateRegularCheck) {
+      return;
+    }
+
+    templateEditorStore.addRegularCheck(
+      description: check.description,
+      observation: check.observation,
+      secondsTimer: check.secondsTimer,
+      references: check.references,
     );
   }
 
