@@ -1,0 +1,117 @@
+{
+  "rebreatherManufacturer": "Kiss",
+  "rebreatherModel": "Kiss Classic Explorer",
+  "title": "Pre-dive check",
+  "description": "Should be done after your unit has been assembled, your scrubber canister filled, lungs attached, all fittings/hoses checked & secure, etc. It should be done prior to entering the water. - etsam/Classic KISS manual R.9",
+  "sections": [
+    {
+      "title": "Main",
+      "checks": [
+        {
+          "description": "have ensured that the Valve Disks (mushroom valves) on the Valve Plates are flat and smooth. I have done a DSV positive and negative diaphragm test to ensure that they are sealing properly. I have also ensured that they have been installed correctly and the gas flow is going in the correct direction, left to right.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "I have done a breathing hose positive and negative pressure test to ensure that my loop hoses are not damaged.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "I have done a negative pressure test on the fully assembled KISS rebreather and it maintains full vacuum pressure.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "I have done a positive pressure test on the fully assembled KISS rebreather and it maintains full pressure. I have ensured that the counterlungs are hanging freely and that the Velcro is attached to the bottom of the counterlung case.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "I have turned my displays on.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "I’ve opened my diluent valve and checked that the cylinder is full. I’ve checked the pressure gauge for any sign of leakage of diluent in the system. I’ve ensured that the ADV and the bailout regulator are working correctly. (The diluent gas I am using is appropriate for the dive that I am planning).",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "",
+              "suffix": "PSI / BAR"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "I’ve opened the oxygen valve and checked that the cylinder is full. I’ve ensured that the manual add valve is working by pushing the button and watching the displays, while breathing on the unit. Also, I’ve ensured that the constant flow is working by listening for the flow.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "",
+              "suffix": "PSI / BAR"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "I've calibrated the sensors in oxygen. ( If I am using the Jetsam displays, I will ensure that they are in the “ON” position, NOT the calibrate position before I jump in the water.) I have verified the sensor readings in air.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "I’ve ensured that the size of my bail‐out gas cylinder is adequate for the dive that I am planning, that it is full and that the regulator is working correctly. I have also ensured that my wing and drysuit inflation are working correctly.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "I have pre‐breathed my KISS rebreather for at least 5 minutes before entering the water.",
+          "secondsTimer": 300,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "I will double check that my oxygen and diluent cylinders are open, that my displays are on, and my computer is properly programmed before I enter the water.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Once in the water, I will do a bubble check with my buddy to double check that there are no leaks in my system.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "The diluent tank is NOT an adequate gas supply for emergency situations.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    }
+  ],
+  "isAsset": true
+}

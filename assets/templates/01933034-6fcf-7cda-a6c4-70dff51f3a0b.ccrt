@@ -1,0 +1,398 @@
+{
+  "rebreatherManufacturer": "Kiss",
+  "rebreatherModel": "GEM Sidekick",
+  "title": "Assembly Checklist - Granular absorvent",
+  "description": "R.5",
+  "sections": [
+    {
+      "title": "Main",
+      "checks": [
+        {
+          "description": "Ensure that the nitrox cylinder has been filled and then personally analyze the contents to verify the percentage of oxygen, pressure, & MOD.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "O₂",
+              "suffix": "%"
+            },
+            {
+              "value": null,
+              "prefix": "Pressure",
+              "suffix": "PSI / BAR"
+            },
+            {
+              "value": null,
+              "prefix": "MOD",
+              "suffix": "ft / m"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Inspect the scrubber head and ensure that all components are properly secured, clean and not damaged.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Secure 3 approved sensors to the sensor holder and install the holder onto the scrubber head.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Ensure that the wiring and Molex plug’s are not damaged, properly secured, and in good working order and then secure Molex plug’s to the sensor’s.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Inspect, clean and lubricate the scrubber canister O-rings on the scrubber head.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Lay the head on the towers, with the underside facing up.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Inspect, clean and lubricate the canister tube sealing area and then secure it to the scrubber head.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Canister component info",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "Used",
+              "suffix": "h"
+            },
+            {
+              "value": null,
+              "prefix": "Left",
+              "suffix": "h"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Configure the scrubber canister for granular absorbent.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Fill the canister a third of the way & tap to settle, fill another third and tap to settle, and then fill to a ½ inch from the bottom thread. Place the scrubber basket onto the absorbent, While pushing down on the basket, tap to settle until it doesn’t settle any further. When finished absorbent should be a ½ inch from bottom thread.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Inspect, clean and lubricate the sealing area’s on the open end of the scrubber canister tube.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Inspect the scrubber canister base and ensure that it is not damaged and in good condition.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Inspect, clean and lubricate the scrubber canister base O-rings.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Insert the spring into the centre of the base, and turn counter clockwise to secure.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Thread the scrubber canister base onto the scrubber canister.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Inspect ADV actuator paddle – verify that it does not bind on activation.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Inspect the scrubber head and canister assembly. It should be undamaged, clean and ready for final assembly.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Inspect the vacuum break and bungee and ensure that they are undamaged and properly secured to the assembly.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Inspect, clean and lubricate the counterlung O-rings on the scrubber head assembly.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Inspect, clean and lubricate the counterlung sealing surface.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Insert scrubber assembly into counterlung.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Ensure that the ADV is properly lined up with the ADV access.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Attach knurled nuts to secure counterlung to scrubber head assembly.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Inspect the mouthpiece mushroom valve on the left side valve plate. Verify that is flat and smooth and not damaged in anyway. Ensure that it is facing the correct direction so that gas flow is going from left to right.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Inspect the mouthpiece right side valve assembly. Gently shake the mouthpiece; the inner valve should move freely.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Verify that the discharge ports on the mouthpiece are venting properly and that the diaphragms are in good condition.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "With the mouthpiece in the closed position, exhale into it to ensure that the vent hole is unobstructed and is venting properly.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Inspect, clean and lubricate the loop hose mouthpiece attachment O-ring’s and the mating sealing surface’s.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Attach loop hoses to mouthpiece and secure with circ-clips.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Verify that mouthpiece attachment O-rings are not pinched.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Perform mouthpiece and loop hose positive and negative test to verify that the mushroom valve and the right side valve assembly are working properly.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Inspect, clean and lubricate the loop hose QD hose stub O-ring’s and tower sealing surface’s.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Attach loop hose QD hose stub’s to scrubber head towers: with the OPV furthest from you, secure the exhaust loop hose to the right tower and the inhale loop hose to the left tower. The arrow on the mouthpiece should be on the top side pointing towards the exhaust hose.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Verify that the hose stub’s are properly connected and that the O-rings are not pinched.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Verify that the mouthpiece is facing the correct direction.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Perform system positive and negative test.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Verify that mouthpiece discharge port diaphragms are lying flat; re-seat if necessary.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Attach the first stage to your cylinder; leave the valve closed.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Attach female gas addition QD which is secured to the first stage regulator, to gas supply male nipple on the scrubber head.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Inspect the display cable for damage.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Inspect the Fischer connector for damage, dirt and rust - clean and lubricate if necessary.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Turn on PPO₂ monitor.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check PPO₂ monitor battery.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Flush the unit with air and calibrate PPO₂ monitor to 21%",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Turn cylinder valve on & then turn it off immediately. Watch the pressure gauge to verify there isn’t a leak.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Turn the cylinder back on.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Inhale from mouthpiece and exhale out of your nose a few times to verify the ADV works as it should. Watch the PPO₂ display while you are doing this. Ensure the PPO₂ is reacting the way it should, based on the percentage of gas in the system. Leave the mouthpiece open when you are finished.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Manually activate ADV to flush system with Nitrox in order to verify the sensor calibration. The percentage should be with in 1 or 2 % of the analyzed gas percentage.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Turn the cylinder off and close the mouthpiece.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Disconnect the gas supply from the scrubber head.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Turn the PPO₂ display off",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    }
+  ],
+  "isAsset": true
+}

@@ -1,0 +1,300 @@
+{
+  "rebreatherManufacturer": "Kiss",
+  "rebreatherModel": "Kiss Classic Explorer",
+  "title": "Predive Checklist",
+  "description": "Jetsam/Classic KISS manual R.9",
+  "sections": [
+    {
+      "title": "Header",
+      "checks": [
+        {
+          "description": "Planned depth",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "",
+              "suffix": "m / ft"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Planned set point",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "",
+              "suffix": "BAR / ATM"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Today's dive number",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "Dive",
+              "suffix": ""
+            }
+          ],
+          "runtimeType": "regular"
+        }
+      ]
+    },
+    {
+      "title": "Main",
+      "checks": [
+        {
+          "description": "I have checked my bailout system and it is in perfect working order.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "My bailout system is appropriate for the dive depth I am planning",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "",
+              "suffix": "ft / m"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Sensors age",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "",
+              "suffix": "months"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Sensors mV",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "",
+              "suffix": "mV"
+            },
+            {
+              "value": null,
+              "prefix": "",
+              "suffix": "mV"
+            },
+            {
+              "value": null,
+              "prefix": "",
+              "suffix": "mV"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "PPO₂ Display baterries time left",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "",
+              "suffix": "h"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "I have analysed my O₂ cylinder.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "O₂",
+              "suffix": "%"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "I have analysed and have confirmed what percentage of O₂ / Helium / Nitrogen my on‐board diluent cylinder contains.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "O₂",
+              "suffix": "%"
+            },
+            {
+              "value": null,
+              "prefix": "He",
+              "suffix": "%"
+            },
+            {
+              "value": null,
+              "prefix": "N₂",
+              "suffix": "%"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "I have analysed and have confirmed what percentage of O₂ / Helium / Nitrogen my first off‐board cylinder contains.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "O₂",
+              "suffix": "%"
+            },
+            {
+              "value": null,
+              "prefix": "He",
+              "suffix": "%"
+            },
+            {
+              "value": null,
+              "prefix": "N₂",
+              "suffix": "%"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "I have analysed and have confirmed what percentage of O₂ / Helium / Nitrogen my second off‐board cylinder contains.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "O₂",
+              "suffix": "%"
+            },
+            {
+              "value": null,
+              "prefix": "He",
+              "suffix": "%"
+            },
+            {
+              "value": null,
+              "prefix": "N₂",
+              "suffix": "%"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "If I am using more off‐board cylinders I will also write down the mixture and ensure that I have analysed them and have confirmed what percentage of O₂ / Helium / Nitrogen they contain.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check absorvent use",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "Used",
+              "suffix": "h"
+            },
+            {
+              "value": null,
+              "prefix": "Left",
+              "suffix": "h"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "My dive computer is in perfect working order.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Computer battery checked",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "",
+              "suffix": "V"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "My buddy and I have practiced bailout procedures and understand what to do in an emergency",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Surface interval before dive",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "",
+              "suffix": "h"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "CNS before dive",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "",
+              "suffix": "%"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Weight checked",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "",
+              "suffix": "lb / kg"
+            }
+          ],
+          "runtimeType": "regular"
+        }
+      ]
+    }
+  ],
+  "isAsset": true
+}
