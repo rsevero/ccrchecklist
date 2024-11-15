@@ -26,6 +26,11 @@ void main() async {
     // Replace all occurrences of "O2" with "O₂"
     contents = contents.replaceAll('O2', 'O₂');
 
+    // Remove all double spaces
+    while (contents.contains('  ')) {
+      contents = contents.replaceAll('  ', ' ');
+    }
+
     // Parse the JSON content
     final jsonData = jsonDecode(contents);
 

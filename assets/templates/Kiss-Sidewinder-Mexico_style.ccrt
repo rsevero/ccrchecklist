@@ -310,7 +310,7 @@
       "title": "Calibration",
       "checks": [
         {
-          "description": "Lightly press ADV and hold for slow flow of O₂ until readings stabilizes,  note milivolts (mV) and complete Linearity Worksheet",
+          "description": "Lightly press ADV and hold for slow flow of O₂ until readings stabilizes, note milivolts (mV) and complete Linearity Worksheet",
           "runtimeType": "linearityStep2"
         },
         {
