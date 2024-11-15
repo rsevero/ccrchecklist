@@ -99,7 +99,7 @@
           "runtimeType": "regular"
         },
         {
-          "description": "f NOT Diving Immediately: Close O2 + diluent cylinder valves, drain hoses, turn off electronics, and secure unit",
+          "description": "If NOT Diving Immediately: Close O₂ + diluent cylinder valves, drain hoses, turn off electronics, and secure unit",
           "secondsTimer": 0,
           "observation": "",
           "references": [],

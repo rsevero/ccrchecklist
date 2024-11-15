@@ -22,7 +22,7 @@
           "runtimeType": "regular"
         },
         {
-          "description": "Add Diluent during the descent. It is dangerous to confuse the diluent and oxygen inflators. Adding oxygen will cause a high ppO2 in the breathing loop.",
+          "description": "Add Diluent during the descent. It is dangerous to confuse the diluent and oxygen inflators. Adding oxygen will cause a high ppO₂ in the breathing loop.",
           "secondsTimer": 0,
           "observation": "",
           "references": [],

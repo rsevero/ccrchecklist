@@ -230,7 +230,7 @@
           "runtimeType": "regular"
         },
         {
-          "description": "Confirm Dil & O2 MAV function",
+          "description": "Confirm Dil & O₂ MAV function",
           "secondsTimer": 0,
           "observation": "",
           "references": [],
@@ -239,7 +239,7 @@
       ]
     },
     {
-      "title": "Diluent & O2 Leak Test",
+      "title": "Diluent & O₂ Leak Test",
       "checks": [
         {
           "description": "Open diluent & oxygen cylinders slowly allowing hoses to pressurize",

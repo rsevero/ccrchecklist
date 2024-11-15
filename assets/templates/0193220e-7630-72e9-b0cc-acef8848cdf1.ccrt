@@ -357,7 +357,7 @@
       "title": "Final",
       "checks": [
         {
-          "description": "If not diving immediately, verify PO2 in the loop is above 0.4 and the mouthpiece is closed. Shut down handset and cylinders, and bleed any pressure out of the system.",
+          "description": "If not diving immediately, verify PO₂ in the loop is above 0.4 and the mouthpiece is closed. Shut down handset and cylinders, and bleed any pressure out of the system.",
           "secondsTimer": 0,
           "observation": "",
           "references": [],

@@ -86,7 +86,7 @@
           "runtimeType": "regular"
         },
         {
-          "description": "Secure the tanks (O2 and diluent) to the Rebreather.",
+          "description": "Secure the tanks (O₂ and diluent) to the Rebreather.",
           "secondsTimer": 0,
           "observation": "",
           "references": [],

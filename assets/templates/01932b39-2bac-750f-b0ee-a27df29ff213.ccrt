@@ -71,7 +71,7 @@
           "runtimeType": "linearityStep1"
         },
         {
-          "description": "Check CO2 cal & cal according to manual, if needed",
+          "description": "Check CO₂ cal & cal according to manual, if needed",
           "secondsTimer": 0,
           "observation": "Expected in AIR: 350 - 450 ppm",
           "references": [
