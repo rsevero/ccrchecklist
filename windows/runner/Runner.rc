@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "ccr_checklist" "\0"
+            VALUE "CompanyName", "org.mapiah" "\0"
+            VALUE "FileDescription", "ccrchecklist" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "ccr_checklist" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "ccr_checklist.exe" "\0"
-            VALUE "ProductName", "ccr_checklist" "\0"
+            VALUE "InternalName", "ccrchecklist" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2024 org.mapiah. All rights reserved." "\0"
+            VALUE "OriginalFilename", "ccrchecklist.exe" "\0"
+            VALUE "ProductName", "ccrchecklist" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

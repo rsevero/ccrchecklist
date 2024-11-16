@@ -1,9 +1,9 @@
-import 'package:ccr_checklist/data/template.dart';
-import 'package:ccr_checklist/misc/constants.dart';
-import 'package:ccr_checklist/misc/help_dialog_helper.dart';
-import 'package:ccr_checklist/misc/save_template_helper.dart';
-import 'package:ccr_checklist/store/template_editor_store.dart';
-import 'package:ccr_checklist/widget/undo_redo_buttons_widget.dart';
+import 'package:ccrchecklist/data/template.dart';
+import 'package:ccrchecklist/misc/constants.dart';
+import 'package:ccrchecklist/misc/help_dialog_helper.dart';
+import 'package:ccrchecklist/misc/save_template_helper.dart';
+import 'package:ccrchecklist/store/template_editor_store.dart';
+import 'package:ccrchecklist/widget/undo_redo_buttons_widget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';

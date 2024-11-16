@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:ccr_checklist/misc/constants.dart';
+import 'package:ccrchecklist/misc/constants.dart';
 import 'package:path_provider/path_provider.dart';
 
 class CCRDirectory {

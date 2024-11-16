@@ -1,4 +1,4 @@
-import 'package:ccr_checklist/store/checklist_editor_store.dart';
+import 'package:ccrchecklist/store/checklist_editor_store.dart';
 import 'package:intl/intl.dart';
 
 class ChecklistCompleteHelper {

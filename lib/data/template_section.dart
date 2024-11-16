@@ -1,4 +1,4 @@
-import 'package:ccr_checklist/data/template_check.dart';
+import 'package:ccrchecklist/data/template_check.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'template_section.freezed.dart';

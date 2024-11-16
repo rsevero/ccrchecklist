@@ -1,9 +1,9 @@
-import 'package:ccr_checklist/misc/flutter_extension_methods.dart';
-import 'package:ccr_checklist/misc/helper_functions.dart';
-import 'package:ccr_checklist/page/checklist_complete_page.dart';
-import 'package:ccr_checklist/store/checklist_editor_store.dart';
-import 'package:ccr_checklist/widget/checklist_appbar.dart';
-import 'package:ccr_checklist/widget/checklist_body.dart';
+import 'package:ccrchecklist/misc/flutter_extension_methods.dart';
+import 'package:ccrchecklist/misc/helper_functions.dart';
+import 'package:ccrchecklist/page/checklist_complete_page.dart';
+import 'package:ccrchecklist/store/checklist_editor_store.dart';
+import 'package:ccrchecklist/widget/checklist_appbar.dart';
+import 'package:ccrchecklist/widget/checklist_body.dart';
 import 'package:flutter/material.dart'; // For date formatting
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';

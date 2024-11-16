@@ -1,6 +1,6 @@
-import 'package:ccr_checklist/data/template.dart';
-import 'package:ccr_checklist/data/template_file.dart';
-import 'package:ccr_checklist/store/template_list_store.dart';
+import 'package:ccrchecklist/data/template.dart';
+import 'package:ccrchecklist/data/template_file.dart';
+import 'package:ccrchecklist/store/template_list_store.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

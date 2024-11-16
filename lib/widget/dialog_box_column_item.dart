@@ -1,4 +1,4 @@
-import 'package:ccr_checklist/misc/constants.dart';
+import 'package:ccrchecklist/misc/constants.dart';
 import 'package:flutter/material.dart';
 
 class DialogBoxColumnItem extends StatelessWidget {

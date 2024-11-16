@@ -1,7 +1,7 @@
-import 'package:ccr_checklist/data/checklist_check.dart';
-import 'package:ccr_checklist/data/checklist_section.dart';
-import 'package:ccr_checklist/data/template_check.dart';
-import 'package:ccr_checklist/data/template_section.dart';
+import 'package:ccrchecklist/data/checklist_check.dart';
+import 'package:ccrchecklist/data/checklist_section.dart';
+import 'package:ccrchecklist/data/template_check.dart';
+import 'package:ccrchecklist/data/template_section.dart';
 import 'package:mobx/mobx.dart';
 
 class ObservableListJsonConverter {

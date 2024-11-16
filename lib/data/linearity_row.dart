@@ -1,4 +1,4 @@
-import 'package:ccr_checklist/misc/constants.dart';
+import 'package:ccrchecklist/misc/constants.dart';
 import 'package:dart_numerics/dart_numerics.dart';
 
 class LinearityRow {

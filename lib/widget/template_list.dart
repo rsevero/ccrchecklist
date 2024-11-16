@@ -1,8 +1,8 @@
-import 'package:ccr_checklist/data/template_file.dart';
-import 'package:ccr_checklist/misc/constants.dart';
-import 'package:ccr_checklist/misc/flutter_extension_methods.dart';
-import 'package:ccr_checklist/store/template_list_store.dart';
-import 'package:ccr_checklist/widget/template_list_tile_widget.dart';
+import 'package:ccrchecklist/data/template_file.dart';
+import 'package:ccrchecklist/misc/constants.dart';
+import 'package:ccrchecklist/misc/flutter_extension_methods.dart';
+import 'package:ccrchecklist/store/template_list_store.dart';
+import 'package:ccrchecklist/widget/template_list_tile_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';

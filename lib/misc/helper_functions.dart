@@ -1,5 +1,5 @@
-import 'package:ccr_checklist/page/checklist_page.dart';
-import 'package:ccr_checklist/store/checklist_editor_store.dart';
+import 'package:ccrchecklist/page/checklist_page.dart';
+import 'package:ccrchecklist/store/checklist_editor_store.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,4 +1,4 @@
-import 'package:ccr_checklist/widget/help_dialog.dart';
+import 'package:ccrchecklist/widget/help_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

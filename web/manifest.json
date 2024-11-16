@@ -1,6 +1,6 @@
 {
-    "name": "ccr_checklist",
-    "short_name": "ccr_checklist",
+    "name": "ccrchecklist",
+    "short_name": "ccrchecklist",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#ffffff",

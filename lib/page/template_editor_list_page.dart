@@ -1,13 +1,13 @@
-import 'package:ccr_checklist/data/template.dart';
-import 'package:ccr_checklist/misc/flutter_extension_methods.dart';
-import 'package:ccr_checklist/misc/help_dialog_helper.dart';
-import 'package:ccr_checklist/misc/save_template_helper.dart';
-import 'package:ccr_checklist/misc/template_load_helper.dart';
-import 'package:ccr_checklist/store/template_editor_store.dart';
-import 'package:ccr_checklist/store/template_list_store.dart';
-import 'package:ccr_checklist/widget/template_list.dart';
+import 'package:ccrchecklist/data/template.dart';
+import 'package:ccrchecklist/misc/flutter_extension_methods.dart';
+import 'package:ccrchecklist/misc/help_dialog_helper.dart';
+import 'package:ccrchecklist/misc/save_template_helper.dart';
+import 'package:ccrchecklist/misc/template_load_helper.dart';
+import 'package:ccrchecklist/store/template_editor_store.dart';
+import 'package:ccrchecklist/store/template_list_store.dart';
+import 'package:ccrchecklist/widget/template_list.dart';
 import 'package:flutter/material.dart';
-import 'package:ccr_checklist/page/template_editor_page.dart';
+import 'package:ccrchecklist/page/template_editor_page.dart';
 import 'package:provider/provider.dart';
 
 class TemplateEditorListPage extends StatelessWidget {

@@ -1,4 +1,4 @@
-import "package:ccr_checklist/theme/ccr_theme_extension.dart";
+import "package:ccrchecklist/theme/ccr_theme_extension.dart";
 import "package:flutter/material.dart";
 
 class MaterialTheme {

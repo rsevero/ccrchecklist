@@ -1,5 +1,5 @@
-import 'package:ccr_checklist/misc/constants.dart';
-import 'package:ccr_checklist/theme/orange_color_schemes.g.dart';
+import 'package:ccrchecklist/misc/constants.dart';
+import 'package:ccrchecklist/theme/orange_color_schemes.g.dart';
 import 'package:flutter/material.dart';
 
 final mainColorScheme = ColorScheme.fromSeed(seedColor: Colors.orange);

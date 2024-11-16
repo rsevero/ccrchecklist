@@ -1,9 +1,9 @@
-import 'package:ccr_checklist/data/checklist_check.dart';
-import 'package:ccr_checklist/misc/constants.dart';
-import 'package:ccr_checklist/misc/flutter_extension_methods.dart';
-import 'package:ccr_checklist/misc/linearity_check_helper.dart';
-import 'package:ccr_checklist/store/checklist_editor_store.dart';
-import 'package:ccr_checklist/widget/linearity_worksheet_text.dart';
+import 'package:ccrchecklist/data/checklist_check.dart';
+import 'package:ccrchecklist/misc/constants.dart';
+import 'package:ccrchecklist/misc/flutter_extension_methods.dart';
+import 'package:ccrchecklist/misc/linearity_check_helper.dart';
+import 'package:ccrchecklist/store/checklist_editor_store.dart';
+import 'package:ccrchecklist/widget/linearity_worksheet_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';

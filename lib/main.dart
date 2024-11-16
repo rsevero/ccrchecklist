@@ -1,10 +1,10 @@
-import 'package:ccr_checklist/page/template_list_page.dart';
-import 'package:ccr_checklist/store/checklist_editor_store.dart';
-import 'package:ccr_checklist/store/config_store.dart';
-import 'package:ccr_checklist/store/template_editor_store.dart';
-import 'package:ccr_checklist/store/template_list_store.dart';
-import 'package:ccr_checklist/theme/material_theme.dart';
-import 'package:ccr_checklist/undo/undo_redo_storage.dart';
+import 'package:ccrchecklist/page/template_list_page.dart';
+import 'package:ccrchecklist/store/checklist_editor_store.dart';
+import 'package:ccrchecklist/store/config_store.dart';
+import 'package:ccrchecklist/store/template_editor_store.dart';
+import 'package:ccrchecklist/store/template_list_store.dart';
+import 'package:ccrchecklist/theme/material_theme.dart';
+import 'package:ccrchecklist/undo/undo_redo_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:platform_info/platform_info.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +20,7 @@ void main() async {
     await windowManager.ensureInitialized();
 
     WindowOptions windowOptions = const WindowOptions(
+      title: 'CCR Checklist',
       // Regular mobile phone screen size
       size: Size(412, 915),
       center: true,

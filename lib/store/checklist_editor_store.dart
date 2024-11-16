@@ -1,15 +1,15 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:ccr_checklist/data/checklist_check.dart';
-import 'package:ccr_checklist/data/checklist_section.dart';
-import 'package:ccr_checklist/data/linearity_row.dart';
-import 'package:ccr_checklist/data/regular_check_reference.dart';
-import 'package:ccr_checklist/data/template.dart';
-import 'package:ccr_checklist/data/template_check.dart';
-import 'package:ccr_checklist/misc/constants.dart';
-import 'package:ccr_checklist/misc/ccr_directory_helper.dart';
-import 'package:ccr_checklist/misc/linearity_check_helper.dart';
-import 'package:ccr_checklist/store/observablelist_json_converter.dart';
+import 'package:ccrchecklist/data/checklist_check.dart';
+import 'package:ccrchecklist/data/checklist_section.dart';
+import 'package:ccrchecklist/data/linearity_row.dart';
+import 'package:ccrchecklist/data/regular_check_reference.dart';
+import 'package:ccrchecklist/data/template.dart';
+import 'package:ccrchecklist/data/template_check.dart';
+import 'package:ccrchecklist/misc/constants.dart';
+import 'package:ccrchecklist/misc/ccr_directory_helper.dart';
+import 'package:ccrchecklist/misc/linearity_check_helper.dart';
+import 'package:ccrchecklist/store/observablelist_json_converter.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -193,7 +193,7 @@ abstract class _ChecklistEditorStoreBaseToJson with Store {
     Directory directory = await CCRDirectory.shared();
     final formattedDateTime =
         DateFormat('yyyy-MM-dd_HH:mm:ss').format(DateTime.now());
-    String filename = 'ccr_checklist_$formattedDateTime.$ccrChecklistExtension';
+    String filename = 'ccrchecklist_$formattedDateTime.$ccrChecklistExtension';
     filename = slugify(filename);
     final file =
         await File('${directory.path}/$filename').create(recursive: true);

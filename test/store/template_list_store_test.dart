@@ -1,4 +1,4 @@
-import 'package:ccr_checklist/store/template_list_store.dart';
+import 'package:ccrchecklist/store/template_list_store.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

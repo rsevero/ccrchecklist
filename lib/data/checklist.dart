@@ -1,4 +1,4 @@
-import 'package:ccr_checklist/data/checklist_section.dart';
+import 'package:ccrchecklist/data/checklist_section.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

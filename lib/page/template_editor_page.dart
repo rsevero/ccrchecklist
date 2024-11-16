@@ -1,9 +1,9 @@
-import 'package:ccr_checklist/misc/helper_functions.dart';
-import 'package:ccr_checklist/store/template_editor_store.dart';
-import 'package:ccr_checklist/store/template_list_store.dart';
-import 'package:ccr_checklist/widget/template_editor_page_actions_widget.dart';
-import 'package:ccr_checklist/widget/template_editor_page_app_bar.dart';
-import 'package:ccr_checklist/widget/template_editor_page_body.dart';
+import 'package:ccrchecklist/misc/helper_functions.dart';
+import 'package:ccrchecklist/store/template_editor_store.dart';
+import 'package:ccrchecklist/store/template_list_store.dart';
+import 'package:ccrchecklist/widget/template_editor_page_actions_widget.dart';
+import 'package:ccrchecklist/widget/template_editor_page_app_bar.dart';
+import 'package:ccrchecklist/widget/template_editor_page_body.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

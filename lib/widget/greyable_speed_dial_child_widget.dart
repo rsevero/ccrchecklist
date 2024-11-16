@@ -1,4 +1,4 @@
-import 'package:ccr_checklist/theme/main_theme.dart';
+import 'package:ccrchecklist/theme/main_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 

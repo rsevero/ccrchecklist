@@ -1,8 +1,0 @@
-[Desktop Entry]
-Version=0.1
-Type=Application
-Terminal=false
-Name=CCR Checklist
-Exec=ccr_checklist %u
-Icon=ccr_checklist.png
-Categories=Utility;

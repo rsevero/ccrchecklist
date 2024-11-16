@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:ccr_checklist/data/checklist_check.dart';
-import 'package:ccr_checklist/misc/constants.dart';
-import 'package:ccr_checklist/misc/datetime_formater_helper.dart';
-import 'package:ccr_checklist/misc/flutter_extension_methods.dart';
-import 'package:ccr_checklist/store/checklist_editor_store.dart';
-import 'package:ccr_checklist/widget/timer_duration.dart';
+import 'package:ccrchecklist/data/checklist_check.dart';
+import 'package:ccrchecklist/misc/constants.dart';
+import 'package:ccrchecklist/misc/datetime_formater_helper.dart';
+import 'package:ccrchecklist/misc/flutter_extension_methods.dart';
+import 'package:ccrchecklist/store/checklist_editor_store.dart';
+import 'package:ccrchecklist/widget/timer_duration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';

@@ -1,4 +1,4 @@
-import 'package:ccr_checklist/data/regular_check_reference.dart';
+import 'package:ccrchecklist/data/regular_check_reference.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

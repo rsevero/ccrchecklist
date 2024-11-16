@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:ccr_checklist/misc/ccr_directory_helper.dart';
-import 'package:ccr_checklist/misc/constants.dart';
+import 'package:ccrchecklist/misc/ccr_directory_helper.dart';
+import 'package:ccrchecklist/misc/constants.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:mobx/mobx.dart';
 import 'package:flutter/services.dart' show rootBundle;

@@ -1,9 +1,9 @@
-import 'package:ccr_checklist/misc/checklist_complete_helper.dart';
-import 'package:ccr_checklist/misc/help_dialog_helper.dart';
-import 'package:ccr_checklist/page/pdf_preview_page.dart';
-import 'package:ccr_checklist/store/checklist_editor_store.dart';
-import 'package:ccr_checklist/store/config_store.dart';
-import 'package:ccr_checklist/widget/non_ok_sections_report.dart';
+import 'package:ccrchecklist/misc/checklist_complete_helper.dart';
+import 'package:ccrchecklist/misc/help_dialog_helper.dart';
+import 'package:ccrchecklist/page/pdf_preview_page.dart';
+import 'package:ccrchecklist/store/checklist_editor_store.dart';
+import 'package:ccrchecklist/store/config_store.dart';
+import 'package:ccrchecklist/widget/non_ok_sections_report.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

@@ -1,4 +1,4 @@
-import 'package:ccr_checklist/misc/constants.dart';
+import 'package:ccrchecklist/misc/constants.dart';
 
 String ccrFormatMinutesSecondsToMinutesSecondsTimer(int minutes, int seconds) {
   if ((minutes < 0) || (seconds < 0)) {

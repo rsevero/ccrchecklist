@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'package:ccr_checklist/data/template_file.dart';
-import 'package:ccr_checklist/misc/constants.dart';
-import 'package:ccr_checklist/data/template.dart';
-import 'package:ccr_checklist/misc/ccr_directory_helper.dart';
+import 'package:ccrchecklist/data/template_file.dart';
+import 'package:ccrchecklist/misc/constants.dart';
+import 'package:ccrchecklist/data/template.dart';
+import 'package:ccrchecklist/misc/ccr_directory_helper.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:mobx/mobx.dart';
 import 'package:platform_info/platform_info.dart';

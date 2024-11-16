@@ -1,10 +1,10 @@
-import 'package:ccr_checklist/data/regular_check_reference.dart';
-import 'package:ccr_checklist/misc/constants.dart';
-import 'package:ccr_checklist/misc/flutter_extension_methods.dart';
-import 'package:ccr_checklist/store/template_editor_store.dart';
-import 'package:ccr_checklist/widget/dialog_box_column_item.dart';
-import 'package:ccr_checklist/widget/greyable_speed_dial_child_widget.dart';
-import 'package:ccr_checklist/widget/timer_duration.dart';
+import 'package:ccrchecklist/data/regular_check_reference.dart';
+import 'package:ccrchecklist/misc/constants.dart';
+import 'package:ccrchecklist/misc/flutter_extension_methods.dart';
+import 'package:ccrchecklist/store/template_editor_store.dart';
+import 'package:ccrchecklist/widget/dialog_box_column_item.dart';
+import 'package:ccrchecklist/widget/greyable_speed_dial_child_widget.dart';
+import 'package:ccrchecklist/widget/timer_duration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';

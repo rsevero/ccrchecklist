@@ -1,8 +1,8 @@
 import 'dart:io';
-import 'package:ccr_checklist/data/template.dart';
-import 'package:ccr_checklist/misc/constants.dart';
-import 'package:ccr_checklist/misc/ccr_directory_helper.dart';
-import 'package:ccr_checklist/store/template_editor_store.dart';
+import 'package:ccrchecklist/data/template.dart';
+import 'package:ccrchecklist/misc/constants.dart';
+import 'package:ccrchecklist/misc/ccr_directory_helper.dart';
+import 'package:ccrchecklist/store/template_editor_store.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:slugify/slugify.dart';

@@ -1,7 +1,7 @@
-import 'package:ccr_checklist/misc/checklist_complete_helper.dart';
-import 'package:ccr_checklist/store/checklist_editor_store.dart';
-import 'package:ccr_checklist/store/config_store.dart';
-import 'package:ccr_checklist/widget/checklist_as_pdf.dart';
+import 'package:ccrchecklist/misc/checklist_complete_helper.dart';
+import 'package:ccrchecklist/store/checklist_editor_store.dart';
+import 'package:ccrchecklist/store/config_store.dart';
+import 'package:ccrchecklist/widget/checklist_as_pdf.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';

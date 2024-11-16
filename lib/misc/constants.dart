@@ -26,7 +26,7 @@ const String ccrTemplateExtension = 'ccrt';
 
 const String ccrTemplateMimeType = 'application/vnd.ccrchecklist-ccrt+json';
 
-const String ccrDirectory = 'ccr_checklist';
+const String ccrDirectory = 'ccrchecklist';
 const String ccrTemplatesDirectory = 'templates';
 const String ccrShareDirectory = 'share';
 

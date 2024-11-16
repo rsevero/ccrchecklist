@@ -1,10 +1,10 @@
-import 'package:ccr_checklist/data/checklist_check.dart';
-import 'package:ccr_checklist/data/checklist_section.dart';
-import 'package:ccr_checklist/data/linearity_row.dart';
-import 'package:ccr_checklist/misc/checklist_complete_helper.dart';
-import 'package:ccr_checklist/misc/constants.dart';
-import 'package:ccr_checklist/store/checklist_editor_store.dart';
-import 'package:ccr_checklist/store/config_store.dart';
+import 'package:ccrchecklist/data/checklist_check.dart';
+import 'package:ccrchecklist/data/checklist_section.dart';
+import 'package:ccrchecklist/data/linearity_row.dart';
+import 'package:ccrchecklist/misc/checklist_complete_helper.dart';
+import 'package:ccrchecklist/misc/constants.dart';
+import 'package:ccrchecklist/store/checklist_editor_store.dart';
+import 'package:ccrchecklist/store/config_store.dart';
 import 'package:flutter/services.dart';
 import 'package:htmltopdfwidgets/htmltopdfwidgets.dart';
 import 'package:mobx/mobx.dart';

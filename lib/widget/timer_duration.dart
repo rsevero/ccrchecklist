@@ -1,7 +1,7 @@
-import 'package:ccr_checklist/misc/constants.dart';
-import 'package:ccr_checklist/misc/datetime_formater_helper.dart';
-import 'package:ccr_checklist/misc/flutter_extension_methods.dart';
-import 'package:ccr_checklist/widget/dialog_box_column_item.dart';
+import 'package:ccrchecklist/misc/constants.dart';
+import 'package:ccrchecklist/misc/datetime_formater_helper.dart';
+import 'package:ccrchecklist/misc/flutter_extension_methods.dart';
+import 'package:ccrchecklist/widget/dialog_box_column_item.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 

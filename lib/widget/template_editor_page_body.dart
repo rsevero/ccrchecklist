@@ -1,5 +1,5 @@
-import 'package:ccr_checklist/store/template_editor_store.dart';
-import 'package:ccr_checklist/widget/template_section_widget.dart';
+import 'package:ccrchecklist/store/template_editor_store.dart';
+import 'package:ccrchecklist/widget/template_section_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';

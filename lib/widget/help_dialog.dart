@@ -1,5 +1,5 @@
-import 'package:ccr_checklist/misc/help_dialog_helper.dart';
-import 'package:ccr_checklist/widget/bottom_fade.dart';
+import 'package:ccrchecklist/misc/help_dialog_helper.dart';
+import 'package:ccrchecklist/widget/bottom_fade.dart';
 import 'package:flutter/material.dart';
 import 'package:markdown_widget/markdown_widget.dart';
 
