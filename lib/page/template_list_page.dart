@@ -1,4 +1,5 @@
 import 'package:ccrchecklist/data/template.dart';
+import 'package:ccrchecklist/misc/about_dialog_helper.dart';
 import 'package:ccrchecklist/misc/constants.dart';
 import 'package:ccrchecklist/misc/help_dialog_helper.dart';
 import 'package:ccrchecklist/misc/template_load_helper.dart';
@@ -89,6 +90,13 @@ class _TemplateListPageState extends State<TemplateListPage> {
                   onPressed: () =>
                       ccrOpenHelpDialog(context, 'TemplateListPage'),
                   tooltip: 'Help',
+                ),
+                IconButton(
+                  icon: const Icon(Icons.info_outline),
+                  onPressed: () {
+                    showCCRAboutDialog(context);
+                  },
+                  tooltip: 'About',
                 ),
               ],
             ),

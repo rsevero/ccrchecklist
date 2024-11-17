@@ -35,6 +35,7 @@ dependencies:
   expansion_tile_list: ^0.1.1
   flutter:
     sdk: flutter
+  flutter_markdown: ^0.7.4+1
   flutter_mobx: ^2.2.0
   flutter_sharing_intent: ^1.1.1
   flutter_speed_dial: ^7.0.0
@@ -47,6 +48,7 @@ dependencies:
   mobx_codegen: ^2.4.0
   mockito: ^5.4.4
   numberpicker: ^2.1.2
+  package_info_plus: ^8.1.1
   path_provider: ^2.1.5
   pdf: ^3.10.8
   platform_info: ^5.0.0
@@ -58,6 +60,7 @@ dependencies:
   theme_tailor: ^3.0.1
   theme_tailor_annotation: ^3.0.1
   toml: ^0.16.0
+  url_launcher: ^6.3.1
   uuid: ^4.5.1
   vibration: ^2.0.1
   window_manager: ^0.4.2
@@ -177,13 +180,13 @@ flutter:
           weight: 700
 
   assets:
-    - assets/templates/
-    - assets/templates/manifest.json
-    - assets/sounds/
-    - assets/sounds/alarm-clock-short.mp3
-    - assets/help/
     - assets/help/ChecklistCompletePage.md
     - assets/help/ChecklistPage.md
     - assets/help/TemplateEditorListPage.md
     - assets/help/TemplateEditorPage.md
     - assets/help/TemplateListPage.md
+    - assets/icons/ccrchecklist.png
+    - assets/sounds/alarm-clock-short.mp3
+    - assets/templates/manifest.json
+    - assets/texts/how_to_report_bugs.md
+    - assets/texts/ownership_checklists.md
