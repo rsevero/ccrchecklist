@@ -28,7 +28,6 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  about: ^2.1.3
   audioplayers: ^6.1.0
   cupertino_icons: ^1.0.6
   dart_numerics: ^0.0.6
@@ -187,6 +186,7 @@ flutter:
     - assets/help/TemplateListPage.md
     - assets/icons/ccrchecklist.png
     - assets/sounds/alarm-clock-short.mp3
+    - assets/templates/
     - assets/templates/manifest.json
     - assets/texts/how_to_report_bugs.md
     - assets/texts/no_warranties.md

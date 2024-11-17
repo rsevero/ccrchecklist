@@ -174,15 +174,15 @@ abstract class TemplateListStoreBase with Store {
   }
 
   Future<void> _getAssetTemplates() async {
-    String manifestJson =
+    final String manifestJson =
         await rootBundle.loadString(ccrDefaultTemplatesManifestDirectory);
-    List<String> templateFileNames = ((json.decode(manifestJson)
+    final List<String> templateFileNames = ((json.decode(manifestJson)
             as Map<String, dynamic>)['templates'] as List<dynamic>)
         .cast<String>();
 
     // Load each template file listed in the manifest
     for (String filename in templateFileNames) {
-      final templatePath = '$ccrDefaultTemplatesDirectory/$filename';
+      final String templatePath = '$ccrDefaultTemplatesDirectory/$filename';
       final String jsonString = await rootBundle.loadString(templatePath);
       final Map<String, dynamic> jsonMap = json.decode(jsonString);
       final Template newTemplate = Template.fromJson(jsonMap);
