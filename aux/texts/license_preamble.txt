@@ -13,23 +13,3 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
-import 'package:flutter/material.dart';
-
-class LinearityWorksheetText extends StatelessWidget {
-  final String text;
-  final TextStyle style;
-  const LinearityWorksheetText(this.text, this.style, {super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Text(
-        text,
-        style: style,
-        textAlign: TextAlign.center,
-      ),
-    );
-  }
-}
