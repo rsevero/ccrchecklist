@@ -1,7 +1,7 @@
 # CCR Checklist
 
 * [Just using](#just-using)
-* [Creating/editing templates](#creating-editing-templates)
+* [Creating/editing templates](#creatingediting-templates)
     * [Check types](#check-types)
         * [Regular Check](#regular-check)
         * [Linearity Check (step 1)](#linearity-check-step-1)
