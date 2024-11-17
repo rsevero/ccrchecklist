@@ -37,7 +37,7 @@ void showCCRAboutDialog(BuildContext context) async {
       width: 48,
       height: 48,
     ),
-    applicationLegalese: '© 2024 CCR Checklist Developers',
+    applicationLegalese: '© 2024 Rodrigo Severo',
     children: <Widget>[
       ExpansionTile(
         title: const Text('Operating System'),
@@ -47,6 +47,10 @@ void showCCRAboutDialog(BuildContext context) async {
             subtitle: Text('Version: $osVersion'),
           ),
         ],
+      ),
+      AboutDialogMarkdownTile(
+        title: 'No warranties. Be responsable.',
+        markdownPath: 'assets/texts/no_warranties.md',
       ),
       AboutDialogMarkdownTile(
         title: 'How to report bugs',

@@ -189,4 +189,5 @@ flutter:
     - assets/sounds/alarm-clock-short.mp3
     - assets/templates/manifest.json
     - assets/texts/how_to_report_bugs.md
+    - assets/texts/no_warranties.md
     - assets/texts/ownership_checklists.md
