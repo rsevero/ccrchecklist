@@ -60,6 +60,10 @@ void showCCRAboutDialog(BuildContext context) async {
         title: 'Ownership of checklists',
         markdownPath: 'assets/texts/ownership_checklists.md',
       ),
+      AboutDialogMarkdownTile(
+        title: 'Privacy policy',
+        markdownPath: 'assets/texts/privacy_policy.md',
+      ),
     ],
   );
 }
