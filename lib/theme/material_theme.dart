@@ -167,7 +167,7 @@ class MaterialTheme {
         titleTextStyle: appBarTextStyle.copyWith(
           fontFamily: 'Jost',
           fontWeight: FontWeight.w900,
-          fontSize: 32,
+          fontSize: 30,
           color: foregroundColor,
         ),
         shape: RoundedRectangleBorder(

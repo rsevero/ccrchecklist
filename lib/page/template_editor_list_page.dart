@@ -23,6 +23,7 @@ import 'package:ccrchecklist/misc/template_load_helper.dart';
 import 'package:ccrchecklist/store/template_editor_store.dart';
 import 'package:ccrchecklist/store/template_list_store.dart';
 import 'package:ccrchecklist/widget/template_list.dart';
+import 'package:ccrchecklist/widget/tool_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:ccrchecklist/page/template_editor_page.dart';
 import 'package:provider/provider.dart';
@@ -34,10 +35,9 @@ class TemplateEditorListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Checklist Templates'),
-          elevation: 4,
-          actions: [
+        body: ToolBar(
+          title: 'Templates',
+          buttons: [
             IconButton(
               icon: const Icon(Icons.help_outline),
               onPressed: () =>
@@ -52,11 +52,15 @@ class TemplateEditorListPage extends StatelessWidget {
               tooltip: 'About',
             ),
           ],
-        ),
-        body: TemplateList(
-          isEditor: true,
-          onTapTemplateFile: _onTapTemplateFile,
-          onRemoveTemplateFile: _onRemoveTemplateFile,
+          contents: [
+            Expanded(
+              child: TemplateList(
+                isEditor: true,
+                onTapTemplateFile: _onTapTemplateFile,
+                onRemoveTemplateFile: _onRemoveTemplateFile,
+              ),
+            ),
+          ],
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () => _addNewTemplate(context),

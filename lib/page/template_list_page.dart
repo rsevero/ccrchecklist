@@ -27,6 +27,7 @@ import 'package:ccrchecklist/store/config_store.dart';
 import 'package:ccrchecklist/store/template_list_store.dart';
 import 'package:ccrchecklist/widget/missing_diver_name_dialog.dart';
 import 'package:ccrchecklist/widget/template_list.dart';
+import 'package:ccrchecklist/widget/tool_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -87,10 +88,9 @@ class _TemplateListPageState extends State<TemplateListPage> {
 
         return SafeArea(
           child: Scaffold(
-            appBar: AppBar(
-              title: const Text('CCR Checklist'),
-              elevation: 4,
-              actions: <Widget>[
+            body: ToolBar(
+              title: 'CCR Checklist',
+              buttons: [
                 IconButton(
                   icon: const Icon(Icons.edit),
                   onPressed: () => _openTemplateEditor(context),
@@ -115,10 +115,14 @@ class _TemplateListPageState extends State<TemplateListPage> {
                   tooltip: 'About',
                 ),
               ],
-            ),
-            body: TemplateList(
-              isEditor: false,
-              onTapTemplateFile: _onTapTemplateFile,
+              contents: [
+                Expanded(
+                  child: TemplateList(
+                    isEditor: false,
+                    onTapTemplateFile: _onTapTemplateFile,
+                  ),
+                ),
+              ],
             ),
           ),
         );
