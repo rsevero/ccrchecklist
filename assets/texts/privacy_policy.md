@@ -1,7 +1,7 @@
 # Privacy Policy
 Effective Date: 2024-11-18
 
-CCr Checklist ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy outlines how we collect, use, and safeguard your information when you use our Android application ("the App"). By using the App, you agree to the practices described in this policy.
+CCR Checklist ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy outlines how we collect, use, and safeguard your information when you use our Android application ("the App"). By using the App, you agree to the practices described in this policy.
 
 ---
 
