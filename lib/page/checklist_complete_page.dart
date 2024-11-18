@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import 'package:ccrchecklist/misc/about_dialog_helper.dart';
 import 'package:ccrchecklist/misc/checklist_complete_helper.dart';
 import 'package:ccrchecklist/misc/help_dialog_helper.dart';
 import 'package:ccrchecklist/page/pdf_preview_page.dart';
@@ -55,6 +56,13 @@ class ChecklistCompletePage extends StatelessWidget {
               onPressed: () =>
                   ccrOpenHelpDialog(context, 'ChecklistCompletePage'),
               tooltip: 'Help',
+            ),
+            IconButton(
+              icon: const Icon(Icons.info_outline),
+              onPressed: () {
+                showCCRAboutDialog(context);
+              },
+              tooltip: 'About',
             ),
           ],
         ),

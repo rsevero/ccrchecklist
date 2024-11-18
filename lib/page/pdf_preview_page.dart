@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import 'package:ccrchecklist/misc/about_dialog_helper.dart';
 import 'package:ccrchecklist/misc/checklist_complete_helper.dart';
 import 'package:ccrchecklist/store/checklist_editor_store.dart';
 import 'package:ccrchecklist/store/config_store.dart';
@@ -69,6 +70,13 @@ class PdfPreviewPage extends StatelessWidget {
               IconButton(
                 icon: const Icon(Icons.share),
                 onPressed: () => _onPressedShare(context),
+              ),
+              IconButton(
+                icon: const Icon(Icons.info_outline),
+                onPressed: () {
+                  showCCRAboutDialog(context);
+                },
+                tooltip: 'About',
               ),
             ],
           ],

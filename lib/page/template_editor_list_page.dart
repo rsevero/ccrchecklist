@@ -15,6 +15,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import 'package:ccrchecklist/data/template.dart';
+import 'package:ccrchecklist/misc/about_dialog_helper.dart';
 import 'package:ccrchecklist/misc/flutter_extension_methods.dart';
 import 'package:ccrchecklist/misc/help_dialog_helper.dart';
 import 'package:ccrchecklist/misc/save_template_helper.dart';
@@ -42,6 +43,13 @@ class TemplateEditorListPage extends StatelessWidget {
               onPressed: () =>
                   ccrOpenHelpDialog(context, 'TemplateEditorListPage'),
               tooltip: 'Help',
+            ),
+            IconButton(
+              icon: const Icon(Icons.info_outline),
+              onPressed: () {
+                showCCRAboutDialog(context);
+              },
+              tooltip: 'About',
             ),
           ],
         ),

@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import 'package:ccrchecklist/misc/about_dialog_helper.dart';
 import 'package:ccrchecklist/misc/flutter_extension_methods.dart';
 import 'package:ccrchecklist/misc/help_dialog_helper.dart';
 import 'package:ccrchecklist/misc/helper_functions.dart';
@@ -21,6 +22,7 @@ import 'package:ccrchecklist/store/checklist_editor_store.dart';
 import 'package:ccrchecklist/store/config_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -63,7 +65,11 @@ class CheckListAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ),
         IconButton(
-          icon: Icon(Icons.info_outline),
+          icon: HugeIcon(
+            icon: HugeIcons.strokeRoundedZoomInArea,
+            color: Colors.black,
+            size: 24.0,
+          ),
           tooltip: 'Info',
           onPressed: () {
             _showInfoDialog(
@@ -81,6 +87,13 @@ class CheckListAppBar extends StatelessWidget implements PreferredSizeWidget {
           icon: const Icon(Icons.help_outline),
           onPressed: () => ccrOpenHelpDialog(context, 'ChecklistPage'),
           tooltip: 'Help',
+        ),
+        IconButton(
+          icon: const Icon(Icons.info_outline),
+          onPressed: () {
+            showCCRAboutDialog(context);
+          },
+          tooltip: 'About',
         ),
       ],
     );

@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import 'package:ccrchecklist/misc/about_dialog_helper.dart';
 import 'package:ccrchecklist/store/config_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -39,14 +40,23 @@ class SettingsPage extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Settings'),
           actions: <Widget>[
-            Observer(builder: (context) {
-              return IconButton(
-                icon: const Icon(Icons.save),
-                onPressed: configStore.isModified
-                    ? () => configStore.saveConfig()
-                    : null,
-              );
-            }),
+            Observer(
+              builder: (context) {
+                return IconButton(
+                  icon: const Icon(Icons.save),
+                  onPressed: configStore.isModified
+                      ? () => configStore.saveConfig()
+                      : null,
+                );
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.info_outline),
+              onPressed: () {
+                showCCRAboutDialog(context);
+              },
+              tooltip: 'About',
+            ),
           ],
         ),
         body: Padding(

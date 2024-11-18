@@ -15,6 +15,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import 'package:ccrchecklist/data/template.dart';
+import 'package:ccrchecklist/misc/about_dialog_helper.dart';
 import 'package:ccrchecklist/misc/constants.dart';
 import 'package:ccrchecklist/misc/help_dialog_helper.dart';
 import 'package:ccrchecklist/misc/save_template_helper.dart';
@@ -81,6 +82,13 @@ class TemplateEditorPageAppBar extends AppBar {
           icon: const Icon(Icons.help_outline),
           onPressed: () => ccrOpenHelpDialog(context, 'TemplateEditorPage'),
           tooltip: 'Help',
+        ),
+        IconButton(
+          icon: const Icon(Icons.info_outline),
+          onPressed: () {
+            showCCRAboutDialog(context);
+          },
+          tooltip: 'About',
         ),
       ];
 
