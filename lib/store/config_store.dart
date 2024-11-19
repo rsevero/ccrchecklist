@@ -20,7 +20,6 @@ import 'package:ccrchecklist/misc/ccr_directory_helper.dart';
 import 'package:ccrchecklist/misc/constants.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:mobx/mobx.dart';
-import 'package:flutter/services.dart' show rootBundle;
 import 'package:toml/toml.dart';
 
 part 'config_store.g.dart';
@@ -59,16 +58,16 @@ abstract class _ConfigStoreBaseToJson with Store implements TomlEncodableValue {
   Future<void> loadConfig() async {
     _configLoadStatus = ConfigLoadStatusEnum.loading;
     try {
-      final directory = await CCRDirectory.config();
-      final path = '${directory.path}/$ccrConfigFile';
-      if (!File(path).existsSync()) {
+      final Directory configDirectory = await CCRDirectory.config();
+      final String configPath = '${configDirectory.path}/$ccrConfigFile';
+      if (!File(configPath).existsSync()) {
         print("No TOML file to read");
         _configData = {};
         _configLoadStatus = ConfigLoadStatusEnum.loaded;
         return;
       }
-      String tomlContent = await rootBundle.loadString(path);
-      final document = TomlDocument.parse(tomlContent);
+      final String tomlContent = await File(configPath).readAsString();
+      final TomlDocument document = TomlDocument.parse(tomlContent);
       _configData = document.toMap();
       _configLoadStatus = ConfigLoadStatusEnum.loaded;
     } catch (e) {
