@@ -35,9 +35,12 @@ class TemplateEditorListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Templates'),
+          elevation: 4,
+        ),
         body: ToolBar(
-          title: 'Templates',
-          buttons: [
+          actions: [
             IconButton(
               icon: const Icon(Icons.help_outline),
               onPressed: () =>

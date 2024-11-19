@@ -88,9 +88,12 @@ class _TemplateListPageState extends State<TemplateListPage> {
 
         return SafeArea(
           child: Scaffold(
+            appBar: AppBar(
+              title: const Text('CCR Checklist'),
+              elevation: 4,
+            ),
             body: ToolBar(
-              title: 'CCR Checklist',
-              buttons: [
+              actions: [
                 IconButton(
                   icon: const Icon(Icons.edit),
                   onPressed: () => _openTemplateEditor(context),
