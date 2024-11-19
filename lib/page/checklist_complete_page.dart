@@ -42,12 +42,10 @@ class ChecklistCompletePage extends StatelessWidget {
         ),
         body: ToolBar(
           actions: [
-            if (defaultTargetPlatform == TargetPlatform.linux) ...[
-              IconButton(
-                icon: const Icon(Icons.picture_as_pdf),
-                onPressed: () => _onPressedShow(context),
-              ),
-            ],
+            IconButton(
+              icon: const Icon(Icons.picture_as_pdf),
+              onPressed: () => _onPressedShow(context),
+            ),
             if (defaultTargetPlatform == TargetPlatform.android) ...[
               IconButton(
                 icon: const Icon(Icons.share),
