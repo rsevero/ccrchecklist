@@ -14,6 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import 'package:ccrchecklist/misc/constants.dart';
+import 'package:ccrchecklist/misc/flutter_extension_methods.dart';
 import 'package:ccrchecklist/store/template_editor_store.dart';
 import 'package:ccrchecklist/widget/template_section_widget.dart';
 import 'package:flutter/material.dart';
@@ -26,77 +28,108 @@ class TemplateEditorPageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final templateEditorStore = Provider.of<TemplateEditorStore>(context);
+    final theme = context.ccrThemeExtension;
 
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Observer(
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Observer(
             builder: (_) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              return Row(
                 children: [
-                  Center(
-                    child: Text(
-                      templateEditorStore.currentTemplate.title,
-                      style: const TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.w700,
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: theme.inverseSurface,
+                        borderRadius: ccrTemplateListTileBorderRadius,
                       ),
-                      textAlign: TextAlign.left,
-                    ),
-                  ),
-                  Center(
-                    child: Text(
-                      templateEditorStore.currentTemplate.description,
-                      style: const TextStyle(
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.w700,
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            templateEditorStore
+                                .currentTemplate.rebreatherManufacturer,
+                            style: TextStyle(
+                              fontSize: 24.0,
+                              fontWeight: FontWeight.w300,
+                              color: theme.onInverseSurface,
+                            ),
+                            textAlign: TextAlign.left,
+                          ),
+                          Text(
+                            templateEditorStore.currentTemplate.rebreatherModel,
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.w700,
+                              color: theme.onInverseSurface,
+                            ),
+                            textAlign: TextAlign.left,
+                          ),
+                          Text(
+                            templateEditorStore.currentTemplate.title,
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w300,
+                              color: theme.onInverseSurface,
+                            ),
+                            textAlign: TextAlign.left,
+                          ),
+                          Text(
+                            templateEditorStore.currentTemplate.description,
+                            style: TextStyle(
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.w300,
+                              color: theme.onInverseSurface,
+                            ),
+                            textAlign: TextAlign.left,
+                          ),
+                        ],
                       ),
-                      textAlign: TextAlign.left,
                     ),
                   ),
                 ],
               );
             },
           ),
-        ),
-        const Padding(
-          padding: EdgeInsets.only(left: 16.0, bottom: 8.0),
-          child: Text(
-            'Pages',
-            style: TextStyle(
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold,
+          Center(
+            child: Text(
+              'Pages',
+              style: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
-        ),
-        Expanded(
-          child: Observer(
-            builder: (_) => ReorderableListView.builder(
-              buildDefaultDragHandles: false,
-              shrinkWrap: true,
-              itemCount: templateEditorStore.sections.length,
-              itemBuilder: (context, index) {
-                return Observer(
-                  key: ObjectKey(templateEditorStore.sections[index]),
-                  builder: (_) {
-                    final section = templateEditorStore.sections[index];
+          Expanded(
+            child: Observer(
+              builder: (_) => ReorderableListView.builder(
+                buildDefaultDragHandles: false,
+                shrinkWrap: true,
+                itemCount: templateEditorStore.sections.length,
+                itemBuilder: (context, index) {
+                  return Observer(
+                    key: ObjectKey(templateEditorStore.sections[index]),
+                    builder: (_) {
+                      final section = templateEditorStore.sections[index];
 
-                    return TemplateSectionWidget(
-                      section: section,
-                      sectionIndex: index,
-                    );
-                  },
-                );
-              },
-              onReorder: (oldSectionIndex, newSectionIndex) =>
-                  templateEditorStore.moveSection(
-                      oldSectionIndex, newSectionIndex),
+                      return TemplateSectionWidget(
+                        section: section,
+                        sectionIndex: index,
+                      );
+                    },
+                  );
+                },
+                onReorder: (oldSectionIndex, newSectionIndex) =>
+                    templateEditorStore.moveSection(
+                        oldSectionIndex, newSectionIndex),
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
