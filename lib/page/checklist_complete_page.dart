@@ -21,6 +21,7 @@ import 'package:ccrchecklist/page/pdf_preview_page.dart';
 import 'package:ccrchecklist/store/checklist_editor_store.dart';
 import 'package:ccrchecklist/store/config_store.dart';
 import 'package:ccrchecklist/widget/non_ok_sections_report.dart';
+import 'package:ccrchecklist/widget/tool_bar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -38,6 +39,8 @@ class ChecklistCompletePage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Checklist Report'),
+        ),
+        body: ToolBar(
           actions: [
             if (defaultTargetPlatform == TargetPlatform.linux) ...[
               IconButton(
@@ -65,26 +68,28 @@ class ChecklistCompletePage extends StatelessWidget {
               tooltip: 'About',
             ),
           ],
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
+          contents: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(width: 20),
-                  Text(
-                    message,
-                    textScaler: const TextScaler.linear(1.3),
+                  Row(
+                    children: [
+                      const SizedBox(width: 20),
+                      Text(
+                        message,
+                        textScaler: const TextScaler.linear(1.3),
+                      ),
+                    ],
                   ),
+                  if (nonOkSectionCount > 0) ...[
+                    const NonOkSectionsReport(),
+                  ]
                 ],
               ),
-              if (nonOkSectionCount > 0) ...[
-                const NonOkSectionsReport(),
-              ]
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
