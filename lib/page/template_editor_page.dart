@@ -20,6 +20,7 @@ import 'package:ccrchecklist/store/template_list_store.dart';
 import 'package:ccrchecklist/widget/template_editor_page_actions_widget.dart';
 import 'package:ccrchecklist/widget/template_editor_page_app_bar.dart';
 import 'package:ccrchecklist/widget/template_editor_page_body.dart';
+import 'package:ccrchecklist/widget/tool_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -49,7 +50,9 @@ class TemplateEditorPage extends StatelessWidget {
       child: SafeArea(
         child: Scaffold(
           appBar: TemplateEditorPageAppBar(context, templateEditorStore),
-          body: const TemplateEditorPageBody(),
+          body: ToolBar(
+            content: const TemplateEditorPageBody(),
+          ),
           floatingActionButton: const TemplateEditorPageActionsWidget(),
         ),
       ),
