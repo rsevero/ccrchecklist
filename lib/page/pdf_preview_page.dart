@@ -19,6 +19,7 @@ import 'package:ccrchecklist/misc/checklist_complete_helper.dart';
 import 'package:ccrchecklist/store/checklist_editor_store.dart';
 import 'package:ccrchecklist/store/config_store.dart';
 import 'package:ccrchecklist/widget/checklist_as_pdf.dart';
+import 'package:ccrchecklist/widget/tool_bar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
@@ -65,41 +66,43 @@ class PdfPreviewPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('PDF Preview'),
-          actions: [
-            if (defaultTargetPlatform == TargetPlatform.android) ...[
-              IconButton(
-                icon: const Icon(Icons.share),
-                onPressed: () => _onPressedShare(context),
-              ),
-              IconButton(
-                icon: const Icon(Icons.info_outline),
-                onPressed: () {
-                  showCCRAboutDialog(context);
-                },
-                tooltip: 'About',
-              ),
-            ],
-          ],
         ),
-        body: PdfPreview(
-          initialPageFormat: PdfPageFormat.a4,
-          canDebug: false,
-          canChangePageFormat: true,
-          canChangeOrientation: false,
-          pageFormats: const {
-            'A4': PdfPageFormat.a4,
-            'Letter': PdfPageFormat.letter,
-            'Legal': PdfPageFormat.legal,
-          },
-          pdfFileName: _pdfFilename(),
-          build: (context) async {
-            final pdfBytes = await _generatePdf();
-            if (pdfBytes != null) {
-              return pdfBytes;
-            } else {
-              return Future.error('Failed to generate PDF');
-            }
-          },
+        body: ToolBar(
+          actions: defaultTargetPlatform == TargetPlatform.android
+              ? [
+                  IconButton(
+                    icon: const Icon(Icons.share),
+                    onPressed: () => _onPressedShare(context),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.info_outline),
+                    onPressed: () {
+                      showCCRAboutDialog(context);
+                    },
+                    tooltip: 'About',
+                  ),
+                ]
+              : null,
+          content: PdfPreview(
+            initialPageFormat: PdfPageFormat.a4,
+            canDebug: false,
+            canChangePageFormat: true,
+            canChangeOrientation: false,
+            pageFormats: const {
+              'A4': PdfPageFormat.a4,
+              'Letter': PdfPageFormat.letter,
+              'Legal': PdfPageFormat.legal,
+            },
+            pdfFileName: _pdfFilename(),
+            build: (context) async {
+              final pdfBytes = await _generatePdf();
+              if (pdfBytes != null) {
+                return pdfBytes;
+              } else {
+                return Future.error('Failed to generate PDF');
+              }
+            },
+          ),
         ),
       ),
     );

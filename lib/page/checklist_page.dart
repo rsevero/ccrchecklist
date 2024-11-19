@@ -57,9 +57,7 @@ class ChecklistPage extends StatelessWidget {
             rebreatherModel: checklistEditorStore.rebreatherModel,
           ),
           body: ToolBar(
-            contents: [
-              ChecklistBody(sectionIndex: sectionIndex),
-            ],
+            content: ChecklistBody(sectionIndex: sectionIndex),
           ),
           bottomNavigationBar: ClipRRect(
             borderRadius: const BorderRadius.only(

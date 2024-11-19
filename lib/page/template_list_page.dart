@@ -118,14 +118,10 @@ class _TemplateListPageState extends State<TemplateListPage> {
                   tooltip: 'About',
                 ),
               ],
-              contents: [
-                Expanded(
-                  child: TemplateList(
-                    isEditor: false,
-                    onTapTemplateFile: _onTapTemplateFile,
-                  ),
-                ),
-              ],
+              content: TemplateList(
+                isEditor: false,
+                onTapTemplateFile: _onTapTemplateFile,
+              ),
             ),
           ),
         );

@@ -55,15 +55,11 @@ class TemplateEditorListPage extends StatelessWidget {
               tooltip: 'About',
             ),
           ],
-          contents: [
-            Expanded(
-              child: TemplateList(
-                isEditor: true,
-                onTapTemplateFile: _onTapTemplateFile,
-                onRemoveTemplateFile: _onRemoveTemplateFile,
-              ),
-            ),
-          ],
+          content: TemplateList(
+            isEditor: true,
+            onTapTemplateFile: _onTapTemplateFile,
+            onRemoveTemplateFile: _onRemoveTemplateFile,
+          ),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () => _addNewTemplate(context),

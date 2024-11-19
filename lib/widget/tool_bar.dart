@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 
 class ToolBar extends StatelessWidget {
   final List<Widget>? actions;
-  final List<Widget> contents;
+  final Widget? content;
 
   const ToolBar({
     super.key,
     this.actions,
-    this.contents = const [],
+    this.content,
   });
 
   @override
@@ -29,7 +29,9 @@ class ToolBar extends StatelessWidget {
                 ),
               ),
           ] +
-          contents,
+          [
+            if (content != null) Expanded(child: content!),
+          ],
     );
   }
 }

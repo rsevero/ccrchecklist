@@ -68,28 +68,26 @@ class ChecklistCompletePage extends StatelessWidget {
               tooltip: 'About',
             ),
           ],
-          contents: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      const SizedBox(width: 20),
-                      Text(
-                        message,
-                        textScaler: const TextScaler.linear(1.3),
-                      ),
-                    ],
-                  ),
-                  if (nonOkSectionCount > 0) ...[
-                    const NonOkSectionsReport(),
-                  ]
-                ],
-              ),
+          content: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    const SizedBox(width: 20),
+                    Text(
+                      message,
+                      textScaler: const TextScaler.linear(1.3),
+                    ),
+                  ],
+                ),
+                if (nonOkSectionCount > 0) ...[
+                  const NonOkSectionsReport(),
+                ]
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
