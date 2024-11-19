@@ -20,6 +20,7 @@ import 'package:ccrchecklist/page/checklist_complete_page.dart';
 import 'package:ccrchecklist/store/checklist_editor_store.dart';
 import 'package:ccrchecklist/widget/checklist_appbar.dart';
 import 'package:ccrchecklist/widget/checklist_body.dart';
+import 'package:ccrchecklist/widget/tool_bar.dart';
 import 'package:flutter/material.dart'; // For date formatting
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
@@ -55,7 +56,11 @@ class ChecklistPage extends StatelessWidget {
             rebreatherManufacturer: checklistEditorStore.rebreatherManufacturer,
             rebreatherModel: checklistEditorStore.rebreatherModel,
           ),
-          body: ChecklistBody(sectionIndex: sectionIndex),
+          body: ToolBar(
+            contents: [
+              ChecklistBody(sectionIndex: sectionIndex),
+            ],
+          ),
           bottomNavigationBar: ClipRRect(
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(16.0),

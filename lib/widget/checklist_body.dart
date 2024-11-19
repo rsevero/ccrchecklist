@@ -35,34 +35,36 @@ class ChecklistBody extends StatelessWidget {
     final section = checklistEditorStore.sections[sectionIndex];
     final paddingSize = (context.textTheme.titleLarge?.fontSize ?? 22.0) * 0.75;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        if (checklistEditorStore.sections.length > 1) ...[
-          Observer(
-            builder: (_) => Container(
-              width: double.infinity,
-              padding: EdgeInsets.all(paddingSize),
-              decoration: BoxDecoration(
-                color: checklistEditorStore.sectionsOk[sectionIndex]
-                    ? context.ccrThemeExtension.primary
-                    : context.ccrThemeExtension.error,
-                borderRadius: BorderRadius.circular(16.0),
-              ),
-              child: Text(
-                "${section.title} - ${sectionIndex + 1}/${checklistEditorStore.sections.length}",
-                style: context.textTheme.titleLarge?.copyWith(
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (checklistEditorStore.sections.length > 1) ...[
+            Observer(
+              builder: (_) => Container(
+                width: double.infinity,
+                padding: EdgeInsets.all(paddingSize),
+                decoration: BoxDecoration(
                   color: checklistEditorStore.sectionsOk[sectionIndex]
-                      ? context.ccrThemeExtension.onPrimary
-                      : context.ccrThemeExtension.onError,
+                      ? context.ccrThemeExtension.primary
+                      : context.ccrThemeExtension.error,
+                  borderRadius: BorderRadius.circular(16.0),
+                ),
+                child: Text(
+                  "${section.title} - ${sectionIndex + 1}/${checklistEditorStore.sections.length}",
+                  style: context.textTheme.titleLarge?.copyWith(
+                    color: checklistEditorStore.sectionsOk[sectionIndex]
+                        ? context.ccrThemeExtension.onPrimary
+                        : context.ccrThemeExtension.onError,
+                  ),
                 ),
               ),
             ),
-          ),
+          ],
+          CheckListCheckList(sectionIndex: sectionIndex),
         ],
-        CheckListCheckList(sectionIndex: sectionIndex),
-      ],
+      ),
     );
   }
 }
