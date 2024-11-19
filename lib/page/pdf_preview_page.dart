@@ -68,21 +68,21 @@ class PdfPreviewPage extends StatelessWidget {
           title: const Text('PDF Preview'),
         ),
         body: ToolBar(
-          actions: defaultTargetPlatform == TargetPlatform.android
-              ? [
-                  IconButton(
-                    icon: const Icon(Icons.share),
-                    onPressed: () => _onPressedShare(context),
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.info_outline),
-                    onPressed: () {
-                      showCCRAboutDialog(context);
-                    },
-                    tooltip: 'About',
-                  ),
-                ]
-              : null,
+          actions: [
+            if (defaultTargetPlatform == TargetPlatform.android) ...[
+              IconButton(
+                icon: const Icon(Icons.share),
+                onPressed: () => _onPressedShare(context),
+              ),
+            ],
+            IconButton(
+              icon: const Icon(Icons.info_outline),
+              onPressed: () {
+                showCCRAboutDialog(context);
+              },
+              tooltip: 'About',
+            ),
+          ],
           content: PdfPreview(
             initialPageFormat: PdfPageFormat.a4,
             canDebug: false,
