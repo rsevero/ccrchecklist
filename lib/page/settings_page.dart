@@ -16,6 +16,7 @@
 
 import 'package:ccrchecklist/misc/about_dialog_helper.dart';
 import 'package:ccrchecklist/store/config_store.dart';
+import 'package:ccrchecklist/widget/tool_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
@@ -39,6 +40,8 @@ class SettingsPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Settings'),
+        ),
+        body: ToolBar(
           actions: <Widget>[
             Observer(
               builder: (context) {
@@ -58,21 +61,21 @@ class SettingsPage extends StatelessWidget {
               tooltip: 'About',
             ),
           ],
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TextField(
-                controller: _diverNameController,
-                decoration: const InputDecoration(
-                  labelText: 'Diver Name',
-                  border: OutlineInputBorder(),
+          content: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TextField(
+                  controller: _diverNameController,
+                  decoration: const InputDecoration(
+                    labelText: 'Diver Name',
+                    border: OutlineInputBorder(),
+                  ),
                 ),
-              ),
-              const SizedBox(height: 20),
-            ],
+                const SizedBox(height: 20),
+              ],
+            ),
           ),
         ),
       ),
