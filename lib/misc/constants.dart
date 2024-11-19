@@ -46,6 +46,8 @@ const String ccrDirectory = 'ccrchecklist';
 const String ccrTemplatesDirectory = 'templates';
 const String ccrShareDirectory = 'share';
 
+const String ccrNoDiverName = 'No Diver Name set';
+
 enum CCRFileExistsAction { replace, chooseAnother, cancel }
 
 const double ccrDescriptionFieldWidth = 300;

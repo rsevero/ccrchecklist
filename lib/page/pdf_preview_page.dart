@@ -16,6 +16,8 @@
 
 import 'package:ccrchecklist/misc/about_dialog_helper.dart';
 import 'package:ccrchecklist/misc/checklist_complete_helper.dart';
+import 'package:ccrchecklist/misc/constants.dart';
+import 'package:ccrchecklist/misc/flutter_extension_methods.dart';
 import 'package:ccrchecklist/store/checklist_editor_store.dart';
 import 'package:ccrchecklist/store/config_store.dart';
 import 'package:ccrchecklist/widget/checklist_as_pdf.dart';
@@ -94,6 +96,9 @@ class PdfPreviewPage extends StatelessWidget {
               'Legal': PdfPageFormat.legal,
             },
             pdfFileName: _pdfFilename(),
+            scrollViewDecoration: BoxDecoration(
+              color: context.ccrThemeExtension.surface,
+            ),
             build: (context) async {
               final pdfBytes = await _generatePdf();
               if (pdfBytes != null) {
@@ -111,7 +116,7 @@ class PdfPreviewPage extends StatelessWidget {
   String _pdfFilename() {
     final buffer = StringBuffer();
 
-    buffer.write(slugify(configStore.configData['DiverName'],
+    buffer.write(slugify(configStore.configData['DiverName'] ?? ccrNoDiverName,
         delimiter: '_', lowercase: false));
     buffer.write('-');
     buffer.write(ChecklistCompleteHelper.formatDate(checklistEditorStore.date));
