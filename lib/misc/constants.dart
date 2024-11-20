@@ -47,6 +47,7 @@ const String ccrTemplatesDirectory = 'templates';
 const String ccrShareDirectory = 'share';
 
 const String ccrNoDiverName = 'No Diver Name set';
+const String ccrNoDescription = 'No Description set';
 
 enum CCRFileExistsAction { replace, chooseAnother, cancel }
 

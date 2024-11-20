@@ -117,11 +117,14 @@ class _TemplateListState extends State<TemplateList> {
         currentModel = template.rebreatherModel;
         templates = [];
       }
+      final String templateDescription = (template.description.isEmpty)
+          ? ccrNoDescription
+          : template.description;
       templates.add(
         TemplateListTileWidget(
           title: Text(template.title,
               style: context.ccrThemeExtension.templateTitleTextTheme),
-          description: Text(template.description,
+          description: Text(templateDescription,
               style: context.ccrThemeExtension.templateDescriptionTextTheme),
           isAsset: template.isAsset,
           isEditor: widget.isEditor,
