@@ -25,7 +25,6 @@ import 'package:ccrchecklist/widget/timer_duration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:vibration/vibration.dart';
 
 class ChecklistRegularCheckWidget extends StatefulWidget {
   final int sectionIndex;
@@ -338,11 +337,6 @@ class _ChecklistRegularCheckWidgetState
             });
           } else {
             _timer.cancel();
-
-            // Vibrate the device
-            if (await Vibration.hasVibrator() ?? false) {
-              Vibration.vibrate();
-            }
 
             // Play a sound
             final player = AudioPlayer();
