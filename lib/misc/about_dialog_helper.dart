@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import 'package:ccrchecklist/misc/constants.dart';
 import 'package:ccrchecklist/widget/about_dialog_markdown_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -49,13 +50,11 @@ void showCCRAboutDialog(BuildContext context) async {
                 color: Colors.blue, decoration: TextDecoration.underline),
           ),
           onTap: () async {
-            const url =
-                'https://github.com/rsevero/ccrchecklist/blob/main/CHANGELOG.md';
-            final Uri uri = Uri.parse(url);
+            final Uri uri = Uri.parse(ccrUrlChangelog);
             if (await canLaunchUrl(uri)) {
               await launchUrl(uri, mode: LaunchMode.externalApplication);
             } else {
-              throw 'Could not launch $url';
+              throw 'Could not launch $ccrUrlChangelog';
             }
           },
         ),

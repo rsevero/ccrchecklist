@@ -42,6 +42,9 @@ const String ccrTemplateExtension = 'ccrt';
 
 const String ccrTemplateMimeType = 'application/vnd.ccrchecklist-ccrt+json';
 
+const String ccrUrlChangelog =
+    'https://github.com/rsevero/ccrchecklist/blob/main/CHANGELOG.md';
+
 const String ccrDirectory = 'ccrchecklist';
 const String ccrTemplatesDirectory = 'templates';
 const String ccrShareDirectory = 'share';
