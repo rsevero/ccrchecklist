@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import 'package:ccrchecklist/misc/flutter_extension_methods.dart';
 import 'package:flutter/material.dart';
 
 class TemplateListTileWidget extends StatelessWidget {
@@ -40,22 +41,26 @@ class TemplateListTileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: title,
-      subtitle: description,
-      onTap: onTap,
-      shape: RoundedRectangleBorder(
-        borderRadius: borderRadius,
+    return Padding(
+      padding: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
+      child: ListTile(
+        title: title,
+        subtitle: description,
+        onTap: onTap,
+        shape: RoundedRectangleBorder(
+          borderRadius: borderRadius,
+        ),
+        tileColor: context.ccrThemeExtension.surfaceContainerHigh,
+        trailing: !isEditor || isAsset
+            ? null
+            : IconButton(
+                icon: const Icon(Icons.delete),
+                onPressed: onRemove == null
+                    ? null
+                    : () => onRemove!(context, templateIndex),
+                tooltip: 'Remove',
+              ),
       ),
-      trailing: !isEditor || isAsset
-          ? null
-          : IconButton(
-              icon: const Icon(Icons.delete),
-              onPressed: onRemove == null
-                  ? null
-                  : () => onRemove!(context, templateIndex),
-              tooltip: 'Remove',
-            ),
     );
   }
 }

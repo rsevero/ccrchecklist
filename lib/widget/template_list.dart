@@ -89,7 +89,7 @@ class _TemplateListState extends State<TemplateList> {
 
   List<ExpansionTile> _buildDefaultTile(BuildContext context) {
     List<ExpansionTile> manufacturers = [];
-    List<ExpansionTile> models = [];
+    List<Padding> models = [];
     List<Widget> templates = [];
     String currentManufacturer = '';
     String currentModel = '';
@@ -102,7 +102,7 @@ class _TemplateListState extends State<TemplateList> {
         if (currentManufacturer != '') {
           models.add(_modelTile(currentModel, templates));
           if (models.length == 1) {
-            models[0] = _expandTile(models[0]);
+            models[0] = _expandModelTile(models[0]);
           }
           manufacturers.add(_manufacturerTile(currentManufacturer, models));
         }
@@ -141,16 +141,20 @@ class _TemplateListState extends State<TemplateList> {
 
     if (models.isNotEmpty) {
       if (models.length == 1) {
-        models[0] = _expandTile(models[0]);
+        models[0] = _expandModelTile(models[0]);
       }
       manufacturers.add(_manufacturerTile(currentManufacturer, models));
     }
 
     if (manufacturers.length == 1) {
-      manufacturers[0] = _expandTile(manufacturers[0]);
+      manufacturers[0] = _expandManufacturerTile(manufacturers[0]);
     }
 
     return manufacturers;
+  }
+
+  ExpansionTile _expandManufacturerTile(ExpansionTile tile) {
+    return _expandTile(tile);
   }
 
   ExpansionTile _expandTile(ExpansionTile tile) {
@@ -169,7 +173,17 @@ class _TemplateListState extends State<TemplateList> {
     return expandedTile;
   }
 
-  ExpansionTile _modelTile(String tileText, List<Widget> templates) {
+  Padding _expandModelTile(Padding modelTile) {
+    final originalExpandedTile = modelTile.child as ExpansionTile;
+    final expandedTile = _expandTile(originalExpandedTile);
+
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: expandedTile,
+    );
+  }
+
+  Padding _modelTile(String tileText, List<Widget> templates) {
     final ExpansionTile newModel = ExpansionTile(
       title: Text(
         tileText,
@@ -186,7 +200,10 @@ class _TemplateListState extends State<TemplateList> {
       children: templates,
     );
 
-    return newModel;
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: newModel,
+    );
   }
 
   ExpansionTile _manufacturerTile(String tileText, List<Widget> models) {
