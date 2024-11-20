@@ -27,20 +27,35 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:provider/provider.dart';
 
-class TemplateEditorPageActionsWidget extends StatelessWidget {
+class TemplateEditorPageActionsWidget extends StatefulWidget {
   const TemplateEditorPageActionsWidget({super.key});
+
+  @override
+  State<TemplateEditorPageActionsWidget> createState() =>
+      _TemplateEditorPageActionsWidgetState();
+}
+
+class _TemplateEditorPageActionsWidgetState
+    extends State<TemplateEditorPageActionsWidget> {
+  bool _isSpeedDialOpen = false;
 
   @override
   Widget build(BuildContext context) {
     final templateEditorStore = Provider.of<TemplateEditorStore>(context);
+    final theme = context.ccrThemeExtension;
 
     return Observer(
       builder: (_) {
-        return Padding(
-          padding: const EdgeInsets.only(right: 120.0),
+        return Align(
+          alignment:
+              _isSpeedDialOpen ? Alignment.bottomRight : Alignment.bottomCenter,
           child: SpeedDial(
+            backgroundColor: theme.tertiary,
+            foregroundColor: theme.onTertiary,
             animatedIcon: AnimatedIcons.menu_close,
             tooltip: 'Options',
+            onOpen: () => setState(() => _isSpeedDialOpen = true),
+            onClose: () => setState(() => _isSpeedDialOpen = false),
             children: [
               GreyableSpeedDialChild(
                 child: const Icon(Icons.calculate_outlined),
