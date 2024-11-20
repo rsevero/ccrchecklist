@@ -1,4 +1,4 @@
-###
+### Next
 * Creation of CHANGELOG.md
 
 ### 0.0.12 - 2024-11-20
