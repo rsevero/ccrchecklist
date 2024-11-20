@@ -1,0 +1,159 @@
+{
+  "rebreatherManufacturer": "rEvo",
+  "rebreatherModel": "rEvo III",
+  "title": "Build check",
+  "description": "(v0.4) 031013",
+  "sections": [
+    {
+      "title": "Main",
+      "checks": [
+        {
+          "description": "Analyse content of the O₂ tank",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "O₂",
+              "suffix": "%"
+            },
+            {
+              "value": null,
+              "prefix": "Pressure",
+              "suffix": "bar"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Analyse content of the Dil tank",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "O₂",
+              "suffix": "%"
+            },
+            {
+              "value": null,
+              "prefix": "He",
+              "suffix": "%"
+            },
+            {
+              "value": null,
+              "prefix": "Pressure",
+              "suffix": "bar"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Install both tanks on the unit: check correct installation fixation",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Connect regulators to tank valves",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "measurement": "mV",
+          "description": "Check millivolts in air",
+          "referenceCount": 3,
+          "runtimeType": "linearityStep1"
+        },
+        {
+          "description": "Check external battery: fire solenoid 10 seconds, EXT Voltage > 6.5V",
+          "secondsTimer": 10,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check oxygen sensor life: youngest sensor is < 7 months old? If not add/replace sensor and mark date",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check the remaining time on the scrubbers: if needed refill with fresh sorb",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Put moisture absorber in the inhale lung, UNDER the non-collapse tube",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Correctly install the sensor grid and solenoid grid: check cable rooting",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Install scrubbers in unit: TOP-marker on exhale scrubber (rMS: arrows to top)**",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check the scrubber O-rings, clean sealing surfaces, grease if needed",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Close the cover, screw hand tight",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check breathing loop hoses / perform stereo check (non-return valves",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check bite-piece, O-rings breathing loop, clean sealing surfaces, grease if needed",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Install breathing loop on rebreathers",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Wrap HUD cable 3-4 times clockwise around loop",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    }
+  ],
+  "isAsset": true
+}
