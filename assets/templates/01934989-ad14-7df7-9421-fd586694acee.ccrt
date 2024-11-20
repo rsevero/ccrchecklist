@@ -1,0 +1,56 @@
+{
+  "rebreatherManufacturer": "Dive Rite",
+  "rebreatherModel": "O₂ptima CMCL",
+  "title": "Immediately Post Dive",
+  "description": "Should be done immediately after every dive after getting out of the water",
+  "sections": [
+    {
+      "title": "Main",
+      "checks": [
+        {
+          "description": "Close the BOV",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Change set point to 0.19 PO₂",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check battery voltages",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Note pressure remaining in oxygen cylinder and total dive time to determine scrubber usage",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Close cylinder valves and bleed down system via manual add valves (***Never turn off the cylinder valves before you are out of the water and have removed the rebreather! ***)",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Dry electrical contacts on HUD then turn off HUD and controller",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    }
+  ],
+  "isAsset": true
+}
