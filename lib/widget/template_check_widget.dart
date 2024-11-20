@@ -69,82 +69,87 @@ class TemplateCheckWidget extends StatelessWidget {
         } else if (check is TemplateLinearityStep2Check) {
           description += ' (Linearity step 2)';
         }
-        return Container(
-          decoration: BoxDecoration(
-            color: ccrThemeExtension.secondaryContainer,
-            borderRadius: ccrTemplateListTileBorderRadius,
-          ),
-          child: Row(
-            children: [
-              Expanded(
-                child: ListTile(
-                  title: Text(
-                    "${index + 1}: $description",
-                    style: TextStyle(
-                      color: isSelected
-                          ? ccrThemeExtension.onPrimaryContainer
-                          : ccrThemeExtension.onSurface,
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 4, left: 4, right: 4),
+          child: Container(
+            decoration: BoxDecoration(
+              color: ccrThemeExtension.secondaryContainer,
+              borderRadius: ccrTemplateListTileBorderRadius,
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: ListTile(
+                    title: Text(
+                      "${index + 1}: $description",
+                      style: TextStyle(
+                        color: isSelected
+                            ? ccrThemeExtension.onPrimaryContainer
+                            : ccrThemeExtension.onSurface,
+                      ),
+                    ),
+                    subtitle: (observation.isNotEmpty)
+                        ? Text(
+                            observation,
+                            style: TextStyle(
+                              color: isSelected
+                                  ? ccrThemeExtension.onPrimaryContainer
+                                  : ccrThemeExtension.onSurface,
+                            ),
+                          )
+                        : null,
+                    trailing: PopupMenuButton<String>(
+                      onSelected: (value) {
+                        switch (value) {
+                          case 'Edit':
+                            _editCheck(context, sectionIndex, index);
+                            break;
+                          case 'Duplicate':
+                            _duplicateRegularCheck(
+                                context, sectionIndex, index);
+                            break;
+                          case 'Move to new page':
+                            _moveCheckNewSection(context, sectionIndex, index);
+                            break;
+                          case 'Delete':
+                            templateEditorStore.deleteCheck(
+                                sectionIndex, index);
+                            break;
+                        }
+                      },
+                      itemBuilder: (BuildContext context) =>
+                          <PopupMenuEntry<String>>[
+                        const PopupMenuItem<String>(
+                          value: 'Edit',
+                          child: Text('Edit'),
+                        ),
+                        if (check is TemplateRegularCheck)
+                          const PopupMenuItem<String>(
+                            value: 'Duplicate',
+                            child: Text('Duplicate'),
+                          ),
+                        PopupMenuItem<String>(
+                          value: 'Move to new page',
+                          enabled: templateEditorStore.sections.length > 1,
+                          child: const Text('Move to new page'),
+                        ),
+                        const PopupMenuItem<String>(
+                          value: 'Delete',
+                          child: Text('Delete'),
+                        ),
+                      ],
                     ),
                   ),
-                  subtitle: (observation.isNotEmpty)
-                      ? Text(
-                          observation,
-                          style: TextStyle(
-                            color: isSelected
-                                ? ccrThemeExtension.onPrimaryContainer
-                                : ccrThemeExtension.onSurface,
-                          ),
-                        )
-                      : null,
-                  trailing: PopupMenuButton<String>(
-                    onSelected: (value) {
-                      switch (value) {
-                        case 'Edit':
-                          _editCheck(context, sectionIndex, index);
-                          break;
-                        case 'Duplicate':
-                          _duplicateRegularCheck(context, sectionIndex, index);
-                          break;
-                        case 'Move to new page':
-                          _moveCheckNewSection(context, sectionIndex, index);
-                          break;
-                        case 'Delete':
-                          templateEditorStore.deleteCheck(sectionIndex, index);
-                          break;
-                      }
-                    },
-                    itemBuilder: (BuildContext context) =>
-                        <PopupMenuEntry<String>>[
-                      const PopupMenuItem<String>(
-                        value: 'Edit',
-                        child: Text('Edit'),
-                      ),
-                      if (check is TemplateRegularCheck)
-                        const PopupMenuItem<String>(
-                          value: 'Duplicate',
-                          child: Text('Duplicate'),
-                        ),
-                      PopupMenuItem<String>(
-                        value: 'Move to new page',
-                        enabled: templateEditorStore.sections.length > 1,
-                        child: const Text('Move to new page'),
-                      ),
-                      const PopupMenuItem<String>(
-                        value: 'Delete',
-                        child: Text('Delete'),
-                      ),
-                    ],
+                ),
+                ReorderableDragStartListener(
+                  index: index,
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    child: Icon(Icons.drag_handle),
                   ),
-                ),
-              ),
-              ReorderableDragStartListener(
-                index: index,
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: Icon(Icons.drag_handle),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         );
       },
