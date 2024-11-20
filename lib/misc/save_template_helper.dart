@@ -62,6 +62,8 @@ Future<void> ccrSaveAsTemplate(BuildContext context, Template template,
 
   final String filepath = await ccrFilePathFromFileName(filename);
 
+  template = template.copyWith(isAsset: false);
+
   if (!context.mounted) return;
   final templateEditorStore =
       Provider.of<TemplateEditorStore>(context, listen: false);
