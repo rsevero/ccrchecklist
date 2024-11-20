@@ -204,14 +204,14 @@ class CCRThemeExtension extends ThemeExtension<CCRThemeExtension>
     ccrTimerTextColorNotRunning = Color(0xffffffff);
     ccrSectionOkColor = Colors.green;
 
-    manufacturerTextTheme = _copyUnsettingColor(headlineSmall)
-        .copyWith(fontWeight: FontWeight.w200);
+    manufacturerTextTheme =
+        _copyUnsettingColor(titleLarge).copyWith(fontWeight: FontWeight.w200);
     modelTextTheme =
-        _copyUnsettingColor(titleLarge).copyWith(fontWeight: FontWeight.w500);
+        _copyUnsettingColor(titleMedium).copyWith(fontWeight: FontWeight.w500);
     templateTitleTextTheme =
-        _copyUnsettingColor(titleMedium).copyWith(fontWeight: FontWeight.w700);
+        _copyUnsettingColor(titleSmall).copyWith(fontWeight: FontWeight.w700);
     templateDescriptionTextTheme =
-        _copyUnsettingColor(bodyLarge).copyWith(fontWeight: FontWeight.w300);
+        _copyUnsettingColor(bodyMedium).copyWith(fontWeight: FontWeight.w300);
     dialogTitleTextTheme = _copyUnsettingColor(headlineMedium)
         .copyWith(fontWeight: FontWeight.w600);
     dialogFieldTitleTextTheme =
