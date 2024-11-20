@@ -18,6 +18,7 @@ import 'package:ccrchecklist/widget/about_dialog_markdown_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:platform_info/platform_info.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 void showCCRAboutDialog(BuildContext context) async {
@@ -50,8 +51,9 @@ void showCCRAboutDialog(BuildContext context) async {
           onTap: () async {
             const url =
                 'https://github.com/rsevero/ccrchecklist/blob/main/CHANGELOG.md';
-            if (await canLaunchUrlString(url)) {
-              await launchUrlString(url);
+            final Uri uri = Uri.parse(url);
+            if (await canLaunchUrl(uri)) {
+              await launchUrl(uri, mode: LaunchMode.externalApplication);
             } else {
               throw 'Could not launch $url';
             }
