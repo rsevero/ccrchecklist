@@ -1,6 +1,7 @@
 ### Next
 * rEvo III checklists
 * Case insensitive template list
+* Fixing 'launchUrl' in Android
 
 ### 0.0.13 - 2024-11-20
 * Creation of CHANGELOG.md
