@@ -36,47 +36,50 @@ class TemplateEditorPageActionsWidget extends StatelessWidget {
 
     return Observer(
       builder: (_) {
-        return SpeedDial(
-          animatedIcon: AnimatedIcons.menu_close,
-          tooltip: 'Options',
-          children: [
-            GreyableSpeedDialChild(
-              child: const Icon(Icons.calculate_outlined),
-              text: 'Add Linearity Step 2 Check',
-              isEnabled: templateEditorStore.enableLinearityStep2Creation,
-              onTap: () => _onTapAddLinearityStep2Check(context),
-            ),
-            GreyableSpeedDialChild(
-              child: const Icon(Icons.addchart),
-              text: 'Add Linearity Step 1 Check',
-              isEnabled: templateEditorStore.enableLinearityStep1Creation,
-              onTap: () => _onTapAddLinearityStep1Check(context),
-            ),
-            GreyableSpeedDialChild(
-              child: const Icon(Icons.table_view),
-              text: 'Add Complete Linearity Check',
-              isEnabled: templateEditorStore.enableCheckCreation,
-              onTap: () => _onTapAddCompleteLinearityCheck(context),
-            ),
-            GreyableSpeedDialChild(
-              child: const Icon(Icons.check),
-              text: 'Add Regular Check',
-              isEnabled: templateEditorStore.enableCheckCreation,
-              onTap: () => _onTapAddRegularCheck(context),
-            ),
-            GreyableSpeedDialChild(
-              child: const Icon(Icons.assignment_add),
-              text: 'Add Page',
-              isEnabled: true,
-              onTap: () => _onTapAddSection(context),
-            ),
-            GreyableSpeedDialChild(
-              child: const Icon(Icons.edit_attributes),
-              text: 'Edit Info',
-              isEnabled: true,
-              onTap: () => _onTapEditTemplate(context),
-            ),
-          ],
+        return Padding(
+          padding: const EdgeInsets.only(right: 120.0),
+          child: SpeedDial(
+            animatedIcon: AnimatedIcons.menu_close,
+            tooltip: 'Options',
+            children: [
+              GreyableSpeedDialChild(
+                child: const Icon(Icons.calculate_outlined),
+                text: 'Add Linearity Step 2 Check',
+                isEnabled: templateEditorStore.enableLinearityStep2Creation,
+                onTap: () => _onTapAddLinearityStep2Check(context),
+              ),
+              GreyableSpeedDialChild(
+                child: const Icon(Icons.addchart),
+                text: 'Add Linearity Step 1 Check',
+                isEnabled: templateEditorStore.enableLinearityStep1Creation,
+                onTap: () => _onTapAddLinearityStep1Check(context),
+              ),
+              GreyableSpeedDialChild(
+                child: const Icon(Icons.table_view),
+                text: 'Add Complete Linearity Check',
+                isEnabled: templateEditorStore.enableCheckCreation,
+                onTap: () => _onTapAddCompleteLinearityCheck(context),
+              ),
+              GreyableSpeedDialChild(
+                child: const Icon(Icons.check),
+                text: 'Add Regular Check',
+                isEnabled: templateEditorStore.enableCheckCreation,
+                onTap: () => _onTapAddRegularCheck(context),
+              ),
+              GreyableSpeedDialChild(
+                child: const Icon(Icons.assignment_add),
+                text: 'Add Page',
+                isEnabled: true,
+                onTap: () => _onTapAddSection(context),
+              ),
+              GreyableSpeedDialChild(
+                child: const Icon(Icons.edit_attributes),
+                text: 'Edit Info',
+                isEnabled: true,
+                onTap: () => _onTapEditTemplate(context),
+              ),
+            ],
+          ),
         );
       },
     );
