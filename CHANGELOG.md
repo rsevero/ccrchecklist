@@ -1,5 +1,6 @@
 ### 0.0.13 - 2024-11-20
 * Creation of CHANGELOG.md
+* Creation of appbundle.sh script
 
 ### 0.0.12 - 2024-11-20
 * Migrating ChecklistPage AppBar actions to ToolBar to free AppBar for page title
