@@ -298,23 +298,27 @@ abstract class TemplateListStoreBase with Store {
   }
 
   int _compareTemplateFile(TemplateFile a, TemplateFile b) {
-    final manufacturerCompare =
-        a.rebreatherManufacturer.compareTo(b.rebreatherManufacturer);
+    final manufacturerCompare = a.rebreatherManufacturer
+        .toLowerCase()
+        .compareTo(b.rebreatherManufacturer.toLowerCase());
     if (manufacturerCompare != 0) {
       return manufacturerCompare;
     }
 
-    final modelCompare = a.rebreatherModel.compareTo(b.rebreatherModel);
+    final modelCompare = a.rebreatherModel
+        .toLowerCase()
+        .compareTo(b.rebreatherModel.toLowerCase());
     if (modelCompare != 0) {
       return modelCompare;
     }
 
-    final titleCompare = a.title.compareTo(b.title);
+    final titleCompare = a.title.toLowerCase().compareTo(b.title.toLowerCase());
     if (titleCompare != 0) {
       return titleCompare;
     }
 
-    final descriptionCompare = a.description.compareTo(b.description);
+    final descriptionCompare =
+        a.description.toLowerCase().compareTo(b.description.toLowerCase());
     if (descriptionCompare != 0) {
       return descriptionCompare;
     }
