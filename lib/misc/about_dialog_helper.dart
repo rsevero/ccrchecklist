@@ -18,6 +18,7 @@ import 'package:ccrchecklist/widget/about_dialog_markdown_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:platform_info/platform_info.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 void showCCRAboutDialog(BuildContext context) async {
   final Platform platform = Platform.instance;
@@ -39,6 +40,24 @@ void showCCRAboutDialog(BuildContext context) async {
     ),
     applicationLegalese: '© 2024 Rodrigo Severo',
     children: <Widget>[
+      ListTile(
+        title: InkWell(
+          child: const Text(
+            'View CHANGELOG',
+            style: TextStyle(
+                color: Colors.blue, decoration: TextDecoration.underline),
+          ),
+          onTap: () async {
+            const url =
+                'https://github.com/rsevero/ccrchecklist/blob/main/CHANGELOG.md';
+            if (await canLaunchUrlString(url)) {
+              await launchUrlString(url);
+            } else {
+              throw 'Could not launch $url';
+            }
+          },
+        ),
+      ),
       ExpansionTile(
         title: const Text('Operating System'),
         children: <Widget>[
