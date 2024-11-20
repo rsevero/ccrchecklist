@@ -176,14 +176,18 @@ class _TemplateListState extends State<TemplateList> {
     return expandedTile;
   }
 
+  Padding _paddingForModel(ExpansionTile modelTile) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
+      child: modelTile,
+    );
+  }
+
   Padding _expandModelTile(Padding modelTile) {
     final originalExpandedTile = modelTile.child as ExpansionTile;
     final expandedTile = _expandTile(originalExpandedTile);
 
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: expandedTile,
-    );
+    return _paddingForModel(expandedTile);
   }
 
   Padding _modelTile(String tileText, List<Widget> templates) {
@@ -203,10 +207,7 @@ class _TemplateListState extends State<TemplateList> {
       children: templates,
     );
 
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: newModel,
-    );
+    return _paddingForModel(newModel);
   }
 
   ExpansionTile _manufacturerTile(String tileText, List<Widget> models) {
