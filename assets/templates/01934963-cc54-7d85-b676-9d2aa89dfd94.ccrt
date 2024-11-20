@@ -1,0 +1,98 @@
+{
+  "rebreatherManufacturer": "Dive Rite",
+  "rebreatherModel": "O₂ptima",
+  "title": "End of the Day",
+  "description": "Should be performed at the end of your day of diving",
+  "sections": [
+    {
+      "title": "Main",
+      "checks": [
+        {
+          "description": "Rinse and/or soak entire CCR in fresh water",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Unplug and remove HUD and controller",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Discard scrubber media/remove EAC (record scrubber usage and seal airtight if planning to reuse)",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Disassemble loop—remove DSV, loop hoses, ADV, T-piece, counterlungs, scrubber end cap, and scrubber canister",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Wipe inside of electronics head with clean towel and allow to air dry",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Flush the inside of all loop components (except electronics head) with warm running water",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Soak loop hoses, DSV, ADV, T-piece, scrubber canister, and scrubber end cap/water trap assembly in Steramine solution",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Pour Steramine solution into counterlungs, shake, and drain",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Rinse all loop components—including the insides of counterlungs—thoroughly with fresh water and shake/blow out excess",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Hang hoses, DSV, and counterlungs upside down to dry",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Allow all components to dry thoroughly before storage",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "For long term storage, remove batteries and seal all components in plastic bag or bin after drying",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    }
+  ],
+  "isAsset": true
+}

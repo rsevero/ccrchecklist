@@ -1,0 +1,63 @@
+{
+  "rebreatherManufacturer": "Dive Rite",
+  "rebreatherModel": "O₂ptima",
+  "title": "Survival Checklist",
+  "description": "For users who are thoroughly familiar with assembling and operating the O₂ptima and are actively using it.",
+  "sections": [
+    {
+      "title": "Main",
+      "checks": [
+        {
+          "description": "Confirm scrubber media, bore plug, and premix tubing O-ring are correctly installed",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Confirm diluent and oxygen cylinder contents and pressures",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Perform leak down check on both diluent and oxygen systems",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check DSV mushrooms and conduct positive and negative checks",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check internal and external voltages and mV readings in air",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Flush with O₂, check mV readings, and confirm calibration on HUD and controller",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Complete the Preflight Checklist before diving",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    }
+  ],
+  "isAsset": true
+}

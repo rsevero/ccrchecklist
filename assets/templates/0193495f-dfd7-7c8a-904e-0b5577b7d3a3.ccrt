@@ -1,0 +1,70 @@
+{
+  "rebreatherManufacturer": "Dive Rite",
+  "rebreatherModel": "O₂ptima",
+  "title": "Preflight Checklist",
+  "description": "After gearing up and just before entering the waterto begin your dive",
+  "sections": [
+    {
+      "title": "Main",
+      "checks": [
+        {
+          "description": "Turn cylinders on, check manual addition valves, verify pressures",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Confirm ADV function",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Verify handsets/HUD",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Prebreathe, verify set point, confirm PO₂",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Confirm BCD/Dry suit function(s)",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Don/verify operational use of bailout – check pressures",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "ALWAYS PERFORM BUBBLE CHECK",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "ALWAYS KNOW YOUR PO₂",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    }
+  ],
+  "isAsset": true
+}

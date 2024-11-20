@@ -1,0 +1,353 @@
+{
+  "rebreatherManufacturer": "Dive Rite",
+  "rebreatherModel": "O₂ptima",
+  "title": "Assembly Guide Checklist",
+  "description": "Complete assembly checklist",
+  "sections": [
+    {
+      "title": "Main",
+      "checks": [
+        {
+          "description": "Fill oxygen, diluent, and bailout cylinders if needed.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Turn on handset and check O₂ sensor display in ambient air. Record mV readings.",
+          "secondsTimer": 0,
+          "observation": "Readings should be between 10 and 14 mV.",
+          "references": [
+            {
+              "value": null,
+              "prefix": "",
+              "suffix": "mV"
+            },
+            {
+              "value": null,
+              "prefix": "",
+              "suffix": "mV"
+            },
+            {
+              "value": null,
+              "prefix": "",
+              "suffix": "mV"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Change setpoint to 0.7 to fire O₂ solenoid. Check voltage.",
+          "secondsTimer": 0,
+          "observation": "Min depends on type of battery used. Change setpoint back to .19.",
+          "references": [
+            {
+              "value": null,
+              "prefix": "Ext.",
+              "suffix": "V"
+            },
+            {
+              "value": null,
+              "prefix": "Int.",
+              "suffix": "V"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check HUD O₂ sensor display in ambient air and ensure that the reading agrees with the handset.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Analyze gas.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "Oxygen",
+              "suffix": "%"
+            },
+            {
+              "value": null,
+              "prefix": "Dil. O₂",
+              "suffix": "%"
+            },
+            {
+              "value": null,
+              "prefix": "Dil. He",
+              "suffix": "%"
+            },
+            {
+              "value": null,
+              "prefix": "Bail. 1 O₂",
+              "suffix": "%"
+            },
+            {
+              "value": null,
+              "prefix": "Bail. 1 H2",
+              "suffix": "%"
+            },
+            {
+              "value": null,
+              "prefix": "Bail. 2 O₂",
+              "suffix": "%"
+            },
+            {
+              "value": null,
+              "prefix": "Bail. 2 H2",
+              "suffix": "%"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Analyze CO.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "Oxygen",
+              "suffix": "PPM"
+            },
+            {
+              "value": null,
+              "prefix": "Dil.",
+              "suffix": "PPM"
+            },
+            {
+              "value": null,
+              "prefix": "Bail. 1",
+              "suffix": "PPM"
+            },
+            {
+              "value": null,
+              "prefix": "Bail. 2",
+              "suffix": "PPM"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check bailout regulator hoses, mouthpieces, and hose fitting tightness. Install bailout regulators. Confirm IP as needed.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Mount oxygen and diluent cylinders and attach regulators.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Steramine and rinse canister, lid, loop, and counterlungs unless completed before storage.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Inspect canister, scrubber, and lid.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "Used",
+              "suffix": "min"
+            },
+            {
+              "value": null,
+              "prefix": "",
+              "suffix": ""
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "If using sorb, pack scrubber canister. Install canister.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Lube head O-rings and flat seal as necessary. Confirm O-ring is in place on premix tube and install head.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "If using EAC, mark/note cartridge direction and install cartridge.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Inspect bore plug and confirm that it is installed in correct orientation.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Confirm water trap is installed in lid. Lube lid O-rings and flat seal as necessary. Install lid.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Pressure test canister. If good install and secure back cover and trim weights if needed.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Install calibration caps, connect O₂ hose, turn on controller, and flush with oxygen until PP02 readings stabilize.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check and record mV readings while filled with O₂. Minimum 40 mV. Check for stability.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "",
+              "suffix": "mV"
+            },
+            {
+              "value": null,
+              "prefix": "",
+              "suffix": "mV"
+            },
+            {
+              "value": null,
+              "prefix": "",
+              "suffix": "mV"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Turn on HUD to check operation at 1.0 PPO₂. Calibrate controller and/or HUD if required.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Inspect loop, fittings, O-rings, and counterlungs. Lube as needed. Install counterlungs. Assemble loop and attach to counterlungs.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Attach ADV, BC, and manual add feeds. Confirm solenoid Oxygen supply hose is securely attached.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Inspect and test DSV directional valves. Attach DSV to loop, close DSV, turn off in-line shutoffs, close counterlung exhaust valve and confirm correct flow direction through loop.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Connect loop to scrubber canister. Double check all loop fittings for tightness. Cover canister fittings with neoprene covers and route controller and HUD cables.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Perform negative pressure test for a minimum of 30 seconds.",
+          "secondsTimer": 30,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Perform positive pressure test for a minimum of 2 minutes.",
+          "secondsTimer": 120,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Turn on oxygen and diluent cylinders.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Check ADV, manual add valves, trim pillow inflator, BC inflator and exhaust valves/OPVs for proper operation.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Record oxygen and diluent cylinder pressures.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [
+            {
+              "value": null,
+              "prefix": "Oxygen",
+              "suffix": "bar"
+            },
+            {
+              "value": null,
+              "prefix": "Diluent",
+              "suffix": "bar"
+            }
+          ],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Turn off cylinders and perform a leak down check.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Turn oxygen and diluent cylinders back on, open counterlung exhaust valve, turn on inline shutoffs, change setpoint to 0.5, and perform a 5 minute pre-breath confirming correct solenoid operation.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        },
+        {
+          "description": "Confirm correct onboard and bailout gases are configured and selected in computers. Confirm computers are set to CC mode.",
+          "secondsTimer": 0,
+          "observation": "",
+          "references": [],
+          "runtimeType": "regular"
+        }
+      ]
+    }
+  ],
+  "isAsset": true
+}
