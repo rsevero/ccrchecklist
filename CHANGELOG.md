@@ -1,3 +1,7 @@
+### Next
+* rEvo III checklists
+* Case insensitive template list
+
 ### 0.0.13 - 2024-11-20
 * Creation of CHANGELOG.md
 * Creation of appbundle.sh script
