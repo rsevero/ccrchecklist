@@ -20,7 +20,6 @@ import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:platform_info/platform_info.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 void showCCRAboutDialog(BuildContext context) async {
   final Platform platform = Platform.instance;
