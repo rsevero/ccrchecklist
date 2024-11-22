@@ -7,6 +7,6 @@
 - [ ] Criar testes
 - [ ] Internacionalizar app
 - [X] Opção de som ao terminar temporizador
-- [ ] Criar "Sobre": https://pub.dev/packages/about
+- [X] Criar "Sobre": https://pub.dev/packages/aboutdialog
 - [ ] Incluir licenças das fontes usadas
 - [X] Fazer com que fontes usadas estejam disponíveis no app sem precisar baixar
