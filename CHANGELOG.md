@@ -2,6 +2,7 @@
 * rEvo III checklists
 * Case insensitive template list
 * Fixing 'launchUrl' in Android
+* Include README link in AboutDialog
 
 ### 0.0.13 - 2024-11-20
 * Creation of CHANGELOG.md
