@@ -45,6 +45,23 @@ void showCCRAboutDialog(BuildContext context) async {
       ListTile(
         title: InkWell(
           child: const Text(
+            'View README',
+            style: TextStyle(
+                color: Colors.blue, decoration: TextDecoration.underline),
+          ),
+          onTap: () async {
+            final Uri uri = Uri.parse(ccrUrlReadme);
+            if (await canLaunchUrl(uri)) {
+              await launchUrl(uri, mode: LaunchMode.externalApplication);
+            } else {
+              throw 'Could not launch $ccrUrlReadme';
+            }
+          },
+        ),
+      ),
+      ListTile(
+        title: InkWell(
+          child: const Text(
             'View CHANGELOG',
             style: TextStyle(
                 color: Colors.blue, decoration: TextDecoration.underline),
