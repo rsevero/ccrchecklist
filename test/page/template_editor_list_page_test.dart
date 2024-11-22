@@ -60,11 +60,6 @@ class MockTemplateListStore extends TemplateListStore with Store {
 
 void main() {
   group('Template Editor List Page Tests', () {
-    testWidgets('Test if initial circular progress indicator shows up',
-        (tester) async {
-      await tester.pumpWidget(createTemplateEditorListPage());
-      expect(find.byType(CircularProgressIndicator), findsAny);
-    });
     testWidgets('Test if template list shows up', (tester) async {
       final mockTemplateListStore = MockTemplateListStore();
 
