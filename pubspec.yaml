@@ -54,7 +54,10 @@ dependencies:
   platform_info: ^5.0.0
   printing: ^5.13.4
   provider: ^6.1.1
-  receive_sharing_intent: ^1.8.0
+  receive_sharing_intent:
+    git:
+      url: https://github.com/KasemJaffer/receive_sharing_intent
+      ref: 2cea396843cd3ab1b5ec4334be4233864637874e
   share_plus: ^10.1.2
   slugify: ^2.0.0
   theme_tailor: ^3.0.1
